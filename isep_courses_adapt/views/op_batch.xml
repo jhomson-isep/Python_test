@@ -47,6 +47,11 @@
                         </page>
                     </notebook>
                 </xpath>
+                <xpath expr="//div[hasclass('oe_button_box')]/button[1]" position="before">
+                <button class="oe_stat_button" name="action_open_subjects" type="object" icon="fa-book" attrs="{'invisible': [('subject_count', '=', 0)]}">
+                    <field name="subject_count" widget="statinfo" string="Asignaturas"/>
+                </button>
+            </xpath>
             </field>
         </record>
 
