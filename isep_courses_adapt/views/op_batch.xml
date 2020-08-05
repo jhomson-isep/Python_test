@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="isep_courses_adapt.view_op_batch_form_inherited" model="ir.ui.view">
+            <field name="model">op.batch</field>
+            <field name="inherit_id" ref="openeducat_core.view_op_batch_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='parent_id']" position="replace">
+                    <field name="coordinator"/>
+                </xpath>
+                <xpath expr="//field[@name='course_id']" position="replace">
+                    <field name="modality_id"/>
+                    <field name="campus_id"/>
+                    <field name="uvic_program"/>
+                </xpath>
+                <xpath expr="//field[@name='code']" position="after">
+                    <field name="course_id"/>
+                </xpath>
+                <xpath expr="//form/sheet/group[@name='main']" position="after">
+                    <notebook>
+                        <page string="General">
+                            <group cols="4">
+                                <group string="Información acádemica">
+                                    <field name="ects"/>
+                                    <field name="hours"/>
+                                    <field name="expiration_days"/>
+                                    <field name="date_diplomas"/>
+                                    <field name="academic_year"/>
+                                </group>
+                                <group string="Otra información">
+                                    <field name="days_week"/>
+                                    <field name="schedule"/>
+                                    <field name="preference_group"/>
+                                    <field name="class_place"/>
+                                    <field name="type_practices"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Estudiantes">
+                            <field name="student_lines" attrs="{'readonly': True}">
+                                <tree string="Student Lines" editable="bottom">
+                                    <field name="student_id"/>
+                                    <field name="course_id"/>
+                                    <field name="roll_number"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
