@@ -98,7 +98,7 @@ class CrmLead(models.Model):
         elif modalidad == "Online":
             modalidad = "ELR"
 
-        elif cod_sede == 'centro-oviedo':
+        if cod_sede == 'centro-oviedo':
             cod_sede = "OVI"
         elif cod_sede == 'centro-bilbao':
             cod_sede = "BIO"
