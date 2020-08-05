@@ -87,11 +87,22 @@ class CrmLead(models.Model):
 
         #Lógica de las distintas empresas
         cod_sede = lead.get('x_codsede')
-        company_id = lead.get('company_id')
         cod_curso = lead.get('x_codcurso')
         email = lead.get('email_from')
         modalidad = lead.get('x_codmodalidad')
 
+        #Mediante url enviar a donde debe
+        url = lead.get('x_ga_source')
+        if url.find("ised") != -1:
+            lead.update({'company_id': 4})
+        elif url.find(".com") != -1:
+            lead.update({'company_id': 1111})
+            pass;
+        else:
+            lead.update({'company_id': 1})
+            pass;
+
+        company_id = lead.get('company_id')
         #Problemas con el campo mal hecho de modalidad y sede, en los type form se llaman distinto por eso el cambio
         if modalidad == "Presencial":
             modalidad = "PRS"
@@ -102,7 +113,7 @@ class CrmLead(models.Model):
             cod_sede = "OVI"
         elif cod_sede == 'centro-bilbao':
             cod_sede = "BIO"
-        elif cod_sede == 'centro-madrid':
+        elif cod_sede == 'centro-madrid-atocha':
             cod_sede = "MAD"
         elif cod_sede == 'centro-pamplona':
             cod_sede = "PAM"
@@ -114,8 +125,7 @@ class CrmLead(models.Model):
 
         #REVISAR ESTO
         #Añadir producto a la iniciativa directamente
-        logger.info('-----------------------\n' + cod_sede)
-        logger.info('-----------------------\n' + cod_curso)
+        logger.info(company_id)
         try:
             referencia_interna = self.env['product_template'].search([('default_code', '=', cod_curso)],limit=1)
             lead.update({"x_curso_id": referencia_interna.id})
@@ -163,6 +173,5 @@ class CrmLead(models.Model):
 
 
         res = super(CrmLead, self).create(lead)
-        logger.info(res)
 
         return res
