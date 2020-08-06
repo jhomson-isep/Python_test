@@ -41,9 +41,9 @@ class OpCourse(models.Model):
         try:
             config_params = self.env['ir.config_parameter'].sudo()
             logger.error(config_params)
-            token = literal_eval(config_params.get_param('moodle_token'))
-            url = literal_eval(config_params.get_param('moodle_url'))
-            endpoint = literal_eval(config_params.get_param('moodle_endpoint'))
+            token = config_params.get_param('moodle_token')
+            url = config_params.get_param('moodle_url')
+            endpoint = config_params.get_param('moodle_endpoint')
         except Exception as e:
             raise UserError(_("Error on moddle conection: " % str(e)))
             logger.error(e)
@@ -110,16 +110,16 @@ class OpCourse(models.Model):
     def create_moodle_course(self, subject, category):
         try:
             config_params = self.env['ir.config_parameter'].sudo()
-            token = literal_eval(config_params.get_param('moodle_token'))
-            url = literal_eval(config_params.get_param('moodle_url'))
-            endpoint = literal_eval(config_params.get_param('moodle_endpoint'))
+            token = config_params.get_param('moodle_token')
+            url = config_params.get_param('moodle_url')
+            endpoint = config_params.get_param('moodle_endpoint')
         except Exception as e:
             logger.error(str(e))
             raise Warning(_("Error on moddle conection: " % str(e)))
         params = {
             'courses[0][fullname]': subject.name,
-            'courses[0][shortname]': subject.code + category,
-            'courses[0][idnumber]': subject.code + category,
+            'courses[0][shortname]': subject.code,
+            'courses[0][idnumber]': subject.code,
             'courses[0][summary]': subject.name,
             'courses[0][format]': 'topics',
             'courses[0][visible]': 1,

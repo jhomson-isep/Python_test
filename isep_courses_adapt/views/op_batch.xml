@@ -5,17 +5,21 @@
             <field name="model">op.batch</field>
             <field name="inherit_id" ref="openeducat_core.view_op_batch_form"/>
             <field name="arch" type="xml">
+
                 <xpath expr="//field[@name='parent_id']" position="replace">
                     <field name="coordinator"/>
                 </xpath>
+
                 <xpath expr="//field[@name='course_id']" position="replace">
                     <field name="modality_id"/>
                     <field name="campus_id"/>
                     <field name="uvic_program"/>
                 </xpath>
+
                 <xpath expr="//field[@name='code']" position="after">
                     <field name="course_id"/>
                 </xpath>
+
                 <xpath expr="//form/sheet/group[@name='main']" position="after">
                     <notebook>
                         <page string="General">
@@ -47,11 +51,20 @@
                         </page>
                     </notebook>
                 </xpath>
+
                 <xpath expr="//div[hasclass('oe_button_box')]/button[1]" position="before">
-                <button class="oe_stat_button" name="action_open_subjects" type="object" icon="fa-book" attrs="{'invisible': [('subject_count', '=', 0)]}">
-                    <field name="subject_count" widget="statinfo" string="Asignaturas"/>
-                </button>
-            </xpath>
+                    <button class="oe_stat_button" name="action_open_subjects" type="object" icon="fa-book"
+                            attrs="{'invisible': [('subject_count', '=', 0)]}">
+                        <field name="subject_count" widget="statinfo" string="Asignaturas"/>
+                    </button>
+                </xpath>
+
+                <xpath expr="//div[hasclass('oe_button_box')]/button[1]" position="before">
+                    <button class="oe_stat_button" name="action_open_students" type="object" icon="fa-user"
+                            attrs="{'invisible': [('student_count', '=', 0)]}">
+                        <field name="student_count" widget="statinfo" string="Estudiantes"/>
+                    </button>
+                </xpath>
             </field>
         </record>
 
