@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_sale_presupuesto">
+            <t t-name="isep_custom.report_sale_presupuesto">
+                <t t-call="web.html_container">
+                    <t t-foreach="docs" t-as="doc">
+                        <!--
+                        <span t-if="doc.partner_id.name==doc.partner_invoice_id.name">
+                            <t t-call="isep_custom.report_sale_prematricula" t-lang="doc.partner_id.lang"/>
+                        </span>
+                        <span t-if="doc.partner_id.name!=doc.partner_invoice_id.name">
+                            <t t-call="isep_custom.report_sale_prematricula_titular" t-lang="doc.partner_id.lang"/>
+                            <span t-if="doc.company_id.id!='Modalidad: ISED: ONL'">
+                                <t t-call="isep_custom.report_sale_prematricula_ised_onl" t-lang="doc.partner_id.lang"/>
+                            </span>
+                        </span>-->
+                        <t t-call="isep_custom.report_sale_prematricula" t-lang="doc.partner_id.lang"/>
+                        <span t-if="doc.company_id.id>1">
+                            <t t-call="isep_custom.report_sale_prematricula2" t-lang="doc.partner_id.lang"/>
+                            <t t-foreach="doc.order_line" t-as="l">
+                                <t t-if="l.product_id.product_tmpl_id.tipodecurso not in ('rec','desc','desc_ma','inc','mat')">
+                                    <span t-if="l.product_id.name=='Director de Seguridad Integral'">
+                                        <t t-call="isep_custom.report_sale_seguridad2" t-lang="doc.partner_id.lang"/>
+                                    </span>
+                                </t>
+                            </t>
+                        </span>
+                        <span t-if="doc.company_id.id==1">
+                            <span t-if="doc.opportunity_id.x_codmodalidad !='PRS'">
+                                <span t-if="doc.partner_id.country_id.id == 69  or  doc.partner_id.country_id.id == 254">
+                                    <t t-call="isep_custom.report_sale_prematricula_isep_no_presencial" t-lang="doc.partner_id.lang"/>
+                                </span>
+                                <span t-if="doc.partner_id.country_id.id != 69   and doc.partner_id.country_id.id != 254">
+                                    <t t-call="isep_custom.report_sale_prematricula_isep_no_presencial_extranjero" t-lang="doc.partner_id.lang"/>
+                                </span>
+                            </span>
+                            <span t-if="doc.opportunity_id.x_codmodalidad =='PRS'">
+                                <span t-if="doc.partner_id.country_id.id == 69 or  doc.partner_id.country_id.id == 254">
+                                    <t t-call="isep_custom.report_sale_prematricula_isep_presencial" t-lang="doc.partner_id.lang"/>
+                                </span>
+                                <span t-if="doc.partner_id.country_id.id != 69 and   doc.partner_id.country_id.id != 254 ">
+                                    <t t-call="isep_custom.report_sale_prematricula_isep_presencial_extranjero" t-lang="doc.partner_id.lang"/>
+                                </span>
+                            </span>
+                        </span>
+                        <span t-if="doc.payment_mode_id.name == 'Domiciliado' and doc.cuenta_bancaria and doc.mandate_id">
+                            <t t-call="isep_custom.report_sale_order_mandate" t-lang="doc.partner_id.lang"/>
+                        </span>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <report
+            id="action_print_isep_presupuesto"
+            model="sale.order"
+            string="Prematricula"
+            report_type="qweb-pdf"
+            name="isep_custom.report_sale_presupuesto"
+            file="isep_custom.report_sale_presupuesto"
+        />
+    </data>
+</odoo>

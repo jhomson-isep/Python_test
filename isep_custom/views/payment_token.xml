@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record id="isep_payment_token_form" model="ir.ui.view">
+		<field name="model">payment.token</field>
+		<field name="inherit_id" ref="payment.payment_token_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='name']" position="attributes">
+				<attribute name="string">Titular</attribute>
+			</xpath>
+			<xpath expr="//field[@name='partner_id']" position="attributes">
+				<attribute name="string">Cliente</attribute>
+			</xpath>
+			<xpath expr="//field[@name='acquirer_ref']" position="attributes">
+				<attribute name="string">Número de tarjeta</attribute>
+			</xpath>
+			<xpath expr="//field[@name='acquirer_ref']" position="after">
+				<field name="csv"/>
+				<field name="caducidad"/>
+			</xpath>
+		</field>
+	</record>
+
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="import_cobros_academica_form" model="ir.ui.view">
+        <field name="name">import.cobros.academica.form</field>
+        <field name="model">import.cobros.academica</field>
+        <field name="arch" type="xml">
+            <form string="Importar Cobros Académica">
+                <group colspan="4" col="4">
+                    <field name="name" />
+                    <field name="delimeter"/>
+                </group>
+                <group>
+                    <field name="data" filename="name"/>
+                    <field name="company_id"/>
+                </group>
+                <separator colspan="4" string=""/>
+                <footer>
+                    <button class="btn btn-sm btn-primary"
+                        name="action_import" string="Importar" type="object"/>
+                    <button class="btn btn-sm btn-default"
+                        special="cancel" string="Cancelar"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="import_cobros_academica_action" model="ir.actions.act_window">
+        <field name="name">Importar Cobros Académica</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">import.cobros.academica</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="import_cobros_academica_form"/>
+        <field name="target">new</field>
+        <field name="groups_id" eval="[(4, ref('account.group_account_manager'))]"/>
+    </record>
+    <menuitem action="import_cobros_academica_action"
+        id="import_cobros_academica_menu" parent="account.menu_finance_entries"/>
+</odoo>

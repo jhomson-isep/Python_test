@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="report_sale_prematricula_ised_onl">
+			<t t-name="isep_custom.report_sale_prematricula_ised_onl">
+			    <t t-call="web.external_layout">
+			        <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />
+			        <div class="page">
+			            <div class="oe_structure" />
+			            <div class="row">
+			                <ol>
+			                    <table width="95%" style="font-size:12px">
+			                        <tr>
+			                            <td height="30px" />
+			                        </tr>
+			                        <tr>
+			                            <td width="30px" />
+			                            <td colspan="2" align="justify">
+			                                <li>
+			                                    El alumno y el titular del contrato han recibido de
+			                                    <span t-field="doc.company_id.display_name" />
+			                                    , en el momento de la firma del presente, la información necesaria acerca del curso a seguir, tanto académica, económica y administrativa.
+			                                </li>
+			                            </td>
+			                        </tr>
+			                        <tr>
+			                            <td height="10px" />
+			                        </tr>
+			                        <tr>
+			                            <td width="15px" />
+			                            <td align="justify">
+			                                <li>
+			                                    En aquellos programas con requisito de acceso de nivel universitario, la expedición de título de
+			                                    <span t-field="doc.company_id.display_name" />
+			                                    ,  quedará supeditada a la obtención del título universitario previo. En caso de ser un programa con título de UVic, no podrá ser matriculado a la Universidad hasta que finalice sus
+			estudios universitarios en un plazo máximo de un año desde el inicio del curso en
+			                                    <span t-field="doc.company_id.display_name" />
+			                                    .
+			                                </li>
+			                            </td>
+			                        </tr>
+			                        <tr>
+			                            <td height="10px" />
+			                        </tr>
+			                        <tr>
+			                            <td width="15px" />
+			                            <td align="justify">
+			                                <li>
+			                                    Los programas que
+			                                    <span t-field="doc.company_id.display_name" />
+			                                    imparte vinculados a alguna Universidad u otras instituciones están supeditados a las normativas propias de cada centro.
+			                                </li>
+			                            </td>
+			                        </tr>
+			                        <tr>
+			                            <td height="10px" />
+			                        </tr>
+			                        <tr>
+			                            <td width="15px" />
+			                            <td align="justify" />
+			                        </tr>
+			                        <tr>
+			                            <td height="10px" />
+			                        </tr>
+			                        <tr>
+			                            <td width="15px" />
+			                            <td align="justify">
+			                                <li>El alumno se responsabiliza de aportar la documentación requerida en el tiempo y forma indicada. En caso contrario
+			no se podrá gestionar la matriculación por parte de las distintas instituciones vinculadas.</li>
+			                            </td>
+			                        </tr>
+			                        <tr>
+			                            <td height="10px" />
+			                        </tr>
+			                        <tr>
+			                            <td width="15px" />
+			                            <td align="justify">
+			                                <li>
+			                                    El alumno matriculado en las modalidades no presencial, dispondrá de 14 días hábiles a contar a partir del acceso a
+			Aula Virtual. En caso de la modalidad presencial podrá desistir del contrato hasta 15 días hábiles antes de la fecha
+			de inicio programada. En este caso,
+			                                    <span t-field="doc.company_id.display_name" />
+			                                    retendrá las tasas académicas en concepto de gastos de administración y reserva de plaza. Pasado dicho plazo, se deberán efectuar todos los pago.
+			                                </li>
+			                            </td>
+			                        </tr>
+			                        <tr>
+			                            <td height="10px" />
+			                        </tr>
+			                        <tr>
+			                            <td width="15px" />
+			                            <td align="justify">
+			                                <li>
+			                                    <span t-field="doc.company_id.display_name" />
+			                                    podrá reclamar la totalidad del importe al alumno/titular si éste no cumple con los vencimientos pactados. Los plazos acordados con anterioridad se entenderán como no válidos.
+			                                </li>
+			                            </td>
+			                        </tr>
+			                        <tr>
+			                            <td height="10px" />
+			                        </tr>
+			                        <tr>
+			                            <td width="15px" />
+			                            <td align="justify">
+			                                <li>
+			                                    <span t-field="doc.company_id.display_name" />
+			                                    se reserva el derecho de dejar de prestar el servicio cuando el alumno no cumpla con las obligaciones adquiridas, así como el derecho de reportar a ficheros de morosidad, solvencia patrimonial o crédito en caso de que
+			el alumno/titular no cumpla satisfactoriamente con las obligaciones de pago contempladas en este contrato.
+			                                </li>
+			                            </td>
+			                        </tr>
+			                        <tr>
+			                            <td height="10px" />
+			                        </tr>
+			                        <tr>
+			                            <td width="15px" />
+			                            <td align="justify" />
+			                        </tr>
+			                        <tr>
+			                            <td height="10px" />
+			                        </tr>
+			                        <tr>
+			                            <td width="15px" />
+			                            <td align="justify">
+			                                <li>El precio de expedición de títulos, certificados u otros no están incluidos en el importe del curso.</li>
+			                            </td>
+			                        </tr>
+			                        <tr>
+			                            <td height="10px" />
+			                        </tr>
+			                        <tr>
+			                            <td width="15px" />
+			                            <td align="justify">
+			                                <li>Los cursos presenciales serán realizados siempre que se alcance el número mínimo necesario de alumnos. En caso de anulación los importes abonados serán reintegrados.</li>
+			                            </td>
+			                        </tr>
+			                        <tr>
+			                            <td height="10px" />
+			                        </tr>
+			                        <tr>
+			                            <td width="15px" />
+			                            <td align="justify">
+			                                <li>
+			                                    El titular autoriza a
+			                                    <span t-field="doc.company_id.display_name" />
+			                                    a realizar los cobros en la forma y plazos según las condiciones aceptadas para el pago.
+			                                </li>
+			                            </td>
+			                        </tr>
+			                    </table>
+			                </ol>
+			            </div>
+			        </div>
+			    </t>
+			</t>
+        </template>
+    </data>
+</openerp>

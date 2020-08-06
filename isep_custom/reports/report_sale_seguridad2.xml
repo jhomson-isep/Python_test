@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    	<template id="report_sale_seguridad2">
+			<t t-name="isep_custom.report_sale_seguridad2">
+			    <t t-call="report.external_layout">
+			        <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />
+			        <div class="page">
+			            <div class="oe_structure" />
+			            <div class="row">
+			                <table width="95%" style="font-size:10px">
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td colspan="2" align="justify">REQUISITOS DE ACCESO CURSO DIRECTOR DE SEGURIDAD INTEGRAL</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td align="justify">a. Tener la nacionalidad de alguno de los Estados miembros de la Unión Europea o de un Estado parte en el Acuerdo sobre el Espacio Económico Europeo, o ser nacional de un tercer Estado que tenga suscrito con España un convenio internacional en el que cada parte reconozca el acceso al ejercicio de estas actividades a los nacionales de la otra.</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td align="justify">b. Poseer la capacidad física y la aptitud psicológica necesarias para el ejercicio de las respectivas funciones.</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td align="justify">c. Estar en posesión de un título universitario oficial de grado en el ámbito de la seguridad que acredite la adquisición de las competencias que se determinen, o bien del título del curso de dirección de seguridad, reconocido por el Ministerio del Interior.</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td align="justify">d. Carecer de antecedentes penales por delitos dolosos.</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td align="justify">e. No haber sido sancionado en los dos o cuatro años anteriores por infracción grave o muy grave, respectivamente, en materia de seguridad privada.</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td align="justify">f. No haber sido separado del servicio en las Fuerzas y Cuerpos de Seguridad o en las Fuerzas Armadas españolas o del país de su nacionalidad o procedencia en los dos años anteriores.</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td align="justify">g. No haber sido condenado por intromisión ilegítima en el ámbito de protección del derecho al honor, a la intimidad personal y familiar o a la propia imagen, vulneración del secreto de las comunicaciones o de otros derechos fundamentales en los cinco años anteriores a la solicitud.</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td align="justify">En el caso de los nacionales de Estados miembros de la Unión Europea o de Estados parte en el Acuerdo sobre el Espacio Económico Europeo, cuya habilitación o cualificación profesional haya sido obtenida en alguno de dichos Estados para el desempeño de funciones de seguridad privada en el mismo, podrán prestar servicios en España, siempre que, previa comprobación por el Ministerio del Interior, se acredite que cumplen los siguientes requisitos::</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td align="justify">Poseer alguna titulación, habilitación o certificación expedida por las autoridades competentes de cualquier Estado miembro o de un Estado parte en el Acuerdo sobre el Espacio Económico Europeo que les autorice para el ejercicio de funciones de seguridad privada en el mismo.</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td align="justify">Acreditar los conocimientos, formación y aptitudes equivalentes a los exigidos en España para el ejercicio de las profesiones de seguridad privada, para lo cual deberán estar en posesión de los siguientes documentos:</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td align="justify">a. En los casos en que el Estado de origen regule las diferentes profesiones de seguridad privada, el certificado de competencia o título de formación que las acredite como tal. Dicho certificado o título deberá reunir los siguientes requisitos:</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td>Haber sido expedido por una autoridad competente de un Estado miembro, designada con arreglo a las disposiciones legales, reglamentarias o administrativas de dicho Estado.</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td>Acreditar un nivel de cualificación profesional equivalente, como mínimo, al nivel inmediatamente anterior al exigido en España, mediante el certificado previsto en el artículo 19.2 del Real Decreto 1837/2008, de 8 de noviembre, para todas las profesiones de seguridad privada, excepto detectives privados.</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td align="justify">Acreditar la preparación del titular para el ejercicio de la profesión correspondiente.</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td align="justify">b. En los casos en que el Estado de origen no regule las diferentes profesiones de seguridad privada, el documento expedido por la autoridad competente, acreditativo de haber ejercido la profesión de que se trate en ese o en otro Estado de la Unión Europea, durante al menos dos años a tiempo completo, en el curso de los diez años inmediatamente anteriores al momento de la presentación de la solicitud, siempre que esté en posesión de uno o varios certificados de competencia o de uno o varios títulos de formación.
+			 En todo caso, los dos años de experiencia aludidos no podrán exigirse cuando la persona solicitante acredite una cualificación profesional adquirida a través de la superación de una formación regulada de las definidas en el artículo 8 del Real Decreto 1837/2008, de 8 de noviembre, y que corresponda a los niveles de cualificación señalados anteriormente.</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td align="justify">Tener conocimientos de lengua castellana suficientes para el normal desempeño de las funciones de seguridad privada.</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td align="justify">Los previstos en las letras a), e), f), g) del primer apartado.</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td align="justify">La carencia o insuficiencia de conocimientos o aptitudes necesarios para el ejercicio de las actividades de seguridad privada en España de los nacionales de Estados miembros de la Unión Europea o de Estados parte en el Acuerdo sobre el Espacio Económico Europeo, podrá suplirse por aplicación de las medidas compensatorias previstas en el artículo 5 de la Orden INT/2850/2011, de 11 de octubre, por la que se regula el reconocimiento de las cualificaciones profesionales para el ejercicio de las profesiones y actividades relativas al sector de seguridad privada a los nacionales de los Estados miembros de la Unión Europea.</td>
+			                    </tr>
+			                    <tr>
+			                        <td height="10px" />
+			                    </tr>
+			                    <tr>
+			                        <td width="15px" />
+			                        <td align="justify" />
+			                    </tr>
+			                </table>
+			            </div>
+			        </div>
+			    </t>
+			</t>
+    	</template>
+    </data>
+</openerp>

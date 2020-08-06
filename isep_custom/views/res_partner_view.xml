@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='country_id']" position="replace">
+                <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" attrs="{
+                'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)],
+                'required': [('type', '=', 'contact'),('parent_id', '=', False)]}"/>
+            </xpath>
+          <xpath expr="//field[@name='parent_id']" position="replace">
+            <field name="parent_id"
+                placeholder="Company"
+                domain="[('parent_id', '=', False)]" context="{'default_supplier': supplier, 'default_customer': customer}"
+                attrs="{'invisible': [('is_company','=', True),('parent_id', '=', False)]}"
+                on_change="onchange_parent_id(parent_id)"/>
+          </xpath>
+          <!-- <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="replace">
+          </xpath> -->
+          <xpath expr="//field[@name='company_id']" position="after">
+            <field name="bool_mail_chimp"/>
+            <field name="verificar_email"/>
+          </xpath>
+          <xpath expr="//notebook" position="before">
+            <group string="Información Personalizada">
+              <group>
+                <field name="x_sexo"/>
+                <field name="x_tipodecontacto"/>
+                <!--  <field name="x_horarioid"> </field> -->
+                <field name="x_horarioid"/>
+                <field name="x_universidad"/>
+                <field name="x_profesion"/>
+                <field name="x_tipodocumento"/>
+                <!-- <label for="vat"/>
+                <div name="vat_info" class="o_row">
+                    <field name="vat" placeholder="e.g. BE0477472701"/>
+                </div> -->
+              </group>
+              <group>
+                <field name="x_aceptacondiciones" readonly="1" invisible="1"/>
+                <field name="x_titulacion" string="Titulación"/>
+                <!-- <field name="x_documentoidentidad"> </field> -->
+                <field name="x_finalizacionestudios"/>
+                <!--<field name="x_annonacimiento_int"/>-->
+                <field name="x_birthdate"/>
+                <field name="x_annonacimiento"/>
+                <field name="team_id"/>
+                <field name="user_id" on_change="on_change_user(user_id)" groups="base.group_sale_manager,base.group_system"> </field>
+                <!-- <field name="team_id" groups="base.group_sale_manager,base.group_system"> </field>
+                -->
+              </group>
+            </group>
+          </xpath>
+          <xpath expr="//page[1]" position="before">
+            <page string="Oportunidades">
+                <field name="x_ops_ids" context="{'form_view_ref':'crm.crm_case_form_view_oppor','tree_view_ref' : 'crm.crm_case_tree_view_oppor'}" ref="crm.crm_case_tree_view_oppor"/>
+            </page>
+            <!-- 
+            <page string="Llamadas/Mensajes">
+                <field name="x_message_ids" domain="[('model','=',&quot;crm.lead&quot;),('x_leadid.partner_id','=',default_id)]" context="{'default_id':active_id}"/>
+                
+                <field name="llamadas_cliente">
+                    <tree string="Llamadas al cliente">
+                        <field name="date_ini"/>
+                        <field name="duracion" widget="float_time"/>
+                        <field name="empleado"/>
+                        <field name="entidad"/>
+                    </tree>
+                </field>
+            </page>
+            -->
+          </xpath>
+        </field>
+    </record>
+
+
+<!--
+  <record id="isep_res_partner_vat_inherit" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base_vat.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='vat']" position="replace">
+            </xpath>
+            <xpath expr="//div[@name='vat_info']" position="replace">
+            </xpath>
+        </field>
+  </record>
+-->
+
+    <record id="isep_partner_search_view" model="ir.ui.view">
+        <field name="name">isep.partner.search.view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="phone"/>
+                <field name="email"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="isep_view_res_partner_form_website" model="ir.ui.view">
+        <field name="name">isep.view.res.partner.form.website</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="website_partner.view_partners_form_website"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='website_publish_button']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="isep_partner_view_button_contracts_count" model="ir.ui.view">
+        <field name="name">isep.partner.view.button.contracts_count</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.partner_view_button_contracts_count"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='%(account.action_open_partner_analytic_accounts)d']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- <record id="isep_res_partner_zip_id_2" model="ir.ui.view">
+        <field name="name">isep.res.partner.zip_id.2</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base_location.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="zip_id" position="replace">
+                <field name="zip_id"
+                    options="{'create_name_field': 'city', 'no_open': True, 'no_create': True}"
+                    placeholder="City completion"
+                    class="oe_edit_only"/>
+                </field>
+            <xpath expr="//field[@name='child_ids']/form//field[@name='zip_id']" position="replace">
+                <field name="zip_id"
+                    options="{'create_name_field': 'city', 'no_open': True, 'no_create': True}"
+                    placeholder="City completion"
+                    class="oe_edit_only"/>
+            </xpath>
+        </field>
+    </record> -->
+
+
+    <record id="isep_res_partner_button_efectos" model="ir.ui.view">
+        <field name="name">isep.res.partner.button.efectos</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.partner_view_buttons"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button type="action"
+                    class="oe_stat_button"
+                    id="efectos_button"
+                    icon="fa-book"
+                    name="%(account_due_list.action_invoice_payments)d"
+                    attrs="{'invisible': [('customer', '=', False)]}"
+                    context="{'search_default_partner_id': active_id,'default_partner_id': active_id}"
+                    groups="account.group_account_invoice,base.group_system">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_value"><field name="count_efectos"/></span>
+                        <span class="o_stat_text">Efectos</span>
+                    </div>
+                </button>
+            </div>
+        </field>
+    </record>
+
+
+
+
+
+</odoo>

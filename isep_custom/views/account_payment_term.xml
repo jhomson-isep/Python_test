@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="isep_account_view_payment_term_form" model="ir.ui.view">
+    <field name="model">account.payment.term</field>
+    <field name="inherit_id" ref="account.view_payment_term_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='name']" position="after">
+        <field name="alias"/>
+      </xpath>
+      <xpath expr="//field[@name='company_id']" position="after">
+        <field name="x_company_ids" widget="many2many_tags"/>
+      </xpath>
+      <xpath expr="//group[1]" position="after">
+        <group col="4">
+            <field name="x_Penalizacion"/>
+            <field name="x_Penalizacion_Porcentaje"/>
+        </group>
+      </xpath>
+    </field>
+  </record>
+</odoo>

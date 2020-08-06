@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3).
+
+import account_move
+import res_partner
+import res_groups
+import sale_discount
+import crm_horariosdecontacto
+import crmtipodecurso
+import crm_lead
+import product_attribute_value
+import crm_preciocurso
+import account_invoice
+import account_payment_term
+import product_category
+import product_template
+import product_product
+import sale_order
+import isep_pagos
+import res_company
+import gmri
+import mail_message
+import sale_order_line
+import account_invoice_line
+import account_payment
+import res_partner_bank
+import geonames_import
+import payment_method

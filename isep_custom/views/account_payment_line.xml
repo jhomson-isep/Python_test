@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="isep_account_payment_line_tree" model="ir.ui.view">
+		<field name="name">isep.account.payment.line.tree</field>
+		<field name="model">account.payment.line</field>
+		<field name="inherit_id" ref="account_payment_order.account_payment_line_tree"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='payment_type']" position="after">
+	    		<field name="partner_country_id"/>
+	    	</xpath>
+		</field>
+	</record>
+</odoo>

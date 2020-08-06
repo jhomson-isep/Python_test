@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <record id="view_call_temp_form" model="ir.ui.view">
+            <field name="name">call.temp.form</field>
+            <field name="model">crm.temp.call</field>
+            <field name="arch" type="xml">
+                <form string="Llamadas entrantes">
+                    <header>
+                        <button name="validate_call" string="Validar" type="object" attrs="{'invisible': [('check', '=', True)]}" class="oe_highlight"/>
+                    </header>
+                    <group>
+                        <group string="Información de la llamada">
+                            <field name="inicio"/>
+                            <field name="fin"/>
+                            <field name="duracion" widget="float_time"/>
+                            <field name="extension"/>
+                        </group>
+                        <group string="Información del cliente">
+                            <field name="llamado"/>
+                            <field name="entidad"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="other"/>
+                        <field name="check" invisible="1"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_call_temp_call" model="ir.ui.view">
+            <field name="name">call.temp.tree</field>
+            <field name="model">crm.temp.call</field>
+            <field name="arch" type="xml">
+                <tree string="Llamadas entrantes">
+                    <field name="user"/>
+                    <field name="extension"/>
+                    <field name="inicio"/>
+                    <field name="duracion" widget="float_time"/>
+                    <field name="check" widget="boolean_button"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="entry_call_search_form_view" model="ir.ui.view">
+            <field name="name">call.temp.search</field>
+            <field name="model">crm.temp.call</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Filtrar por estado">
+                    <filter string="No pasados" name="not_validate" domain="[('check','!=','False')]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="crm_llamadas_entrantes" model="ir.actions.act_window">
+            <field name="name">Llamadas Entrantes</field>
+            <field name="res_model">crm.temp.call</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="entry_call_search_form_view"/>
+            <field name="context">{"search_default_not_validate":1}</field>
+        </record>
+
+
+
+    <menuitem action="crm_llamadas_entrantes" id="crm_llamadas_entrantes_menu" parent="llamadas_isep_menu"
+            name="Llamadas entrantes" sequence="20"/>
+
+
+</odoo>

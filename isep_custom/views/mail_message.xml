@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="isep_view_message_form" model="ir.ui.view">
+        <field name="model">mail.message</field>
+        <field name="inherit_id" ref="mail.view_message_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='subtype_id']" position="after">
+        		<field name="x_leadid"/>
+        	</xpath>
+		</field>
+	</record>
+
+	<record id="isep_view_message_tree" model="ir.ui.view">
+        <field name="model">mail.message</field>
+        <field name="inherit_id" ref="mail.view_message_tree"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='date']" position="after">
+        		<field name="x_duraciontexto"/>
+				<field name="body" invisible="1"/>
+				<field name="x_body_html"/>
+        	</xpath>
+        	<xpath expr="//field[@name='res_id']" position="after">
+        		<field name="x_leadid"/>
+        	</xpath>
+		</field>
+	</record>
+</odoo>

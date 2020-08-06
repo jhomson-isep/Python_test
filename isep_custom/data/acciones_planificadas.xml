@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="planificada_mailchimp_isep" model="ir.cron">
+        <field name="name">MailChimp ISEP</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+        <field name="active" eval="True"/>
+        <field name="doall" eval="False"/>
+        <field name="model" eval="'res.partner'"/>
+        <field name="function" eval="'accion_automatica_mailchimp_P'"/>
+        <field name="args" eval="'(None, )'" />
+    </record>
+    <record id="planificada_mailchimp_ised" model="ir.cron">
+        <field name="name">MailChimp ISED</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+        <field name="active" eval="True"/>
+        <field name="doall" eval="False"/>
+        <field name="model" eval="'res.partner'"/>
+        <field name="function" eval="'accion_automatica_mailchimp_D'"/>
+        <field name="args" eval="'(None, )'" />
+    </record>
+</odoo>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="isep_account_invoice_form" model="ir.ui.view">
+    <field name="model">account.invoice</field>
+    <field name="inherit_id" ref="account.invoice_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='invoice_line_ids']/tree[1]" position="attributes">
+            <attribute name="editable"></attribute>
+        </xpath>
+        <!--
+        <xpath expr="//page[1]" position="after">
+            <page string="Forma de Pago">
+              <group>
+                <group>
+                  <field name="x_Tarjeta"/>
+                  <field name="x_CVC"/>
+                  <field name="x_Mes"/>
+                  <field name="x_Anyo"/>
+                </group>
+                <group>
+                  <field name="x_CCC"/>
+                </group>
+              </group>
+              <group>
+                <field name="x_GrupoReferencia"/>
+                <field name="x_Titular_Factura"/>
+                <field name="x_Desea_Factura"/>
+              </group>
+              <group>
+                <group>
+                  <field name="x_Matricula_Pagada"/>
+                  <field name="x_Matricula_Fecha_Pago"/>
+                  <field name="x_Matricula_Vencimiento"/>
+                  <field name="x_Matricula_Forma_Pago"/>
+                  <field name="x_Recibo_Forma_Pago"/>
+                </group>
+                <group>
+                  <field name="x_Paga_y_Senyal_Pagada"/>
+                  <field name="x_Paga_y_Senyal"/>
+                  <field name="x_Paga_y_Senyal_Fecha_Pago"/>
+                  <field name="x_Paga_y_Senyal_Vencimiento"/>
+                </group>
+              </group>
+            </page>
+        </xpath>
+        -->
+        <xpath expr="//page[last()]" position="after">
+            <page string="Movimientos de Pagos">
+                <group>
+                    <field name="move_id"/>
+                </group>
+            </page>
+            <page string="Pedidos de venta">
+                <group>
+                    <field name="sale_order_ids"/>
+                </group>
+            </page>
+        </xpath>
+
+        <xpath expr="//field[@name='date_invoice']" position="replace">
+            <field name="date_invoice" groups="account.group_account_user,account.group_account_manager"/>
+        </xpath>
+    </field>
+  </record>
+
+    <record id="isep_account_invoice_form_mensualidad" model="ir.ui.view">
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="sale.account_invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='team_id']" position="after">
+                <field name="mensualidad" attrs="{'invisible':[('type','!=','out_invoice')]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

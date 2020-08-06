@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="crmpreciodecurso_tree" model="ir.ui.view">
+        <field name="model">crm.preciodecurso</field>
+        <field name="arch" type="xml">
+			<tree string="Precios de Cursos">
+                    <field name="x_prod_id"/>
+					<field name="x_modalidad_id"/>
+					<field name="x_sede_id"/>
+					<field name="x_precio"/>
+					<field name="x_company_id"/>
+                </tree>
+		</field>
+	</record>
+</odoo>

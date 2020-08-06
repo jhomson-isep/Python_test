@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="crmtipodecurso_tree" model="ir.ui.view">
+        <field name="model">x.crmtipodecurso</field>
+        <field name="arch" type="xml">
+			<tree string="Tipos de Cursos">
+				<field name="x_name"/>
+				<field name="x_codigotipodecurso"/>
+			</tree>
+		</field>
+	</record>
+</odoo>

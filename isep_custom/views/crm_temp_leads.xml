@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="lead_temp_form" model="ir.ui.view">
+        <field name="name">lead.temp.form</field>
+        <field name="model">crm.temp</field>
+        <field name="arch" type="xml">
+            <form string="Iniciativa">
+                <header>
+                    <button name="validate_lead" string="Validar" type="object" attrs="{'invisible': [('check', '=', True)]}" class="oe_highlight"/>
+                </header>
+                <group>
+                    <group string="Informacion cliente">
+                        <field name="nombre"/>
+                        <field name="apellidos"/>
+                        <field name="phone"/>
+                        <field name="mobile"/>
+                        <field name="email"/>
+                        <field name="pais"/>
+                        <field name="state"/>
+                        <field name="ciudad"/>
+                        <field name="lane"/>
+                        <field name="cp"/>
+                        <field name="anno_nac"/>
+                        <field name="sexo"/>
+                        <field name="estudios_finalizados"/>
+                    </group>
+                    <group string="Estudios">
+                        <field name="cod_curso"/>
+                        <field name="cod_sede"/>
+                        <field name="cod_modalidad"/>
+                        <field name="horario"/>
+                        <field name="cod_tipo_curso"/>
+                        <field name="curso"/>
+                        <field name="cod_area"/>
+                        <field name="modalidad"/>
+                        <field name="sede"/>
+                    </group>
+                </group>
+                <group>
+                    <group string="Portal">
+                        <field name="codigo"/>
+                        <field name="leadsource"/>
+                        <field name="source"/>
+                        <field name="terms"/>
+                    </group>
+                    <group string="Info iniciativa">
+                        <field name="descripcion"/>
+                        <field name="medium"/>
+                        <field name="utma"/>
+                        <field name="content"/>
+                    </group>
+                </group>
+                <group string="Mas informacion">
+                    <field name="iniciativa_id"/>
+                    <field name="other"/>
+                    <field name="check" invisible="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="lead_temp_tree" model="ir.ui.view">
+        <field name="name">lead.temp.tree</field>
+        <field name="model">crm.temp</field>
+        <field name="arch" type="xml">
+            <tree string="Iniciativas entrantes">
+                <field name="fecha_lead"/>
+                <field name="nombre"/>
+                <field name="apellidos"/>
+                <field name="ciudad"/>
+                <field name="state"/>
+                <field name="pais"/>
+                <field name="email"/>
+                <field name="check" widget="boolean_button"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="lead_temp_search" model="ir.ui.view">
+        <field name="name">lead.temp.search</field>
+        <field name="model">crm.temp</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search string="Filtrar por estado">
+                <filter string="No pasados" name="not_validate" domain="[('check','!=','False')]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="crm_iniciativas" model="ir.actions.act_window">
+        <field name="name">Iniciativas Entrantes</field>
+        <field name="res_model">crm.temp</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="lead_temp_search"/>
+        <field name="context">{"search_default_not_validate":1}</field>
+    </record>
+
+    <menuitem
+        id="crm_iniciativas_menu"
+        name="Iniciativas entrantes"
+        action="crm_iniciativas"
+        parent="crm.crm_menu_sales"
+        sequence="66"/>
+        
+</odoo>

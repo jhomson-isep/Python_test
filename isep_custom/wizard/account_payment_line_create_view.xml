@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="isep_account_payment_line_create_form" model="ir.ui.view">
+		<field name="name">isep_account_payment_line_create_form</field>
+		<field name="model">account.payment.line.create</field>
+		<field name="inherit_id" ref="account_payment_order.account_payment_line_create_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='due_date']" position="attributes">
+				<attribute name="string">Fecha de vencimiento final</attribute>
+			</xpath>
+			<xpath expr="//field[@name='due_date']" position="before">
+			 	<field name="due_date_init" attrs="{'invisible': [('date_type', '!=', 'due')]}"/>
+			</xpath>
+			<xpath expr="//field[@name='journal_ids']" position="before">
+                                <field name="accounts_ids" widget="many2many_tags"
+                                   placeholder="Dejar vacío para usar todas las cuentas."/>
+                        </xpath>
+                        <xpath expr="//field[@name='due_date']" position="after">
+                                <field name="currency_ids" widget="many2many_tags"
+                                   placeholder="Dejar vacío para usar todas las monedas." />
+                        </xpath>
+		</field>
+	</record>
+</odoo>

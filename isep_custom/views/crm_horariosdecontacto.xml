@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="crm_horariosdecontacto_tree" model="ir.ui.view">
+        <field name="model">crm.horariosdecontacto</field>
+        <field name="arch" type="xml">
+			<tree string="Horarios de Contacto">
+            	<field name="x_name"/>
+            </tree>
+		</field>
+	</record>
+</odoo>

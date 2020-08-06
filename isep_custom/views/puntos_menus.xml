@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<menuitem action="sale.action_orders"
+            id="menu_sale_order" parent="account.menu_finance_receivables"
+            sequence="100" groups="base.group_sale_salesman,base.group_sale_manager"
+            name="Pedidos de venta"/>
+</odoo>

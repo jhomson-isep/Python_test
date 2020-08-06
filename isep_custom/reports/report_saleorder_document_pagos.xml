@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="report_saleorder_document_pagos">
+            <t t-call="report.external_layout">
+                <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})" />
+                <div class="page">
+                    <div class="oe_structure" />
+                    <div class="row">
+                        <div style="font-size:10px">
+                            <span t-field="doc.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha_informe)[1].fecha_informe" />
+                            <t t-set="i" t-value="0" />
+                            <t t-set="Resto" t-value="0.0" />
+                            <span t-foreach="doc.x_pago_id.lines_ids" t-as="l">
+                                <t t-if="'Matr' not in l.name">
+                                    <t t-set="Resto" t-value="Resto+l.importe" />
+                                    <span t-esc="Resto" />
+                                </t>
+                                <span t-if="i&gt;0" />
+                                <t t-set="i" t-value="i+1" />
+                            </span>
+                            <span t-if="i&gt;=1">
+                                Resto Aplazado
+                                <span t-esc="Resto" />
+                                € en
+                                <span t-esc="i-1" />
+                                Plazo/s de
+                                <span t-field="doc.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha_informe)[1].importe" />
+                                cada uno. Siendo el último recibo de
+                                <span t-field="doc.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha_informe)[i-1].importe" />
+                                el
+                            </span>
+                            <span t-field="doc.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha_informe)[i-1].fecha_informe" />
+                            <!--<span t-field="doc.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha_informe)[1].importe" />
+                            <span t-field="doc.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha_informe)[i-1].importe" />-->
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Nombre</th>
+                                        <th>Importe</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="invoice_tbody">
+                                    <tr t-foreach="doc.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha_informe)" t-as="l">
+                                        <td>
+                                            <span t-field="l.fecha_informe"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="l.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="l.importe"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</openerp>

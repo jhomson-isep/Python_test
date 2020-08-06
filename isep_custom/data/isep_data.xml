@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+<!--
+    1 -> ISEP
+    3 -> ISED
+    7 -> ISED ASTURIAS
+    5 -> ISED BILBAO
+    4 -> ISED MADRID
+    6 -> ISED ZARISED
+
+-->
+<!--
+    PARA BORRARRRR
+        <record id="product_isep_matricula_presencial" model="product.product">
+            <field name="name">Matrícula presencial</field>
+            <field name="list_price">0</field>
+            <field name="type">service</field>
+            <field name="company_id"></field>
+            <field name="default_code">MATP</field>
+            <field name="tipodecurso">mat</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="description">Producto genérico para la facturación de cursos presenciales.</field>
+        </record>
+
+        <record id="product_isep_matricula_elearning" model="product.product">
+            <field name="name">Matrícula elearning</field>
+            <field name="list_price">0</field>
+            <field name="type">service</field>
+            <field name="company_ids"></field>
+            <field name="default_code">MATE</field>
+            <field name="tipodecurso">mat</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="description">Producto genérico para la facturación de cursos elearning.</field>
+        </record>
+-->
+       <!-- Matrículas -->
+
+        <record id="product_isep_matricula_elearning" model="product.product">
+            <field name="name">Matrícula elearning residente</field>
+            <field name="list_price">400</field>
+            <field name="type">service</field>
+            <field name="company_ids" eval="[(6, 0, [(1)])]"/>
+            <field name="default_code">MELR</field>
+            <field name="tipodecurso">mat</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="description">Matrícula.</field>
+        </record>
+
+
+        <record id="product_isep_matricula_elearning_no_regional" model="product.product">
+            <field name="name">Matrícula elearning no residente</field>
+            <field name="list_price">400</field>
+            <field name="type">service</field>
+            <field name="company_ids" eval="[(6, 0, [(1)])]"/>
+            <field name="default_code">MENR</field>
+            <field name="tipodecurso">mat</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="description">Matrícula.</field>
+        </record>
+
+
+        <record id="product_isep_matricula_distancia" model="product.product">
+            <field name="name">Matrícula distancia</field>
+            <field name="list_price">400</field>
+            <field name="type">service</field>
+            <field name="company_ids" eval="[(6, 0, [(1)])]"/>
+            <field name="default_code">MDIS</field>
+            <field name="tipodecurso">mat</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="description">Matrícula.</field>
+        </record>
+
+
+        <record id="product_isep_matricula_presencial" model="product.product">
+            <field name="name">Matrícula presencial</field>
+            <field name="list_price">600</field>
+            <field name="type">service</field>
+            <field name="company_ids" eval="[(6, 0, [(1)])]"/>
+            <field name="default_code">MPRS</field>
+            <field name="tipodecurso">mat</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="description">Matrícula.</field>
+        </record>
+
+        <!-- [(6, 0, [(3)])]-->
+        <record id="product_ised_matricula_online" model="product.product">
+            <field name="name">Matrícula online</field>
+            <field name="list_price">300</field>
+            <field name="type">service</field>
+            <field name="company_ids" eval="[(6, 0, [(1)])]"/>
+            <field name="default_code">MONL</field>
+            <field name="tipodecurso">mat</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="description">Matrícula.</field>
+        </record>
+
+        <!-- Matriculas especiales -->
+
+        <!-- [(6, 0, [(4),(5),(6)])] -->
+        <record id="product_isep_matricula_especial" model="product.product">
+            <field name="name">Matrícula especial</field>
+            <field name="list_price">100</field>
+            <field name="type">service</field>
+            <field name="company_ids" eval="[(6, 0, [(1)])]"/>
+            <field name="default_code">MESP</field>
+            <field name="tipodecurso">mat</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="description">Matrícula.</field>
+        </record>
+
+        <!-- [(6, 0, [(4),(5),(6)])]-->
+        <record id="product_isep_matricula_primer_nivel" model="product.product">
+            <field name="name">Matrícula primer nivel</field>
+            <field name="list_price">250</field>
+            <field name="type">service</field>
+            <field name="company_ids" eval="[(6, 0, [(1)])]"/>
+            <field name="default_code">MPNVL</field>
+            <field name="tipodecurso">mat</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="description">Matrícula.</field>
+        </record>
+
+        <!-- [(6, 0, [(4),(5),(6)])] -->
+        <record id="product_isep_matricula_segundo_nivel" model="product.product">
+            <field name="name">Matrícula segundo nivel</field>
+            <field name="list_price">350</field>
+            <field name="type">service</field>
+            <field name="company_ids" eval="[(6, 0, [(1)])]"/>
+            <field name="default_code">MSNVL</field>
+            <field name="tipodecurso">mat</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="description">Matrícula.</field>
+        </record>
+        <!-- [(6, 0, [(4),(5),(6)])] -->
+        <record id="product_isep_matricula_curso_completo" model="product.product">
+            <field name="name">Matrícula curso completo</field>
+            <field name="list_price">600</field>
+            <field name="type">service</field>
+            <field name="company_ids" eval="[(6, 0, [(1)])]"/>
+            <field name="default_code">MCCMP</field>
+            <field name="tipodecurso">mat</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="description">Matrícula.</field>
+        </record>
+
+        <!-- Fin Matriculas especiales-->
+        <!-- Fin Matriculas-->
+
+        <!-- [(6, 0, [(1),(3),(7),(5),(4),(6)])]-->
+        <record id="product_isep_recargo" model="product.product">
+            <field name="name">Financiación</field>
+            <field name="standard_price">0</field>
+            <field name="list_price">0</field>
+            <field name="type">service</field>
+            <field name="company_ids" eval="[(6, 0, [(1)])]"/>
+            <field name="default_code">REC</field>
+            <field name="tipodecurso">rec</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="description">Producto de financiación genérico para la facturación de cursos.</field>
+        </record>
+
+        <!--[(6, 0, [(1),(3),(7),(5),(4),(6)])]-->
+        <record id="product_isep_quota" model="product.product">
+            <field name="name">Quota</field>
+            <field name="standard_price">0</field>
+            <field name="list_price">0</field>
+            <field name="type">service</field>
+            <field name="company_ids" eval="[(6, 0, [(1)])]"/>
+            <field name="default_code">QUOT</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="description">Producto genérico para la facturación de cursos.</field>
+        </record>
+
+        <!-- [(1),(3),(7),(5),(4),(6)])]-->
+        <record id="product_isep_gastos_envio" model="product.product">
+            <field name="name">Gastos de envio</field>
+            <field name="standard_price">0</field>
+            <field name="list_price">0</field>
+            <field name="type">service</field>
+            <field name="company_ids" eval="[(6, 0, [(1)])]"/>
+            <field name="default_code">GENV</field>
+            <field name="tipodecurso">gasto_env</field>
+            <field name="uom_id" ref="product.product_uom_unit"/>
+            <field name="uom_po_id" ref="product.product_uom_unit"/>
+            <field name="description">Producto genérico para la facturación de gastos de envio.</field>
+        </record>
+    </data>
+</openerp>
