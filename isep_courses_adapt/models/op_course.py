@@ -62,11 +62,11 @@ class OpCourse(models.Model):
             response = response.json()
             logger.info(response)
             if type(response) == dict and response.get('exception'):
-                raise logger.info(response.get('exception'))
+                logger.info(response.get('exception'))
             else:
                 values.update({'moodle_category_id': response[0].get('id')})
         except Exception:
-            raise logger.info("Error calling Moodle API\n", Exception)
+            logger.info("Error calling Moodle API\n", Exception)
         res = super(OpCourse, self).create(values)
         return res
 
@@ -81,7 +81,7 @@ class OpCourse(models.Model):
             endpoint = config_params.get_param('moodle_endpoint')
         except Exception as e:
             logger.error(str(e))
-            raise Warning(_("Error on moddle conection: " % str(e)))
+            Warning(_("Error on moddle conection: " % str(e)))
         params = {
             'categories[0][id]': self.moodle_category_id,
             'categories[0][name]': values.get('name'),
@@ -92,19 +92,20 @@ class OpCourse(models.Model):
         if values.get('parent_id') or self.parent_id:
             params.update({'categories[0][parent]': self.parent_id.moodle_category_id})
         try:
+            logger.info(self.moodle_category_id)
             response = post(url + endpoint, params)
             response = response.json()
             logger.info(response)
             if type(response) == dict and response.get('exception'):
-                raise logger.info("Error calling Moodle API\n", response)
+                logger.info("Error calling Moodle API\n", response)
         except ValueError:
-            raise logger.info("Error calling Moodle API\n", ValueError)
+            logger.info("Error calling Moodle API\n", ValueError)
         res = super(OpCourse, self).write(values)
         try:
             for subject in self.subject_ids:
                 self.create_moodle_course(subject, self.moodle_category_id)
         except ValueError:
-            raise logger.info("Error calling Moodle API\n", ValueError)
+            logger.info("Error calling Moodle API\n", ValueError)
         return res
 
     def create_moodle_course(self, subject, category):
@@ -115,7 +116,7 @@ class OpCourse(models.Model):
             endpoint = config_params.get_param('moodle_endpoint')
         except Exception as e:
             logger.error(str(e))
-            raise Warning(_("Error on moddle conection: " % str(e)))
+            Warning(_("Error on moddle conection: " % str(e)))
         params = {
             'courses[0][fullname]': subject.name,
             'courses[0][shortname]': subject.code,
@@ -130,12 +131,13 @@ class OpCourse(models.Model):
             "wsfunction": 'core_course_create_courses'
         }
         try:
+            logger.info(category)
             response = post(url + endpoint, params)
             response = response.json()
             logger.info(response)
             if type(response) == dict and response.get('exception'):
-                raise logger.info(response.get('exception'))
+                logger.info(response.get('exception'))
             else:
                 self.env['op.subject'].write({'id': subject.id, 'moodle_course_id': response[0].get('id')})
         except Exception:
-            raise logger.info("Error calling Moodle API\n", Exception)
+            logger.info("Error calling Moodle API\n", Exception)
