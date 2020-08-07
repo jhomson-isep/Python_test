@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="isep_product_template_product_tree" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='name']" position="before">
+        		<field name="default_code"/>
+        	</xpath>
+		</field>
+	</record>
+
+	<record id="isep_product_template_common_form" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='categ_id']" position="after">
+        		<field name="tipodecurso"/>
+        	</xpath>
+            <field name="company_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+		</field>
+	</record>
+</odoo>

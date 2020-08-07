@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<template id="isep_report_saleorder" inherit_id="sale.report_saleorder">
+			<xpath expr="//t[@t-call='sale.report_saleorder_document']" position="after">
+				<t t-call="isep_custom.report_saleorder_document_pagos" t-lang="doc.partner_id.lang"/>
+			</xpath>
+		</template>
+	</data>
+</openerp>

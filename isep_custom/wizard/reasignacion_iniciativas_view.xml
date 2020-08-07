@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="mass_reasignacion_iniciativas_order_form" model="ir.ui.view">
+        <field name="name">mass.reasignacion.iniciativas.order.form</field>
+        <field name="model">mass.reasignacion.iniciativas</field>
+        <field name="arch" type="xml">
+            <form>
+                <span></span>
+            	<group>
+            		<field name="user_id"/>
+            		<field name="team_id"/>
+            		<field name="company_id"/>
+            	</group>
+                <separator colspan="4" string=""/>
+                <span></span>
+                <footer>
+                    <button name="confirm" string="Confirmar" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- [(4, ref('base.group_sale_manager'),ref('__export__.res_groups_129'))] -->
+	<record id="mass_reasignacion_iniciativas_submenu" model="ir.actions.act_window">
+        <field name="name">Reasignación de Iniciativas</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mass.reasignacion.iniciativas</field>
+        <field name="src_model">crm.lead</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="mass_reasignacion_iniciativas_order_form"/>
+        <field name="target">new</field>
+        <field name="multi">True</field>
+        <field name="groups_id" eval="[(4, ref('sales_team.group_sale_manager'), ref('isep_custom.group_controlador_equipo_ventas'))]"/>
+    </record>
+
+    <!-- [(4, ref('base.group_sale_manager'),ref('__export__.res_groups_129'))] -->
+     <!-- 
+	<record  model="ir.default" id="mass_reasignacion_iniciativas_action">
+        <field name="model_id" ref="crm.model_crm_lead"/>
+        <field name="name">mass.reasignacion.iniciativas</field>
+        <field name="key2">client_action_multi</field>
+        <field name="value" eval="'ir.actions.act_window,' + str(ref('mass_reasignacion_iniciativas_submenu'))"/>
+        <field name="key">action</field>
+        <field name="model">crm.lead</field>
+        <field name="groups_id" eval="[(1,ref('sales_team.group_sale_manager'),ref('isep_custom.group_controlador_equipo_ventas'))]"/> 
+    </record>
+
+
+
+    <record  model="ir.default" id="mass_reasignacion_iniciativas_action" >
+        <field name="model_id" ref="crm.model_crm_lead"/>
+        <field name="field_id">6299</field>
+        <field name="json_value"></field>
+        <field name="name">mass.reasignacion.iniciativas</field>
+        <field name="key2">client_action_multi</field>
+        <field name="value" eval="'ir.actions.act_window,' + str(ref('mass_reasignacion_iniciativas_submenu'))"/>
+        <field name="key">action</field>
+        <field name="model">crm.lead</field>
+        <field name="groups_id" eval="[(1,ref('sales_team.group_sale_manager'),ref('isep_custom.group_controlador_equipo_ventas'))]"/> 
+    </record>
+    -->
+
+    <record id="action_mass_reasignacion_iniciativas_order_form" model="ir.actions.act_window">
+        <field name="name">Asignación Masiva</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mass.reasignacion.iniciativas</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="mass_reasignacion_iniciativas_order_form"/>
+        <field name="target">new</field>
+    </record>    
+
+    <act_window
+        id="mass_reasignacion_iniciativas_action"
+        multi="True"
+        key2="client_action_multi" name="Asignación Masiva"
+        res_model="mass.reasignacion.iniciativas" src_model="crm.lead"
+        view_mode="form" target="new" view_type="form"
+        view_id="mass_reasignacion_iniciativas_order_form"
+        groups="sales_team.group_sale_manager"
+    />
+
+</odoo>
+

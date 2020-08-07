@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+  <!-- OPORTUNIDADES -->
+
+
+  <record id="isep_crm_case_form_view_oppor" model="ir.ui.view">
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+    <field name="arch" type="xml">
+
+      <xpath expr="//field[@name='partner_id']" position="replace">
+        <field name="partner_id" on_change="on_change_partner_id(partner_id)" string="Cliente" context="{'x_producto_id':x_producto_id,'default_name': partner_name, 'default_street': street,                                          'default_street2': street2, 'default_city': city,                                          'default_state_id': state_id, 'default_zip': zip,                                          'default_country_id': country_id, 'default_function': function,                                          'default_phone': phone, 'default_mobile': mobile,                                          'default_email': email_from,                                          'default_user_id': user_id, 'default_team_id': team_id}"/>
+      </xpath>
+
+      <xpath expr="//field[@name='email_from']" position="replace">
+        <field name="email_from" string="Email" widget="email" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}" on_change="on_change_partner_fields(partner_id,context)"/>
+      </xpath>
+
+      <xpath expr="//field[@name='phone']" position="replace">
+        <field name="phone" widget="phone" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+      </xpath>
+
+      <!--
+      <xpath expr="//label[@for='next_activity_id']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+
+      <xpath expr="//field[@name='next_activity_id']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+      -->
+
+      <xpath expr="//notebook[1]" position="before">
+        <group string="Información Personalizada">
+            <group>
+                <!--
+                <field name="x_tipodecurso_id"/>
+
+              -->
+                <field name="x_curso_id" context="{'display_default_code':True}"/>
+                <field name="x_sede_id" string="Delegación"/>
+                <field name="x_producto_id" on_change="on_change_prod(x_producto_id)" context="{'partner_id':partner_id,'x_producto_id': x_producto_id}"/>
+                <field name="x_oldcrmpotentialid" groups="base.group_system"/>
+                <field name="company_id" groups="base.group_system"/>
+            </group>
+
+            <group>
+                <field name="x_area_id"/>
+                <field name="x_modalidad_id"/>
+            </group>
+        </group>
+      </xpath>
+
+      <xpath expr="//page[1]" position="replace">
+        <page string="Descripción">
+          <field name="description"/>
+        </page>
+      </xpath>
+
+      <xpath expr="//field[@name='partner_name']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+
+      <xpath expr="//field[@name='street']" position="replace">
+        <field name="street" placeholder="Calle..." class="o_address_street" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+      </xpath>
+
+      <xpath expr="//field[@name='street2']" position="replace">
+        <field name="street2" placeholder="Calle 2..." class="o_address_street" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+      </xpath>
+
+      <xpath expr="//field[@name='city']" position="replace">
+        <field name="city" placeholder="Ciudad" class="o_address_city" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+      </xpath>
+
+      <xpath expr="//field[@name='zip']" position="replace">
+        <field name="zip" placeholder="C.P." class="o_address_zip" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+      </xpath>
+
+      <xpath expr="//field[@name='country_id']" position="replace">
+        <field name="country_id" placeholder="País" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+      </xpath>
+
+      <xpath expr="//page[@name='lead']/group/group/div" position="after">
+        <field name="x_aceptacondiciones" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}" invisible="1"/>
+        <field name="x_tipodecontacto" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+        <field name="x_horario_id" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+      </xpath>
+
+      <xpath expr="//field[@name='contact_name']" position="replace">
+        <field name="contact_name" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}" on_change="on_change_partner_fields(partner_id,context)"/>
+      </xpath>
+
+      <xpath expr="//field[@name='title']" position="replace">
+        <field name="title" placeholder="Título" domain="[]" options="{&quot;no_open&quot;: True}" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}" on_change="on_change_partner_fields(partner_id,context)"/>
+      </xpath>
+
+      <xpath expr="//field[@name='function']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+
+      <xpath expr="//field[@name='mobile']" position="replace">
+        <field name="mobile" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+      </xpath>
+
+      <!--
+      <xpath expr="//field[@name='fax']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+
+
+      <xpath expr="//field[@name='opt_out']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+      -->
+
+
+
+      <xpath expr="//notebook" position="inside">
+        <page string="Descripción">
+        <field name="x_sexo" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+        <field name="x_universidad" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+        <field name="x_titulacion" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+        <field name="x_tipodedocumento" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+        <field name="x_documentodeidentidad" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+        <field name="x_finalizacionestudios" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+        <field name="x_annonacimiento" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+        <field name="x_profesion" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+      </page>
+      </xpath>
+
+      <xpath expr="//page[last()]" position="after">
+        <page string="Google Analytics" groups="base.group_erp_manager,base.group_sale_manager,isep_custom.group_manager_mgonzalez,isep_custom.group_director_sede">
+          <group>
+              <field name="x_ga_campaign" groups="base.group_sale_manager,isep_custom.group_manager_mgonzalez,base.group_system"/>
+              <field name="x_ga_medium" groups="base.group_sale_manager,isep_custom.group_manager_mgonzalez,base.group_system"/>
+              <field name="x_ga_source" groups="base.group_sale_manager,isep_custom.group_manager_mgonzalez,base.group_system,isep_custom.group_director_sede" string="Origen"/>
+              <field name="x_ga_utma" groups="base.group_sale_manager,isep_custom.group_manager_mgonzalez,base.group_system"/>
+          </group>
+        </page>
+
+        <page string="Codigos" groups="base.group_configuration">
+          <group>
+              <group>
+                  <field name="x_codarea"/>
+                  <field name="x_codsede"/>
+                  <field name="x_codmodalidad"/>
+              </group>
+
+              <group>
+                  <field name="x_codcurso"/>
+                  <field name="x_codtipodecurso"/>
+              </group>
+          </group>
+        </page>
+      </xpath>
+
+      <xpath expr="//field[@name='user_id']" position="attributes">
+        <attribute name="groups">isep_custom.group_director_sede,base.group_sale_manager,isep_custom.group_manager_mgonzalez</attribute>
+      </xpath>
+
+
+    </field>
+  </record>
+
+  <!-- FIN OPORTUNIDADES -->
+
+
+  <!-- INICIATIVAS -->
+
+  <record id="isep_crm_case_form_view_leads" model="ir.ui.view">
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
+    <field name="arch" type="xml">
+
+      <xpath expr="//field[@name='street']" position="replace">
+        <field name="street" placeholder="Calle..." class="o_address_street" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+      </xpath>
+
+      <xpath expr="//field[@name='street2']" position="replace">
+        <field name="street2" placeholder="Calle 2..." class="o_address_street" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+      </xpath>
+
+      <xpath expr="//field[@name='city']" position="replace">
+        <field name="city" placeholder="Ciudad" class="o_address_city" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+      </xpath>
+
+      <xpath expr="//field[@name='state_id']" position="replace">
+        <field name="state_id" class="o_address_state" placeholder="Provincia" options="{&quot;no_open&quot;: True}" on_change="onchange_state(state_id)" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+      </xpath>
+
+      <xpath expr="//field[@name='zip']" position="replace">
+        <field name="zip" placeholder="C.P." class="o_address_zip" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+      </xpath>
+
+      <xpath expr="//field[@name='country_id']" position="replace">
+        <field name="country_id" placeholder="País" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+      </xpath>
+
+      <xpath expr="//field[@name='contact_name']" position="replace">
+        <field name="contact_name" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}" on_change="on_change_partner_fields(partner_id,context)"/>
+      </xpath>
+
+      <xpath expr="//field[@name='title']" position="replace">
+        <field name="title" placeholder="Título" domain="[]" options="{&quot;no_open&quot;: True}" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}" on_change="on_change_partner_fields(partner_id,context)"/>
+      </xpath>
+
+      <xpath expr="//field[@name='email_from']" position="replace">
+        <field name="email_from" widget="email" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}" on_change="on_change_partner_fields(partner_id,context)" groups="base.group_sale_manager,isep_custom.group_manager_mgonzalez"/>
+      </xpath>
+
+      <xpath expr="//field[@name='function']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+
+      <xpath expr="//field[@name='phone']" position="replace">
+        <field name="phone" widget="phone" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}" groups="base.group_sale_manager"/>
+      </xpath>
+
+      <xpath expr="//field[@name='mobile']" position="replace">
+        <field name="mobile" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}" invisible="1" groups="base.group_sale_manager"/>
+      </xpath>
+
+
+      <!--
+      <xpath expr="//field[@name='fax']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+    -->
+
+      <xpath expr="//field[@name='user_id']" position="replace">
+        <field name="user_id"/>
+      </xpath>
+
+      <xpath expr="//field[@name='type']" position="after">
+        <field name="x_grupoduplicado" invisible="1"/>
+        <field name="x_contactonuevoodup"/>
+      </xpath>
+
+      <xpath expr="//field[@name='message_bounce']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+
+      <xpath expr="//field[@name='partner_name']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+
+      <xpath expr="//page[1]" position="replace">
+        <page string="Descripción">
+          <field name="description"/>
+        </page>
+      </xpath>
+
+      <xpath expr="//notebook[1]" position="before">
+        <group string="Información Especifica">
+          <group>
+            <field name="x_sexo" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+            <field name="x_universidad" context="{'x_producto_id':x_producto_id,'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+            <field name="x_titulacion" context="{'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+            <field name="x_tipodecontacto" context="{'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+            <field name="x_horario_id" context="{'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+            <field name="x_aceptacondiciones" context="{'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}" invisible="1"/>
+            <field name="x_tipodedocumento" context="{'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+            <field name="x_documentodeidentidad" context="{'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+            <field name="x_annonacimiento" context="{'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+            <field name="x_finalizacionestudios" context="{'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+            <field name="x_profesion" context="{'partner_id':partner_id,'street':street,'street2':street2,'zip':zip,'city':city,'state_id':state_id, 'country_id':country_id,'title':title,'email_from':email_from,'phone':phone,'mobile':mobile, 'user_id':user_id,'x_sexo':x_sexo, 'team_id':team_id, 'x_universidad':x_universidad,'x_horario_id':x_horario_id, 'x_titulacion':x_titulacion,'contact_name':contact_name, 'x_aceptacondiciones':x_aceptacondiciones,'x_tipodedocumento':x_tipodedocumento, 'x_documentodeidentidad':x_documentodeidentidad, 'x_finalizacionestudios':x_finalizacionestudios, 'x_annonacimiento':x_annonacimiento, 'x_profesion':x_profesion, 'x_tipodecontacto':x_tipodecontacto}"/>
+
+          </group>
+          <group>
+            <field name="x_area_id" readonly="1"/>
+            <field name="x_curso_id" readonly="1"/>
+            <!--
+            <field name="x_tipodecurso_id" readonly="1"/>
+          -->
+            <field name="x_modalidad_id" domain="[('attribute_id','in',[2,3]),('attribute_id.x_company_ids', 'in',[company_id])]"/>
+            <field name="x_sede_id" domain="[('attribute_id','in',[1,4]),('attribute_id.x_company_ids', 'in',[company_id])]" string="Delegación"/>
+            <field name="x_producto_id" context="{'partner_id':partner_id,'x_producto_id': x_producto_id}" on_change="on_change_prod(x_producto_id)"/>
+          </group>
+        </group>
+      </xpath>
+
+      <xpath expr="//page[last()]" position="after">
+        <page string="Google Analytics" groups="base.group_erp_manager,base.group_sale_manager,isep_custom.group_manager_mgonzalez">
+          <group>
+            <field name="x_ga_campaign"/>
+            <field name="x_ga_medium"/>
+            <field name="x_ga_source"/>
+            <field name="x_ga_utma"/>
+            <field name="x_content"/>
+            <field name="x_term"/>
+          </group>
+        </page>
+        <page string="Codigos" groups="base.group_configuration">
+          <group>
+            <group>
+              <field name="x_codarea"/>
+              <field name="x_codsede"/>
+              <field name="x_codmodalidad"/>
+            </group>
+            <group>
+              <field name="x_codcurso"/>
+              <field name="x_codtipodecurso"/>
+            </group>
+          </group>
+        </page>
+      </xpath>
+    </field>
+  </record>
+
+
+  <!-- FIN INICIATIVAS -->
+
+
+  <!-- SIGUIENTES ACTIVIDADES -->
+
+  <record id="isep_crm_lead_view_tree_activity" model="ir.ui.view">
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.crm_lead_view_tree_activity"/>
+    <field name="arch" type="xml">
+
+      <xpath expr="//field[@name='name']" position="before">
+        <field name="create_date"/>
+      </xpath>
+
+      <!--
+      <xpath expr="//field[@name='date_action']" position="attributes">
+          <attribute name="invisible">True</attribute>
+      </xpath>
+
+      <xpath expr="//field[@name='date_action']" position="after">
+        <field name="x_dateactiontime"/>
+      </xpath>
+      -->
+
+      <xpath expr="//field[@name='date_deadline']" position="after">
+        <field name="user_id"/>
+        <field name="team_id"/>
+      </xpath>
+    </field>
+  </record>
+
+
+
+  <!-- FIN SIGUIENTES ACTIVIDADES -->
+
+
+  <!-- OPORTUNIDADES VISTA TREE -->
+
+  <record id="isep_crm_oppor_view_tree" model="ir.ui.view">
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+    <field name="arch" type="xml">
+      <xpath expr="//tree" position="attributes">
+        <attribute name="colors">colors="green:probability &gt;99; red:probability &lt;1;</attribute>
+        <attribute name="import">false</attribute>
+      </xpath>
+
+      <xpath expr="//field[@name='date_deadline']" position="after">
+        <field name="date_conversion"/>
+      </xpath>
+
+      <xpath expr="//field[@name='create_date']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+
+      <xpath expr="//field[@name='name']" position="after">
+        <field name="x_curso_id"/>
+      </xpath>
+
+      <xpath expr="//field[@name='country_id']" position="after">
+        <field name="phone"/>
+      </xpath>
+
+      <!--
+      <xpath expr="//field[@name='date_action']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+    -->
+
+      <xpath expr="//field[@name='team_id']" position="after">
+        <field name="x_dateactiontime" invisible="1"/>
+        <!--<field name="next_activity_id" invisible="1"/>-->
+      </xpath>
+
+
+      <!--
+      <xpath expr="//field[@name='title_action']" position="attributes">
+        <attribute name="invisible">True</attribute>
+        <attribute name="string">Descripción actividad siguiente.</attribute>
+      </xpath>
+    -->
+
+      <xpath expr="//field[@name='planned_revenue']" position="attributes">
+        <attribute name="invisible">True</attribute>
+        <attribute name="sum">Ingresos esperados</attribute>
+      </xpath>
+
+      <xpath expr="//field[@name='planned_revenue']" position="after">
+        <field name="x_plannedrevenue"/>
+      </xpath>
+
+      <xpath expr="//field[@name='user_id']" position="after">
+        <field name="x_ga_source" groups="base.group_system,isep_custom.group_director_sede" string="Origen"/>
+        <field name="x_ga_medium" groups="base.group_system,isep_custom.group_director_sede" invisible="1"/>
+
+        
+        <field name="x_contactonuevoodup" />
+       <!--
+        <field name="x_precontactonuevodup" string="Iniciativa" fg_color="green:duplicates_count>=1;red:duplicates_count==0;"/>
+      -->
+        <field name="x_precontactonuevodup" string="Iniciativa" >
+            
+        </field>
+        
+
+      </xpath>
+      
+    </field>
+  </record>
+
+
+  <!-- <record id="isep_crm_oppor_view_tree_duplicates" model="ir.ui.view">
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm_duplicates.crm_case_tree_view_oppor"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='duplicates_count']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+    </field>
+  </record> -->
+
+  <!-- FIN OPORTUNIDADES VISTA TREE -->
+
+
+
+  <!-- INICIATIVAS VISTA TREE -->
+
+
+  <record id="isep_crm_lead_view_tree" model="ir.ui.view">
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
+    <field name="arch" type="xml">
+
+      <xpath expr="//field[@name='name']" position="after">
+        <field name="x_curso_id"/>
+      </xpath>
+
+      <xpath expr="//field[@name='contact_name']" position="after">
+        <field name="state_id"/>
+      </xpath>
+
+      <xpath expr="//field[@name='phone']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+
+      <xpath expr="//field[@name='user_id']" position="attributes">
+        <attribute name="invisible">False</attribute>
+      </xpath>
+
+      <!--
+      <xpath expr="//field[@name='stage_id']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+      -->
+
+      <xpath expr="//field[@name='phone']" position="after">
+        <field name="x_numdups" invisible="1"/>
+        <field name="x_colorcondup" invisible="1"/>
+        <field name="x_grupoduplicado"/>
+        <field name="x_ga_medium" groups="base.group_system"/>
+      </xpath>
+
+      <xpath expr="//field[@name='team_id']" position="after">
+        <field name="company_id"/>
+        <field name="description" groups="base.group_sale_manager,isep_custom.group_manager_mgonzalez,isep_custom.group_director_sede"/>
+      </xpath>
+
+     <xpath expr="//field[@name='user_id']" position="after">
+        <field name="x_ga_source" groups="base.group_system,isep_custom.group_director_sede" string="Origen"/>
+        <field name="x_contactonuevoodup" />
+        <field name="x_precontactonuevodup" string="Iniciativa" />
+      </xpath>
+      
+
+    </field>
+  </record>
+
+
+  <!--
+  <record id="isep_crm_lead_view_tree_duplicates" model="ir.ui.view">
+    <field name="name">isep_crm_lead_view_tree_duplicates</field>
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm_duplicates.crm_case_tree_view_leads"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='duplicates_count']" position="attributes">
+        <attribute name="invisible">True</attribute>
+      </xpath>
+      <xpath expr="//field[@name='duplicates_count']" position="after">
+        <field name="x_contactonuevoodup" fg_color="red:x_colorcondup&gt; 0;orange:x_colorcondup&gt; 1;"/>
+        <field name="x_precontactonuevodup" string="Iniciativa" fg_color="green:duplicates_count&lt; 1;red:duplicates_count&gt;0;"/>
+      </xpath>
+    </field>
+  </record>
+  -->
+
+
+
+
+
+  <!-- FIN INICIATIVAS VISTA TREE -->
+
+  <!-- VISTAS SEARCH -->
+
+  <record id="isep_crm_lead_search_view" model="ir.ui.view">
+      <field name="name">isep.crm.lead.search.view</field>
+      <field name="model">crm.lead</field>
+      <field name="inherit_id" ref="crm.view_crm_case_leads_filter"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='source_id']" position="after">
+          <field name="phone"/>
+          <field name="email_from"/>
+        </xpath>
+      </field>
+    </record>
+
+    <record id="isep_crm_opportunities_search_view" model="ir.ui.view">
+      <field name="name">isep.crm.opportunities.search.view</field>
+      <field name="model">crm.lead</field>
+      <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='name']" position="after">
+          <field name="phone"/>
+          <field name="email_from"/>
+        </xpath>
+      </field>
+    </record>
+
+</odoo>

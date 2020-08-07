@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="isep_report_footer" inherit_id="report.external_layout_footer">
+			<xpath expr="//li[@t-if='company.vat']" position="replace">
+				<li t-if="company.vat and not company.vat">TIN: <span t-field="company.vat"/></li>
+			</xpath>
+		</template>
+
+        <template id="isep_report_header" inherit_id="report.external_layout_header">
+			<xpath expr="//div[@name='company_address']" position="replace">
+				<div class="col-xs-3" name="company_address">
+                    <div t-field="company.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;,&quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
+                    <span t-field="company.vat"  style="border-bottom: 1px solid black;"/>
+                </div>
+			</xpath>
+
+			<xpath expr="//div[@class='col-xs-9 text-right']" position="replace">
+				<div class="col-xs-9 text-right" style="margin-top:20px;" t-if="company_id.id!=14" t-field="company.rml_header1"/>
+			</xpath>
+		</template>
+<!--
+		<template id="isep_payment_receipt" inherit_id="payment_receipt_invoice.report_payment_print">
+			<xpath expr="//t[@t-call='report.internal_layout']" position="replace">
+				<t t-call="report.external_layout">
+                    <div class="page">
+						<div class="header" style="text-align:center;"><h1><strong>Recibo de Pago</strong></h1></div>
+						<div class="row mt32 mb32" style="text-align:center;"/>
+						<div class="row mt32 mb32">
+								<div class="col-xs-12" style="text-align:left;">
+									<span style="float:left;"><strong>Cliente:</strong><span t-field="doc.partner_id.name"/></span>
+									<span style="float:left; padding-left:50px;"><strong>Fecha factura:</strong><span t-field="doc.date_invoice"/></span>
+									<span style="float:left; padding-left:50px;"><strong>Fecha Vencimiento:</strong><span t-field="doc.date_due"/></span>
+								</div>
+						</div>
+						<table class="table table-condensed">
+								<thead>
+								<tr>
+									<th style="background-color:#9b9da0 !important;">Total Factura</th>
+									<th style="background-color:#9b9da0 !important;">Pagado</th>
+									<th style="background-color:#9b9da0 !important;">Debe</th>
+								</tr>
+							</thead>
+							<tbody>
+								<t t-set="paid_amount" t-value="1"/>
+								<t t-foreach="get_details_inv(doc)" t-as="rec">
+										<tr>
+											<td><span t-att-style="style" t-esc="rec['total_amount']"/></td>
+											<t t-set="paid_amount" t-value="rec['paid']"/>
+											<td><span t-att-style="style" t-esc="rec['paid']"/> </td>
+											<td><span t-att-style="style" t-esc="rec['balance_amount']"/></td>
+										</tr>
+								</t>
+							</tbody>
+						</table>
+						<t t-if="paid_amount != 0">
+							<div class="row mt32 mb32" style="text-align:center;">
+								<div class="col-xs-12">
+									<h3><strong>Detalles de pago</strong></h3>
+								</div>
+							</div>
+							<table class="table table-condensed">
+									<thead>
+									<tr>
+										<th style="background-color:#9b9da0 !important;">Concepto</th>
+										<th style="background-color:#9b9da0 !important;">Fecha de Pago</th>
+										<th style="background-color:#9b9da0 !important;">Método de pago</th>
+										<th style="background-color:#9b9da0 !important;">Importe</th>
+									</tr>
+								</thead>
+								<tbody>
+									<t t-foreach="get_details(doc)" t-as="b">
+										<t t-if="b">
+											<tr>
+												<td><span t-att-style="style" t-esc="b['memo']"/> </td>
+												<td><span t-att-style="style" t-esc="b['date']"/></td>
+												<td><span t-att-style="style" t-esc="b['method']"/></td>
+												<td><span t-att-style="style" t-esc="b['amount']"/></td>
+											</tr>
+										</t>
+									</t>
+								</tbody>
+							</table>
+						</t>
+                    </div>
+                </t>
+			</xpath>
+		</template>
+-->
+	</data>
+</openerp>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="0">
+		<!-- Datos -->
+		<record id="isep_pago" model="ir.sequence">
+			<field name="name">Isep_pagos</field>
+			<field name="code">isep.pagos</field>
+			<field name="company_id"></field>
+			<field name="prefix">P_</field>
+			<field name="padding">6</field>
+		</record>
+		<record id="isep_pago_linea" model="ir.sequence">
+			<field name="name">Isep_pagos_lineas</field>
+			<field name="code">isep.pagoslineas</field>
+			<field name="company_id"></field>
+			<field name="prefix">PL_</field>
+			<field name="padding">6</field>
+		</record>
+	</data>
+</openerp>

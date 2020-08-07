@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_isep_pagos_form" model="ir.ui.view">
+        <field name="name">isep.pagos.form</field>
+        <field name="model">isep.pagos</field>
+        <field name="arch" type="xml">
+            <form string="Isep pagos">
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="importe"/>
+                    </group>
+                    <group>
+                        <field name="fecha"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Lineas de pago">
+                        <field name="lines_ids"/>
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_isep_pagoslineas_tree" model="ir.ui.view">
+        <field name="name">isep.pagoslineas.form</field>
+        <field name="model">isep.pagoslineas</field>
+        <field name="arch" type="xml">
+            <tree string="Isep pagos lineas">
+                <field name="name"/>
+                <field name="fecha"/>
+                <field name="importe" sum="Total"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

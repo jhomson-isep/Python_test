@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_sale_prematricula">
+                <t t-call="web.external_layout">
+                    <t t-set="doc" t-value="docs"/>
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <div class="row">
+                            <table width="100%"  style="font-size:12px">
+                                <tr>
+                                    <td colspan="10" align="right"><b><span t-field="doc.name"/></b> </td>
+                                </tr>
+                                <tr height="8px">
+                                    <td></td>
+                                </tr>
+                                <tr  class="border-black">
+                                    <td width="8px"></td>
+                                    <td colspan="8"><h5><b>DATOS PERSONALES DEL ALUMNO</b></h5></td>
+                                </tr>
+                                <tr height="1px">
+                                    <td width="14px"></td>
+                                    <td width="14px"></td>
+                                    <td width="12px"></td>
+                                    <td width="12px"></td>
+                                    <td width="12px"></td>
+                                    <td width="12px"></td>
+                                    <td width="12px"></td>
+                                    <td width="12px"></td>
+                                </tr>
+                                <tr >
+                                   <td width="15px"></td>
+                                   <td><strong>Nombre : </strong></td>
+                                   <td colspan="5"><span t-field="doc.partner_id.name"/> </td>
+                                </tr>
+                                <tr>
+                                   <td width="15px"></td>
+                                   <td width="100px"><strong>DNI/Pasaporte : </strong></td>
+                                   <td  width="300px"><span t-field="doc.partner_id.vat"/> </td>
+                                   <td><strong>Nacimiento : </strong></td>
+                                   <td><span t-field="doc.partner_id.x_annonacimiento"/> </td>
+                                </tr>
+                                <tr>
+                                   <td width="15px"></td>
+                                   <td><strong>Domicilio : </strong></td>
+                                   <td colspan="3"><span t-field="doc.partner_id.street"/> </td>
+                                   <td><strong>C.P.: </strong></td>
+                                   <td><span t-field="doc.partner_id.zip"/> </td>
+                                </tr>
+                                <tr>
+                                   <td width="15px"></td>
+                                   <td  width="100px"><strong>Población: </strong></td>
+                                   <td><span t-field="doc.partner_id.city"/> </td>
+                                   <td   width="100px"><strong>Provincia : </strong></td>
+                                   <td  width="100px"><span t-field="doc.partner_id.state_id"/> </td>
+                                   <td  width="100px"><strong>Pais : </strong></td>
+                                   <td  width="100px"><span t-field="doc.partner_id.country_id"/> </td>
+                                </tr>
+                                <tr>
+                                   <td width="15px"></td>
+                                   <td><strong>Móvil: </strong></td>
+                                   <td><span t-field="doc.partner_id.mobile"/> </td>
+                                   <td><strong>Teléfono Fijo: </strong></td>
+                                   <td colspan="3"><span t-field="doc.partner_id.phone"/> </td>
+                                </tr>
+                                <tr>
+                                   <td width="15px"></td>
+                                   <td><strong>E-mail: </strong></td>
+                                   <td colspan="5"><span t-field="doc.partner_id.email"/> </td>
+                                </tr>
+
+                                <tr>
+                                   <td width="15px"></td>
+                                   <td><strong>Estudios: </strong></td>
+                                   <td><span t-field="doc.partner_id.x_titulacion"/> </td>
+                                   <td><strong>Finalizados: </strong></td>
+                                   <td colspan="3"><span t-field="doc.partner_id.x_finalizacionestudios"/> </td>
+                                </tr>
+
+                                <tr>
+                                   <td width="15px"></td>
+                                   <td><strong>Centro: </strong></td>
+                                   <td><span t-field="doc.partner_id.x_universidad"/> </td>
+                                   <td><strong>Profesión: </strong></td>
+                                   <td  colspan="3"><span t-field="doc.partner_id.x_profesion"/> </td>
+                                </tr>
+
+                                <tr height="15px">
+                                    <td></td>
+                                </tr>
+                                <tr  class="border-black">
+                                    <td width="15px"></td>
+                                    <td colspan="8"><h5><b>DATOS DEL TITULAR</b></h5></td>
+                                </tr>
+                                <tr>
+                                   <td width="15px"></td>
+                                   <td width="100px"><strong>Nombre : </strong></td>
+                                   <td  width="300px"><span t-field="doc.partner_invoice_id.name"/> </td>
+                                </tr>
+                                <tr>
+                                   <td width="15px"></td>
+                                   <td><strong>DNI/Pasaporte : </strong></td>
+                                   <td><span t-field="doc.partner_invoice_id.vat"/> </td>
+                                </tr>
+                                <tr>
+                                   <td width="15px"></td>
+                                   <td><strong>Domicilio : </strong></td>
+                                   <td colspan="3"><span t-field="doc.partner_invoice_id.street"/> </td>
+                                   <td><strong>C.P.: </strong></td>
+                                   <td><span t-field="doc.partner_invoice_id.zip"/> </td>
+                                </tr>
+                                <tr>
+                                   <td width="15px"></td>
+                                   <td width="100px"><strong>Población: </strong></td>
+                                   <td><span t-field="doc.partner_invoice_id.city"/> </td>
+                                   <td width="100px"><strong>Provincia : </strong></td>
+                                   <td width="100px"><span t-field="doc.partner_invoice_id.state_id"/> </td>
+                                   <td width="100px"><strong>Pais : </strong></td>
+                                   <td width="100px"><span t-field="doc.partner_invoice_id.country_id"/> </td>
+                                </tr>
+                                <tr>
+                                   <td width="15px"></td>
+                                   <td><strong>Móvil: </strong></td>
+                                   <td><span t-field="doc.partner_invoice_id.mobile"/> </td>
+                                   <td><strong>Teléfono Fijo: </strong></td>
+                                   <td colspan="3"><span t-field="doc.partner_invoice_id.phone"/> </td>
+                                </tr>
+                                <tr>
+                                   <td width="15px"></td>
+                                   <td><strong>E-mail: </strong></td>
+                                   <td colspan="5"><span t-field="doc.partner_invoice_id.email"/> </td>
+                                </tr>
+                            
+                                <tr height="15px">
+                                    <td> </td>
+                                </tr>
+                                <tr  class="border-black">
+                                    <td width="15px"></td>
+                                    <td colspan="8">Recibida previamente la información detallada de las características del curso, contenido y demás cuestiones relacionadas, el alumno/titular acepta las condiciones generales y académicas amparadas en este contrato y SOLICITA LA MATRÍCULA PARA EL CURSO DE:
+
+                                        <t t-foreach="doc.order_line" t-as="l">
+                                            <t t-if="l.product_id.product_tmpl_id.tipodecurso not in ('rec','desc','desc_ma','inc','mat')">
+                                                <span t-field="l.product_id.name"/>.
+                                            </t>
+                                        </t>
+                                    </td>
+                                </tr>
+                            
+                                <tr height="8px">
+                                    <td></td>
+                                </tr>
+                                <tr class="border-black">
+                                    <td width="15px"></td>
+                                    <td colspan="8"><h5><b>CONDICIONES ACEPTADAS PARA EL PAGO DEL IMPORTE DEL CURSO</b></h5></td>
+                                </tr>
+                                <tr>
+                                    <td width="15px"></td>
+                                    <td><strong>Plazo de Pago: </strong></td>
+                                    <td><span t-field="doc.payment_term_id.x_Alias"/> </td>
+                                </tr>
+                                <tr>
+                                    <td width="15px"></td>
+                                    <td>
+                                      <strong> Matrícula / Pago Inicial: </strong>
+                                    </td>
+                                    <td colspan="5">
+                                      <span t-field="doc.precio_matricula"/>
+                                    </td>
+                                    <td colspan="5"><span t-field="doc.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha_informe)[0].importe"/> </td>
+                                </tr>
+                                <tr>
+                                    <td width="15px"></td>
+                                    <td>
+                                      <strong> Gastos de envio: </strong>
+                                    </td>
+                                    <td colspan="5">
+                                      <span t-field="doc.precio_entrega"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                   <td width="15px"></td>
+                                    <td><strong>Resto Aplazado: </strong></td>
+                                    <td colspan="5">
+                                      <span t-field="doc.precio_total_curso"/>
+                                      en:
+                                      <span t-field="doc.len_cuotas"/>
+                                      Plazo/s de
+                                      <span t-field="doc.precio_primer_pago"/>
+                                      cada uno. Siendo el último recibo de
+                                      <span t-field="doc.precio_ultimo_pago"/>
+                                      
+                                        <t t-set="i" t-value="0"/>
+                                        <t t-set="Matricula" t-value="doc.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha_informe)[0].importe"/>
+                                        <t t-set="Resto" t-value="0.0"/>
+                                        <span t-foreach="doc.x_pago_id.lines_ids" t-as="l">
+                                            <t t-if="'Matr' not in l.name">
+                                                <t t-set="Resto" t-value="Resto+l.importe"/>
+                                            </t>
+                                            <span t-if="i>0">
+                                            </span>
+                                            <t t-set="i" t-value="i+1"/>
+                                        </span>
+                                        <span t-if="i>1">
+                                            <t t-set="Resto" t-value="Resto"/>
+                                            <span t-esc="Resto"/>
+                                             en:
+                                             <span t-esc="i-1"/> Plazo/s de <span t-field="doc.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha_informe)[1].importe"/> cada uno. Siendo el último recibo de
+                                            <span t-field="doc.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha_informe)[i-1].importe"/>
+                                        </span>
+                                      
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="15px"></td>
+                                    <td><strong> Forma de Pago: </strong></td>
+                                    <td colspan="2"><span t-field="doc.payment_mode_id.name"/> </td>
+                                    <span t-if="i>0">
+                                        <td colspan="2"><strong>Primer Vencimiento Aplazado: </strong></td>
+                                        <td>
+                                            <span t-if="i>1">
+                                                <span t-field="doc.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha_informe)[1].fecha_informe"/>
+                                            </span>
+                                        </td>
+                                    </span>
+                                    <td colspan="2"><strong>Primer Vencimiento Aplazado: </strong></td>
+                                    <td>
+                                      <span t-field="doc.fecha_primer_pago"/>
+                                    </td>
+                                </tr>
+                                <t t-if="doc.payment_mode_id">
+                                  <tr t-if="'Dat' in doc.payment_mode_id.name and doc.tarjeta_credito">
+                                      <td width="15px"></td>
+                                      <td><strong>Numero de Tarjeta: </strong></td>
+                                      <td  colspan="2"><span t-field="doc.tarjeta_credito.acquirer_ref"/> </td>
+                                      <td><strong>Caducidad: </strong></td>
+                                      <td><span t-field="doc.tarjeta_credito.caducidad"/></td>
+                                      <td><strong>CVC: </strong></td>
+                                      <td><span t-field="doc.tarjeta_credito.csv"/> </td>
+                                  </tr>
+                                  <tr t-if="doc.payment_mode_id.name == 'Domiciliado' and doc.cuenta_bancaria">
+                                      <td width="15px"></td>
+                                      <td><strong>Cuenta Bancaria: </strong></td>
+                                      <td><span t-field="doc.cuenta_bancaria.acc_number"/> </td>
+                                  </tr>
+                                </t>
+                              
+                                <tr height="8px">
+                                    <td></td>
+                                </tr>
+                                <tr  class="border-black">
+                                    <td width="15px"></td>
+                                    <td colspan="8"><h5><b>DATOS DE ENTREGA DEL MATERIAL O RECOGIDA DE MATRÍCULA</b></h5></td>
+                                </tr>
+                                <tr>
+                                   <td width="15px"></td>
+                                   <td  width="100px"><strong>Nombre : </strong></td>
+                                   <td width="300px"><span t-field="doc.partner_id.name"/> </td>
+                                </tr>
+                                <tr>
+                                   <td width="15px"></td>
+                                   <td><strong>Domicilio : </strong></td>
+                                   <td colspan="3"><span t-field="doc.partner_id.street"/> </td>
+                                   <td><strong>C.P.: </strong></td>
+                                   <td><span t-field="doc.partner_id.zip"/> </td>
+                                </tr>
+                                <tr>
+                                   <td width="15px"></td>
+                                   <td width="100px"><strong>Población: </strong></td>
+                                   <td><span t-field="doc.partner_id.city"/> </td>
+                                   <td width="100px"><strong>Provincia : </strong></td>
+                                   <td width="100px"><span t-field="doc.partner_id.state_id"/> </td>
+                                   <td width="100px"><strong>Pais : </strong></td>
+                                   <td width="100px"><span t-field="doc.partner_id.country_id"/> </td>
+                                </tr>
+
+                                <tr height="15px">
+                                    <td></td>
+                                </tr>
+                                <tr  class="border-black">
+                                    <td width="15px"></td>
+                                    <td colspan="8">Suscrito en dos ejemplares en
+                                        <t t-if="doc.team_id.id==13">
+                                        Pamplona
+                                        </t>
+                                        <t t-if="doc.team_id.id !=13">
+                                            <span t-field="doc.company_id.city"/>
+                                        </t>
+                                        , a  <span t-field="doc.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha_informe)[0].fecha_informe"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="15px"></td>
+                                    <td colspan="8">Leído y conforme con las condiciones generales y mis derechos y deberes que se adjuntan (recibo copia).</td>
+                                </tr>
+                                <tr>
+                                   <td width="15px"></td>
+                                   <td><strong>FIRMA ALUMNO: </strong></td>
+                                   <td><strong>FIRMA TITULAR: </strong></td>
+                                   <td><strong>FIRMA <span t-field="doc.company_id.display_name"/>: </strong></td>
+                                </tr>
+                                <tr>
+                                    <td width="15px"></td>
+                                    <td><strong></strong></td>
+                                    <td><strong>(si es distinto al alumno) </strong></td>
+                                    <td rowspan="2">
+                                        <img src='/isep_custom/static/src/img/firmaised.jpg'  height="80px" width="120px"/>
+                                    </td>
+                                </tr>
+                                <tr height="40px">
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td width="15px"></td>
+                                    <td><span t-field="doc.partner_id.name"/> </td>
+                                    <td><span t-field="doc.partner_invoice_id.name"/> </td>
+                                </tr>
+                                <tr>
+                                    <td width="15px"></td>
+                                    <td><span t-field="doc.partner_id.vat"/> </td>
+                                    <td><span t-field="doc.partner_invoice_id.vat"/> </td>
+                                    <td>[Ref: <span t-field="doc.name"/>]</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+        </template>
+    </data>
+</odoo>
