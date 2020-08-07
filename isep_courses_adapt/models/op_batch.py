@@ -24,14 +24,20 @@ class op_batch(models.Model):
     campus_id = fields.Many2one('op.campus', string='Campus')
     coordinator = fields.Many2one('res.partner', string="Coordinator")
     uvic_program = fields.Boolean(string='UVIC program', default=False)
+    rvoe_program = fields.Boolean(string='RVOE program', default=False)
     ects = fields.Integer("ECTS", default=0, related='course_id.ects')
     hours = fields.Float(string="Hours", related='course_id.hours')
     expiration_days = fields.Integer("Expiration days", default=0)
     date_diplomas = fields.Datetime("Date diplomas")
     modality_id = fields.Many2one('op.modalidad', string='Modality', related='course_id.modality_id')
-    # students_ids = fields.Many2many('op.subject', string='Subject(s)')
+    user_company_id = fields.Integer(string="Company id", compute='_get_current_user')
     subject_count = fields.Integer(compute='_compute_subject_count')
     student_count = fields.Integer(compute='_compute_student_count')
+
+    @api.depends()
+    def _get_current_user(self):
+        for rec in self:
+            rec.user_company_id = self.env.user.company_id
 
     def _compute_subject_count(self):
         """Compute the number of distinct subjects linked to the batch."""

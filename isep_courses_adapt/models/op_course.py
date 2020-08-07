@@ -45,8 +45,8 @@ class OpCourse(models.Model):
             url = config_params.get_param('moodle_url')
             endpoint = config_params.get_param('moodle_endpoint')
         except Exception as e:
-            raise UserError(_("Error on moddle conection: " % str(e)))
             logger.error(e)
+            raise UserError(_("Error on moodle connection: " % str(e)))
 
         params = {
             'categories[0][name]': values.get('name'),
@@ -55,6 +55,7 @@ class OpCourse(models.Model):
             'moodlewsrestformat': 'json',
             'wsfunction': 'core_course_create_categories'
         }
+
         if values.get('parent_id'):
             params.update({'categories[0][parent]': values.get('parent_id')})
         try:
@@ -62,7 +63,7 @@ class OpCourse(models.Model):
             response = response.json()
             logger.info(response)
             if type(response) == dict and response.get('exception'):
-                logger.info(response.get('exception'))
+                logger.info(response.get('message'))
             else:
                 values.update({'moodle_category_id': response[0].get('id')})
         except Exception:
@@ -81,7 +82,8 @@ class OpCourse(models.Model):
             endpoint = config_params.get_param('moodle_endpoint')
         except Exception as e:
             logger.error(str(e))
-            Warning(_("Error on moddle conection: " % str(e)))
+            Warning(_("Error on moodle connection: " % str(e)))
+
         params = {
             'categories[0][id]': self.moodle_category_id,
             'categories[0][name]': values.get('name'),
@@ -116,7 +118,7 @@ class OpCourse(models.Model):
             endpoint = config_params.get_param('moodle_endpoint')
         except Exception as e:
             logger.error(str(e))
-            Warning(_("Error on moddle conection: " % str(e)))
+            Warning(_("Error on moodle connection: " % str(e)))
         params = {
             'courses[0][fullname]': subject.name,
             'courses[0][shortname]': subject.code,
