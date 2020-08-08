@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from . import op_sql
 from . import res_config_settings
 from . import op_course
 from . import op_subject
