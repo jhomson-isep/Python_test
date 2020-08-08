@@ -187,5 +187,7 @@ class OpCourse(models.Model):
                 #     break
                 # int_break += 1
             except Exception as e:
+                logger.info("===== Fallo ======")
                 logger.info(e)
+                logger.info(row)
                 continue

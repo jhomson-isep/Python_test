@@ -11,9 +11,18 @@ class SQL():
     user = 'sa'
     password = 'Gr5p4mr3'
     database = 'ISEP'
+    # driver = 'SQL Server'  # for Windows
+    driver = 'ODBC Driver 17 for SQL Server' # for linux
 
     def get_distinct_courses(self):
+        # rows = self.query("SELECT DISTINCT SUBSTRING(Curso_id, 3, 2) FROM Cursos;")
         rows = self.query("SELECT DISTINCT SUBSTRING(Curso_id, 3, 2) FROM Cursos;")
+        return rows
+
+    def get_all_courses(self):
+        # rows = self.query("SELECT DISTINCT SUBSTRING(Curso_id, 3, 2) FROM Cursos;")
+        rows = self.query(
+            "SELECT *, SUBSTRING(Curso_Id, 3, 2) AS code FROM Cursos WHERE FechaAlta between '2019-01-01' and '2020-31-12';")
         return rows
 
     def get_course_by_code(self, code):
@@ -23,8 +32,9 @@ class SQL():
 
     def query(self, sql):
         # con_string = 'DSN=%s;UID=%s;PWD=%s;DATABASE=%s;' % (self.dsn, self.user, self.password, self.database)
-        con_string = 'DRIVER={SQL Server};SERVER=%s;UID=%s;PWD=%s;DATABASE=%s;' % (
-            self.server, self.user, self.password, self.database)
+        con_string = 'DRIVER={%s};SERVER=%s;UID=%s;PWD=%s;DATABASE=%s;' % (self.driver,
+                                                                           self.server, self.user, self.password,
+                                                                           self.database)
         conn = pyodbc.connect(con_string)
         cursor_sql = conn.cursor()
         cursor_sql.execute(sql)
@@ -33,8 +43,9 @@ class SQL():
 
     def query_get_one(self, sql):
         # con_string = 'DSN=%s;UID=%s;PWD=%s;DATABASE=%s;' % (self.dsn, self.user, self.password, self.database)
-        con_string = 'DRIVER={SQL Server};SERVER=%s;UID=%s;PWD=%s;DATABASE=%s;' % (
-            self.server, self.user, self.password, self.database)
+        con_string = 'DRIVER={%s};SERVER=%s;UID=%s;PWD=%s;DATABASE=%s;' % (self.driver,
+                                                                           self.server, self.user, self.password,
+                                                                           self.database)
         conn = pyodbc.connect(con_string)
         cursor_sql = conn.cursor()
         cursor_sql.execute(sql)
