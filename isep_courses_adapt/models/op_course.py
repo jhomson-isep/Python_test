@@ -153,35 +153,39 @@ class OpCourse(models.Model):
         rows = s.get_distinct_courses()
         int_break = 0
         for row in rows:
-            default_code = row[0]
-            course = self.search([('code', '=', default_code)])
-            if len(course) < 1:
-                course_moodle = s.get_course_by_code(default_code)
-                logger.info(course_moodle.NombreCurso)
-                evaluation_type = self.env['op.evaluation.type'].search([('name', 'ilike', 'normal')], limit=1)
-                modality = self.env['op.modalidad'].search([('code', '=', course_moodle.Modalidad)], limit=1)
-                product = self.env['product.template'].search(
-                    [('default_code', '=', default_code), ('active', '=', True)],
-                    limit=1)
-                logger.info(product.name)
-                course_values = {
-                    'name': course_moodle.NombreCurso,
-                    'code': default_code,
-                    'product_template_id': product.id or None,
-                    'name_catalan': course_moodle.TitolCat,
-                    'evaluation_type_id': evaluation_type.id or None,
-                    'modality_id': modality.id or None,
-                    'hours': course_moodle.TotalHoras,
-                    'credits': course_moodle.TotalCreditos,
-                    'ects': course_moodle.ECTS,
-                    'acknowledgments': course_moodle.Reconocimientos,
-                    'reconeixements': course_moodle.Reconeixements,
-                    'content': course_moodle.Contenido,
-                    'moodle_category_id': course_moodle.MoodleId
-                }
-                res = super(OpCourse, self).create(course_values)
-                print(res)
+            try:
+                default_code = row[0]
+                course = self.search([('code', '=', default_code)])
+                if len(course) < 1:
+                    course_moodle = s.get_course_by_code(default_code)
+                    logger.info(course_moodle.NombreCurso)
+                    evaluation_type = self.env['op.evaluation.type'].search([('name', 'ilike', 'normal')], limit=1)
+                    modality = self.env['op.modalidad'].search([('code', '=', course_moodle.Modalidad)], limit=1)
+                    product = self.env['product.template'].search(
+                        [('default_code', '=', default_code), ('active', '=', True)],
+                        limit=1)
+                    logger.info(product.name)
+                    course_values = {
+                        'name': course_moodle.NombreCurso,
+                        'code': default_code,
+                        'product_template_id': product.id or None,
+                        'name_catalan': course_moodle.TitolCat,
+                        'evaluation_type_id': evaluation_type.id or None,
+                        'modality_id': modality.id or None,
+                        'hours': course_moodle.TotalHoras,
+                        'credits': course_moodle.TotalCreditos,
+                        'ects': course_moodle.ECTS,
+                        'acknowledgments': course_moodle.Reconocimientos,
+                        'reconeixements': course_moodle.Reconeixements,
+                        'content': course_moodle.Contenido,
+                        'moodle_category_id': course_moodle.MoodleId
+                    }
+                    res = super(OpCourse, self).create(course_values)
+                    print(res)
 
-            if int_break == 5:
-                break
-            int_break += 1
+                # if int_break == 5:
+                #     break
+                # int_break += 1
+            except Exception as e:
+                logger.info(e)
+                continue

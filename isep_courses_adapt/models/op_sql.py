@@ -12,26 +12,6 @@ class SQL():
     password = 'Gr5p4mr3'
     database = 'ISEP'
 
-    def Send_SQL(self):
-        # con_string = 'DRIVER={SQL Server};DSN=%s;UID=%s;PWD=%s;DATABASE=%s;' % (self.dsn, self.user, self.password, self.database)
-        con_string = 'DRIVER={SQL Server};UID=%s;PWD=%s;DATABASE=%s;' % (
-            self.user, self.password, self.database)
-        # con_string = 'DSN=85.118.244.220;UID=sa;PWD=Gr5p4mr3;DATABASE=GrupoISEPxtra;'
-
-        cnxn = pyodbc.connect(con_string)
-        # cnxn = pyodbc.connect(server='85.118.244.220',UID='sa',PWD='Gr5p4mr3',DATABASE='GrupoISEPxtra')
-
-        cursorsql = cnxn.cursor()
-        cursorsql.execute("SELECT id,curso_id,NombreCurso from Cursos;")
-        row = cursorsql.fetchone()
-        while row:
-            # print row[0]
-            # print row[1]
-            # print row[2]
-            row = cursorsql.fetchone()
-
-        cnxn.commit()
-
     def get_distinct_courses(self):
         rows = self.query("SELECT DISTINCT SUBSTRING(Curso_id, 3, 2) FROM Cursos;")
         return rows
