@@ -8,4 +8,4 @@ class OpModalidad(models.Model):
     _description = "Modalidad"
 
     name = fields.Char('Name', size=128, required=True)
-    code = fields.Char('Name', size=8, required=True)
+    code = fields.Char('Code', size=8, required=True)
