@@ -27,7 +27,8 @@
         'views/op_evaluation_type.xml',
         'views/op_campus.xml',
         'views/op_practices_types.xml',
-        'views/res_config_settings_views.xml'
+        'views/res_config_settings_views.xml',
+        'views/op_subject.xml'
     ],
     'installable': True,
 }
