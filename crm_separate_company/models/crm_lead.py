@@ -24,10 +24,6 @@ class CrmLead(models.Model):
 
         res = super(CrmLead, self).create(lead)
 
-        #Quitar el partner para que no se repita
-        lead.pop('partner_id')
-        lead.pop('user_id')
-
         self.sudo()
         #logger.info(lead)
 
@@ -66,7 +62,7 @@ class CrmLead(models.Model):
         # lead.update({"company_id": lead.get('company_id')})
 
         #lead.update({"name": lead.get('name')})
-        lead.update({'create_date': lead.get('create_date')})
+
         lead.update({'x_codsede': lead.get('x_codsede')})
 
         #lead.update({"x_codmodalidad": lead.get('x_codmodalidad')})
@@ -99,11 +95,26 @@ class CrmLead(models.Model):
         #lead.update({"company_id": lead.get('company_id')})
 
         #Lógica de las distintas empresas
+        nombre = lead.get('name')
         cod_sede = lead.get('x_codsede')
         cod_curso = lead.get('x_codcurso')
         email = lead.get('email_from')
         modalidad = lead.get('x_codmodalidad')
-        cod_tipo_cuso = lead.get('x_codtipocurso')
+        cod_tipo_curso = lead.get('x_codtipodecurso')
+        url = lead.get('x_ga_source')
+
+        lead.clear()
+
+        lead = {
+            'name': nombre,
+            'x_codsede': cod_sede,
+            'x_codcurso': cod_curso,
+            'email_from': email,
+            'x_codtipodecurso':cod_tipo_curso,
+            'company_id': 0,
+            'x_ga_source':url,
+            'x_codmodalidad': modalidad
+        }
 
         #Mediante url enviar a donde debe
         url = lead.get('x_ga_source')
@@ -156,10 +167,10 @@ class CrmLead(models.Model):
             logger.info("No pudo relacionar la referencia interna con el cod_curso")
 
         #Crear nombre compuesto de su sede, el codigo y email
-        if modalidad != 'Online':
+        if modalidad != 'ELR':
             name = cod_sede + cod_curso + " - " + email
         else:
-            name = modalidad + cod_curso + " - " + email
+            name = 'ONL' + cod_curso + " - " + email
 
         lead.update({'name': name})
 
@@ -202,6 +213,10 @@ class CrmLead(models.Model):
                 logger.info("Entre en Iruñised")
         logger.info('\n Company ID \n')
         logger.info(lead.get('company_id'))
+
+        logger.info(lead)
+
+
         res.write(lead)
 
         return res
