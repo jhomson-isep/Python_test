@@ -13,12 +13,23 @@ class CrmLead(models.Model):
 
     @api.multi
     def create(self, lead):
-        res = super(CrmLead, self).create(lead)
-        self.sudo()
-        #logger.info(lead)
+
         # Buscar el cliente mediante el email utilizando el self.env en el modelo res.partner
         client = self.env['res.partner'].search([('email', '=', lead.get('email_from'))], limit=1)
         lead.update({'partner_id': client.id})
+
+        # Buscar user id en res.partner
+        user = client.user_id.id
+        lead.update({'user_id': user})
+
+        res = super(CrmLead, self).create(lead)
+
+        #Quitar el partner para que no se repita
+        res.pop('partner_id')
+        res.pop('user_id')
+
+        self.sudo()
+        #logger.info(lead)
 
         # Buscar el id del país para poder vincular después
         #country_id = self.env['res.country'].search([('code', '=', lead.get('country_id'))])
@@ -29,7 +40,7 @@ class CrmLead(models.Model):
         #lead.update({"state_id": state_id.id})
 
         # Buscar user id en res.partner
-        user = client.user_id.id
+        #user = client.user_id.id
 
         # Tomar la fecha actual
         date = datetime.now()
@@ -71,7 +82,7 @@ class CrmLead(models.Model):
         lead.update({'x_modalidad_id': lead.get('x_modalidad_id')})
 
         lead.update({'x_codtipodecurso': lead.get('x_codtipodecurso')})
-        lead.update({'user_id': user})
+        #lead.update({'user_id': user})
         lead.update({'x_sede_id': lead.get('x_sede_id')})
 
         lead.update({'team_id': lead.get('team_id')})
@@ -191,7 +202,6 @@ class CrmLead(models.Model):
                 logger.info("Entre en Iruñised")
         logger.info('\n Company ID \n')
         logger.info(lead.get('company_id'))
-        res2 = super(CrmLead, self).write(lead)
-        logger.info(res2)
+        res.write(lead)
 
         return res
