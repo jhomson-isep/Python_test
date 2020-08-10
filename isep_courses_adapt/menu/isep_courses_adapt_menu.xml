@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Configuration Menu -->
+        <menuitem id="menu_op_modalidad_sub" name="Modalidad"
+                  parent="openeducat_core.menu_op_school_config_general" sequence="10"
+                  action="act_open_op_modalidad_view" groups="base.group_system"/>
+
+        <menuitem id="menu_op_batch_subject_rel_sub" name="Relación de asignaturas"
+                  parent="openeducat_core.menu_op_school_config_subject" sequence="11"
+                  action="act_open_op_batch_subject_rel_view" groups="base.group_system"/>
+
+        <menuitem id="menu_op_campus_sub" name="Sedes"
+                  parent="openeducat_core.menu_op_school_config_general" sequence="10"
+                  action="act_open_op_campus_view" groups="base.group_system"/>
+
+        <menuitem id="menu_op_evaluation_type_sub" name="Tipos de evaluación"
+                  parent="openeducat_core.menu_op_school_config_general" sequence="10"
+                  action="act_open_op_evaluation_type_view" groups="base.group_system"/>
+
+        <menuitem id="menu_op_practices_type_sub" name="Tipos de practicas"
+                  parent="openeducat_core.menu_op_school_config_general" sequence="10"
+                  action="act_open_op_practices_type_view" groups="base.group_system"/>
+    </data>
+</odoo>

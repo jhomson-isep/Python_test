@@ -61,9 +61,5 @@
             <field name="view_mode">tree</field>
             <field name="view_id" ref="view_op_modalidad_tree"/>
         </record>
-
-        <menuitem id="menu_op_modalidad_sub" name="Modalidad"
-                  parent="openeducat_core.menu_op_school_config_general" sequence="10"
-                  action="act_open_op_modalidad_view" groups="base.group_system"/>
     </data>
 </odoo>

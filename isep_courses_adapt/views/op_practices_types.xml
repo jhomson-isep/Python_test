@@ -37,7 +37,7 @@
             </field>
         </record>
         <record model="ir.actions.act_window" id="act_open_op_practices_type_view">
-            <field name="name">practices_type</field>
+            <field name="name">Tipos de práctica</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">op.practices.type</field>
             <field name="view_type">form</field>
@@ -58,9 +58,5 @@
             <field name="view_mode">tree</field>
             <field name="view_id" ref="view_op_practices_type_tree"/>
         </record>
-
-        <menuitem id="menu_op_practices_type_sub" name="Tipos de practicas"
-                  parent="openeducat_core.menu_op_school_config_general" sequence="10"
-                  action="act_open_op_practices_type_view" groups="base.group_system"/>
     </data>
 </odoo>

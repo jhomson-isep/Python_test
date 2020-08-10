@@ -37,7 +37,7 @@
             </field>
         </record>
         <record model="ir.actions.act_window" id="act_open_op_campus_view">
-            <field name="name">campus</field>
+            <field name="name">Sedes</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">op.campus</field>
             <field name="view_type">form</field>
@@ -58,9 +58,5 @@
             <field name="view_mode">tree</field>
             <field name="view_id" ref="view_op_campus_tree"/>
         </record>
-
-        <menuitem id="menu_op_campus_sub" name="campus"
-                  parent="openeducat_core.menu_op_school_config_general" sequence="10"
-                  action="act_open_op_campus_view" groups="base.group_system"/>
     </data>
 </odoo>
