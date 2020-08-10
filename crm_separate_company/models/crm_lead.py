@@ -24,7 +24,7 @@ class CrmLead(models.Model):
 
         res = super(CrmLead, self).create(lead)
 
-        self.sudo()
+        self.sudo(2)
         #logger.info(lead)
 
         # Buscar el id del país para poder vincular después
@@ -113,13 +113,15 @@ class CrmLead(models.Model):
             'x_codtipodecurso':cod_tipo_curso,
             'company_id': 0,
             'x_ga_source':url,
-            'x_codmodalidad': modalidad
+            'x_codmodalidad': modalidad,
+            'user_id': False
         }
 
         #Mediante url enviar a donde debe
         url = lead.get('x_ga_source')
         if url.find("ised") != -1:
             lead.update({'company_id': 4})
+            #ISED MADRID
             logger.info("Entre en ISED")
 
         elif url.find(".com") != -1:
@@ -187,7 +189,7 @@ class CrmLead(models.Model):
         #ISED
         #---------------------------------
         elif company_id == 4:
-            if modalidad == 'ONL':
+            if modalidad == 'ELR':
                 #Centro Sup de estudios ISED SL - Online
                 lead.update({'company_id': 3})
                 logger.info("Entre en Online")
@@ -211,11 +213,11 @@ class CrmLead(models.Model):
                 #Iruñised - Pamplona
                 lead.update({'company_id': 22})
                 logger.info("Entre en Iruñised")
+
         logger.info('\n Company ID \n')
         logger.info(lead.get('company_id'))
 
         logger.info(lead)
-
 
         res.write(lead)
 
