@@ -3,6 +3,7 @@
 from odoo import fields, models, api
 from .op_sql import SQL
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -34,6 +35,7 @@ class OpBatch(models.Model):
     date_diplomas = fields.Datetime(string="Date diplomas")
     modality_id = fields.Many2one('op.modalidad', string='Modality', related='course_id.modality_id')
     user_company_id = fields.Integer(string="Company id", compute='_get_current_user')
+    op_batch_subject_rel_ids = fields.One2many('op.batch.subject.rel', 'batch_id')
     subject_count = fields.Integer(compute='_compute_subject_count')
     student_count = fields.Integer(compute='_compute_student_count')
 
@@ -138,9 +140,9 @@ class OpBatch(models.Model):
                         res = super(OpBatch, self).create(batch_values)
                         print(res)
 
-                    # if int_break == 5:
-                    #     break
-                    # int_break += 1
+                    if int_break == 5 and os.name != "posix":
+                        break
+                    int_break += 1
                 except Exception as e:
                     logger.info(e)
                     continue

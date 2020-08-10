@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="isep_courses_adapt_op_subject_tree" model="ir.ui.view">
+            <field name="model">op.subject</field>
+            <field name="inherit_id" ref="openeducat_core.view_op_subject_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='grade_weightage']" position="replace">
+                    <field name="grade_weightage" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="isep_courses_adapt_op_subject_form" model="ir.ui.view">
+            <field name="model">op.subject</field>
+            <field name="inherit_id" ref="openeducat_core.view_op_subject_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='grade_weightage']" position="replace">
+                    <field name="uvic_code"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
