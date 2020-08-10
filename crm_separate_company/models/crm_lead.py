@@ -25,8 +25,8 @@ class CrmLead(models.Model):
         res = super(CrmLead, self).create(lead)
 
         #Quitar el partner para que no se repita
-        res.pop('partner_id')
-        res.pop('user_id')
+        lead.pop('partner_id')
+        lead.pop('user_id')
 
         self.sudo()
         #logger.info(lead)
