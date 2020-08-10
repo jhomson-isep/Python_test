@@ -108,11 +108,11 @@ class OpBatch(models.Model):
                     course = self.env['op.course'].search([('code', 'ilike', batch.code)], limit=1)
                     partner = self.env['res.partner'].search([('name', 'ilike', batch.Coordinador)], limit=1)
                     if batch.Coordinador is not None:
-                        if len(partner) != 0:
+                        if len(partner) == 0:
                             partner = self.env['res.partner'].create({'name': batch.Coordinador})
                     campus = self.env['op.campus'].search([('name', 'ilike', batch.Marca)], limit=1)
                     if batch.Marca is not None:
-                        if len(campus) != 0:
+                        if len(campus) == 0:
                             campus = self.env['op.campus'].create({'name': batch.Marca})
                     practices = self.env['op.practices.type'].search([('name', 'ilike', batch.TipoPracticas)], limit=1)
                     logger.info("practices: ".format(batch.TipoPracticas))
@@ -140,7 +140,7 @@ class OpBatch(models.Model):
                         res = super(OpBatch, self).create(batch_values)
                         print(res)
 
-                    if int_break == 5 and os.name != "posix":
+                    if int_break == 50 and os.name != "posix":
                         break
                     int_break += 1
                 except Exception as e:
