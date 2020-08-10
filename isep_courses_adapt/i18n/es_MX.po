@@ -240,7 +240,62 @@ msgstr ""
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_subject__moodle_course_id
 msgid "Moodle course Id"
-msgstr ""
+msgstr "Id de Moodle (curso)"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_subject__uvic_code
+msgid "UVIC code"
+msgstr "Código UVIC"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__batch_id
+msgid "Batch"
+msgstr "Grupo"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__subject_id
+msgid "Subject"
+msgstr "Asignatura"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__hours
+msgid "Hours"
+msgstr "Horas"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__credits
+msgid "Credits"
+msgstr "Créditos"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__ects
+msgid "ECTS"
+msgstr "ECTS"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__nif_faculty
+msgid "Teacher's NIF"
+msgstr "NIF Profesor"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__evaluable
+msgid "Is evaluable"
+msgstr "Es evaluable"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__level
+msgid "Level"
+msgstr "Nivel"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__optional
+msgid "Is optional"
+msgstr "Es opcional"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__order
+msgid "Order"
+msgstr "Orden"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__moodleid
@@ -343,7 +398,7 @@ msgstr ""
 #. module: isep_courses_adapt
 #: model:ir.model,name:isep_courses_adapt.model_op_subject
 msgid "Subject"
-msgstr "Tema"
+msgstr "Asignatura"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__titulo
