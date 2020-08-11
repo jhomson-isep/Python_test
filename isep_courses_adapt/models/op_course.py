@@ -106,48 +106,15 @@ class OpCourse(models.Model):
                     logger.info("Error calling Moodle API\n", response)
             except ValueError:
                 logger.info("Error calling Moodle API\n", ValueError)
-            try:
-                for subject in self.subject_ids:
-                    self.create_moodle_course(subject, self.moodle_category_id)
-            except ValueError:
-                logger.info("Error calling Moodle API\n", ValueError)
+            # try:
+            #     for subject in self.subject_ids:
+            #         self.create_moodle_course(subject, self.moodle_category_id)
+            # except ValueError:
+            #     logger.info("Error calling Moodle API\n", ValueError)
 
         res = super(OpCourse, self).write(values)
         return res
 
-    def create_moodle_course(self, subject, category):
-        try:
-            config_params = self.env['ir.config_parameter'].sudo()
-            token = config_params.get_param('moodle_token')
-            url = config_params.get_param('moodle_url')
-            endpoint = config_params.get_param('moodle_endpoint')
-        except Exception as e:
-            logger.error(str(e))
-            Warning(_("Error on moodle connection: " % str(e)))
-        params = {
-            'courses[0][fullname]': subject.name,
-            'courses[0][shortname]': subject.code,
-            'courses[0][idnumber]': subject.code,
-            'courses[0][summary]': subject.name,
-            'courses[0][format]': 'topics',
-            'courses[0][visible]': 1,
-            'courses[0][lang]': 'en',
-            'courses[0][categoryid]': category,
-            "wstoken": token,
-            'moodlewsrestformat': 'json',
-            "wsfunction": 'core_course_create_courses'
-        }
-        try:
-            logger.info(category)
-            response = post(url + endpoint, params)
-            response = response.json()
-            logger.info(response)
-            if type(response) == dict and response.get('exception'):
-                logger.info(response.get('exception'))
-            else:
-                self.env['op.subject'].write({'id': subject.id, 'moodle_course_id': response[0].get('id')})
-        except Exception:
-            logger.info("Error calling Moodle API\n", Exception)
 
     def import_courses(self):
         s = SQL()
