@@ -11,7 +11,7 @@ class CrmLead(models.Model):
     _inherit = 'crm.lead'
 
 
-    @api.multi
+    @api.model
     def create(self, lead):
 
         # Buscar el cliente mediante el email utilizando el self.env en el modelo res.partner
@@ -189,31 +189,31 @@ class CrmLead(models.Model):
         elif company_id == 4:
             if modalidad == 'ELR':
                 #Centro Sup de estudios ISED SL - Online
-                #lead.update({'company_id': 3})
+                lead.update({'company_id': 3})
                 logger.info("Entre en Online")
 
             elif cod_sede == 'MAD':
                 #Centro de estudios ISED SL - Madrid
-                #lead.update({'company_id': 4})
+                lead.update({'company_id': 4})
                 logger.info("Entre en Madrid")
 
             elif cod_sede == 'BIO':
                 #Centro de estudios ISED Bilbao - Bilbao
-                #lead.update({'company_id': 5})
+                lead.update({'company_id': 5})
                 logger.info("Entre en Bilbao")
 
             elif cod_sede == 'ZAR':
                 #Zarised - Zaragoza
-                #lead.update({'company_id': 6})
+                lead.update({'company_id': 6})
                 logger.info("Entre en Zaragoza")
 
             else:
                 #Iruñised - Pamplona
-                #lead.update({'company_id': 22})
+                lead.update({'company_id': 22})
                 logger.info("Entre en Iruñised")
 
-        #logger.info('\n Company ID \n')
-        #logger.info(lead.get('company_id'))
+        logger.info('\n Company ID \n')
+        logger.info(lead.get('company_id'))
 
         logger.info(lead)
 
