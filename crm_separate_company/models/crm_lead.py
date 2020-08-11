@@ -103,18 +103,18 @@ class CrmLead(models.Model):
         cod_tipo_curso = lead.get('x_codtipodecurso')
         url = lead.get('x_ga_source')
 
+        lead_copy = lead
         lead.clear()
 
+        #lead con los nuevos datos hace falta agregar comercial(user_id) y equipo de ventas(crm_team)
         lead = {
             'name': nombre,
             'x_codsede': cod_sede,
             'x_codcurso': cod_curso,
             'email_from': email,
             'x_codtipodecurso':cod_tipo_curso,
-            #'company_id': 0,
             'x_ga_source':url,
             'x_codmodalidad': modalidad,
-            # 'user_id': 2
         }
 
         company_id = None
@@ -122,13 +122,10 @@ class CrmLead(models.Model):
         #Mediante url enviar a donde debe
         url = lead.get('x_ga_source')
         if url.find("ised") != -1:
-            # lead.update({'company_id': 4})
             company_id = 4
-            #ISED MADRID
             logger.info("Entre en ISED")
 
         elif url.find(".com") != -1:
-            # lead.update({'company_id': 1111})
             company_id = 1111
             logger.info("Entre en LATAM")
         else:
@@ -141,12 +138,11 @@ class CrmLead(models.Model):
             modalidad = 'PRS'
         elif modalidad == 'Online':
             modalidad = 'ELR'
-            # lead.update({'company_id': 3})
 
         #Actualizar la modalidad
         lead.update({'x_codmodalidad': modalidad})
 
-
+        #Dependiendo la sede se le colocara el nombre nuevo
         if cod_sede == 'centro-oviedo':
             cod_sede = 'OVI'
         elif cod_sede == 'centro-bilbao':
@@ -171,10 +167,11 @@ class CrmLead(models.Model):
             logger.info("No pudo relacionar la referencia interna con el cod_curso")
 
         #Crear nombre compuesto de su sede, el codigo y email
+        #Elr es online en modalidad
         if modalidad != 'ELR':
-            name = cod_sede + cod_curso + " - " + email
+            name = cod_curso + cod_sede + " - " + email
         else:
-            name = 'ONL' + cod_curso + " - " + email
+            name = cod_curso + 'ONL' + " - " + email
 
         lead.update({'name': name})
 
@@ -193,36 +190,34 @@ class CrmLead(models.Model):
         elif company_id == 4:
             if modalidad == 'ELR':
                 #Centro Sup de estudios ISED SL - Online
-                #lead.update({'company_id': 3})
+                company_id = 3
                 logger.info("Entre en Online")
 
             elif cod_sede == 'MAD':
                 #Centro de estudios ISED SL - Madrid
-                # lead.update({'company_id': 4})
+                company_id = 4
                 logger.info("Entre en Madrid")
 
             elif cod_sede == 'BIO':
                 #Centro de estudios ISED Bilbao - Bilbao
-                # lead.update({'company_id': 5})
+                company_id = 5
                 logger.info("Entre en Bilbao")
 
             elif cod_sede == 'ZAR':
                 #Zarised - Zaragoza
-                # lead.update({'company_id': 6})
+                company_id = 6
                 logger.info("Entre en Zaragoza")
 
             else:
                 #Iruñised - Pamplona
-                # lead.update({'company_id': 22})
                 company_id = 22
                 logger.info("Entre en Iruñised")
 
-        #logger.info('\n Company ID \n')
-        #logger.info(lead.get('company_id'))
-
-        logger.info(lead)
+        logger.info(lead_copy)
         lead_obj = self.sudo().browse(res.id)
         lead_obj.sudo().write(lead)
+
+        #Update a la base de datos para cambiar el company_id directo
         self.env.cr.execute(
             """ UPDATE crm_lead SET company_id = %s WHERE id = %s""" % (company_id, res.id))
 
