@@ -24,7 +24,7 @@ class CrmLead(models.Model):
 
         res = super(CrmLead, self).create(lead)
 
-        self.sudo(2)
+        # self.sudo(2)
         #logger.info(lead)
 
         # Buscar el id del país para poder vincular después
@@ -114,30 +114,34 @@ class CrmLead(models.Model):
             #'company_id': 0,
             'x_ga_source':url,
             'x_codmodalidad': modalidad,
-            'user_id': False
+            # 'user_id': 2
         }
+
+        company_id = None
 
         #Mediante url enviar a donde debe
         url = lead.get('x_ga_source')
         if url.find("ised") != -1:
-            lead.update({'company_id': 4})
+            # lead.update({'company_id': 4})
+            company_id = 4
             #ISED MADRID
             logger.info("Entre en ISED")
 
         elif url.find(".com") != -1:
-            lead.update({'company_id': 1111})
+            # lead.update({'company_id': 1111})
+            company_id = 1111
             logger.info("Entre en LATAM")
         else:
-            lead.update({'company_id': 1})
+            # lead.update({'company_id': 1})
+            company_id = 1
             logger.info("Entre en España")
 
-        company_id = lead.get('company_id')
         #Problemas con el campo mal hecho de modalidad y sede, en los type form se llaman distinto por eso el cambio
         if modalidad == 'Presencial':
             modalidad = 'PRS'
         elif modalidad == 'Online':
             modalidad = 'ELR'
-            lead.update({'company_id': 3})
+            # lead.update({'company_id': 3})
 
         #Actualizar la modalidad
         lead.update({'x_codmodalidad': modalidad})
@@ -194,29 +198,32 @@ class CrmLead(models.Model):
 
             elif cod_sede == 'MAD':
                 #Centro de estudios ISED SL - Madrid
-                #lead.update({'company_id': 4})
+                # lead.update({'company_id': 4})
                 logger.info("Entre en Madrid")
 
             elif cod_sede == 'BIO':
                 #Centro de estudios ISED Bilbao - Bilbao
-                #lead.update({'company_id': 5})
+                # lead.update({'company_id': 5})
                 logger.info("Entre en Bilbao")
 
             elif cod_sede == 'ZAR':
                 #Zarised - Zaragoza
-                #lead.update({'company_id': 6})
+                # lead.update({'company_id': 6})
                 logger.info("Entre en Zaragoza")
 
             else:
                 #Iruñised - Pamplona
-                #lead.update({'company_id': 22})
+                # lead.update({'company_id': 22})
+                company_id = 22
                 logger.info("Entre en Iruñised")
 
         #logger.info('\n Company ID \n')
         #logger.info(lead.get('company_id'))
 
         logger.info(lead)
-
-        res.sudo().write(lead)
+        lead_obj = self.sudo().browse(res.id)
+        lead_obj.sudo().write(lead)
+        self.env.cr.execute(
+            """ UPDATE crm_lead SET company_id = %s WHERE id = %s""" % (company_id, res.id))
 
         return res
