@@ -447,3 +447,8 @@ msgstr "Mantenimiento de Cursos"
 #: model:ir.ui.menu,name:openeducat_core.menu_op_category_sub
 msgid "Categories"
 msgstr "Categorías"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_res_config_settings__send_moodle
+msgid "Send Moodle"
+msgstr "Enviar a Moodle"

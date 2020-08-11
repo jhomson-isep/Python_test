@@ -8,3 +8,4 @@ class ResConfigSettings(models.TransientModel):
     moodle_url = fields.Char(string="Moodle URL", config_parameter='moodle_url', size=128)
     moodle_endpoint = fields.Char(string="Moodle endpoint", config_parameter='moodle_endpoint',
                                   default="/webservice/rest/server.php")
+    send_moodle = fields.Boolean(string='Send moodle', default=False)
