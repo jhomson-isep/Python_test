@@ -14,7 +14,7 @@
                         <div class="o_setting_right_pane">
                             <span class="o_form_label">URL de Moodle</span>
                             <div class="text-muted">
-                                Send mail limit when scheduler run
+                                Dominio en que se encuentra alojado Moodle
                                 <field name="moodle_url"/>
                             </div>
                         </div>
@@ -24,7 +24,7 @@
                         <div class="o_setting_right_pane">
                             <span class="o_form_label">Token de Moodle</span>
                             <div class="text-muted">
-                                Send mail limit when scheduler run
+                                Token de acceso a Moodle con permisos de creación y escritura
                                 <field name="moodle_token"/>
                             </div>
                         </div>
@@ -34,8 +34,20 @@
                         <div class="o_setting_right_pane">
                             <span class="o_form_label">Endpoint</span>
                             <div class="text-muted">
-                                Send mail limit when scheduler run
+                                URL a webservices de moodle
                                 <field name="moodle_endpoint"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="send_moodle"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="send_moodle"/>
+                            <div class="text-muted">
+                                Activar sincronización con Moodle
                             </div>
                         </div>
                     </div>
