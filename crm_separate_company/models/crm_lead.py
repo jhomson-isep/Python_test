@@ -111,7 +111,7 @@ class CrmLead(models.Model):
             'x_codcurso': cod_curso,
             'email_from': email,
             'x_codtipodecurso':cod_tipo_curso,
-            'company_id': 0,
+            #'company_id': 0,
             'x_ga_source':url,
             'x_codmodalidad': modalidad,
             'user_id': False
@@ -127,11 +127,9 @@ class CrmLead(models.Model):
         elif url.find(".com") != -1:
             lead.update({'company_id': 1111})
             logger.info("Entre en LATAM")
-            pass;
         else:
             lead.update({'company_id': 1})
             logger.info("Entre en España")
-            pass;
 
         company_id = lead.get('company_id')
         #Problemas con el campo mal hecho de modalidad y sede, en los type form se llaman distinto por eso el cambio
@@ -179,46 +177,46 @@ class CrmLead(models.Model):
         #ISEP LATAM
         #---------------------------------
         if company_id == 1111:
-            pass;
+            pass
 
         #ISEP SL
         #---------------------------------
         elif company_id == 1:
-            pass;
+            pass
 
         #ISED
         #---------------------------------
         elif company_id == 4:
             if modalidad == 'ELR':
                 #Centro Sup de estudios ISED SL - Online
-                lead.update({'company_id': 3})
+                #lead.update({'company_id': 3})
                 logger.info("Entre en Online")
 
             elif cod_sede == 'MAD':
                 #Centro de estudios ISED SL - Madrid
-                lead.update({'company_id': 4})
+                #lead.update({'company_id': 4})
                 logger.info("Entre en Madrid")
 
             elif cod_sede == 'BIO':
                 #Centro de estudios ISED Bilbao - Bilbao
-                lead.update({'company_id': 5})
+                #lead.update({'company_id': 5})
                 logger.info("Entre en Bilbao")
 
             elif cod_sede == 'ZAR':
                 #Zarised - Zaragoza
-                lead.update({'company_id': 6})
+                #lead.update({'company_id': 6})
                 logger.info("Entre en Zaragoza")
 
             else:
                 #Iruñised - Pamplona
-                lead.update({'company_id': 22})
+                #lead.update({'company_id': 22})
                 logger.info("Entre en Iruñised")
 
-        logger.info('\n Company ID \n')
-        logger.info(lead.get('company_id'))
+        #logger.info('\n Company ID \n')
+        #logger.info(lead.get('company_id'))
 
         logger.info(lead)
 
-        res.write(lead)
+        res.sudo().write(lead)
 
         return res
