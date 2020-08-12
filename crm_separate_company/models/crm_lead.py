@@ -44,6 +44,7 @@ class CrmLead(models.Model):
         cod_curso = lead.get('x_codcurso')
         email = lead.get('email_from')
         modalidad = lead.get('x_codmodalidad')
+        cod_area = lead.get('x_codarea')
         cod_tipo_curso = lead.get('x_codtipodecurso')
         url = lead.get('x_ga_source')
 
@@ -62,7 +63,9 @@ class CrmLead(models.Model):
             'x_codmodalidad': modalidad,
             'user_id': None,
             'team_id': None,
-            'x_modalidad_id': None
+            'x_modalidad_id': None,
+            'x_codarea': cod_area,
+            'x_area_id': None
         }
 
         company_id = None
@@ -208,15 +211,24 @@ class CrmLead(models.Model):
         #lead.update({'user_id': user_id})
         #lead.update({'team_id': team_id})
 
+        #Actualizar id de la modalidad
+        try:
+            modalidad_id = lead.env['crm_lead'].sudo().search([('x_codmodalidad', '=', modalidad)], limit=1)
+            lead.update({'x_modalidad_id': modalidad_id.x_modalidad_id})
+        except:
+            logger.info("No pudo vincular la modalidad con el codigo de modalidad")
+
+        #Actualizar id del area
+        try:
+            area_id = lead.env['crm_lead'].sudo().search([('x_codarea', '=', cod_area)], limit=1)
+            lead.update({'x_area_id': area_id.x_area_id})
+        except:
+            logger.info("No pudo vincular el area con el codigo de area")
+
+
         logger.info(lead_copy)
         lead_obj = self.sudo().browse(res.id)
         lead_obj.sudo().write(lead)
-
-        #Actualizar id de la modalidad
-        try:
-            lead.env['crm_lead'].sudo().search([('default_code', '=', cod_curso)],limit=1)
-        except:
-            logger.info("No pudo vincular la referencia interna con el cod_curso")
 
 
         #Update a la base de datos para cambiar el company_id directo
