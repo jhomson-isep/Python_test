@@ -45,7 +45,7 @@ class SQL():
 
     def get_all_courses(self):
         rows = self.query(
-            "SELECT *, SUBSTRING(Curso_Id, 3, 2) AS code FROM Cursos WHERE FechaAlta between '2019-01-01' and '2020-31-12';")
+            "SELECT *, SUBSTRING(Curso_Id, 3, 2) AS code FROM Cursos WHERE FechaAlta between '2018-01-01' and '2020-31-12';")
         return rows
 
     def get_course_by_code(self, code):

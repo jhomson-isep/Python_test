@@ -148,7 +148,7 @@ class OpCourse(models.Model):
                         'ects': course_moodle.ECTS,
                         'acknowledgments': course_moodle.Reconocimientos,
                         'reconeixements': course_moodle.Reconeixements,
-                        'content': course_moodle.Contenido
+                        'content': course_moodle.Contenido,
                         'moodle_code': course_moodle.MoodleId
                     }
                     res = super(OpCourse, self).create(course_values)

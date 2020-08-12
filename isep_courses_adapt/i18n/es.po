@@ -402,6 +402,12 @@ msgid "Subject Management"
 msgstr "Gestión de asignaturas"
 
 #. module: openeducat_core
+#: model:ir.model.fields,field_description:openeducat_core.field_op_course__subject_ids
+#: model:ir.model.fields,field_description:openeducat_core.field_op_faculty__faculty_subject_ids
+msgid "Subject(s)"
+msgstr "Asignaturas"
+
+#. module: openeducat_core
 #: model:ir.actions.act_window,name:openeducat_core.act_open_op_faculty_view
 #: model:ir.actions.act_window,name:openeducat_core.act_open_op_faculty_view_2
 #: model:ir.model.fields,field_description:openeducat_core.field_wizard_op_faculty__faculty_ids
