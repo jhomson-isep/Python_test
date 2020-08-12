@@ -153,6 +153,11 @@ msgid "Moodle category Id"
 msgstr ""
 
 #. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__moodle_code
+msgid "Moodle code"
+msgstr "Código en Moodle"
+
+#. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_subject__moodle_course_id
 msgid "Moodle course Id"
 msgstr "Id de Moodle (curso)"
@@ -227,6 +232,11 @@ msgstr "Código"
 #: model:ir.model,name:isep_courses_adapt.model_op_course
 msgid "OpenEduCat Course"
 msgstr "Curso OpenEduCat"
+
+#. module: isep_courses_adapt
+#: model:ir.model,name:isep_courses_adapt.model_op_batch_subject_rel
+msgid "Subject relations"
+msgstr "Relación de asignaturas"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__period

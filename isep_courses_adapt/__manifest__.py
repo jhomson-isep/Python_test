@@ -21,7 +21,6 @@
     ],
     'data': [
         'security/ir.model.access.csv',
-        'menu/isep_courses_adapt_menu.xml',
         'views/op_course.xml',
         'views/op_batch.xml',
         'views/op_modalidad.xml',
@@ -30,7 +29,8 @@
         'views/op_practices_types.xml',
         'views/res_config_settings_views.xml',
         'views/op_subject.xml',
-        'views/op_batch_subject_rel.xml'
+        'views/op_batch_subject_rel.xml',
+        'menu/isep_courses_adapt_menu.xml',
     ],
     'installable': True,
 }

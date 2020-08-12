@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 
 class OpBatchSubjectRel(models.Model):
     _name = 'op.batch.subject.rel'
+    _description = "Subject relations"
 
     batch_id = fields.Many2one('op.batch', string="Batch")
     subject_id = fields.Many2one('op.subject', string="Subject")

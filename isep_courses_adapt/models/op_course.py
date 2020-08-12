@@ -29,6 +29,7 @@ class OpCourse(models.Model):
     name_catalan = fields.Char(string="Catalan name")
     section = fields.Char(string="Section")
     moodle_category_id = fields.Integer(string="Moodle category Id")
+    moodle_code = fields.Char(string="Moodle code", size=16)
     fees_term_id = fields.Many2one('op.fees.terms', 'Fees Term')
     level = fields.Char(string="Level", size=1)
     ects = fields.Integer("ECTS", default=0)
@@ -115,7 +116,6 @@ class OpCourse(models.Model):
         res = super(OpCourse, self).write(values)
         return res
 
-
     def import_courses(self):
         s = SQL()
         logger.info("**************************************")
@@ -148,8 +148,8 @@ class OpCourse(models.Model):
                         'ects': course_moodle.ECTS,
                         'acknowledgments': course_moodle.Reconocimientos,
                         'reconeixements': course_moodle.Reconeixements,
-                        'content': course_moodle.Contenido,
-                        'moodle_category_id': course_moodle.MoodleId
+                        'content': course_moodle.Contenido
+                        'moodle_code': course_moodle.MoodleId
                     }
                     res = super(OpCourse, self).create(course_values)
                     print(res)
@@ -160,5 +160,5 @@ class OpCourse(models.Model):
             except Exception as e:
                 logger.info("===== Fallo ======")
                 logger.info(e)
-                logger.info(row)
+                logger.info(course_values)
                 continue
