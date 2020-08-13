@@ -70,7 +70,7 @@ class CrmLead(models.Model):
         team_id = None
 
         #Mediante url enviar a donde debe
-        url = lead.get('x_ga_source')
+        url = lead.get('description')
         if url.find("ised") != -1:
             company_id = 4
             logger.info("Entre en ISED")
