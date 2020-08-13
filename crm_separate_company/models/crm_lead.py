@@ -113,10 +113,10 @@ class CrmLead(models.Model):
         #Añadir producto a la iniciativa directamente
         logger.info(company_id)
         try:
-            referencia_interna = self.env['product.template'].sudo().search([('default_code', 'ilike', cod_curso)], limit=1)
+            referencia_interna = self.env['product.template'].sudo().search([('default_code', '=', cod_curso)], limit=1)
             lead.update({'x_curso_id': referencia_interna.id})
 
-            referencia_interna = self.env['product.product'].sudo().search([('default_code', 'ilike', cod_curso)], limit=1)
+            referencia_interna = self.env['product.product'].sudo().search([('default_code', '=', cod_curso)], limit=1)
             lead.update({'x_producto_id': referencia_interna.id})
         except:
             logger.info("No pudo relacionar la referencia interna con el cod_curso")
@@ -211,16 +211,22 @@ class CrmLead(models.Model):
 
         #Actualizar id de la modalidad
         try:
-            lead.env['product.attribute.value'].sudo().search([('name', 'ilike', modalidad)], limit=1)
-            lead.update({'x_modalidad_id': modalidad_id})
-        except:
+            modalidad_id = self.env['product.attribute.value'].sudo().search(
+                [('name', 'ilike', modalidad), ('attribute_id', 'in', [2, 3])], limit=1)
+            lead.update({'x_modalidad_id': modalidad_id.id})
+        except Exception as e:
+            logger.info("===== Fallo en modalidad_id ======")
+            logger.info(e)
             logger.info("No pudo vincular la modalidad con el codigo de modalidad")
 
         #Actualizar id del area
         try:
-            area_id = lead.env['product.category'].sudo().search([('x_codigocategoria', 'ilike', cod_area)], limit=1)
+            area_id = self.env['product.category'].sudo().search([('x_codigocategoria', 'ilike', cod_area)], limit=1)
             lead.update({'x_area_id': area_id.id})
-        except:
+        except Exception as e:
+            logger.info("===== Fallo en area_id ======")
+            logger.info(cod_area)
+            logger.info(e)
             logger.info("No pudo vincular el area con el codigo de area")
 
         logger.info(lead_copy)
