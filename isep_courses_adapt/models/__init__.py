@@ -10,4 +10,7 @@ from . import op_modalidad
 from . import op_evaluation_type
 from . import op_campus
 from . import op_practices_type
+from . import op_study_type
+from . import op_document_type
+from . import op_contact_type
 from . import op_student

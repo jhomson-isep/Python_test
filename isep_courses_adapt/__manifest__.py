@@ -30,6 +30,9 @@
         'views/res_config_settings_views.xml',
         'views/op_subject.xml',
         'views/op_batch_subject_rel.xml',
+        'views/op_contact_type.xml',
+        'views/op_study_type.xml',
+        'views/op_document_type.xml',
         'menu/isep_courses_adapt_menu.xml',
         'views/op_student.xml'
     ],
