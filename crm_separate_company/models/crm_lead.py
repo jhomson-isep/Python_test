@@ -113,10 +113,10 @@ class CrmLead(models.Model):
         #Añadir producto a la iniciativa directamente
         logger.info(company_id)
         try:
-            referencia_interna = self.env['product.template'].sudo().search([('default_code', '=', cod_curso)], limit=1)
+            referencia_interna = self.env['product.template'].sudo().search([('default_code', 'ilike', cod_curso)], limit=1)
             lead.update({'x_curso_id': referencia_interna.id})
 
-            referencia_interna = self.env['product.product'].sudo().search([('default_code', '=', cod_curso)], limit=1)
+            referencia_interna = self.env['product.product'].sudo().search([('default_code', 'ilike', cod_curso)], limit=1)
             lead.update({'x_producto_id': referencia_interna.id})
         except:
             logger.info("No pudo relacionar la referencia interna con el cod_curso")
@@ -211,7 +211,7 @@ class CrmLead(models.Model):
 
         #Actualizar id de la modalidad
         try:
-            modalidad_id = lead.env['product.attribute'].sudo().search([('name', 'ilike', modalidad)], limit=1)
+            modalidad_id = lead.env['product.attribute.value'].sudo().search([('name', 'ilike', modalidad)], limit=1)
             lead.update({'x_modalidad_id': modalidad_id.id})
         except:
             logger.info("No pudo vincular la modalidad con el codigo de modalidad")
