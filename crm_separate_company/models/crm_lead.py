@@ -92,7 +92,7 @@ class CrmLead(models.Model):
         if modalidad == 'Presencial':
             modalidad = 'PRS'
         elif modalidad == 'Online':
-            modalidad = 'ELR'
+            modalidad = 'ONL'
 
         #Actualizar la modalidad
         lead.update({'x_codmodalidad': modalidad})
@@ -145,8 +145,8 @@ class CrmLead(models.Model):
                 cod_sede = 'VAL'
 
 
-            # Elr es online en modalidad
-            if modalidad != 'ELR':
+            # ONL es online en modalidad
+            if modalidad != 'ONL':
                 name = cod_curso + "-" + cod_tipo_curso + "-" + cod_sede + "-" + 'PRS' + " - " + email
             else:
                 name = cod_curso + "-" + cod_tipo_curso + "-" + cod_sede + "-" + 'ONL' + " - " + email
@@ -155,13 +155,13 @@ class CrmLead(models.Model):
         #---------------------------------
         elif company_id == 4:
 
-            #Elr es online en modalidad
-            if modalidad != 'ELR':
+            #ONL es online en modalidad
+            if modalidad != 'ONL':
                 name = cod_curso + "-" + cod_tipo_curso + "-" + cod_sede + "-" + 'PRS' + " - " + email
             else:
                 name = cod_curso + "-" + cod_tipo_curso + "-" + cod_sede + "-" + 'ONL' + " - " + email
 
-            if modalidad == 'ELR':
+            if modalidad == 'ONL':
                 #Centro Sup de estudios ISED SL - Online
                 #company_id = 3
                 #Manel Arroyo
@@ -211,14 +211,14 @@ class CrmLead(models.Model):
 
         #Actualizar id de la modalidad
         try:
-            modalidad_id = lead.env['product.attribute'].sudo().search([('name', '=', modalidad)], limit=1)
+            modalidad_id = lead.env['product.attribute'].sudo().search([('name', 'ilike', modalidad)], limit=1)
             lead.update({'x_modalidad_id': modalidad_id.id})
         except:
             logger.info("No pudo vincular la modalidad con el codigo de modalidad")
 
         #Actualizar id del area
         try:
-            area_id = lead.env['product.category'].sudo().search([('x_codigocategoria', '=', cod_area)], limit=1)
+            area_id = lead.env['product.category'].sudo().search([('x_codigocategoria', 'ilike', cod_area)], limit=1)
             lead.update({'x_area_id': area_id.id})
         except:
             logger.info("No pudo vincular el area con el codigo de area")
