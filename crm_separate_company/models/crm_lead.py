@@ -27,9 +27,6 @@ class CrmLead(models.Model):
                 'phone': lead.get('phone')
             })
 
-        # Buscar user id en res.partner
-        user = client.user_id.id
-        lead.update({'user_id': user})
 
         res = super(CrmLead, self).create(lead)
 
@@ -118,7 +115,7 @@ class CrmLead(models.Model):
         #Añadir producto a la iniciativa directamente
         logger.info(company_id)
         try:
-            referencia_interna = self.env['product_template'].sudo().search([('default_code', '=', cod_curso)],limit=1)
+            referencia_interna = self.env['product.template'].sudo().search([('default_code', '=', cod_curso)], limit=1)
             lead.update({'x_curso_id': referencia_interna.id})
             lead.update({'x_producto_id': referencia_interna.id})
         except:
