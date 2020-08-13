@@ -4,3 +4,7 @@ access_op_evaluation_type_admin,access.op.modalidad.admin,isep_courses_adapt.mod
 access_op_practices_type_admin,access.op.practices.admin,isep_courses_adapt.model_op_practices_type,base.group_system,1,1,1,1
 access_op_campus_admin,access.op.campus.admin,isep_courses_adapt.model_op_campus,base.group_system,1,1,1,1
 access_op_batch_subject_rel_admin,access.op.batch.subject.rel.admin,isep_courses_adapt.model_op_batch_subject_rel,base.group_system,1,1,1,1
+access_op_contact_type_admin,access.op.contact.type.admin,isep_courses_adapt.model_op_contact_type,base.group_system,1,1,1,1
+access_op_document_type_admin,access.op.document.type.admin,isep_courses_adapt.model_op_document_type,base.group_system,1,1,1,1
+access_op_study_type_admin,access.op.study.type.admin,isep_courses_adapt.model_op_study_type,base.group_system,1,1,1,1
+access_op_university_admin,access.op.university.admin,isep_courses_adapt.model_op_university,base.group_system,1,1,1,1

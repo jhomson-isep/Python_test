@@ -10,10 +10,22 @@
                     <field name="gr_no"/>
                 </xpath>
 
-                <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group[@name='personal_detail']/field[@name='email']"
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="university_id"/>
+                    <field name="year_end_studies"/>
+                    <field name="uvic_documentation"/>
+                    <field name="rvoe_documentation"/>
+                </xpath>
+
+                <xpath expr="//field[@name='email']"
                        position="after">
                     <field name="curp"/>
+                    <field name="document_type_id"/>
+                    <field name="document_number"/>
+                    <field name="contact_type_id"/>
+                    <field name="study_type_id"/>
                 </xpath>
+
                 <xpath expr="//form">
                     <div class="oe_chatter">
                         <field name="message_follower_ids" widget="mail_followers"/>
