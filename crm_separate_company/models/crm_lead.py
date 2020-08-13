@@ -210,14 +210,14 @@ class CrmLead(models.Model):
         #Actualizar id de la modalidad
         try:
             modalidad_id = lead.env['product.attribute.value'].sudo().search([('x_descripcion', '=', modalidad)], limit=1)
-            lead.update({'x_modalidad_id': modalidad_id.x_modalidad_id})
+            lead.update({'x_modalidad_id': modalidad_id.id})
         except:
             logger.info("No pudo vincular la modalidad con el codigo de modalidad")
 
         #Actualizar id del area
         try:
             area_id = lead.env['product.category'].sudo().search([('x_codigocategoria', '=', cod_area)], limit=1)
-            lead.update({'x_area_id': area_id.x_area_id})
+            lead.update({'x_area_id': area_id.id})
         except:
             logger.info("No pudo vincular el area con el codigo de area")
 
