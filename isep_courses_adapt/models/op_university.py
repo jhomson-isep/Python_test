@@ -8,3 +8,4 @@ class OpUniversity(models.Model):
     _description = "Openeducat university"
 
     name = fields.Char('Name', size=128, required=True)
+    code = fields.Char('Code', size=32, required=True)

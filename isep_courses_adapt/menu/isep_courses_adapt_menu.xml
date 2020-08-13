@@ -38,5 +38,9 @@
         <menuitem id="menu_op_contact_type_sub" name="Tipos de contacto"
                   parent="isep_courses_adapt.menu_op_student_config_general" sequence="10"
                   action="act_open_op_contact_type_view" groups="base.group_system"/>
+
+        <menuitem id="menu_op_university_sub" name="Universidades"
+                  parent="isep_courses_adapt.menu_op_student_config_general" sequence="10"
+                  action="act_open_op_university_view" groups="base.group_system"/>
     </data>
 </odoo>
