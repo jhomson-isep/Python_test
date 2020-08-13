@@ -21,5 +21,9 @@
         <menuitem id="menu_op_practices_type_sub" name="Tipos de practicas"
                   parent="openeducat_core.menu_op_school_config_general" sequence="10"
                   action="act_open_op_practices_type_view" groups="base.group_system"/>
+
+        <menuitem id="menu_op_document_type_sub" name="Tipos de Documentos"
+                  parent="openeducat_core.menu_op_school_config_general" sequence="10"
+                  action="act_open_op_document_type_view" groups="base.group_system"/>
     </data>
 </odoo>
