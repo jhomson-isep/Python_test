@@ -31,6 +31,7 @@
         'views/op_subject.xml',
         'views/op_batch_subject_rel.xml',
         'menu/isep_courses_adapt_menu.xml',
+        'views/op_student.xml'
     ],
     'installable': True,
 }

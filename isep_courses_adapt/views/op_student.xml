@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="fanlab_student_extended" model="ir.ui.view">
+            <field name="model">op.student</field>
+            <field name="inherit_id" ref="openeducat_core.view_op_student_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='gender']" position="before">
+                    <field name="gr_no"/>
+                </xpath>
+
+                <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group[@name='personal_detail']/field[@name='email']"
+                       position="after">
+                    <field name="curp"/>
+                </xpath>
+                <xpath expr="//form">
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="fanlab_student_course_view_ex" model="ir.ui.view">
+            <field name="model">op.student</field>
+            <field name="inherit_id" ref="openeducat_core.view_op_student_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page[@name='educational']/group/field[@name='course_detail_ids']/tree"
+                       position="replace">
+                    <tree editable="bottom">
+                        <field name="course_id"/>
+                    </tree>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
