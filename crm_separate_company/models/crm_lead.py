@@ -27,6 +27,8 @@ class CrmLead(models.Model):
                 'phone': lead.get('phone')
             })
 
+        company_id = lead.get('company_id')
+        logger.info(company_id)
 
         res = super(CrmLead, self).create(lead)
 
@@ -43,8 +45,7 @@ class CrmLead(models.Model):
         modalidad = lead.get('x_codmodalidad')
         cod_area = lead.get('x_codarea')
         cod_tipo_curso = lead.get('x_codtipodecurso')
-        url = lead.get('x_ga_source')
-
+        url = lead.get('website')
 
         lead_copy = lead
         lead.clear()
@@ -62,17 +63,16 @@ class CrmLead(models.Model):
             'team_id': None,
             'x_modalidad_id': None,
             'x_codarea': cod_area,
-            'x_area_id': None
+            'x_area_id': None,
+            'website': None
         }
 
-        company_id = None
         user_id = None
         team_id = None
 
         #Mediante url enviar a donde debe
-        url = lead.get('description')
         if url.find("ised") != -1:
-            company_id = 4
+            company_id = 4 
             logger.info("Entre en ISED")
 
         elif url.find(".com") != -1:
@@ -109,8 +109,6 @@ class CrmLead(models.Model):
         elif cod_sede == 'centro-zaragoza':
             cod_sede = 'ZAR'
 
-
-
         #REVISAR ESTO
         #Añadir producto a la iniciativa directamente
         logger.info(company_id)
@@ -122,17 +120,20 @@ class CrmLead(models.Model):
             logger.info("No pudo relacionar la referencia interna con el cod_curso")
 
 
-
-
         #ISEP LATAM
         #---------------------------------
         if company_id == 1111:
             #Solo se usa online en latam
+            #Carolina Araujo
+            user_id = 100000006
+            team_id = 100000006
             name = cod_curso + cod_tipo_curso + "LATAM" + " - " + email
 
         #ISEP SL
         #---------------------------------
         elif company_id == 1:
+            #Manel Arroyo
+            user_id = 76
 
             if cod_sede in ('barcelona', 'Barcelona', 'BCN'):
                 cod_sede = 'CAT'
@@ -203,25 +204,22 @@ class CrmLead(models.Model):
                 #team_id = 10
                 logger.info("Entre en Iruñised")
 
-        #Actualizar el nombre, comercial y equipo de ventas
+        #Actualizar el nombre
         lead.update({'name': name})
-        #lead.update({'user_id': user_id})
-        #lead.update({'team_id': team_id})
 
         #Actualizar id de la modalidad
         try:
-            modalidad_id = lead.env['crm_lead'].sudo().search([('x_codmodalidad', '=', modalidad)], limit=1)
+            modalidad_id = lead.env['product.attribute.value'].sudo().search([('x_descripcion', '=', modalidad)], limit=1)
             lead.update({'x_modalidad_id': modalidad_id.x_modalidad_id})
         except:
             logger.info("No pudo vincular la modalidad con el codigo de modalidad")
 
         #Actualizar id del area
         try:
-            area_id = lead.env['crm_lead'].sudo().search([('x_codarea', '=', cod_area)], limit=1)
+            area_id = lead.env['product.category'].sudo().search([('x_codigocategoria', '=', cod_area)], limit=1)
             lead.update({'x_area_id': area_id.x_area_id})
         except:
             logger.info("No pudo vincular el area con el codigo de area")
-
 
         logger.info(lead_copy)
         lead_obj = self.sudo().browse(res.id)
