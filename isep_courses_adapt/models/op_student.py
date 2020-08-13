@@ -18,6 +18,7 @@ class OpStudent(models.Model):
     document_number = fields.Char(string='Document number', size=32)
     contact_type_id = fields.Many2one('op.contact.type', string='Contact type')
     study_type_id = fields.Many2one('op.study.type', string='Study type')
+    university_id = fields.Many2one('op.university', string='University')
 
     moodle_id = fields.Integer(string='Moodle ID')
     moodle_pass = fields.Char(string='Moodle Password', size=24)
