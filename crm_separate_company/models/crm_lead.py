@@ -211,8 +211,8 @@ class CrmLead(models.Model):
 
         #Actualizar id de la modalidad
         try:
-            modalidad_id = lead.env['product.attribute.value'].sudo().search([('name', 'ilike', modalidad)], limit=1)
-            lead.update({'x_modalidad_id': modalidad_id.id})
+            lead.env['product.attribute.value'].sudo().search([('name', 'ilike', modalidad)], limit=1)
+            lead.update({'x_modalidad_id': modalidad_id})
         except:
             logger.info("No pudo vincular la modalidad con el codigo de modalidad")
 
