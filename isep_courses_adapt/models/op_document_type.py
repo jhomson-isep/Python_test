@@ -8,3 +8,4 @@ class OpDocumentType(models.Model):
     _description = "Student document type"
 
     name = fields.Char('Name', size=32, required=True)
+    code = fields.Char('Code', size=12, required=True)
