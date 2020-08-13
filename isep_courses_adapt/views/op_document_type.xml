@@ -37,7 +37,7 @@
             </field>
         </record>
         <record model="ir.actions.act_window" id="act_open_op_document_type_view">
-            <field name="name">Tipos de evaluación</field>
+            <field name="name">Tipo de documentos</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">op.document.type</field>
             <field name="view_type">form</field>
