@@ -33,8 +33,9 @@
         'views/op_contact_type.xml',
         'views/op_study_type.xml',
         'views/op_document_type.xml',
-        'menu/isep_courses_adapt_menu.xml',
-        'views/op_student.xml'
+        'views/op_student.xml',
+        'views/op_university.xml',
+        'menu/isep_courses_adapt_menu.xml'
     ],
     'installable': True,
 }

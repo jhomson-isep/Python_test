@@ -24,7 +24,7 @@
 
         <menuitem id="menu_op_student_config_general"
                   name="Mantenimiento de alumnos"
-                  parent="menu_op_school_config"
+                  parent="openeducat_core.menu_op_school_config"
                   sequence="80"/>
 
         <menuitem id="menu_op_document_type_sub" name="Tipos de Documentos"

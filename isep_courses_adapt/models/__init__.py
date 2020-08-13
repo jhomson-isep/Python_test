@@ -13,4 +13,5 @@ from . import op_practices_type
 from . import op_study_type
 from . import op_document_type
 from . import op_contact_type
+from . import op_university
 from . import op_student
