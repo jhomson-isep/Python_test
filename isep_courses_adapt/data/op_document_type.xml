@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="op_document_type_1" model="op.document.type">
+            <field name="name">DNI</field>
+            <field name="code">DNI</field>
+        </record>
+        <record id="op_document_type_2" model="op.document.type">
+            <field name="name">Pasaporte</field>
+            <field name="code">PSS</field>
+        </record>
+        <record id="op_document_type_3" model="op.document.type">
+            <field name="name">Documento de identidad</field>
+            <field name="code">DIE</field>
+        </record>
+        <record id="op_document_type_4" model="op.document.type">
+            <field name="name">CURP</field>
+            <field name="code">CURP</field>
+        </record>
+    </data>
+</odoo>

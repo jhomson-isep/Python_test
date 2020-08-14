@@ -1,0 +1,458 @@
+id,code,name
+op_university_1,IUE,IUE
+op_university_2,UIL,UIL
+op_university_3,UCEU,Abat Oliva CEU
+op_university_4,ABAC,Academia de Bellas Artes de Catania
+op_university_5,UFO,Albanian University - Universitas Fabrefacta Optime
+op_university_6,UAlfonso,Alfonso X El Sabio
+op_university_7,UNebrija,Antonio de Nebrija
+op_university_8,ATMG,Ateneo Metropolitano de Guadalajara
+op_university_9,UAB,Autónoma de Barcelona
+op_university_10,CAC,Centro de Estudios Superiores Carlos A. Carrillo
+op_university_11,CAECE,Universidad CAECE Buenos Aires
+op_university_12,CAS,de Castellón
+op_university_13,CAU,Carlos Albizu University
+op_university_14,CC,Crearte Coaching
+op_university_15,CDP,Conservatorio de Polonia
+op_university_16,CECA,Coorporación Universitaria del Caribe
+op_university_17,Cediiap,Cediiap Instituto Universitario
+op_university_18,CEE,Conservatorio Estatal de Ereván
+op_university_19,CES,Centro de Estudios Superiores CTM Justo Sierra O Reilly
+op_university_20,UVCAB,Universidad Católica Andrés Bello
+op_university_21,UVB,Universidad Valle del Bravo
+op_university_22,UVAQ,Universidad Vasco de Quiroga
+op_university_23,UVAM,Universidad Vizcaya de las Américas
+op_university_24,UVALP,Universidad de Valparaiso
+op_university_25,UVallad,de Valladolid
+op_university_26,UValencia,de Valencia
+op_university_27,UV,Universidad de Villanueva
+op_university_28,UTS,Universidad Tecnológica de Santiago
+op_university_29,UTRE,Universidada de Talavera de la Reina
+op_university_30,CFT,Colegio Universitario Fermín Toro
+op_university_31,CLM,de Castilla La Mancha
+op_university_32,CLU,Columbia University
+op_university_33,CME,Conservatorio de Música San Lorenzo de El Escorial
+op_university_34,CONSMUPA,"Conservatorio Superior de Música ""Eduardo Martínez Torner"""
+op_university_35,Coyotl,Centro Universitario Coyotl
+op_university_36,CPM,Conservatorio Popular de Música
+op_university_37,CPRH,Conservatorio Profesional de Música Rodolfo Halster
+op_university_38,CS,Conservatorio de Salamanca
+op_university_39,CSD,Conservatorio Superior de Danza
+op_university_40,UTESA,Recinto Santo Domingo de Guzmán
+op_university_41,UTEP,The University of Texas at El Paso
+op_university_42,UTEL,Universidad Tecnológica Latinoamericana en Línea
+op_university_43,UTEC,Universidad Tecnológica Equinoccial
+op_university_44,UTE,Universidad de la Tercera Edad
+op_university_45,UTCM,Universidad Tec Milenio
+op_university_46,UTCI,Universidad Tecnológica de Chile Inacap
+op_university_47,UTCH,Universidad Tecnológica del Chocó
+op_university_48,UTC,Universidad Tecnológica Centroamericana
+op_university_49,UTB,Universidad Tecnológica de Bolivar
+op_university_50,CUGL,Centro Universitario Guadalajara Lamar
+op_university_51,CUL,Corporación Universitaria Lasallista
+op_university_52,CUNY,The City University of New York
+op_university_53,CUPC,Universidad Piloto de Colombia
+op_university_54,CURC,Corporación Universitaria Regional del Caribe
+op_university_55,CUTC,Colegio Universitario de los Teques Cecilio Acosta
+op_university_56,CUTCA,Colegio Universitario de los Teques Cecilio Acosta
+op_university_57,CUVA,Centro Universitario Valle de Anáhuac
+op_university_58,DBS,Dublin Business School
+op_university_59,Eartvic,Escola d Art i Superior de Disseny de Vic
+op_university_60,USMP,Universidad San Martín de Porras
+op_university_61,USMA,Universidad Católica Santa María La Antigua
+op_university_62,USLL,Universidad La Salle
+op_university_63,USJaret,Universidad de Spiru-Jaret
+op_university_64,USJ,San Jorge
+op_university_65,USFX,Universidad Mayor Real y Pontificia San Francisco Xavier de Chuquisaca
+op_university_66,USFQ,Universidad San Francisco de Quito
+op_university_67,USF,Universidad de Sofía
+op_university_68,USevilla,de Sevilla
+op_university_69,USEK,Internacional SEK
+op_university_70,ENCH,Escuela Normal del Estado de Chihuahua
+op_university_71,ENCO,Escuela Normal del Estado de Coahuila
+op_university_72,ENDC,Escuela Nacional de Deporte de Colombia
+op_university_73,ENDR,Escuela Normal Experimental “Profr. Darío Rodríguez Cruz”
+op_university_74,ENE,Escuela Normal de Especialización de México
+op_university_75,ENEES,Escuela Normal de Especialización del Estado de Sinaloa
+op_university_76,ENFT,Escuela Normal Fronteriza Tijuana
+op_university_77,ENJ,Escuela Normal de Jalisco
+op_university_78,ENM,Escuela Normal Montemorelos
+op_university_79,ENMFM,Escuela Normal Miguel F. Martínez
+op_university_80,USalle,Salle
+op_university_81,USalam,de Salamanca
+op_university_82,USAL,Universidad del Salvador
+op_university_83,USA,Universidad Sergio Arboleda
+op_university_84,US,Universidad de la Sabana
+op_university_85,URY,Universidad de la República de Uruguay
+op_university_86,URV,Rovira i Virgili
+op_university_87,URU,Universidad Rafael Urdaneta
+op_university_88,URSur,Universidad Regional del Sureste
+op_university_89,URP,Universidade de Ribeirao Preto
+op_university_90,ESCUN,Escuela Universitaria de Magisterio
+op_university_91,ESCUNI,Escuela Universitaria de Magisterio
+op_university_92,ESIC,ESIC
+op_university_93,ESMUC,Escuela Superior de Música de Catalunya
+op_university_94,ESSA,Escola Superior de Saúde do Alcoitão
+op_university_95,ESTS,Escuela Superior de Turismo Sol de Madrid
+op_university_96,ETAC,Universidad ETAC
+op_university_97,EUCS,Escuela Universitaria de Ciencias de la Salud
+op_university_98,EUG,Escuelas Universitarias Gimbernat
+op_university_99,EUIT,Escuela Univ Inferm. Terrassa
+op_university_100,UPVasco,del País Vasco
+op_university_101,UPV,Politécnica de Valencia
+op_university_102,UPSA,Universidad Privada de Santa Cruz de la Sierra
+op_university_103,UPS,Universidad Pontificia de Salamanca
+op_university_104,UPRIVEE,Université Privée
+op_university_105,UPRC,Universidad de Puerto Rico
+op_university_106,UPR,Universidad de Puerto Rico
+op_university_107,UPotsdam,Universidad de Potsdam
+op_university_108,UPorto,de Porto
+op_university_109,UPO,Pablo de Olavide
+op_university_110,FUMC,Fundación Universitaria María Cano
+op_university_111,FUMEC,Universidad FUMEC Brasil
+op_university_112,FUS,Fundación Universitaria Sanitas
+op_university_113,Hawái,Universidad de Hawái en Manoa
+op_university_114,HCL,Haverford College
+op_university_115,HPPR,Instituto Superior Pedagógico de Pinar del Río
+op_university_116,IAU,Instituto de Altos Estudios Universitarios
+op_university_117,ICAI-ICADE,Universidad Pontificia Comillas ICAI-ICADE
+op_university_118,ICEL,Universidad ICEL
+op_university_119,ICEST,Instituto de Ciencias y Estudios Superiores de Tamaulipas
+op_university_120,UPEL,Universidad Pedagógica Experimental
+op_university_121,UPCV,Pontificia Universidad Católica de Valparaíso
+op_university_122,UPCF,Universidad del Pacífico
+op_university_123,UPCEU,de San Pablo-CEU
+op_university_124,UPCA,Universidad Peruana de Ciencias Aplicadas
+op_university_125,UPC,Politécnica de Catalunya
+op_university_126,UPBSM,Universidad Pontificia Bolivariana Seccional de Monteria
+op_university_127,UPB,Universidad Pontificia Bolivariana
+op_university_128,UPAP,Universidad Politécnica y Artísitica de Paraguay
+op_university_129,UPAEP,Universidad Popular Autónoma del Estado de Puebla
+op_university_130,INACAP,INACAP Instituto Nacional de Capacitación Profesional
+op_university_131,INAM,Instituto América
+op_university_132,INR,Instituto Nacional de Rehabilitación
+op_university_133,IPA,Instituto de Profesores Artigas
+op_university_134,IPN,Instituto Politécnico Nacional
+op_university_135,ISA,Instituto Superior de Arte
+op_university_136,ISCMH,Instituto Superior de Ciencias Médicas de la Habana
+op_university_137,ISED,ISED
+op_university_138,ISEP,ISEP
+op_university_139,ISF,Instituto Superior de Estudios para la Familia
+op_university_140,UNSA,Universidad Nacional de San Agustin de Arequipa
+op_university_141,UNR,Universidad Nacional Rusa
+op_university_142,UNQ,Universidad Nacional de Quilnes
+op_university_143,UNPHU,Universidad Nacional Pedro Henríquez Ureña
+op_university_144,UNP,Universidad Nacional de la Plata
+op_university_145,UNMSM,Universidad Nacional Mayor de San Marcos
+op_university_146,UNL,Universidad Nacional de Loja
+op_university_147,UNIVAL,Universidad Internacional de la Integración de América Latina
+op_university_148,UNISUL,Universidade do Sul de Santa Catarina
+op_university_149,UNIR,UNIR
+op_university_150,itesm,Instituto Tecnológico de Monterrey
+op_university_151,ITESO,Instituto Tecnológico y de Estudios Superiores de Occidente
+op_university_152,ITSD,Instituto Tecnológico de Santo Domingo
+op_university_153,ITSON,Instituto Tecnológico de Sonora
+op_university_154,IUEP,Instituto Universitario Eloisa Patrón de Rosado
+op_university_155,IUPGC,Institución Universitaria Politécnico Grancolombiano
+op_university_156,IUT,Instituto Universitario de tecnologia Rodolfo Loero Arismendi
+op_university_157,IVAL,Instituto Venezolano de la Audición y el Lenguaje
+op_university_158,La Salle,Instituto Superior Público La Salle de urubamba
+op_university_159,Unibagué,Universidad de Ibagué
+op_university_160,UniAmérica,UniAmérica-Centro Universitário em Foz do Iguaçu
+op_university_161,UNHV,Universidad Nacional Hermilio Valdizan
+op_university_162,UNHA,Universidad Agraria de La Habana
+op_university_163,UNFV,Universidad Nacional Federico Villarreal
+op_university_164,UNEV,Universidad Nacional Evangélica
+op_university_165,UNESR,Universidad Nacional Experimental Simón Rodríguez
+op_university_166,UNEFA,UNEFA. Universidad Nacional Experimental Politécnica de la Fuerza Armada Nacional
+op_university_167,UNED,UNED
+op_university_168,LUJED,La Universidad Juárez del Estado de Durango
+op_university_169,LVP,Universidad de Liverpool
+op_university_170,LWD,Lindenwood University
+op_university_171,MD,Corporación Universitaria Minuto de Dios
+op_university_172,MELE,Magisterio en Lengua Extranjera
+op_university_173,MER,Colegio Universitario de Administración y Mercadeo
+op_university_174,MERCY,Mercyhurst University
+op_university_175,MIP,Moskovskiy Institut de Psicoanálisis
+op_university_176,MLE,Magisterio en Lengua Extranjera
+op_university_177,MML,"Conservatorio Superior de Música ""Manuel Massoti Littel"""
+op_university_178,UNAM,Universidad Nacional Autónoma de México
+op_university_179,UNAH,Universidad Nacional Autónoma de Honduras
+op_university_180,UNAD,Universidad Nacional Abierta y a Distancia
+op_university_181,UNACHI,Universidad Autónoma de Chiriquí
+op_university_182,Unach,Universidad Nacional de Chimborazo
+op_university_183,UNAC,Corporación Universitaria Adventista
+op_university_184,UNAB,Universidad Nacional Andrés Bello
+op_university_185,UN,Universidad del Noroeste
+op_university_186,UMZ,Universidad de Mendoza
+op_university_187,UMW,Universidad de Minnesota
+op_university_188,PUCP,Pontificia Universidad Católica del Perú
+op_university_189,PUJ,Pontificia Universidad Javeriana
+op_university_190,QCU,Queens College University
+op_university_191,R.F.E.T.,Real Federación Española de TeniS
+op_university_192,RCS,Real Conservatorio Superior de Música de Madrid
+op_university_193,RESAD,Escuela Superior de Arte Dramático
+op_university_194,RUDN,Universidad Rusa de la Amistad de los Pueblos
+op_university_195,RWU,Roger Williams University
+op_university_196,SDC,Universidad Santiago de Cali
+op_university_197,SEGE,Sistema Educativo Estatal Regular Escuela Normal Particular Autorizada Minerva AC
+op_university_198,UMondrag,de Mondragón
+op_university_199,UMMR,Universidad Marista de Mérida
+op_university_200,UMM,Universidad de Montemorelos
+op_university_201,UMinho,Universidade do Minho
+op_university_202,UMH,Miguel Hernández
+op_university_203,UMGZ,Universidad Mariano Galvéz
+op_university_204,UMG,Universidad Marista de Guadalajara
+op_university_205,UMexico,de Mexico
+op_university_206,UMEX,Universidad Mexicana de Educación a Distancia
+op_university_207,UMetro,Universidad Metropolitana
+op_university_208,UABER,University of Aberdeen
+op_university_209,UABuc,Universidad Autónoma de Bucaramanga
+op_university_210,UAC,Universidad Autónoma de Chihuahua
+op_university_211,UACam,Universidad Autónoma de Campeche
+op_university_212,UACoa,Universidad Autónoma de Coahuila
+op_university_213,UACON,Universidad del Aconcagua
+op_university_214,UACUH,Universidad de Cuauhtemoc
+op_university_215,UAD,Universidad Autónoma de Durango
+op_university_216,UAdeO,Universidad Autónoma de Occidente
+op_university_217,UADP,Universidad Adventista del Plata
+op_university_218,umaslp,Universidad Marista de San Luis Potosí
+op_university_219,UMAR,Universidad del Mar
+op_university_220,UMalaga,de Málaga
+op_university_221,UMag,Universidad del Magdalena
+op_university_222,UMadrid,de Madrid
+op_university_223,UMAD,Universidad Madrid
+op_university_224,UMA,Universidad de Magdalena
+op_university_225,UM,Universidad de Manizales
+op_university_226,ULV,University of Louisville
+op_university_227,ULT,Universidad Latinoamericana
+op_university_228,UAlicante,de Alicante
+op_university_229,UAlmeria,de Almería
+op_university_230,UAM,Autónoma de Madrid
+op_university_231,UAME,Universidad Americana
+op_university_232,UAmer,Universidad de las Américas
+op_university_233,UAmericas,Universidad de las Américas
+op_university_234,UAMich,Universidad Arturo Michelena
+op_university_235,UAMT,Universidad Autónoma Metropolitana
+op_university_236,UAN,Universidad Antonio Nariño
+op_university_237,ULCR,Universidad Latina de Costa Rica
+op_university_238,ULC,Universidad La Concordia
+op_university_239,ULat,Universidad Latina de Panamá
+op_university_240,ULaguna,de La Laguna
+op_university_241,ULagos,Universidad de los Lagos
+op_university_242,ULACEX,Universidad Latinoamericana de Comercio Exterior
+op_university_243,UL,Universidad de Lima
+op_university_244,UJW,Universidad Johnson & Wales
+op_university_245,UJS,Universidad Justo Sierra
+op_university_246,UJMV,Universidad José María Vargas
+op_university_247,UAS,Universidad Autónoma de Sinaloa
+op_university_248,UASD,Universidad Autónoma de Santo Domingo
+op_university_249,UASLP,Universidad Autónoma de San Luis Potosí
+op_university_250,UATM,Universidad Autónoma de Tamaulipas
+op_university_251,UAV,Universidad de Aveiro
+op_university_252,UAY,Universidad Autónoma de Yucatán
+op_university_253,UAZ,Universidad Autónoma de Zacatecas
+op_university_254,UAZT,Universidad Azteca
+op_university_255,UAzuay,Universidad del Azuay
+op_university_256,UB,de Barcelona
+op_university_257,UIMP,Internacional Menéndez Pelayo
+op_university_258,UIG,Universidad del Istmo
+op_university_259,UIE,Universidad Internacional del Ecuador
+op_university_260,UICV,Universidad Inca Garcilaso de la Vega
+op_university_261,UICR,Universidad Interamericana de Costa Rica
+op_university_262,UICB,Université Internationale de Casablanca
+op_university_263,UIC,Internacional de Catalunya
+op_university_264,UIber,Universidad de Iberoamérica
+op_university_265,UIBA,Universitat de les Illes Balears
+op_university_266,UBrasil,de Brasil
+op_university_267,UBT,Universidad Butler
+op_university_268,UBurgos,de Burgos
+op_university_269,UBV,Universidad Bolivariana
+op_university_270,UBY,Universidad de Boyacá
+op_university_271,UC,Universidad de Cienfuegos
+op_university_272,UCA,Católica de Ávila
+op_university_273,UCadiz,de Cádiz
+op_university_274,UCaldas,Universidad de Caldas
+op_university_275,UCAM,Universidad Centroamericana de Nicaragua
+op_university_276,UH,Universidad de Houston
+op_university_277,UGV,Universidad Garcilaso de la Vega
+op_university_278,UGranada,de Granada
+op_university_279,UGMis,Universidad Gabriela Mistral
+op_university_280,UGM,Universidad del Golfo de México
+op_university_281,UGJ,Universidad de Guanajuato
+op_university_282,UGirona,de Girona
+op_university_283,UGimbernat,Gimbernat
+op_university_284,UGA,Universidad de Guadalajara
+op_university_285,UFVL,Universidad Favaloro
+op_university_286,UCatC,Universidad Católica de Colombia
+op_university_287,UCatCul,Universidad Católica de Culiacán
+op_university_288,UCATECI,Universidad Católica del Cibao
+op_university_289,UCATMM,Universidad Católica Madre y Maestra
+op_university_290,UCatSM,Universidad Católica de Santa María
+op_university_291,UCAZ,Universidad Carlos Albizu
+op_university_292,UCB,Universidad Católica Boliviana San Pablo
+op_university_293,UCBolivia,Católica Boliviana
+op_university_294,UCC,Universidad Cooperativa de Colombia
+op_university_295,UCCA,Universidad Católica de Córdoba
+op_university_296,UExtrem,de Extremadura
+op_university_297,UES,Universidad de El Salvador
+op_university_298,UEP,Universidad de Puebla
+op_university_299,UEMC,Europea Miguel Cervantes
+op_university_300,UEM,Europea de Madrid
+op_university_301,UEL,University of East London
+op_university_302,UEES,Universidad de Especialidades Espíritu Santo
+op_university_303,UED,Universidad Europeo Design
+op_university_304,UEcuador,Central de Ecuador
+op_university_305,UEC,Universidad Externado de Colombia
+op_university_306,UCES,Universidad de Ciencias Empresariales y Sociales
+op_university_307,UCESM,Universidad CES
+op_university_308,UCET,Universidad Central del Este
+op_university_309,UCF,"University of California, Santa Barbara"
+op_university_310,UCG,Universidad Casa Grande
+op_university_311,UCGO,Universidad Católica de Goiás
+op_university_312,UCH,Cardenal Herrera
+op_university_313,Uchile,de Chile
+op_university_314,UCHO,Universidad Cristiana de Honduras
+op_university_315,UDN,Universidad del Norte
+op_university_316,UDMO,Universidad de Montemorelos
+op_university_317,UDMAT,Universidad de Matanzas
+op_university_318,UDMA,Universidad de Manisales
+op_university_319,UDM,Universidad Do Minho
+op_university_320,UDL,Universidad de Lodz
+op_university_321,UDJMD,Universidad Dr. José Matías Delgado
+op_university_322,UDIMA,Universidad a distancia de Madrid-UDIMA
+op_university_323,UDH,Universidad de la Habana
+op_university_324,UDGE,Université de Genève
+op_university_325,UCO,Universidad Contemporánea Mondragón
+op_university_326,UCoimbra,de Coimbra
+op_university_327,UCOL,Universidad de Colima
+op_university_328,UColombia,de Colombia
+op_university_329,UComillas,Pontificia de Comillas
+op_university_330,UCOR,Concordia University
+op_university_331,UCordoba,de Córdoba
+op_university_332,UCoruña,de la Coruña
+op_university_333,UCosta,de Costa Rica
+op_university_334,UCP,Universidad Católica Popular del Risaralda
+op_university_335,UDAN,Universidad de Anáhuac
+op_university_336,UDA,Universidad de los Andes
+op_university_337,UD,Universidad de Deusto
+op_university_338,UCYH,Universidad Cayetano Heredia
+op_university_339,UCY,Universidad de Camagüey
+op_university_340,UCVI,Universidad Central de las Villas
+op_university_341,UCVenez,Católica de Venezuela
+op_university_342,UCVE,Universidad Central de Venezuela
+op_university_343,UCVA,Universidad César Vallejo
+op_university_344,UCV,Universidad Católica de Valencia
+op_university_345,UCSD,Universidad Católica de Santo Domingo
+op_university_346,UCSG,Universidad Católica de Santiago de Guayaquil
+op_university_347,UCurug,Católica de Uruguay
+op_university_348,UCPEV,Universidad de Ciencias Pedagógicas Enrique José Varona
+op_university_349,UCPeru,Católica de Perú
+op_university_350,UCPE,Universidad Católica de Pereira
+op_university_351,UDFJC,Universidad Distrital Francisco José de Caldas
+op_university_352,UDG,Universidad de Guayaquil
+op_university_353,UDGB,Università degli studi di Genova: Benvenuti
+op_university_354,UCJSC,Universidad Centroamericana José Simeón Cañas
+op_university_355,UCJC,Universidad Camilo José Cela
+op_university_356,UCHond,Universidad Católica de Honduras
+op_university_357,UDY,Universidad de Yacambú
+op_university_358,UE,Universidad Europea
+op_university_359,UEB,Universidad El Bosque
+op_university_360,UCColón,Universidad Cristobal Colón
+op_university_361,UCCI,Universidad Cardenal Cisneros
+op_university_362,UCCH,Universidad de Concepción de Chile
+op_university_363,UFRJ,Universidad Federal do Rio de Janeiro
+op_university_364,UFSC,Universidad Femenina del Sagrado Corazón
+op_university_365,UFV,Francisco de Vitoria
+op_university_366,UCAndrés,Católica Andrés Bello
+op_university_367,UCanarias,de Las Palmas de Gran Canaria
+op_university_368,UCambridge,de Cambridge
+op_university_369,UI1,Universidad Isabel I
+op_university_370,UIA,Internacional de Andalucía
+op_university_371,UIB,Ibero-Americana
+op_university_372,UBalear,de les Illes Balears
+op_university_373,UBAires,de Buenos Aires
+op_university_374,UBA,Universidad Bicentenaria de Aragua
+op_university_375,UJAT,Universidad Juárez Autónoma de Tabasco
+op_university_376,UJaumeI,Jaume I
+op_university_377,UJG,Universidad Jesuita de Guadalajara
+op_university_378,UANE,Universidad Autónoma del Noreste
+op_university_379,Uandina,Universidad Andina del Cusco
+op_university_380,UAnahuac,Universidad Anáhuac
+op_university_381,ULlull,Ramon Llull
+op_university_382,ULON,Universidad de Londres
+op_university_383,ULP,Universidad Louis Pasteur
+op_university_384,UAEMEX,Universidad Autónoma del Estado de México
+op_university_385,UAEM,Universidad Autónoma del Estado de Morelos
+op_university_386,UAEH,Universidad Autónoma del Estado de Hidalgo
+op_university_387,UMECIT,"Universidad Metropolitana de Educación, Ciencia y Tecnología"
+op_university_388,UMER,Universidad Mercurio
+op_university_389,UMeso,Universidad Mesoamericana
+op_university_390,TBC,Tecnológico de Baja California
+op_university_391,SFU,Siberian Federal University
+op_university_392,SEK,Universidad SEK de Segovia
+op_university_393,umtlax,Universidad Metropolitana de Tlaxcala
+op_university_394,UMU,Universidad Mundial
+op_university_395,UMurcia,de Murcia
+op_university_396,MU,Mondragon Unibertsitatea
+op_university_397,MSR,Musrara
+op_university_398,MODE,Universidad Modelo
+op_university_399,UNCR,Universidad Nacional de Costa Rica
+op_university_400,UNDBEL,Universidad de Belgrano
+op_university_401,UNE,Universidad UNE Allende
+op_university_402,LCUS,La Corporación Universitaria de Santander
+op_university_403,LCUI,La Corporación Universitaria Iberoamericana
+op_university_404,LBUAP,La Benemérita Universidad Autónoma de Puebla
+op_university_405,UNIP,Universidad Estatal Paulista
+op_university_406,UNIPAU,Universidad Internacional de la Paz
+op_university_407,UNIPD,Università Degli Studi Di Padova
+op_university_408,ISMC,"Instituto Superior Pedagógico de Matanzas, Cuba"
+op_university_409,ISM,IS María de Fallas
+op_university_410,ISFD,Instituto Superior De Formación Docente y Técnica
+op_university_411,UOviedo,de Oviedo
+op_university_412,UOX,University of Oxford
+op_university_413,UP,Universidad de Panamá
+op_university_414,IES Alamo,IES El Alamo
+op_university_415,IES,IES Tomás Navarro
+op_university_416,ICT,ICT - Catholic Institute of Toulouse
+op_university_417,UPN,Pública de Navarra
+op_university_418,UPNac,Universidad Pedagógica Nacional
+op_university_419,UPNFM,Universidad Pedagógica Nacional Francisco Morazán
+op_university_420,FECR,Fundación Escuela Colombiana de Rehabilitación
+op_university_421,FDD,Fundación Deporte & Desafío
+op_university_422,FCF,Federación Catalana de Fútbol
+op_university_423,URM,Universidad Regiomontana
+op_university_424,UROCO,Universidad Rollins College
+op_university_425,URos,Universidad del Rosario
+op_university_426,ENSB,Escuela Normal Superior del Estado de Baja California
+op_university_427,ENS,Escuela Normal Superior del Istmo de Tehuantepec
+op_university_428,ENPE,"Escuela Normal Particular ""Colegio Ensenada"""
+op_university_429,USC,Universidad de Santiago de Compostela
+op_university_430,USCG,Universidad San Carlos de Guatemala
+op_university_431,USDB,Universidad Salesiana de Bolivia
+op_university_432,EFL,"Escuela superior de formación artisica ""Francisco Laso"""
+op_university_433,EEP,Escuela de Especialización Psicopedagógica
+op_university_434,EATG,Escuela Ateneo Metropolitano de Guadalajara
+op_university_435,UT,Universidad de Texas
+op_university_436,UTA,Universidad Tecnológica América
+op_university_437,UTAmb,Universidad Técnica de Ambato
+op_university_438,CSM,Conservatorio Superior de Música de Castilla y León
+op_university_439,CSIS,College of Staten Island
+op_university_440,CSI,Conservatorio Superior de Música y Danza
+op_university_441,UTPL,Universidad Técnica Particular de Loja
+op_university_442,UTR,Universidada de Talavera de la Reina
+op_university_443,UTRB,Universidad del Turabo
+op_university_444,CESMG,Centro de Estudios Superiores María Goretti
+op_university_445,CESAG,Centro de Enseñanza Superior Alberta Giménez
+op_university_446,CES XXI,Centro Educativo Siglo XXI
+op_university_447,UVitoria,de Vitoria
+op_university_448,UVLL,Universidad del Valle
+op_university_449,UVM,Universidad del Valle de México
+op_university_450,UVP,Universidad del Valle de Parras
+op_university_451,UVS,Universidad de Varsovia
+op_university_452,UW,Universidad de Breslavia
+op_university_453,UWH,Universidad Westhill
+op_university_454,UX,Universidad de Xalapa
+op_university_455,UZaragoza,de Zaragoza
+op_university_456,VESA,Vesalius College Brussels
+op_university_457,ADP,Universidad Autónoma de Paraguay

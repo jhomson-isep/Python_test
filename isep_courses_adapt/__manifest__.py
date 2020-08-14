@@ -23,7 +23,7 @@
         'security/ir.model.access.csv',
         'views/op_course.xml',
         'views/op_batch.xml',
-        'views/op_modalidad.xml',
+        'views/op_modality.xml',
         'views/op_evaluation_type.xml',
         'views/op_campus.xml',
         'views/op_practices_types.xml',
@@ -35,7 +35,13 @@
         'views/op_document_type.xml',
         'views/op_student.xml',
         'views/op_university.xml',
-        'menu/isep_courses_adapt_menu.xml'
+        'menu/isep_courses_adapt_menu.xml',
+        'data/op_document_type.xml',
+        'data/op_evaluation_type.xml',
+        'data/op.study.type.csv',
+        'data/op.university.csv',
+        'data/op_modality.xml',
+        'data/op.campus.csv'
     ],
     'installable': True,
 }

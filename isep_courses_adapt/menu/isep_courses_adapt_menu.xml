@@ -2,9 +2,9 @@
 <odoo>
     <data>
         <!-- Configuration Menu -->
-        <menuitem id="menu_op_modalidad_sub" name="Modalidad"
+        <menuitem id="menu_op_modality_sub" name="Modalidad"
                   parent="openeducat_core.menu_op_school_config_general" sequence="10"
-                  action="act_open_op_modalidad_view" groups="base.group_system"/>
+                  action="act_open_op_modality_view" groups="base.group_system"/>
 
         <menuitem id="menu_op_batch_subject_rel_sub" name="Relación de asignaturas"
                   parent="openeducat_core.menu_op_school_config_subject" sequence="11"

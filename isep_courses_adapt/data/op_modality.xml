@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="op_modality_1" model="op.modality">
+            <field name="name">Presencial</field>
+            <field name="code">PRS</field>
+        </record>
+        <record id="op_modality_2" model="op.modality">
+            <field name="name">Online</field>
+            <field name="code">ONL</field>
+        </record>
+        <record id="op_modality_3" model="op.modality">
+            <field name="name">E-Learning</field>
+            <field name="code">ELR</field>
+        </record>
+        <record id="op_modality_4" model="op.modality">
+            <field name="name">Distancia</field>
+            <field name="code">DIS</field>
+        </record>
+        <record id="op_modality_5" model="op.modality">
+            <field name="name">Presencial SIN</field>
+            <field name="code">SIN</field>
+        </record>
+        <record id="op_modality_6" model="op.modality">
+            <field name="name">Presencial INT</field>
+            <field name="code">INT</field>
+        </record>
+        <record id="op_modality_7" model="op.modality">
+            <field name="name">E-Learning (no residente)</field>
+            <field name="code">ENR</field>
+        </record>
+    </data>
+</odoo>

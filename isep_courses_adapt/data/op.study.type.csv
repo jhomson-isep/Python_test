@@ -1,0 +1,129 @@
+id,code,name
+op_study_type_1,VT,Licenciatura en Veterinaria
+op_study_type_2,VC,Venta de cursos
+op_study_type_3,UV,Personal Universidad de VIC
+op_study_type_4,UP,Universidades de Psicología
+op_study_type_5,UN,Universidades de Empresariales
+op_study_type_6,UE,Universidades de educación
+op_study_type_7,TSM,Título Superior de Música
+op_study_type_8,TSIS,Técnico Superior en Integración Social
+op_study_type_9,TSEI,Técnico Superior en Educación Infantil
+op_study_type_10,TSD,Título superior de danza
+op_study_type_11,AM,Ambulatorios / CAPS
+op_study_type_12,APL,Artes Plásticas
+op_study_type_13,AR,Arquitectura
+op_study_type_14,ARDI,Grado en Arte y Diseño
+op_study_type_15,ARPL,Magisterio en Artes Plásticas
+op_study_type_16,ART,Arte
+op_study_type_17,AS,Asistencia Social
+op_study_type_18,AUD,Audiología
+op_study_type_19,AY,Ayuntamientos
+op_study_type_20,AZ,Alzheimer (Entitats)
+op_study_type_21,BA,Bachillerato
+op_study_type_22,BCA,Ciencias y Artes de la Comunicación
+op_study_type_23,BI,Biología
+op_study_type_24,BIOM,Biomedicina
+op_study_type_25,BL,Bellas Artes
+op_study_type_26,BO,Boletin
+op_study_type_27,BOA,Bachelor of Arts
+op_study_type_28,BP,Biblioteca libros de psicología
+op_study_type_29,BPS,Biopsicología
+op_study_type_30,BSC,Bachelor of Science
+op_study_type_31,QUI,Licenciatura en Química
+op_study_type_32,Publicidad,Publicidad y Relaciones Públicas
+op_study_type_33,PT,Psiquiatría
+op_study_type_34,PSPG,Psicopedagogía
+op_study_type_35,PS,Psicología
+op_study_type_36,PP,Profesores de Portugal
+op_study_type_37,PL,Profesores Universitarios de Logopedia
+op_study_type_38,PI,Puntos de Información
+op_study_type_39,PER,Periodismo
+op_study_type_40,PD,Pedagogía
+op_study_type_41,CRIM,Graduada/o en Criminología
+op_study_type_42,CS,Asociaciones de salud y educación
+op_study_type_43,CSS,Ciencias Sociales y Sociología
+op_study_type_44,CYM,Comercio y Marketing
+op_study_type_45,DA,Distancia Avis
+op_study_type_46,DAR,Diplomado en Artes
+op_study_type_47,DEE,Doctora en Educación
+op_study_type_48,DEGI,Doctorado Economía y Gestión de la Innovación
+op_study_type_49,DEN,Grado en Enfermería
+op_study_type_50,DGF,Diseño Gráfico
+op_study_type_51,MEI,Magisterio en Educación Infantil
+op_study_type_52,MEE,Magisterio en Educación Especial
+op_study_type_53,ME,Magisterio
+op_study_type_54,MD,MÁSTER/POSGRADO
+op_study_type_55,MC,Escuelas de música
+op_study_type_56,MAV,Magisterio en Artes Visuales
+op_study_type_57,MAL,Magisterio en Audición y Lenguaje
+op_study_type_58,MA,Asoc. malalts
+op_study_type_59,M&C,Medicina y Cirugía
+op_study_type_60,LTLH,Licenciada en Terapia del Lenguaje y el Habla
+op_study_type_61,EFS,Entrenador de Fútbol Base
+op_study_type_62,EP,Entrenador de Pádel
+op_study_type_63,EPC,Título de Enseñanzas Profesionales De Percusión
+op_study_type_64,ES,Educación Social
+op_study_type_65,ET,Entrenador de Tenis
+op_study_type_66,F,Fonoaudiológo
+op_study_type_67,FI,Filología
+op_study_type_68,FL,Filosofía
+op_study_type_69,FP,Franquicias potenciales
+op_study_type_70,FR,Franquicias CLÍNIC
+op_study_type_71,LLTL,Literatura Latinoamericana
+op_study_type_72,LLOL,Licenciado en Letras: Orientación Lingüística
+op_study_type_73,LLCC,Licenciada en Lengua Castellana y Comunicación
+op_study_type_74,LLA,Grado en Lingüística y Lenguas Aplicadas
+op_study_type_75,LKL,Licenciada en Kinesiología
+op_study_type_76,LING,Licenciatura en Lingüística
+op_study_type_77,LIN,Licenciada en Educación Inicial
+op_study_type_78,LI,Licenciado
+op_study_type_79,LHCM,Licenciado en Historia y Ciencias de la Música
+op_study_type_80,LHA,Licenciatura en Historia del Arte
+op_study_type_81,GI,Ciencias y Gerencia Internacional
+op_study_type_82,GLLM,Grado lenguas y literatura modernas
+op_study_type_83,GMMEP,Grado Medio de Música. Especialidad Piano.
+op_study_type_84,GP,Gabinetes de Psicología Catalunya
+op_study_type_85,GR,Grafología
+op_study_type_86,GSM,Grado Superior de Música
+op_study_type_87,H,Licenciatura en Humanidades
+op_study_type_88,HAR,Graduada/o en Historia del Arte
+op_study_type_89,HO,Hospitales
+op_study_type_90,IB,Instituto Bachiller
+op_study_type_91,LCM,Licenciada en Comunicación
+op_study_type_92,LCIF,"Licenciada en Lengua Castellana, inglés y francés"
+op_study_type_93,LCH,Licenciada en Ciencias Humanas
+op_study_type_94,LCF,Licenciado en Ciencias de la Familia
+op_study_type_95,LCE,Licenciado en Ciencias Empresariales
+op_study_type_96,LC,Licenciado en Ciencias de la Educación
+op_study_type_97,LAE,Licenciatura en Administración Educativa
+op_study_type_98,LAD,Licenciatura en Arte Dramático
+op_study_type_99,LAAL,Licenciada en Alteraciones de la Audición y el Lenguaje
+op_study_type_100,ITDI,Ingeniero Técnico en Diseño Industrial
+op_study_type_101,ISI,Ingeniería Superior Industrial
+op_study_type_102,ID,Inmobiliaria Distanc
+op_study_type_103,LGLA,Linguística
+op_study_type_104,FT,Fisioterapia
+op_study_type_105,LTL,Licenciada en Terapia del Lenguaje
+op_study_type_106,DGP,Diseño Gráfico y Publicidad
+op_study_type_107,PAPL,Título de Perito y profesor de Artes Plásticas
+op_study_type_108,CA,Ciencias Ambientales
+op_study_type_109,BCA,Ciencias y Artes de la Comunicación
+op_study_type_110,SP,Selección de Personal
+op_study_type_111,TAS,Técnico en Atención Sociosanitaria
+op_study_type_112,TCH,Terapia en Comunicación Humana
+op_study_type_113,TEAT,Técnico de Empresas y Actividades Turísticas
+op_study_type_114,TFC,Funcionaria de Carrera - Maestra
+op_study_type_115,TFP,Técnico en Farmacia y Parafarmacia
+op_study_type_116,TNT,Terapias Naturales
+op_study_type_117,TO,Terapia Ocupacional
+op_study_type_118,TP,Título de Especialista en Terapia Psicomotriz
+op_study_type_119,TS,Trabajo Social
+op_study_type_120,AJ,Bienestar Social
+op_study_type_121,AESM,E. Artísticas Superiores de Música
+op_study_type_122,ADU,Técnico Superior Universitario en Administración de Aduanas
+op_study_type_123,ADI,Arte Digital
+op_study_type_124,ADE,Licenciada en Administración y Dirección de Empresas
+op_study_type_125,AD,Administración y Dirección de Empresas
+op_study_type_126,ACV,Auxiliar Clínica Veterinaria
+op_study_type_127,AB,Derecho
+op_study_type_128,AA,Título de Graduado en Artes Aplicadas

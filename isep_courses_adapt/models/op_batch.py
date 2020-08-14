@@ -33,7 +33,7 @@ class OpBatch(models.Model):
     hours = fields.Float(string="Hours", related='course_id.hours')
     expiration_days = fields.Integer(string="Expiration days", default=0)
     date_diplomas = fields.Datetime(string="Date diplomas")
-    modality_id = fields.Many2one('op.modalidad', string='Modality', related='course_id.modality_id')
+    modality_id = fields.Many2one('op.modality', string='Modality', related='course_id.modality_id')
     user_company_id = fields.Integer(string="Company id", compute='_get_current_user')
     op_batch_subject_rel_ids = fields.One2many('op.batch.subject.rel', 'batch_id')
     subject_count = fields.Integer(compute='_compute_subject_count')

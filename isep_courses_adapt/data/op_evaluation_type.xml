@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="op_evaluation_type_1" model="op.evaluation.type">
+            <field name="name">Constructiva</field>
+        </record>
+        <record id="op_evaluation_type_2" model="op.evaluation.type">
+            <field name="name">De inicio o Inicial</field>
+        </record>
+        <record id="op_evaluation_type_3" model="op.evaluation.type">
+            <field name="name">Diagnóstica</field>
+        </record>
+        <record id="op_evaluation_type_4" model="op.evaluation.type">
+            <field name="name">Formativa</field>
+        </record>
+        <record id="op_evaluation_type_5" model="op.evaluation.type">
+            <field name="name">Sumativa</field>
+        </record>
+        <record id="op_evaluation_type_6" model="op.evaluation.type">
+            <field name="name">Autoevaluación</field>
+        </record>
+        <record id="op_evaluation_type_7" model="op.evaluation.type">
+            <field name="name">Coevaluación</field>
+        </record>
+        <record id="op_evaluation_type_8" model="op.evaluation.type">
+            <field name="name">Heteroevaluación</field>
+        </record>
+    </data>
+</odoo>

@@ -21,7 +21,7 @@ class OpCourse(models.Model):
     product_template_id = fields.Many2one('product.template', string='Producto')
     # code_product = fields.Char(related='product_template_id.default_code', string='Codigo de Producto')
 
-    modality_id = fields.Many2one('op.modalidad', string='Modality')
+    modality_id = fields.Many2one('op.modality', string='Modality')
     evaluation_type_id = fields.Many2one('op.evaluation.type', string='Evaluation type')
     period = fields.Char(string="Period")
     hours = fields.Float(string="Hours")
@@ -131,7 +131,7 @@ class OpCourse(models.Model):
                     course_moodle = s.get_course_by_code(default_code)
                     logger.info(course_moodle.NombreCurso)
                     evaluation_type = self.env['op.evaluation.type'].search([('name', 'ilike', 'normal')], limit=1)
-                    modality = self.env['op.modalidad'].search([('code', '=', course_moodle.Modalidad)], limit=1)
+                    modality = self.env['op.modality'].search([('code', '=', course_moodle.Modalidad)], limit=1)
                     product = self.env['product.template'].search(
                         [('default_code', '=', default_code), ('active', '=', True)],
                         limit=1)

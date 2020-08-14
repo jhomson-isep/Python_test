@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <record id="view_op_modalidad_tree" model="ir.ui.view">
-            <field name="name">op.modalidad.tree</field>
-            <field name="model">op.modalidad</field>
+        <record id="view_op_modality_tree" model="ir.ui.view">
+            <field name="name">op.modality.tree</field>
+            <field name="model">op.modality</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <tree string="Modalidad">
@@ -12,9 +12,9 @@
                 </tree>
             </field>
         </record>
-        <record id="view_op_modalidad_form" model="ir.ui.view">
-            <field name="name">op.modalidad.form</field>
-            <field name="model">op.modalidad</field>
+        <record id="view_op_modality_form" model="ir.ui.view">
+            <field name="name">op.modality.form</field>
+            <field name="model">op.modality</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <form string="Modalidad">
@@ -27,9 +27,9 @@
                 </form>
             </field>
         </record>
-        <record id="view_op_modalidad_search" model="ir.ui.view">
-            <field name="name">op.modalidad.search</field>
-            <field name="model">op.modalidad</field>
+        <record id="view_op_modality_search" model="ir.ui.view">
+            <field name="name">op.modality.search</field>
+            <field name="model">op.modality</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <search string="Modalidad">
@@ -39,27 +39,27 @@
                 </search>
             </field>
         </record>
-        <record model="ir.actions.act_window" id="act_open_op_modalidad_view">
+        <record model="ir.actions.act_window" id="act_open_op_modality_view">
             <field name="name">Modalidad</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">op.modalidad</field>
+            <field name="res_model">op.modality</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="search_view_id" ref="view_op_modalidad_search"/>
+            <field name="search_view_id" ref="view_op_modality_search"/>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
-        <record model="ir.actions.act_window.view" id="act_open_op_modalidad_view_form">
-            <field name="act_window_id" ref="act_open_op_modalidad_view"/>
+        <record model="ir.actions.act_window.view" id="act_open_op_modality_view_form">
+            <field name="act_window_id" ref="act_open_op_modality_view"/>
             <field name="sequence" eval="20"/>
             <field name="view_mode">form</field>
-            <field name="view_id" ref="view_op_modalidad_form"/>
+            <field name="view_id" ref="view_op_modality_form"/>
         </record>
-        <record model="ir.actions.act_window.view" id="act_open_op_modalidad_view_tree">
-            <field name="act_window_id" ref="act_open_op_modalidad_view"/>
+        <record model="ir.actions.act_window.view" id="act_open_op_modality_view_tree">
+            <field name="act_window_id" ref="act_open_op_modality_view"/>
             <field name="sequence" eval="10"/>
             <field name="view_mode">tree</field>
-            <field name="view_id" ref="view_op_modalidad_tree"/>
+            <field name="view_id" ref="view_op_modality_tree"/>
         </record>
     </data>
 </odoo>

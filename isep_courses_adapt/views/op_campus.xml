@@ -8,6 +8,7 @@
             <field name="arch" type="xml">
                 <tree string="campus">
                     <field name="name"/>
+                    <field name="code"/>
                 </tree>
             </field>
         </record>
@@ -20,6 +21,7 @@
                     <sheet>
                         <group col="4">
                             <field name="name"/>
+                            <field name="code"/>
                         </group>
                     </sheet>
                 </form>
@@ -32,6 +34,7 @@
             <field name="arch" type="xml">
                 <search string="campus">
                     <field name="name"/>
+                    <field name="code"/>
                     <newline/>
                 </search>
             </field>

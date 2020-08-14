@@ -72,13 +72,13 @@ msgstr "Tipo de evaluación"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_evaluation_type__create_uid
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modalidad__create_uid
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modality__create_uid
 msgid "Created by"
 msgstr "Creado por"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_evaluation_type__create_date
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modalidad__create_date
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modality__create_date
 msgid "Created on"
 msgstr "Creado el"
 
@@ -89,7 +89,7 @@ msgstr "Créditos"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_evaluation_type__display_name
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modalidad__display_name
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modality__display_name
 msgid "Display Name"
 msgstr "Nombre mostrado"
 
@@ -110,25 +110,25 @@ msgstr "Horas"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_evaluation_type__id
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modalidad__id
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modality__id
 msgid "ID"
 msgstr ""
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_evaluation_type____last_update
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modalidad____last_update
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modality____last_update
 msgid "Last Modified on"
 msgstr "Última modificación en"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_evaluation_type__write_uid
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modalidad__write_uid
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modality__write_uid
 msgid "Last Updated by"
 msgstr "Última actualización por"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_evaluation_type__write_date
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modalidad__write_date
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modality__write_date
 msgid "Last Updated on"
 msgstr "Última actualización el"
 
@@ -219,12 +219,12 @@ msgstr "Orden"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_evaluation_type__name
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modalidad__name
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modality__name
 msgid "Name"
 msgstr "Nombre"
 
 #. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modalidad__code
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modality__code
 msgid "Code"
 msgstr "Código"
 

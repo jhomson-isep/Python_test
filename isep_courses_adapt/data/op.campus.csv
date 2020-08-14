@@ -1,0 +1,26 @@
+id,code,name
+op_campus_1,ALB,Albacete
+op_campus_2,ARG,Aragón
+op_campus_3,BIO,Bilbao
+op_campus_4,BNR,Buenos Aires
+op_campus_5,CAT,Catalunya
+op_campus_6,ELR,E-Learning
+op_campus_8,ESK,Euskadi
+op_campus_9,GRA,Granada
+op_campus_10,ILL,Illes
+op_campus_11,LOG,Logroño
+op_campus_12,MAL,Málaga (Cursos Antiguos)
+op_campus_13,MDR,Madrid
+op_campus_14,MUR,Murcia
+op_campus_15,OPO,Oporto (Portugal)
+op_campus_16,PAM,Pamplona
+op_campus_17,PGC,Las Palmas de Gran Canaria
+op_campus_18,PMA,Palma de Mallorca
+op_campus_19,SAN,Santiago de compostela
+op_campus_20,SEB,San Sebastián
+op_campus_21,SEV,Sevilla
+op_campus_22,TFE,Tenerife
+op_campus_23,VAL,Valencia
+op_campus_24,VIC,Vic
+op_campus_25,VIT,Vitoria
+op_campus_26,ZAZ,Zaragoza
