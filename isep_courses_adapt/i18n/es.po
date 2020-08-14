@@ -468,3 +468,53 @@ msgstr "Categorías"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_res_config_settings__send_moodle
 msgid "Send Moodle"
 msgstr "Enviar a Moodle"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__campus_id
+msgid "Campus"
+msgstr "Sede"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__uvic_documentation
+msgid "UVIC Documentation"
+msgstr "Documentación UVIC"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__rvoe_documentation
+msgid "RVOE Documentation"
+msgstr "Documentación RVOE"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__year_end_studies
+msgid "Year of completion of studies"
+msgstr "Finalización estudios"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__document_type_id
+msgid "Document type"
+msgstr "Tipo de documento"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__document_number
+msgid "Document number"
+msgstr "Número de documento"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__contact_type_id
+msgid "Contact type"
+msgstr "Tipo de contacto"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__study_type_id
+msgid "Study type"
+msgstr "Tipo de estudios"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__university_id
+msgid "University"
+msgstr "Universidad"
+
+#. module: openeducat_core
+#: model:ir.model.fields,field_description:openeducat_core.field_op_student__gr_no
+msgid "GR Number"
+msgstr "Matrícula"

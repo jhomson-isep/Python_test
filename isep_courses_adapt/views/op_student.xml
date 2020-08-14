@@ -10,45 +10,21 @@
                     <field name="gr_no"/>
                 </xpath>
 
-                <xpath expr="//field[@name='partner_id']" position="after">
-                    <field name="university_id"/>
-                    <field name="year_end_studies"/>
-                    <field name="uvic_documentation"/>
-                    <field name="rvoe_documentation"/>
-                </xpath>
-
                 <xpath expr="//field[@name='email']"
                        position="after">
                     <field name="curp"/>
+                    <field name="university_id"/>
                     <field name="document_type_id"/>
+                    <field name="year_end_studies"/>
                     <field name="document_number"/>
+                    <field name="uvic_documentation"/>
                     <field name="contact_type_id"/>
+                    <field name="rvoe_documentation"/>
                     <field name="study_type_id"/>
                 </xpath>
 
-                <xpath expr="//form">
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids" widget="mail_followers"/>
-                        <field name="activity_ids" widget="mail_activity"/>
-                        <field name="message_ids" widget="mail_thread"/>
-                    </div>
-                </xpath>
             </field>
         </record>
-
-        <record id="isep_student_course_view_ex" model="ir.ui.view">
-            <field name="model">op.student</field>
-            <field name="inherit_id" ref="openeducat_core.view_op_student_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//form/sheet/notebook/page[@name='educational']/group/field[@name='course_detail_ids']/tree"
-                       position="replace">
-                    <tree editable="bottom">
-                        <field name="course_id"/>
-                    </tree>
-                </xpath>
-            </field>
-        </record>
-
 
     </data>
 </odoo>
