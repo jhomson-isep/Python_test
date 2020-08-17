@@ -232,18 +232,21 @@ class CrmLead(models.Model):
             logger.info(e)
             logger.info("No pudo vincular el area con el codigo de area")
 
-        """"#Buscar si esta duplicada
-        try:
-            lead_dup = self.env['crm.lead'].sudo().search([('email', '=', email), ('name', '=', nombre)], limit=1)
-            break
-        except Exception as e:
-            logger.info(e)
-        """
+        #=======INICIO REVISAR========
+        #Buscar si esta duplicada
+        lead_dup_ids = self.env['crm.lead'].sudo().search([('email', '=', email), ('name', '=', nombre)]).ids
 
-        logger.info(lead_copy)
-        lead_obj = self.sudo().browse(res.id)
-        lead_obj.sudo().write(lead)
-
+        if len(lead_dup_ids) >= 2:
+            logger.info("=================DUPLICADO================")
+            logger.info("Esta duplicado")
+            lead_dup = self.env['crm_lead'].sudo().search(['id', '=', res.id])
+            #Elimina el registro que se creo porque ya estaba duplicado
+            lead_dup.unlink()
+        else:
+            logger.info(lead_copy)
+            lead_obj = self.sudo().browse(res.id)
+            lead_obj.sudo().write(lead)
+        # =======FINAL REVISAR========
 
         #Update a la base de datos para cambiar el company_id directo
         self.env.cr.execute(

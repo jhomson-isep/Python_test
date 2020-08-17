@@ -7,12 +7,13 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class CrmLead(models.Model):
-    _inherit = 'payment.transaction'
+class PaymentTransaction(models.Model):
+    _inherit = 'sale.subscription'
 
 
-    #Query para sacar todos las suscripciones con el año actual
-    query ="""
-    SELECT partner_name, partner_email, reference, amount, date, state FROM payment_transaction WHERE date_part('year',date) = date_part('year',now())
-    """
 
+    def obtain_subscription(self):
+        total_subscription = self.env['sale.subscrition'].sudo().search('date', 'like', '2020')
+
+        for subscription in total_subscription:
+            logger.info(subscription)
