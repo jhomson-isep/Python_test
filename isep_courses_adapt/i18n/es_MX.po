@@ -514,6 +514,16 @@ msgstr "Tipo de estudios"
 msgid "University"
 msgstr "Universidad"
 
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_res_company__principal_id
+msgid "Principal"
+msgstr "Director"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_res_company__academic_director_id
+msgid "Academic director"
+msgstr "Director acádemico"
+
 #. module: openeducat_core
 #: model:ir.model.fields,field_description:openeducat_core.field_op_student__gr_no
 msgid "GR Number"
