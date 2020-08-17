@@ -30,7 +30,6 @@ class CrmLead(models.Model):
         company_id = lead.get('company_id')
         logger.info(company_id)
 
-        res = super(CrmLead, self).create(lead)
 
         #Faltantes en el lead
         lead.update({'x_grupoduplicado': ''})
@@ -46,6 +45,10 @@ class CrmLead(models.Model):
         cod_area = lead.get('x_codarea')
         cod_tipo_curso = lead.get('x_codtipodecurso')
         url = lead.get('website')
+
+        #create
+        res = super(CrmLead, self).create(lead)
+
 
         lead_copy = lead
         lead.clear()
@@ -228,6 +231,14 @@ class CrmLead(models.Model):
             logger.info(cod_area)
             logger.info(e)
             logger.info("No pudo vincular el area con el codigo de area")
+
+        """"#Buscar si esta duplicada
+        try:
+            lead_dup = self.env['crm.lead'].sudo().search([('email', '=', email), ('name', '=', nombre)], limit=1)
+            break
+        except Exception as e:
+            logger.info(e)
+        """
 
         logger.info(lead_copy)
         lead_obj = self.sudo().browse(res.id)
