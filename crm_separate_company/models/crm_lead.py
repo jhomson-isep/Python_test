@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, SUPERUSER_ID
+import urllib.parse as urlparse
+from urllib.parse import parse_qs
 from datetime import datetime
 import logging
 
@@ -46,6 +48,8 @@ class CrmLead(models.Model):
         cod_area = lead.get('x_codarea')
         cod_tipo_curso = lead.get('x_codtipodecurso')
         url = lead.get('website')
+        url_parsed = urlparse.urlparse(url)
+        campaign = parse_qs(url_parsed.query)['utm_campaign']
 
         #create
         res = super(CrmLead, self).create(lead)
@@ -70,6 +74,9 @@ class CrmLead(models.Model):
             'x_area_id': None,
             'website': None
         }
+
+        if campaign:
+            lead.update({'x_ga_campaign': campaign})
 
         user_id = None
         team_id = None
