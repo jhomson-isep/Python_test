@@ -18,7 +18,7 @@ class CrmLead(models.Model):
 
         # Buscar el cliente mediante el email utilizando el self.env en el modelo res.partner
         try:
-            client = self.env['res.partner'].sudo().search([('email', '=', lead.get('email_from'))])
+            client = self.env['res.partner'].sudo().search([('email', '=', lead.get('email_from'))], limit=1)
             lead.update({'partner_id': client.id})
         except:
             client = self.env['res.partner'].sudo().create({
@@ -166,7 +166,8 @@ class CrmLead(models.Model):
             if modalidad != 'ONL':
                 name = cod_curso + "-" + cod_tipo_curso + "-" + cod_sede + "-" + 'PRS' + " - " + email
             else:
-                name = cod_curso + "-" + cod_tipo_curso + "-" + cod_sede + "-" + 'ONL' + " - " + email
+                name = cod_curso + "-" + cod_tipo_curso + "-" + 'ONL' + " - " + email
+                team_id = 5
 
         #ISED
         #---------------------------------
@@ -176,7 +177,7 @@ class CrmLead(models.Model):
             if modalidad != 'ONL':
                 name = cod_curso + "-" + cod_tipo_curso + "-" + cod_sede + "-" + 'PRS' + " - " + email
             else:
-                name = cod_curso + "-" + cod_tipo_curso + "-" + cod_sede + "-" + 'ONL' + " - " + email
+                name = cod_curso + "-" + cod_tipo_curso + "-" + 'ONL' + " - " + email
 
             if modalidad == 'ONL':
                 #Centro Sup de estudios ISED SL - Online
