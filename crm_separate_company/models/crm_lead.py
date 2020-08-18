@@ -117,11 +117,11 @@ class CrmLead(models.Model):
         #Añadir producto a la iniciativa directamente
         logger.info(company_id)
         try:
-            referencia_interna = self.env['product.template'].sudo().search([('default_code', '=', cod_curso)], limit=1)
-            lead.update({'x_curso_id': referencia_interna.id})
+            referencia_interna_template = self.env['product.template'].sudo().search([('default_code', '=', cod_curso), ('sale_ok', '=', True)], limit=1)
+            lead.update({'x_curso_id': referencia_interna_template.id})
 
-            referencia_interna = self.env['product.product'].sudo().search([('default_code', '=', cod_curso)], limit=1)
-            lead.update({'x_producto_id': referencia_interna.id})
+            referencia_interna_product = self.env['product.product'].sudo().search([('product_tmpl_id', '=', referencia_interna_template.id)], limit=1)
+            lead.update({'x_producto_id': referencia_interna_product.id})
         except:
             logger.info("No pudo relacionar la referencia interna con el cod_curso")
 
