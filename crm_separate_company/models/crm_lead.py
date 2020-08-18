@@ -48,9 +48,6 @@ class CrmLead(models.Model):
         cod_area = lead.get('x_codarea')
         cod_tipo_curso = lead.get('x_codtipodecurso')
         url = lead.get('website')
-        url_parsed = urlparse.urlparse(url)
-        campaign = parse_qs(url_parsed.query)['utm_campaign']
-        medium = parse_qs(url_parsed.query)['utm_medium']
 
         #create
         res = super(CrmLead, self).create(lead)
@@ -76,9 +73,18 @@ class CrmLead(models.Model):
             'website': None
         }
 
-        if campaign and medium:
-            lead.update({'x_ga_campaign': campaign[0]})
-            lead.update({'x_ga_medium': medium[0]})
+        try:
+            url_parsed = urlparse.urlparse(url)
+            campaign = parse_qs(url_parsed.query)['utm_campaign']
+            medium = parse_qs(url_parsed.query)['utm_medium']
+
+            if campaign:
+                lead.update({'x_ga_campaign': campaign[0]})
+
+            if medium:
+                lead.update({'x_ga_medium': medium[0]})
+        except Exception as e:
+            logger.info(e)
 
         user_id = None
         team_id = None
