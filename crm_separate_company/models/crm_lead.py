@@ -247,7 +247,7 @@ class CrmLead(models.Model):
             logger.info("Esta duplicado")
             # lead_dup = self.env['crm.lead'].sudo().search(['id', '=', res.id])
             #Elimina el registro que se creo porque ya estaba duplicado
-            lead.update({'status': False})
+            lead.update({'active': False})
             # lead_dup.sudo().write(lead)
         # else:
         #     logger.info(lead_copy)
