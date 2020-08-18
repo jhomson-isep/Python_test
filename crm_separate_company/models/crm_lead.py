@@ -76,11 +76,11 @@ class CrmLead(models.Model):
         try:
             url_parsed = urlparse.urlparse(url)
             campaign = parse_qs(url_parsed.query)['utm_campaign']
-            medium = parse_qs(url_parsed.query)['utm_medium']
 
             if campaign:
                 lead.update({'x_ga_campaign': campaign[0]})
 
+            medium = parse_qs(url_parsed.query)['utm_medium']
             if medium:
                 lead.update({'x_ga_medium': medium[0]})
         except Exception as e:
