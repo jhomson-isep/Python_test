@@ -16,7 +16,7 @@ class CrmLead(models.Model):
 
         # Buscar el cliente mediante el email utilizando el self.env en el modelo res.partner
         try:
-            client = self.env['res.partner'].sudo().search([('email', '=', lead.get('email_from'))], limit=1)
+            client = self.env['res.partner'].sudo().search([('email', '=', lead.get('email_from'))])
             lead.update({'partner_id': client.id})
         except:
             client = self.env['res.partner'].sudo().create({
@@ -26,6 +26,7 @@ class CrmLead(models.Model):
                 'mobile': lead.get('mobile'),
                 'phone': lead.get('phone')
             })
+            lead.update({'partner_id': client.id})
 
         company_id = lead.get('company_id')
         logger.info(company_id)
@@ -60,7 +61,7 @@ class CrmLead(models.Model):
             'x_codcurso': cod_curso,
             'email_from': email,
             'x_codtipodecurso':cod_tipo_curso,
-            'x_ga_source':url,
+            'description': url,
             'x_codmodalidad': modalidad,
             'user_id': None,
             'team_id': None,
@@ -149,7 +150,7 @@ class CrmLead(models.Model):
             elif cod_sede in ('valencia', 'Valencia', 'VAL'):
                 cod_sede = 'VAL'
                 team_id = 200000001
-            elif cod_sed == 'ONL':
+            elif cod_sede == 'ONL':
                 team_id = 5
             elif cod_sede == 'MDR':
                 team_id = 4
@@ -240,7 +241,7 @@ class CrmLead(models.Model):
 
         #=======INICIO REVISAR========
         #Buscar si esta duplicada
-        lead_dup_ids = self.env['crm.lead'].sudo().search([('email', '=', email), ('name', '=', nombre)]).ids
+        lead_dup_ids = self.env['crm.lead'].sudo().search([('email_from', '=', email), ('name', '=', nombre)]).ids
 
         if len(lead_dup_ids) > 1:
             logger.info("=================DUPLICADO================")
