@@ -50,6 +50,7 @@ class CrmLead(models.Model):
         url = lead.get('website')
         url_parsed = urlparse.urlparse(url)
         campaign = parse_qs(url_parsed.query)['utm_campaign']
+        medium = parse_qs(url_parsed.query)['utm_medium']
 
         #create
         res = super(CrmLead, self).create(lead)
@@ -75,8 +76,9 @@ class CrmLead(models.Model):
             'website': None
         }
 
-        if campaign:
-            lead.update({'x_ga_campaign': campaign})
+        if campaign and medium:
+            lead.update({'x_ga_campaign': campaign[0]})
+            lead.update({'x_ga_medium': medium[0]})
 
         user_id = None
         team_id = None
