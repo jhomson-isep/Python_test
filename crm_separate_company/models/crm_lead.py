@@ -105,7 +105,7 @@ class CrmLead(models.Model):
             cod_sede = 'OVI'
         elif cod_sede in ('centro-bilbao','bilbao','Bilbao'):
             cod_sede = 'BIO'
-        elif cod_sede in ('centro-madrid-atocha', 'madrid', 'Madrid', 'MAD'):
+        elif cod_sede in ('centro-madrid-atocha', 'madrid', 'Madrid', 'MAD', 'MDR'):
             cod_sede = 'MDR'
         elif cod_sede == 'centro-pamplona':
             cod_sede = 'PAM'
@@ -132,7 +132,7 @@ class CrmLead(models.Model):
             #Carolina Araujo
             user_id = 100000006
             team_id = 100000006
-            name = cod_curso + cod_tipo_curso + "LATAM" + " - " + email
+            name = cod_curso + "-" + cod_tipo_curso + "-" + "LATAM" + " - " + email
 
         #ISEP SL
         #---------------------------------
@@ -142,11 +142,17 @@ class CrmLead(models.Model):
 
             if cod_sede in ('barcelona', 'Barcelona', 'BCN'):
                 cod_sede = 'CAT'
+                team_id = 1
             elif cod_sede in ('metodo-at-home', 'Metodo-At-Home'):
-                cod_sede = 'MAT'
+                cod_sede = 'MAH'
+                #team_id = 0
             elif cod_sede in ('valencia', 'Valencia', 'VAL'):
                 cod_sede = 'VAL'
-
+                team_id = 200000001
+            elif cod_sed == 'ONL':
+                team_id = 5
+            elif cod_sede == 'MDR':
+                team_id = 4
 
             # ONL es online en modalidad
             if modalidad != 'ONL':
@@ -236,7 +242,7 @@ class CrmLead(models.Model):
         #Buscar si esta duplicada
         lead_dup_ids = self.env['crm.lead'].sudo().search([('email', '=', email), ('name', '=', nombre)]).ids
 
-        if len(lead_dup_ids) >= 2:
+        if len(lead_dup_ids) > 1:
             logger.info("=================DUPLICADO================")
             logger.info("Esta duplicado")
             lead_dup = self.env['crm_lead'].sudo().search(['id', '=', res.id])
