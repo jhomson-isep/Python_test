@@ -245,17 +245,17 @@ class CrmLead(models.Model):
         if len(lead_dup_ids) > 1:
             logger.info("=================DUPLICADO================")
             logger.info("Esta duplicado")
-            lead_dup = self.env['crm.lead'].sudo().search(['id', '=', res.id])
+            # lead_dup = self.env['crm.lead'].sudo().search(['id', '=', res.id])
             #Elimina el registro que se creo porque ya estaba duplicado
-            lead_dup.update({'status': False})
-            lead_dup.sudo().write(lead)
-        else:
-            logger.info(lead_copy)
-            lead_obj = self.sudo().browse(res.id)
-            lead_obj.sudo().write(lead)
-            # Update a la base de datos para cambiar el company_id directo
-            self.env.cr.execute(
-                """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s  WHERE id = %s""" % (company_id, user_id, team_id, res.id))
+            lead.update({'status': False})
+            # lead_dup.sudo().write(lead)
+        # else:
+        #     logger.info(lead_copy)
+        #     lead_obj = self.sudo().browse(res.id)
+        #     lead_obj.sudo().write(lead)
+        #     # Update a la base de datos para cambiar el company_id directo
+        #     self.env.cr.execute(
+        #         """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s  WHERE id = %s""" % (company_id, user_id, team_id, res.id))
         # =======FINAL REVISAR========
 
         logger.info(lead_copy)
