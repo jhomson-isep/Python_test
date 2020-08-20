@@ -29,7 +29,7 @@
             </field>
         </field>
     </record>
-   <record id="view_res_partner_filter" model="ir.ui.view">
+    <record id="view_res_partner_filter" model="ir.ui.view">
         <field name="name">res.partner.select</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_res_partner_filter"/>
@@ -48,12 +48,15 @@
         <field name="inherit_id" ref="crm.crm_lead_partner_kanban_view"/>
         <field name="arch" type="xml">
             <field name="email" position="after">
-                <field name="potential_dupplicates"/>
                 <field name="duplicates_count"/>
             </field>
-            <xpath expr="//div[@class='oe_kanban_partner_links']" position="inside">
+            <xpath expr="//div[hasclass('oe_kanban_partner_links')]" position="inside">
                 <br/>
-                <a t-if="record.duplicates_count.raw_value > 0" name="open_duplicates" style="margin-right: 10px" type="object">
+                <a t-if="record.duplicates_count.raw_value > 0"
+                   name="open_duplicates"
+                   style="margin-right: 10px"
+                   type="object"
+                >
                     <field name="duplicates_count"/> Potential duplicates
                 </a>
                 <br/>

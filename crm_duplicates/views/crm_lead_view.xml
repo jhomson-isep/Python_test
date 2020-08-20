@@ -11,14 +11,15 @@
                 <button name="open_duplicates"
                         type="object"
                         class="oe_inline oe_stat_button"
-                        icon="fa-file-text">
+                        icon="fa-file-text"
+                        attrs="{'invisible': [('duplicates_count', '=', 0)]}"
+                >
                     <field name="duplicates_count" string="Duplicates" widget="statinfo"/>
                 </button>
             </div>
         </field>
     </record>
-    <!-- Comentar el tree y el kanban -->
-    <!-- <record id="crm_case_tree_view_oppor" model="ir.ui.view">
+    <record id="crm_case_tree_view_oppor" model="ir.ui.view">
         <field name="name">Opportunities Tree</field>
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
@@ -34,11 +35,14 @@
         <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
         <field name="arch" type="xml">
             <field name="user_id" position="after">
-                <field name="potential_dupplicates"/>
                 <field name="duplicates_count"/>
             </field>
-            <xpath expr="//div[@class='o_kanban_record_bottom']" position="before">
-                <a t-if="record.duplicates_count.raw_value > 0" name="open_duplicates" style="margin-right: 10px" type="object">
+            <xpath expr="//div[hasclass('o_kanban_record_bottom')]" position="before">
+                <a t-if="record.duplicates_count.raw_value > 0"
+                   name="open_duplicates"
+                   style="margin-right: 10px"
+                   type="object"
+                >
                     <field name="duplicates_count"/> potential duplicates
                 </a>
             </xpath>
@@ -56,7 +60,7 @@
                 />
             </filter>
         </field>
-    </record> -->
+    </record>
 
     <!-- Leads -->
     <record id="crm_case_form_view_leads" model="ir.ui.view">
@@ -76,8 +80,7 @@
             </div>
         </field>
     </record>
-    <!-- Comentar -->
-    <!-- <record id="crm_case_tree_view_leads" model="ir.ui.view" >
+    <record id="crm_case_tree_view_leads" model="ir.ui.view" >
         <field name="name">Leads</field>
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
@@ -93,11 +96,14 @@
         <field name="inherit_id" ref="crm.view_crm_lead_kanban"/>
         <field name="arch" type="xml">
             <field name="user_id" position="after">
-                <field name="potential_dupplicates"/>
                 <field name="duplicates_count"/>
             </field>
-            <xpath expr="//div[@class='o_kanban_record_bottom']" position="before">
-                <a t-if="record.duplicates_count.raw_value > 0" name="open_duplicates" style="margin-right: 10px" type="object">
+            <xpath expr="//div[hasclass('o_kanban_record_bottom')]" position="before">
+                <a t-if="record.duplicates_count.raw_value > 0"
+                   name="open_duplicates"
+                   style="margin-right: 10px"
+                   type="object"
+                >
                     <field name="duplicates_count"/> potential duplicates
                 </a>
             </xpath>
@@ -115,8 +121,6 @@
                 />
             </filter>
         </field>
-    </record> -->
-
-
+    </record>
 
 </odoo>
