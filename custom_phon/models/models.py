@@ -44,21 +44,21 @@ class _customphon(models.Model):
                 if (((valor >= 9) and (valor <= 15)) and ((valor2 >= 9) and (valor2 <= 15))):
                     if (valor == 10 or valor == 9) and (valor2 == 9 or valor2 == 10):
                         pho.phone = numero
-                        """pho.mobile = numero2"""
+                        pho.mobile = numero2
                         return pho
                     if (valor > 10 and valor2 < 11):
                         numero = str(numero)
                         numero = "+" + numero
                         pho.phone = numero
                         numero2 = str(numero2)
-                        """pho.mobile = numero2"""
+                        pho.mobile = numero2
                         return pho
                     if (valor2 > 10 and valor < 11):
                         numero2 = str(numero2)
                         numero2 = "+" + numero2
                         numero = str(numero)
                         pho.phone = numero
-                        """pho.mobile = numero2"""
+                        pho.mobile = numero2
                         return pho
                 else:
                     raise ValidationError("Numero telefónico o móvil en formato incorrecto")
@@ -98,12 +98,12 @@ class _customphon(models.Model):
                 numero2 = int(numero2)
                 if ((valor >= 9) and (valor <= 15)):
                     if (valor == 10 or valor == 9):
-                        pho.phone = numero2
+                        pho.mobile = numero2
                         return pho
                     if valor > 10:
                         numero2 = str(numero2)
                         numero2 = "+" + numero2
-                        pho.phone = numero2
+                        pho.mobile = numero2
                         return pho
                 else:
                     raise ValidationError("Numero móvil en formato incorrecto")
