@@ -337,7 +337,6 @@ class sale_order(models.Model):
             direccion = "http://ws2.aplicacion.grupoisep.com/odoo.php"        
     
             r = requests.get(url =direccion, params=PARAMS)
-            _logger(self.opportunity_id)
             _logger.info("R: {}, direccion: {}, params: {}".format(r,direccion,PARAMS))
         except Exception as e:
             _logger.info(traceback.format_exc())
