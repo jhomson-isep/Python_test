@@ -60,6 +60,14 @@ class _customphon(models.Model):
                         pho.phone = numero
                         pho.mobile = numero2
                         return pho
+                    if ((valor >10) and (valor2 > 10)):
+                        numero2 = str(numero2)
+                        numero2 = "+" + numero2
+                        numero = str(numero)
+                        numero = "+" + numero
+                        pho.phone = numero
+                        pho.mobile = numero2
+                        return pho
                 else:
                     raise ValidationError("Numero telefónico o móvil en formato incorrecto")
             else:
