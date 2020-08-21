@@ -4,6 +4,9 @@ from odoo import _, api, exceptions, fields, models
 from odoo.http import request
 from werkzeug.exceptions import HTTPException
 from odoo.osv.expression import OR
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class DuplicationError(HTTPException):
@@ -61,7 +64,9 @@ class res_partner(models.Model):
         Overwrite to force 'write' in 'create'
         """
         partner_id = super(res_partner, self).create(values)
-        partner_id.write({})
+        logger.info("******** Values of partner on crm_duplicates model ********")
+        logger.info(values)
+        self.browse(partner_id.id).write({})
         return partner_id
 
     @api.multi
