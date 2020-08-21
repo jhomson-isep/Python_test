@@ -22,10 +22,9 @@ class _customphon(models.Model):
     @api.model
     def create(self, values):
         pho = super(_customphon, self).create(values)
-        numero = pho.phone
-        numero2 = pho.mobile
-
         if pho.phone and pho.mobile:
+            numero = pho.phone
+            numero2 = pho.mobile
             numero = numero.replace("+", "")
             numero = numero.replace("(", "")
             numero = numero.replace(")", "")
@@ -74,6 +73,7 @@ class _customphon(models.Model):
                 raise ValidationError("Número telefónico o móvil en formato incorrecto")
 
         elif (pho.phone and pho.mobile == False):
+            numero = pho.phone
             numero = numero.replace("+", "")
             numero = numero.replace("(", "")
             numero = numero.replace(")", "")
@@ -96,6 +96,7 @@ class _customphon(models.Model):
             else:
                 raise ValidationError("Número telefónico en formato incorrecto")
         elif (pho.mobile and pho.phone == False):
+            numero2 = pho.mobile
             numero2 = numero2.replace("+", "")
             numero2 = numero2.replace("(", "")
             numero2 = numero2.replace(")", "")
