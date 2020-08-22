@@ -11,6 +11,7 @@ class res_company(models.Model):
         string='Partner Rigid Duplicates Fields',
         domain=[
             ('model', '=', 'res.partner'),
+            ('store', '=', True),
             ('ttype', 'not in', ['one2many', 'many2many', 'binary', 'reference', 'serialized']),
         ],
         help='Select criteria, how to search partner duplicates. Odoo would not allow to save a duplicate!',
@@ -20,6 +21,7 @@ class res_company(models.Model):
         string='Partner Soft Duplicates Fields',
         domain=[
             ('model', '=', 'res.partner'),
+            ('store', '=', True),
             ('ttype', 'not in', ['one2many', 'many2many', 'binary', 'reference', 'serialized']),
         ],
         help='Select criteria, how to search partner duplicates. \
@@ -30,6 +32,7 @@ class res_company(models.Model):
         string='Leads Rigid Duplicates Fields',
         domain=[
             ('model', '=', 'crm.lead'),
+            ('store', '=', True),
             ('ttype', 'not in', ['one2many', 'many2many', 'binary', 'reference', 'serialized']),
         ],
         help='Select criteria, how to search leads duplicates. \
@@ -40,8 +43,16 @@ class res_company(models.Model):
         string='Leads Soft Duplicates Fields',
         domain=[
             ('model', '=', 'crm.lead'),
+            ('store', '=', True),
             ('ttype', 'not in', ['one2many', 'many2many', 'binary', 'reference', 'serialized']),
         ],
         help='Select criteria, how to search leads duplicates. \
             Odoo would show duplicates on a button, but it would allow to save a duplicate',
+    )
+    search_duplicates_for_companies_only = fields.Boolean(
+        string="Only companies and stand-alone individuals",
+        help="""
+            If checked duplicates would be searched only for and among partners without parent.
+            In such a way all contacts would be excluded.
+        """
     )

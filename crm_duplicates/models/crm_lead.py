@@ -1,58 +1,28 @@
 # -*- coding: utf-8 -*-
 
-import logging
-
 from odoo import _, api, exceptions, fields, models
-
-_logger = logging.getLogger(__name__)
+from odoo.osv.expression import OR
 
 
 class crm_lead(models.Model):
     _inherit = "crm.lead"
 
     @api.multi
-    def _compute_potential_dupplicates(self):
+    def _compute_duplicates_count(self):
         """
-        The method to compute potential_dupplicates and duplicates_count
+        Compute method for duplicates_count
+
+        Methods:
+         * _construct_domain
+         * search_count
         """
+        company_id = self.env.user.company_id.sudo()
+        fields = company_id.duplicate_fields_lead_soft
         for record in self:
-            potential_dupplicates = False
+            domain = record._construct_domain(fields=fields, char_operator="ilike")
             duplicates_count = 0
-
-            fields = self.env.user.company_id.duplicate_fields_lead_soft
-            domain = [('id', '!=', record.id)]
-            # --- Support Multi Companies: duplicates are possible between different companies --- #
-            if record.company_id:
-                domain.append(('company_id', '=', record.company_id.id))
-            # --- Construct Domain by all criteria from settings --- #
-            or_operators_number = -1
-            domain_temp = []
-            for field in fields:
-                if field.ttype in ('one2many', 'many2many', 'binary', 'reference', 'serialized'):
-                    _logger.warning("Inacceptable field type %s", field.ttype)
-                elif field.ttype in ('many2one', 'one2many', 'many2many'):
-                    if len(record[field.name]) > 0:
-                        domain_temp.append((field.name, 'in', record[field.name].ids))
-                        or_operators_number += 1
-                elif field.ttype in ('char'):
-                    if record[field.name]:
-                        domain_temp.append((field.name, 'ilike', record[field.name]))
-                        or_operators_number += 1
-                elif record[field.name]:
-                    domain_temp.append((field.name, '=', record[field.name]))
-                    or_operators_number += 1
-
-            if or_operators_number != -1:  # Otherwise, it means domain consists only of company_id or it is empty
-                if or_operators_number > 0:
-                    domain += ['|'] * or_operators_number
-                domain += domain_temp
-                _logger.info("Soft duplicate partners are searched by the domain %s", domain)
-                duplicate_leads = record.search(domain)
-                if duplicate_leads:
-                    potential_dupplicates = [(6, 0, duplicate_leads.ids)]
-                    duplicates_count = len(duplicate_leads)
-
-            record.potential_dupplicates = potential_dupplicates
+            if domain:
+                duplicates_count = self.sudo().search_count(domain)
             record.duplicates_count = duplicates_count
 
     @api.model
@@ -68,18 +38,9 @@ class crm_lead(models.Model):
                 potential_dupplicates.append(lead.id)
         return [('id', 'in', potential_dupplicates)]
 
-
-    potential_dupplicates = fields.Many2many(
-        'crm.lead',
-        'rel_table',
-        'leadx_1',
-        'leady_2',
-        string='Potential duplicates',
-        compute=_compute_potential_dupplicates,
-    )
     duplicates_count = fields.Integer(
         string='Duplicates Count',
-        compute=_compute_potential_dupplicates,
+        compute=_compute_duplicates_count,
         search='search_duplicates_count',
     )
 
@@ -93,6 +54,98 @@ class crm_lead(models.Model):
         return lead_id
 
     @api.multi
+    def write(self, vals):
+        """
+        Overwrite to check for rigid duplicates and raise UserError in such a case
+
+        Methods:
+         * _return_duplicated_records
+
+        Raises:
+         * UserError if duplicates have been found
+        """
+        for record in self:
+            lead_id = super(crm_lead, record).write(vals)
+            duplicate_leads = record._return_duplicated_records(fields_names="duplicate_fields_lead")
+            if duplicate_leads:
+                duplicate_leads_recordset = self.sudo().browse(duplicate_leads)
+                warning = _('Duplicates were found: \n')
+                for duplicate in duplicate_leads_recordset:
+                    fields = self.env.user.company_id.sudo().duplicate_fields_lead
+                    duplicated_fields = "; ".join(["{} - {}".format(field.name, record[field.name])
+                                        for field in fields if record[field.name]
+                                        and record[field.name] == duplicate[field.name]])
+                    warning += '"[ID {}] {} {} {} \n'.format(
+                        duplicate.id,
+                        duplicate.name,
+                        _(' by fields: '),
+                        duplicated_fields
+                    )
+                raise exceptions.UserError(warning)
+        return True
+
+    @api.multi
+    def _construct_domain(self, fields, char_operator='='):
+        """
+        The method to construct domain for a given record by given fields
+
+        Args:
+         * fields - ir.model.fields recordset
+         * char_operator - whether to use 'ilike' or '=' operator for char fields
+
+        Returns:
+         * list of leaves (reverse polish notation) or False
+
+        Extra info:
+         * we do not check field type for relations and so on, since we rely upon xml fields domain
+         * expected singleton
+        """
+        self.ensure_one()
+        self = self.sudo()
+        domain = False
+        fields_domain = []
+        for field in fields:
+            if self[field.name]:
+                if field.ttype == 'many2one':
+                    fields_domain = OR([fields_domain, [(field.name, 'in', self[field.name].ids)]])
+                elif field.ttype == 'char':
+                    fields_domain = OR([fields_domain, [(field.name, char_operator, self[field.name])]])
+                else:
+                    fields_domain = OR([fields_domain, [(field.name, '=', self[field.name])]])
+        if fields_domain:
+            domain = fields_domain + [('id', '!=', self.id)] \
+                     + ["|", ("company_id", "=", False), ('company_id', '=', self.company_id.id)]
+        return domain
+
+    @api.multi
+    def _return_duplicated_records(self, fields_names, char_operator="="):
+        """
+        The method to find duplciated records by domain
+
+        Args:
+         * fields_names - name of settings fields (criteria to search duplicates)
+         * char_operator - whether to use 'ilike' or '=' operator for char fields
+
+        Methods:
+         * _construct_domain
+         * _search
+
+        Returns:
+         * list of ids
+
+        Extra info:
+         * Expected singleton
+        """
+        self.ensure_one()
+        company_id = self.env.user.company_id.sudo()
+        fields = company_id[fields_names]
+        domain = self._construct_domain(fields=fields, char_operator=char_operator)
+        records = []
+        if domain:
+            records = self.sudo()._search(domain)
+        return records
+
+    @api.multi
     def merge_opportunity(self, user_id=False, team_id=False):
         """
         Overwrite to pass context and let merge duplicats
@@ -103,75 +156,35 @@ class crm_lead(models.Model):
         return super(crm_lead, self.with_context(context)).merge_opportunity(user_id=user_id, team_id=team_id)
 
     @api.multi
-    def write(self, vals):
-        """
-        Overwrite to check for rigids duplicates and raise UserError in such a case
-        """
-        if self._context.get('inhibit_duplication_warning'):
-            return super(crm_lead, self).write(vals)
-
-        for lead in self:
-            lead_id = super(crm_lead, lead).write(vals)
-
-            fields = self.env.user.company_id.duplicate_fields_lead
-            domain = [('id', '!=', lead.id)]
-            # --- Support Multi Companies: duplicates are possible between different companies --- #
-            if lead.company_id:
-                domain.append(('company_id', '=', lead.company_id.id))
-            # --- Construct Domain by all criteria from settings --- #
-            or_operators_number = -1
-            domain_temp = []
-            for field in fields:
-                if field.ttype in ['one2many', 'many2many', 'binary', 'reference', 'serialized']:
-                    _logger.warning("Inacceptable field type %s", field.ttype)
-                elif field.ttype in ['many2one', 'one2many', 'many2many']:
-                    if len(lead[field.name]) > 0:
-                        domain_temp.append((field.name, 'in', lead[field.name].ids))
-                        or_operators_number += 1
-                elif lead[field.name]:
-                    domain_temp.append((field.name, '=', lead[field.name]))
-                    or_operators_number += 1
-
-            if or_operators_number != -1:  # Otherwise, it means domain consists only of company_id or it is empty
-                if or_operators_number > 0:
-                    domain += ['|'] * or_operators_number
-                domain += domain_temp
-                _logger.info("Duplicate partners are searched by the domain %s", domain)
-                duplicate_leads = lead.search(domain)
-            else:
-                return lead_id
-
-            if len(duplicate_leads) == 0:
-                return lead_id
-            else:
-                _logger.info("Duplicate leads number is %s", len(duplicate_leads))
-                warning = _('Duplicates were found: \n')
-                for duplicate in duplicate_leads:
-                    warning += '"[ID '+str(duplicate.id) + '] ' + duplicate.name+'"' + _(' by fields: ')
-                    for field in fields:
-                        if lead[field.name] and lead[field.name] == duplicate[field.name]:
-                            warning += field.name + ' - ' + lead[field.name] + '; '
-                    warning += '\n'
-                raise exceptions.UserError(warning)
-
-    @api.multi
     def open_duplicates(self):
         """
         The method to open tree of potential duplicates
+
+        Methods:
+         * _return_duplicated_records
+
+        Extra info:
+         * Expected singleton
+
+        Returns:
+         * action to open leads' duplicates list
         """
-        for lead in self:
-            res = {
+        self.ensure_one()
+        duplicates = self._return_duplicated_records(
+            fields_names="duplicate_fields_lead_soft",
+            char_operator="ilike"
+        )
+        return {
                 'name': 'Duplicates',
                 'view_type': 'form',
                 'view_mode': 'tree,form',
                 'view_id': False,
                 'res_model': 'crm.lead',
-                'domain': str([('id', 'in', lead.potential_dupplicates.ids)]),
+                'domain': str([('id', 'in', duplicates + self.ids)]),
                 'type': 'ir.actions.act_window',
                 'nodestroy': True,
                 'target': 'current',
                 'context': {
                     'form_view_ref': 'crm_duplicates.crm_case_form_view_oppor',
                 },
-            }
-        return res
+        }

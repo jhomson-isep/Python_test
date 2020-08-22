@@ -45,6 +45,14 @@
                                        options="{'no_quick_create': True, 'no_create': True, 'no_edit': True}"
                                 />
                             </div>
+                            <label for="search_duplicates_for_companies_only"/>
+                            <div class="text-muted">
+                                If checked duplicates would be searched only <strong>for</strong> and <strong>among
+                                </strong> partners without parent. In such a way all contacts would be excluded
+                            </div>
+                            <div class="text-muted">
+                                <field name='search_duplicates_for_companies_only'/>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-6 o_setting_box">
@@ -52,8 +60,8 @@
                         <div class="o_setting_right_pane">
                             <label for="duplicate_fields_lead_soft"/>
                             <div class="text-muted">
-                                Select criteria, how to search opportunities duplicates.
-                                Odoo would show such duplicates on a special button, but would allow to save such object!
+                               Select criteria, how to search opportunities duplicates.
+                               Odoo would show such duplicates on a special button, but would allow to save such object!
                             </div>
                             <div class="text-muted">
                                 <field name='duplicate_fields_lead_soft'
