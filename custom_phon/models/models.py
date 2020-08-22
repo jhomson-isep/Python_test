@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, api
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError
 import re
 
 # class custom_phon(models.Model):
@@ -19,111 +19,66 @@ import re
 class _customphon(models.Model):
     _inherit = 'res.partner'
 
+    def _checkphones(self, numero):
+            numero = numero.replace("+", "")
+            numero = numero.replace("(", "")
+            numero = numero.replace(")", "")
+            numero = numero.replace("-", "")
+            numero = numero.replace(" ", "")
+            numero = numero.replace("/", "")
+            if (numero.isdigit() == True):
+                valor = len(numero)
+                if ((valor >= 9) and (valor <= 15)):
+                    if (valor > 10):
+                        numero = "+" + numero
+                    return numero
+                else:
+                    raise UserError("Numero telefónico en formato incorrecto")
+            else:
+                raise UserError("Número telefónico en formato incorrecto")
+
     @api.model
     def create(self, values):
-        pho = super(_customphon, self).create(values)
-        if pho.phone and pho.mobile:
-            numero = pho.phone
-            numero2 = pho.mobile
-            numero = numero.replace("+", "")
-            numero = numero.replace("(", "")
-            numero = numero.replace(")", "")
-            numero = numero.replace("-", "")
-            numero = numero.replace(" ", "")
-            numero2 = numero2.replace("+", "")
-            numero2 = numero2.replace("(", "")
-            numero2 = numero2.replace(")", "")
-            numero2 = numero2.replace("-", "")
-            numero2 = numero2.replace(" ", "")
-            if ((numero.isdigit() == True) and (numero2.isdigit())):
-                valor = len(numero)
-                valor2 = len(numero2)
-                numero = int(numero)
-                numero2 = int(numero2)
-                if (((valor >= 9) and (valor <= 15)) and ((valor2 >= 9) and (valor2 <= 15))):
-                    if (valor == 10 or valor == 9) and (valor2 == 9 or valor2 == 10):
-                        pho.phone = numero
-                        pho.mobile = numero2
-                        return pho
-                    if (valor > 10 and valor2 < 11):
-                        numero = str(numero)
-                        numero = "+" + numero
-                        pho.phone = numero
-                        numero2 = str(numero2)
-                        pho.mobile = numero2
-                        return pho
-                    if (valor2 > 10 and valor < 11):
-                        numero2 = str(numero2)
-                        numero2 = "+" + numero2
-                        numero = str(numero)
-                        pho.phone = numero
-                        pho.mobile = numero2
-                        return pho
-                    if ((valor >10) and (valor2 > 10)):
-                        numero2 = str(numero2)
-                        numero2 = "+" + numero2
-                        numero = str(numero)
-                        numero = "+" + numero
-                        pho.phone = numero
-                        pho.mobile = numero2
-                        return pho
-                else:
-                    raise ValidationError("Numero telefónico o móvil en formato incorrecto")
-            else:
-                raise ValidationError("Número telefónico o móvil en formato incorrecto")
+        tel = values.get('phone')
+        mov = values.get('mobile')
+        if tel and mov:
+            tel = self._checkphones(tel)
+            mov = self._checkphones(mov)
+            values.update({'phone': tel, 'mobile': mov})
+            res = super(_customphon, self).create(values)
+            return res
+        elif tel and mov == False:
+            tel = self._checkphones(tel)
+            values.update({'phone': tel, 'mobile': mov})
+            res = super(_customphon, self).create(values)
+            return res
+        elif tel == False and mov:
+            mov = self._checkphones(mov)
+            values.update({'phone': tel, 'mobile': mov})
+            res = super(_customphon, self).create(values)
+            return res
+        elif tel == False and mov == False:
+            raise UserError("Introduzca un número telefónico o número móvil por favor")
 
-        elif (pho.phone and pho.mobile == False):
-            numero = pho.phone
-            numero = numero.replace("+", "")
-            numero = numero.replace("(", "")
-            numero = numero.replace(")", "")
-            numero = numero.replace("-", "")
-            numero = numero.replace(" ", "")
-            if numero.isdigit() == True:
-                valor = len(numero)
-                numero = int(numero)
-                if ((valor >= 9) and (valor<=15)):
-                    if (valor == 10 or valor == 9):
-                        pho.phone = numero
-                        return pho
-                    if valor > 10:
-                        numero = str(numero)
-                        numero = "+" + numero
-                        pho.phone = numero
-                        return pho
-                else:
-                    raise ValidationError("Numero telefónico en formato incorrecto")
-            else:
-                raise ValidationError("Número telefónico en formato incorrecto")
-        elif (pho.mobile and pho.phone == False):
-            numero2 = pho.mobile
-            numero2 = numero2.replace("+", "")
-            numero2 = numero2.replace("(", "")
-            numero2 = numero2.replace(")", "")
-            numero2 = numero2.replace("-", "")
-            numero2 = numero2.replace(" ", "")
-            if numero2.isdigit() == True:
-                valor = len(numero2)
-                numero2 = int(numero2)
-                if ((valor >= 9) and (valor <= 15)):
-                    if (valor == 10 or valor == 9):
-                        pho.mobile = numero2
-                        return pho
-                    if valor > 10:
-                        numero2 = str(numero2)
-                        numero2 = "+" + numero2
-                        pho.mobile = numero2
-                        return pho
-                else:
-                    raise ValidationError("Numero móvil en formato incorrecto")
-            else:
-                raise ValidationError("Número móvil en formato incorrecto")
-        else:
-            raise ValidationError("Introduzca un número de teléfono, ya sea móvil o fijo")
 
-    @api.multi
     def write(self, values):
-        pho = super(_customphon, self).write(values)
-        for sel in self:
-            sel.phone
-        return pho
+        tel2 = values.get('phone')
+        mov2 = values.get('mobile')
+        if tel2 and mov2:
+            tel2 = self._checkphones(tel2)
+            mov2 = self._checkphones(mov2)
+            values.update({'phone': tel2, 'mobile': mov2})
+            res = super(_customphon, self).write(values)
+            return res
+        elif tel2 and mov2 == False:
+            tel = self._checkphones(tel2)
+            values.update({'phone': tel2, 'mobile': mov2})
+            res = super(_customphon, self).write(values)
+            return res
+        elif tel2 == False and mov2:
+            mov = self._checkphones(mov2)
+            values.update({'phone': tel2, 'mobile': mov2})
+            res = super(_customphon, self).write(values)
+            return res
+        elif tel2 == False and mov2 == False:
+            raise UserError("Introduzca un número telefónico o número móvil por favor")
