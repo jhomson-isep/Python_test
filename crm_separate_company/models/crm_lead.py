@@ -88,6 +88,10 @@ class CrmLead(models.Model):
             if source:
                 lead.update({'x_ga_source': source[0]})
 
+            term = parse_qs(url_parsed.query)['utm_term']
+            if source:
+                lead.update({'x_ga_term': term[0]})
+
         except Exception as e:
             logger.info(e)
 
