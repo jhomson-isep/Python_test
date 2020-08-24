@@ -35,6 +35,7 @@
         'views/op_document_type.xml',
         'views/op_student.xml',
         'views/op_university.xml',
+        'views/op_faculty.xml',
         'menu/isep_courses_adapt_menu.xml',
         'data/op_document_type.xml',
         'data/op_evaluation_type.xml',

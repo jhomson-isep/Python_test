@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="ica_view_op_faculty_form_inherit" model="ir.ui.view">
+            <field name="name">ica.op.faculty.form.inherit</field>
+            <field name="model">op.faculty</field>
+            <field name="inherit_id" ref="openeducat_core.view_op_faculty_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='emp_id']" position="after">
+                    <field name="title"/>
+                    <field name="specialty"/>
+                    <field name="workplace"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
