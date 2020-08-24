@@ -260,7 +260,29 @@ class CrmLead(models.Model):
             logger.info(e)
             logger.info("No pudo vincular el area con el codigo de area")
 
+        #=======INICIO REVISAR========
+        #Buscar si esta duplicada por email y curso
+        lead_dup_ids = self.env['crm.lead'].sudo().search([('email_from', '=', email), ('x_curso_id', '=', referencia_interna_template.id), ('x_modalidad_id', '=', modalidad_id.id)]).ids
 
+        if len(lead_dup_ids) > 1:
+            logger.info("=================DUPLICADO================")
+            logger.info("Esta duplicado")
+            lead_dup = self.env['crm.lead'].sudo().search(['id', '=', res.id])
+            #Elimina el registro que se creo porque ya estaba duplicado
+            lead.update({'active': False})
+            #Buscar motivo de perdida
+            lost_reason = self.env['crm.lost.reason'].sudo().search(['name', 'ilike', 'DUPLICADO'], limit=1)
+            lead.update({'lost_reason': lost_reason.id})
+
+            lead_dup.sudo().write(lead)
+        else:
+             logger.info(lead_copy)
+             lead_obj = self.sudo().browse(res.id)
+             lead_obj.sudo().write(lead)
+             # Update a la base de datos para cambiar el company_id directo
+             self.env.cr.execute(
+                 """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s  WHERE id = %s""" % (company_id, user_id, team_id, res.id))
+        # =======FINAL REVISAR========
 
         logger.info(lead_copy)
         lead_obj = self.sudo().browse(res.id)
