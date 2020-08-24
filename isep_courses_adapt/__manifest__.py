@@ -24,6 +24,7 @@
         'views/op_course.xml',
         'views/op_batch.xml',
         'views/op_modality.xml',
+        'views/op_workplace.xml',
         'views/op_evaluation_type.xml',
         'views/op_campus.xml',
         'views/op_practices_types.xml',

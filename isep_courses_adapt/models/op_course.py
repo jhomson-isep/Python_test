@@ -4,7 +4,6 @@ from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 from requests import get, post
 from .op_sql import SQL
-from ast import literal_eval
 import logging
 
 logger = logging.getLogger(__name__)
@@ -19,8 +18,6 @@ class OpCourse(models.Model):
     _inherit = 'op.course'
 
     product_template_id = fields.Many2one('product.template', string='Producto')
-    # code_product = fields.Char(related='product_template_id.default_code', string='Codigo de Producto')
-
     modality_id = fields.Many2one('op.modality', string='Modality')
     evaluation_type_id = fields.Many2one('op.evaluation.type', string='Evaluation type')
     period = fields.Char(string="Period")
@@ -97,7 +94,8 @@ class OpCourse(models.Model):
                 "wsfunction": 'core_course_update_categories'
             }
             if values.get('parent_id') or self.parent_id:
-                params.update({'categories[0][parent]': self.parent_id.moodle_category_id})
+                params.update(
+                    {'categories[0][parent]': self.parent_id.moodle_category_id})
             try:
                 logger.info(self.moodle_category_id)
                 response = post(url + endpoint, params)
@@ -130,8 +128,10 @@ class OpCourse(models.Model):
                 if len(course) < 1:
                     course_moodle = s.get_course_by_code(default_code)
                     logger.info(course_moodle.NombreCurso)
-                    evaluation_type = self.env['op.evaluation.type'].search([('name', 'ilike', 'normal')], limit=1)
-                    modality = self.env['op.modality'].search([('code', '=', course_moodle.Modalidad)], limit=1)
+                    evaluation_type = self.env['op.evaluation.type'].search(
+                        [('name', 'ilike', 'normal')], limit=1)
+                    modality = self.env['op.modality'].search(
+                        [('code', '=', course_moodle.Modalidad)], limit=1)
                     product = self.env['product.template'].search(
                         [('default_code', '=', default_code), ('active', '=', True)],
                         limit=1)
