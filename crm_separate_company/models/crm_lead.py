@@ -274,14 +274,6 @@ class CrmLead(models.Model):
             lost_reason = self.env['crm.lost.reason'].sudo().search(['name', 'ilike', 'DUPLICADO'], limit=1)
             lead.update({'lost_reason': lost_reason.id})
 
-            lead_dup.sudo().write(lead)
-        else:
-             logger.info(lead_copy)
-             lead_obj = self.sudo().browse(res.id)
-             lead_obj.sudo().write(lead)
-             # Update a la base de datos para cambiar el company_id directo
-             self.env.cr.execute(
-                 """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s  WHERE id = %s""" % (company_id, user_id, team_id, res.id))
         # =======FINAL REVISAR========
 
         logger.info(lead_copy)
