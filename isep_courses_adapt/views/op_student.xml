@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <record id="isep_student_extended" model="ir.ui.view">
+        <record id="view_op_student_form_extended" model="ir.ui.view">
             <field name="model">op.student</field>
             <field name="inherit_id" ref="openeducat_core.view_op_student_form"/>
             <field name="arch" type="xml">
@@ -23,6 +23,14 @@
                     <field name="study_type_id"/>
                 </xpath>
 
+            </field>
+        </record>
+
+        <record id="view_op_student_form_fees_hide" model="ir.ui.view">
+            <field name="model">op.student</field>
+            <field name="inherit_id" ref="openeducat_fees.view_op_student_form_fees_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[not(@name)][1]" position="replace"/>
             </field>
         </record>
 
