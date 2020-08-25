@@ -261,13 +261,12 @@ class CrmLead(models.Model):
         logger.info(new_nombre_curso)
 
         lead_dup_ids = self.env['crm.lead'].sudo().search(
-            [('email_from', '=', email), ('x_curso_id.name', 'ilike', new_nombre_curso), ('name', 'ilike', modalidad)]).ids
+            [('email_from', '=', email), ('x_curso_id.name', 'ilike', new_nombre_curso), ('x_modalidad_id', '=', modalidad_id.id)]).ids
+        logger.info(lead_dup_ids)
 
 
-        if len(lead_dup_ids) > 1:
+        if len(lead_dup_ids) >= 1:
             logger.info("=================DUPLICADO================")
-            logger.info("Esta duplicado")
-            lead_dup = self.env['crm.lead'].sudo().search(['id', '=', res.id])
             #Elimina el registro que se creo porque ya estaba duplicado
             lead.update({'active': False})
             #Buscar motivo de perdida
