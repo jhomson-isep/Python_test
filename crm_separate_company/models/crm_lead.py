@@ -276,7 +276,7 @@ class CrmLead(models.Model):
 
         # =======FINAL REVISAR========
 
-        logger.info(lead_copy)
+        logger.info(lead)
         lead_obj = self.sudo().browse(res.id)
         lead_obj.sudo().write(lead)
         # Update a la base de datos para cambiar el company_id directo
