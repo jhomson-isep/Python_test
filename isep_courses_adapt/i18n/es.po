@@ -15,55 +15,11 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__anyacademico
-msgid "Año académico"
-msgstr ""
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__anyinicio
-msgid "Año inicio"
-msgstr ""
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__campanya
-msgid "Campaña"
-msgstr ""
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__name_catalan
 msgid "Catalan name"
 msgstr "Nombre Catalán"
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__ciudad
-msgid "Ciudad"
-msgstr ""
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__gin_codigohorario
-msgid "Codigo Horario"
-msgstr ""
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__codigouvic
-msgid "Codigo UVic"
-msgstr ""
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__contenido
-msgid "Contenido"
-msgstr ""
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__convocatoriauvic
-msgid "Convocatoria UVic"
-msgstr ""
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__coordinador
-msgid "Coordinador"
-msgstr ""
 
 #. module: isep_courses_adapt
 #: model:ir.model,name:isep_courses_adapt.model_op_evaluation_type
@@ -112,7 +68,7 @@ msgstr "Horas"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_evaluation_type__id
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_modality__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_evaluation_type____last_update
@@ -136,11 +92,6 @@ msgstr "Última actualización el"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__level
 msgid "Level"
 msgstr "Nivel"
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__lugarclase
-msgid "Lugar de Clase"
-msgstr ""
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__modality_id
@@ -252,36 +203,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__section
 msgid "Section"
 msgstr "Sección"
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__titulo
-msgid "Titulo"
-msgstr ""
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__totalhoras
-msgid "Total de Horas"
-msgstr ""
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__totalcreditos
-msgid "Total de crédito"
-msgstr ""
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__tutor
-msgid "Tutor"
-msgstr ""
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__titulo_catalan
-msgid "Título catalán"
-msgstr ""
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__universidad
-msgid "Universidad"
-msgstr ""
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__coordinator
@@ -528,3 +449,38 @@ msgstr "Director acádemico"
 #: model:ir.model.fields,field_description:openeducat_core.field_op_student__gr_no
 msgid "GR Number"
 msgstr "Matrícula"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_faculty__nifp
+msgid "NIFP"
+msgstr "NIFP"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_faculty__job_title
+msgid "Job title"
+msgstr "Título"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_faculty__specialty
+msgid "Specialty"
+msgstr "Especialidad"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_faculty__workplace_ids
+msgid "Worklpace"
+msgstr "Lugar de trabajo"
+
+#. module: isep_courses_adapt
+#: model:ir.model,name:isep_courses_adapt.model_op_workplace
+msgid "Workplace"
+msgstr "Lugar de trabajo"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_workplace__name
+msgid "Name"
+msgstr "Lugar de trabajo"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_workplace__code
+msgid "Code"
+msgstr "Código"

@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="ica_view_op_faculty_form_inherit" model="ir.ui.view">
+            <field name="name">ica.op.faculty.form.inherit</field>
+            <field name="model">op.faculty</field>
+            <field name="inherit_id" ref="openeducat_core.view_op_faculty_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='emp_id']" position="after">
+                    <field name="nifp"/>
+                    <field name="job_title"/>
+                    <field name="specialty"/>
+                </xpath>
+
+                <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+                    <page name="workspaces_page" string="Lugares de trabajo">
+                        <field name="workplace_ids" colspan="4" nolabel="1"/>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

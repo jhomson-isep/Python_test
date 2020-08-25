@@ -48,6 +48,7 @@ class CrmLead(models.Model):
         cod_area = lead.get('x_codarea')
         cod_tipo_curso = lead.get('x_codtipodecurso')
         url = lead.get('website')
+        nombre_curso = lead.get('x_universidad')
 
         #create
         res = super(CrmLead, self).create(lead)
@@ -70,7 +71,8 @@ class CrmLead(models.Model):
             'x_modalidad_id': None,
             'x_codarea': cod_area,
             'x_area_id': None,
-            'website': None
+            'website': None,
+            'x_universidad': None
         }
 
         try:
@@ -87,6 +89,10 @@ class CrmLead(models.Model):
             source = parse_qs(url_parsed.query)['utm_source']
             if source:
                 lead.update({'x_ga_source': source[0]})
+
+            term = parse_qs(url_parsed.query)['utm_term']
+            if source:
+                lead.update({'x_ga_term': term[0]})
 
         except Exception as e:
             logger.info(e)
@@ -113,9 +119,9 @@ class CrmLead(models.Model):
             logger.info("Entre en España")
 
         #Problemas con el campo mal hecho de modalidad y sede, en los type form se llaman distinto por eso el cambio
-        if modalidad == 'Presencial':
+        if modalidad in ('Presencial','presencial'):
             modalidad = 'PRS'
-        elif modalidad == 'Online':
+        elif modalidad in ('Online', 'online'):
             modalidad = 'ONL'
 
         #Actualizar la modalidad
@@ -137,7 +143,7 @@ class CrmLead(models.Model):
         #Añadir producto a la iniciativa directamente
         logger.info(company_id)
         try:
-            referencia_interna_template = self.env['product.template'].sudo().search([('default_code', '=', cod_curso), ('sale_ok', '=', True)], limit=1)
+            referencia_interna_template = self.env['product.template'].sudo().search([('default_code', '=', cod_curso), ('sale_ok', '=', True), ('name', 'ilike', nombre_curso)], limit=1)
             lead.update({'x_curso_id': referencia_interna_template.id})
 
             referencia_interna_product = self.env['product.product'].sudo().search([('product_tmpl_id', '=', referencia_interna_template.id)], limit=1)
@@ -153,7 +159,7 @@ class CrmLead(models.Model):
             #Carolina Araujo
             user_id = 100000006
             team_id = 100000006
-            name = cod_curso + "-" + cod_tipo_curso + "-" + "LATAM" + " - " + email
+            name = cod_curso + "-" + "LATAM" + " - " + email
 
         #ISEP SL
         #---------------------------------
@@ -177,9 +183,9 @@ class CrmLead(models.Model):
 
             # ONL es online en modalidad
             if modalidad != 'ONL':
-                name = cod_curso + "-" + cod_tipo_curso + "-" + cod_sede + "-" + 'PRS' + " - " + email
+                name = cod_curso + "-" + cod_sede + "-" + 'PRS' + " - " + email
             else:
-                name = cod_curso + "-" + cod_tipo_curso + "-" + 'ONL' + " - " + email
+                name = cod_curso + "-" + 'ONL' + " - " + email
                 team_id = 5
 
         #ISED
@@ -188,9 +194,9 @@ class CrmLead(models.Model):
 
             #ONL es online en modalidad
             if modalidad != 'ONL':
-                name = cod_curso + "-" + cod_tipo_curso + "-" + cod_sede + "-" + 'PRS' + " - " + email
+                name = cod_curso + "-" + "-" + cod_sede + "-" + 'PRS' + " - " + email
             else:
-                name = cod_curso + "-" + cod_tipo_curso + "-" + 'ONL' + " - " + email
+                name = cod_curso + "-" + 'ONL' + " - " + email
 
             if modalidad == 'ONL':
                 #Centro Sup de estudios ISED SL - Online
@@ -260,7 +266,21 @@ class CrmLead(models.Model):
             logger.info(e)
             logger.info("No pudo vincular el area con el codigo de area")
 
+        #=======INICIO REVISAR========
+        #Buscar si esta duplicada por email y curso
+        lead_dup_ids = self.env['crm.lead'].sudo().search([('email_from', '=', email), ('x_curso_id', '=', referencia_interna_template.id), ('x_modalidad_id', '=', modalidad_id.id)]).ids
 
+        if len(lead_dup_ids) > 1:
+            logger.info("=================DUPLICADO================")
+            logger.info("Esta duplicado")
+            lead_dup = self.env['crm.lead'].sudo().search(['id', '=', res.id])
+            #Elimina el registro que se creo porque ya estaba duplicado
+            lead.update({'active': False})
+            #Buscar motivo de perdida
+            lost_reason = self.env['crm.lost.reason'].sudo().search(['name', 'ilike', 'DUPLICADO'], limit=1)
+            lead.update({'lost_reason': lost_reason.id})
+
+        # =======FINAL REVISAR========
 
         logger.info(lead_copy)
         lead_obj = self.sudo().browse(res.id)
