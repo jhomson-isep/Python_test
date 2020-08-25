@@ -28,6 +28,7 @@ class CrmLead(models.Model):
                 'mobile': lead.get('mobile'),
                 'phone': lead.get('phone')
             })
+            client = self.env['res.partner'].sudo().search([('email', '=', lead.get('email_from'))], limit=1)
             lead.update({'partner_id': client.id})
 
         company_id = lead.get('company_id')
@@ -143,7 +144,7 @@ class CrmLead(models.Model):
         #Añadir producto a la iniciativa directamente
         logger.info(company_id)
         try:
-            referencia_interna_template = self.env['product.template'].sudo().search([('default_code', '=', cod_curso), ('sale_ok', '=', True), ('name', 'ilike', nombre_curso)], limit=1)
+            referencia_interna_template = self.env['product.template'].sudo().search([('sale_ok', '=', True), ('name', 'ilike', nombre_curso)], limit=1)
             lead.update({'x_curso_id': referencia_interna_template.id})
 
             referencia_interna_product = self.env['product.product'].sudo().search([('product_tmpl_id', '=', referencia_interna_template.id)], limit=1)
