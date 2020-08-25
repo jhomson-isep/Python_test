@@ -151,7 +151,6 @@ class CrmLead(models.Model):
             #Carolina Araujo
             user_id = 100000006
             team_id = 100000006
-            name = cod_curso + "-" + "LATAM" + " - " + email
 
         #ISEP SL
         #---------------------------------
@@ -174,10 +173,7 @@ class CrmLead(models.Model):
                 team_id = 4
 
             # ONL es online en modalidad
-            if modalidad != 'ONL':
-                name = cod_curso + "-" + cod_sede + "-" + 'PRS' + " - " + email
-            else:
-                name = cod_curso + "-" + 'ONL' + " - " + email
+            if modalidad == 'ONL':
                 team_id = 5
 
         #ISED
@@ -185,10 +181,6 @@ class CrmLead(models.Model):
         elif company_id == 4:
 
             #ONL es online en modalidad
-            if modalidad != 'ONL':
-                name = cod_curso + "-" + "-" + cod_sede + "-" + 'PRS' + " - " + email
-            else:
-                name = cod_curso + "-" + 'ONL' + " - " + email
 
             if modalidad == 'ONL':
                 #Centro Sup de estudios ISED SL - Online
@@ -234,9 +226,6 @@ class CrmLead(models.Model):
                 user_id = 115
                 #team_id = 10
                 logger.info("Entre en Iruñised")
-
-        #Actualizar el nombre
-        lead.update({'name': name})
 
         #Actualizar id de la modalidad
         try:
