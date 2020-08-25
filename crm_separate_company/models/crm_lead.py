@@ -113,6 +113,9 @@ class CrmLead(models.Model):
             modalidad = 'PRS'
         elif modalidad in ('Online', 'online'):
             modalidad = 'ONL'
+        #Modalidad At-Home
+        elif modalidad in ('at home', 'At Home', 'At home'):
+            modalidad = 'ELR'
 
         #Actualizar la modalidad
         lead.update({'x_codmodalidad': modalidad})
