@@ -32,7 +32,6 @@ class CrmLead(models.Model):
 
 
         #Lógica de las distintas empresas
-        nombre = lead.get('name')
         cod_sede = lead.get('x_codsede')
         cod_curso = lead.get('x_codcurso')
         email = lead.get('email_from')
@@ -51,7 +50,6 @@ class CrmLead(models.Model):
 
         #lead con los nuevos datos hace falta agregar comercial(user_id) y equipo de ventas(crm_team)
         lead = {
-            'name': nombre,
             'x_codsede': cod_sede,
             'x_codcurso': cod_curso,
             'email_from': email,
