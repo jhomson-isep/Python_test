@@ -117,9 +117,9 @@ class CrmLead(models.Model):
             logger.info("Entre en España")
 
         #Problemas con el campo mal hecho de modalidad y sede, en los type form se llaman distinto por eso el cambio
-        if modalidad == 'Presencial':
+        if modalidad in ('Presencial','presencial'):
             modalidad = 'PRS'
-        elif modalidad == 'Online':
+        elif modalidad in ('Online', 'online'):
             modalidad = 'ONL'
 
         #Actualizar la modalidad
