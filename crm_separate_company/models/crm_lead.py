@@ -267,10 +267,11 @@ class CrmLead(models.Model):
 
         if len(lead_dup_ids) >= 1:
             logger.info("=================DUPLICADO================")
-            #Elimina el registro que se creo porque ya estaba duplicado
-            lead.update({'active': False})
             #Buscar motivo de perdida
             lost_reason = self.env['crm.lost.reason'].sudo().search([('name', 'ilike', 'DUPLICADO')], limit=1)
+            #Elimina el registro que se creo porque ya estaba duplicado
+            lead.update({'probability': 0})
+            lead.update({'active': False})
             lead.update({'lost_reason': lost_reason.id})
 
         # =======FINAL REVISAR========
