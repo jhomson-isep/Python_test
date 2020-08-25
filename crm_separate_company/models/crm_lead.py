@@ -256,7 +256,7 @@ class CrmLead(models.Model):
         #     ('x_codarea', '=', cod_area), (
         #         'name', 'ilike', cod_curso), ('name', 'ilike', modalidad)]).ids
         nombre_curso = nombre_curso.split(' ')
-        nombre_curso.remove(0)
+        nombre_curso.pop(0)
         new_nombre_curso = ' '.join(nombre_curso)
         logger.info(new_nombre_curso)
 
