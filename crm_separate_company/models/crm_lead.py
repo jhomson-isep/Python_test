@@ -22,8 +22,8 @@ class CrmLead(models.Model):
             lead.update({'partner_id': client.id})
         else:
             client = self.env['res.partner'].sudo().create({
-                'contact_name': lead.get('contact_name'),
-                'partner_name': lead.get('partner_name'),
+                'name': lead.get('contact_name'),
+                'display_name': lead.get('partner_name'),
                 'email': lead.get('email_from'),
                 'mobile': lead.get('mobile'),
                 'phone': lead.get('phone')
