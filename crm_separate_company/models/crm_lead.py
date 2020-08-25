@@ -48,6 +48,7 @@ class CrmLead(models.Model):
         cod_area = lead.get('x_codarea')
         cod_tipo_curso = lead.get('x_codtipodecurso')
         url = lead.get('website')
+        nombre_curso = lead.get('x_universidad')
 
         #create
         res = super(CrmLead, self).create(lead)
@@ -70,7 +71,8 @@ class CrmLead(models.Model):
             'x_modalidad_id': None,
             'x_codarea': cod_area,
             'x_area_id': None,
-            'website': None
+            'website': None,
+            'x_universidad': None
         }
 
         try:
@@ -141,7 +143,7 @@ class CrmLead(models.Model):
         #Añadir producto a la iniciativa directamente
         logger.info(company_id)
         try:
-            referencia_interna_template = self.env['product.template'].sudo().search([('default_code', '=', cod_curso), ('sale_ok', '=', True)], limit=1)
+            referencia_interna_template = self.env['product.template'].sudo().search([('default_code', '=', cod_curso), ('sale_ok', '=', True), ('name', 'ilike', nombre_curso)], limit=1)
             lead.update({'x_curso_id': referencia_interna_template.id})
 
             referencia_interna_product = self.env['product.product'].sudo().search([('product_tmpl_id', '=', referencia_interna_template.id)], limit=1)
