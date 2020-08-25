@@ -50,6 +50,14 @@ class _Customfield(models.Model):
                     dominio = "hotmail.com"
                     correo = ""
                     correo = direccion
+                elif dominio == "hotmail.com.mx":
+                    dominio = "hotmail.com"
+                    correo = ""
+                    correo = direccion
+                elif dominio == "hotmai.com":
+                    dominio = "hotmail.com"
+                    correo = ""
+                    correo = direccion
                 elif dominio == "hotmial.com":
                     dominio = "hotmail.com"
                     correo = ""
