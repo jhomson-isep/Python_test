@@ -250,7 +250,7 @@ class CrmLead(models.Model):
 
         #Actualizar id del area
         try:
-            area_id = self.env['product.category'].sudo().search([('id', '=', referencia_interna_template.id)], limit=1)
+            area_id = self.env['product.category'].sudo().search([('x_codigocategoria', 'ilike', cod_area)], limit=1)
             lead.update({'x_area_id': area_id.id})
         except Exception as e:
             logger.info("===== Fallo en area_id ======")
