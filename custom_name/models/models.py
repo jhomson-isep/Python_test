@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, api
+
 
 # class custom_name(models.Model):
 #     _name = 'custom_name.custom_name'
@@ -14,23 +15,28 @@ from odoo import models, fields, api
 #     def _value_pc(self):
 #         self.value2 = float(self.value) / 100
 
-class _customname(models.Model):
+class _Customname(models.Model):
     _inherit = 'res.partner'
 
     @api.model
     def create(self, values):
-        dat = super(_customname, self).create(values)
-        nombre = dat.name
-        if nombre.istitle():
-            dat.name = nombre
-            return dat
-        else:
-            dat.name = nombre.title()
-        return dat
+        nombre = values.get('name')
+        if nombre and not nombre.istitle():
+            nombre = self._checkname(nombre)
+            values.update({'name': nombre})
+        res = super(_Customname, self).create(values)
+        return res
 
     @api.multi
-    def write(self,values):
-        dat = super(_customname, self).write(values)
-        for sel in self:
-            sel.name
-        return
+    def write(self, values):
+        nombre = values.get('name')
+        if nombre and not nombre.istitle():
+            nombre = self._checkname(nombre)
+            values.update({'name': nombre})
+        res = super(_Customname, self).write(values)
+        return res
+
+    @staticmethod
+    def _checkname(nombre):
+        nombre = nombre.title()
+        return nombre

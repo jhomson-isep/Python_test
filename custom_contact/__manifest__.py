@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "addons/custom_contact",
+    'name': "Valida email ISEP",
 
     'summary': """
         Módulo para validar el campo email en el formulario de contacto
