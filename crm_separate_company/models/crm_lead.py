@@ -16,11 +16,11 @@ class CrmLead(models.Model):
     @api.model
     def create(self, lead):
 
-        # Buscar el cliente mediante el email utilizando el self.env en el modelo res.partner
-        try:
-            client = self.env['res.partner'].sudo().search([('email', '=', lead.get('email_from'))], limit=1)
+        # Buscar el cliente mediante el email utilizando el self.env en el modelo res.partner, si no existe se crea
+        client = self.env['res.partner'].sudo().search([('email', '=', lead.get('email_from'))], limit=1)
+        if len(client) > 0:
             lead.update({'partner_id': client.id})
-        except:
+        else:
             client = self.env['res.partner'].sudo().create({
                 'contact_name': lead.get('contact_name'),
                 'partner_name': lead.get('partner_name'),
@@ -28,17 +28,8 @@ class CrmLead(models.Model):
                 'mobile': lead.get('mobile'),
                 'phone': lead.get('phone')
             })
-            client = self.env['res.partner'].sudo().search([('email', '=', lead.get('email_from'))], limit=1)
             lead.update({'partner_id': client.id})
 
-        company_id = lead.get('company_id')
-        logger.info(company_id)
-
-
-        #Faltantes en el lead
-        lead.update({'x_grupoduplicado': ''})
-        lead.update({'x_numdups': 0})
-        lead.update({'x_precontactonuevodup': ''})
 
         #Lógica de las distintas empresas
         nombre = lead.get('name')
@@ -259,7 +250,7 @@ class CrmLead(models.Model):
 
         #Actualizar id del area
         try:
-            area_id = self.env['product.category'].sudo().search([('x_codigocategoria', 'ilike', cod_area)], limit=1)
+            area_id = self.env['product.category'].sudo().search([('id', '=', referencia_interna_template.id)], limit=1)
             lead.update({'x_area_id': area_id.id})
         except Exception as e:
             logger.info("===== Fallo en area_id ======")
