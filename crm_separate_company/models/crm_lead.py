@@ -249,7 +249,12 @@ class CrmLead(models.Model):
 
         #=======INICIO REVISAR========
         #Buscar si esta duplicada por email y curso
-        lead_dup_ids = self.env['crm.lead'].sudo().search([('email_from', '=', email), ('x_curso_id', '=', referencia_interna_template.id), ('x_modalidad_id', '=', modalidad_id.id)]).ids
+        #lead_dup_ids = self.env['crm.lead'].sudo().search([('email_from', '=', email), ('x_curso_id', '=', referencia_interna_template.id), ('x_modalidad_id', '=', modalidad_id.id)]).ids
+        lead_dup_ids = self.env['crm.lead'].sudo().search(
+            [('email_from', '=', email), ('x_codcurso', '=', cod_curso),
+             ('x_codarea', '=', cod_area), (
+                 'name', 'ilike', cod_curso), ('name', 'ilike', modalidad)]).ids
+
 
         if len(lead_dup_ids) > 1:
             logger.info("=================DUPLICADO================")
