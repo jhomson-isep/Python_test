@@ -20,6 +20,8 @@ class CrmLead(models.Model):
         client = self.env['res.partner'].sudo().search([('email', '=', lead.get('email_from'))], limit=1)
         if len(client) > 0:
             lead.update({'partner_id': client.id})
+            #Asignar actual <- El actual es cuando una persona ya ha sido atendida anteriormente por algún asesor
+            lead.update({'x_contactonuevoodup12': client.user_id})
         else:
             client = self.env['res.partner'].sudo().create({
                 'name': lead.get('contact_name'),
