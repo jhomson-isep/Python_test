@@ -93,22 +93,27 @@ class CrmLead(models.Model):
         team_id = None
 
         #Mediante url enviar a donde debe
-        if url.find("ised") != -1:
-            company_id = 4 
-            logger.info("Entre en ISED")
-
-        elif url.find(".com") != -1:
-            company_id = 1111
-            #Carolina Araujo
-            user_id = 100000006
-            team_id = 100000006
-            logger.info("Entre en LATAM")
-        else:
-            company_id = 1
-            #Manel Arroyo
-            user_id = 76
-            #team_id =
-            logger.info("Entre en España")
+        try:
+            if url.find("ised") != -1:
+                company_id = 4 
+                logger.info("Entre en ISED")
+    
+            elif url.find(".com") != -1:
+                company_id = 1111
+                #Carolina Araujo
+                user_id = 100000006
+                team_id = 100000006
+                logger.info("Entre en LATAM")
+            else:
+                company_id = 1
+                #Manel Arroyo
+                user_id = 76
+                #team_id =
+                logger.info("Entre en España")
+        except Exception as e:
+            logger.info(e)
+            company_id = 4
+            logger.info("Entre en ISED por error")
 
         #Problemas con el campo mal hecho de modalidad y sede, en los type form se llaman distinto por eso el cambio
         if modalidad in ('Presencial','presencial'):
