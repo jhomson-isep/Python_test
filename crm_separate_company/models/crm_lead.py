@@ -27,8 +27,9 @@ class CrmLead(models.Model):
                 'name': lead.get('contact_name'),
                 'display_name': lead.get('partner_name'),
                 'email': lead.get('email_from'),
-                'mobile': lead.get('mobile'),
-                'phone': lead.get('phone')
+                'mobile': lead.get('mobile') or None,
+                'phone': lead.get('phone') or None,
+                'type': 'contact'
             })
             lead.update({'partner_id': client.id})
 
@@ -262,33 +263,31 @@ class CrmLead(models.Model):
         #    [('email_from', '=', email), ('x_codcurso', '=', cod_curso),
         #     ('x_codarea', '=', cod_area), (
         #         'name', 'ilike', cod_curso), ('name', 'ilike', modalidad)]).ids
-        nombre_curso = nombre_curso.split(' ')
-        nombre_curso.pop(0)
-        new_nombre_curso = ' '.join(nombre_curso)
-        logger.info(new_nombre_curso)
+        if nombre_curso:
+            nombre_curso = nombre_curso.split(' ')
+            nombre_curso.pop(0)
+            new_nombre_curso = ' '.join(nombre_curso)
+            logger.info(new_nombre_curso)
 
-        lead_dup_ids = self.env['crm.lead'].sudo().search(
-            [('email_from', '=', email), ('x_curso_id.name', 'ilike', new_nombre_curso), ('x_modalidad_id', '=', modalidad_id.id)]).ids
-        logger.info(lead_dup_ids)
+            lead_dup_ids = self.env['crm.lead'].sudo().search(
+                [('email_from', '=', email), ('x_curso_id.name', 'ilike', new_nombre_curso), ('x_modalidad_id', '=', modalidad_id.id)]).ids
+            logger.info(lead_dup_ids)
 
+            if len(lead_dup_ids) >= 1:
+                logger.info("=================DUPLICADO================")
+                #Buscar motivo de perdida
+                lost_reason = self.env['crm.lost.reason'].sudo().search([('name', 'ilike', 'DUPLICADO')], limit=1)
+                #Elimina el registro que se creo porque ya estaba duplicado
+                lead.update({'probability': 0})
+                lead.update({'active': False})
+                lead.update({'lost_reason': lost_reason.id})
 
-        if len(lead_dup_ids) >= 1:
-            logger.info("=================DUPLICADO================")
-            #Buscar motivo de perdida
-            lost_reason = self.env['crm.lost.reason'].sudo().search([('name', 'ilike', 'DUPLICADO')], limit=1)
-            #Elimina el registro que se creo porque ya estaba duplicado
-            lead.update({'probability': 0})
-            lead.update({'active': False})
-            lead.update({'lost_reason': lost_reason.id})
-
-        # =======FINAL REVISAR========
-
-        logger.info(lead)
-        lead_obj = self.sudo().browse(res.id)
-        lead_obj.sudo().write(lead)
-        # Update a la base de datos para cambiar el company_id directo
-        self.env.cr.execute(
-            """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s  WHERE id = %s""" % (company_id, user_id, team_id, res.id))
-
+            logger.info(lead)
+            lead_obj = self.sudo().browse(res.id)
+            lead_obj.sudo().write(lead)
+            # Update a la base de datos para cambiar el company_id directo
+            self.env.cr.execute(
+                """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s  WHERE id = %s""" % (
+                    company_id, user_id, team_id or 'NULL', res.id))
 
         return res
