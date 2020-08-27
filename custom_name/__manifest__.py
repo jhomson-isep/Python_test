@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Valida nombre ISEP",
+    'name': "custom_name",
 
     'summary': """
         Módulo para Estandarizar el campo nombre""",
