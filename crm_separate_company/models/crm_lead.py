@@ -22,7 +22,7 @@ class CrmLead(models.Model):
             try:
                 lead.update({'partner_id': client.id})
                 #Asignar actual <- El actual es cuando una persona ya ha sido atendida anteriormente por algún asesor
-                lead.update({'x_contactonuevoodup12': client.user_id})
+                lead.update({'x_contactonuevoodup12': client.user_id.id or 'NULL'})
             except Exception as e:
                 logger.info("########## CONTACTO EXISTENTE PERO NO ACTUALIZADO")
                 logger.info(e)
