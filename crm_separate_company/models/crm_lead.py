@@ -19,9 +19,14 @@ class CrmLead(models.Model):
         # Buscar el cliente mediante el email utilizando el self.env en el modelo res.partner, si no existe se crea
         client = self.env['res.partner'].sudo().search([('email', '=', lead.get('email_from'))], limit=1)
         if len(client) > 0:
-            lead.update({'partner_id': client.id})
-            #Asignar actual <- El actual es cuando una persona ya ha sido atendida anteriormente por algún asesor
-            lead.update({'x_contactonuevoodup12': client.user_id})
+            try:
+                lead.update({'partner_id': client.id})
+                #Asignar actual <- El actual es cuando una persona ya ha sido atendida anteriormente por algún asesor
+                lead.update({'x_contactonuevoodup12': client.user_id})
+            except Exception as e:
+                logger.info("########## CONTACTO EXISTENTE PERO NO ACTUALIZADO")
+                logger.info(e)
+                logger.info(client)
         else:
             client = self.env['res.partner'].sudo().create({
                 'name': lead.get('contact_name'),
@@ -31,7 +36,12 @@ class CrmLead(models.Model):
                 'phone': lead.get('phone') or None,
                 'type': 'contact'
             })
-            lead.update({'partner_id': client.id})
+            try:
+                lead.update({'partner_id': client.id})
+            except Exception as e:
+                logger.info("########## NO PUDE CREAR Y ASIGNAR EL CONTACTO")
+                logger.info(e)
+                logger.info(client)
 
 
         #Lógica de las distintas empresas
@@ -47,8 +57,6 @@ class CrmLead(models.Model):
         #create
         res = super(CrmLead, self).create(lead)
 
-
-        lead_copy = lead
         lead.clear()
 
         #lead con los nuevos datos hace falta agregar comercial(user_id) y equipo de ventas(crm_team)
