@@ -152,9 +152,10 @@ class CrmLead(models.Model):
         #Añadir producto a la iniciativa directamente
         logger.info(company_id)
 
-        if not cod_curso:
+        if not nombre_curso:
             try:
-                referencia_interna_template = self.env['product.template'].sudo().search([('sale_ok', '=', True), ('default_code', '=', nombre_curso)], limit=1)
+                referencia_interna_template = self.env['product.template'].sudo().search(
+                    [('sale_ok', '=', True), ('default_code', '=', cod_curso), ('company_id', '=', company_id)], limit=1)
                 lead.update({'x_curso_id': referencia_interna_template.id})
 
                 referencia_interna_product = self.env['product.product'].sudo().search([('product_tmpl_id', '=', referencia_interna_template.id)], limit=1)
@@ -164,7 +165,7 @@ class CrmLead(models.Model):
         else:
             try:
                 referencia_interna_template = self.env['product.template'].sudo().search(
-                    [('sale_ok', '=', True), ('name', 'ilike', nombre_curso), ('default_code', '=', cod_curso)], limit=1)
+                    [('sale_ok', '=', True), ('name', 'ilike', nombre_curso), ('default_code', '=', cod_curso), ('company_id', '=', company_id)], limit=1)
                 lead.update({'x_curso_id': referencia_interna_template.id})
 
                 referencia_interna_product = self.env['product.product'].sudo().search(
