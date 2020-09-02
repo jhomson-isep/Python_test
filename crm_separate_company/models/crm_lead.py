@@ -251,7 +251,7 @@ class CrmLead(models.Model):
 
             else:
                 #Iruñised - Pamplona
-                #company_id = 22
+                company_id = 22
                 #Laura Ollo
                 user_id = 115
                 #team_id = 10
