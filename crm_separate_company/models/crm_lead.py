@@ -151,14 +151,27 @@ class CrmLead(models.Model):
         #REVISAR ESTO
         #Añadir producto a la iniciativa directamente
         logger.info(company_id)
-        try:
-            referencia_interna_template = self.env['product.template'].sudo().search([('sale_ok', '=', True), ('name', 'ilike', nombre_curso)], limit=1)
-            lead.update({'x_curso_id': referencia_interna_template.id})
 
-            referencia_interna_product = self.env['product.product'].sudo().search([('product_tmpl_id', '=', referencia_interna_template.id)], limit=1)
-            lead.update({'x_producto_id': referencia_interna_product.id})
-        except:
-            logger.info("No pudo relacionar la referencia interna con el cod_curso")
+        if not cod_curso:
+            try:
+                referencia_interna_template = self.env['product.template'].sudo().search([('sale_ok', '=', True), ('default_code', '=', nombre_curso)], limit=1)
+                lead.update({'x_curso_id': referencia_interna_template.id})
+
+                referencia_interna_product = self.env['product.product'].sudo().search([('product_tmpl_id', '=', referencia_interna_template.id)], limit=1)
+                lead.update({'x_producto_id': referencia_interna_product.id})
+            except:
+                logger.info("No pudo relacionar la referencia interna con el cod_curso")
+        else:
+            try:
+                referencia_interna_template = self.env['product.template'].sudo().search(
+                    [('sale_ok', '=', True), ('name', 'ilike', nombre_curso), ('default_code', '=', cod_curso)], limit=1)
+                lead.update({'x_curso_id': referencia_interna_template.id})
+
+                referencia_interna_product = self.env['product.product'].sudo().search(
+                    [('product_tmpl_id', '=', referencia_interna_template.id)], limit=1)
+                lead.update({'x_producto_id': referencia_interna_product.id})
+            except:
+                logger.info("No pudo relacionar la referencia interna con el cod_curso")
 
 
         #ISEP LATAM
