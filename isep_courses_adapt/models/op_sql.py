@@ -45,7 +45,7 @@ class SQL():
 
     def get_all_courses(self):
         rows = self.query(
-            "SELECT *, SUBSTRING(Curso_Id, 3, 2) AS code FROM Cursos WHERE FechaAlta between '2018-01-01' and '2020-31-12';")
+            "SELECT *, SUBSTRING(Curso_Id, 3, 2) AS code FROM Cursos")
         return rows
 
     def get_course_by_code(self, code):
@@ -62,3 +62,24 @@ class SQL():
         rows = self.query(
             "SELECT * FROM CursosAsignaturas WHERE CodAsignatura = '{0}';".format(subject_code))
         return rows
+
+    def get_all_students(self):
+        rows = self.query(
+            "SELECT TOP(10) * FROM Alumnos WHERE N_Id NOT IN (SELECT DISTINCT al.N_Id FROM Alumnos al LEFT JOIN "
+            "GrupoISEPxtra.dbo.gin_PreMatriculas pm ON al.N_Id = pm.AlumnoID WHERE pm.AnyAcademico IS NOT NULL AND "
+            "pm.SedeID in (7,8,9,10,11,12,13,27) AND pm.Tramitada = 1 ) ORDER BY N_Id DESC;")
+        return rows
+
+    def get_province_by_nid(self, nid):
+        row = self.query_get_one(
+            "SELECT tbl.NomItem AS provincia , al.NombreEmpresa AS nombre_empresa, al.DireccionEmpresa, "
+            "al.TelefonoEmpresa, al.PoblacionEmpresa, al.CodPostalEmpresa, al.CodPostalEmpresa FROM Alumnos al JOIN "
+            "Tablas tbl ON al.ProvinciaEmpresa = tbl.CodItem AND tbl.CodTaula = 'PR' WHERE al.NombreEmpresa IS NOT "
+            "NULL AND al.N_Id = {0};".format(nid))
+        return row
+
+    def get_country_by_nid(self, nid):
+        row = self.query_get_one(
+            "SELECT tbl.NomItem AS country FROM Alumnos al JOIN Tablas tbl ON al.Pais = tbl.CodItem AND tbl.CodTaula = "
+            "'PA' WHERE al.Pais IS NOT NULL AND al.N_Id = {0};".format(nid))
+        return row
