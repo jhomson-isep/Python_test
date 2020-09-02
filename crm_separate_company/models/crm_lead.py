@@ -65,7 +65,7 @@ class CrmLead(models.Model):
             'x_codcurso': cod_curso,
             'email_from': email,
             'x_codtipodecurso':cod_tipo_curso,
-            'description': url,
+            #'description': url,
             'x_codmodalidad': modalidad,
             'user_id': None,
             'team_id': None,
