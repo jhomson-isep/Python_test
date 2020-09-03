@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="imc_res_partner_form_inherit" model="ir.ui.view">
+            <field name="name">imc.res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="x_actual_campaign" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
