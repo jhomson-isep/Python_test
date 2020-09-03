@@ -336,4 +336,13 @@ class CrmLead(models.Model):
                 """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s  WHERE id = %s""" % (
                     company_id, user_id, team_id or 'NULL', res.id))
 
+        else:
+            logger.info(lead)
+            lead_obj = self.sudo().browse(res.id)
+            lead_obj.sudo().write(lead)
+            # Update a la base de datos para cambiar el company_id directo
+            self.env.cr.execute(
+                """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s  WHERE id = %s""" % (
+                    company_id, user_id, team_id or 'NULL', res.id))
+
         return res
