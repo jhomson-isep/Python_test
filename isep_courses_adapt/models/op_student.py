@@ -24,7 +24,7 @@ class OpStudent(models.Model):
     moodle_id = fields.Integer(string='Moodle ID')
     moodle_user = fields.Char(string='Moodle user', size=128)
     moodle_pass = fields.Char(string='Moodle Password', size=24)
-    partner_id = fields.Many2one('res.partner', 'Partner', ondelete="cascade", required=False)
+    partner_id = fields.Many2one('res.partner', 'Partner', required=False)
 
     _sql_constraints = [(
         'unique_n_id',

@@ -29,7 +29,8 @@ logger = logging.getLogger(__name__)
 
 class CrmLead(models.Model):
     _inherit = 'crm.lead'
-    zapier = fields.Boolean(string="¿Proviene de Zapier?")
+
+    zapier = fields.Boolean(string="¿Proviene de Zapier?", default=False)
 
     @api.model
     def create(self, lead):
@@ -39,7 +40,7 @@ class CrmLead(models.Model):
         if len(client) > 0:
             try:
                 lead.update({'partner_id': client.id})
-                #Asignar actual <- El actual es cuando una persona ya ha sido atendida anteriormente por algún asesor
+                # Asignar actual <- El actual es cuando una persona ya ha sido atendida anteriormente por algún asesor
                 lead.update({'x_contactonuevoodup12': client.user_id.id or None})
             except Exception as e:
                 logger.info("########## CONTACTO EXISTENTE PERO NO ACTUALIZADO")
@@ -61,8 +62,7 @@ class CrmLead(models.Model):
                 logger.info(e)
                 logger.info(client)
 
-
-        #Lógica de las distintas empresas
+        # Lógica de las distintas empresas
         cod_sede = lead.get('x_codsede')
         cod_curso = lead.get('x_codcurso')
         email = lead.get('email_from')
@@ -72,18 +72,18 @@ class CrmLead(models.Model):
         url = lead.get('website')
         nombre_curso = lead.get('x_universidad')
 
-        #create
+        # create
         res = super(CrmLead, self).create(lead)
 
         lead.clear()
 
-        #lead con los nuevos datos hace falta agregar comercial(user_id) y equipo de ventas(crm_team)
+        # lead con los nuevos datos hace falta agregar comercial(user_id) y equipo de ventas(crm_team)
         lead = {
             'x_codsede': cod_sede,
             'x_codcurso': cod_curso,
             'email_from': email,
-            'x_codtipodecurso':cod_tipo_curso,
-            #'description': url,
+            'x_codtipodecurso': cod_tipo_curso,
+            # 'description': url,
             'x_codmodalidad': modalidad,
             'user_id': None,
             'team_id': None,
@@ -121,45 +121,45 @@ class CrmLead(models.Model):
         user_id = None
         team_id = None
 
-        #Mediante url enviar a donde debe
+        # Mediante url enviar a donde debe
         try:
             if url.find("ised") != -1:
-                company_id = 4 
+                company_id = 4
                 logger.info("Entre en ISED")
-    
+
             elif url.find(".com") != -1:
                 company_id = 1111
-                #Carolina Araujo
+                # Carolina Araujo
                 user_id = 100000006
                 team_id = 100000006
                 logger.info("Entre en LATAM")
             else:
                 company_id = 1
-                #Manel Arroyo
+                # Manel Arroyo
                 user_id = 76
-                #team_id =
+                # team_id =
                 logger.info("Entre en España")
         except Exception as e:
             logger.info(e)
             company_id = 4
             logger.info("Entre en ISED por error")
 
-        #Problemas con el campo mal hecho de modalidad y sede, en los type form se llaman distinto por eso el cambio
-        if modalidad in ('Presencial','presencial'):
+        # Problemas con el campo mal hecho de modalidad y sede, en los type form se llaman distinto por eso el cambio
+        if modalidad in ('Presencial', 'presencial'):
             modalidad = 'PRS'
         elif modalidad in ('Online', 'online'):
             modalidad = 'ONL'
-        #Modalidad At-Home
+        # Modalidad At-Home
         elif modalidad in ('at home', 'At Home', 'At home'):
             modalidad = 'ELR'
 
-        #Actualizar la modalidad
+        # Actualizar la modalidad
         lead.update({'x_codmodalidad': modalidad})
 
-        #Dependiendo la sede se le colocara el nombre nuevo
+        # Dependiendo la sede se le colocara el nombre nuevo
         if cod_sede == 'centro-oviedo':
             cod_sede = 'OVI'
-        elif cod_sede in ('centro-bilbao','bilbao','Bilbao'):
+        elif cod_sede in ('centro-bilbao', 'bilbao', 'Bilbao'):
             cod_sede = 'BIO'
         elif cod_sede in ('centro-madrid-atocha', 'madrid', 'Madrid', 'MAD', 'MDR'):
             cod_sede = 'MDR'
@@ -168,8 +168,8 @@ class CrmLead(models.Model):
         elif cod_sede == 'centro-zaragoza':
             cod_sede = 'ZAR'
 
-        #REVISAR ESTO
-        #Añadir producto a la iniciativa directamente
+        # REVISAR ESTO
+        # Añadir producto a la iniciativa directamente
         logger.info(company_id)
         logger.info(cod_curso)
 
@@ -181,7 +181,8 @@ class CrmLead(models.Model):
             logger.info(lead.get('x_curso_id'))
             logger.info("Se actualizo")
 
-            referencia_interna_product = self.env['product.product'].sudo().search([('product_tmpl_id', '=', referencia_interna_template.id)], limit=1)
+            referencia_interna_product = self.env['product.product'].sudo().search(
+                [('product_tmpl_id', '=', referencia_interna_template.id)], limit=1)
             logger.info(referencia_interna_product)
             lead.update({'x_producto_id': referencia_interna_product.id})
             logger.info(lead.get('x_producto_id'))
@@ -202,19 +203,18 @@ class CrmLead(models.Model):
             logger.info("No pudo relacionar la referencia interna con el cod_curso")
         """
 
-
-        #ISEP LATAM
-        #---------------------------------
+        # ISEP LATAM
+        # ---------------------------------
         if company_id == 1111:
-            #Solo se usa online en latam
-            #Carolina Araujo
+            # Solo se usa online en latam
+            # Carolina Araujo
             user_id = 100000006
             team_id = 100000006
 
-        #ISEP SL
-        #---------------------------------
+        # ISEP SL
+        # ---------------------------------
         elif company_id == 1:
-            #Manel Arroyo
+            # Manel Arroyo
             user_id = 76
 
             if cod_sede in ('barcelona', 'Barcelona', 'BCN'):
@@ -235,40 +235,40 @@ class CrmLead(models.Model):
             if modalidad == 'ONL':
                 team_id = 5
 
-        #ISED
-        #---------------------------------
+        # ISED
+        # ---------------------------------
         elif company_id == 4:
 
-            #ONL es online en modalidad
+            # ONL es online en modalidad
 
             if modalidad == 'ONL':
-                #Centro Sup de estudios ISED SL - Online
-                #company_id = 3
-                #Manel Arroyo
+                # Centro Sup de estudios ISED SL - Online
+                # company_id = 3
+                # Manel Arroyo
                 user_id = 76
                 team_id = 8
                 logger.info("Entre en Online")
 
             elif cod_sede == 'MDR':
-                #Centro de estudios ISED SL - Madrid
-                #company_id = 4
-                #Karoll Rodríguez
+                # Centro de estudios ISED SL - Madrid
+                # company_id = 4
+                # Karoll Rodríguez
                 user_id = 102
                 team_id = 10
                 logger.info("Entre en Madrid")
 
             elif cod_sede == 'BIO':
-                #Centro de estudios ISED Bilbao - Bilbao
-                #company_id = 5
-                #ISED BILBAO
+                # Centro de estudios ISED Bilbao - Bilbao
+                # company_id = 5
+                # ISED BILBAO
                 user_id = 189
                 team_id = 12
                 logger.info("Entre en Bilbao")
 
             elif cod_sede == 'ZAR':
-                #Zarised - Zaragoza
-                #company_id = 6
-                #Silvia Revilla
+                # Zarised - Zaragoza
+                # company_id = 6
+                # Silvia Revilla
                 user_id = 105
                 team_id = 11
                 logger.info("Entre en Zaragoza")
@@ -279,14 +279,14 @@ class CrmLead(models.Model):
                 logger.info("Oviedo")
 
             else:
-                #Iruñised - Pamplona
+                # Iruñised - Pamplona
                 company_id = 22
-                #Laura Ollo
+                # Laura Ollo
                 user_id = 115
-                #team_id = 10
+                # team_id = 10
                 logger.info("Entre en Iruñised")
 
-        #Actualizar id de la modalidad
+        # Actualizar id de la modalidad
         try:
             modalidad_id = self.env['product.attribute.value'].sudo().search(
                 [('name', 'ilike', modalidad), ('attribute_id', 'in', [2, 3])], limit=1)
@@ -296,7 +296,7 @@ class CrmLead(models.Model):
             logger.info(e)
             logger.info("No pudo vincular la modalidad con el codigo de modalidad")
 
-        #Actualizar id del area
+        # Actualizar id del area
         try:
             area_id = self.env['product.category'].sudo().search([('x_codigocategoria', 'ilike', cod_area)], limit=1)
             lead.update({'x_area_id': area_id.id})
@@ -306,8 +306,8 @@ class CrmLead(models.Model):
             logger.info(e)
             logger.info("No pudo vincular el area con el codigo de area")
 
-        #=======INICIO REVISAR========
-        #Buscar si esta duplicada por email y curso
+        # =======INICIO REVISAR========
+        # Buscar si esta duplicada por email y curso
 
         if nombre_curso:
             nombre_curso = nombre_curso.split(' ')
@@ -316,14 +316,15 @@ class CrmLead(models.Model):
             logger.info(new_nombre_curso)
 
             lead_dup_ids = self.env['crm.lead'].sudo().search(
-                [('email_from', '=', email), ('x_curso_id.name', 'ilike', new_nombre_curso), ('x_modalidad_id', '=', modalidad_id.id)]).ids
+                [('email_from', '=', email), ('x_curso_id.name', 'ilike', new_nombre_curso),
+                 ('x_modalidad_id', '=', modalidad_id.id)]).ids
             logger.info(lead_dup_ids)
 
             if len(lead_dup_ids) >= 1:
                 logger.info("=================DUPLICADO================")
-                #Buscar motivo de perdida
+                # Buscar motivo de perdida
                 lost_reason = self.env['crm.lost.reason'].sudo().search([('name', 'ilike', 'DUPLICADO')], limit=1)
-                #Elimina el registro que se creo porque ya estaba duplicado
+                # Elimina el registro que se creo porque ya estaba duplicado
                 lead.update({'probability': 0})
                 lead.update({'active': False})
                 lead.update({'lost_reason': lost_reason.id})
