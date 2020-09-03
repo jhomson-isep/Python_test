@@ -91,7 +91,9 @@ class CrmLead(models.Model):
             'x_codarea': cod_area,
             'x_area_id': None,
             'website': None,
-            'x_universidad': None
+            'x_universidad': None,
+            'x_curso_id': None,
+            'x_producto_id': None
         }
 
         try:
@@ -169,15 +171,22 @@ class CrmLead(models.Model):
         #REVISAR ESTO
         #Añadir producto a la iniciativa directamente
         logger.info(company_id)
+        logger.info(cod_curso)
 
         try:
             referencia_interna_template = self.env['product.template'].sudo().search(
                 [('sale_ok', '=', True), ('default_code', '=', cod_curso), ('company_id', '=', company_id)], limit=1)
+            logger.info(referencia_interna_template)
             lead.update({'x_curso_id': referencia_interna_template.id})
+            logger.info(lead.get('x_curso_id'))
+            logger.info("Se actualizo")
 
             referencia_interna_product = self.env['product.product'].sudo().search([('product_tmpl_id', '=', referencia_interna_template.id)], limit=1)
+            logger.info(referencia_interna_product)
             lead.update({'x_producto_id': referencia_interna_product.id})
-        except:
+            logger.info(lead.get('x_producto_id'))
+        except Exception as e:
+            logger.info(e)
             logger.info("No pudo relacionar la referencia interna con el cod_curso")
 
         """
@@ -299,11 +308,7 @@ class CrmLead(models.Model):
 
         #=======INICIO REVISAR========
         #Buscar si esta duplicada por email y curso
-        #lead_dup_ids = self.env['crm.lead'].sudo().search([('email_from', '=', email), ('x_curso_id', '=', referencia_interna_template.id), ('x_modalidad_id', '=', modalidad_id.id)]).ids
-        #lead_dup_ids = self.env['crm.lead'].sudo().search(
-        #    [('email_from', '=', email), ('x_codcurso', '=', cod_curso),
-        #     ('x_codarea', '=', cod_area), (
-        #         'name', 'ilike', cod_curso), ('name', 'ilike', modalidad)]).ids
+
         if nombre_curso:
             nombre_curso = nombre_curso.split(' ')
             nombre_curso.pop(0)
