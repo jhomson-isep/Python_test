@@ -1,13 +1,13 @@
 <odoo>
     <data>
         <!-- Inherit Form View to Modify it -->
-        <record id="imc_crm_lead_form_inherit" model="ir.ui.view">
-            <field name="name">imc.crm.lead.form.inherit</field>
+        <record id="isc_crm_lead_form_inherit" model="ir.ui.view">
+            <field name="name">isc.crm.lead.form.inherit</field>
             <field name="model">crm.lead</field>
             <field name="inherit_id" ref="crm.lead_form_lead"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='tag_ids']" position="after">
-                    <field name="x_zapier"/>
+                <xpath expr="//field[@name='zapier']" position="after">
+                    <field name="zapier"/>
                 </xpath>
             </field>
         </record>

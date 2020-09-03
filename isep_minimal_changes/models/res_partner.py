@@ -1,7 +1,7 @@
 from odoo import models, fields, api, _
 import logging
 
-class ResPartner(models.model):
+class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    actual_campaign = fields.Many2many('res.partner', string="Campaña Actual")
+    actual_campaign = fields.Many2many('utm.campaign', string="Campaña Actual")

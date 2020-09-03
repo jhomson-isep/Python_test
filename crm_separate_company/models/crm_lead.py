@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 
 class CrmLead(models.Model):
     _inherit = 'crm.lead'
-
+    zapier = fields.Boolean('crm.lead', string="¿Proviene de Zapier?")
 
     @api.model
     def create(self, lead):
