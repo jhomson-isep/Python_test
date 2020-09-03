@@ -4,9 +4,9 @@
         <record id="isc_crm_lead_form_inherit" model="ir.ui.view">
             <field name="name">isc.crm.lead.form.inherit</field>
             <field name="model">crm.lead</field>
-            <field name="inherit_id" ref="crm.lead_form_lead"/>
+            <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='zapier']" position="after">
+                <xpath expr="//field[@name='x_producto_id']" position="after">
                     <field name="zapier"/>
                 </xpath>
             </field>

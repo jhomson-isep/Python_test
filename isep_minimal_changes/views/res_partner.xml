@@ -6,7 +6,7 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='actual_campaign']" position="after">
+                <xpath expr="//field[@name='lang']" position="after">
                     <field name="actual_campaign" widget="many2many_tags"/>
                 </xpath>
             </field>
