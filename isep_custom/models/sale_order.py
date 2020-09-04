@@ -849,7 +849,7 @@ class sale_order(models.Model):
             sel.partner_id.customer = True
             sel.partner_invoice_id.customer = True
             text_error = ''
-            if not sel.partner_id.vat and sel.company_id == 1111:
+            if not sel.partner_id.vat and sel.company_id.id == 1111:
                 text_error += "No se puede confirmar si el cliente no tiene RFC.\n"
             if not sel.x_Matricula_Pagada:
                 text_error += "No se ha pagado la matrícula.\n"
