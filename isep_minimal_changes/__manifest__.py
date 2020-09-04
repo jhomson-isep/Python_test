@@ -13,7 +13,8 @@
     "category": "Education",
     "license": "AGPL-3",
     "depends": [
-        "base"
+        "base",
+        "utm"
     ],
     "data": [
         "views/res_partner.xml"
