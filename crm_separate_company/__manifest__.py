@@ -20,8 +20,6 @@
         "crm"
     ],
     "data": [
-        "security/ir.model.access.csv",
-        "views/crm_lead.xml"
     ],
     'installable': True,
 }

@@ -354,3 +354,4 @@ class CrmLead(models.Model):
         else:
             # create
             res = super(CrmLead, self).create(lead)
+            return res
