@@ -74,6 +74,7 @@ class CrmLead(models.Model):
             cod_tipo_curso = lead.get('x_codtipodecurso')
             url = lead.get('website')
             nombre_curso = lead.get('x_universidad')
+            telefono = lead.get('phone')
 
             # create
             res = super(CrmLead, self).create(lead)
@@ -223,14 +224,24 @@ class CrmLead(models.Model):
                 if cod_sede in ('barcelona', 'Barcelona', 'BCN'):
                     cod_sede = 'CAT'
                     team_id = 1
+
                 elif cod_sede in ('metodo-at-home', 'Metodo-At-Home'):
                     cod_sede = 'MAH'
                     team_id = 1
+
                 elif cod_sede in ('valencia', 'Valencia', 'VAL'):
                     cod_sede = 'VAL'
                     team_id = 200000001
+
                 elif cod_sede == 'ONL':
                     team_id = 5
+                    # Mandar a Latam cuando sea un telefono de México y Colombia
+                    if telefono[:3] in ('+52', '+57'):
+                        company_id = 1111
+                        # Carolina Araujo
+                        user_id = 100000006
+                        team_id = 100000006
+
                 elif cod_sede == 'MDR':
                     team_id = 4
 
