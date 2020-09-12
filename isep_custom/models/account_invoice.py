@@ -184,7 +184,7 @@ class account_invoice(models.Model):
                 # serán los primeros pagos y se duplican lineas debido a que el sistema no lo genera.
                 for line_obj in self.move_id.line_ids.sorted(key=lambda r: r.date_maturity):
                     line_obj.partner_id = self.partner_id.id
-                    if (line_obj.account_id.code == '430000' and self.company_id.id == 1) or (
+                    if (line_obj.account_id.code == '430000' and self.company_id.id in [1, 4, 5]) or (
                             line_obj.account_id.code[:6] == '105-00' and self.company_id.id in [1, 1116]):
                         if bool_matricula:
                             line_matricula = line_obj.with_context(check_move_validity=False).copy()
