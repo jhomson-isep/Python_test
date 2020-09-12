@@ -5,28 +5,19 @@ from odoo.exceptions import UserError
 import re
 
 
-class ResPartner(models.Model):
-    _inherit = 'res.partner'
+class CrmLead(models.Model):
+    _inherit = 'crm.lead'
 
     @api.model
     def create(self, values):
-        email = values.get('email')
+        email = values.get('email_from')
+        name = values.get('name')
         if email:
             email = self.check_email(email)
-            values.update({'email': email})
-        else:
-            raise UserError('Introduzca una dirección de correo electrónico')
-
-        res = super(ResPartner, self).create(values)
-        return res
-
-    @api.multi
-    def write(self, values):
-        email = values.get('email')
-        if email:
-            email = self.check_email(email)
-            values.update({'email': email})
-        res = super(ResPartner, self).write(values)
+            if values.get('email_from') in name:
+                name = name.replace(values.get('email_from'), email)
+            values.update({'email_from': email, 'name': name})
+        res = super(CrmLead, self).create(values)
         return res
 
     @staticmethod
