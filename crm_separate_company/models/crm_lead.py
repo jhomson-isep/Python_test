@@ -248,6 +248,12 @@ class CrmLead(models.Model):
                 # ONL es online en modalidad
                 if modalidad == 'ONL':
                     team_id = 5
+                    # Mandar a Latam cuando sea un telefono de México y Colombia
+                    if telefono[:3] in ('+52', '+57'):
+                        company_id = 1111
+                        # Carolina Araujo
+                        user_id = 100000006
+                        team_id = 100000006
 
             # ISED
             # ---------------------------------
