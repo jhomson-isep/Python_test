@@ -5,6 +5,7 @@ from odoo.exceptions import UserError
 from requests import get, post
 from .op_sql import SQL
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -17,9 +18,11 @@ logger = logging.getLogger(__name__)
 class OpCourse(models.Model):
     _inherit = 'op.course'
 
-    product_template_id = fields.Many2one('product.template', string='Producto')
+    product_template_id = fields.Many2one('product.template',
+                                          string='Producto')
     modality_id = fields.Many2one('op.modality', string='Modality')
-    evaluation_type_id = fields.Many2one('op.evaluation.type', string='Evaluation type')
+    evaluation_type_id = fields.Many2one('op.evaluation.type',
+                                         string='Evaluation type')
     period = fields.Char(string="Period")
     hours = fields.Float(string="Hours")
     credits = fields.Float(string="Credits")
@@ -57,7 +60,8 @@ class OpCourse(models.Model):
             }
 
             if values.get('parent_id'):
-                params.update({'categories[0][parent]': values.get('parent_id')})
+                params.update({'categories[0][parent]': values.get(
+                    'parent_id')})
             try:
                 response = post(url + endpoint, params)
                 response = response.json()
@@ -133,7 +137,8 @@ class OpCourse(models.Model):
                     modality = self.env['op.modality'].search(
                         [('code', '=', course_moodle.Modalidad)], limit=1)
                     product = self.env['product.template'].search(
-                        [('default_code', '=', default_code), ('active', '=', True)],
+                        [('default_code', '=', default_code), ('active',
+                                                               '=', True)],
                         limit=1)
                     logger.info(product.name)
                     course_values = {
@@ -151,12 +156,13 @@ class OpCourse(models.Model):
                         'content': course_moodle.Contenido,
                         'moodle_code': course_moodle.MoodleId
                     }
-                    res = super(OpCourse, self).create(course_values)
-                    print(res)
+                    if course_moodle.NombreCurso:
+                        res = super(OpCourse, self).create(course_values)
+                        print(res)
 
-                # if int_break == 5:
-                #     break
-                # int_break += 1
+                if int_break == 50 and os.name != "posix":
+                    break
+                int_break += 1
             except Exception as e:
                 logger.info("===== Fallo ======")
                 logger.info(e)
