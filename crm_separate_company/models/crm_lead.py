@@ -339,7 +339,7 @@ class CrmLead(models.Model):
                 lead_dup_ids = self.env['crm.lead'].sudo().search(
                     [('email_from', '=', email), ('x_curso_id.name', 'ilike', new_nombre_curso),
                      ('x_modalidad_id', '=', modalidad_id.id),
-                     ('create_date', '>=', fecha + datetime.timedelta(hours=-1)),
+                     ('create_date', '>=', fecha - datetime.timedelta(hours=1)),
                      ('create_date', '<=', fecha)]).ids
                 logger.info(lead_dup_ids)
 
