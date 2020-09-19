@@ -4,8 +4,13 @@ from odoo import models, fields
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    moodle_token = fields.Char(string="Moodle token", config_parameter='moodle_token', size=128)
-    moodle_url = fields.Char(string="Moodle URL", config_parameter='moodle_url', size=128)
-    moodle_endpoint = fields.Char(string="Moodle endpoint", config_parameter='moodle_endpoint',
+    moodle_token = fields.Char(string="Moodle token",
+                               config_parameter='moodle_token', size=128)
+    moodle_url = fields.Char(string="Moodle URL",
+                             config_parameter='moodle_url', size=128)
+    moodle_endpoint = fields.Char(string="Moodle endpoint",
+                                  config_parameter='moodle_endpoint',
                                   default="/webservice/rest/server.php")
     send_moodle = fields.Boolean(string='Send moodle', default=False)
+    courses_limit = fields.Integer(string="Courses limit", default=100,
+                                   config_parameter='courses_limit')

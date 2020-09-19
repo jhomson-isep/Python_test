@@ -210,7 +210,7 @@ msgid "Coordinator"
 msgstr "Coordinador"
 
 #. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__modality
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__modality_id
 msgid "Modality"
 msgstr "Modalidad"
 
@@ -273,6 +273,11 @@ msgstr "Días de expiración"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__date_diplomas
 msgid "Date diplomas"
 msgstr "Fecha de diplomas"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__students_limit
+msgid "Students limit"
+msgstr "Límite matrículas"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__acknowledgments

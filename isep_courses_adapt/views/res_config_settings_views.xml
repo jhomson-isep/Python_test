@@ -52,6 +52,16 @@
                         </div>
                     </div>
 
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <span class="o_form_label">Límite</span>
+                            <div class="text-muted">
+                                Limite de cursos a importar
+                                <field name="courses_limit"/>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </xpath>
         </field>
