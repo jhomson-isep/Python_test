@@ -37,7 +37,8 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         logger.info("On import students")
         logger.info("**************************************")
-        rows = s.get_all_students()
+        offset = self.search_count([])
+        rows = s.get_all_students(offset=offset)
         int_break = 0
         for student in rows:
             try:
@@ -94,9 +95,11 @@ class OpStudent(models.Model):
                         'moodle_user': student.Usuario
                     }
 
-                    logger.info(student_values)
+                    # logger.info(student_values)
                     res = super(OpStudent, self).create(student_values)
                     print(res)
+                    logger.info('Student with n_id {0} created'.format(
+                        student_values['n_id']))
 
                     if int_break == 10 and os.name != "posix":
                         break
@@ -105,3 +108,7 @@ class OpStudent(models.Model):
             except Exception as e:
                 logger.info(e)
                 continue
+
+        logger.info("**************************************")
+        logger.info("End of script: import students")
+        logger.info("**************************************")

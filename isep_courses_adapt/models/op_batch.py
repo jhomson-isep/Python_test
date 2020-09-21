@@ -126,12 +126,8 @@ class OpBatch(models.Model):
         logger.info("**************************************")
         logger.info("import batches")
         logger.info("**************************************")
-        config_params = self.env['ir.config_parameter'].sudo()
-        limit = config_params.get_param('courses_limit')
-        token = config_params.get_param('moodle_token')
-        logger.info(limit)
-        logger.info(token)
-        rows = s.get_all_courses(limit=limit)
+        offset = self.search_count([])
+        rows = s.get_all_courses(offset=offset)
         int_break = 0
         for batch in rows:
             course_code = str(batch.Curso_Id)
