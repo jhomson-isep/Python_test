@@ -44,7 +44,7 @@ class CrmLead(models.Model):
                 try:
                     lead.update({'partner_id': client.id})
                     # Asignar actual <- El actual es cuando una persona ya ha sido atendida anteriormente por algún asesor
-                    lead.update({'x_contactonuevoodup12': client.user_id.id or None})
+                    #lead.update({'x_contactonuevoodup12': client.user_id.id or None})
                 except Exception as e:
                     logger.info("########## CONTACTO EXISTENTE PERO NO ACTUALIZADO")
                     logger.info(e)
@@ -75,6 +75,7 @@ class CrmLead(models.Model):
             url = lead.get('website')
             nombre_curso = lead.get('x_universidad')
             telefono = lead.get('phone')
+            fecha = lead.get('create_date')
 
             # create
             res = super(CrmLead, self).create(lead)
@@ -337,7 +338,9 @@ class CrmLead(models.Model):
 
                 lead_dup_ids = self.env['crm.lead'].sudo().search(
                     [('email_from', '=', email), ('x_curso_id.name', 'ilike', new_nombre_curso),
-                     ('x_modalidad_id', '=', modalidad_id.id)]).ids
+                     ('x_modalidad_id', '=', modalidad_id.id),
+                     ('create_date', '>=', fecha - datetime.timedelta(hours=1)),
+                     ('create_date', '<=', fecha)]).ids
                 logger.info(lead_dup_ids)
 
                 if len(lead_dup_ids) >= 1:
