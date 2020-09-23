@@ -21,9 +21,8 @@
 from odoo import models, fields, api, SUPERUSER_ID
 import urllib.parse as urlparse
 from urllib.parse import parse_qs
-from datetime import datetime
+from datetime import datetime, timedelta
 import logging
-
 logger = logging.getLogger(__name__)
 
 
@@ -76,7 +75,7 @@ class CrmLead(models.Model):
             nombre_curso = lead.get('x_universidad')
             telefono = lead.get('phone')
             fecha = lead.get('create_date')
-            actual = lead.ger('x_contactonuevoodup12')
+            actual = lead.get('x_contactonuevoodup12')
 
             # create
             res = super(CrmLead, self).create(lead)
@@ -347,7 +346,7 @@ class CrmLead(models.Model):
                 lead_dup_ids = self.env['crm.lead'].sudo().search(
                     [('email_from', '=', email), ('x_curso_id.name', 'ilike', new_nombre_curso),
                      ('x_modalidad_id', '=', modalidad_id.id),
-                     ('create_date', '>=', fecha - datetime.timedelta(hours=1)),
+                     ('create_date', '>=', fecha - timedelta(hours=1)),
                      ('create_date', '<=', fecha)]).ids
                 logger.info(lead_dup_ids)
 
