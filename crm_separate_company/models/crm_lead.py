@@ -44,7 +44,7 @@ class CrmLead(models.Model):
                 try:
                     lead.update({'partner_id': client.id})
                     # Asignar actual <- El actual es cuando una persona ya ha sido atendida anteriormente por algún asesor
-                    #lead.update({'x_contactonuevoodup12': client.user_id.id or None})
+                    lead.update({'x_contactonuevoodup12': client.user_id.id or None})
                 except Exception as e:
                     logger.info("########## CONTACTO EXISTENTE PERO NO ACTUALIZADO")
                     logger.info(e)
@@ -76,6 +76,7 @@ class CrmLead(models.Model):
             nombre_curso = lead.get('x_universidad')
             telefono = lead.get('phone')
             fecha = lead.get('create_date')
+            actual = lead.ger('x_contactonuevoodup12')
 
             # create
             res = super(CrmLead, self).create(lead)
@@ -306,6 +307,13 @@ class CrmLead(models.Model):
                     user_id = 115
                     # team_id = 10
                     logger.info("Entre en Iruñised")
+
+            #Actual problema
+            if actual == None:
+                try:
+                    lead.update({'x_contactonuevoodup12': user_id})
+                except Exception as e:
+                    logger.info(e)
 
             # Actualizar id de la modalidad
             try:
