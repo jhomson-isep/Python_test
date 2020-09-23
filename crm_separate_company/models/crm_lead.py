@@ -74,12 +74,12 @@ class CrmLead(models.Model):
             url = lead.get('website')
             nombre_curso = lead.get('x_universidad')
             telefono = lead.get('phone')
-            fecha = lead.get('create_date')
+
             actual = lead.get('x_contactonuevoodup12')
 
             # create
             res = super(CrmLead, self).create(lead)
-
+            fecha = res.create_date
             lead.clear()
 
             # lead con los nuevos datos hace falta agregar comercial(user_id) y equipo de ventas(crm_team)

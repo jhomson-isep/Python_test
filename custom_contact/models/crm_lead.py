@@ -24,14 +24,14 @@ class CrmLead(models.Model):
     def check_email(email):
         gmail = ['gmali.com', 'gmial.com', 'gmail.cm', 'gmal.com', 'gmil.com']
         hotmail = ['hotmal.com', 'hotmail.com.mx', 'hotmai.com',
-                   'hotmial.com', 'jotmail.com', 'hotmali.com', 'hotmail.cm']
+                   'hotmial.com', 'jotmail.com', 'hotmali.com', 'hotmail.cm', 'hotmail.cim']
         hotmail_es = ['hotmal.es', 'hotmai.es', 'hotmial.es',
                       'jotmail.es', 'hotmali.es', 'hotmail.es']
         outlook = ['outlok.com', 'outlock.com', 'outloc.com', 'oulook.com',
-                   'oulook.com', 'otlook.com', 'outluk.com']
+                   'oulook.com', 'otlook.com', 'outluk.com', 'outlook.cim', 'outlook.cpm', 'outlook.cum']
         outlook_es = ['outlok.es', 'outlock.es', 'outloc.es', 'oulook.es',
                       'oulook.es', 'otlook.es', 'outluk.es']
-        yahoo = ['yaho.com', 'yajoo.com', 'jahoo.com', 'yahoo.cm']
+        yahoo = ['yaho.com', 'yajoo.com', 'jahoo.com', 'yahoo.cm', 'yahoo.cim', 'yahoo.cpm', 'yahoo.cum']
         yahoo_es = ['yaho.es', 'yajoo.es', 'jahoo.es']
         if re.match('^[(a-z0-9\_\-\.)]+@[(a-z0-9\_\-\.)]+\.[(a-z)]{2,15}$',
                     str(email).lower()):
