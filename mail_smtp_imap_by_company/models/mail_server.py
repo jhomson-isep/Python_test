@@ -74,7 +74,7 @@ class MailMail(models.Model):
         for server_id, batch_ids in self._split_by_server():
             #geminatecs
             smtp_session = None
-            active_company_id = self.env['res.users'].browse(self._context.get('uid') or self.env.user).company_id
+            active_company_id = self.env['res.users'].browse(self._context.get('uid') or self.env.user.id).company_id
             company_server_id = self.env['ir.mail_server'].search([('default_company', '=', active_company_id.id)])
             server_id = company_server_id and company_server_id.id or server_id
             #geminatecs
