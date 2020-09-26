@@ -836,6 +836,11 @@ class sale_order(models.Model):
             if not sel.x_pago_id and sel.curso:
                 raise ValidationError(_("No se puede crear la factura sin la previa generación de pagos!."))
         super(sale_order, self).action_invoice_create(grouped, final)
+        for order in self:
+            invoices = order.invoice_ids.sorted(key=lambda r: r.id)
+            _logger.info(
+                "Invoice {0} created".format(invoices[len(invoices) - 1].id))
+            invoices[len(invoices) - 1].payment_mode_id = order.payment_mode_id
         #for order in self:
         #    if order.curso and len(order.invoice_ids) == 1:
         #        if order.diario_id:
