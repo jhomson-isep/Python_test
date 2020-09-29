@@ -366,6 +366,10 @@ class CrmLead(models.Model):
                 self.env.cr.execute(
                     """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s  WHERE id = %s""" % (
                         company_id, user_id, team_id or 'NULL', res.id))
+                if len(client) > 0:
+                    self.env.cr.execute(
+                        """ UPDATE res_partner SET company_id = %s WHERE id 
+                        = %s""" % (company_id, client.id))
 
             else:
                 logger.info(lead)
@@ -375,6 +379,10 @@ class CrmLead(models.Model):
                 self.env.cr.execute(
                     """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s  WHERE id = %s""" % (
                         company_id, user_id, team_id or 'NULL', res.id))
+                if len(client) > 0:
+                    self.env.cr.execute(
+                        """ UPDATE res_partner SET company_id = %s WHERE id 
+                        = %s""" % (company_id, client.id))
 
             return res
 
