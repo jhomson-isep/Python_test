@@ -14,7 +14,8 @@
     "license": "AGPL-3",
     "depends": [
         "base",
-        "utm"
+        "utm",
+        "sale"
     ],
     "data": [
         "views/res_partner.xml"
