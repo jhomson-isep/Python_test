@@ -48,11 +48,11 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Domicilio:</strong></div>
-                                        <div class="col-6"><span t-field=""></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Población:</strong></div>
-                                        <div class="col-6"><span t-field=""></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Movil:</strong></div>
@@ -64,18 +64,18 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Universidad:</strong></div>
-                                        <div class="col-6"><span t-field=""></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Estudios:</strong></div>
-                                        <div class="col-6"><span t-field=""></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
                                     </div>
                                 </div>
                                 <!--Segunda Columna-->
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-6"><strong>Nacimiento:</strong></div>
-                                        <div class="col-6"><span t-field=""></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>País:</strong></div>
@@ -83,11 +83,11 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Estado:</strong></div>
-                                        <div class="col-6"><span t-field=""></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>C.P:</strong></div>
-                                        <div class="col-6"><span t-field=""></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Teléfono Fijo;</strong></div>
@@ -99,11 +99,11 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Finalizados</strong></div>
-                                        <div class="col-6"><span t-field=""></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Profesión:</strong></div>
-                                        <div class="col-6"><span t-field=""></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
                                     </div>
                                 </div>
                             </div>
