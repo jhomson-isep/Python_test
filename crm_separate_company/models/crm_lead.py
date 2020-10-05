@@ -178,23 +178,6 @@ class CrmLead(models.Model):
             logger.info(company_id)
             logger.info(cod_curso)
 
-            try:
-                referencia_interna_template = self.env['product.template'].sudo().search(
-                    [('sale_ok', '=', True), ('default_code', '=', cod_curso), ('company_id', '=', company_id)], limit=1)
-                logger.info(referencia_interna_template)
-                lead.update({'x_curso_id': referencia_interna_template.id})
-                logger.info(lead.get('x_curso_id'))
-                logger.info("Se actualizo")
-
-                referencia_interna_product = self.env['product.product'].sudo().search(
-                    [('product_tmpl_id', '=', referencia_interna_template.id)], limit=1)
-                logger.info(referencia_interna_product)
-                lead.update({'x_producto_id': referencia_interna_product.id})
-                logger.info(lead.get('x_producto_id'))
-            except Exception as e:
-                logger.info(e)
-                logger.info("No pudo relacionar la referencia interna con el cod_curso")
-
             """
             try:
                 referencia_interna_template = self.env['product.template'].sudo().search(
@@ -314,6 +297,25 @@ class CrmLead(models.Model):
                 except Exception as e:
                     logger.info(e)
 
+            #Producto
+            try:
+                referencia_interna_template = self.env['product.template'].sudo().search(
+                    [('sale_ok', '=', True), ('default_code', '=', cod_curso), ('company_id', '=', company_id)], limit=1)
+                logger.info(referencia_interna_template)
+                lead.update({'x_curso_id': referencia_interna_template.id})
+                logger.info(lead.get('x_curso_id'))
+                logger.info("Se actualizo")
+
+                referencia_interna_product = self.env['product.product'].sudo().search(
+                    [('product_tmpl_id', '=', referencia_interna_template.id)], limit=1)
+                logger.info(referencia_interna_product)
+                lead.update({'x_producto_id': referencia_interna_product.id})
+                logger.info(lead.get('x_producto_id'))
+            except Exception as e:
+                logger.info(e)
+                logger.info("No pudo relacionar la referencia interna con el cod_curso")
+
+
             # Actualizar id de la modalidad
             try:
                 modalidad_id = self.env['product.attribute.value'].sudo().search(
@@ -334,54 +336,21 @@ class CrmLead(models.Model):
                 logger.info(e)
                 logger.info("No pudo vincular el area con el codigo de area")
 
+
             # =======INICIO REVISAR========
-            # Buscar si esta duplicada por email y curso
-
-            if len(referencia_interna_template) > 0:
-
-                lead_dup_ids = self.env['crm.lead'].sudo().search(
-                    [('email_from', '=', email), ('x_curso_id', '=', referencia_interna_template.id),
-                     ('x_modalidad_id', '=', modalidad_id.id),
-                     ('create_date', '>=', fecha - timedelta(hours=1)),
-                     ('create_date', '<=', fecha)]).ids
-                logger.info(lead_dup_ids)
-
-                if len(lead_dup_ids) >= 1:
-                    logger.info("=================DUPLICADO================")
-                    # Buscar motivo de perdida
-                    lost_reason = self.env['crm.lost.reason'].sudo().search([('name', 'ilike', 'DUPLICADO')], limit=1)
-                    # Elimina el registro que se creo porque ya estaba duplicado
-                    lead.update({'probability': 0})
-                    lead.update({'active': False})
-                    lead.update({'lost_reason': lost_reason.id})
-
-                logger.info(lead)
-                lead_obj = self.sudo().browse(res.id)
-                lead_obj.sudo().write(lead)
-                # Update a la base de datos para cambiar el company_id directo
+            logger.info(lead)
+            lead_obj = self.sudo().browse(res.id)
+            lead_obj.sudo().write(lead)
+            # Update a la base de datos para cambiar el company_id directo
+            self.env.cr.execute(
+                """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s  WHERE id = %s""" % (
+                    company_id, user_id, team_id or 'NULL', res.id))
+            if len(client) > 0:
                 self.env.cr.execute(
-                    """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s  WHERE id = %s""" % (
-                        company_id, user_id, team_id or 'NULL', res.id))
-                if len(client) > 0:
-                    self.env.cr.execute(
-                        """ UPDATE res_partner SET company_id = %s WHERE id 
-                        = %s""" % (company_id, client.id))
-
-            else:
-                logger.info(lead)
-                lead_obj = self.sudo().browse(res.id)
-                lead_obj.sudo().write(lead)
-                # Update a la base de datos para cambiar el company_id directo
-                self.env.cr.execute(
-                    """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s  WHERE id = %s""" % (
-                        company_id, user_id, team_id or 'NULL', res.id))
-                if len(client) > 0:
-                    self.env.cr.execute(
-                        """ UPDATE res_partner SET company_id = %s WHERE id 
-                        = %s""" % (company_id, client.id))
+                    """ UPDATE res_partner SET company_id = %s WHERE id 
+                    = %s""" % (company_id, client.id))
 
             return res
-
         else:
             # create
             res = super(CrmLead, self).create(lead)
