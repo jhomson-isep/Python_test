@@ -17,4 +17,8 @@
         'sale'
     ],
     'installable': True,
+    'data': [
+        'reports/test.xml',
+        'reports/hoja_matricula_ISEPSL.xml'
+    ]
 }
