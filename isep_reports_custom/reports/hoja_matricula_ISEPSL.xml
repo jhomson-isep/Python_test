@@ -19,28 +19,30 @@
                                     <div class="col-6">
                                         <div class="row"><strong style="color:#547494;">Universidad</strong></div>
                                         <div class="row">
-                                            <img class="img-fluid" src="/isep_reports_custom/static/src/img/logo_isep.png" style="height:125px;padding-top:2px;"></img>
+                                            <img class="img-fluid"
+                                                 src="/isep_reports_custom/static/src/img/logo_isep.png"
+                                                 style="height:125px;padding-top:2px;"/>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <!--Iconos en dos renglones cada uno-->
                                         <div class="row">
                                             <div class="col-6">
-                                                <img src="/isep_reports_custom/static/src/img/icono1.png"></img>
+                                                <img src="/isep_reports_custom/static/src/img/icono1.png"/>
                                                 <strong style="color:#fc6c04;">+34 93 847 77 77</strong>
                                             </div>
                                             <div class="col-6">
-                                                <img src="/isep_reports_custom/static/src/img/icono2.png"></img>
+                                                <img src="/isep_reports_custom/static/src/img/icono2.png"/>
                                                 <strong style="color:#fc6c04;">Barcelona@isep.es</strong>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
-                                                <img src="/isep_reports_custom/static/src/img/icono1.png"></img>
+                                                <img src="/isep_reports_custom/static/src/img/icono1.png"/>
                                                 <strong style="color:#fc6c04;">http://www.isep.es/</strong>
                                             </div>
                                             <div class="col-6">
-                                                <img src="/isep_reports_custom/static/src/img/icono2.png"></img>
+                                                <img src="/isep_reports_custom/static/src/img/icono2.png"/>
                                                 <strong style="color:#fc6c04;">B61254314</strong>
                                             </div>
                                         </div>
@@ -58,75 +60,75 @@
                                 <!--Primera Columna-->
                                 <div class="col-6">
                                     <div class="row">
-                                        <div class="col-6"><strong>Nombre:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>Nombre:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.name"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>RFC/Pasaporte:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.vat"></span></div>
+                                        <div class="col-4"><strong>RFC/Pasaporte:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.vat"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>Domicilio:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>Domicilio:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.street"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>Población:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>Población:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.city"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>Movil:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.mobile"></span></div>
+                                        <div class="col-4"><strong>Movil:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.mobile"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>Email:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.email"></span></div>
+                                        <div class="col-4"><strong>Email:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.email"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>Universidad:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>Universidad:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.x_universidad"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>Estudios:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>Estudios:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.x_titulacion"></span></div>
                                     </div>
                                 </div>
                                 <!--Segunda Columna-->
                                 <div class="col-6">
                                     <div class="row">
-                                        <div class="col-6"><strong>Nacimiento:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>Nacimiento:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.x_annonacimiento"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>País:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.country_id"></span></div>
+                                        <div class="col-4"><strong>País:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.country_id"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>Estado:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>Estado:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.state_id"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>C.P:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>C.P:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.zip_sat_id"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>Teléfono Fijo;</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.phone"></span></div>
+                                        <div class="col-4"><strong>Teléfono Fijo;</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.phone"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>Asesor</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.user_id.name"></span></div>
+                                        <div class="col-4"><strong>Asesor</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.user_id.name"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>Finalizados</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>Finalizados</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.x_finalizacionestudios"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>Profesión:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>Profesión:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.x_profesion"></span></div>
                                     </div>
                                 </div>
                             </div>
-                            <!--Segunda seccion-->
+                            <!--############################Segunda seccion#########################################-->
                             <hr style="border:3px solid #547494; margin-bottom:1px;"></hr>
                             <div class="row">
                                 <!--#547494 <- Azul del HR-->
@@ -138,71 +140,47 @@
                                 <!--Primera Columna-->
                                 <div class="col-6">
                                     <div class="row">
-                                        <div class="col-6"><strong>Nombre:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>Nombre:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.name"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>RFC/Pasaporte:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.vat"></span></div>
+                                        <div class="col-4"><strong>RFC/Pasaporte:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.vat"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>Domicilio:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>Movil:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.mobile"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>Población:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>Teléfono Fijo;</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.phone"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>Movil:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.mobile"></span></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6"><strong>Email:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.email"></span></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6"><strong>Universidad:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6"><strong>Estudios:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>Email:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.email"></span></div>
                                     </div>
                                 </div>
                                 <!--Segunda Columna-->
                                 <div class="col-6">
                                     <div class="row">
-                                        <div class="col-6"><strong>Nacimiento:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>Domicilio:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.street"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>País:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.country_id"></span></div>
+                                        <div class="col-4"><strong>Población:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.city"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>Estado:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>País:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.country_id"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>C.P:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>Estado:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.state_id"></span></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><strong>Teléfono Fijo;</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.phone"></span></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6"><strong>Asesor</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.user_id.name"></span></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6"><strong>Finalizados</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6"><strong>Profesión:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-4"><strong>C.P:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_id.zip_sat_id"></span></div>
                                     </div>
                                 </div>
                             </div>
