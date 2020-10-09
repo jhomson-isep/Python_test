@@ -1,0 +1,26 @@
+.logo{
+    height:125px;
+    padding-top:2px;
+}
+
+.title{
+    background-color: #fc6c04;
+    border-top-right-radius:5px;
+    border-bottom-right-radius:5px;
+}
+
+.personal_information{
+    font-size:13px;
+}
+
+.sign{
+    font-size:13px;
+    text-align:center;
+}
+
+.img-sign{
+    height:50px;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
