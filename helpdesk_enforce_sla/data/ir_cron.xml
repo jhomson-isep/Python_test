@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+        <record id="base_automation.ir_cron_data_base_automation_check" model="ir.cron">
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="True" />
+        </record>
+    </data>
+</openerp>

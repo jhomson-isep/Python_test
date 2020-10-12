@@ -1,0 +1,30 @@
+<odoo>
+  <data>
+    <!-- Add Team manager to helpdesk Team -->
+    <record model="ir.ui.view" id="helpdesk_team_manager_id">
+      <field name="name">helpdesk.team.manager.id</field>
+      <field name="model">helpdesk.team</field>
+	  <field name="inherit_id" ref="helpdesk.helpdesk_team_view_form"/>
+      <field name="arch" type="xml">
+	  <xpath expr="//div[@id='productivity']" position="inside"> 
+			  <div class="col-md-6 mt32">
+					<div class="input-group">
+						<span class="input-group-addon"/>
+						<div class="form-control" style="float: none;">
+							<span class="fa fa-3x fa-user pull-right"/>
+							<label for="manager_id"/>
+							<div class="text-muted">
+								Assign a manager to this team. The manager will receive emails for tickets that needs to be escalated for violating SLA.
+							</div>
+							<div>
+								<hr class="mt8 mb8"/>
+								<field name="manager_id"/>
+							</div>
+						</div>
+					</div>
+				</div>
+	  </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

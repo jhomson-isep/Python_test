@@ -1,0 +1,129 @@
+<odoo>
+    <!-- Mail template are declared in a NOUPDATE block
+         so users can freely customize/delete them -->
+    <data noupdate="0">
+
+        <!--Email template  for escalation email for tickets past deadline and no action taken-->
+        <record id="heldesk_ticket_sla_escalation_email" model="mail.template">
+            <field name="name">Helpdesk Ticket SLA Escalation Email</field>
+            <field name="email_from"></field>
+            <field name="subject">${object.company_id.name|safe}: Ticket# ${object.name}</field>
+            <!--<field name="partner_to">${object.partner_id.id}</field>-->
+			<field name="email_to">${object.team_id.manager_id.email | safe}</field> <!-- You need to put the managers email here -->
+            <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="user_signature" eval="True"/>
+			<!--<field name="report_template" ref="account.account_invoices"/>
+			<field name="report_name">Invoice_${(object.number or '').replace('/','_')}_${object.state == 'draft' and 'draft' or object.state == 'open' and 'open' or object.state == 'paid' and 'paid' or ''}</field>-->
+            <field name="lang">${object.user_id.partner_id.lang or 'en_US'}</field>
+            <field name="body_html"><![CDATA[
+<div style="padding:0px;width:600px;margin:0 auto;background:#ffffff repeat top/100%;color:#777777">
+		% set access_link = object.get_view_link()
+    <div style="color:#545454; border:1px solid #eee; border-radius:5px; margin-bottom:0px ">
+        <div style="padding-top:10px; padding-bottom:5px;">
+          <h4 style="margin-left:3px;
+                margin-right:0px;
+                font-size:inherit;
+                margin-bottom:0px;
+                margin-top:0px;
+                color:#545454;
+                line-height:1.1;
+                font-family:inherit;">Dear ${object.team_id.manager_id.name},
+          </h4>
+        </div>
+
+        <div style="padding:5px;">
+           <p align="left">
+                This email brings to your attention a pending ticket# <strong><a href="${access_link}">${object.name}</a></strong>
+           </p>
+           <p align="left">
+                The SLA deadline has been exceeded and no action has been taken by the responsible team since the ticket was opened.
+           </p>
+        </div>
+        <div style="background-color:#19a8d0;">
+            <div style="font-size: 1px;line-height: 1px;background-color: #dddee1;">&nbsp;</div>
+            <blockquote style="margin-bottom: 0px; color:#fff !important;">
+                <p>
+		% if object.name:
+                <b>Ticket Title:</b> <a href="${access_link}">${object.name}</a></p><p>
+	    	% endif
+                <b>Customer:</b> ${object.partner_id.display_name}</p><p>
+		% if object.deadline:
+                <b>SLA Deadline:</b> ${format_tz(object.deadline)}</p><p>
+	    	% endif
+                <b>Assigned To:</b> ${object.user_id.name}</p><p>
+                <b>Opened On:</b> ${format_tz(object.create_date)}</p><p>
+		% if object.user_id:
+	    	% endif
+                </p>
+            </blockquote>
+            <div style="font-size: 1px;line-height: 1px;background-color: #dddee1;">&nbsp;</div>
+        </div>
+    </div>
+</div>
+            ]]></field>
+        </record>
+
+        <!--Email template  for email reminders for tickets-->
+        <record id="heldesk_ticket_sla_reminder_email" model="mail.template">
+            <field name="name">Helpdesk Ticket SLA  Reminder Email</field>
+            <field name="email_from"></field>
+            <field name="subject">${object.company_id.name|safe}: Ticket# ${object.name}</field>
+            <!--<field name="partner_to">${object.partner_id.id}</field>-->
+            <field name="email_to">${object.user_id.email | safe}</field>
+            <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="user_signature" eval="True"/>
+			<!--<field name="report_template" ref="account.account_invoices"/>
+			<field name="report_name">Invoice_${(object.number or '').replace('/','_')}_${object.state == 'draft' and 'draft' or object.state == 'open' and 'open' or object.state == 'paid' and 'paid' or ''}</field>-->
+            <field name="lang">${object.user_id.partner_id.lang or 'en_US'}</field>
+            <field name="body_html"><![CDATA[
+<div style="padding:0px;width:600px;margin:0 auto;background:#ffffff repeat top/100%;color:#777777">
+		% set access_link = object.get_view_link()
+    <div style="color:#545454; border:1px solid #eee; border-radius:5px; margin-bottom:0px ">
+        <div style="padding-top:10px; padding-bottom:5px;">
+          <h4 style="margin-left:3px;
+                margin-right:0px;
+                font-size:inherit;
+                margin-bottom:0px;
+                margin-top:0px;
+                color:#545454;
+                line-height:1.1;
+                font-family:inherit;">Dear ${object.user_id.name},
+          </h4>
+        </div>
+
+        <div style="padding:5px;">
+           <p align="left">
+                Kind reminder of ticket# <strong><a href="${access_link}">${object.name}</a></strong>
+           </p>
+           <p align="left">
+                Please arrange to review and resolve it within SLA timelines. Thank you.
+           </p>
+        </div>
+        <div style="background-color:#19a8d0;">
+            <div style="font-size: 1px;line-height: 1px;background-color: #dddee1;">&nbsp;</div>
+            <blockquote style="margin-bottom: 0px; color:#fff !important;">
+                <p>
+		% if object.name:
+                <b>Ticket Title:</b> <a href="${access_link}">${object.name}</a></p><p>
+	    	% endif
+                <b>Customer:</b> ${object.partner_id.display_name}</p><p>
+		% if object.deadline:
+                <b>SLA Deadline:</b> ${format_tz(object.deadline)}</p><p>
+	    	% endif
+                <b>Assigned To:</b> ${object.user_id.name}</p><p>
+                <b>Opened On:</b> ${format_tz(object.create_date)}</p><p>
+		% if object.user_id:
+	    	% endif
+                </p>
+            </blockquote>
+            <div style="font-size: 1px;line-height: 1px;background-color: #dddee1;">&nbsp;</div>
+        </div>
+    </div>
+</div>
+
+            ]]></field>
+        </record>
+  </data>
+</odoo>
