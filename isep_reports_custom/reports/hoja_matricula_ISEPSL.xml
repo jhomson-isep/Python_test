@@ -26,6 +26,7 @@
                                         <!--<div class="row"><strong style="color:#547494;">Universidad</strong></div>-->
                                         <div class="row">
                                             <img class="img-fluid logo"
+                                                 style="height:125px;padding-top:2px;"
                                                  src="/isep_reports_custom/static/src/img/logo_isep.png"/>
                                         </div>
                                     </div>
@@ -55,9 +56,9 @@
                                 </div>
                             </div>
                             <!--#############################Primera Seccion #547494 <- Azul del HR##################-->
-                            <hr style="border:3px solid #547494;"></hr>
+                            <hr style="border:3px solid #547494;margin-bottom:1px;"></hr>
                             <div class="row">
-                                <div class="col-5 title">
+                                <div class="col-5 title" style="background-color: #fc6c04;border-top-right-radius:5px;border-bottom-right-radius:5px;">
                                     <strong style="color:white; margin-left:5px;">DATOS PERSONALES DEL ALUMNO</strong>
                                 </div>
                             </div>
@@ -134,10 +135,10 @@
                                 </div>
                             </div>
                             <!--############################Segunda seccion#########################################-->
-                            <hr style="border:3px solid #547494;"></hr>
+                            <hr style="border:3px solid #547494;margin-bottom:1px;"></hr>
                             <div class="row">
                                 <!--#547494 <- Azul del HR-->
-                                <div class="col-4 title">
+                                <div class="col-4 title" style="background-color: #fc6c04;border-top-right-radius:5px;border-bottom-right-radius:5px;">
                                     <strong style="color:white; margin-left:5px;">DATOS DE FACTURACIÓN</strong>
                                 </div>
                             </div>
@@ -190,7 +191,7 @@
                                 </div>
                             </div>
                             <!--##################################Tercera Seccion####################################-->
-                            <hr style="border:2px solid #547494;"></hr>
+                            <hr style="border:2px solid #547494;margin-bottom:1px;"></hr>
                             <div class="row" style="font-size:13px;">
                                 <p style="text-align:justify;"><!--Revisar-->
                                     Recibida previamente la información detallada de las características del curso, contenido y demás cuestiones relacionadas, el alumno/titular acepta las condiciones generales y académicas amparadas
@@ -203,9 +204,9 @@
                                 </ul>
                             </div>
                             <!--###################################Cuarta seccion####################################-->
-                            <hr style="border:3px solid #547494;"></hr>
+                            <hr style="border:3px solid #547494;margin-bottom:1px;"></hr>
                             <div class="row">
-                                <div class="col-7 title">
+                                <div class="col-7 title" style="background-color: #fc6c04;border-top-right-radius:5px;border-bottom-right-radius:5px;">
                                     <strong style="color:white; margin-left:5px;">
                                         CONDICIONES ACEPTADAS PARA EL PAGO DEL CURSO
                                     </strong>
@@ -213,7 +214,7 @@
                             </div>
                             <div class="row">
                                 <!--Primera Columna-->
-                                <div class="col-6">
+                                <div class="col-6" style="font-size:13px;">
                                     <div class="row">
                                         <div class="col-6"><strong>Plazo de Pago:</strong></div>
                                         <div class="col-6"><span t-field="o.payment_term_id.display_name"></span></div>
@@ -237,39 +238,46 @@
                                 </div>
                             </div>
                             <!--################################Quinta seccion#######################################-->
-                            <hr style="border:2px solid #547494;"></hr>
+                            <hr style="border:2px solid #547494;margin-bottom:1px;"></hr>
                             <div class="row" style="font-size:13px;">
                                 <p>Suscrito en dos ejemplares en Culiacán, a <span t-field="o.create_date"></span></p>
                                 <p>Leído y conforme con las condiciones generales y mis derechos y deberes que se adjuntan (recibo copia).</p>
                             </div>
                             <div class="row sign">
-                                <div class="col-4"><p>FIRMA DEL ALUMNO</p></div>
-                                <div class="col-4"><p>FIRMA DEL TITULAR<br></br>(Si es distinto al alumno)</p></div>
-                                <div class="col-4"><p>FIRMA <span t-field="o.company_id.name"></span></p></div>
+                                <div class="col-4" style="font-size:13px;text-align:center;"><p>FIRMA DEL ALUMNO</p></div>
+                                <div class="col-4" style="font-size:13px;text-align:center;"><p>FIRMA DEL TITULAR<br></br>(Si es distinto al alumno)</p></div>
+                                <div class="col-4" style="font-size:13px;text-align:center;"><p>FIRMA <span t-field="o.company_id.name"></span></p></div>
                             </div>
                             <div class="row" style="height:50px">
                                 <div class="col-8"></div>
                                 <div class="col-4">
                                     <img class="img-fluid img-sign"
+                                         style="height:50px;display:block;margin-left:auto;margin-right:auto;"
                                          src="/isep_reports_custom/static/src/img/firmamarc.jpg"/>
                                 </div>
                             </div>
                             <div class="row sign">
-                                <div class="col-4">
+                                <div class="col-4" style="font-size:13px;text-align:center;">
                                     <span t-field="o.partner_id.name"></span>
                                     <br></br>
                                     <span t-field="o.partner_id.vat"></span>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-4" style="font-size:13px;text-align:center;">
                                     <span t-field="o.partner_id.payment_token_ids.display_name"></span>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-4" style="font-size:13px;text-align:center;">
                                     <span t-field="o.name"></span>
                                 </div>
                             </div>
-                            <div class="footer">
-                                <img src="/isep_reports_custom/static/src/img/footer_isep.png"></img>
+                            <!--Imagen final antes del footer-->
+                            <div class="row">
+                                <img src="/isep_reports_custom/static/src/img/footer_isep.png" style="display:block;margin-left:auto;margin-right:auto;"/>
                             </div>
+                            <div class="footer">
+                                <img src="/isep_reports_custom/static/src/img/ISEP.png" style="display:block;margin-left:auto;margin-right:auto;"/>
+                            </div>
+                        </div>
+                        <div class="page" name="second_page">
                         </div>
 
                     </t>
