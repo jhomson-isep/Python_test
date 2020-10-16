@@ -39,7 +39,7 @@ class HelpdeskSLA(models.Model):
     _inherit = 'helpdesk.team'
 
     manager_id = fields.Many2one(
-        'res.users',
+        'res.partner',
         string="Team Manager",
         help="This is for escalation of tickets violating SLA")
 
@@ -52,4 +52,4 @@ class HelpdeskSLA(models.Model):
     def get_view_link(self):
         """For adding a link to the ticket on the reminder emails."""
         self.ensure_one()
-        return self._notification_link_helper('view')
+        return self.access_url

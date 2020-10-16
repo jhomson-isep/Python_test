@@ -11,7 +11,7 @@
             <!--<field name="partner_to">${object.partner_id.id}</field>-->
 			<field name="email_to">${object.team_id.manager_id.email | safe}</field> <!-- You need to put the managers email here -->
             <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
-            <field name="auto_delete" eval="True"/>
+            <field name="auto_delete" eval="False"/>
             <field name="user_signature" eval="True"/>
 			<!--<field name="report_template" ref="account.account_invoices"/>
 			<field name="report_name">Invoice_${(object.number or '').replace('/','_')}_${object.state == 'draft' and 'draft' or object.state == 'open' and 'open' or object.state == 'paid' and 'paid' or ''}</field>-->
@@ -72,7 +72,7 @@
             <!--<field name="partner_to">${object.partner_id.id}</field>-->
             <field name="email_to">${object.user_id.email | safe}</field>
             <field name="model_id" ref="helpdesk.model_helpdesk_ticket"/>
-            <field name="auto_delete" eval="True"/>
+            <field name="auto_delete" eval="False"/>
             <field name="user_signature" eval="True"/>
 			<!--<field name="report_template" ref="account.account_invoices"/>
 			<field name="report_name">Invoice_${(object.number or '').replace('/','_')}_${object.state == 'draft' and 'draft' or object.state == 'open' and 'open' or object.state == 'paid' and 'paid' or ''}</field>-->
