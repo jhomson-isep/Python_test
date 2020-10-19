@@ -162,16 +162,18 @@ class CrmLead(models.Model):
             lead.update({'x_codmodalidad': modalidad})
 
             # Dependiendo la sede se le colocara el nombre nuevo
-            if cod_sede == 'centro-oviedo':
+            if cod_sede in ('centro-oviedo', 'Oviedo'):
                 cod_sede = 'OVI'
             elif cod_sede in ('centro-bilbao', 'bilbao', 'Bilbao'):
                 cod_sede = 'BIO'
             elif cod_sede in ('centro-madrid-atocha', 'madrid', 'Madrid', 'MAD', 'MDR'):
                 cod_sede = 'MDR'
-            elif cod_sede == 'centro-pamplona':
+            elif cod_sede in ('centro-pamplona','Pamplona'):
                 cod_sede = 'PAM'
-            elif cod_sede == 'centro-zaragoza':
+            elif cod_sede in ('centro-zaragoza','Zaragoza'):
                 cod_sede = 'ZAR'
+            elif cod_sede == 'Valencia':
+                cod_sede = 'Val'
 
             # REVISAR ESTO
             # Añadir producto a la iniciativa directamente
