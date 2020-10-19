@@ -289,170 +289,60 @@
                         <br></br>
                         <div class="page" name="second_page">
                             <div class="row" style="font-size:11px; text-align:justify;">
-                                <div class="col-6">
-                                    <strong>INFORMACIÓN PREVIA</strong>
-                                    <br></br>
-                                    <p>
-                                        El alumno y el titular del contrato han recibido de ISEP S.L., en el momento
-                                        de la firma del presente, la información necesaria acerca del programa a seguir,
-                                        tanto académica, económica y administrativa.
-                                    </p>
-                                    <strong>FORMALIZACIÓN Y CUMPLIMIENTO DEL CONTRATO</strong>
-                                    <br></br>
+                                <div class="col-12">
                                     <ol>
                                         <li>
-                                            El contrato queda formalizado con la aceptación de estas condiciones. Las partes
-                                            tienen por no efectuado ningún pacto verbal. Estas cláusulas prevalecen sobre otros
-                                            pactos escritos que las contradigan.
+                                            El alumno y el titular del contrato han recibido de <span t-field="o.company_id.name"></span>, en el momento
+                                            de la firma del presente, la información necesaria acerca del programa a seguir,
+                                            tanto académica, económica y administrativa.
                                         </li>
                                         <li>
-                                            Tras la formalización del contrato, el alumno se compromete a aportar la
-                                            documentación requerida (incluyendo la acreditación de la titulación universitaria
-                                            necesaria) en el tiempo y forma solicitados por <span t-field="o.company_id.name"></span>. Cuando se trate de un
-                                            programa de ISEP S.L. vinculado con alguna Universidad u otras instituciones, la
-                                            matriculación a dichas instituciones está supeditada a las normativas propias de cada
-                                            centro.
+                                            En aquellos programas con requisito de acceso de nivel universitario, la expedición de título de <span t-field="o.company_id.name"></span> , quedará supeditada a
+                                            la obtención del título universitario previo. En caso de ser un programa con título de UVic, no podrá ser matriculado a la Universidad hasta que
+                                            finalice sus estudios universitarios en un plazo máximo de un año desde el inicio del curso en Centro de Estudios Ised SL .
                                         </li>
                                         <li>
-                                            De acuerdo con el Real Decreto Legislativo 1/2007, el alumno/titular tiene derecho, en
-                                            plazo de 14 días naturales tras la formalización del contrato, a desistir sin ningún coste,
-                                            debiendo notificarlo de forma inequívoca al centro <span t-field="o.company_id.name"></span> donde se haya
-                                            matriculado. En cualquier otro caso, la baja unilateral por parte del alumno no exime del
-                                            pago de los importes pactados ni da derecho a devolución de importes ya abonados. La
-                                            asistencia al aula o el acceso al campus virtual durante ese plazo suponen una solicitud
-                                            expresa de inicio de la prestación del servicio. Como Anexo integrante de este contrato,
-                                            en <a href="isep.es/documento-desistimiento">este enlace (isep.es/documento-desistimiento)</a>
-                                            se adjunta el documento de desistimiento.
+                                            Los programas que <span t-field="o.company_id.name"></span> imparte vinculados a alguna Universidad u otras instituciones están supeditados a las normativas
+                                            propias de cada centro.
                                         </li>
                                         <li>
-                                            El titular autoriza a ISEP S.L. a realizar los cobros en la forma y los plazos según las
-                                            condiciones aceptadas para el pago.
+                                            Prácticas de alumnos. Caso de que el alumno hubiera contratado un curso en el que se incluyera la realización de prácticas, <span t-field="o.company_id.name"></span> se encargará de localizar un centro de realización para las mismas. El alumno deberá tener tanto disponibilidad horaria como geográfica
+                                            para poder realizarlas en el centro que se le asigne.Para poder optar a prácticas, si se trata de cursos presenciales, es requisito indispensable que
+                                            el alumno se encuentre al corriente de pago en todas las cuotas correspondientes a los cursos en los que se ha matriculado. En caso de formación
+                                            no presencial será imprescindible que haya abonado al menos un 50% del precio total del curso.
                                         </li>
                                         <li>
-                                            En caso de incumplimiento de los vencimientos pactados, <span t-field="o.company_id.name"></span> podrá reclamar la
-                                            totalidad del importe al alumno/titular, y los plazos acordados con anterioridad quedarán
-                                            sin efecto.
+                                            El alumno se responsabiliza de aportar la documentación requerida en el tiempo y forma indicada. En caso contrario no se podrá gestionar la
+                                            matriculación por parte de las distintas instituciones vinculadas
                                         </li>
                                         <li>
-                                            <span t-field="o.company_id.name"></span> se reserva el derecho de dejar de prestar el servicio cuando el alumno no
-                                            cumpla con las obligaciones adquiridas, así como de reportar a ficheros de morosidad,
-                                            solvencia patrimonial o crédito en caso de que el alumno/titular no cumpla
-                                            satisfactoriamente con las obligaciones de pago pactadas
+                                            El alumno matriculado en las modalidades no presencial, dispondrá de 15 hábiles a contar a partir del acceso a Aula Virtual para desistir del contrato
+                                            de matrícula firmado.En caso de la modalidad presencial, podrá desistir del contrato hasta 15 días hábiles antes de la fecha de inicio programada.
+                                            En ambos casos, <span t-field="o.company_id.name"></span> retendrá las tasas académicas en concepto de gastos de administración y reserva de plaza. Pasado
+                                            dicho plazo, se deberán efectuar todos los pagos.
                                         </li>
                                         <li>
-                                            Los programas presenciales serán realizados siempre que se alcance el número
-                                            mínimo necesario de alumnos. En caso de anulación, el alumno podrá optar entre
-                                            destinar el importe pagado a otro programa de ISEP S.L. o bien el reintegro de los
-                                            importes abonados. Si no se pueden realizar sesiones presenciales por prevención del
-                                            COVID-19 u otras causas, se mantiene el programa y el alumno tiene derecho a las
-                                            mismas horas de clase en directo. En este caso, <span t-field="o.company_id.name"></span> puede adoptar la
-                                            metodología de la modalidad At Home (clases en vivo por videoconferencia).
+                                            <span t-field="o.company_id.name"></span> podrá reclamar la totalidad del importe al alumno/titular si éste no cumple con los vencimientos pactados. Los plazos
+                                            acordados con anterioridad se entenderán como no válidos.
                                         </li>
                                         <li>
-                                            Los contenidos y la metodología del programa se actualizan para incorporar mejoras y
-                                            novedades. En caso de cambios, el alumno estará informado a medida que se
-                                            implementen.
-                                        </li>
-                                    </ol>
-                                    <strong>TITULACIÓN ACADÉMICA Y CERTIFICADOS</strong>
-                                    <br></br>
-                                    <ol start="9">
-                                        <li>
-                                            El alumno podrá solicitar la expedición del título de <span t-field="o.company_id.name"></span> una vez haya superado
-                                            los requisitos académicos de la formación y haya cumplido el resto de requisitos
-                                            (económicos, administrativos, aportación de documentación en tiempo y forma, etc.).
+                                            <span t-field="o.company_id.name"></span> se reserva el derecho de dejar de prestar el servicio cuando el alumno no cumpla con las obligaciones adquiridas, así
+                                            como el derecho de reportar a ficheros de morosidad, solvencia patrimonial o crédito en caso de que el alumno/titular no cumpla satisfactoriamente
+                                            con las obligaciones de pago contempladas en este contrato.
                                         </li>
                                         <li>
-                                            Los títulos de <span t-field="o.company_id.name"></span> son titulaciones propias en el marco de la educación continua,
-                                            para el desarrollo y proyección profesional, no conducentes a estudios de doctorado.
-                                            Para cualquier proceso de convalidación de un título de <span t-field="o.company_id.name"></span> fuera de España, el
-                                            interesado debe consultar con la normativa de convalidaciones en su país. Para
-                                            programas con Reconocimiento de Validez Oficial (RVOE) por la SEPyC (México), el
-                                            alumno debe solicitarlo según las instrucciones de
-                                            <a href="https://www.isep.es/proceso-titulacion-oficial-mexico/">este enlace</a>.
+                                            El precio de expedición de títulos, certificados u otros no están incluidos en el importe del curso.Se hará envío o entrega del Diploma
+                                            correspondiente al curso realizado por el alumno, una vez haya finalizado el mismo de modo satisfactorio, y siempre y cuando haya abonado la
+                                            totalidad del coste del curso en el que se matriculó. Si un alumno solicitara un Certificado de Estudios,  <span t-field="o.company_id.name"></span> procederá a la
+                                            emisión del mismo teniendo en cuenta tanto el número de horas realizadas, así como la valoración de los módulos cursados. Será requisito
+                                            indispensable que, a la hora de la solicitud del mismo, el alumno se encuentre al corriente de pagos de las cuotas del curso
                                         </li>
                                         <li>
-                                            El precio de expedición de títulos, certificados u otros no están incluidos en el importe
-                                            del programa. Los importes vigentes pueden consultarse en las sedes de ISEP S.L..
-                                        </li>
-                                    </ol>
-                                </div>
-                                <div class="col-6">
-                                    <strong>MEDIDAS TÉCNICAS</strong>
-                                    <br></br>
-                                    <ol start="12">
-                                        <li>
-                                            El funcionamiento óptimo del Campus Virtual está planteado para aplicaciones
-                                            destinadas a ser utilizadas en ordenadores personales con navegadores Chrome y
-                                            Firefox. <span t-field="o.company_id.name"></span> no puede garantizar el perfecto funcionamiento del Campus con otros
-                                            dispositivos o navegadores.
+                                            Los cursos presenciales serán realizados siempre que se alcance el número mínimo necesario de alumnos. En caso de anulación los importes
+                                            abonados serán reintegrados.
                                         </li>
                                         <li>
-                                            Se recomienda a los alumnos que cuenten con una conexión de Internet ADSL o Fibra
-                                            óptica. En algunos programas se propondrá el visionado de sesiones en directo que
-                                            pueden requerir un mayor ancho de banda para su correcta visualización.
-                                        </li>
-                                        <li>
-                                            Cuando algún servicio quede temporalmente indisponible por causas de fuerza mayor o
-                                            errores en las redes telemáticas de transferencia de datos, ajenos a la voluntad de <span t-field="o.company_id.name"></span>, esta queda exonerada de los daños y perjuicios que esta situación ocasione.
-                                        </li>
-                                    </ol>
-                                    <strong>PROPIEDAD INTELECTUAL Y DERECHOS DE IMAGEN</strong>
-                                    <br></br>
-                                    <ol start="15">
-                                        <li>
-                                            El alumno, exclusivamente para su uso personal y respetando los derechos de propiedad
-                                            intelectual, podrá descargar los contenidos, copiar o imprimir cualquier página de la web y
-                                            del campus virtual de <span t-field="o.company_id.name"></span> a los que tenga acceso (incluido el material docente). En
-                                            ningún caso podrá transmitir, cambiar, modificar o suprimir los contenidos sin la previa
-                                            autorización escrita de <span t-field="o.company_id.name"></span>.
-                                        </li>
-                                        <li>
-                                            Con finalidades docentes, de evaluación, de investigación y de difusión, <span t-field="o.company_id.name"></span> se
-                                            reserva el derecho de tratar, procesar, adaptar, reproducir o comunicar públicamente las
-                                            aportaciones realizadas en ejercicios, foros, casos prácticos y trabajos elaborados por el
-                                            alumno durante la formación. El alumno concede su autorización expresa para ello
-                                            conservando, en todo caso, el derecho al reconocimiento de la autoría de los trabajos
-                                            elaborados durante sus estudios.
-                                        </li>
-                                        <li>
-                                            Cuando el alumno participe en actividades presenciales, autoriza a <span t-field="o.company_id.name"></span> a captar su
-                                            imagen (fotografía, audio y vídeo), así como a su transcripción y a la comunicación
-                                            pública de estas grabaciones o transcripciones a través de la página web, redes sociales
-                                            u otros medios de comunicación.
-                                        </li>
-                                    </ol>
-                                    <strong>DURACIÓN DEL CONTRATO</strong>
-                                    <br></br>
-                                    <ol start="19">
-                                        <li>
-                                            De acuerdo con la normativa vigente, <span t-field="o.company_id.name"></span> informa que los datos proporcionados se
-                                            incorporarán al sistema de tratamiento titularidad de <span t-field="o.company_id.name"></span> con finalidades de tramitar
-                                            la matrícula, gestionar la inscripción y participación en la actividad formativa, finalidades
-                                            administrativas y contables, gestión del expediente académico e instancias, finalidades
-                                            comerciales y obligaciones legales. Para cumplimiento legal y gestión administrativacontable, los datos se podrán ceder a Agencia Tributaria, bancos, cajas y organismos y/o
-                                            administración pública. En caso de titulación de UVic-UCC, los datos se comunicarán e
-                                            incorporarán al fichero Formació Continuada de UVic-UCC, con finalidades de formación
-                                            y acreditación de la docencia. Puede ejercer sus derechos (acceso, rectificación,
-                                            limitación, supresión, portabilidad, oposición) o revocar el consentimiento por correo
-                                            postal a <span t-field="o.company_id.name"></span> o bien por email: barcelona@isep.es, o dirigirse a la autoridad
-                                            competente si es oportuno. Más info (finalidades, legitimación, destinatarios, derechos,
-                                            etc): (www.isep.es/privacidad-alumnos).
-                                        </li>
-                                    </ol>
-                                    <strong>LEGISLACIÓN APLICABLE Y JURISDICCIÓN</strong>
-                                    <br></br>
-                                    <ol start="20">
-                                        <li>
-                                            Este contrato se considera formalizado en Barcelona. A este contrato y a las relaciones
-                                            jurídicas que puedan derivarse de su aplicación e interpretación, les será de aplicación la
-                                            ley española.
-                                        </li>
-                                        <li>
-                                            Si cualquier cláusula incluida en este contrato fuese declarada nula o ineficaz (total o
-                                            parcialmente), tal nulidad o ineficacia afectará tan solo a dicha disposición o a la parte de
-                                            esta que resulte nula o ineficaz (teniéndose por no puesta), y subsistirán el resto de las
-                                            condiciones pactadas.
+                                            El titular autoriza a <span t-field="o.company_id.name"></span> a realizar los cobros en la forma y plazos según las condiciones aceptadas para el pago.
                                         </li>
                                     </ol>
                                 </div>
@@ -478,7 +368,7 @@
                                 </div>
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">
-                                <p>Autorizo a ISEP S.L. a realizar los cargos correspondientes a:</p>
+                                <p>Autorizo a <span t-field="o.company_id.name"></span>. a realizar los cargos correspondientes a:</p>
                                 <!--Falta algo-->
                             </div>
                             <br></br>
