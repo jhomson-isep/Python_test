@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <data>
-        <report id="report_prematricula_isep_espana"
+        <report id="report_prematricula_ised_espana"
                 model="sale.order"
-                string="Prematricula ISEP España"
+                string="Prematricula ISED España"
                 report_type="qweb-pdf"
-                name="isep_reports_custom.prematricula_isep_espana"
+                name="isep_reports_custom.prematricula_ised_espana"
                 menu="True"/>
 
         <template id="assets_backend" inherit_id="web.assets_backend">
@@ -14,7 +14,7 @@
              </xpath>
         </template>
 
-        <template id="prematricula_isep_espana">
+        <template id="prematricula_ised_espana">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <t t-call="web.basic_layout">
@@ -27,7 +27,7 @@
                                         <div class="row">
                                             <img class="img-fluid logo"
                                                  style="height:125px;padding-top:2px;"
-                                                 src="/isep_reports_custom/static/src/img/logo_isep.png"/>
+                                                 src="/isep_reports_custom/static/src/img/logo_ised.png"/>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -243,7 +243,7 @@
                             <div class="row" style="font-size:13px;">
                                 <div class="col-12">
                                     <p>
-                                        Suscrito en dos ejemplares en Barcelona, a <span t-field="o.create_date"></span>
+                                        Suscrito en dos ejemplares en Madrid, a <span t-field="o.create_date"></span>
                                         <br></br>
                                         Leído y conforme con las condiciones generales y mis derechos y deberes que se adjuntan (recibo copia).
                                     </p>
@@ -277,7 +277,7 @@
                             </div>
                             <!--Imagen final antes del footer-->
                             <div class="row">
-                                <img src="/isep_reports_custom/static/src/img/footer_isep.png"
+                                <img src="/isep_reports_custom/static/src/img/footer_ised.png"
                                      style="display:block;margin-left:auto;margin-right:auto;height:185px;width:70%"
                                      class="img-fluid"
                                 />
@@ -308,7 +308,7 @@
                                         <li>
                                             Tras la formalización del contrato, el alumno se compromete a aportar la
                                             documentación requerida (incluyendo la acreditación de la titulación universitaria
-                                            necesaria) en el tiempo y forma solicitados por ISEP S.L.. Cuando se trate de un
+                                            necesaria) en el tiempo y forma solicitados por <span t-field="o.company_id.name"></span>. Cuando se trate de un
                                             programa de ISEP S.L. vinculado con alguna Universidad u otras instituciones, la
                                             matriculación a dichas instituciones está supeditada a las normativas propias de cada
                                             centro.
@@ -316,7 +316,7 @@
                                         <li>
                                             De acuerdo con el Real Decreto Legislativo 1/2007, el alumno/titular tiene derecho, en
                                             plazo de 14 días naturales tras la formalización del contrato, a desistir sin ningún coste,
-                                            debiendo notificarlo de forma inequívoca al centro de ISEP S.L. donde se haya
+                                            debiendo notificarlo de forma inequívoca al centro <span t-field="o.company_id.name"></span> donde se haya
                                             matriculado. En cualquier otro caso, la baja unilateral por parte del alumno no exime del
                                             pago de los importes pactados ni da derecho a devolución de importes ya abonados. La
                                             asistencia al aula o el acceso al campus virtual durante ese plazo suponen una solicitud
@@ -329,12 +329,12 @@
                                             condiciones aceptadas para el pago.
                                         </li>
                                         <li>
-                                            En caso de incumplimiento de los vencimientos pactados, ISEP S.L. podrá reclamar la
+                                            En caso de incumplimiento de los vencimientos pactados, <span t-field="o.company_id.name"></span> podrá reclamar la
                                             totalidad del importe al alumno/titular, y los plazos acordados con anterioridad quedarán
                                             sin efecto.
                                         </li>
                                         <li>
-                                            ISEP S.L. se reserva el derecho de dejar de prestar el servicio cuando el alumno no
+                                            <span t-field="o.company_id.name"></span> se reserva el derecho de dejar de prestar el servicio cuando el alumno no
                                             cumpla con las obligaciones adquiridas, así como de reportar a ficheros de morosidad,
                                             solvencia patrimonial o crédito en caso de que el alumno/titular no cumpla
                                             satisfactoriamente con las obligaciones de pago pactadas
@@ -345,7 +345,7 @@
                                             destinar el importe pagado a otro programa de ISEP S.L. o bien el reintegro de los
                                             importes abonados. Si no se pueden realizar sesiones presenciales por prevención del
                                             COVID-19 u otras causas, se mantiene el programa y el alumno tiene derecho a las
-                                            mismas horas de clase en directo. En este caso, ISEP S.L. puede adoptar la
+                                            mismas horas de clase en directo. En este caso, <span t-field="o.company_id.name"></span> puede adoptar la
                                             metodología de la modalidad At Home (clases en vivo por videoconferencia).
                                         </li>
                                         <li>
@@ -358,14 +358,14 @@
                                     <br></br>
                                     <ol start="9">
                                         <li>
-                                            El alumno podrá solicitar la expedición del título de ISEP S.L. una vez haya superado
+                                            El alumno podrá solicitar la expedición del título de <span t-field="o.company_id.name"></span> una vez haya superado
                                             los requisitos académicos de la formación y haya cumplido el resto de requisitos
                                             (económicos, administrativos, aportación de documentación en tiempo y forma, etc.).
                                         </li>
                                         <li>
-                                            Los títulos de ISEP S.L. son titulaciones propias en el marco de la educación continua,
+                                            Los títulos de <span t-field="o.company_id.name"></span> son titulaciones propias en el marco de la educación continua,
                                             para el desarrollo y proyección profesional, no conducentes a estudios de doctorado.
-                                            Para cualquier proceso de convalidación de un título de ISEP S.L. fuera de España, el
+                                            Para cualquier proceso de convalidación de un título de <span t-field="o.company_id.name"></span> fuera de España, el
                                             interesado debe consultar con la normativa de convalidaciones en su país. Para
                                             programas con Reconocimiento de Validez Oficial (RVOE) por la SEPyC (México), el
                                             alumno debe solicitarlo según las instrucciones de
@@ -384,7 +384,7 @@
                                         <li>
                                             El funcionamiento óptimo del Campus Virtual está planteado para aplicaciones
                                             destinadas a ser utilizadas en ordenadores personales con navegadores Chrome y
-                                            Firefox. ISEP S.L.no puede garantizar el perfecto funcionamiento del Campus con otros
+                                            Firefox. <span t-field="o.company_id.name"></span> no puede garantizar el perfecto funcionamiento del Campus con otros
                                             dispositivos o navegadores.
                                         </li>
                                         <li>
@@ -394,8 +394,7 @@
                                         </li>
                                         <li>
                                             Cuando algún servicio quede temporalmente indisponible por causas de fuerza mayor o
-                                            errores en las redes telemáticas de transferencia de datos, ajenos a la voluntad de ISEP
-                                            S.L., esta queda exonerada de los daños y perjuicios que esta situación ocasione.
+                                            errores en las redes telemáticas de transferencia de datos, ajenos a la voluntad de <span t-field="o.company_id.name"></span>, esta queda exonerada de los daños y perjuicios que esta situación ocasione.
                                         </li>
                                     </ol>
                                     <strong>PROPIEDAD INTELECTUAL Y DERECHOS DE IMAGEN</strong>
@@ -404,12 +403,12 @@
                                         <li>
                                             El alumno, exclusivamente para su uso personal y respetando los derechos de propiedad
                                             intelectual, podrá descargar los contenidos, copiar o imprimir cualquier página de la web y
-                                            del campus virtual de ISEP S.L. a los que tenga acceso (incluido el material docente). En
+                                            del campus virtual de <span t-field="o.company_id.name"></span> a los que tenga acceso (incluido el material docente). En
                                             ningún caso podrá transmitir, cambiar, modificar o suprimir los contenidos sin la previa
-                                            autorización escrita de ISEP S.L..
+                                            autorización escrita de <span t-field="o.company_id.name"></span>.
                                         </li>
                                         <li>
-                                            Con finalidades docentes, de evaluación, de investigación y de difusión, ISEP S.L. se
+                                            Con finalidades docentes, de evaluación, de investigación y de difusión, <span t-field="o.company_id.name"></span> se
                                             reserva el derecho de tratar, procesar, adaptar, reproducir o comunicar públicamente las
                                             aportaciones realizadas en ejercicios, foros, casos prácticos y trabajos elaborados por el
                                             alumno durante la formación. El alumno concede su autorización expresa para ello
@@ -417,7 +416,7 @@
                                             elaborados durante sus estudios.
                                         </li>
                                         <li>
-                                            Cuando el alumno participe en actividades presenciales, autoriza a ISEP S.L. a captar su
+                                            Cuando el alumno participe en actividades presenciales, autoriza a <span t-field="o.company_id.name"></span> a captar su
                                             imagen (fotografía, audio y vídeo), así como a su transcripción y a la comunicación
                                             pública de estas grabaciones o transcripciones a través de la página web, redes sociales
                                             u otros medios de comunicación.
@@ -427,8 +426,8 @@
                                     <br></br>
                                     <ol start="19">
                                         <li>
-                                            De acuerdo con la normativa vigente, ISEP S.L. informa que los datos proporcionados se
-                                            incorporarán al sistema de tratamiento titularidad de ISEP S.L. con finalidades de tramitar
+                                            De acuerdo con la normativa vigente, <span t-field="o.company_id.name"></span> informa que los datos proporcionados se
+                                            incorporarán al sistema de tratamiento titularidad de <span t-field="o.company_id.name"></span> con finalidades de tramitar
                                             la matrícula, gestionar la inscripción y participación en la actividad formativa, finalidades
                                             administrativas y contables, gestión del expediente académico e instancias, finalidades
                                             comerciales y obligaciones legales. Para cumplimiento legal y gestión administrativacontable, los datos se podrán ceder a Agencia Tributaria, bancos, cajas y organismos y/o
@@ -436,7 +435,7 @@
                                             incorporarán al fichero Formació Continuada de UVic-UCC, con finalidades de formación
                                             y acreditación de la docencia. Puede ejercer sus derechos (acceso, rectificación,
                                             limitación, supresión, portabilidad, oposición) o revocar el consentimiento por correo
-                                            postal a ISEP S.L. o bien por email: barcelona@isep.es, o dirigirse a la autoridad
+                                            postal a <span t-field="o.company_id.name"></span> o bien por email: barcelona@isep.es, o dirigirse a la autoridad
                                             competente si es oportuno. Más info (finalidades, legitimación, destinatarios, derechos,
                                             etc): (www.isep.es/privacidad-alumnos).
                                         </li>
