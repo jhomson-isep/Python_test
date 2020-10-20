@@ -77,6 +77,17 @@ class CrmLead(models.Model):
 
             actual = lead.get('x_contactonuevoodup12')
 
+            logger.info(lead.get('x_profesion'))
+            logger.info(lead.get('x_finalizacionestudios'))
+            #---------------Nueva lógica de typeform-----------------------------#
+            if not cod_sede:
+                cod_sede = lead.get('x_profesion')
+            if not modalidad:
+                modalidad = lead.get('x_finalizacionestudios')
+
+            lead.update({'x_finalizacionestudios': ''})
+            lead.update({'x_profesion': ''})
+
             # create
             res = super(CrmLead, self).create(lead)
             fecha = res.create_date
@@ -173,25 +184,12 @@ class CrmLead(models.Model):
             elif cod_sede in ('centro-zaragoza','Zaragoza'):
                 cod_sede = 'ZAR'
             elif cod_sede == 'Valencia':
-                cod_sede = 'Val'
+                cod_sede = 'VAL'
 
             # REVISAR ESTO
             # Añadir producto a la iniciativa directamente
             logger.info(company_id)
             logger.info(cod_curso)
-
-            """
-            try:
-                referencia_interna_template = self.env['product.template'].sudo().search(
-                    [('sale_ok', '=', True), ('name', 'ilike', nombre_curso), ('default_code', '=', cod_curso), ('company_id', '=', company_id)], limit=1)
-                lead.update({'x_curso_id': referencia_interna_template.id})
-    
-                referencia_interna_product = self.env['product.product'].sudo().search(
-                    [('product_tmpl_id', '=', referencia_interna_template.id)], limit=1)
-                lead.update({'x_producto_id': referencia_interna_product.id})
-            except:
-                logger.info("No pudo relacionar la referencia interna con el cod_curso")
-            """
 
             # ISEP LATAM
             # ---------------------------------
@@ -245,13 +243,47 @@ class CrmLead(models.Model):
             # ---------------------------------
             elif company_id == 4:
 
+                #Codigo de sede con la logica de typeform
+                if cod_sede == '00001':
+                    cod_sede = 'ONL'
+                elif cod_sede == '00010':
+                    cod_sede = 'PAM'
+                elif cod_sede == '00100':
+                    cod_sede = 'BIO'
+                elif cod_sede == '01000':
+                    cod_sede = 'ZAR'
+                elif cod_sede == '10000':
+                    cod_sede = 'MDR'
+
+                #Codigo de modalidad con la logica de typeform
+                if modalidad == '001':
+                    modalidad = 'MAH'
+                elif modalidad == '010':
+                    modalidad = 'PRS'
+                elif modalidad == '100':
+                    modalidad = 'ONL'
+
+                if cod_sede and modalidad:
+                    lead.update({
+                        'name': cod_curso +
+                                '-' +
+                                modalidad +
+                                '-' +
+                                cod_sede +
+                                ' - ' +
+                                email
+                    })
+
+                lead.update(({'x_codmodalidad': modalidad}))
+                lead.update(({'x_codsede': cod_sede}))
+
                 # ONL es online en modalidad
 
-                if modalidad == 'ONL':
+                if modalidad == 'ONL' or cod_sede == 'ONL':
                     # Centro Sup de estudios ISED SL - Online
                     # company_id = 3
-                    # Manel Arroyo
-                    user_id = 76
+                    # Yura Vanegas
+                    user_id = 45
                     team_id = 8
                     logger.info("Entre en Online")
 
@@ -284,13 +316,15 @@ class CrmLead(models.Model):
                     team_id = 10
                     logger.info("Oviedo")
 
-                else:
+                elif cod_sede == 'PAM':
                     # Iruñised - Pamplona
                     company_id = 22
                     # Laura Ollo
                     user_id = 115
                     # team_id = 10
                     logger.info("Entre en Iruñised")
+                else:
+                    company_id = 4
 
             #Actual problema
             if actual == None:
