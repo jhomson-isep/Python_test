@@ -17,7 +17,7 @@
         <template id="prematricula_isep_espana">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
-                    <t t-call="web.basic_layout">
+                    <t t-call="web.blank_layout">
                         <div class="page" name="first_page">
                             <!--Header de la factura-->
                             <div class="header">
@@ -58,7 +58,7 @@
                             <!--#############################Primera Seccion #547494 <- Azul del HR##################-->
                             <hr style="border:3px solid #547494;margin-bottom:1px;"></hr>
                             <div class="row">
-                                <div class="col-5 title" style="background-color: #fc6c04;border-top-right-radius:5px;border-bottom-right-radius:5px;">
+                                <div class="col-5 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
                                     <strong style="color:white; margin-left:5px;">DATOS PERSONALES DEL ALUMNO</strong>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@
                             <hr style="border:3px solid #547494;margin-bottom:1px;"></hr>
                             <div class="row">
                                 <!--#547494 <- Azul del HR-->
-                                <div class="col-4 title" style="background-color: #fc6c04;border-top-right-radius:5px;border-bottom-right-radius:5px;">
+                                <div class="col-4 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
                                     <strong style="color:white; margin-left:5px;">DATOS DE FACTURACIÓN</strong>
                                 </div>
                             </div>
@@ -207,7 +207,7 @@
                             <!--###################################Cuarta seccion####################################-->
                             <hr style="border:3px solid #547494;margin-bottom:1px;"></hr>
                             <div class="row">
-                                <div class="col-7 title" style="background-color: #fc6c04;border-top-right-radius:5px;border-bottom-right-radius:5px;">
+                                <div class="col-7 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
                                     <strong style="color:white; margin-left:5px;">
                                         CONDICIONES ACEPTADAS PARA EL PAGO DEL CURSO
                                     </strong>
@@ -283,7 +283,7 @@
                                 />
                             </div>
                             <div class="footer">
-                                <img src="/isep_reports_custom/static/src/img/ISEP.png" style="display:block;margin-left:auto;margin-right:auto;"/>
+                                <img src="/isep_reports_custom/static/src/img/ISEP.png" style="display:block;margin-left:auto;margin-right:auto;width:100%"/>
                             </div>
                         </div>
                         <br></br>

@@ -17,7 +17,7 @@
         <template id="prematricula_ised_espana">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
-                    <t t-call="web.basic_layout">
+                    <t t-call="web.blank_layout">
                         <div class="page" name="first_page">
                             <!--Header de la factura-->
                             <div class="header">
