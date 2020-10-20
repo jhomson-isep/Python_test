@@ -17,7 +17,7 @@
         <template id="prematricula_isep_espana">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
-                    <t t-call="web.blank_layout">
+                    <t t-call="web.basic_layout">
                         <div class="page" name="first_page">
                             <!--Header de la factura-->
                             <div class="header">
@@ -222,11 +222,15 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Matrícula/Pago Inicial:</strong></div>
-                                        <div class="col-6"></div>
+                                        <div class="col-6"><span t-field="o.precio_matricula"></span></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Resto Aplazado:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.mobile"></span></div>
+                                        <div class="col-6">
+                                            <span t-field="o.len_cuotas"></span> Plazo/s de
+                                            <span t-field="o.precio_primer_pago"></span>
+                                            <span t-field="o.pricelist_id.currency_id.sat_currency_id"></span>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Forma de Pago:</strong></div>
@@ -275,15 +279,40 @@
                                     <span t-field="o.name"></span>
                                 </div>
                             </div>
-                            <!--Imagen final antes del footer-->
-                            <div class="row">
-                                <img src="/isep_reports_custom/static/src/img/footer_isep.png"
-                                     style="display:block;margin-left:auto;margin-right:auto;height:185px;width:70%"
-                                     class="img-fluid"
-                                />
-                            </div>
+                            <div class="row" style="height:120px"></div><!--Cuadro para pasar de pagina-->
                             <div class="footer">
-                                <img src="/isep_reports_custom/static/src/img/ISEP.png" style="display:block;margin-left:auto;margin-right:auto;width:100%"/>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-12" style="text-align:center;">
+                                                <strong style="color:#042c5c;">
+                                                    Nuestro objetivo es tu triunfo profesional.
+                                                </strong>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <img src="/isep_reports_custom/static/src/img/tel.png"/>
+                                                <strong style="color:#fc6c04;">+34 93 847 77 77</strong>
+                                            </div>
+                                            <div class="col-6">
+                                                <img src="/isep_reports_custom/static/src/img/mail.png"/>
+                                                <strong style="color:#fc6c04;">Barcelona@isep.es</strong>
+                                            </div>
+                                        </div>
+                                        <hr style="border:2px solid #547494;margin-bottom:1px;"></hr>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <img src="/isep_reports_custom/static/src/img/web.png"/>
+                                                <strong style="color:#fc6c04;">http://www.isep.es/</strong>
+                                            </div>
+                                            <div class="col-6">
+                                                <img src="/isep_reports_custom/static/src/img/cif.png"/>
+                                                <strong style="color:#fc6c04;">B61254314</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <br></br>
@@ -480,33 +509,40 @@
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">
                                 <p>Autorizo a ISEP S.L. a realizar los cargos correspondientes a:</p>
-                                <!--Falta algo-->
+                            </div>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                <ol>
+                                    <li>
+                                        Gastos de Inscripción: <span t-field="o.precio_matricula"></span> <span t-field="o.confirmation_date"></span>
+                                    </li>
+                                    <li><span t-field="o.len_cuotas"></span> Mensualidades de <span t-field="o.precio_primer_pago"></span> con fecha <span t-field="o.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha)[1].fecha"></span></li>
+                                </ol>
                             </div>
                             <br></br>
                             <br></br>
                             <div class="row" style="text-align:justify;font-size:13px;">
-                                <strong>Nombre completo del titular de la cuenta:</strong> <span t-field="o.partner_id.name"></span>
+                                <strong>Nombre completo del titular de la cuenta:</strong> <span t-field="o.partner_id.payment_token_ids[0].display_name"></span>
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">
-                                <strong>Tipo de tarjeta:</strong> <span t-field="o.partner_id.name"></span>
+                                <strong>Tipo de tarjeta:</strong> <span t-field="o.partner_id.payment_token_ids[0].x_type"></span>
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">
-                                <strong>Banco Emisor de la tarjeta:</strong> <span t-field="o.partner_id.name"></span>
+                                <strong>Banco Emisor de la tarjeta:</strong> <span t-field="o.partner_id.payment_token_ids[0].x_bank"></span>
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">
-                                <strong>Número de la tarjeta:</strong> <span t-field="o.partner_id.name"></span>
+                                <strong>Número de la tarjeta:</strong> <span t-field="o.partner_id.payment_token_ids[0].acquirer_ref"></span>
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">
-                                <strong>Si la tarjeta es de débito indicar número de clave bancaria estandarizada "CLABE": </strong><span t-field="o.partner_id.name"></span>
+                                <strong>Si la tarjeta es de débito indicar número de clave bancaria estandarizada "CLABE": </strong>
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">
-                                <strong>NIF:</strong> <span t-field="o.partner_id.name"></span>
+                                <strong>NIF:</strong> <span t-field="o.partner_id.payment_token_ids[0].csv"></span>
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">
                                 <strong>Nota:</strong> El NIF son los tres digitos verificadores al reverso de su tarjeta - en American Express son cuatro digitos ubicados al frente.
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">
-                                <strong>Fecha de vencimiento:</strong> <span t-field="o.partner_id.name"></span>
+                                <strong>Fecha de vencimiento:</strong> <span t-field="o.partner_id.payment_token_ids[0].caducidad"></span>
                             </div>
                             <br></br>
                             <div class="row" style="text-align:justify;font-size:13px;">
@@ -532,7 +568,7 @@
                                 <div class="col-12"><span t-field="o.partner_invoice_id.name"></span></div>
                             </div>
                             <div class="row" style="text-align:center;"><div class="col-12"><strong>Fecha:</strong></div></div>
-                            <div class="row" style="text-align:center;"><div class="col-12"></div></div>
+                            <div class="row" style="text-align:center;"><div class="col-12"><span t-field="o.date_order"></span></div></div>
                         </div>
                     </t>
                 </t>
