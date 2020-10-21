@@ -76,13 +76,12 @@ class CrmLead(models.Model):
             telefono = lead.get('phone')
 
             actual = lead.get('x_contactonuevoodup12')
-
             logger.info(lead.get('x_profesion'))
             logger.info(lead.get('x_finalizacionestudios'))
             #---------------Nueva lógica de typeform-----------------------------#
-            if not cod_sede:
+            if cod_sede == '':
                 cod_sede = lead.get('x_profesion')
-            if not modalidad:
+            if modalidad == '':
                 modalidad = lead.get('x_finalizacionestudios')
 
             lead.update({'x_finalizacionestudios': ''})
@@ -173,18 +172,20 @@ class CrmLead(models.Model):
             lead.update({'x_codmodalidad': modalidad})
 
             # Dependiendo la sede se le colocara el nombre nuevo
-            if cod_sede in ('centro-oviedo', 'Oviedo'):
+            if cod_sede in ('centro-oviedo', 'Oviedo', 'ised-oviedo'):
                 cod_sede = 'OVI'
-            elif cod_sede in ('centro-bilbao', 'bilbao', 'Bilbao'):
+            elif cod_sede in ('centro-bilbao', 'bilbao', 'Bilbao', 'ised-bilbao'):
                 cod_sede = 'BIO'
-            elif cod_sede in ('centro-madrid-atocha', 'madrid', 'Madrid', 'MAD', 'MDR'):
+            elif cod_sede in ('centro-madrid-atocha', 'madrid', 'Madrid', 'MAD', 'MDR', 'ised-madrid'):
                 cod_sede = 'MDR'
-            elif cod_sede in ('centro-pamplona','Pamplona'):
+            elif cod_sede in ('centro-pamplona', 'Pamplona', 'ised-pamplona'):
                 cod_sede = 'PAM'
-            elif cod_sede in ('centro-zaragoza','Zaragoza'):
+            elif cod_sede in ('centro-zaragoza', 'Zaragoza', 'ZAZ', 'ised-zaragoza'):
                 cod_sede = 'ZAR'
             elif cod_sede == 'Valencia':
                 cod_sede = 'VAL'
+            elif cod_sede in ('Online', 'online'):
+                cod_sede = 'ONL'
 
             # REVISAR ESTO
             # Añadir producto a la iniciativa directamente
