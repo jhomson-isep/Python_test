@@ -206,7 +206,16 @@ class CrmLead(models.Model):
                 # Manel Arroyo
                 user_id = 76
 
-                if cod_sede in ('barcelona', 'Barcelona', 'BCN'):
+                #Codigo de modalidad con la logica de typeform
+                if modalidad == '001':
+                    modalidad = 'MAH'
+                elif modalidad == '010':
+                    modalidad = 'PRS'
+                elif modalidad == '100':
+                    modalidad = 'ONL'
+
+
+                if cod_sede in ('barcelona', 'Barcelona', 'BCN', '001'):
                     cod_sede = 'CAT'
                     team_id = 1
 
@@ -214,7 +223,7 @@ class CrmLead(models.Model):
                     cod_sede = 'MAH'
                     team_id = 1
 
-                elif cod_sede in ('valencia', 'Valencia', 'VAL'):
+                elif cod_sede in ('valencia', 'Valencia', 'VAL', '100'):
                     cod_sede = 'VAL'
                     team_id = 200000001
 
@@ -227,7 +236,7 @@ class CrmLead(models.Model):
                         user_id = 100000006
                         team_id = 100000006
 
-                elif cod_sede == 'MDR':
+                elif cod_sede in ('MDR', '100'):
                     team_id = 4
 
                 # ONL es online en modalidad
