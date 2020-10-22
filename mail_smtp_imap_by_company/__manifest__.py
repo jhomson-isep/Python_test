@@ -19,16 +19,18 @@
 #
 ##############################################################################
 {
-    'name' : 'Mail SMTP and IMAP + Alias Domain By Company',
-    'version' : '12.0.0.1',
+    'name': 'Mail SMTP and IMAP + Alias Domain By Company',
+    'version': '12.0.0.1',
     'author': 'Geminate Consultancy Services',
     'company': 'Geminate Consultancy Services',
     'category': 'sales',
     'website': 'https://www.geminatecs.com/',
-    'summary' : 'Mail SMTP and IMAP + Alias Domain By Company',
-    'description' : """Geminate comes with a feature to support multiple domain and multi company emailing system.""",
-    'depends' : ['base','sale_management','fetchmail','crm','project','mail','account','hr_recruitment'],
-    'data' : [
+    'summary': 'Mail SMTP and IMAP + Alias Domain By Company',
+    'description': """Geminate comes with a feature to support multiple 
+    domain and multi company emailing system.""",
+    'depends': ['base', 'sale_management', 'fetchmail', 'crm', 'project',
+                'mail', 'account'],
+    'data': [
         'security/ir.model.access.csv',
         'views/mail_server_view.xml',
         'views/alias_mail_view.xml',
