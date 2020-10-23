@@ -349,7 +349,8 @@
                             </div>
                         </div>
                         <br></br>
-                        <!--<div class="page" name="third_page_tarjeta">
+                        <t t-if="'Dat' in doc.payment_mode_id.name and doc.tarjeta_credito">
+                        <div class="page" name="third_page_tarjeta">
                             <br></br>
                             <br></br>
                             <br></br>
@@ -421,7 +422,10 @@
                             </div>
                             <div class="row" style="text-align:center;"><div class="col-12"><strong>Fecha:</strong></div></div>
                             <div class="row" style="text-align:center;"><div class="col-12"></div></div>
-                        </div>-->
+                        </div>
+                            </t>
+
+                        <t t-if="doc.payment_mode_id.name == 'Domiciliado' and doc.cuenta_bancaria and doc.mandate_id">
                         <div class="page" name="third_page_sepa">
                             <style type="text/css">
                                 h4 {
@@ -681,6 +685,8 @@
                                 </div>
                             </div>
                         </div>
+                    </t>
+
                     </t>
                 </t>
             </t>
