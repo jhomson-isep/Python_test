@@ -345,6 +345,9 @@ class CrmLead(models.Model):
 
             #Producto
             try:
+                if (modalidad == 'ONL' or cod_sede == 'ONL') and company_id == 4:
+                    cod_curso = cod_curso + modalidad
+
                 referencia_interna_template = self.env['product.template'].sudo().search(
                     [('sale_ok', '=', True), ('default_code', '=', cod_curso), ('company_id', '=', company_id)], limit=1)
                 logger.info(referencia_interna_template)
