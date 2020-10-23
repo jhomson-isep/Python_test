@@ -79,9 +79,9 @@ class CrmLead(models.Model):
             logger.info(lead.get('x_profesion'))
             logger.info(lead.get('x_finalizacionestudios'))
             #---------------Nueva lógica de typeform-----------------------------#
-            if cod_sede == '':
+            if cod_sede is None:
                 cod_sede = lead.get('x_profesion')
-            if modalidad == '':
+            if modalidad is None:
                 modalidad = lead.get('x_finalizacionestudios')
 
             lead.update({'x_finalizacionestudios': ''})
@@ -274,15 +274,24 @@ class CrmLead(models.Model):
                     modalidad = 'ONL'
 
                 if cod_sede and modalidad:
-                    lead.update({
-                        'name': cod_curso +
-                                '-' +
-                                modalidad +
-                                '-' +
-                                cod_sede +
-                                ' - ' +
-                                email
-                    })
+                    if modalidad == 'ONL':
+                        lead.update({
+                            'name': cod_curso +
+                                    '-' +
+                                    modalidad +
+                                    ' - ' +
+                                    email
+                                    })
+                    else:
+                        lead.update({
+                            'name': cod_curso +
+                                    '-' +
+                                    modalidad +
+                                    '-' +
+                                    cod_sede +
+                                    ' - ' +
+                                    email
+                                    })
 
                 lead.update(({'x_codmodalidad': modalidad}))
                 lead.update(({'x_codsede': cod_sede}))
@@ -345,7 +354,7 @@ class CrmLead(models.Model):
 
             #Producto
             try:
-                if (modalidad == 'ONL' or cod_sede == 'ONL') and company_id == 4:
+                if modalidad == 'ONL' and company_id == 4:
                     cod_curso = cod_curso + modalidad
 
                 referencia_interna_template = self.env['product.template'].sudo().search(
