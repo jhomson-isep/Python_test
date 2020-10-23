@@ -349,7 +349,81 @@
                             </div>
                         </div>
                         <br></br>
-                        <div class="page" name="third_page">
+                        <div class="page" name="third_page_tarjeta">
+                            <br></br>
+                            <br></br>
+                            <br></br>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                <div class="col-3">
+                                    <div class="row"><strong>Nombre :</strong></div>
+                                    <div class="row"><strong>Programa :</strong></div>
+                                </div>
+                                <div class="col-9">
+                                    <div class="row"><span t-field="o.partner_id.name"></span></div>
+                                    <div class="row">
+                                        <t t-foreach="o.order_line" t-as="l">
+                                            <span t-field="l.product_id"><br></br></span>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                <p>Autorizo a <span t-field="o.company_id.name"></span>. a realizar los cargos correspondientes a:</p>
+                                <!--Falta algo-->
+                            </div>
+                            <br></br>
+                            <br></br>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                <strong>Nombre completo del titular de la cuenta:</strong> <span t-field="o.partner_id.name"></span>
+                            </div>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                <strong>Tipo de tarjeta:</strong> <span t-field="o.partner_id.name"></span>
+                            </div>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                <strong>Banco Emisor de la tarjeta:</strong> <span t-field="o.partner_id.name"></span>
+                            </div>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                <strong>Número de la tarjeta:</strong> <span t-field="o.partner_id.name"></span>
+                            </div>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                <strong>Si la tarjeta es de débito indicar número de clave bancaria estandarizada "CLABE": </strong><span t-field="o.partner_id.name"></span>
+                            </div>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                <strong>NIF:</strong> <span t-field="o.partner_id.name"></span>
+                            </div>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                <strong>Nota:</strong> El NIF son los tres digitos verificadores al reverso de su tarjeta - en American Express son cuatro digitos ubicados al frente.
+                            </div>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                <strong>Fecha de vencimiento:</strong> <span t-field="o.partner_id.name"></span>
+                            </div>
+                            <br></br>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                Solicito y autorizo a <span t-field="o.company_id.name"></span>, para que en mi nombre realice y gestione cualquier trámite administrativo, pagos académicos y de titulación de la Universidad en
+                                donde he formalizado la inscripción, al no disponer de una tarjeta de crédito habilitada para cobros internacionales y evitarme los costos bancarios de las
+                                transferencias internacionales para dichos pagos.
+                            </div>
+                            <br></br>
+                            <br></br>
+                            <div class="row" style="text-align:center;font-size:13px">
+                                <div class="col-12">
+                                    Entregar este formato a su gestor comercial
+                                    <br></br>
+                                    He leído y autorizo lo manifestado en la presente orden de pago.
+                                </div>
+                            </div>
+                            <br></br>
+                            <br></br>
+                            <div class="row" style="text-align:center;">
+                                <div class="col-12" style="height:50px;"><strong>FIRMA TITULAR:</strong></div>
+                            </div>
+                            <div class="row" style="text-align:center;">
+                                <div class="col-12"><span t-field="o.partner_invoice_id.name"></span></div>
+                            </div>
+                            <div class="row" style="text-align:center;"><div class="col-12"><strong>Fecha:</strong></div></div>
+                            <div class="row" style="text-align:center;"><div class="col-12"></div></div>
+                        </div>
+                        <div class="page" name="third_page_sepa">
                             <br></br>
                             <br></br>
                             <br></br>
