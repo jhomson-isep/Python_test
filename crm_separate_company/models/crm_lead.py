@@ -182,7 +182,7 @@ class CrmLead(models.Model):
                 cod_sede = 'PAM'
             elif cod_sede in ('centro-zaragoza', 'Zaragoza', 'ZAZ', 'ised-zaragoza'):
                 cod_sede = 'ZAR'
-            elif cod_sede == 'Valencia':
+            elif cod_sede in ('Valencia', 'valencia'):
                 cod_sede = 'VAL'
             elif cod_sede in ('Online', 'online'):
                 cod_sede = 'ONL'
@@ -205,15 +205,6 @@ class CrmLead(models.Model):
             elif company_id == 1:
                 # Manel Arroyo
                 user_id = 76
-
-                #Codigo de modalidad con la logica de typeform
-                if modalidad == '001':
-                    modalidad = 'MAH'
-                elif modalidad == '010':
-                    modalidad = 'PRS'
-                elif modalidad == '100':
-                    modalidad = 'ONL'
-
 
                 if cod_sede in ('barcelona', 'Barcelona', 'BCN', '001'):
                     cod_sede = 'CAT'
@@ -248,6 +239,37 @@ class CrmLead(models.Model):
                         # Carolina Araujo
                         user_id = 100000006
                         team_id = 100000006
+
+                #Codigo de modalidad con la logica de typeform
+                if modalidad == '001':
+                    modalidad = 'MAH'
+                elif modalidad == '010':
+                    modalidad = 'PRS'
+                elif modalidad == '100':
+                    modalidad = 'ONL'
+
+                if cod_sede and modalidad:
+                    if modalidad == 'ONL':
+                        lead.update({
+                            'name': cod_curso +
+                                    '-' +
+                                    modalidad +
+                                    ' - ' +
+                                    email
+                                    })
+                    else:
+                        lead.update({
+                            'name': cod_curso +
+                                    '-' +
+                                    modalidad +
+                                    '-' +
+                                    cod_sede +
+                                    ' - ' +
+                                    email
+                                    })
+
+                lead.update(({'x_codmodalidad': modalidad}))
+                lead.update(({'x_codsede': cod_sede}))
 
             # ISED
             # ---------------------------------
