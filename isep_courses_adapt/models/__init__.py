@@ -17,3 +17,5 @@ from . import op_contact_type
 from . import op_university
 from . import op_student
 from . import op_faculty
+from . import op_faculty_gd
+from . import res_google_drive
