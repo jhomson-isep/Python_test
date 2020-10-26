@@ -15,7 +15,8 @@
     "depends": [
         "base",
         "utm",
-        "sale"
+        "sale",
+        "helpdesk"
     ],
     "data": [
         "views/res_partner.xml",
