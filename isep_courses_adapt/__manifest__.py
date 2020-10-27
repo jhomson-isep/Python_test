@@ -17,7 +17,8 @@
     'license': 'AGPL-3',
     'depends': [
         'base',
-        'openeducat_core'
+        'openeducat_core',
+        'openeducat_fees'
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -25,6 +26,7 @@
         'views/op_batch.xml',
         'views/op_modality.xml',
         'views/op_workplace.xml',
+        'views/op_student_documents.xml',
         'views/op_evaluation_type.xml',
         'views/op_campus.xml',
         'views/op_practices_types.xml',
