@@ -3,7 +3,7 @@
 from odoo import models, fields
 
 
-class AccountInvoice(models.Model):
-    _inherit = 'account.invoice'
+class ProductCategory(models.Model):
+    _inherit = 'product.category'
 
     active = fields.Boolean(string='active', default=True)
