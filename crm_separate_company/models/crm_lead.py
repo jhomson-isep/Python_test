@@ -178,6 +178,8 @@ class CrmLead(models.Model):
                 cod_sede = 'BIO'
             elif cod_sede in ('centro-madrid-atocha', 'madrid', 'Madrid', 'MAD', 'MDR', 'ised-madrid'):
                 cod_sede = 'MDR'
+            elif cod_sede == 'ised-barcelona':
+                cod_sede = 'CAT'
             elif cod_sede in ('centro-pamplona', 'Pamplona', 'ised-pamplona'):
                 cod_sede = 'PAM'
             elif cod_sede in ('centro-zaragoza', 'Zaragoza', 'ZAZ', 'ised-zaragoza'):
@@ -320,7 +322,7 @@ class CrmLead(models.Model):
 
                 # ONL es online en modalidad
 
-                if modalidad == 'ONL' or cod_sede == 'ONL':
+                if modalidad == 'ONL' or cod_sede == 'ONL' or cod_sede == 'CAT':
                     # Centro Sup de estudios ISED SL - Online
                     # company_id = 3
                     # Yura Vanegas
