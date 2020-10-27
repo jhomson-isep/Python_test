@@ -3,7 +3,8 @@
     <data>
         <record id="view_op_student_form_extended" model="ir.ui.view">
             <field name="model">op.student</field>
-            <field name="inherit_id" ref="openeducat_core.view_op_student_form"/>
+            <field name="inherit_id"
+                   ref="openeducat_core.view_op_student_form"/>
             <field name="arch" type="xml">
 
                 <xpath expr="//field[@name='gender']" position="before">
@@ -23,14 +24,21 @@
                     <field name="study_type_id"/>
                 </xpath>
 
+                <notebook position="inside">
+                    <page name="Documentación" string="Documentación">
+                        <field name="document_ids" colspan="4" nolabel="1"/>
+                    </page>
+                </notebook>
             </field>
         </record>
 
         <record id="view_op_student_form_fees_hide" model="ir.ui.view">
             <field name="model">op.student</field>
-            <field name="inherit_id" ref="openeducat_fees.view_op_student_form_fees_inherit"/>
+            <field name="inherit_id"
+                   ref="openeducat_fees.view_op_student_form_fees_inherit"/>
             <field name="arch" type="xml">
-                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[not(@name)][1]" position="replace"/>
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[not(@name)][1]"
+                       position="replace"/>
             </field>
         </record>
 
