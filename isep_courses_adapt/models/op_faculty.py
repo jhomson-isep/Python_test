@@ -19,7 +19,8 @@ class OpFaculty(models.Model):
         ('female', 'Female'),
         ('other', 'Other')
     ], 'Gender', required=True)
-
+    document_ids = fields.Many2one('op.document.type', string='Document Type')
+    document_file = fields.Binary('Upload Document')
     @staticmethod
     def add_years(d, years):
         """Return a date that's `years` years after the date (or datetime)

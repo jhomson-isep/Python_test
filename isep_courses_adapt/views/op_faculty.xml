@@ -18,6 +18,14 @@
                         <field name="workplace_ids" colspan="4" nolabel="1"/>
                     </page>
                 </xpath>
+                <notebook position="inside">
+                    <page string="Tipo de Documento" name="document_type">
+                        <group col="2">
+                            <field name="document_ids" colspan="2" widget="many2one"/>
+                        </group>
+                        
+                    </page>
+                </notebook>
 
             </field>
         </record>
