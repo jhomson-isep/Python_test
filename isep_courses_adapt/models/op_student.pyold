@@ -1,5 +1,6 @@
 from odoo import fields, api, models
 from .op_sql import SQL
+import traceback
 import logging
 import os
 
@@ -28,8 +29,6 @@ class OpStudent(models.Model):
     moodle_user = fields.Char(string='Moodle user', size=128)
     moodle_pass = fields.Char(string='Moodle Password', size=24)
     partner_id = fields.Many2one('res.partner', 'Partner', required=False)
-    document_ids = fields.One2many("op.student.documents", "student_id",
-                                   string="Documentation")
 
     _sql_constraints = [(
         'unique_n_id',
@@ -46,31 +45,49 @@ class OpStudent(models.Model):
         rows = s.get_all_students(offset=offset)
         int_break = 0
         for student in rows:
+            logger.info(student)
             try:
                 existent_student = self.search([('n_id', '=', student.N_Id)])
                 if len(existent_student) < 1:
                     app_country = s.get_country_by_nid(student.N_Id)
-                    country = self.env['res.country'].search([('name', 'ilike', app_country.country or '')], limit=1)
-                    partner = self.env['res.partner'].search([('email', '!=', False),
-                                                              ('email', '=', student.EMail)], limit=1)
-                    if not partner.id:
-                        partner_values = {
-                            'name': student.Nombre + " " + student.Apellidos,
-                            'email': student.EMail,
-                            'phone': student.Telefono,
-                            'mobile': student.Telefono,
-                            'street_name': student.Direccion,
-                            'zip': student.CodPostal or None,
-                            'city': student.Poblacion,
-                            'country_id': country.id,
-                            'vat': student.CURPMx or student.DNI,
-                            'is_student': True
-                        }
-                        partner = self.env['res.partner'].create(partner_values)
-                    campus = self.env['op.campus'].search([('code', '=', student.Sede)], limit=1)
-                    document_type = self.env['op.document.type'].search([('code', '=', student.TipoDocumento)], limit=1)
-                    study_type = self.env['op.study.type'].search([('code', '=', student.TipoEstudios)], limit=1)
-                    university = self.env['op.university'].search([('code', '=', student.TipoEstudios)], limit=1)
+                    if app_country is not None:
+                        country = self.env['res.country'].search(
+                            [('name', 'ilike', app_country.country or '')],
+                            limit=1)
+                    else:
+                        country = None
+                    partner = self.env['res.partner'].search(
+                        [('email', '!=', False),
+                         ('email', '=', student.EMail)], limit=1)
+                    # if partner is None:
+                    #     # try:
+                    #     #     partner_name = student.Nombre + " " + student.Apellidos
+                    #     # except Exception as ex:
+                    #     #     partner_name = student.Nombre or student.Apellidos
+                    #     # logger.info(partner_name)
+                    #     partner_values = {
+                    #         'name': student.Nombre + " " + student.Apellidos,
+                    #         'email': student.EMail or 'student@isep.com',
+                    #         'phone': student.Telefono,
+                    #         'mobile': student.Telefono,
+                    #         'street_name': student.Direccion,
+                    #         'zip': student.CodPostal or None,
+                    #         'city': student.Poblacion,
+                    #         'country_id': country.id or None,
+                    #         'vat': student.CURPMx or student.DNI,
+                    #         'is_student': True
+                    #     }
+                    #     logger.info(partner_values)
+                    #     partner = self.env['res.partner'].create(
+                    #         partner_values)
+                    campus = self.env['op.campus'].search(
+                        [('code', '=', student.Sede)], limit=1)
+                    document_type = self.env['op.document.type'].search(
+                        [('code', '=', student.TipoDocumento)], limit=1)
+                    study_type = self.env['op.study.type'].search(
+                        [('code', '=', student.TipoEstudios)], limit=1)
+                    university = self.env['op.university'].search(
+                        [('code', '=', student.TipoEstudios)], limit=1)
                     if student.Sexo == 'H':
                         gender = 'm'
                     elif student.Sexo == 'M':
@@ -100,7 +117,7 @@ class OpStudent(models.Model):
                         'moodle_user': student.Usuario
                     }
 
-                    # logger.info(student_values)
+                    logger.info(student_values)
                     res = super(OpStudent, self).create(student_values)
                     print(res)
                     logger.info('Student with n_id {0} created'.format(
