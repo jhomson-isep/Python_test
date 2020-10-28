@@ -108,7 +108,8 @@ class CrmLead(models.Model):
                 'website': None,
                 'x_universidad': None,
                 'x_curso_id': None,
-                'x_producto_id': None
+                'x_producto_id': None,
+                'x_sede_id': None
             }
 
             try:
@@ -211,17 +212,21 @@ class CrmLead(models.Model):
                 if cod_sede in ('barcelona', 'Barcelona', 'BCN', '001'):
                     cod_sede = 'CAT'
                     team_id = 1
+                    lead.update({'x_sede_id': 2})
 
                 elif cod_sede in ('metodo-at-home', 'Metodo-At-Home'):
                     cod_sede = 'MAH'
                     team_id = 1
+                    lead.update({'x_sede_id': 16})
 
                 elif cod_sede in ('valencia', 'Valencia', 'VAL', '100'):
                     cod_sede = 'VAL'
                     team_id = 200000001
+                    lead.update({'x_sede_id': 5})
 
                 elif cod_sede == 'ONL':
                     team_id = 5
+                    lead.update({'x_sede_id': 26})
                     # Mandar a Latam cuando sea un telefono de México y Colombia
                     if telefono[:3] in ('+52', '+57'):
                         company_id = 1111
@@ -231,6 +236,7 @@ class CrmLead(models.Model):
 
                 elif cod_sede in ('MDR', '100'):
                     team_id = 4
+                    lead.update({'x_sede_id': 3})
 
                 # ONL es online en modalidad
                 if modalidad == 'ONL':
@@ -280,14 +286,19 @@ class CrmLead(models.Model):
                 #Codigo de sede con la logica de typeform
                 if cod_sede == '00001':
                     cod_sede = 'ONL'
+                    lead.update({'x_sede_id': 13})
                 elif cod_sede == '00010':
                     cod_sede = 'PAM'
+                    lead.update({'x_sede_id': 9})
                 elif cod_sede == '00100':
                     cod_sede = 'BIO'
+                    lead.update({'x_sede_id': 10})
                 elif cod_sede == '01000':
                     cod_sede = 'ZAR'
+                    lead.update({'x_sede_id': 11})
                 elif cod_sede == '10000':
                     cod_sede = 'MDR'
+                    lead.update({'x_sede_id': 8})
 
                 #Codigo de modalidad con la logica de typeform
                 if modalidad == '001':
