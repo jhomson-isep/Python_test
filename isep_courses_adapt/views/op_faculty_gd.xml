@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="ica_view_op_faculty_gd_form_inherit" model="ir.ui.view">
+            <field name="name">ica.op.faculty.gd.form.inherit</field>
+            <field name="model">op.faculty</field>
+            <field name="inherit_id" ref="openeducat_core.view_op_faculty_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Tipo de Documento" name="document_type">
+                        <group col="2">
+                            <field name="document_ids" colspan="2" widget="many2one"/>
+                        </group>
+                        
+                    </page>
+                </notebook>
+
+            </field>
+        </record>
+    </data>
+</odoo>
