@@ -313,7 +313,6 @@
                                 </div>
                             </div>
                         </div>
-                        <br></br>
                         <div class="page" name="second_page">
                             <div class="row" style="font-size:11px; text-align:justify;">
                                 <div class="col-6">
@@ -486,7 +485,6 @@
                                 </div>
                             </div>
                         </div>
-                        <br></br>
                         <t t-if="o.payment_mode_id.name == 'Tarjeta' or o.payment_mode_id.name == 'Datáfono'">
                             <div class="page" name="third_page_tarjeta">
                             <br></br>
@@ -597,6 +595,7 @@
                                     font-size: 0.8em;
                                 }
                             </style>
+                            <br></br>
                             <br></br>
                             <br></br>
                             <br></br>
