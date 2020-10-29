@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from pydrive.drive import GoogleDrive
+from pydrive.drive import GoogleDrive, GoogleDriveFile
 from odoo import models, fields, api
 from pydrive.auth import GoogleAuth
 import logging
 import base64
+import io
 import os
 
 logger = logging.getLogger(__name__)
@@ -20,40 +21,21 @@ class OpStudentDocuments(models.Model):
     drive_id = fields.Char(string="Gdrive ID")
     document_name = fields.Char(string="Document name")
     faculty_id = fields.Many2one(comodel_name="op.faculty", string="Faculty")
-    file = fields.Binary(string="Upload Document")
-    file_name = fields.Char(string="File Name", size=1024)
+    file = fields.Binary()
+    filename = fields.Char()
 
     @api.multi
     def download_file(self):
-        self.drive_id = ''
-        logger.info(os.path.dirname(os.path.abspath(__file__)))
-        model_path = os.path.dirname(os.path.abspath(__file__))
-        credentials_file = model_path + "/drive/credentials.txt"
-        drive_config_file = model_path + '/drive/client_secrets.json'
-        GoogleAuth.DEFAULT_SETTINGS['client_config_file'] = drive_config_file
-        gauth = GoogleAuth()
-        # Try to load saved client credentials
-        gauth.LoadCredentialsFile(credentials_file)
-        if gauth.credentials is None:
-            # Authenticate if they're not there
-            gauth.LocalWebserverAuth()
-        elif gauth.access_token_expired:
-            # Refresh them if expired
-            gauth.Refresh()
-        else:
-            # Initialize the saved credentials
-            gauth.Authorize()
-        # Save the current credentials to a file
-        gauth.SaveCredentialsFile(credentials_file)
-
+        gauth = self.Gauth()
         drive = GoogleDrive(gauth)
 
         file = drive.CreateFile({'id': self.drive_id})
         logger.info("*******************")
         logger.info(file)
 
-        file_gtf = file.GetContentFile(file['title'])
-        logger.info(file.FetchContent)
+        file.FetchContent(file['mimeType'], False)
+        file_gtf = base64.b64encode(file.content.getvalue())
+        logger.info(file_gtf)
         self.document_name = file['title']
         attachment = self.env['ir.attachment'].create({
             'name': file['title'],
@@ -75,15 +57,27 @@ class OpStudentDocuments(models.Model):
 
     @api.multi
     def upload_file(self):
+        gauth = self.Gauth()
+
+        drive = GoogleDrive(gauth)
+        logger.info(os.path.abspath(self.filename))
+        file = drive.CreateFile()
+        file.content = io.BytesIO(base64.b64decode(self.file))
+        file['title'] = self.filename
+        file.Upload()
+        self.document_name = self.filename
+        self.filename = ''
+        self.file = b'\x00'
+        self.drive_id = file['id']
+
+    def Gauth(self):
         logger.info(os.path.dirname(os.path.abspath(__file__)))
         model_path = os.path.dirname(os.path.abspath(__file__))
-        credentials_file = model_path + '/drive/credentials.txt'
+        credentials_file = model_path + "/drive/credentials.txt"
         drive_config_file = model_path + '/drive/client_secrets.json'
         GoogleAuth.DEFAULT_SETTINGS['client_config_file'] = drive_config_file
-     
         gauth = GoogleAuth()
         # Try to load saved client credentials
-        #self.auth_url(gauth)
         gauth.LoadCredentialsFile(credentials_file)
         if gauth.credentials is None:
             # Authenticate if they're not there
@@ -96,22 +90,4 @@ class OpStudentDocuments(models.Model):
             gauth.Authorize()
         # Save the current credentials to a file
         gauth.SaveCredentialsFile(credentials_file)
-
-        drive = GoogleDrive(gauth)
-
-        file = drive.CreateFile()
-        file_name = os.path.abspath(self.file_name)
-        file.SetContentFile(file_name)
-        file.Upload()
-        self.document_name = os.path.basename(file_name)
-        self.file = None
-        self.drive_id = file['id']
-
-    @api.multi
-    def auth_url(self, gauth):
-        return {
-            'type' : 'ir.actions.act_url',
-            'url' : gauth.GetAuthUrl(),
-            'target': 'new',
-            'nodestroy': False,
-        }
+        return gauth
