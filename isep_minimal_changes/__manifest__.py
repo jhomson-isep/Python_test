@@ -15,10 +15,12 @@
     "depends": [
         "base",
         "utm",
-        "sale"
+        "sale",
+        "helpdesk"
     ],
     "data": [
-        "views/res_partner.xml"
+        "views/res_partner.xml",
+        "views/helpdesk_ticket.xml"
     ],
     'installable': True,
 }

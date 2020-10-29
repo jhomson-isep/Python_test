@@ -79,9 +79,9 @@ class CrmLead(models.Model):
             logger.info(lead.get('x_profesion'))
             logger.info(lead.get('x_finalizacionestudios'))
             #---------------Nueva lógica de typeform-----------------------------#
-            if cod_sede == '':
+            if cod_sede is None:
                 cod_sede = lead.get('x_profesion')
-            if modalidad == '':
+            if modalidad is None:
                 modalidad = lead.get('x_finalizacionestudios')
 
             lead.update({'x_finalizacionestudios': ''})
@@ -108,7 +108,8 @@ class CrmLead(models.Model):
                 'website': None,
                 'x_universidad': None,
                 'x_curso_id': None,
-                'x_producto_id': None
+                'x_producto_id': None,
+                'x_sede_id': None
             }
 
             try:
@@ -178,11 +179,13 @@ class CrmLead(models.Model):
                 cod_sede = 'BIO'
             elif cod_sede in ('centro-madrid-atocha', 'madrid', 'Madrid', 'MAD', 'MDR', 'ised-madrid'):
                 cod_sede = 'MDR'
+            elif cod_sede == 'ised-barcelona':
+                cod_sede = 'CAT'
             elif cod_sede in ('centro-pamplona', 'Pamplona', 'ised-pamplona'):
                 cod_sede = 'PAM'
             elif cod_sede in ('centro-zaragoza', 'Zaragoza', 'ZAZ', 'ised-zaragoza'):
                 cod_sede = 'ZAR'
-            elif cod_sede == 'Valencia':
+            elif cod_sede in ('Valencia', 'valencia'):
                 cod_sede = 'VAL'
             elif cod_sede in ('Online', 'online'):
                 cod_sede = 'ONL'
@@ -206,29 +209,24 @@ class CrmLead(models.Model):
                 # Manel Arroyo
                 user_id = 76
 
-                #Codigo de modalidad con la logica de typeform
-                if modalidad == '001':
-                    modalidad = 'MAH'
-                elif modalidad == '010':
-                    modalidad = 'PRS'
-                elif modalidad == '100':
-                    modalidad = 'ONL'
-
-
                 if cod_sede in ('barcelona', 'Barcelona', 'BCN', '001'):
                     cod_sede = 'CAT'
                     team_id = 1
+                    lead.update({'x_sede_id': 2})
 
                 elif cod_sede in ('metodo-at-home', 'Metodo-At-Home'):
                     cod_sede = 'MAH'
                     team_id = 1
+                    lead.update({'x_sede_id': 16})
 
                 elif cod_sede in ('valencia', 'Valencia', 'VAL', '100'):
                     cod_sede = 'VAL'
                     team_id = 200000001
+                    lead.update({'x_sede_id': 5})
 
                 elif cod_sede == 'ONL':
                     team_id = 5
+                    lead.update({'x_sede_id': 26})
                     # Mandar a Latam cuando sea un telefono de México y Colombia
                     if telefono[:3] in ('+52', '+57'):
                         company_id = 1111
@@ -238,6 +236,7 @@ class CrmLead(models.Model):
 
                 elif cod_sede in ('MDR', '100'):
                     team_id = 4
+                    lead.update({'x_sede_id': 3})
 
                 # ONL es online en modalidad
                 if modalidad == 'ONL':
@@ -249,6 +248,37 @@ class CrmLead(models.Model):
                         user_id = 100000006
                         team_id = 100000006
 
+                #Codigo de modalidad con la logica de typeform
+                if modalidad == '001':
+                    modalidad = 'MAH'
+                elif modalidad == '010':
+                    modalidad = 'PRS'
+                elif modalidad == '100':
+                    modalidad = 'ONL'
+
+                if cod_sede and modalidad:
+                    if modalidad == 'ONL':
+                        lead.update({
+                            'name': cod_curso +
+                                    '-' +
+                                    modalidad +
+                                    ' - ' +
+                                    email
+                                    })
+                    else:
+                        lead.update({
+                            'name': cod_curso +
+                                    '-' +
+                                    modalidad +
+                                    '-' +
+                                    cod_sede +
+                                    ' - ' +
+                                    email
+                                    })
+
+                lead.update(({'x_codmodalidad': modalidad}))
+                lead.update(({'x_codsede': cod_sede}))
+
             # ISED
             # ---------------------------------
             elif company_id == 4:
@@ -256,14 +286,19 @@ class CrmLead(models.Model):
                 #Codigo de sede con la logica de typeform
                 if cod_sede == '00001':
                     cod_sede = 'ONL'
+                    lead.update({'x_sede_id': 13})
                 elif cod_sede == '00010':
                     cod_sede = 'PAM'
+                    lead.update({'x_sede_id': 9})
                 elif cod_sede == '00100':
                     cod_sede = 'BIO'
+                    lead.update({'x_sede_id': 10})
                 elif cod_sede == '01000':
                     cod_sede = 'ZAR'
+                    lead.update({'x_sede_id': 11})
                 elif cod_sede == '10000':
                     cod_sede = 'MDR'
+                    lead.update({'x_sede_id': 8})
 
                 #Codigo de modalidad con la logica de typeform
                 if modalidad == '001':
@@ -274,22 +309,31 @@ class CrmLead(models.Model):
                     modalidad = 'ONL'
 
                 if cod_sede and modalidad:
-                    lead.update({
-                        'name': cod_curso +
-                                '-' +
-                                modalidad +
-                                '-' +
-                                cod_sede +
-                                ' - ' +
-                                email
-                    })
+                    if modalidad == 'ONL':
+                        lead.update({
+                            'name': cod_curso +
+                                    '-' +
+                                    modalidad +
+                                    ' - ' +
+                                    email
+                                    })
+                    else:
+                        lead.update({
+                            'name': cod_curso +
+                                    '-' +
+                                    modalidad +
+                                    '-' +
+                                    cod_sede +
+                                    ' - ' +
+                                    email
+                                    })
 
                 lead.update(({'x_codmodalidad': modalidad}))
                 lead.update(({'x_codsede': cod_sede}))
 
                 # ONL es online en modalidad
 
-                if modalidad == 'ONL' or cod_sede == 'ONL':
+                if modalidad == 'ONL' or cod_sede == 'ONL' or cod_sede == 'CAT':
                     # Centro Sup de estudios ISED SL - Online
                     # company_id = 3
                     # Yura Vanegas
@@ -345,7 +389,7 @@ class CrmLead(models.Model):
 
             #Producto
             try:
-                if (modalidad == 'ONL' or cod_sede == 'ONL') and company_id == 4:
+                if modalidad == 'ONL' and company_id == 4:
                     cod_curso = cod_curso + modalidad
 
                 referencia_interna_template = self.env['product.template'].sudo().search(
