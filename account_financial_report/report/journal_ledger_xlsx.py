@@ -4,9 +4,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import _, models
-import time
-import logging
-logger = logging.getLogger(__name__)
 
 
 class JournalLedgerXslx(models.AbstractModel):
@@ -209,7 +206,6 @@ class JournalLedgerXslx(models.AbstractModel):
             report_journal.currency_id.name,
             report_journal.name,
         )
-        logger.info(sheet_name)
         self._generate_moves_content(
             workbook, report_journal.report_id, sheet_name,
             report_journal.report_move_ids)
@@ -220,13 +216,11 @@ class JournalLedgerXslx(models.AbstractModel):
             workbook, report, "Tax Report", report.report_tax_line_ids)
 
     def _generate_journal_taxes_summary(self, workbook, report_journal):
-        sheet_name = "Tax - %s (%s) - %s - %s" % (
+        sheet_name = "Tax - %s (%s) - %s" % (
             report_journal.code,
             report_journal.currency_id.name,
             report_journal.name,
-            time.time(),
         )
-        logger.info(sheet_name)
         report = report_journal.report_id
         self._generate_taxes_summary(
             workbook, report, sheet_name, report_journal.report_tax_line_ids)
