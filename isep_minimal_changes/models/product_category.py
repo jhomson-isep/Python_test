@@ -3,7 +3,7 @@
 from odoo import models, fields
 
 
-class ResCountry(models.Model):
-    _inherit = 'res.country'
+class ProductCategory(models.Model):
+    _inherit = 'product.category'
 
     active = fields.Boolean(string='active', default=True)
