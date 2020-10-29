@@ -137,3 +137,6 @@ dmypy.json
 
 # Old files
 .pyold
+isep_courses_adapt/models/drive/client_secrect.json
+isep_courses_adapt/models/drive/credentials.json
+isep_courses_adapt/models/drive/credentials.txt
