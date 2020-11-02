@@ -16,9 +16,8 @@
             <field name="name">op.student.access.form</field>
             <field name="model">op.student.access</field>
             <field name="priority" eval="8"/>
-            <!--nuevo 021120
+            <!--nuevo 021120 -->
             <field name="inherit_id" ref="view_employee_form"/>
-            -->
             <field name="arch" type="xml">
                 <form string="Accesos del alumno">
                     <sheet>
@@ -51,7 +50,7 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id"
-                   ref="view_op_student_access_search_search"/>
+                   ref="view_op_student_access_search"/>
             <field name="student_id">[]</field>
             <field name="student_access">{}</field>
         </record>
