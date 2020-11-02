@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <report id="report_factura_isep_espana_divs"
+                model="account.invoice"
+                string="Factura ISEP España Divs"
+                report_type="qweb-pdf"
+                name="isep_reports_custom.factura_isep_espana_divs"
+                menu="True"/>
+
+        <template id="assets_backend" inherit_id="web.assets_backend">
+             <xpath expr="." position="inside">
+                 <link rel="stylesheet" href="/isep_reports_custom/static/src/css/sheet.css"/>
+             </xpath>
+        </template>
+
+        <template id="factura_isep_espana_divs">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page" name="first_page">
+                            <link rel="stylesheet" href="/isep_reports_custom/static/src/css/sheet.css"/>
+                            <div class="row">
+                                <div class="col-4">
+                                    <strong>Nombre Factura</strong>
+                                    <hr class="gray_hr"></hr>
+                                </div>
+                            </div>
+                            <div></div>
+                            <div class="row">
+                                <div class="col-8"></div>
+                                <div class="col-4">
+                                    <strong>Dirección</strong>
+                                    <hr class="orange_hr"></hr>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3"><strong>Fecha Factura:</strong></div>
+                                <div class="col-3"><strong>Fecha Vencimiento:</strong></div>
+                                <div class="col-3"><strong>Fuente:</strong></div>
+                                <div class="col-3"><strong>Referencia:</strong></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3"></div>
+                                <div class="col-3"></div>
+                                <div class="col-3"></div>
+                                <div class="col-3"></div>
+                            </div>
+                            <div class="row div_th orange_color">
+                                <div class="col-4"><strong>Descripción</strong></div>
+                                <div class="col-2"><strong>Cantidad</strong></div>
+                                <div class="col-2"><strong>Precio Unidad</strong></div>
+                                <div class="col-2"><strong>Impuestos</strong></div>
+                                <div class="col-2"><strong>Precio</strong></div>
+                            </div>
+                            <div class="row orange_gradient" t-foreach="o.invoice_line_ids" t-as="l">
+                                <div class="col-4"><span t-field="l.name"/></div>
+                                <div class="col-2"><span t-field="l.quantity"/><span t-field="l.uom_id" groups="product.group_uom"/></div>
+                                <div class="col-2"><span t-field="l.price_unit"/></div>
+                                <div class="col-2" t-if="display_discount" groups="sale.group_discount_per_so_line"><span t-field="l.discount"/></div>
+                                <div class="col-2"></div>
+                            </div>
+
+                            <div class="footer">
+                                <div class="row">
+                                    <div class="col-12 blue-design"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

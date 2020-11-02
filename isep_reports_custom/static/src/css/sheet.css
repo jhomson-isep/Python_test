@@ -11,9 +11,16 @@
 }
 
 .orange_gradient{
-    background-color: #f96910;
+    background-color: #f8d5c4;
 }
 
-.radius_tr{
-    border-radius:5px;
+.div_th{
+    border-top-right-radius:20px;
+    border-top-left-radius:20px;
+
+}
+
+.blue-design{
+    background-color:#061742;
+    border-top-right-radius:150px;
 }
