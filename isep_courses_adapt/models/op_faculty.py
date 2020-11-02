@@ -19,6 +19,7 @@ class OpFaculty(models.Model):
         ('female', 'Female'),
         ('other', 'Other')
     ], 'Gender', required=True)
+    document_ids = fields.One2many("op.student.documents", "faculty_id", String="Documentation")
 
     @staticmethod
     def add_years(d, years):
