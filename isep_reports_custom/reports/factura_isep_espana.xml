@@ -21,14 +21,16 @@
                         <div class="page" name="first_page">
                             <link rel="stylesheet" href="/isep_reports_custom/static/src/css/sheet.css"/>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <strong>Nombre Factura</strong>
                                     <hr class="gray_hr"></hr>
                                 </div>
                             </div>
+                            <div></div>
                             <div class="row">
-                                <div class="col-6 col-offset-6">
-                                    <strong>Direccion</strong>
+                                <div class="col-8"></div>
+                                <div class="col-4">
+                                    <strong>Dirección</strong>
                                     <hr class="orange_hr"></hr>
                                 </div>
                             </div>
@@ -45,9 +47,9 @@
                                 <div class="col-3"></div>
                             </div>
                             <div class="row">
-                                <table class="table table-condensed">
+                                <table class="table table-striped">
                                     <thead>
-                                        <tr class="radius_tr orange_color">
+                                        <tr class="orange_color">
                                             <th>Descripción</th>
                                             <th class="text-right">Cantidad</th>
                                             <th class="text-right">Precio Unidad</th>
@@ -58,23 +60,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="orange_gradient" t-foreach="o.invoice_line_ids" t-as="l">
-                                            <td><span t-field="l.name"/></td>
-                                            <td class="text-right">
+                                        <tr t-foreach="o.invoice_line_ids" t-as="l">
+                                            <td class="orange_gradient"><span t-field="l.name"/></td>
+                                            <td class="text-right orange_gradient">
                                                 <span t-field="l.quantity"/>
                                                 <span t-field="l.uom_id" groups="product.group_uom"/>
                                             </td>
 
-                                            <td class="text-right">
+                                            <td class="text-right orange_gradient">
                                                 <span t-field="l.price_unit"/>
                                             </td>
-                                            <td t-if="display_discount" class="text-right" groups="sale.group_discount_per_so_line">
+                                            <td t-if="display_discount" class="text-right orange_gradient" groups="sale.group_discount_per_so_line">
                                                 <span t-field="l.discount"/>
                                             </td>
-                                            <td class="text-right">
+                                            <td class="text-right orange_gradient">
                                                 <span t-esc="', '.join(map(lambda x: (x.description or x.name), l.invoice_line_tax_ids))"/>
                                             </td>
-                                            <td class="text-right">
+                                            <td class="text-right orange_gradient">
                                                 <span t-field="l.price_subtotal" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
                                             </td>
                                         </tr>
@@ -129,6 +131,11 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="footer">
+                                <div class="row">
+                                    <div class="col-12 blue-design"></div>
                                 </div>
                             </div>
                         </div>

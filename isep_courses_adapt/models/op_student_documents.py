@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from pydrive.drive import GoogleDrive, GoogleDriveFile
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 from pydrive.auth import GoogleAuth
 import logging
 import base64
@@ -23,13 +24,29 @@ class OpStudentDocuments(models.Model):
     faculty_id = fields.Many2one(comodel_name="op.faculty", string="Faculty")
     file = fields.Binary()
     filename = fields.Char()
+    folder_id = fields.Char(string="Gdrive Folder ID")
 
+    # @api.model
+    # def create(self, values):
+    #     # self.env['op.student.documents'].create([
+    #     #     {'document_type_id': self.document_type_id.id,
+    #     #      'student_id': self.student_id,
+    #     #      'drive_url': self.drive_id,
+    #     #      'document_name': self.document_name,
+    #     #      'faculty_id': self.faculty_id.id,
+    #     #      'file': self.file,
+    #     #      'filename': self.filename,
+    #     #      'folder_id': self.folder_id
+    #     #      }
+    #     # ])
+    #     res = super(OpStudentDocuments, self).create(values)
+    #     return res
     @api.multi
     def download_file(self):
         gauth = self.Gauth()
         drive = GoogleDrive(gauth)
 
-        file = drive.CreateFile({'id': self.drive_id})
+        file = drive.CreateFile({'id': self.drive_id, 'parents' : [{'id': self.folder_id.split('.')[-1]}] })
         logger.info("*******************")
         logger.info(file)
 
@@ -56,19 +73,42 @@ class OpStudentDocuments(models.Model):
         }
 
     @api.multi
+    @api.depends('student_id', 'faculty_id')
     def upload_file(self):
         gauth = self.Gauth()
-
+        #self.valid_file()
+        #self._check_ids()
         drive = GoogleDrive(gauth)
-        logger.info(os.path.abspath(self.filename))
-        file = drive.CreateFile()
-        file.content = io.BytesIO(base64.b64decode(self.file))
-        file['title'] = self.filename
-        file.Upload()
-        self.document_name = self.filename
-        self.filename = ''
-        self.file = b'\x00'
-        self.drive_id = file['id']
+
+        # if self._context.get('active_model') == 'res.partner' and active_id:
+        #    if active_id not in partners.ids:
+        #        partners |= self.env['res.partner'].browse(active_id)
+        # return partners
+        logger.info(self.student_id)
+
+        # folder = drive.CreateFile({"title" : self.student_id.first_name, "mimeType" : "application/vnd.google-apps.folder"})
+        # folder.Upload()
+        # file = drive.CreateFile()
+        # file.content = io.BytesIO(base64.b64decode(self.file))
+        # file['title'] = self.filename
+        # file['parents'] = [{'id': folder['id']}]
+        # file.Upload()
+        # self.document_name = self.filename
+        # self.filename = ''
+        # self.file = b'\x00'
+        # self.folder_id = self.student_id.first_name + '.' + folder['id']
+        # self.drive_id = file['id']
+        # self.env['op.student.documents'].write([
+        #     {'document_type_id': self.document_type_id.id,
+        #      'student_id': self.student_id.id,
+        #      'drive_url': self.drive_id,
+        #      'document_name': self.document_name,
+        #      'faculty_id': self.faculty_id.id,
+        #      'file': self.file,
+        #      'filename': self.filename,
+        #      'folder_id': self.folder_id
+        #      }
+        # ])
 
     def Gauth(self):
         logger.info(os.path.dirname(os.path.abspath(__file__)))
@@ -91,3 +131,33 @@ class OpStudentDocuments(models.Model):
         # Save the current credentials to a file
         gauth.SaveCredentialsFile(credentials_file)
         return gauth
+
+    def valid_file(self):
+        if self.filename.split('.')[-1] in ['png', 'pdf', 'jpeg', 'jpg']:
+            return
+        else:
+            raise ValidationError(_('Invalid format file!.'))
+
+
+    @api.model
+    def create(self, values):
+        res = super(OpStudentDocuments, self).create(values)
+        return res
+
+    # @api.model
+    # def write(self, values):
+    #     return super(OpStudentDocuments, self).create(values)
+
+    # @api.one
+    # @api.constrains('document_type_id', 'student_id', 'faculty_id')
+    # def _check_ids(self):
+    #     self.env.cr.execute("SELECT document_type_id, student_id FROM op_student_documents WHERE document_type_id = %s AND student_id = %s ", (self.document_type_id.id, self.student_id.id))
+    #     consult1 = self.env.cr.fetchall()
+    #     self.env.cr.execute("SELECT document_type_id, student_id FROM op_student_documents WHERE document_type_id = %s AND faculty_id = %s ", (self.document_type_id.id, self.faculty_id.id))
+    #     consult2 = self.env.cr.fetchall()
+    #     logger.info(consult1)
+    #     logger.info(consult2)
+        # if :
+        #     raise ValidationError(_('Document type is unique!'))
+        # elif :
+        #     raise ValidationError(_('Document type is unique!'))
