@@ -16,8 +16,6 @@
             <field name="name">op.student.access.form</field>
             <field name="model">op.student.access</field>
             <field name="priority" eval="8"/>
-            <!--nuevo 021120 -->
-            <field name="inherit_id" ref="view_employee_form"/>
             <field name="arch" type="xml">
                 <form string="Accesos del alumno">
                     <sheet>

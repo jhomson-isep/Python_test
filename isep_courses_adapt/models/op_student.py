@@ -30,6 +30,9 @@ class OpStudent(models.Model):
     partner_id = fields.Many2one('res.partner', 'Partner', required=False)
     document_ids = fields.One2many("op.student.documents", "student_id",
                                    string="Documentation")
+    #021120
+    access_ids = fields.One2many("op.student.access", "student_id",
+                                   string="Access")
 
     _sql_constraints = [(
         'unique_n_id',

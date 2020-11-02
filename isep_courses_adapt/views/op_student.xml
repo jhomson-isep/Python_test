@@ -28,7 +28,11 @@
                     <page name="Documentación" string="Documentación">
                         <field name="document_ids" colspan="4" nolabel="1"/>
                     </page>
+                    <page name="Accesos" string="Accesos">
+                        <field name="access_ids" colspan="4" nolabel="1"/>
+                    </page>
                 </notebook>
+
             </field>
         </record>
 
