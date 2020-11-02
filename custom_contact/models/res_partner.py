@@ -33,8 +33,9 @@ class ResPartner(models.Model):
     def check_email(email):
         gmail = ['gmali.com', 'gmial.com', 'gmail.cm', 'gmal.com', 'gmil.com']
         hotmail = ['hotmal.com', 'hotmail.com.mx', 'hotmai.com',
-                   'hotmial.com', 'jotmail.com', 'hotmali.com', 'hotmail.cm']
-        hotmail_es = ['hotmal.es', 'hotmai.es', 'hotmial.es',
+                   'hotmial.com', 'jotmail.com', 'hotmali.com',
+                   'hotmail.cm', 'hormail.com']
+        hotmail_es = ['hotmal.es', 'hotmai.es', 'hotmial.es', 'hormail.es'
                       'jotmail.es', 'hotmali.es', 'hotmail.es']
         outlook = ['outlok.com', 'outlock.com', 'outloc.com', 'oulook.com',
                    'oulook.com', 'otlook.com', 'outluk.com']
