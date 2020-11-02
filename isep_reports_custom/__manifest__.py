@@ -20,6 +20,7 @@
     'data': [
         'reports/test.xml',
         'reports/hoja_matricula_ISEPSL.xml',
-        'reports/hoja_matricula_ISED.xml'
+        'reports/hoja_matricula_ISED.xml',
+        'reports/factura_isep.xml'
     ]
 }
