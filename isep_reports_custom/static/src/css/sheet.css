@@ -1,19 +1,19 @@
-.logo{
-    height:125px;padding-top:2px;
+.gray_hr{
+    border:solid #d3d3d9;
 }
 
-.title{
-    background-color: #fc6c04;border-top-right-radius:5px;border-bottom-right-radius:5px;
+.orange_hr{
+    border:solid #f8d5c4;
 }
 
-.personal_information{
-    font-size:13px;
+.orange_color{
+    background-color: #f96910;
 }
 
-.sign{
-    font-size:13px;text-align:center;
+.orange_gradient{
+    background-color: #f96910;
 }
 
-.img-sign{
-    height:50px;display:block;margin-left:auto;margin-right:auto;
+.radius_tr{
+    border-radius:5px;
 }
