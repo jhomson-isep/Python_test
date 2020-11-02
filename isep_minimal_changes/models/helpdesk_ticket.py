@@ -11,3 +11,9 @@ class HelpdeskStage(models.Model):
     _inherit = 'helpdesk.stage'
 
     active = fields.Boolean(string='active', default=True)
+
+
+class HelpdeskTeam(models.Model):
+    _inherit = 'helpdesk.stage'
+
+    personal_team_email = fields.Char(string='Email personal')
