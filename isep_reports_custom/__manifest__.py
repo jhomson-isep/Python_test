@@ -18,9 +18,9 @@
     ],
     'installable': True,
     'data': [
-        'reports/test.xml',
+        'reports/factura_isep_espana.xml',
         'reports/hoja_matricula_ISEPSL.xml',
-        'reports/hoja_matricula_ISED.xml',
-        'reports/factura_isep_espana.xml'
+        'reports/hoja_matricula_ISED.xml'
+
     ]
 }

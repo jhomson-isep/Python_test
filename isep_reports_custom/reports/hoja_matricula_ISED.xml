@@ -397,19 +397,17 @@
                                 <strong>Nombre completo del titular de la cuenta:</strong> <span t-field="o.partner_id.payment_token_ids[0].display_name"></span>
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">
-                                <strong>Número de la tarjeta:</strong> <span t-field="o.partner_id.payment_token_ids[0].acquirer_ref"></span>
+                                <strong>Número de la tarjeta:</strong>
+                                <span
+                                    t-esc="o.partner_id.payment_token_ids[0].acquirer_ref[:8]">
+                                </span>
+                                ****
+                                <span
+                                    t-esc="o.partner_id.payment_token_ids[0].acquirer_ref[-4:]">
+                                </span>
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">
                                 <strong>Si la tarjeta es de débito indicar número de clave bancaria estandarizada "CLABE": </strong>
-                            </div>
-                            <div class="row" style="text-align:justify;font-size:13px;">
-                                <strong>NIF:</strong> <span t-field="o.partner_id.payment_token_ids[0].csv"></span>
-                            </div>
-                            <div class="row" style="text-align:justify;font-size:13px;">
-                                <strong>Nota:</strong> El NIF son los tres digitos verificadores al reverso de su tarjeta - en American Express son cuatro digitos ubicados al frente.
-                            </div>
-                            <div class="row" style="text-align:justify;font-size:13px;">
-                                <strong>Fecha de vencimiento:</strong> <span t-field="o.partner_id.payment_token_ids[0].caducidad"></span>
                             </div>
                             <br></br>
                             <div class="row" style="text-align:justify;font-size:13px;">
