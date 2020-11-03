@@ -12,5 +12,17 @@
                 </xpath>
             </field>
         </record>
+        <record id="imc_res_partner_card_form_inherit" model="ir.ui.view">
+            <field name="name">imc.res.partner.card.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="payment.view_partners_form_payment_defaultcreditcard"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='479']" position="attributes">
+                    <attribute name="attrs">
+                        {'confirm': 'No sé quién eres. No sé lo que quieres. Si lo que estás buscando es un rescate, créeme, no tengo dinero. Pero lo que sí tengo es un conjunto de habilidades muy particulares; habilidades que he adquirido a lo largo de mi prolongada carrera profesional. Habilidades que me convierten en una pesadilla para gente como tú. Si dejas que mi hija se vaya ahora, aquí se acabará todo. No te buscaré, no te perseguiré. Pero si no lo haces, te buscaré, te encontraré y te mataré'}
+                    </attribute>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>
