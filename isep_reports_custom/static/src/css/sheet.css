@@ -22,5 +22,24 @@
 
 .blue-design{
     background-color:#061742;
+    border-top-left-radius:150px;
+    height: 150px;
+}
+
+.orange-design{
+    background-color:#f96910;
     border-top-right-radius:150px;
+    height: 150px;
+}
+
+.StandardTable thead th{
+    background: #fab482;
+}
+
+.StandardTable thead th:first-of-type{
+    border-top-left-radius: 10px;
+}
+
+.StandardTable thead th:last-of-type{
+    border-top-right-radius: 10px;
 }

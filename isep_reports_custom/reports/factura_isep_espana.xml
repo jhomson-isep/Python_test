@@ -20,6 +20,16 @@
                     <t t-call="web.basic_layout">
                         <div class="page" name="first_page">
                             <link rel="stylesheet" href="/isep_reports_custom/static/src/css/sheet.css"/>
+                            <div class="header">
+                                <div class="row">
+                                    <div class="col-6 blue-design">
+                                        <img class="img-fluid logo"
+                                                 style="height:125px;padding-top:2px;"
+                                                 src="/isep_reports_custom/static/src/img/logo_isep.png"/>
+                                    </div>
+                                    <div class="col-6 orange-design"></div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-4">
                                     <strong>Nombre Factura</strong>
@@ -47,9 +57,9 @@
                                 <div class="col-3"></div>
                             </div>
                             <div class="row">
-                                <table class="table table-striped">
+                                <table class="StandardTable">
                                     <thead>
-                                        <tr class="orange_color">
+                                        <tr>
                                             <th>Descripción</th>
                                             <th class="text-right">Cantidad</th>
                                             <th class="text-right">Precio Unidad</th>
@@ -83,8 +93,8 @@
 
                                     </tbody>
                                 </table>
-                                <table class="table table-condensed">
-                                    <tr class="border-black">
+                                <table class="StandardTable">
+                                    <tr>
                                         <td><strong>Subtotal</strong></td>
                                         <td class="text-right">
                                             <span t-field="o.amount_untaxed" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
@@ -109,7 +119,7 @@
                                 </table>
                                 <div class="row" t-if="o.tax_line_ids">
                                     <div class="col-xs-6">
-                                        <table class="table table-condensed">
+                                        <table class="StandardTable">
                                             <thead>
                                                 <tr class="orange_tr">
                                                     <th>Impuesto</th>
@@ -135,7 +145,8 @@
                             </div>
                             <div class="footer">
                                 <div class="row">
-                                    <div class="col-12 blue-design"></div>
+                                    <div class="col-6 blue-design"></div>
+                                    <div class="col-6 orange-design"></div>
                                 </div>
                             </div>
                         </div>
