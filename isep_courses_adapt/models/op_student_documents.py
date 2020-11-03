@@ -26,27 +26,11 @@ class OpStudentDocuments(models.Model):
     filename = fields.Char()
     folder_id = fields.Char(string="Gdrive Folder ID")
 
-    # @api.model
-    # def create(self, values):
-    #     # self.env['op.student.documents'].create([
-    #     #     {'document_type_id': self.document_type_id.id,
-    #     #      'student_id': self.student_id,
-    #     #      'drive_url': self.drive_id,
-    #     #      'document_name': self.document_name,
-    #     #      'faculty_id': self.faculty_id.id,
-    #     #      'file': self.file,
-    #     #      'filename': self.filename,
-    #     #      'folder_id': self.folder_id
-    #     #      }
-    #     # ])
-    #     res = super(OpStudentDocuments, self).create(values)
-    #     return res
-    @api.multi
     def download_file(self):
         gauth = self.Gauth()
         drive = GoogleDrive(gauth)
 
-        file = drive.CreateFile({'id': self.drive_id, 'parents' : [{'id': self.folder_id.split('.')[-1]}] })
+        file = drive.CreateFile({'id': self.drive_id, 'parents' : [{'id': self.folder_id}] })
         logger.info("*******************")
         logger.info(file)
 
@@ -72,11 +56,9 @@ class OpStudentDocuments(models.Model):
             'nodestroy': False,
         }
 
-    @api.multi
-    @api.depends('student_id', 'faculty_id')
     def upload_file(self):
         gauth = self.Gauth()
-        #self.valid_file()
+        self.valid_file()
         #self._check_ids()
         drive = GoogleDrive(gauth)
 
@@ -85,30 +67,40 @@ class OpStudentDocuments(models.Model):
         #        partners |= self.env['res.partner'].browse(active_id)
         # return partners
         logger.info(self.student_id)
-
-        # folder = drive.CreateFile({"title" : self.student_id.first_name, "mimeType" : "application/vnd.google-apps.folder"})
-        # folder.Upload()
-        # file = drive.CreateFile()
-        # file.content = io.BytesIO(base64.b64decode(self.file))
-        # file['title'] = self.filename
-        # file['parents'] = [{'id': folder['id']}]
-        # file.Upload()
-        # self.document_name = self.filename
-        # self.filename = ''
-        # self.file = b'\x00'
-        # self.folder_id = self.student_id.first_name + '.' + folder['id']
-        # self.drive_id = file['id']
-        # self.env['op.student.documents'].write([
-        #     {'document_type_id': self.document_type_id.id,
-        #      'student_id': self.student_id.id,
-        #      'drive_url': self.drive_id,
-        #      'document_name': self.document_name,
-        #      'faculty_id': self.faculty_id.id,
-        #      'file': self.file,
-        #      'filename': self.filename,
-        #      'folder_id': self.folder_id
-        #      }
-        # ])
+        model_path = os.path.dirname(os.path.abspath(__file__))
+        file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
+        exist_folder = False
+        file = drive.CreateFile()
+        folder = None
+        ids = []
+        with open(model_path + '/folders_ids/ids.txt', 'r+') as file_ids:
+            ids = [i for i in file_ids.read().split('\n')]
+            file_ids.close()
+        for folders in file_list:
+            if len(id) > 0:
+                for id in ids:
+                    if folders['id'] == id:
+                        exist_folder = True
+                        folder = folders
+                        break
+            else:
+                break
+        if not exist_folder:
+            folder = drive.CreateFile(
+                {"title": self.student_id.first_name, "mimeType": "application/vnd.google-apps.folder"})
+            folder.Upload()
+            with open(model_path + '/folders_ids/ids.txt', 'a+') as file_ids:
+                file_ids.write(folder['id'] + '\n')
+                file_ids.close()
+        file.content = io.BytesIO(base64.b64decode(self.file))
+        file['title'] = self.filename
+        file['parents'] = [{'id': folder['id']}]
+        file.Upload()
+        self.document_name = self.filename
+        self.filename = ''
+        self.file = b'\x00'
+        self.folder_id = folder['id']
+        self.drive_id = file['id']
 
     def Gauth(self):
         logger.info(os.path.dirname(os.path.abspath(__file__)))
@@ -133,16 +125,18 @@ class OpStudentDocuments(models.Model):
         return gauth
 
     def valid_file(self):
+        if self.filename == '':
+            raise ValidationError(_('Select a file!'))
         if self.filename.split('.')[-1] in ['png', 'pdf', 'jpeg', 'jpg']:
             return
         else:
             raise ValidationError(_('Invalid format file!.'))
 
 
-    @api.model
-    def create(self, values):
-        res = super(OpStudentDocuments, self).create(values)
-        return res
+    # @api.model
+    # def create(self, values):
+    #     res = super(OpStudentDocuments, self).create(values)
+    #     return res
 
     # @api.model
     # def write(self, values):
