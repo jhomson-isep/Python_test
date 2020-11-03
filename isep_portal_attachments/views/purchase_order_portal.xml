@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_attachment_form" model="ir.ui.view">
+        <field name="name">view.portal.my.purchase.order.inherit</field>
+        <field name="inherit_id" ref="purchase.portal_my_purchase_order"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='container']" position="after">
+                <div class="mt32">
+                    <h4><strong>Message and communication history</strong></h4>
+                    <t t-call="portal.message_thread">
+                        <t t-set="object" t-value="order"/>
+                        <t t-set="token" t-value="order.access_token"/>
+                        <t t-set="pid" t-value="pid"/>
+                        <t t-set="hash" t-value="hash"/>
+                    </t>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
