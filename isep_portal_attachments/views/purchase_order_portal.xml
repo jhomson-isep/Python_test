@@ -51,48 +51,6 @@
                             </main>
                         </form>
                     </div>
-
-                    <div class="modal-dialog modal-content"
-                         t-if="not order.has_to_be_signed(True)">
-                        <header class="modal-header">
-                            <h4 class="modal-title">Validate Order</h4>
-                            <button type="button" class="close"
-                                    data-dismiss="modal" aria-label="Close">
-                                &amp;times;</button>
-                        </header>
-                        <main class="modal-body" id="sign-dialog">
-                            <p>
-                                <span>By paying this proposal, I agree to the
-                                    following terms:</span>
-                                <ul>
-                                    <li><span>Accepted on the behalf
-                                        of:</span> <b
-                                            t-field="order.partner_id.commercial_partner_id"/></li>
-                                    <li><span>For an amount of:</span> <b
-                                            data-id="total_amount"
-                                            t-field="order.amount_total"/></li>
-                                    <li t-if="order.payment_term_id"><span>With
-                                        payment terms:</span> <b
-                                            t-field="order.payment_term_id.note"/></li>
-                                </ul>
-                            </p>
-                            <div t-if="pms or acquirers" id="payment_method"
-                                 class="text-left">
-                                <h3 class="mb24">Pay with</h3>
-                                <t t-call="payment.payment_tokens_list">
-                                    <t t-set="mode" t-value="'payment'"/>
-                                    <t t-set="submit_txt">Pay &amp; Confirm</t>
-                                    <t t-set="icon_class" t-value="'fa-lock'"/>
-                                    <t t-set="form_action"
-                                       t-value="order.get_portal_url(suffix='/transaction/token')"/>
-                                    <t t-set="prepare_tx_url"
-                                       t-value="order.get_portal_url(suffix='/transaction/')"/>
-                                    <t t-set="access_token"
-                                       t-value="order.access_token"/>
-                                </t>
-                            </div>
-                        </main>
-                    </div>
                 </div>
 
                 <!-- modal relative to the action reject -->
@@ -200,16 +158,6 @@
                                href="#"><i class="fa fa-times"/> Reject</a>
                         </div>
                     </t>
-                    <div t-elif="order.has_to_be_signed(True)"
-                         class="col-sm-auto mt8">
-                        <a role="button" class="btn btn-primary"
-                           data-toggle="modal" data-target="#modalaccept"
-                           href="#">
-                            <i class="fa fa-check"/> <t
-                                t-if="not order.signature">
-                            Accept &amp; Pay</t><t t-else="">Pay now</t>
-                        </a>
-                    </div>
                 </div>
 
                 <section t-if="order.signature" id="signature"
