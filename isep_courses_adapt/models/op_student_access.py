@@ -3,6 +3,7 @@
 from odoo import models, fields
 import logging
 from .op_moodle import Moodle
+import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -18,12 +19,12 @@ class OpStudentAccess(models.Model):
         logger.info("**************************************")
         logger.info("import student access")
         logger.info("**************************************")
-        student = self.env['op.student'].search([('id', '=', id)])
-        #student = self.env['op.student'].search([('document_number', '=', student.document_number)])
-        #rows = mdl.get_last_access('email', student.EMail)
-        rows = mdl.get_last_access('email', student.email)
+        student = self.env['op.student'].search([('id', '=', self.student_id.id)])
+        rows = mdl.get_last_access('email', student.document_number)
         int_break = 0
-        for batch in rows:
-            course_code = str(batch.Curso_Id)
+        for row in rows:
+            ult_access=datetime.datetime.utcfromtimestamp(row['lastaccess'])
+            self.write({'student_id': self.student_id,
+                        'student_access':ult_access})
 
 
