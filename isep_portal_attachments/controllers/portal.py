@@ -6,33 +6,24 @@ import base64
 from collections import OrderedDict
 from odoo.addons.portal.controllers.mail import _message_post_helper
 from odoo.tools import image_resize_image
-# from odoo.addons.portal.controllers.portal import CustomerPortal, \
-#     pager as portal_pager, get_records_pager
+from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager, get_records_pager
 from odoo.addons.portal.controllers.portal import pager as portal_pager, \
     get_records_pager
-from odoo.addons.purchase.controllers.portal import CustomerPortal
+from odoo.addons.purchase.controllers.portal import CustomerPortal as PurchasePortal
 from odoo.addons.web.controllers.main import Binary
 from odoo.osv import expression
 import logging
 
 logger = logging.getLogger(__name__)
 
-
-class CustomerPurchasePortal(CustomerPortal):
-
-    def _prepare_portal_layout_values(self):
-        values = super(CustomerPurchasePortal, self)._prepare_portal_layout_values()
-        values['purchase_count'] = request.env['purchase.order'].search_count([
-            ('state', 'in', ['sent', 'purchase', 'done', 'cancel'])
-        ])
-        return values
-
+class PurchasePortalInherit(PurchasePortal):
     @http.route(['/my/purchase', '/my/purchase/page/<int:page>'], type='http',
                 auth="user", website=True)
     def portal_my_purchase_orders(self, page=1, date_begin=None, date_end=None,
                                   sortby=None, filterby=None, **kw):
-        res = super(CustomerPurchasePortal, self).portal_my_purchase_orders(
-            page, date_begin, date_end, sortby, filterby, **kw)
+        res = super(PurchasePortalInherit, self).portal_my_purchase_orders(
+            page=1, date_begin=None, date_end=None,
+            sortby=None, filterby=None, **kw)
         values = self._prepare_portal_layout_values()
 
         domain = []
@@ -63,6 +54,15 @@ class CustomerPurchasePortal(CustomerPortal):
             'default_url': '/my/purchase',
         })
         return res
+
+class CustomerPurchasePortal(CustomerPortal):
+
+    def _prepare_portal_layout_values(self):
+        values = super(CustomerPurchasePortal, self)._prepare_portal_layout_values()
+        values['purchase_count'] = request.env['purchase.order'].search_count([
+            ('state', 'in', ['sent', 'purchase', 'done', 'cancel'])
+        ])
+        return values
 
     @http.route(['/my/purchase/<int:order_id>/accept'], type='json',
                 auth="public", website=True)
