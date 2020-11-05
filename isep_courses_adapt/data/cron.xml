@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="delete_all_void_records" forcecreate='True' model="ir.cron">
+            <field name="name">Delete All Void Records</field>
+            <field eval="True" name="active"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="model_id" ref="model_op_student_documents"/>
+            <field name="state">code</field>
+            <field name="code">model.delete_void_records()</field>
+            <field name="type">ir.actions.server</field>
+        </record>
+
+    </data>
+</odoo>
