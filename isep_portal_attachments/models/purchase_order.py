@@ -18,3 +18,7 @@ class PurchaseOrder(models.Model):
     signed_by = fields.Char('Signed by',
                             help='Name of the person that signed the SO.',
                             copy=False)
+
+    def has_to_be_signed(self, also_in_draft=False):
+        return (self.state == 'sent' or (
+                self.state == 'draft' and also_in_draft)) and self.require_signature and not self.signature
