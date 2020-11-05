@@ -167,7 +167,7 @@ class CrmLead(models.Model):
                 modalidad = 'ONL'
             # Modalidad At-Home
             elif modalidad in ('at home', 'At Home', 'At home'):
-                modalidad = 'ELR'
+                modalidad = 'ATH'
 
             # Actualizar la modalidad
             lead.update({'x_codmodalidad': modalidad})
@@ -215,9 +215,9 @@ class CrmLead(models.Model):
                     lead.update({'x_sede_id': 2})
 
                 elif cod_sede in ('metodo-at-home', 'Metodo-At-Home'):
-                    cod_sede = 'MAH'
+                    cod_sede = 'ATH'
                     team_id = 1
-                    lead.update({'x_sede_id': 16})
+                    lead.update({'x_sede_id': 2})
 
                 elif cod_sede in ('valencia', 'Valencia', 'VAL', '100'):
                     cod_sede = 'VAL'
@@ -250,7 +250,8 @@ class CrmLead(models.Model):
 
                 #Codigo de modalidad con la logica de typeform
                 if modalidad == '001':
-                    modalidad = 'MAH'
+                    modalidad = 'ATH'
+                    cod_sede = 'CAT'
                 elif modalidad == '010':
                     modalidad = 'PRS'
                 elif modalidad == '100':
@@ -302,7 +303,7 @@ class CrmLead(models.Model):
 
                 #Codigo de modalidad con la logica de typeform
                 if modalidad == '001':
-                    modalidad = 'MAH'
+                    modalidad = 'ATH'
                 elif modalidad == '010':
                     modalidad = 'PRS'
                 elif modalidad == '100':
