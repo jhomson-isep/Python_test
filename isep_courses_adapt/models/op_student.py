@@ -109,7 +109,7 @@ class OpStudent(models.Model):
                     logger.info('Student with n_id {0} created'.format(
                         student_values['n_id']))
 
-                    if int_break == 10 and os.name != "posix":
+                    if int_break == 100 and os.name != "posix":
                         break
                     int_break += 1
 
