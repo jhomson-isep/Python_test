@@ -56,7 +56,7 @@ class OpStudent(models.Model):
                 'student_id': self.id,
                 'student_access': ult_access
             }
-            _access=self.env['op.student.access'].search([('student_id', '=', self.id)])
+            _access=self.env['op.student.access'].search([('student_id', '=', self.id)], limit=1)
             _insert_access=True
             if type(_access.student_access)==list:
                 if(_access.student_access[-1]==ult_access):
