@@ -130,14 +130,7 @@ class OpFaculty(models.Model):
         file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
         for rec in self:
             documents = self.env['op.student.documents'].search([('faculty_id', '=', rec.id)])
-            delete_folder = False
             for doc in documents:
-                if not delete_folder:
-                    for folders in file_list:
-                        if folders['id'] == doc.folder_id:
-                            folders.Delete()
-                            delete_folder = True
-                            break
                 doc.unlink()
         res = super(OpFaculty, self).unlink()
         return res

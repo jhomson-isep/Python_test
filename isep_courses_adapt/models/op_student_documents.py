@@ -8,6 +8,7 @@ import logging
 import base64
 import io
 import os
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -60,6 +61,7 @@ class OpStudentDocuments(models.Model):
 
     @api.multi
     def upload_file(self, values):
+        start = time.time()
         gauth = self.Gauth()
         self.valid_file(values)
         drive = GoogleDrive(gauth)
@@ -100,6 +102,8 @@ class OpStudentDocuments(models.Model):
         values['file'] = b''
         values['folder_id'] = folder['id']
         values['drive_id'] = file['id']
+        end = time.time()
+        print(f"Runtime of the program is {end - start}")
         return values
 
     @api.multi
@@ -174,3 +178,7 @@ class OpStudentDocuments(models.Model):
             [('document_type_id', '=', None), ('student_id', '=', None), ('faculty_id', '=', None)])
         for rec in study_faculty_res_void:
             rec.unlink()
+
+    def unlink(self):
+        res = super(OpStudentDocuments, self).unlink()
+        return res

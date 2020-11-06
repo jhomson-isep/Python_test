@@ -150,12 +150,6 @@ class OpStudent(models.Model):
             documents = self.env['op.student.documents'].search([('student_id', '=', rec.id)])
             delete_folder = False
             for doc in documents:
-                if not delete_folder:
-                    for folders in file_list:
-                        if folders['id'] == doc.folder_id:
-                            folders.Delete()
-                            delete_folder = True
-                            break
                 doc.unlink()
         res = super(OpStudent, self).unlink()
         return res
