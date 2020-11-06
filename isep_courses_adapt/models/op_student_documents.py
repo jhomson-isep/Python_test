@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from pydrive.drive import GoogleDrive, GoogleDriveFile
+
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
 import logging
 import base64
 import io
@@ -66,7 +67,7 @@ class OpStudentDocuments(models.Model):
         file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
         exist_folder = False
         file = drive.CreateFile()
-        folder = None
+        folder = ''
         name = ''
         field = ''
         if 'student_id' in values:
@@ -155,6 +156,13 @@ class OpStudentDocuments(models.Model):
         elif self.faculty_id.id:
             res = self.search([('document_type_id', '=', self.document_type_id.id), ('faculty_id', '=', self.faculty_id.id)], limit=1).id
         if res != self.id:
+            gauth = self.Gauth()
+            drive = GoogleDrive(gauth)
+            file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
+            for folders in file_list:
+                if folders['id'] == self.search([('id', '=', res)], limit=1).folder_id:
+                    folders.Delete()
+                    break
             raise ValidationError(_('One documet type per person!!'))
 
     @api.model

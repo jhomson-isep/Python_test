@@ -1,4 +1,6 @@
 from odoo import fields, api, models
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
 from .op_sql import SQL
 import logging
 import os
@@ -117,3 +119,43 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         logger.info("End of script: import students")
         logger.info("**************************************")
+
+    def Gauth(self):
+        logger.info(os.path.dirname(os.path.abspath(__file__)))
+        model_path = os.path.dirname(os.path.abspath(__file__))
+        credentials_file = model_path + "/drive/credentials.txt"
+        drive_config_file = model_path + '/drive/client_secrets.json'
+        GoogleAuth.DEFAULT_SETTINGS['client_config_file'] = drive_config_file
+        gauth = GoogleAuth()
+        # Try to load saved client credentials
+        gauth.LoadCredentialsFile(credentials_file)
+        if gauth.credentials is None:
+            # Authenticate if they're not there
+            gauth.LocalWebserverAuth()
+        elif gauth.access_token_expired:
+            # Refresh them if expired
+            gauth.Refresh()
+        else:
+            # Initialize the saved credentials
+            gauth.Authorize()
+        # Save the current credentials to a file
+        gauth.SaveCredentialsFile(credentials_file)
+        return gauth
+
+    def unlink(self):
+        gauth = self.Gauth()
+        drive = GoogleDrive(gauth)
+        file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
+        for rec in self:
+            documents = self.env['op.student.documents'].search([('student_id', '=', rec.id)])
+            delete_folder = False
+            for doc in documents:
+                if not delete_folder:
+                    for folders in file_list:
+                        if folders['id'] == doc.folder_id:
+                            folders.Delete()
+                            delete_folder = True
+                            break
+                doc.unlink()
+        res = super(OpStudent, self).unlink()
+        return res
