@@ -47,32 +47,34 @@ class OpStudent(models.Model):
         logger.info("import all student access")
         logger.info("**************************************")
         moodle = self.env['moodle']
-        rows = Moodle.get_last_access_cron()
+        rows = Moodle.get_last_access_cron(moodle)
         for dic in rows:
             if 'idnumber' in dic:
-                student=self.env['op.student'].search([('document_number','=',dic['idnumber'])])
-                ult_access=dic['lastaccess']
-                acces_values = {
-                'student_id': student.student_id,
-                'student_access': ult_access
-                }
+                student=self.search([('document_number','=',dic['idnumber'])])
+                ult_access = datetime.datetime.utcfromtimestamp(dic['lastaccess'])
+                if len(student)>0:
+                    acces_values = {
+                        'student_id': student.id,
+                        'student_access': ult_access
+                    }
+                    self.env['op.student.access'].create(acces_values)
 
     def import_student_access(self):
         logger.info("**************************************")
         logger.info("import student access")
         logger.info("**************************************")
         moodle=self.env['moodle']
-        rows = Moodle.get_last_access(moodle,'idnumber', self.document_number)
-        #int_break = 0
-        for row in rows:
-            ult_access=datetime.datetime.utcfromtimestamp(row['lastaccess'])
-            acces_values = {
-                'student_id': self.id,
-                'student_access': ult_access
-            }
-            _access=self.env['op.student.access'].search([('student_id', '=', self.id)], limit=1)
-            if(_access.student_access!=ult_access):
-                self.env['op.student.access'].create(acces_values)
+        if(not(self.document_number==False)):
+            rows = Moodle.get_last_access(moodle, 'idnumber', self.document_number)
+            for row in rows:
+                ult_access=datetime.datetime.utcfromtimestamp(row['lastaccess'])
+                acces_values = {
+                    'student_id': self.id,
+                    'student_access': ult_access
+                }
+                _access=self.env['op.student.access'].search([('student_id', '=', self.id)], limit=1)
+                if(_access.student_access!=ult_access):
+                    self.env['op.student.access'].create(acces_values)
 
     def import_students(self):
         s = SQL()
