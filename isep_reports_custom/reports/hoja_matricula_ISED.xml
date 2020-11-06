@@ -63,7 +63,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>DNI/Pasaporte:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.vat"></span></div>
+                                        <t t-if="o.partner_id.vat"><div class="col-6"><span t-field="o.partner_id.vat"></span></div></t>
+                                        <t t-else=""><div class="col-6"><span t-field="o.partner_id.num_reg_trib"></span></div></t>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Domicilio:</strong></div>
@@ -143,7 +144,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>DNI/Pasaporte:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.vat"></span></div>
+                                        <t t-if="o.partner_id.vat"><div class="col-8"><span t-field="o.partner_id.vat"></span></div></t>
+                                        <t t-else=""><div class="col-8"><span t-field="o.partner_id.num_reg_trib"></span></div></t>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>Móvil:</strong></div>
@@ -300,7 +302,7 @@
                         </div>
                         <div class="page" name="second_page">
                             <br></br>
-                            <div class="row" style="font-size:13px; text-align:justify;">
+                            <div class="row" style="font-size:13px; text-align:justify;margin-left:5px;">
                                 <div class="col-12">
                                     <ol>
                                         <li>
@@ -436,7 +438,7 @@
                             <div class="row" style="text-align:center;"><div class="col-12"><span t-field="o.date_order"></span></div></div>
                         </div>
                         </t>
-                        <t t-if="o.payment_mode_id.name == 'Domiciliado' and o.cuenta_bancaria and o.mandate_id">
+                        <t t-if="o.payment_mode_id.name.find('Domiciliado') != -1  and o.cuenta_bancaria and o.mandate_id">
                             <div class="page" name="third_page_sepa">
                                 <div class="row" style="height:325px"></div>
                             <style type="text/css">
@@ -702,7 +704,81 @@
                             </div>
                         </div>
                         </t>
-
+                        <t t-foreach="o.order_line" t-as="l">
+                            <t t-if="l.product_id.product_tmpl_id.tipodecurso not in ('rec','desc','desc_ma','inc','mat')">
+                                <t t-if="l.product_id.name=='Director de Seguridad Integral' or l.product_id.name=='DSI- Director Seguridad'">
+                                    <div class="page">
+                                        <div class="row" style="height:350px;"></div>
+                                        <div class="row" style="text-align:justify;font-size:13px;margin-left:5px;">
+                                            <div class="col-12">
+                                                <br></br>
+                                                <br></br>
+                                                <br></br>
+                                                <br></br>
+                                                <h4>REQUISITOS DE ACCESO CURSO DIRECTOR DE SEGURIDAD INTEGRAL</h4><br></br>
+                                                <ol type="a">
+                                                    <li>
+                                                        Tener la nacionalidad de alguno de los Estados miembros de la Unión Europea o de un Estado parte en el Acuerdo sobre el Espacio Económico Europeo, o ser nacional de un tercer Estado que tenga suscrito con España un convenio internacional en el que cada parte reconozca el acceso al ejercicio de estas actividades a los nacionales de la otra.
+                                                    </li>
+                                                    <li>
+                                                        Poseer la capacidad física y la aptitud psicológica necesarias para el ejercicio de las respectivas funciones.
+                                                    </li>
+                                                    <li>
+                                                        Estar en posesión de un título universitario oficial de grado en el ámbito de la seguridad que acredite la adquisición de las competencias que se determinen, o bien del título del curso de dirección de seguridad, reconocido por el Ministerio del Interior.
+                                                    </li>
+                                                    <li>
+                                                        Carecer de antecedentes penales por delitos dolosos.
+                                                    </li>
+                                                    <li>
+                                                        No haber sido sancionado en los dos o cuatro años anteriores por infracción grave o muy grave, respectivamente, en materia de seguridad privada.
+                                                    </li>
+                                                    <li>
+                                                        No haber sido separado del servicio en las Fuerzas y Cuerpos de Seguridad o en las Fuerzas Armadas españolas o del país de su nacionalidad o procedencia en los dos años anteriores.
+                                                    </li>
+                                                    <li>
+                                                        No haber sido condenado por intromisión ilegítima en el ámbito de protección del derecho al honor, a la intimidad personal y familiar o a la propia imagen, vulneración del secreto de las comunicaciones o de otros derechos fundamentales en los cinco años anteriores a la solicitud.
+                                                    </li>
+                                                </ol>
+                                                <p>En el caso de los nacionales de Estados miembros de la Unión Europea o de Estados parte en el Acuerdo sobre el Espacio Económico Europeo, cuya habilitación o cualificación profesional haya sido obtenida en alguno de dichos Estados para el desempeño de funciones de seguridad privada en el mismo, podrán prestar servicios en España, siempre que, previa comprobación por el Ministerio del Interior, se acredite que cumplen los siguientes requisitos:</p>
+                                                <ol>
+                                                    <li>
+                                                        Poseer alguna titulación, habilitación o certificación expedida por las autoridades competentes de cualquier Estado miembro o de un Estado parte en el Acuerdo sobre el Espacio Económico Europeo que les autorice para el ejercicio de funciones de seguridad privada en el mismo.
+                                                    </li>
+                                                    <li>
+                                                        Acreditar los conocimientos, formación y aptitudes equivalentes a los exigidos en España para el ejercicio de las profesiones de seguridad privada, para lo cual deberán estar en posesión de los siguientes documentos:
+                                                        <ol type="a">
+                                                            <li>
+                                                                En los casos en que el Estado de origen regule las diferentes profesiones de seguridad privada, el certificado de competencia o título de formación que las acredite como tal. Dicho certificado o título deberá reunir los siguientes requisitos:
+                                                                <ul>
+                                                                    <li>
+                                                                        Haber sido expedido por una autoridad competente de un Estado miembro, designada con arreglo a las disposiciones legales, reglamentarias o administrativas de dicho Estado.
+                                                                    </li>
+                                                                    <li>
+                                                                        Acreditar un nivel de cualificación profesional equivalente, como mínimo, al nivel inmediatamente anterior al exigido en España, mediante el certificado previsto en el artículo 19.2 del Real Decreto 1837/2008, de 8 de noviembre, para todas las profesiones de seguridad privada, excepto detectives privados.
+                                                                    </li>
+                                                                    <li>
+                                                                        Acreditar la preparación del titular para el ejercicio de la profesión correspondiente.
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                En los casos en que el Estado de origen no regule las diferentes profesiones de seguridad privada, el documento expedido por la autoridad competente, acreditativo de haber ejercido la profesión de que se trate en ese o en otro Estado de la Unión Europea, durante al menos dos años a tiempo completo, en el curso de los diez años inmediatamente anteriores al momento de la presentación de la solicitud, siempre que esté en posesión de uno o varios certificados de competencia o de uno o varios títulos de formación.
+                                                                En todo caso, los dos años de experiencia aludidos no podrán exigirse cuando la persona solicitante acredite una cualificación profesional adquirida a través de la superación de una formación regulada de las definidas en el artículo 8 del Real Decreto 1837/2008, de 8 de noviembre, y que corresponda a los niveles de cualificación señalados anteriormente.
+                                                            </li>
+                                                        </ol>
+                                                    </li>
+                                                </ol>
+                                                <ul>
+                                                    <li>Tener conocimientos de lengua castellana suficientes para el normal desempeño de las funciones de seguridad privada.</li>
+                                                    <li>Los previstos en las letras a), e), f), g) del primer apartado.</li>
+                                                    <li>La carencia o insuficiencia de conocimientos o aptitudes necesarios para el ejercicio de las actividades de seguridad privada en España de los nacionales de Estados miembros de la Unión Europea o de Estados parte en el Acuerdo sobre el Espacio Económico Europeo, podrá suplirse por aplicación de las medidas compensatorias previstas en el artículo 5 de la Orden INT/2850/2011, de 11 de octubre, por la que se regula el reconocimiento de las cualificaciones profesionales para el ejercicio de las profesiones y actividades relativas al sector de seguridad privada a los nacionales de los Estados miembros de la Unión Europea.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </t>
+                        </t>
                     </t>
                 </t>
             </t>

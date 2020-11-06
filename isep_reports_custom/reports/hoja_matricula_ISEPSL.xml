@@ -25,9 +25,7 @@
                                     <div class="col-6">
                                         <!--<div class="row"><strong style="color:#547494;">Universidad</strong></div>-->
                                         <div class="row">
-                                            <img class="img-fluid logo"
-                                                 style="height:125px;padding-top:2px;"
-                                                 src="/isep_reports_custom/static/src/img/logo_isep.png"/>
+                                            <img class="img-fluid logo" style="height:125px;padding-top:2px;" src="/isep_reports_custom/static/src/img/logo_isep.png"/>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -35,7 +33,7 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <img src="/isep_reports_custom/static/src/img/tel.png"/>
-                                                <strong style="color:#fc6c04;">+34 93 847 77 77</strong>
+                                                <strong style="color:#fc6c04;">+34 934 87 77 77</strong>
                                             </div>
                                             <div class="col-6">
                                                 <img src="/isep_reports_custom/static/src/img/mail.png"/>
@@ -56,154 +54,156 @@
                                 </div>
                             </div>
                             <!--#############################Primera Seccion #547494 <- Azul del HR##################-->
-                            <hr style="border:3px solid #547494;margin-bottom:1px;"></hr>
+                            <hr style="border:3px solid #547494;margin-bottom:1px;"/>
                             <div class="row">
                                 <div class="col-5 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
                                     <strong style="color:white; margin-left:5px;">DATOS PERSONALES DEL ALUMNO</strong>
                                 </div>
                             </div>
-                            <div id="personal_information"  class="row personal_information" style="font-size:13px;">
+                            <div id="personal_information" class="row personal_information" style="font-size:13px;">
                                 <!--Primera Columna-->
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-6"><strong>Nombre:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.name"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>DNI/Pasaporte:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.vat"></span></div>
+                                        <t t-if="o.partner_id.vat"><div class="col-6"><span t-field="o.partner_id.vat"></span></div></t>
+                                        <t t-else=""><div class="col-6"><span t-field="o.partner_id.num_reg_trib"></span></div></t>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Domicilio:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.street"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.street"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Población:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.city"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.city"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Movil:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.mobile"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.mobile"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Email:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.email"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.email"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Centro:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.x_universidad"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.x_universidad"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Estudios:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.x_titulacion"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.x_titulacion"/></div>
                                     </div>
                                 </div>
                                 <!--Segunda Columna-->
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-6"><strong>Nacimiento:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.x_annonacimiento"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.x_annonacimiento"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>País:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.country_id"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.country_id"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Estado:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.state_id"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.state_id"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>C.P:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.zip_sat_id"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.zip"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Teléfono Fijo:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.phone"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.phone"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Asesor</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.user_id.name"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.user_id.name"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Finalizados</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.x_finalizacionestudios"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.x_finalizacionestudios"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Profesión:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.x_profesion"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.x_profesion"/></div>
                                     </div>
                                 </div>
                             </div>
                             <!--############################Segunda seccion#########################################-->
-                            <hr style="border:3px solid #547494;margin-bottom:1px;"></hr>
+                            <hr style="border:3px solid #547494;margin-bottom:1px;"/>
                             <div class="row">
                                 <!--#547494 <- Azul del HR-->
                                 <div class="col-4 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
                                     <strong style="color:white; margin-left:5px;">DATOS DE FACTURACIÓN</strong>
                                 </div>
                             </div>
-                            <div id="personal_information"  class="row personal_information" style="font-size:13px;">
+                            <div id="personal_information" class="row personal_information" style="font-size:13px;">
                                 <!--Primera Columna-->
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-4"><strong>Nombre:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_id.name"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>DNI/Pasaporte:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.vat"></span></div>
+                                        <t t-if="o.partner_id.vat"><div class="col-8"><span t-field="o.partner_id.vat"></span></div></t>
+                                        <t t-else=""><div class="col-8"><span t-field="o.partner_id.num_reg_trib"></span></div></t>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>Móvil:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.mobile"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_id.mobile"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>Teléfono Fijo:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.phone"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_id.phone"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>Email:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.email"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_id.email"/></div>
                                     </div>
                                 </div>
                                 <!--Segunda Columna-->
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-4"><strong>Domicilio:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.street"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_id.street"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>Población:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.city"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_id.city"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>País:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.country_id"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_id.country_id"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>Estado:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.state_id"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_id.state_id"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>C.P:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.zip_sat_id"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_id.zip"/></div>
                                     </div>
                                 </div>
                             </div>
                             <!--##################################Tercera Seccion####################################-->
-                            <hr style="border:2px solid #547494;margin-bottom:1px;"></hr>
+                            <hr style="border:2px solid #547494;margin-bottom:1px;"/>
                             <div class="row">
                                 <p style="font-size:13px;">Recibida previamente la información detallada de las características del curso, contenido y demás cuestiones relacionadas, el alumno/titular acepta las condiciones generales y académicas amparadas en este contrato y SOLICITA LA MATRÍCULA PARA EL CURSO DE:</p>
                             </div>
                             <div class="row" style="font-size:13px;">
                                 <ul>
                                     <t t-foreach="o.order_line" t-as="l">
-                                        <li><span t-field="l.product_id"></span></li>
+                                        <li><span t-field="l.product_id"/></li>
                                     </t>
                                 </ul>
                             </div>
                             <!--###################################Cuarta seccion####################################-->
-                            <hr style="border:3px solid #547494;margin-bottom:1px;"></hr>
+                            <hr style="border:3px solid #547494;margin-bottom:1px;"/>
                             <div class="row">
                                 <div class="col-7 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
                                     <strong style="color:white; margin-left:5px;">
@@ -216,68 +216,69 @@
                                 <div class="col-6" style="font-size:13px;">
                                     <div class="row">
                                         <div class="col-6"><strong>Plazo de Pago:</strong></div>
-                                        <div class="col-6"><span t-field="o.payment_term_id.display_name"></span></div>
+                                        <div class="col-6"><span t-field="o.payment_term_id.display_name"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Matrícula/Pago Inicial:</strong></div>
-                                        <div class="col-6"><span t-field="o.precio_matricula"></span></div>
+                                        <div class="col-6">
+                                            <span t-field="o.precio_matricula"/>
+                                            <span t-field="o.pricelist_id.currency_id"/>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Resto Aplazado:</strong></div>
                                         <div class="col-6">
-                                            <span t-field="o.len_cuotas"></span> Plazo/s de
-                                            <span t-field="o.precio_primer_pago"></span>
-                                            <span t-field="o.pricelist_id.name"></span>
+                                            <span t-field="o.len_cuotas"/> Plazo/s de
+                                            <span t-field="o.precio_primer_pago"/>
+                                            <span t-field="o.pricelist_id.name"/>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Forma de Pago:</strong></div>
-                                        <div class="col-6"><span t-field="o.pay_method_id.name"></span></div>
+                                        <div class="col-6"><span t-field="o.pay_method_id.name"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Primer Vencimiento Aplazado:</strong></div>
-                                        <div class="col-6"><span t-field="o.x_Fecha_Primer_Recibo"></span></div>
+                                        <div class="col-6"><span t-field="o.x_Fecha_Primer_Recibo"/></div>
                                     </div>
                                 </div>
                             </div>
                             <!--################################Quinta seccion#######################################-->
-                            <hr style="border:2px solid #547494;margin-bottom:1px;"></hr>
+                            <hr style="border:2px solid #547494;margin-bottom:1px;"/>
                             <div class="row">
                                 <div class="col-12">
                                     <p style="font-size:13px;">
-                                        Suscrito en dos ejemplares en Barcelona, a <span t-field="o.create_date"></span>
-                                        <br></br>
+                                        Suscrito en dos ejemplares en Barcelona, a <span t-field="o.create_date"/>
+                                        <br/>
                                         Leído y conforme con las condiciones generales y mis derechos y deberes que se adjuntan (recibo copia).
                                     </p>
                                 </div>
                             </div>
                             <div class="row sign">
                                 <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL ALUMNO</p></strong></div>
-                                <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL TITULAR<br></br>(Si es distinto al alumno)</p></strong></div>
-                                <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA <span t-field="o.company_id.name"></span></p></strong></div>
+                                <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL TITULAR<br/>(Si es distinto al alumno)</p></strong></div>
+                                <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA <span t-field="o.company_id.name"/></p></strong></div>
                             </div>
                             <div class="row" style="height:90px">
-                                <div class="col-8"></div>
+                                <div class="col-8"/>
                                 <div class="col-4">
-                                    <img class="img-fluid img-sign"
-                                         style="height:75px;display:block;margin-left:auto;margin-right:auto;"
-                                         src="/isep_reports_custom/static/src/img/firmaisepsl.jpg"/>
+                                    <img class="img-fluid img-sign" style="height:75px;display:block;margin-left:auto;margin-right:auto;" src="/isep_reports_custom/static/src/img/firmaisepsl.jpg"/>
                                 </div>
                             </div>
                             <div class="row sign">
                                 <div class="col-4" style="font-size:13px;text-align:center;">
-                                    <strong style="font-size:13px;"><span t-field="o.partner_id.name"></span></strong>
-                                    <br></br>
-                                    <strong><span t-field="o.partner_id.vat"></span></strong>
+                                    <strong style="font-size:13px;"><span t-field="o.partner_id.name"/></strong>
+                                    <br/>
+                                    <strong><span t-field="o.partner_id.vat"/></strong>
                                 </div>
                                 <div class="col-4" style="font-size:13px;text-align:center;">
-                                    <strong style="font-size:13px;"><span t-field="o.partner_id.payment_token_ids.display_name"></span></strong>
+                                    <strong style="font-size:13px;"><span t-field="o.partner_id.payment_token_ids.display_name"/></strong>
                                 </div>
                                 <div class="col-4" style="font-size:13px;text-align:center;">
-                                    <strong style="font-size:13px;">[Ref:<span t-field="o.name"></span>]</strong>
+                                    <strong style="font-size:13px;">[Ref:<span t-field="o.name"/>]</strong>
                                 </div>
                             </div>
-                            <div class="row" style="height:140px"></div><!--Cuadro para pasar de pagina-->
+                            <div class="row" style="height:140px"/><!--Cuadro para pasar de pagina-->
                             <div class="footer">
                                 <div class="row">
                                     <div class="col-12">
@@ -298,7 +299,7 @@
                                                 <strong style="color:#fc6c04;">Barcelona@isep.es</strong>
                                             </div>
                                         </div>
-                                        <hr style="border:2px solid #547494;margin-bottom:1px;"></hr>
+                                        <hr style="border:2px solid #547494;margin-bottom:1px;"/>
                                         <div class="row">
                                             <div class="col-6">
                                                 <img src="/isep_reports_custom/static/src/img/web.png"/>
@@ -314,17 +315,18 @@
                             </div>
                         </div>
                         <div class="page" name="second_page">
-                            <div class="row" style="font-size:11px; text-align:justify;">
+                            <div class="row" style="font-size:11px; text-align:justify;margin-left:4px;">
                                 <div class="col-6">
+                                    <br/>
                                     <strong>INFORMACIÓN PREVIA</strong>
-                                    <br></br>
+                                    <br/>
                                     <p>
                                         El alumno y el titular del contrato han recibido de ISEP S.L., en el momento
                                         de la firma del presente, la información necesaria acerca del programa a seguir,
                                         tanto académica, económica y administrativa.
                                     </p>
                                     <strong>FORMALIZACIÓN Y CUMPLIMIENTO DEL CONTRATO</strong>
-                                    <br></br>
+                                    <br/>
                                     <ol>
                                         <li>
                                             El contrato queda formalizado con la aceptación de estas condiciones. Las partes
@@ -381,7 +383,7 @@
                                         </li>
                                     </ol>
                                     <strong>TITULACIÓN ACADÉMICA Y CERTIFICADOS</strong>
-                                    <br></br>
+                                    <br/>
                                     <ol start="9">
                                         <li>
                                             El alumno podrá solicitar la expedición del título de ISEP S.L. una vez haya superado
@@ -404,8 +406,9 @@
                                     </ol>
                                 </div>
                                 <div class="col-6">
+                                    <br/>
                                     <strong>MEDIDAS TÉCNICAS</strong>
-                                    <br></br>
+                                    <br/>
                                     <ol start="12">
                                         <li>
                                             El funcionamiento óptimo del Campus Virtual está planteado para aplicaciones
@@ -425,7 +428,7 @@
                                         </li>
                                     </ol>
                                     <strong>PROPIEDAD INTELECTUAL Y DERECHOS DE IMAGEN</strong>
-                                    <br></br>
+                                    <br/>
                                     <ol start="15">
                                         <li>
                                             El alumno, exclusivamente para su uso personal y respetando los derechos de propiedad
@@ -450,7 +453,7 @@
                                         </li>
                                     </ol>
                                     <strong>DURACIÓN DEL CONTRATO</strong>
-                                    <br></br>
+                                    <br/>
                                     <ol start="19">
                                         <li>
                                             De acuerdo con la normativa vigente, ISEP S.L. informa que los datos proporcionados se
@@ -468,7 +471,7 @@
                                         </li>
                                     </ol>
                                     <strong>LEGISLACIÓN APLICABLE Y JURISDICCIÓN</strong>
-                                    <br></br>
+                                    <br/>
                                     <ol start="20">
                                         <li>
                                             Este contrato se considera formalizado en Barcelona. A este contrato y a las relaciones
@@ -487,19 +490,20 @@
                         </div>
                         <t t-if="o.payment_mode_id.name == 'Tarjeta' or o.payment_mode_id.name == 'Datáfono'">
                             <div class="page" name="third_page_tarjeta">
-                            <br></br>
-                            <br></br>
-                            <br></br>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
                             <div class="row" style="text-align:justify;font-size:13px;">
                                 <div class="col-3">
                                     <div class="row"><strong>Nombre :</strong></div>
                                     <div class="row"><strong>Programa :</strong></div>
                                 </div>
                                 <div class="col-9">
-                                    <div class="row"><span t-field="o.partner_id.name"></span></div>
+                                    <div class="row"><span t-field="o.partner_id.name"/></div>
                                     <div class="row">
                                         <t t-foreach="o.order_line" t-as="l">
-                                            <span t-field="l.product_id"><br></br></span>
+                                            <span t-field="l.product_id"><br/></span>
                                         </t>
                                     </div>
                                 </div>
@@ -510,15 +514,15 @@
                             <div class="row" style="text-align:justify;font-size:13px;">
                                 <ol>
                                     <li>
-                                        Gastos de Inscripción: <span t-field="o.precio_matricula"></span> <span t-field="o.confirmation_date"></span>
+                                        Gastos de Inscripción: <span t-field="o.precio_matricula"/> <span t-field="o.confirmation_date"/>
                                     </li>
-                                    <li><span t-field="o.len_cuotas"></span> Mensualidades de <span t-field="o.precio_primer_pago"></span> con fecha <span t-field="o.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha)[1].fecha"></span></li>
+                                    <li><span t-field="o.len_cuotas"/> Mensualidades de <span t-field="o.precio_primer_pago"/><span t-field="o.pricelist_id.name"/> con fecha <span t-field="o.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha)[1].fecha"/></li>
                                 </ol>
                             </div>
-                            <br></br>
-                            <br></br>
+                            <br/>
+                            <br/>
                             <div class="row" style="text-align:justify;font-size:13px;">
-                                <strong>Nombre completo del titular de la cuenta:</strong> <span t-field="o.partner_id.payment_token_ids[0].display_name"></span>
+                                <strong>Nombre completo del titular de la cuenta:</strong> <span t-field="o.partner_id.payment_token_ids[0].display_name"/>
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">
                                 <strong>Número de la tarjeta:</strong>
@@ -533,31 +537,31 @@
                             <div class="row" style="text-align:justify;font-size:13px;">
                                 <strong>Si la tarjeta es de débito indicar número de clave bancaria estandarizada "CLABE": </strong>
                             </div>
-                            <br></br>
+                            <br/>
                             <div class="row" style="text-align:justify;font-size:13px;">
-                                Solicito y autorizo a <span t-field="o.company_id.name"></span>, para que en mi nombre realice y gestione cualquier trámite administrativo, pagos académicos y de titulación de la Universidad en
+                                Solicito y autorizo a <span t-field="o.company_id.name"/>, para que en mi nombre realice y gestione cualquier trámite administrativo, pagos académicos y de titulación de la Universidad en
                                 donde he formalizado la inscripción, al no disponer de una tarjeta de crédito habilitada para cobros internacionales y evitarme los costos bancarios de las
                                 transferencias internacionales para dichos pagos.
                             </div>
-                            <br></br>
-                            <br></br>
+                            <br/>
+                            <br/>
                             <div class="row" style="text-align:center;font-size:13px">
                                 <div class="col-12">
                                     Entregar este formato a su gestor comercial
-                                    <br></br>
+                                    <br/>
                                     He leído y autorizo lo manifestado en la presente orden de pago.
                                 </div>
                             </div>
-                            <br></br>
-                            <br></br>
+                            <br/>
+                            <br/>
                             <div class="row" style="text-align:center;">
                                 <div class="col-12" style="height:50px;"><strong>FIRMA TITULAR:</strong></div>
                             </div>
                             <div class="row" style="text-align:center;">
-                                <div class="col-12"><span t-field="o.partner_invoice_id.name"></span></div>
+                                <div class="col-12"><span t-field="o.partner_invoice_id.name"/></div>
                             </div>
                             <div class="row" style="text-align:center;"><div class="col-12"><strong>Fecha:</strong></div></div>
-                            <div class="row" style="text-align:center;"><div class="col-12"><span t-field="o.date_order"></span></div></div>
+                            <div class="row" style="text-align:center;"><div class="col-12"><span t-field="o.date_order"/></div></div>
                         </div>
                         </t>
                         <t t-if="o.payment_mode_id.name == 'Domiciliado' and o.cuenta_bancaria and o.mandate_id">
@@ -593,10 +597,11 @@
                                     font-size: 0.8em;
                                 }
                             </style>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
                             <div class="row mt0">
                                 <div class="col-12 text-center">
                                     <h4 t-if="o.mandate_id.scheme != 'B2B'">
