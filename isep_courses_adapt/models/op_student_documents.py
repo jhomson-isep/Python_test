@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
-from pydrive.drive import GoogleDrive, GoogleDriveFile
+
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
 import logging
 import base64
 import io
 import os
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -59,6 +61,7 @@ class OpStudentDocuments(models.Model):
 
     @api.multi
     def upload_file(self, values):
+        start = time.time()
         gauth = self.Gauth()
         self.valid_file(values)
         drive = GoogleDrive(gauth)
@@ -66,7 +69,7 @@ class OpStudentDocuments(models.Model):
         file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
         exist_folder = False
         file = drive.CreateFile()
-        folder = None
+        folder = ''
         name = ''
         field = ''
         if 'student_id' in values:
@@ -99,6 +102,8 @@ class OpStudentDocuments(models.Model):
         values['file'] = b''
         values['folder_id'] = folder['id']
         values['drive_id'] = file['id']
+        end = time.time()
+        print(f"Runtime of the program is {end - start}")
         return values
 
     @api.multi
@@ -155,6 +160,13 @@ class OpStudentDocuments(models.Model):
         elif self.faculty_id.id:
             res = self.search([('document_type_id', '=', self.document_type_id.id), ('faculty_id', '=', self.faculty_id.id)], limit=1).id
         if res != self.id:
+            gauth = self.Gauth()
+            drive = GoogleDrive(gauth)
+            file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
+            for folders in file_list:
+                if folders['id'] == self.search([('id', '=', res)], limit=1).folder_id:
+                    folders.Delete()
+                    break
             raise ValidationError(_('One documet type per person!!'))
 
     @api.model
@@ -166,3 +178,7 @@ class OpStudentDocuments(models.Model):
             [('document_type_id', '=', None), ('student_id', '=', None), ('faculty_id', '=', None)])
         for rec in study_faculty_res_void:
             rec.unlink()
+
+    def unlink(self):
+        res = super(OpStudentDocuments, self).unlink()
+        return res

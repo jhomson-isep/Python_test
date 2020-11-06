@@ -1,5 +1,9 @@
 from odoo import fields, api, models
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
 from .op_sql import SQL
+from .op_moodle import Moodle
+import datetime
 import logging
 import os
 
@@ -30,12 +34,47 @@ class OpStudent(models.Model):
     partner_id = fields.Many2one('res.partner', 'Partner', required=False)
     document_ids = fields.One2many("op.student.documents", "student_id",
                                    string="Documentation")
+    access_ids = fields.One2many("op.student.access", "student_id",
+                                   string="Access")
 
     _sql_constraints = [(
         'unique_n_id',
         'unique(n_id)',
         'N_ID Number must be unique per student!'
     )]
+
+    def import_all_student_access(self):
+        logger.info("**************************************")
+        logger.info("import all student access")
+        logger.info("**************************************")
+        moodle = self.env['moodle']
+        rows = Moodle.get_last_access_cron(moodle)
+        for dic in rows:
+            if 'idnumber' in dic:
+                student=self.search([('document_number','=',dic['idnumber'])])
+                ult_access = datetime.datetime.utcfromtimestamp(dic['lastaccess'])
+                if len(student)>0:
+                    acces_values = {
+                        'student_id': student.id,
+                        'student_access': ult_access
+                    }
+                    self.env['op.student.access'].create(acces_values)
+    def import_student_access(self):
+        logger.info("**************************************")
+        logger.info("import student access")
+        logger.info("**************************************")
+        moodle=self.env['moodle']
+        if(not(self.document_number==False)):
+            rows = Moodle.get_last_access(moodle, 'idnumber', self.document_number)
+            for row in rows:
+                ult_access=datetime.datetime.utcfromtimestamp(row['lastaccess'])
+                acces_values = {
+                    'student_id': self.id,
+                    'student_access': ult_access
+                }
+                _access=self.env['op.student.access'].search([('student_id', '=', self.id)], limit=1)
+                if(_access.student_access!=ult_access):
+                    self.env['op.student.access'].create(acces_values)
 
     def import_students(self):
         s = SQL()
@@ -117,3 +156,37 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         logger.info("End of script: import students")
         logger.info("**************************************")
+
+    def Gauth(self):
+        logger.info(os.path.dirname(os.path.abspath(__file__)))
+        model_path = os.path.dirname(os.path.abspath(__file__))
+        credentials_file = model_path + "/drive/credentials.txt"
+        drive_config_file = model_path + '/drive/client_secrets.json'
+        GoogleAuth.DEFAULT_SETTINGS['client_config_file'] = drive_config_file
+        gauth = GoogleAuth()
+        # Try to load saved client credentials
+        gauth.LoadCredentialsFile(credentials_file)
+        if gauth.credentials is None:
+            # Authenticate if they're not there
+            gauth.LocalWebserverAuth()
+        elif gauth.access_token_expired:
+            # Refresh them if expired
+            gauth.Refresh()
+        else:
+            # Initialize the saved credentials
+            gauth.Authorize()
+        # Save the current credentials to a file
+        gauth.SaveCredentialsFile(credentials_file)
+        return gauth
+
+    def unlink(self):
+        gauth = self.Gauth()
+        drive = GoogleDrive(gauth)
+        file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
+        for rec in self:
+            documents = self.env['op.student.documents'].search([('student_id', '=', rec.id)])
+            delete_folder = False
+            for doc in documents:
+                doc.unlink()
+        res = super(OpStudent, self).unlink()
+        return res

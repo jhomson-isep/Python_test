@@ -27,6 +27,7 @@
         'views/op_modality.xml',
         'views/op_workplace.xml',
         'views/op_student_documents.xml',
+        'views/op_student_access.xml',
         'views/op_evaluation_type.xml',
         'views/op_campus.xml',
         'views/op_practices_types.xml',
@@ -46,7 +47,7 @@
         'data/op.university.csv',
         'data/op_modality.xml',
         'data/op.campus.csv',
-        'data/cron.xml'
+        'data/cron.xml',
     ],
     'installable': True,
 }

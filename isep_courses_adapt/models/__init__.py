@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from . import op_sql
+from . import op_moodle
 from . import res_config_settings
 from . import op_course
 from . import op_subject
@@ -16,5 +17,6 @@ from . import op_document_type
 from . import op_contact_type
 from . import op_university
 from . import op_student_documents
+from . import op_student_access
 from . import op_student
 from . import op_faculty
