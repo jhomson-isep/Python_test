@@ -43,11 +43,9 @@ class OpStudent(models.Model):
     )]
 
     def import_student_access(self):
-        # mdl = Moodle()
         logger.info("**************************************")
         logger.info("import student access")
         logger.info("**************************************")
-        #rows = mdl.get_last_access('idnumber', self.document_number)
         moodle=self.env['moodle']
         rows = Moodle.get_last_access(moodle,'idnumber', self.document_number)
         #int_break = 0
@@ -58,10 +56,16 @@ class OpStudent(models.Model):
                 'student_id': self.id,
                 'student_access': ult_access
             }
-            self.env['op.student.access'].create(acces_values)
-            # self.student_access = ult_access
-            # self.write({'student_id': self.student_id,
-            #             'student_access':ult_access})
+            _access=self.env['op.student.access'].search([('student_id', '=', self.id)])
+            _insert_access=True
+            if type(_access.student_access)==list:
+                if(_access.student_access[-1]==ult_access):
+                    _insert_access=False
+            else:
+                if(_access.student_access==ult_access):
+                    _insert_access = False
+            if _insert_access:
+                self.env['op.student.access'].create(acces_values)
 
     def import_students(self):
         s = SQL()
