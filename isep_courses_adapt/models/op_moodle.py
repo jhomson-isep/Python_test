@@ -35,11 +35,11 @@ class Moodle(models.Model):
     def get_last_access_cron(self):
 
         params = {
-            'criteria[0][key]': 'lastaccess',
-            'criteria[0][value]': ""
+            'criteria[0][key]': 'confirmed',
+            'criteria[0][value]': 1
         }
         response = self.moodle_request(function='core_user_get_users', params=params)
-        return response
+        return response['users']
 
     def get_last_access(self,key, value):
         params = {
