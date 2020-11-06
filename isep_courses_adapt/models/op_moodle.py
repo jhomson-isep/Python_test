@@ -28,7 +28,7 @@ class Moodle(models.Model):
         except Exception as e:
             logger.error(e)
             raise UserError(_("Error on moodle connection values: " % str(e)))
-            response = None
+            response = []
 
         return response
 
@@ -44,7 +44,7 @@ class Moodle(models.Model):
     def get_last_access(self, key, value):
         params = {
             'field': key,
-            'values[0]': str(value)
+            'values[0]': value
         }
         response = self.moodle_request(function='core_user_get_users_by_field', params=params)
         return response

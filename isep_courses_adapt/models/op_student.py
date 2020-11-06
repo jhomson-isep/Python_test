@@ -1,6 +1,8 @@
 from odoo import fields, api, models
 from .op_sql import SQL
+from .op_moodle import Moodle
 import logging
+import datetime
 import os
 
 logger = logging.getLogger(__name__)
@@ -39,6 +41,25 @@ class OpStudent(models.Model):
         'unique(n_id)',
         'N_ID Number must be unique per student!'
     )]
+
+    def import_student_access(self):
+        mdl = Moodle()
+        logger.info("**************************************")
+        logger.info("import student access")
+        logger.info("**************************************")
+        rows = mdl.get_last_access('idnumber', self.document_number)
+        #int_break = 0
+        for row in rows:
+            ult_access=datetime.datetime.utcfromtimestamp(row['lastaccess'])
+            #It is necessary to verify that this last access does not exist.
+            acces_values = {
+                'student_id': self.id,
+                'student_access': ult_access
+            }
+            self.env['op.student.access'].create(acces_values)
+            # self.student_access = ult_access
+            # self.write({'student_id': self.student_id,
+            #             'student_access':ult_access})
 
     def import_students(self):
         s = SQL()

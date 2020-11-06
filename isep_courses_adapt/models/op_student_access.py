@@ -21,10 +21,23 @@ class OpStudentAccess(models.Model):
         logger.info("**************************************")
         student = self.env['op.student'].search([('id', '=', self.student_id.id)])
         rows = mdl.get_last_access('email', student.document_number)
-        int_break = 0
+        #int_break = 0
         for row in rows:
             ult_access=datetime.datetime.utcfromtimestamp(row['lastaccess'])
-            self.write({'student_id': self.student_id,
-                        'student_access':ult_access})
+            #It is necessary to verify that this last access does not exist.
+            self.student_access = ult_access
+            # self.write({'student_id': self.student_id,
+            #             'student_access':ult_access})
+
+    def import_all_student_access(self):
+        mdl = Moodle()
+        logger.info("**************************************")
+        logger.info("import all student access")
+        logger.info("**************************************")
+        rows = mdl.get_last_access_cron()
+        for row in rows:
+            pass
+
+
 
 
