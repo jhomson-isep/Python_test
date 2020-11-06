@@ -57,7 +57,7 @@
                 <div role="dialog" class="modal fade" id="modaldecline">
                     <div class="modal-dialog">
                         <form id="decline" method="POST"
-                              t-attf-action="/my/orders/#{order.id}/decline?access_token=#{order.access_token}"
+                              t-attf-action="/my/purchase/#{order.id}/decline?access_token=#{order.access_token}"
                               class="modal-content">
                             <input type="hidden" name="csrf_token"
                                    t-att-value="request.csrf_token()"/>
