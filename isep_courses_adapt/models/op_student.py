@@ -43,11 +43,13 @@ class OpStudent(models.Model):
     )]
 
     def import_student_access(self):
-        mdl = Moodle()
+        # mdl = Moodle()
         logger.info("**************************************")
         logger.info("import student access")
         logger.info("**************************************")
-        rows = mdl.get_last_access('idnumber', self.document_number)
+        #rows = mdl.get_last_access('idnumber', self.document_number)
+        moodle=self.env['moodle']
+        rows = Moodle.get_last_access(moodle,'idnumber', self.document_number)
         #int_break = 0
         for row in rows:
             ult_access=datetime.datetime.utcfromtimestamp(row['lastaccess'])

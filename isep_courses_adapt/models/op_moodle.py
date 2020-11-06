@@ -41,7 +41,7 @@ class Moodle(models.Model):
         response = self.moodle_request(function='core_user_get_users', params=params)
         return response
 
-    def get_last_access(self, key, value):
+    def get_last_access(self,key, value):
         params = {
             'field': key,
             'values[0]': value
