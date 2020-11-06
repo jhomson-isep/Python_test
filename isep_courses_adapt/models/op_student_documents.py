@@ -61,38 +61,36 @@ class OpStudentDocuments(models.Model):
     def upload_file(self, values):
         gauth = self.Gauth()
         self.valid_file(values)
-        # self._check_ids(res)
         drive = GoogleDrive(gauth)
         model_path = os.path.dirname(os.path.abspath(__file__))
         file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
         exist_folder = False
         file = drive.CreateFile()
         folder = None
-        ids = []
         name = ''
-        with open(model_path + '/folders_ids/ids.txt', 'r+') as file_ids:
-            ids = [i for i in file_ids.read().split('\n')]
-            file_ids.close()
+        field = ''
+        if 'student_id' in values:
+            field = 'student_id'
+            model = 'op.student'
+        elif 'faculty_id' in values:
+            field = 'faculty_id'
+            model = 'op.faculty'
+        if 'student_id' in values:
+            res = self.search([('document_type_id', '=', values['document_type_id']), ('student_id', '=', values['student_id'])], limit=1).id
+        elif 'faculty_id' in values:
+            res = self.search([('document_type_id', '=', values['document_type_id']), ('faculty_id', '=', values['faculty_id'])], limit=1).id
+        if res != self.id:
+            return values
         for folders in file_list:
-            if len(ids) > 0:
-                for id in ids:
-                    if folders['id'] == id:
-                        exist_folder = True
-                        folder = folders
-                        break
-            else:
+            if folders['id'] == self.search([(field, '=', values[field])], limit=1).folder_id:
+                exist_folder = True
+                folder = folders
                 break
-        if values['student_id'] != 0:
-            name = self.env['op.student'].search([('id', '=', values['student_id'])], limit=1).name
-        elif values['faculty_id'] != 0:
-            name = self.env['op.faculty'].search([('id', '=', values['faculty_id'])], limit=1).name
         if not exist_folder:
+            name = self.env[model].search([('id', '=', values[field])], limit=1).name
             folder = drive.CreateFile(
                 {"title": name, "mimeType": "application/vnd.google-apps.folder"})
             folder.Upload()
-            with open(model_path + '/folders_ids/ids.txt', 'a+') as file_ids:
-                file_ids.write(folder['id'] + '\n')
-                file_ids.close()
         file.content = io.BytesIO(base64.b64decode(values['file']))
         file['title'] = values['filename']
         file['parents'] = [{'id': folder['id']}]
@@ -130,36 +128,41 @@ class OpStudentDocuments(models.Model):
     def valid_file(self, values):
         if values['filename'] == '':
             raise ValidationError(_('Select a file!'))
-        if values['filename'].split('.')[-1] in ['png', 'pdf', 'jpeg', 'jpg']:
+        if values['filename'].lower().split('.')[-1] in ['png', 'pdf', 'jpeg', 'jpg']:
             return
         else:
             raise ValidationError(_('Invalid format file!.'))
 
     @api.model
     def create(self, values):
-        logger.info(values)
-        if 'op.faculty' or 'op.student' in values:
+        if 'filename' in values:
             values = self.upload_file(values)
         res = super(OpStudentDocuments, self).create(values)
         return res
 
     @api.multi
     def write(self, values):
-        if 'op.faculty' or 'op.student' in values:
+        if 'filename' in values:
             values = self.upload_file(values)
         res = super(OpStudentDocuments, self).create(values)
         return res
 
-    # @api.one
-    # @api.constrains('document_type_id', 'student_id', 'faculty_id')
-    # def _check_ids(self,res):
-    #     self.env.cr.execute("SELECT document_type_id, student_id FROM op_student_documents WHERE document_type_id = %s AND student_id = %s ", (self.document_type_id.id, self.student_id.id))
-    #     consult1 = self.env.cr.fetchall()
-    #     self.env.cr.execute("SELECT document_type_id, student_id FROM op_student_documents WHERE document_type_id = %s AND faculty_id = %s ", (self.document_type_id.id, self.faculty_id.id))
-    #     consult2 = self.env.cr.fetchall()
-    #     logger.info(consult1)
-    #     logger.info(consult2)
-    #     if :
-    #         raise ValidationError(_('Document type is unique!'))
-    #     elif :
-    #         raise ValidationError(_('Document type is unique!'))
+    @api.one
+    @api.constrains('document_type_id', 'student_id', 'faculty_id')
+    def _check_ids(self):
+        if self.student_id.id:
+            res = self.search([('document_type_id', '=', self.document_type_id.id), ('student_id', '=', self.student_id.id)], limit=1).id
+        elif self.faculty_id.id:
+            res = self.search([('document_type_id', '=', self.document_type_id.id), ('faculty_id', '=', self.faculty_id.id)], limit=1).id
+        if res != self.id:
+            raise ValidationError(_('One documet type per person!!'))
+
+    @api.model
+    def delete_void_records(self):
+        study_faculty_res = self.env['ir.attachment'].search([('res_model', '=', 'op.student.documents')])
+        for rec in study_faculty_res:
+            rec.unlink()
+        study_faculty_res_void = self.env['op.student.documents'].search(
+            [('document_type_id', '=', None), ('student_id', '=', None), ('faculty_id', '=', None)])
+        for rec in study_faculty_res_void:
+            rec.unlink()

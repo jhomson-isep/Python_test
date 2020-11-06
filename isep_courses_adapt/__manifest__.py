@@ -45,7 +45,8 @@
         'data/op.study.type.csv',
         'data/op.university.csv',
         'data/op_modality.xml',
-        'data/op.campus.csv'
+        'data/op.campus.csv',
+        'data/cron.xml'
     ],
     'installable': True,
 }
