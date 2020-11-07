@@ -59,6 +59,7 @@ class OpStudent(models.Model):
                         'student_access': ult_access
                     }
                     self.env['op.student.access'].create(acces_values)
+
     def import_student_access(self):
         logger.info("**************************************")
         logger.info("import student access")
