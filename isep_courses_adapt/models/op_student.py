@@ -4,6 +4,7 @@ from pydrive.drive import GoogleDrive
 from .op_sql import SQL
 from .op_moodle import Moodle
 import datetime
+from dateutil.relativedelta import relativedelta
 import logging
 import os
 
@@ -36,12 +37,34 @@ class OpStudent(models.Model):
                                    string="Documentation")
     access_ids = fields.One2many("op.student.access", "student_id",
                                  string="Access")
+    last_access = fields.Char(String='Last access',
+                              compute='_get_last_access',
+                              readonly=True)
 
     _sql_constraints = [(
         'unique_n_id',
         'unique(n_id)',
         'N_ID Number must be unique per student!'
     )]
+
+    def _get_last_access(self):
+        for record in self:
+            last_access = record.env['op.student.access'].search(
+                [('student_id', '=', record.id)], order='id desc', limit=1)
+            if last_access.student_access:
+                access_ago = fields.Datetime.today() - last_access.student_access
+                minutes, seconds = divmod(access_ago.seconds, 60)
+                hours, minutes = divmod(minutes, 60)
+                access_string = "Hace "
+                if access_ago.days > 0:
+                    access_string += "{0} días ".format(access_ago.days)
+                if hours > 0:
+                    access_string += "{0} horas ".format(hours)
+                if minutes > 0:
+                    access_string += "{0} minutos ".format(minutes)
+                record.last_access = access_string
+            else:
+                record.last_access = "Nunca"
 
     def import_all_student_access(self):
         logger.info("**************************************")
