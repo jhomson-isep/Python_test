@@ -136,7 +136,12 @@ dmypy.json
 .idea/
 
 # Old files
-.pyold
+*.pyold
+
+# ipynb extensions
+*.ipynb
+
+# gdrive access files
 isep_courses_adapt/models/drive/client_secrect.json
 isep_courses_adapt/models/drive/credentials.json
 isep_courses_adapt/models/drive/credentials.txt
