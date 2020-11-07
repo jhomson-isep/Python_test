@@ -27,7 +27,7 @@ class Moodle(models.Model):
 
         except Exception as e:
             logger.error(e)
-            raise UserError(_("Error on moodle connection values: " % str(e)))
+            # raise UserError(_("Error on moodle connection values: " % str(e)))
             response = []
 
         return response

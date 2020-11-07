@@ -46,6 +46,7 @@ class OpCourse(models.Model):
             url = config_params.get_param('moodle_url')
             endpoint = config_params.get_param('moodle_endpoint')
             send_moodle = config_params.get_param('send_moodle')
+            send_moodle = False
         except Exception as e:
             logger.error(e)
             raise UserError(_("Error on moodle connection values: " % str(e)))
@@ -85,6 +86,7 @@ class OpCourse(models.Model):
             url = config_params.get_param('moodle_url')
             endpoint = config_params.get_param('moodle_endpoint')
             send_moodle = config_params.get_param('send_moodle')
+            send_moodle = False
         except Exception as e:
             logger.error(e)
             raise UserError(_("Error on moodle connection values: " % str(e)))
