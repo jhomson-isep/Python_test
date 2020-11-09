@@ -399,7 +399,9 @@ class CrmLead(models.Model):
                     cod_curso = cod_curso + modalidad
 
                 referencia_interna_template = self.env['product.template'].sudo().search(
-                    [('sale_ok', '=', True), ('default_code', '=', cod_curso), ('company_id', '=', company_id)], limit=1)
+                    [('sale_ok', '=', True),
+                     ('default_code', '=', cod_curso),
+                     ('company_id', '=', company_id)], limit=1)
                 logger.info(referencia_interna_template)
                 lead.update({'x_curso_id': referencia_interna_template.id})
                 logger.info(lead.get('x_curso_id'))
@@ -410,6 +412,23 @@ class CrmLead(models.Model):
                 logger.info(referencia_interna_product)
                 lead.update({'x_producto_id': referencia_interna_product.id})
                 logger.info(lead.get('x_producto_id'))
+
+                if len(referencia_interna_template) < 1:
+                    referencia_interna_template = self.env['product.template'].sudo().search(
+                        [('sale_ok', '=', True),
+                         ('name', '=', cod_curso),
+                         ('company_id', '=', company_id)], limit=1)
+                    logger.info(referencia_interna_template)
+                    lead.update({'x_curso_id': referencia_interna_template.id})
+                    logger.info(lead.get('x_curso_id'))
+                    logger.info("Se actualizo")
+
+                    referencia_interna_product = self.env['product.product'].sudo().search(
+                        [('product_tmpl_id', '=', referencia_interna_template.id)], limit=1)
+                    logger.info(referencia_interna_product)
+                    lead.update({'x_producto_id': referencia_interna_product.id})
+                    logger.info(lead.get('x_producto_id'))
+
             except Exception as e:
                 logger.info(e)
                 logger.info("No pudo relacionar la referencia interna con el cod_curso")
