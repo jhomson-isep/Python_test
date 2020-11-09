@@ -7,8 +7,20 @@
             <field name="model">helpdesk.team</field>
             <field name="inherit_id" ref="helpdesk.helpdesk_team_view_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='assign_method']" position="after">
-                    <field name="ticket_notify" widget="many2many_tags"/>
+                <xpath expr="//div[@id='productivity']" position="inside">
+                    <div class="col-lg-6 o_setting_box"
+                         title="Notificar a:">
+                        <div class="o_setting_right_pane">
+                            <span class="fa fa-3x fa-user pull-right"/>
+                            <label for="ticket_notify"/>
+                            <div class="text-muted">
+                                Seleccione a la persona o personas para notificar en tickets.
+                            </div>
+                            <div>
+                                <field name="ticket_notify" class="mt16"/>
+                            </div>
+                        </div>
+                    </div>
                 </xpath>
             </field>
         </record>
