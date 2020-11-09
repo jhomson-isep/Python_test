@@ -20,7 +20,8 @@
     ],
     "data": [
         "views/res_partner.xml",
-        "views/helpdesk_ticket.xml"
+        "views/helpdesk_ticket.xml",
+        "views/helpdesk_team.xml"
     ],
     'installable': True,
 }
