@@ -219,12 +219,12 @@
                                         <div class="col-6">
                                             <span t-field="o.len_cuotas"/> Plazo/s de
                                             <span t-field="o.precio_primer_pago"/>
-                                            <span t-field="o.pricelist_id.currency_id.sat_currency_id"/>
+                                            <span t-field="o.pricelist_id.currency_id.name"/>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Forma de Pago:</strong></div>
-                                        <div class="col-6"><span t-field="o.pay_method_id.name"/></div>
+                                        <div class="col-6"><span t-field="o.payment_mode_id.name"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Primer Vencimiento Aplazado:</strong></div>
@@ -375,7 +375,7 @@
                                     <div class="row"><strong>Programa :</strong></div>
                                 </div>
                                 <div class="col-9">
-                                    <div class="row"><span t-field="o.partner_id.name"/></div>
+                                    <div class="row"><span t-field="o.partner_invoice_id.name"/></div>
                                     <div class="row">
                                         <t t-foreach="o.order_line" t-as="l">
                                             <span t-field="l.product_id"><br/></span>
@@ -389,22 +389,22 @@
                             <div class="row" style="text-align:justify;font-size:13px;">
                                 <ol>
                                     <li>
-                                        Gastos de Inscripción: <span t-field="o.precio_matricula"/> <span t-field="o.confirmation_date"/>
+                                        Gastos de Inscripción: <span t-field="o.precio_matricula"/><span t-field='o.pricelist_id.currency_id.name'></span> <span t-field="o.confirmation_date"/>
                                     </li>
-                                    <li><span t-field="o.len_cuotas"/> Mensualidades de <span t-field="o.precio_primer_pago"/> con fecha <span t-field="o.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha)[1].fecha"/></li>
+                                    <li><span t-field="o.len_cuotas"/> Mensualidades de <span t-field="o.precio_primer_pago"/><span t-field='o.pricelist_id.currency_id.name'></span> con fecha <span t-field="o.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha)[1].fecha"/></li>
                                 </ol>
                             </div>
                             <br/>
                             <br/>
                             <div class="row" style="text-align:justify;font-size:13px;">
-                                <strong>Nombre completo del titular de la cuenta:</strong> <span t-field="o.partner_id.payment_token_ids[0].display_name"/>
+                                <strong>Nombre completo del titular de la cuenta:</strong> <span t-field="o.partner_invoice_id.payment_token_ids[0].display_name"/>
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">
                                 <strong>Número de la tarjeta:</strong>
-                                <span t-esc="o.partner_id.payment_token_ids[0].acquirer_ref[:8]">
+                                <span t-esc="o.partner_invoice_id.payment_token_ids[0].acquirer_ref[:8]">
                                 </span>
                                 ****
-                                <span t-esc="o.partner_id.payment_token_ids[0].acquirer_ref[-4:]">
+                                <span t-esc="o.partner_invoice_id.payment_token_ids[0].acquirer_ref[-4:]">
                                 </span>
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">
