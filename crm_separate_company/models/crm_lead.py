@@ -74,6 +74,7 @@ class CrmLead(models.Model):
             url = lead.get('website')
             nombre_curso = lead.get('x_universidad')
             telefono = lead.get('phone')
+            description = lead.get('description')
 
             actual = lead.get('x_contactonuevoodup12')
             logger.info(lead.get('x_profesion'))
@@ -98,7 +99,7 @@ class CrmLead(models.Model):
                 'x_codcurso': cod_curso,
                 'email_from': email,
                 'x_codtipodecurso': cod_tipo_curso,
-                # 'description': url,
+                'description': description,
                 'x_codmodalidad': modalidad,
                 'user_id': None,
                 'team_id': None,
@@ -177,7 +178,7 @@ class CrmLead(models.Model):
                 cod_sede = 'OVI'
             elif cod_sede in ('centro-bilbao', 'bilbao', 'Bilbao', 'ised-bilbao'):
                 cod_sede = 'BIO'
-            elif cod_sede in ('centro-madrid-atocha', 'madrid', 'Madrid', 'MAD', 'MDR', 'ised-madrid'):
+            elif cod_sede in ('centro-madrid', 'centro-madrid-atocha', 'madrid', 'Madrid', 'MAD', 'MDR', 'ised-madrid'):
                 cod_sede = 'MDR'
             elif cod_sede == 'ised-barcelona':
                 cod_sede = 'CAT'
@@ -206,10 +207,14 @@ class CrmLead(models.Model):
             # ISEP SL
             # ---------------------------------
             elif company_id == 1:
-                # Manel Arroyo
-                user_id = 76
+                if description.find('Agente internacional-') != -1:
+                    #Agentes internacionales Yura Vanegas
+                    user_id = 45
+                else:
+                    # Manel Arroyo
+                    user_id = 76
 
-                if cod_sede in ('barcelona', 'Barcelona', 'BCN', '001'):
+                if cod_sede in ('centro-barcelona', 'barcelona', 'Barcelona', 'BCN', '001'):
                     cod_sede = 'CAT'
                     team_id = 1
                     lead.update({'x_sede_id': 2})
@@ -394,7 +399,9 @@ class CrmLead(models.Model):
                     cod_curso = cod_curso + modalidad
 
                 referencia_interna_template = self.env['product.template'].sudo().search(
-                    [('sale_ok', '=', True), ('default_code', '=', cod_curso), ('company_id', '=', company_id)], limit=1)
+                    [('sale_ok', '=', True),
+                     ('default_code', '=', cod_curso),
+                     ('company_id', '=', company_id)], limit=1)
                 logger.info(referencia_interna_template)
                 lead.update({'x_curso_id': referencia_interna_template.id})
                 logger.info(lead.get('x_curso_id'))
@@ -405,6 +412,23 @@ class CrmLead(models.Model):
                 logger.info(referencia_interna_product)
                 lead.update({'x_producto_id': referencia_interna_product.id})
                 logger.info(lead.get('x_producto_id'))
+
+                if len(referencia_interna_template) < 1:
+                    referencia_interna_template = self.env['product.template'].sudo().search(
+                        [('sale_ok', '=', True),
+                         ('name', '=', cod_curso),
+                         ('company_id', '=', company_id)], limit=1)
+                    logger.info(referencia_interna_template)
+                    lead.update({'x_curso_id': referencia_interna_template.id})
+                    logger.info(lead.get('x_curso_id'))
+                    logger.info("Se actualizo")
+
+                    referencia_interna_product = self.env['product.product'].sudo().search(
+                        [('product_tmpl_id', '=', referencia_interna_template.id)], limit=1)
+                    logger.info(referencia_interna_product)
+                    lead.update({'x_producto_id': referencia_interna_product.id})
+                    logger.info(lead.get('x_producto_id'))
+
             except Exception as e:
                 logger.info(e)
                 logger.info("No pudo relacionar la referencia interna con el cod_curso")

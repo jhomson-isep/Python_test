@@ -25,9 +25,7 @@
                                     <div class="col-6">
                                         <!--<div class="row"><strong style="color:#112e51;">Universidad</strong></div>-->
                                         <div class="row">
-                                            <img class="img-fluid logo"
-                                                 style="height:125px;padding-top:2px;"
-                                                 src="/isep_reports_custom/static/src/img/logo_ised.png"/>
+                                            <img class="img-fluid logo" style="height:125px;padding-top:2px;" src="/isep_reports_custom/static/src/img/logo_ised.png"/>
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -48,154 +46,156 @@
                                 </div>
                             </div>
                             <!--#############################Primera Seccion #112e51 <- Azul del HR##################-->
-                            <hr style="border:3px solid #112e51;margin-bottom:1px;"></hr>
+                            <hr style="border:3px solid #112e51;margin-bottom:1px;"/>
                             <div class="row">
                                 <div class="col-5 title" style="background-color: #1b75bb;border-bottom-right-radius:5px;">
                                     <strong style="color:white; margin-left:5px;">DATOS PERSONALES DEL ALUMNO</strong>
                                 </div>
                             </div>
-                            <div id="personal_information"  class="row personal_information" style="font-size:13px;">
+                            <div id="personal_information" class="row personal_information" style="font-size:13px;">
                                 <!--Primera Columna-->
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-6"><strong>Nombre:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.name"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>DNI/Pasaporte:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.vat"></span></div>
+                                        <t t-if="o.partner_id.vat"><div class="col-6"><span t-field="o.partner_id.vat"></span></div></t>
+                                        <t t-else=""><div class="col-6"><span t-field="o.partner_id.num_reg_trib"></span></div></t>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Domicilio:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.street"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.street"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Población:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.city"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.city"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Movil:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.mobile"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.mobile"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Email:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.email"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.email"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Centro:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.x_universidad"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.x_universidad"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Estudios:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.x_titulacion"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.x_titulacion"/></div>
                                     </div>
                                 </div>
                                 <!--Segunda Columna-->
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-6"><strong>Nacimiento:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.x_annonacimiento"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.x_annonacimiento"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>País:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.country_id"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.country_id"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Estado:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.state_id"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.state_id"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>C.P:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.zip_sat_id"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.zip"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Teléfono Fijo:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.phone"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.phone"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Asesor</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.user_id.name"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.user_id.name"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Finalizados</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.x_finalizacionestudios"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.x_finalizacionestudios"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Profesión:</strong></div>
-                                        <div class="col-6"><span t-field="o.partner_id.x_profesion"></span></div>
+                                        <div class="col-6"><span t-field="o.partner_id.x_profesion"/></div>
                                     </div>
                                 </div>
                             </div>
                             <!--############################Segunda seccion#########################################-->
-                            <hr style="border:3px solid #112e51;margin-bottom:1px;"></hr>
+                            <hr style="border:3px solid #112e51;margin-bottom:1px;"/>
                             <div class="row">
                                 <!--#112e51 <- Azul del HR-->
                                 <div class="col-4 title" style="background-color: #1b75bb;border-bottom-right-radius:5px;">
                                     <strong style="color:white; margin-left:5px;">DATOS DE FACTURACIÓN</strong>
                                 </div>
                             </div>
-                            <div id="personal_information"  class="row personal_information" style="font-size:13px;">
+                            <div id="personal_information" class="row personal_information" style="font-size:13px;">
                                 <!--Primera Columna-->
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-4"><strong>Nombre:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.name"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.name"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>DNI/Pasaporte:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.vat"></span></div>
+                                        <t t-if="o.partner_id.vat"><div class="col-8"><span t-field="o.partner_id.vat"></span></div></t>
+                                        <t t-else=""><div class="col-8"><span t-field="o.partner_id.num_reg_trib"></span></div></t>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>Móvil:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.mobile"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.mobile"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>Teléfono Fijo:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.phone"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.phone"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>Email:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.email"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.email"/></div>
                                     </div>
                                 </div>
                                 <!--Segunda Columna-->
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-4"><strong>Domicilio:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.street"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.street"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>Población:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.city"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.city"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>País:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.country_id"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.country_id"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>Estado:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.state_id"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.state_id"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>C.P:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.zip_sat_id"></span></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.zip"/></div>
                                     </div>
                                 </div>
                             </div>
                             <!--##################################Tercera Seccion####################################-->
-                            <hr style="border:2px solid #112e51;margin-bottom:1px;"></hr>
+                            <hr style="border:2px solid #112e51;margin-bottom:1px;"/>
                             <div class="row">
                                 <p style="font-size:13px;">Recibida previamente la información detallada de las características del curso, contenido y demás cuestiones relacionadas, el alumno/titular acepta las condiciones generales y académicas amparadas en este contrato y SOLICITA LA MATRÍCULA PARA EL CURSO DE:</p>
                             </div>
                             <div class="row" style="font-size:13px;">
                                 <ul>
                                     <t t-foreach="o.order_line" t-as="l">
-                                        <li><span t-field="l.product_id"></span></li>
+                                        <li><span t-field="l.product_id"/></li>
                                     </t>
                                 </ul>
                             </div>
                             <!--###################################Cuarta seccion####################################-->
-                            <hr style="border:3px solid #112e51;margin-bottom:1px;"></hr>
+                            <hr style="border:3px solid #112e51;margin-bottom:1px;"/>
                             <div class="row">
                                 <div class="col-7 title" style="background-color: #1b75bb;border-bottom-right-radius:5px;">
                                     <strong style="color:white; margin-left:5px;">
@@ -208,68 +208,66 @@
                                 <div class="col-6" style="font-size:13px;">
                                     <div class="row">
                                         <div class="col-6"><strong>Plazo de Pago:</strong></div>
-                                        <div class="col-6"><span t-field="o.payment_term_id.display_name"></span></div>
+                                        <div class="col-6"><span t-field="o.payment_term_id.display_name"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Matrícula/Pago Inicial:</strong></div>
-                                        <div class="col-6"><span t-field="o.precio_matricula"></span></div>
+                                        <div class="col-6"><span t-field="o.precio_matricula"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Resto Aplazado:</strong></div>
                                         <div class="col-6">
-                                            <span t-field="o.len_cuotas"></span> Plazo/s de
-                                            <span t-field="o.precio_primer_pago"></span>
-                                            <span t-field="o.pricelist_id.currency_id.sat_currency_id"></span>
+                                            <span t-field="o.len_cuotas"/> Plazo/s de
+                                            <span t-field="o.precio_primer_pago"/>
+                                            <span t-field="o.pricelist_id.currency_id.name"/>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Forma de Pago:</strong></div>
-                                        <div class="col-6"><span t-field="o.pay_method_id.name"></span></div>
+                                        <div class="col-6"><span t-field="o.payment_mode_id.name"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6"><strong>Primer Vencimiento Aplazado:</strong></div>
-                                        <div class="col-6"><span t-field="o.x_Fecha_Primer_Recibo"></span></div>
+                                        <div class="col-6"><span t-field="o.x_Fecha_Primer_Recibo"/></div>
                                     </div>
                                 </div>
                             </div>
                             <!--################################Quinta seccion#######################################-->
-                            <hr style="border:2px solid #112e51;margin-bottom:1px;"></hr>
+                            <hr style="border:2px solid #112e51;margin-bottom:1px;"/>
                             <div class="row">
                                 <div class="col-12">
                                     <p style="font-size:13px;">
-                                        Suscrito en dos ejemplares en Madrid, a <span t-field="o.create_date"></span>
-                                        <br></br>
+                                        Suscrito en dos ejemplares en Madrid, a <span t-field="o.create_date"/>
+                                        <br/>
                                         Leído y conforme con las condiciones generales y mis derechos y deberes que se adjuntan (recibo copia).
                                     </p>
                                 </div>
                             </div>
                             <div class="row sign">
                                 <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL ALUMNO</p></strong></div>
-                                <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL TITULAR<br></br>(Si es distinto al alumno)</p></strong></div>
-                                <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA <span t-field="o.company_id.name"></span></p></strong></div>
+                                <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL TITULAR<br/>(Si es distinto al alumno)</p></strong></div>
+                                <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA <span t-field="o.company_id.name"/></p></strong></div>
                             </div>
                             <div class="row" style="height:90px">
-                                <div class="col-8"></div>
+                                <div class="col-8"/>
                                 <div class="col-4">
-                                    <img class="img-fluid img-sign"
-                                         style="height:75px;display:block;margin-left:auto;margin-right:auto;"
-                                         src="/isep_reports_custom/static/src/img/firmaisepsl.jpg"/>
+                                    <img class="img-fluid img-sign" style="height:75px;display:block;margin-left:auto;margin-right:auto;" src="/isep_reports_custom/static/src/img/firmaisepsl.jpg"/>
                                 </div>
                             </div>
                             <div class="row sign">
                                 <div class="col-4" style="font-size:13px;text-align:center;">
-                                    <strong style="font-size:13px;"><span t-field="o.partner_id.name"></span></strong>
-                                    <br></br>
-                                    <strong><span t-field="o.partner_id.vat"></span></strong>
+                                    <strong style="font-size:13px;"><span t-field="o.partner_id.name"/></strong>
+                                    <br/>
+                                    <strong><span t-field="o.partner_id.vat"/></strong>
                                 </div>
                                 <div class="col-4" style="font-size:13px;text-align:center;">
-                                    <strong style="font-size:13px;"><span t-field="o.partner_id.payment_token_ids.display_name"></span></strong>
+                                    <strong style="font-size:13px;"><span t-field="o.partner_invoice_id.name"/></strong>
                                 </div>
                                 <div class="col-4" style="font-size:13px;text-align:center;">
-                                    <strong style="font-size:13px;">[Ref:<span t-field="o.name"></span>]</strong>
+                                    <strong style="font-size:13px;">[Ref:<span t-field="o.name"/>]</strong>
                                 </div>
                             </div>
-                            <div class="row" style="height:140px"></div><!--Cuadro para pasar de pagina-->
+                            <div class="row" style="height:140px"/><!--Cuadro para pasar de pagina-->
                             <div class="footer">
                                 <div class="row">
                                     <div class="col-12">
@@ -287,7 +285,7 @@
                                                 <strong style="color:#1b75bb;">http://www.ised.es/</strong>
                                             </div>
                                         </div>
-                                        <hr style="border:2px solid #112e51;margin-bottom:1px;"></hr>
+                                        <hr style="border:2px solid #112e51;margin-bottom:1px;"/>
                                         <div class="row">
                                             <div class="col-6">
                                                 <img src="/isep_reports_custom/static/src/img/cif.png"/>
@@ -299,26 +297,30 @@
                             </div>
                         </div>
                         <div class="page" name="second_page">
-                            <br></br>
-                            <div class="row" style="font-size:13px; text-align:justify;">
+                            <br/>
+                            <div class="row" style="font-size:13px; text-align:justify;margin-left:5px;">
                                 <div class="col-12">
+                                    <br></br>
+                                    <br></br>
+                                    <br></br>
+                                    <br></br>
                                     <ol>
                                         <li>
-                                            El alumno y el titular del contrato han recibido de <span t-field="o.company_id.name"></span>, en el momento
+                                            El alumno y el titular del contrato han recibido de <span t-field="o.company_id.name"/>, en el momento
                                             de la firma del presente, la información necesaria acerca del programa a seguir,
                                             tanto académica, económica y administrativa.
                                         </li>
                                         <li>
-                                            En aquellos programas con requisito de acceso de nivel universitario, la expedición de título de <span t-field="o.company_id.name"></span> , quedará supeditada a
+                                            En aquellos programas con requisito de acceso de nivel universitario, la expedición de título de <span t-field="o.company_id.name"/> , quedará supeditada a
                                             la obtención del título universitario previo. En caso de ser un programa con título de UVic, no podrá ser matriculado a la Universidad hasta que
                                             finalice sus estudios universitarios en un plazo máximo de un año desde el inicio del curso en Centro de Estudios Ised SL .
                                         </li>
                                         <li>
-                                            Los programas que <span t-field="o.company_id.name"></span> imparte vinculados a alguna Universidad u otras instituciones están supeditados a las normativas
+                                            Los programas que <span t-field="o.company_id.name"/> imparte vinculados a alguna Universidad u otras instituciones están supeditados a las normativas
                                             propias de cada centro.
                                         </li>
                                         <li>
-                                            Prácticas de alumnos. Caso de que el alumno hubiera contratado un curso en el que se incluyera la realización de prácticas, <span t-field="o.company_id.name"></span> se encargará de localizar un centro de realización para las mismas. El alumno deberá tener tanto disponibilidad horaria como geográfica
+                                            Prácticas de alumnos. Caso de que el alumno hubiera contratado un curso en el que se incluyera la realización de prácticas, <span t-field="o.company_id.name"/> se encargará de localizar un centro de realización para las mismas. El alumno deberá tener tanto disponibilidad horaria como geográfica
                                             para poder realizarlas en el centro que se le asigne.Para poder optar a prácticas, si se trata de cursos presenciales, es requisito indispensable que
                                             el alumno se encuentre al corriente de pago en todas las cuotas correspondientes a los cursos en los que se ha matriculado. En caso de formación
                                             no presencial será imprescindible que haya abonado al menos un 50% del precio total del curso.
@@ -330,22 +332,22 @@
                                         <li>
                                             El alumno matriculado en las modalidades no presencial, dispondrá de 15 hábiles a contar a partir del acceso a Aula Virtual para desistir del contrato
                                             de matrícula firmado.En caso de la modalidad presencial, podrá desistir del contrato hasta 15 días hábiles antes de la fecha de inicio programada.
-                                            En ambos casos, <span t-field="o.company_id.name"></span> retendrá las tasas académicas en concepto de gastos de administración y reserva de plaza. Pasado
+                                            En ambos casos, <span t-field="o.company_id.name"/> retendrá las tasas académicas en concepto de gastos de administración y reserva de plaza. Pasado
                                             dicho plazo, se deberán efectuar todos los pagos.
                                         </li>
                                         <li>
-                                            <span t-field="o.company_id.name"></span> podrá reclamar la totalidad del importe al alumno/titular si éste no cumple con los vencimientos pactados. Los plazos
+                                            <span t-field="o.company_id.name"/> podrá reclamar la totalidad del importe al alumno/titular si éste no cumple con los vencimientos pactados. Los plazos
                                             acordados con anterioridad se entenderán como no válidos.
                                         </li>
                                         <li>
-                                            <span t-field="o.company_id.name"></span> se reserva el derecho de dejar de prestar el servicio cuando el alumno no cumpla con las obligaciones adquiridas, así
+                                            <span t-field="o.company_id.name"/> se reserva el derecho de dejar de prestar el servicio cuando el alumno no cumpla con las obligaciones adquiridas, así
                                             como el derecho de reportar a ficheros de morosidad, solvencia patrimonial o crédito en caso de que el alumno/titular no cumpla satisfactoriamente
                                             con las obligaciones de pago contempladas en este contrato.
                                         </li>
                                         <li>
                                             El precio de expedición de títulos, certificados u otros no están incluidos en el importe del curso.Se hará envío o entrega del Diploma
                                             correspondiente al curso realizado por el alumno, una vez haya finalizado el mismo de modo satisfactorio, y siempre y cuando haya abonado la
-                                            totalidad del coste del curso en el que se matriculó. Si un alumno solicitara un Certificado de Estudios,  <span t-field="o.company_id.name"></span> procederá a la
+                                            totalidad del coste del curso en el que se matriculó. Si un alumno solicitara un Certificado de Estudios,  <span t-field="o.company_id.name"/> procederá a la
                                             emisión del mismo teniendo en cuenta tanto el número de horas realizadas, así como la valoración de los módulos cursados. Será requisito
                                             indispensable que, a la hora de la solicitud del mismo, el alumno se encuentre al corriente de pagos de las cuotas del curso
                                         </li>
@@ -354,28 +356,29 @@
                                             abonados serán reintegrados.
                                         </li>
                                         <li>
-                                            El titular autoriza a <span t-field="o.company_id.name"></span> a realizar los cobros en la forma y plazos según las condiciones aceptadas para el pago.
+                                            El titular autoriza a <span t-field="o.company_id.name"/> a realizar los cobros en la forma y plazos según las condiciones aceptadas para el pago.
                                         </li>
                                     </ol>
                                 </div>
                             </div>
+                            <div class="row" style="height:200px;"></div>
                         </div>
                         <t t-if="o.payment_mode_id.name == 'Tarjeta' or o.payment_mode_id.name == 'Datáfono'">
                             <div class="page" name="third_page_tarjeta">
-                                <div class="row" style="height:310px"></div>
-                            <br></br>
-                            <br></br>
-                            <br></br>
+                                <div class="row" style="height:310px"/>
+                            <br/>
+                            <br/>
+                            <br/>
                             <div class="row" style="text-align:justify;font-size:13px;">
                                 <div class="col-3">
                                     <div class="row"><strong>Nombre :</strong></div>
                                     <div class="row"><strong>Programa :</strong></div>
                                 </div>
                                 <div class="col-9">
-                                    <div class="row"><span t-field="o.partner_id.name"></span></div>
+                                    <div class="row"><span t-field="o.partner_invoice_id.name"/></div>
                                     <div class="row">
                                         <t t-foreach="o.order_line" t-as="l">
-                                            <span t-field="l.product_id"><br></br></span>
+                                            <span t-field="l.product_id"><br/></span>
                                         </t>
                                     </div>
                                 </div>
@@ -386,59 +389,57 @@
                             <div class="row" style="text-align:justify;font-size:13px;">
                                 <ol>
                                     <li>
-                                        Gastos de Inscripción: <span t-field="o.precio_matricula"></span> <span t-field="o.confirmation_date"></span>
+                                        Gastos de Inscripción: <span t-field="o.precio_matricula"/><span t-field='o.pricelist_id.currency_id.name'></span> <span t-field="o.confirmation_date"/>
                                     </li>
-                                    <li><span t-field="o.len_cuotas"></span> Mensualidades de <span t-field="o.precio_primer_pago"></span> con fecha <span t-field="o.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha)[1].fecha"></span></li>
+                                    <li><span t-field="o.len_cuotas"/> Mensualidades de <span t-field="o.precio_primer_pago"/><span t-field='o.pricelist_id.currency_id.name'></span> con fecha <span t-field="o.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha)[1].fecha"/></li>
                                 </ol>
                             </div>
-                            <br></br>
-                            <br></br>
+                            <br/>
+                            <br/>
                             <div class="row" style="text-align:justify;font-size:13px;">
-                                <strong>Nombre completo del titular de la cuenta:</strong> <span t-field="o.partner_id.payment_token_ids[0].display_name"></span>
+                                <strong>Nombre completo del titular de la cuenta:</strong> <span t-field="o.partner_invoice_id.payment_token_ids[0].display_name"/>
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">
                                 <strong>Número de la tarjeta:</strong>
-                                <span
-                                    t-esc="o.partner_id.payment_token_ids[0].acquirer_ref[:8]">
+                                <span t-esc="o.partner_invoice_id.payment_token_ids[0].acquirer_ref[:8]">
                                 </span>
                                 ****
-                                <span
-                                    t-esc="o.partner_id.payment_token_ids[0].acquirer_ref[-4:]">
+                                <span t-esc="o.partner_invoice_id.payment_token_ids[0].acquirer_ref[-4:]">
                                 </span>
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">
                                 <strong>Si la tarjeta es de débito indicar número de clave bancaria estandarizada "CLABE": </strong>
                             </div>
-                            <br></br>
+                            <br/>
                             <div class="row" style="text-align:justify;font-size:13px;">
-                                Solicito y autorizo a <span t-field="o.company_id.name"></span>, para que en mi nombre realice y gestione cualquier trámite administrativo, pagos académicos y de titulación de la Universidad en
+                                Solicito y autorizo a <span t-field="o.company_id.name"/>, para que en mi nombre realice y gestione cualquier trámite administrativo, pagos académicos y de titulación de la Universidad en
                                 donde he formalizado la inscripción, al no disponer de una tarjeta de crédito habilitada para cobros internacionales y evitarme los costos bancarios de las
                                 transferencias internacionales para dichos pagos.
                             </div>
-                            <br></br>
-                            <br></br>
+                            <br/>
+                            <br/>
                             <div class="row" style="text-align:center;font-size:13px">
                                 <div class="col-12">
                                     Entregar este formato a su gestor comercial
-                                    <br></br>
+                                    <br/>
                                     He leído y autorizo lo manifestado en la presente orden de pago.
                                 </div>
                             </div>
-                            <br></br>
-                            <br></br>
+                            <br/>
+                            <br/>
                             <div class="row" style="text-align:center;">
                                 <div class="col-12" style="height:50px;"><strong>FIRMA TITULAR:</strong></div>
                             </div>
                             <div class="row" style="text-align:center;">
-                                <div class="col-12"><span t-field="o.partner_invoice_id.name"></span></div>
+                                <div class="col-12"><span t-field="o.partner_invoice_id.name"/></div>
                             </div>
                             <div class="row" style="text-align:center;"><div class="col-12"><strong>Fecha:</strong></div></div>
-                            <div class="row" style="text-align:center;"><div class="col-12"><span t-field="o.date_order"></span></div></div>
+                            <div class="row" style="text-align:center;"><div class="col-12"><span t-field="o.date_order"/></div></div>
                         </div>
                         </t>
-                        <t t-if="o.payment_mode_id.name == 'Domiciliado' and o.cuenta_bancaria and o.mandate_id">
+                        <t t-if="o.payment_mode_id.name.find('Domiciliado') != -1  and o.cuenta_bancaria and o.mandate_id">
                             <div class="page" name="third_page_sepa">
-                                <div class="row" style="height:325px"></div>
+                                <div class="row" style="height:325px"/>
                             <style type="text/css">
                                 h4 {
                                      margin-top: 2px;
@@ -470,10 +471,10 @@
                                     font-size: 0.8em;
                                 }
                             </style>
-                            <br></br>
-                            <br></br>
-                            <br></br>
-                            <br></br>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
                             <div class="row mt0">
                                 <div class="col-12 text-center">
                                     <h4 t-if="o.mandate_id.scheme != 'B2B'">
@@ -702,7 +703,80 @@
                             </div>
                         </div>
                         </t>
-
+                        <t t-foreach="o.order_line" t-as="l">
+                            <t t-if="l.product_id.product_tmpl_id.tipodecurso not in ('rec','desc','desc_ma','inc','mat')">
+                                <t t-if="l.product_id.name=='Director de Seguridad Integral' or l.product_id.name=='DSI- Director Seguridad'">
+                                    <div class="page">
+                                        <div class="row" style="height:70px;"></div>
+                                        <div class="row" style="text-align:justify;font-size:13px;margin-left:5px;">
+                                            <div class="col-12">
+                                                <br></br>
+                                                <br></br>
+                                                <br></br>
+                                                <h4>REQUISITOS DE ACCESO CURSO DIRECTOR DE SEGURIDAD INTEGRAL</h4><br></br>
+                                                <ul>
+                                                    <li>
+                                                        <strong>a).</strong> Tener la nacionalidad de alguno de los Estados miembros de la Unión Europea o de un Estado parte en el Acuerdo sobre el Espacio Económico Europeo, o ser nacional de un tercer Estado que tenga suscrito con España un convenio internacional en el que cada parte reconozca el acceso al ejercicio de estas actividades a los nacionales de la otra.
+                                                    </li>
+                                                    <li>
+                                                        <strong>b).</strong> Poseer la capacidad física y la aptitud psicológica necesarias para el ejercicio de las respectivas funciones.
+                                                    </li>
+                                                    <li>
+                                                        <strong>c).</strong> Estar en posesión de un título universitario oficial de grado en el ámbito de la seguridad que acredite la adquisición de las competencias que se determinen, o bien del título del curso de dirección de seguridad, reconocido por el Ministerio del Interior.
+                                                    </li>
+                                                    <li>
+                                                       <strong>d).</strong> Carecer de antecedentes penales por delitos dolosos.
+                                                    </li>
+                                                    <li>
+                                                       <strong>e).</strong> No haber sido sancionado en los dos o cuatro años anteriores por infracción grave o muy grave, respectivamente, en materia de seguridad privada.
+                                                    </li>
+                                                    <li>
+                                                       <strong>f).</strong> No haber sido separado del servicio en las Fuerzas y Cuerpos de Seguridad o en las Fuerzas Armadas españolas o del país de su nacionalidad o procedencia en los dos años anteriores.
+                                                    </li>
+                                                    <li>
+                                                       <strong>g).</strong> No haber sido condenado por intromisión ilegítima en el ámbito de protección del derecho al honor, a la intimidad personal y familiar o a la propia imagen, vulneración del secreto de las comunicaciones o de otros derechos fundamentales en los cinco años anteriores a la solicitud.
+                                                    </li>
+                                                </ul>
+                                                <p style="font-size:13px;">En el caso de los nacionales de Estados miembros de la Unión Europea o de Estados parte en el Acuerdo sobre el Espacio Económico Europeo, cuya habilitación o cualificación profesional haya sido obtenida en alguno de dichos Estados para el desempeño de funciones de seguridad privada en el mismo, podrán prestar servicios en España, siempre que, previa comprobación por el Ministerio del Interior, se acredite que cumplen los siguientes requisitos:</p>
+                                                <ol>
+                                                    <li>
+                                                        Poseer alguna titulación, habilitación o certificación expedida por las autoridades competentes de cualquier Estado miembro o de un Estado parte en el Acuerdo sobre el Espacio Económico Europeo que les autorice para el ejercicio de funciones de seguridad privada en el mismo.
+                                                    </li>
+                                                    <li>
+                                                        Acreditar los conocimientos, formación y aptitudes equivalentes a los exigidos en España para el ejercicio de las profesiones de seguridad privada, para lo cual deberán estar en posesión de los siguientes documentos:
+                                                        <ul>
+                                                            <li>
+                                                                En los casos en que el Estado de origen regule las diferentes profesiones de seguridad privada, el certificado de competencia o título de formación que las acredite como tal. Dicho certificado o título deberá reunir los siguientes requisitos:
+                                                                <ul>
+                                                                    <li>
+                                                                        Haber sido expedido por una autoridad competente de un Estado miembro, designada con arreglo a las disposiciones legales, reglamentarias o administrativas de dicho Estado.
+                                                                    </li>
+                                                                    <li>
+                                                                        Acreditar un nivel de cualificación profesional equivalente, como mínimo, al nivel inmediatamente anterior al exigido en España, mediante el certificado previsto en el artículo 19.2 del Real Decreto 1837/2008, de 8 de noviembre, para todas las profesiones de seguridad privada, excepto detectives privados.
+                                                                    </li>
+                                                                    <li>
+                                                                        Acreditar la preparación del titular para el ejercicio de la profesión correspondiente.
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                En los casos en que el Estado de origen no regule las diferentes profesiones de seguridad privada, el documento expedido por la autoridad competente, acreditativo de haber ejercido la profesión de que se trate en ese o en otro Estado de la Unión Europea, durante al menos dos años a tiempo completo, en el curso de los diez años inmediatamente anteriores al momento de la presentación de la solicitud, siempre que esté en posesión de uno o varios certificados de competencia o de uno o varios títulos de formación.
+                                                                En todo caso, los dos años de experiencia aludidos no podrán exigirse cuando la persona solicitante acredite una cualificación profesional adquirida a través de la superación de una formación regulada de las definidas en el artículo 8 del Real Decreto 1837/2008, de 8 de noviembre, y que corresponda a los niveles de cualificación señalados anteriormente.
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ol>
+                                                <ul>
+                                                    <li>Tener conocimientos de lengua castellana suficientes para el normal desempeño de las funciones de seguridad privada.</li>
+                                                    <li>Los previstos en las letras a), e), f), g) del primer apartado.</li>
+                                                    <li>La carencia o insuficiencia de conocimientos o aptitudes necesarios para el ejercicio de las actividades de seguridad privada en España de los nacionales de Estados miembros de la Unión Europea o de Estados parte en el Acuerdo sobre el Espacio Económico Europeo, podrá suplirse por aplicación de las medidas compensatorias previstas en el artículo 5 de la Orden INT/2850/2011, de 11 de octubre, por la que se regula el reconocimiento de las cualificaciones profesionales para el ejercicio de las profesiones y actividades relativas al sector de seguridad privada a los nacionales de los Estados miembros de la Unión Europea.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </t>
+                        </t>
                     </t>
                 </t>
             </t>
