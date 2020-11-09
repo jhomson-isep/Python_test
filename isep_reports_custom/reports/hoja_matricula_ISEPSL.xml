@@ -146,47 +146,47 @@
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-4"><strong>Nombre:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.name"/></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.name"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>DNI/Pasaporte:</strong></div>
-                                        <t t-if="o.partner_id.vat"><div class="col-8"><span t-field="o.partner_id.vat"></span></div></t>
-                                        <t t-else=""><div class="col-8"><span t-field="o.partner_id.num_reg_trib"></span></div></t>
+                                        <t t-if="o.partner_id.vat"><div class="col-8"><span t-field="o.partner_invoice_id.vat"></span></div></t>
+                                        <t t-else=""><div class="col-8"><span t-field="o.partner_invoice_id.num_reg_trib"></span></div></t>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>Móvil:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.mobile"/></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.mobile"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>Teléfono Fijo:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.phone"/></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.phone"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>Email:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.email"/></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.email"/></div>
                                     </div>
                                 </div>
                                 <!--Segunda Columna-->
                                 <div class="col-6">
                                     <div class="row">
                                         <div class="col-4"><strong>Domicilio:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.street"/></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.street"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>Población:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.city"/></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.city"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>País:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.country_id"/></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.country_id"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>Estado:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.state_id"/></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.state_id"/></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-4"><strong>C.P:</strong></div>
-                                        <div class="col-8"><span t-field="o.partner_id.zip"/></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.zip"/></div>
                                     </div>
                                 </div>
                             </div>
@@ -272,7 +272,7 @@
                                     <strong><span t-field="o.partner_id.vat"/></strong>
                                 </div>
                                 <div class="col-4" style="font-size:13px;text-align:center;">
-                                    <strong style="font-size:13px;"><span t-field="o.partner_id.payment_token_ids.display_name"/></strong>
+                                    <strong style="font-size:13px;"><span t-field="o.partner_invoice_id.name"/></strong>
                                 </div>
                                 <div class="col-4" style="font-size:13px;text-align:center;">
                                     <strong style="font-size:13px;">[Ref:<span t-field="o.name"/>]</strong>
@@ -526,12 +526,10 @@
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">
                                 <strong>Número de la tarjeta:</strong>
-                                <span
-                                    t-esc="o.partner_id.payment_token_ids[0].acquirer_ref[:8]">
+                                <span t-esc="o.partner_id.payment_token_ids[0].acquirer_ref[:8]">
                                 </span>
                                 ****
-                                <span
-                                    t-esc="o.partner_id.payment_token_ids[0].acquirer_ref[-4:]">
+                                <span t-esc="o.partner_id.payment_token_ids[0].acquirer_ref[-4:]">
                                 </span>
                             </div>
                             <div class="row" style="text-align:justify;font-size:13px;">

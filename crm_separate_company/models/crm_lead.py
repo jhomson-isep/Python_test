@@ -74,6 +74,7 @@ class CrmLead(models.Model):
             url = lead.get('website')
             nombre_curso = lead.get('x_universidad')
             telefono = lead.get('phone')
+            description = lead.get('description')
 
             actual = lead.get('x_contactonuevoodup12')
             logger.info(lead.get('x_profesion'))
@@ -98,7 +99,7 @@ class CrmLead(models.Model):
                 'x_codcurso': cod_curso,
                 'email_from': email,
                 'x_codtipodecurso': cod_tipo_curso,
-                # 'description': url,
+                'description': description,
                 'x_codmodalidad': modalidad,
                 'user_id': None,
                 'team_id': None,
@@ -206,8 +207,12 @@ class CrmLead(models.Model):
             # ISEP SL
             # ---------------------------------
             elif company_id == 1:
-                # Manel Arroyo
-                user_id = 76
+                if description.find('Agente internacional-') != 1:
+                    #Agentes internacionales Yura Vanegas
+                    user_id = 45
+                else:
+                    # Manel Arroyo
+                    user_id = 76
 
                 if cod_sede in ('barcelona', 'Barcelona', 'BCN', '001'):
                     cod_sede = 'CAT'
