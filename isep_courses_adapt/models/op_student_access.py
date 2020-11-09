@@ -20,7 +20,7 @@ class OpStudentAccess(models.Model):
 
     def _get_last_access(self):
         for record in self:
-            access_ago = fields.Datetime.today() - record.student_access
+            access_ago = fields.Datetime.now() - record.student_access
             minutes, seconds = divmod(access_ago.seconds, 60)
             hours, minutes = divmod(minutes, 60)
             access_string = ""
@@ -31,6 +31,7 @@ class OpStudentAccess(models.Model):
             if minutes > 0:
                 access_string += "{0} minutos, ".format(minutes)
             record.last_access = access_string
+
 
     # def import_student_access(self):
     #     mdl = Moodle()
