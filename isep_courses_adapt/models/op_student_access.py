@@ -7,12 +7,30 @@ import datetime
 
 logger = logging.getLogger(__name__)
 
+
 class OpStudentAccess(models.Model):
     _name = "op.student.access"
     _description = "Student Access"
 
-    student_access = fields.Datetime('Student Access', required=True, default=fields.Datetime.now())
+    student_access = fields.Datetime('Student Access', required=True,
+                                     default=fields.Datetime.now())
     student_id = fields.Many2one('op.student', 'Student', required=True)
+    last_access = fields.Char(String='Ago', readonly=True,
+                              compute='_get_last_access')
+
+    def _get_last_access(self):
+        for record in self:
+            access_ago = fields.Datetime.today() - record.student_access
+            minutes, seconds = divmod(access_ago.seconds, 60)
+            hours, minutes = divmod(minutes, 60)
+            access_string = ""
+            if access_ago.days > 0:
+                access_string += "{0} días, ".format(access_ago.days)
+            if hours > 0:
+                access_string += "{0} horas, ".format(hours)
+            if minutes > 0:
+                access_string += "{0} minutos, ".format(minutes)
+            record.last_access = access_string
 
     # def import_student_access(self):
     #     mdl = Moodle()

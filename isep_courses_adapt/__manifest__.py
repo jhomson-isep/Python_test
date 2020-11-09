@@ -40,6 +40,7 @@
         'views/op_student.xml',
         'views/op_university.xml',
         'views/op_faculty.xml',
+        'views/op_student_view.xml',
         'menu/isep_courses_adapt_menu.xml',
         'data/op_document_type.xml',
         'data/op_evaluation_type.xml',
@@ -47,7 +48,7 @@
         'data/op.university.csv',
         'data/op_modality.xml',
         'data/op.campus.csv',
-        'data/cron.xml',
+        'data/cron.xml'
     ],
     'installable': True,
 }

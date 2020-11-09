@@ -9,6 +9,7 @@
                 <tree string="Accesos del Alumno">
                     <field name="student_id"/>
                     <field name="student_access"/>
+                    <field name="last_access"/>
                 </tree>
             </field>
         </record>

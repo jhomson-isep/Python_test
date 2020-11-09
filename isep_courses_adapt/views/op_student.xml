@@ -25,29 +25,32 @@
                 </xpath>
 
                 <xpath expr="//button[1]" position="after">
-                    <button name="import_student_access" string="Access" type="object"/>
+                    <button name="import_student_access" string="Get access"
+                            type="object"/>
                 </xpath>
 
                 <notebook position="inside">
-                    <page name="Documentación" string="Documentación">
+                    <page name="documentation" string="Documentation">
                         <field name="document_ids" colspan="4" nolabel="1"/>
                     </page>
-                    <page name="Accesos" string="Accesos">
-                        <field name="access_ids" colspan="4" nolabel="1"/>
+                    <page name="access" string="Access">
+                        <group>
+                            <field name="access_ids" colspan="4" nolabel="1"/>
+                        </group>
                     </page>
-                </notebook>
-            </field>
-        </record>
+            </notebook>
+        </field>
+    </record>
 
-        <record id="view_op_student_form_fees_hide" model="ir.ui.view">
-            <field name="model">op.student</field>
-            <field name="inherit_id"
-                   ref="openeducat_fees.view_op_student_form_fees_inherit"/>
-            <field name="arch" type="xml">
-                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[not(@name)][1]"
-                       position="replace"/>
-            </field>
-        </record>
+    <record id="view_op_student_form_fees_hide" model="ir.ui.view">
+        <field name="model">op.student</field>
+        <field name="inherit_id"
+               ref="openeducat_fees.view_op_student_form_fees_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[not(@name)][1]"
+                   position="replace"/>
+        </field>
+    </record>
 
-    </data>
-</odoo>
+</data>
+        </odoo>

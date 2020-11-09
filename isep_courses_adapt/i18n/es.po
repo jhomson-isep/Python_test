@@ -489,3 +489,53 @@ msgstr "Lugar de trabajo"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_workplace__code
 msgid "Code"
 msgstr "Código"
+
+#. module: openeducat_core
+#: model_terms:ir.ui.view,arch_db:openeducat_core.view_op_student_form
+msgid "Create Student User"
+msgstr "Crear usuario"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_documents__document_name
+msgid "Document name"
+msgstr "Nombre de documento"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_documents__document_type_id
+msgid "Document type"
+msgstr "Tipo de documento"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_access__student_access
+msgid "Student access"
+msgstr "Fecha de acceso"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_access__student_id
+msgid "Student"
+msgstr "Estudiante"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_access__last_access
+msgid "Ago"
+msgstr "Hace"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__last_access
+msgid "Last access"
+msgstr "Último acceso"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+msgid "Get access"
+msgstr "Obtener accesos"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+msgid "Documentation"
+msgstr "Documentación"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+msgid "Access"
+msgstr "Accesos"

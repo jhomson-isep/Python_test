@@ -4,6 +4,7 @@ from pydrive.drive import GoogleDrive
 from .op_sql import SQL
 from .op_moodle import Moodle
 import datetime
+from dateutil.relativedelta import relativedelta
 import logging
 import os
 
@@ -35,13 +36,35 @@ class OpStudent(models.Model):
     document_ids = fields.One2many("op.student.documents", "student_id",
                                    string="Documentation")
     access_ids = fields.One2many("op.student.access", "student_id",
-                                   string="Access")
+                                 string="Access")
+    last_access = fields.Char(String='Last access',
+                              compute='_get_last_access',
+                              readonly=True)
 
     _sql_constraints = [(
         'unique_n_id',
         'unique(n_id)',
         'N_ID Number must be unique per student!'
     )]
+
+    def _get_last_access(self):
+        for record in self:
+            last_access = record.env['op.student.access'].search(
+                [('student_id', '=', record.id)], order='id desc', limit=1)
+            if last_access.student_access:
+                access_ago = fields.Datetime.today() - last_access.student_access
+                minutes, seconds = divmod(access_ago.seconds, 60)
+                hours, minutes = divmod(minutes, 60)
+                access_string = "Hace "
+                if access_ago.days > 0:
+                    access_string += "{0} días ".format(access_ago.days)
+                if hours > 0:
+                    access_string += "{0} horas ".format(hours)
+                if minutes > 0:
+                    access_string += "{0} minutos ".format(minutes)
+                record.last_access = access_string
+            else:
+                record.last_access = "Nunca"
 
     def import_all_student_access(self):
         logger.info("**************************************")
@@ -51,29 +74,35 @@ class OpStudent(models.Model):
         rows = Moodle.get_last_access_cron(moodle)
         for dic in rows:
             if 'idnumber' in dic:
-                student=self.search([('document_number','=',dic['idnumber'])])
-                ult_access = datetime.datetime.utcfromtimestamp(dic['lastaccess'])
-                if len(student)>0:
+                student = self.search(
+                    [('document_number', '=', dic['idnumber'])])
+                last_access = datetime.datetime.utcfromtimestamp(
+                    dic['lastaccess'])
+                if len(student) > 0:
                     acces_values = {
                         'student_id': student.id,
-                        'student_access': ult_access
+                        'student_access': last_access
                     }
                     self.env['op.student.access'].create(acces_values)
+
     def import_student_access(self):
         logger.info("**************************************")
         logger.info("import student access")
         logger.info("**************************************")
-        moodle=self.env['moodle']
-        if(not(self.document_number==False)):
-            rows = Moodle.get_last_access(moodle, 'idnumber', self.document_number)
+        moodle = self.env['moodle']
+        if self.document_number:
+            rows = Moodle.get_last_access(moodle, 'idnumber',
+                                          self.document_number)
             for row in rows:
-                ult_access=datetime.datetime.utcfromtimestamp(row['lastaccess'])
+                last_access = datetime.datetime.utcfromtimestamp(
+                    row['lastaccess'])
                 acces_values = {
                     'student_id': self.id,
-                    'student_access': ult_access
+                    'student_access': last_access
                 }
-                _access=self.env['op.student.access'].search([('student_id', '=', self.id)], limit=1)
-                if(_access.student_access!=ult_access):
+                _access = self.env['op.student.access'].search(
+                    [('student_id', '=', self.id)], limit=1)
+                if _access.student_access != last_access:
                     self.env['op.student.access'].create(acces_values)
 
     def import_students(self):
@@ -141,11 +170,10 @@ class OpStudent(models.Model):
 
                     # logger.info(student_values)
                     res = super(OpStudent, self).create(student_values)
-                    print(res)
                     logger.info('Student with n_id {0} created'.format(
                         student_values['n_id']))
 
-                    if int_break == 10 and os.name != "posix":
+                    if int_break == 50 and os.name != "posix":
                         break
                     int_break += 1
 

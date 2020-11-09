@@ -11,24 +11,14 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class CustomerPurchasePortal(CustomerPortal):
+class CustomerPortal(CustomerPortal):
 
     def _prepare_portal_layout_values(self):
-        values = super(CustomerPurchasePortal,
+        values = super(CustomerPortal,
                        self)._prepare_portal_layout_values()
         values['purchase_count'] = request.env['purchase.order'].search_count([
             ('state', 'in', ['sent', 'purchase', 'done', 'cancel'])
         ])
-        values['searchbar_filters'] = {
-            'all': {'label': _('All'), 'domain': [
-                ('state', 'in', ['sent', 'purchase', 'done', 'cancel'])]},
-            'purchase': {'label': _('Purchase Order'),
-                         'domain': [('state', '=', 'purchase')]},
-            'cancel': {'label': _('Cancelled'),
-                       'domain': [('state', '=', 'cancel')]},
-            'done': {'label': _('Locked'), 'domain': [('state', '=', 'done')]},
-        }
-        logger.info("values: {0}".format(values))
         return values
 
     @http.route(['/my/purchase', '/my/purchase/page/<int:page>'], type='http',
@@ -127,8 +117,12 @@ class CustomerPurchasePortal(CustomerPortal):
         if not signature:
             return {'error': _('Signature is missing.')}
 
+        if not signature:
+            return {'error': _('Signature is missing.')}
+
         order_sudo.signature = signature
         order_sudo.signed_by = partner_name
+        order_sudo.button_confirm()
 
         # pdf = request.env.ref('sale.action_report_saleorder').sudo().render_qweb_pdf(
         #     [order_sudo.id])[0]
@@ -147,7 +141,7 @@ class CustomerPurchasePortal(CustomerPortal):
 
     @http.route(['/my/purchase/<int:order_id>/decline'], type='http',
                 auth="public", methods=['POST'], website=True)
-    def decline(self, order_id, access_token=None, **post):
+    def portal_purchase_decline(self, order_id, access_token=None, **post):
         try:
             order_sudo = self._document_check_access('purchase.order',
                                                      order_id,
@@ -159,7 +153,7 @@ class CustomerPurchasePortal(CustomerPortal):
 
         query_string = False
         if order_sudo.has_to_be_signed() and message:
-            order_sudo.action_cancel()
+            order_sudo.button_cancel()
             _message_post_helper(message=message, res_id=order_id,
                                  res_model='purchase.order', **{
                     'token': access_token} if access_token else {})
