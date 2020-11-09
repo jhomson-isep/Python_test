@@ -15,6 +15,8 @@ class OpSubject(models.Model):
 
     moodle_course_id = fields.Integer(string='Moodle course Id')
     uvic_code = fields.Char(string="UVIC code", size=16)
+    faculty_ids = fields.One2many('op.faculty.subject.rel',
+                                  'faculty_id',  string="Faculty")
 
     @api.model
     def create(self, values):

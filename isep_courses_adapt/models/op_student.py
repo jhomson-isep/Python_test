@@ -1,3 +1,4 @@
+from addons.openeducat_erp.openeducat_core.models import student
 from odoo import fields, api, models
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
@@ -184,6 +185,51 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         logger.info("End of script: import students")
         logger.info("**************************************")
+
+    def import_student_course_rel(self):
+        s = SQL()
+        logger.info("**************************************")
+        logger.info("On import students courses relations")
+        logger.info("**************************************")
+        offset = self.env['op.student.course'].search_count([])
+        rows = s.get_all_batch(offset)
+        int_break = 0
+        for row in rows:
+            try:
+                existent_student = self.env['op.student'].search([('gr_no', '=', row.N_Id)])
+                if len(existent_student) < 1:
+                    student = self.env['op.student'].search([('gr_no', '=', row.N_Id)], limit=1)
+                    course = self.env['op.course'].search([('code', '=', row.code)], limit=1)
+                    batch = self.env['op.batch'].search([('code', '=', row.Curso_Id)], limit=1)
+                    if batch.id:
+                        values = {
+                            'student_id' : student.id,
+                            'course_id'  : course.id,
+                            'bathc_id'   : batch.id,
+                            'roll_number': row.NumCCC
+                        }
+                        student_course = self.env['op.student.course'].create(values)
+                        student.write({'course_detail_ids' : student_course.id })
+                        batch.write({'student_lines' : student_course.id })
+                        logger.info('Student with n_id {0} updated'.format(
+                            values['n_id']))
+
+                    if int_break == 50 and os.name != "posix":
+                        break
+                    int_break += 1
+
+            except Exception as e:
+                logger.info(e)
+                continue
+
+    def import_student_subjects_rel(self):
+        s = SQL()
+        logger.info("**************************************")
+        logger.info("On import students courses relations")
+        logger.info("**************************************")
+        offset = self.env['op.student.course'].search_count([])
+        rows = s.get_all_batch_subject(offset)
+
 
     def Gauth(self):
         logger.info(os.path.dirname(os.path.abspath(__file__)))

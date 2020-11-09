@@ -108,3 +108,17 @@ class SQL():
             "ON al.Pais = tbl.CodItem AND tbl.CodTaula = 'PA' WHERE al.Pais "
             "IS NOT NULL AND al.NIFP = '{0}';".format(nifp))
         return row
+
+    def get_all_batch(self, offset):
+        rows = self.query(
+            "SELECT *, SUBSTRING(Curso_Id, 3, 2) AS code FROM Matriculaciones "
+            "ORDER BY N_Id DESC OFFSET ({0}) ROWS FETCH NEXT 1000 ROWS ONLY;".format(offset)
+        )
+        return rows
+
+    def get_all_batch_subject(self, offset):
+        rows = self.query(
+            "SELECT *, SUBSTRING(Curso_Id, 3, 2) AS code FROM CursosAsignaturas "
+            "ORDER BY N_Id DESC OFFSET ({0}) ROWS FETCH NEXT 1000 ROWS ONLY;".format(offset)
+        )
+        return rows

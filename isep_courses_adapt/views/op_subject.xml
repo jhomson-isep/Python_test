@@ -18,6 +18,18 @@
                 <xpath expr="//field[@name='grade_weightage']" position="replace">
                     <field name="uvic_code"/>
                 </xpath>
+                <xpath expr="//form/sheet/group[not(@name)]" position="after">
+                     <notebook>
+                            <page string="Profesores">
+                                <field name="faculty_ids" attrs="{'readonly': True}">
+                                    <tree string="Facultys Lines" editable="bottom">
+                                        <field name="faculty_id"/>
+                                        <field name="subject_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                    </notebook>
+                </xpath>
             </field>
         </record>
     </data>
