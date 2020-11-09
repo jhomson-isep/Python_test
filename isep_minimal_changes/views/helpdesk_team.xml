@@ -17,7 +17,7 @@
                                 Seleccione a la persona o personas para notificar en tickets.
                             </div>
                             <div>
-                                <field name="ticket_notify" class="mt16"/>
+                                <field name="ticket_notify" class="mt16" widget="many2many_tags"/>
                             </div>
                         </div>
                     </div>
