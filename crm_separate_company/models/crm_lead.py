@@ -178,7 +178,7 @@ class CrmLead(models.Model):
                 cod_sede = 'OVI'
             elif cod_sede in ('centro-bilbao', 'bilbao', 'Bilbao', 'ised-bilbao'):
                 cod_sede = 'BIO'
-            elif cod_sede in ('centro-madrid-atocha', 'madrid', 'Madrid', 'MAD', 'MDR', 'ised-madrid'):
+            elif cod_sede in ('centro-madrid', 'centro-madrid-atocha', 'madrid', 'Madrid', 'MAD', 'MDR', 'ised-madrid'):
                 cod_sede = 'MDR'
             elif cod_sede == 'ised-barcelona':
                 cod_sede = 'CAT'
@@ -207,14 +207,14 @@ class CrmLead(models.Model):
             # ISEP SL
             # ---------------------------------
             elif company_id == 1:
-                if description.find('Agente internacional-') != 1:
+                if description.find('Agente internacional-') != -1:
                     #Agentes internacionales Yura Vanegas
                     user_id = 45
                 else:
                     # Manel Arroyo
                     user_id = 76
 
-                if cod_sede in ('barcelona', 'Barcelona', 'BCN', '001'):
+                if cod_sede in ('centro-barcelona', 'barcelona', 'Barcelona', 'BCN', '001'):
                     cod_sede = 'CAT'
                     team_id = 1
                     lead.update({'x_sede_id': 2})
