@@ -74,16 +74,21 @@ class OpStudent(models.Model):
         rows = Moodle.get_last_access_cron(moodle)
         for dic in rows:
             if 'idnumber' in dic:
-                student = self.search(
-                    [('document_number', '=', dic['idnumber'])])
-                last_access = datetime.datetime.utcfromtimestamp(
-                    dic['lastaccess'])
-                if len(student) > 0:
-                    acces_values = {
-                        'student_id': student.id,
-                        'student_access': last_access
-                    }
-                    self.env['op.student.access'].create(acces_values)
+                try:
+                    student = self.search(
+                        [('document_number', '=', dic['idnumber'])])
+                    last_access = datetime.datetime.utcfromtimestamp(
+                        dic['lastaccess'])
+                    if len(student) == 1:
+                        acces_values = {
+                            'student_id': student.id,
+                            'student_access': last_access
+                        }
+                        self.env['op.student.access'].create(acces_values)
+                except Exception as e:
+                    logger.info(e)
+                    continue
+
 
     def import_student_access(self):
         logger.info("**************************************")

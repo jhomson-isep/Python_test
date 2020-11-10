@@ -25,37 +25,17 @@ class OpStudentAccess(models.Model):
             hours, minutes = divmod(minutes, 60)
             access_string = ""
             if access_ago.days > 0:
-                access_string += "{0} días, ".format(access_ago.days)
+                if access_ago.days > 365:
+                    years, days = divmod(access_ago.days, 365)
+                    access_string += "{0} años, {1} días, ".format(years, days)
+                else:
+                    access_string += "{0} días, ".format(access_ago.days)
             if hours > 0:
                 access_string += "{0} horas, ".format(hours)
             if minutes > 0:
                 access_string += "{0} minutos, ".format(minutes)
-            record.last_access = access_string
+            record.last_access = access_string[:-2]
 
-
-    # def import_student_access(self):
-    #     mdl = Moodle()
-    #     logger.info("**************************************")
-    #     logger.info("import student access")
-    #     logger.info("**************************************")
-    #     student = self.env['op.student'].search([('id', '=', self.student_id.id)])
-    #     rows = mdl.get_last_access('email', student.document_number)
-    #     #int_break = 0
-    #     for row in rows:
-    #         ult_access=datetime.datetime.utcfromtimestamp(row['lastaccess'])
-    #         #It is necessary to verify that this last access does not exist.
-    #         self.student_access = ult_access
-    #         # self.write({'student_id': self.student_id,
-    #         #             'student_access':ult_access})
-
-    # def import_all_student_access(self):
-    #     mdl = Moodle()
-    #     logger.info("**************************************")
-    #     logger.info("import all student access")
-    #     logger.info("**************************************")
-    #     rows = mdl.get_last_access_cron()
-    #     for row in rows:
-    #         pass
 
 
 
