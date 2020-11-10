@@ -1,0 +1,47 @@
+#. module: isep_portal_attachments
+#: model_terms:ir.ui.view,arch_db:isep_portal_attachments.view_attachment_form
+msgid "<span>By signing this proposal, I agree to the following terms:</span>"
+msgstr ""
+"<span>Al firmar esta propuesta, acepto los siguientes términos:</span>"
+
+#. module: isep_portal_attachments
+#: model_terms:ir.ui.view,arch_db:isep_portal_attachments.view_attachment_form
+msgid "<span>Accepted on the behalf of:</span>"
+msgstr "<span>Aceptado en nombre de:</span>"
+
+#. module: isep_portal_attachments
+#: model_terms:ir.ui.view,arch_db:isep_portal_attachments.view_attachment_form
+msgid "<span>For an amount of:</span>"
+msgstr "<span>Por la cantidad de:</span>"
+
+#. module: isep_portal_attachments
+#: model_terms:ir.ui.view,arch_db:isep_portal_attachments.view_attachment_form
+msgid "<i class=\"fa fa-check\"/> Accept &amp; Sign"
+msgstr "<i class=\"fa fa-check\"/> Aceptar y Firmar"
+
+#. module: isep_portal_attachments
+#: model_terms:ir.ui.view,arch_db:isep_portal_attachments.view_attachment_form
+msgid "<i class=\"fa fa-times\"/> Reject"
+msgstr "<i class=\"fa fa-times\"/> Rechazar"
+
+#. module: isep_portal_attachments
+#: model_terms:ir.ui.view,arch_db:isep_portal_attachments.view_attachment_form
+msgid "<i class=\"fa fa-comment\"/> Feedback"
+msgstr "<i class=\"fa fa-comment\"/> Opinión"
+
+#. module: isep_portal_attachments
+#: model_terms:ir.ui.view,arch_db:isep_portal_attachments.view_attachment_form
+msgid "Reject This Quotation"
+msgstr "Rechazar este Presupuesto"
+
+#. module: isep_portal_attachments
+#: model_terms:ir.ui.view,arch_db:isep_portal_attachments.view_attachment_form
+msgid "Tell us why you are refusing this quotation, this will help us improve our services."
+msgstr ""
+"Cuéntenos por favor por qué rechaza este presupuesto. Nos ayudará a mejorar "
+"en un futuro."
+
+#. module: isep_portal_attachments
+#: model_terms:ir.ui.view,arch_db:isep_portal_attachments.view_attachment_form
+msgid "Your feedback..."
+msgstr "Sus comentarios..."

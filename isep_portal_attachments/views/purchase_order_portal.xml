@@ -62,17 +62,15 @@
                             <input type="hidden" name="csrf_token"
                                    t-att-value="request.csrf_token()"/>
                             <header class="modal-header">
-                                <h4 class="modal-title">Reject This
-                                    Quotation</h4>
+                                <h4 class="modal-title">
+                                    Reject This Quotation</h4>
                                 <button type="button" class="close"
                                         data-dismiss="modal"
                                         aria-label="Close">&amp;times;</button>
                             </header>
                             <main class="modal-body">
                                 <p>
-                                    Tell us why you are refusing this
-                                    quotation, this will help us improve our
-                                    services.
+                                    Tell us why you are refusing this quotation, this will help us improve our services.
                                 </p>
                                 <textarea rows="4" name="decline_message"
                                           required=""
@@ -81,9 +79,8 @@
                             </main>
                             <footer class="modal-footer">
                                 <button type="submit" t-att-id="order.id"
-                                        class="btn btn-danger"><i
-                                        class="fa fa-times"></i>
-                                    Reject</button>
+                                        class="btn btn-danger">
+                                    <i class="fa fa-times"></i> Reject</button>
                                 <button type="button" class="btn btn-primary"
                                         data-dismiss="modal">Cancel</button>
                             </footer>
@@ -144,13 +141,13 @@
                         <div class="col-sm-auto mt8">
                             <a role="button" class="btn btn-primary"
                                data-toggle="modal" data-target="#modalaccept"
-                               href="#"><i class="fa fa-check"/> Accept &amp;
-                                Sign</a>
+                               href="#">
+                                <i class="fa fa-check"/> Accept &amp; Sign</a>
                         </div>
                         <div class="col-sm-auto mt8">
                             <a role="button" class="btn btn-secondary"
-                               href="#discussion"><i class="fa fa-comment"/>
-                                Feedback</a>
+                               href="#discussion">
+                                <i class="fa fa-comment"/> Feedback</a>
                         </div>
                         <div class="col-sm-auto mt8">
                             <a role="button" class="btn btn-danger"

@@ -6,8 +6,7 @@ from odoo import models, fields
 class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
-    require_signature = fields.Boolean('Online Signature',
-                                       default=True,
+    require_signature = fields.Boolean('Online Signature', default=True,
                                        readonly=True,
                                        states={'draft': [('readonly', False)],
                                                'sent': [('readonly', False)]},
@@ -22,3 +21,16 @@ class PurchaseOrder(models.Model):
     def has_to_be_signed(self, also_in_draft=False):
         return (self.state == 'sent' or (
                 self.state == 'draft' and also_in_draft)) and self.require_signature and not self.signature
+
+    def has_attachments(self):
+        attachments = self.env['ir.attachment'].search_count([(
+            'res_model', '=', self._name), ('res_id', '=', self.id)])
+        return attachments
+
+    def action_create_purchase_invoice(self):
+        invoice = self.env['account.invoice'].create({
+            'type': 'in_invoice',
+            'purchase_id': self.id,
+            'partner_id': self.partner_id.id,
+        })
+        invoice.purchase_order_change()

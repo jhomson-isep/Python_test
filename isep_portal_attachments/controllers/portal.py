@@ -117,12 +117,13 @@ class CustomerPortal(CustomerPortal):
         if not signature:
             return {'error': _('Signature is missing.')}
 
-        if not signature:
-            return {'error': _('Signature is missing.')}
+        if order_sudo.has_attachments() == 0:
+            return {'error': _('Invoice is missing.')}
 
         order_sudo.signature = signature
         order_sudo.signed_by = partner_name
         order_sudo.button_confirm()
+        order_sudo.action_create_purchase_invoice()
 
         # pdf = request.env.ref('sale.action_report_saleorder').sudo().render_qweb_pdf(
         #     [order_sudo.id])[0]
