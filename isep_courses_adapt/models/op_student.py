@@ -173,10 +173,10 @@ class OpStudent(models.Model):
                     res = super(OpStudent, self).create(student_values)
                     logger.info('Student with n_id {0} created'.format(
                         student_values['n_id']))
-
-                    if int_break == 50 and os.name != "posix":
-                        break
-                    int_break += 1
+                    #
+                    # if int_break == 50 and os.name != "posix":
+                    #     break
+                    # int_break += 1
 
             except Exception as e:
                 logger.info(e)
@@ -196,27 +196,33 @@ class OpStudent(models.Model):
         int_break = 0
         for row in rows:
             try:
-                existent_student = self.env['op.student'].search([('gr_no', '=', row.N_Id)])
-                if len(existent_student) < 1:
-                    student = self.env['op.student'].search([('gr_no', '=', row.N_Id)], limit=1)
-                    course = self.env['op.course'].search([('code', '=', row.code)], limit=1)
-                    batch = self.env['op.batch'].search([('code', '=', row.Curso_Id)], limit=1)
-                    if batch.id:
-                        values = {
-                            'student_id' : student.id,
-                            'course_id'  : course.id,
-                            'bathc_id'   : batch.id,
-                            'roll_number': row.NumCCC
-                        }
-                        student_course = self.env['op.student.course'].create(values)
-                        student.write({'course_detail_ids' : student_course.id })
-                        batch.write({'student_lines' : student_course.id })
-                        logger.info('Student with n_id {0} updated'.format(
-                            values['n_id']))
+                student = self.env['op.student'].search([('gr_no', '=', row.gr_no)], limit=1)
+                course = self.env['op.course'].search([('code', '=', row.code)], limit=1)
+                batch = self.env['op.batch'].search([('code', '=', row.batch)], limit=1)
+                for stu in student:
+                    logger.info(stu)
+                    for cour in course:
+                        logger.info(cour)
+                        for bat in batch:
+                            logger.info(bat)
+                            values = {
+                                'student_id' : stu.id,
+                                'course_id'  : cour.id,
+                                'batch_id'   : bat.id,
+                                'roll_number': row.gr_no
+                            }
+                            student_course = self.env['op.student.course'].create(values)
+                            student.write({'course_detail_ids' : student_course.id })
+                            try:
+                                batch.write({'student_lines' : student_course.id })
+                            except Exception as BatchError:
+                                logger.info('batch write id error!!', BatchError)
+                            logger.info('Student with n_id {0} updated'.format(
+                                student.id))
 
-                    if int_break == 50 and os.name != "posix":
-                        break
-                    int_break += 1
+                if int_break == 50 and os.name != "posix":
+                    break
+                int_break += 1
 
             except Exception as e:
                 logger.info(e)
@@ -225,11 +231,17 @@ class OpStudent(models.Model):
     def import_student_subjects_rel(self):
         s = SQL()
         logger.info("**************************************")
-        logger.info("On import students courses relations")
+        logger.info("On import students subjects relations")
         logger.info("**************************************")
-        offset = self.env['op.student.course'].search_count([])
-        rows = s.get_all_batch_subject(offset)
-
+        students = self.env['op.student'].search([])
+        for student in students:
+            for course in student.course_details_ids:
+                batch = self.env['op.batch'].search([('id', '=', course.batch_id)], limit=1)
+                offset = 50
+                subjects = s.get_all_subjects_by_course_student(batch.code, student.gr_no, offset)
+                for subject in subjects:
+                    subject_tb = self.env['op.subject'].search([('code', '=', subject.Id)], limit=1)
+                    course.write({'subject_ids' : subject_tb.id})
 
     def Gauth(self):
         logger.info(os.path.dirname(os.path.abspath(__file__)))
