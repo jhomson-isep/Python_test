@@ -99,16 +99,26 @@ class OpStudent(models.Model):
             rows = Moodle.get_last_access(moodle, 'idnumber',
                                           self.document_number)
             for row in rows:
-                last_access = datetime.datetime.utcfromtimestamp(
-                    row['lastaccess'])
-                acces_values = {
-                    'student_id': self.id,
-                    'student_access': last_access
-                }
-                _access = self.env['op.student.access'].search(
-                    [('student_id', '=', self.id)], limit=1)
-                if _access.student_access != last_access:
-                    self.env['op.student.access'].create(acces_values)
+                try:
+                    last_access = datetime.datetime.utcfromtimestamp(
+                        row['lastaccess'])
+                    acces_values = {
+                        'student_id': self.id,
+                        'student_access': last_access
+                    }
+                    _access = self.env['op.student.access'].search(
+                        [('student_id', '=', self.id)], limit=1)
+                    logger.info(_access.student_access)
+                    logger.info(last_access)
+                    year = _access.student_access.year
+                    month = _access.student_access.month
+                    day = _access.student_access.day
+
+                    if not (last_access.year == year and last_access.month == month and last_access.day == day):
+                        self.env['op.student.access'].create(acces_values)
+                except Exception as e:
+                    logger.info(e)
+                    continue
 
     def import_students(self):
         s = SQL()
