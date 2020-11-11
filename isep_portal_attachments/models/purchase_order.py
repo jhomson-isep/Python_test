@@ -34,3 +34,4 @@ class PurchaseOrder(models.Model):
             'partner_id': self.partner_id.id,
         })
         invoice.purchase_order_change()
+        invoice.action_invoice_open()
