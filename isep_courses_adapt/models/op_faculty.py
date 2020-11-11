@@ -102,6 +102,20 @@ class OpFaculty(models.Model):
         logger.info("End of script: import faculties")
         logger.info("**************************************")
 
+    def import_subjects_faculty(self):
+        s = SQL()
+        logger.info("**************************************")
+        logger.info("On import faculties subjects relations")
+        logger.info("**************************************")
+        facultys = self.env['op.faculty'].search([])
+        for faculty in facultys:
+            subjects = s.get_all_subjects_faculty(faculty.nifp)
+            for subject in subjects:
+                subject_tb = self.env['op.subject'].search(['code', '=', subject.CodAsignatura])
+                for subj in subject_tb:
+                    faculty.update({'faculty_subject_ids': [(4, subj.id)]})
+                    logger.info("Update Subject {0} for Faculty {1}".format(faculty.nifp, subj.code))
+
     def Gauth(self):
         logger.info(os.path.dirname(os.path.abspath(__file__)))
         model_path = os.path.dirname(os.path.abspath(__file__))

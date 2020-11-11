@@ -41,7 +41,6 @@
         'views/op_university.xml',
         'views/op_faculty.xml',
         'views/op_student_view.xml',
-        'views/op_faculty_subject_rel.xml',
         'menu/isep_courses_adapt_menu.xml',
         'data/op_document_type.xml',
         'data/op_evaluation_type.xml',

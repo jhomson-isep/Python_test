@@ -138,3 +138,11 @@ class SQL():
                "WHERE pm.AnyAcademico IS NOT NULL AND pm.SedeID in (7,8,9,10, 11,12,13,27) AND pm.Tramitada = 1 ) "
                "ORDER BY Asignaturas.Id DESC;" % (course, course, gr_no, gr_no))
         return rows
+
+    def get_all_subjects_faculty(self, faculty):
+        rows = self.query(
+            "SELECT CursosAsignaturas.NIF_Profesor, CursosAsignaturas.CodAsignatura "
+            "FROM ISEP.dbo.CursosAsignaturas WHERE "
+            "CursosAsignaturas.NIF_Profesor = '{0}';".format(faculty)
+        )
+        return rows
