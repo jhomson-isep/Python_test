@@ -111,8 +111,13 @@ class SQL():
 
     def get_all_batch(self, offset):
         rows = self.query(
-            "SELECT *, SUBSTRING(Curso_Id, 3, 2) AS code FROM Matriculaciones "
-            "ORDER BY N_Id DESC OFFSET ({0}) ROWS FETCH NEXT 1000 ROWS ONLY;".format(offset)
+            "SELECT Alumnos.N_Id AS gr_no, SUBSTRING(Matriculaciones.Curso_Id, 3, 2) AS code, Matriculaciones.Curso_Id As batch "
+            "FROM Alumnos,  Matriculaciones WHERE Alumnos.N_Id = Matriculaciones.N_Id "
+            "AND Alumnos.N_Id NOT IN "
+            "(SELECT DISTINCT al.N_Id FROM ISEP.dbo.Alumnos al "
+            "LEFT JOIN  GrupoISEPxtra.dbo.gin_PreMatriculas pm ON al.N_Id = pm.AlumnoID "
+            "WHERE pm.AnyAcademico IS NOT NULL AND pm.SedeID in (7,8,9,10,11,12,13,27) AND pm.Tramitada = 1 ) "
+            "ORDER BY Alumnos.N_Id DESC OFFSET ({0}) ROWS FETCH NEXT 1000 ROWS ONLY;".format(offset)
         )
         return rows
 
@@ -121,4 +126,15 @@ class SQL():
             "SELECT *, SUBSTRING(Curso_Id, 3, 2) AS code FROM CursosAsignaturas "
             "ORDER BY N_Id DESC OFFSET ({0}) ROWS FETCH NEXT 1000 ROWS ONLY;".format(offset)
         )
+        return rows
+
+    def get_all_subjects_by_course_student(self, course, gr_no, offset):
+        rows = self.query("SELECT Asignaturas.Id, AL.N_Id, MA.Curso_Id, AL.Nombre FROM Asignaturas "
+               "INNER JOIN ISEP.dbo.CursosAsignaturas CA ON CA.CodAsignatura = Asignaturas.CodAsignatura "
+               "INNER JOIN ISEP.dbo.Matriculaciones MA ON MA.Curso_Id = '{0}' AND CA.Curso_Id = '{0}' "
+               "INNER JOIN ISEP.dbo.Alumnos AL ON AL.N_Id = '{1}' AND MA.N_Id = '{1}' AND AL.N_Id NOT IN "
+               "(SELECT DISTINCT al.N_Id FROM ISEP.dbo.Alumnos al "
+               "LEFT JOIN  GrupoISEPxtra.dbo.gin_PreMatriculas pm ON al.N_Id = pm.AlumnoID "
+               "WHERE pm.AnyAcademico IS NOT NULL AND pm.SedeID in (7,8,9,10, 11,12,13,27) AND pm.Tramitada = 1 ) "
+               "ORDER BY Asignaturas.Id DESC OFFSET ({2}) ROWS FETCH NEXT 1000 ROWS ONLY;".format(course, gr_no, offset))
         return rows
