@@ -7,6 +7,8 @@ import datetime
 from dateutil.relativedelta import relativedelta
 import logging
 import os
+import mysql.connector
+from mysql.connector import errorcode
 
 logger = logging.getLogger(__name__)
 
@@ -66,6 +68,92 @@ class OpStudent(models.Model):
             else:
                 record.last_access = "Nunca"
 
+    def update_access(self, rows):
+        for row in rows:
+            if 'idnumber' in rows and row['idnumber'] != '':
+                try:
+                    student = self.search(
+                        [('document_number', '=', row['idnumber'])])
+                    last_access = datetime.datetime.utcfromtimestamp(
+                        row['lastaccess'])
+                    if len(student) == 1:
+                        acces_values = {
+                            'student_id': student.id,
+                            'student_access': last_access
+                        }
+                        _access = self.env['op.student.access'].search(
+                            [('student_id', '=', student.id)], limit=1)
+                        year = _access.student_access.year
+                        month = _access.student_access.month
+                        day = _access.student_access.day
+                        if not (last_access.year == year and last_access.month == month and last_access.day == day):
+                            self.env['op.student.access'].create(acces_values)
+                except Exception as e:
+                    logger.info(e)
+                    continue
+
+    def import_recent_student_access(self, days=1):
+        logger.info("**************************************")
+        logger.info("import recent student access")
+        logger.info("**************************************")
+        config = {
+            'user': 'odoo',
+            'password': 'Iseplatam2020',
+            'host': '192.168.0.153',
+            'database': 'moodle'
+        }
+        today = datetime.datetime.now()
+        yesterday = today - datetime.timedelta(days=days)
+        today = today.strftime('%Y-%m-%d')
+        yesterday = yesterday.strftime('%Y-%m-%d')
+        try:
+            cnx = mysql.connector.connect(**config)
+            cursor = cnx.cursor()
+            s = "\'"
+            today = s + today + s
+            yesterday = s + yesterday + s
+            query = ("""
+        		SELECT
+        		id,
+        		idnumber,
+        		username,
+        		email,
+        		lastaccess
+        		FROM
+        		mdl_user user
+        		WHERE
+        		DATE(FROM_UNIXTIME(lastaccess, '%y/%m/%d %h:%i:%s')) BETWEEN """ +
+                     yesterday +
+                     """ AND """ +
+                     today +
+                     """
+                      ORDER BY
+                     lastaccess
+                     DESC
+                     """)
+            cursor.execute(query)
+            rows = []
+            for (id, idnumber, username, email, lastaccess) in cursor:
+                if 'idnumber' != '':
+                    logger.info({'id': id, 'idnumber': idnumber, 'lastaccess': lastaccess})
+                    rows.append({'id': id, 'idnumber': idnumber, 'lastaccess': lastaccess})
+
+            self.update_access(rows)
+
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+                print("Something is wrong with your user name or password")
+            elif err.errno == errorcode.ER_BAD_DB_ERROR:
+                print("Database does not exist")
+            else:
+                print(err)
+        else:
+            cnx.close()
+
+        logger.info("********************************************")
+        logger.info("End of script: import recent student access")
+        logger.info("********************************************")
+
     def import_all_student_access(self):
         logger.info("**************************************")
         logger.info("import all student access")
@@ -88,6 +176,9 @@ class OpStudent(models.Model):
                 except Exception as e:
                     logger.info(e)
                     continue
+        logger.info("*****************************************")
+        logger.info("End of script: import all students access")
+        logger.info("*****************************************")
 
 
     def import_student_access(self):
@@ -108,8 +199,6 @@ class OpStudent(models.Model):
                     }
                     _access = self.env['op.student.access'].search(
                         [('student_id', '=', self.id)], limit=1)
-                    logger.info(_access.student_access)
-                    logger.info(last_access)
                     year = _access.student_access.year
                     month = _access.student_access.month
                     day = _access.student_access.day
@@ -188,7 +277,7 @@ class OpStudent(models.Model):
                     logger.info('Student with n_id {0} created'.format(
                         student_values['n_id']))
 
-                    if int_break == 50 and os.name != "posix":
+                    if int_break == 1000 and os.name != "posix":
                         break
                     int_break += 1
 
