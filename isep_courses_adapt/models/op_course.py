@@ -111,11 +111,11 @@ class OpCourse(models.Model):
                     logger.info("Error calling Moodle API\n", response)
             except ValueError:
                 logger.info("Error calling Moodle API\n", ValueError)
-            # try:
-            #     for subject in self.subject_ids:
-            #         self.create_moodle_course(subject, self.moodle_category_id)
-            # except ValueError:
-            #     logger.info("Error calling Moodle API\n", ValueError)
+            try:
+                for subject in self.subject_ids:
+                    self.create_moodle_course(subject, self.moodle_category_id)
+            except ValueError:
+                logger.info("Error calling Moodle API\n", ValueError)
 
         res = super(OpCourse, self).write(values)
         return res
@@ -162,9 +162,9 @@ class OpCourse(models.Model):
                         res = super(OpCourse, self).create(course_values)
                         print(res)
 
-                if int_break == 50 and os.name != "posix":
-                    break
-                int_break += 1
+                # if int_break == 50 and os.name != "posix":
+                #     break
+                # int_break += 1
             except Exception as e:
                 logger.info("===== Fallo ======")
                 logger.info(e)

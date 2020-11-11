@@ -170,9 +170,9 @@ class OpBatch(models.Model):
                         res = super(OpBatch, self).create(batch_values)
                         print(res)
 
-                if int_break == 50 and os.name != "posix":
-                    break
-                int_break += 1
+                # if int_break == 50 and os.name != "posix":
+                #     break
+                # int_break += 1
             except Exception as e:
                 logger.info(e)
                 continue

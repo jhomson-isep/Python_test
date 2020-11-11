@@ -128,13 +128,13 @@ class SQL():
         )
         return rows
 
-    def get_all_subjects_by_course_student(self, course, gr_no, offset):
-        rows = self.query("SELECT Asignaturas.Id, AL.N_Id, MA.Curso_Id, AL.Nombre FROM Asignaturas "
-               "INNER JOIN ISEP.dbo.CursosAsignaturas CA ON CA.CodAsignatura = Asignaturas.CodAsignatura "
-               "INNER JOIN ISEP.dbo.Matriculaciones MA ON MA.Curso_Id = '{0}' AND CA.Curso_Id = '{0}' "
-               "INNER JOIN ISEP.dbo.Alumnos AL ON AL.N_Id = '{1}' AND MA.N_Id = '{1}' AND AL.N_Id NOT IN "
+    def get_all_subjects_by_course_student(self, course, gr_no):
+        rows = self.query("SELECT TOP(1000) Asignaturas.Id, AL.N_Id, MA.Curso_Id, AL.Nombre FROM Asignaturas "
+               "INNER JOIN CursosAsignaturas CA ON CA.CodAsignatura = Asignaturas.CodAsignatura "
+               "INNER JOIN Matriculaciones MA ON MA.Curso_Id = '%s' AND CA.Curso_Id = '%s' "
+               "INNER JOIN Alumnos AL ON AL.N_Id = '%s' AND MA.N_Id = '%s' AND AL.N_Id NOT IN "
                "(SELECT DISTINCT al.N_Id FROM ISEP.dbo.Alumnos al "
                "LEFT JOIN  GrupoISEPxtra.dbo.gin_PreMatriculas pm ON al.N_Id = pm.AlumnoID "
                "WHERE pm.AnyAcademico IS NOT NULL AND pm.SedeID in (7,8,9,10, 11,12,13,27) AND pm.Tramitada = 1 ) "
-               "ORDER BY Asignaturas.Id DESC OFFSET ({2}) ROWS FETCH NEXT 1000 ROWS ONLY;".format(course, gr_no, offset))
+               "ORDER BY Asignaturas.Id DESC;" % (course, course, gr_no, gr_no))
         return rows

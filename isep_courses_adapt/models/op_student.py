@@ -169,14 +169,14 @@ class OpStudent(models.Model):
                         'moodle_user': student.Usuario
                     }
 
-                    # logger.info(student_values)
+                    logger.info(student_values)
                     res = super(OpStudent, self).create(student_values)
                     logger.info('Student with n_id {0} created'.format(
                         student_values['n_id']))
-                    #
-                    # if int_break == 50 and os.name != "posix":
-                    #     break
-                    # int_break += 1
+
+                    if int_break == 50 and os.name != "posix":
+                        break
+                    int_break += 1
 
             except Exception as e:
                 logger.info(e)
@@ -206,17 +206,14 @@ class OpStudent(models.Model):
                         for bat in batch:
                             logger.info(bat)
                             values = {
-                                'student_id' : stu.id,
-                                'course_id'  : cour.id,
-                                'batch_id'   : bat.id,
+                                'student_id' : [(4, stu.id)],
+                                'course_id'  : [(4, cour.id)],
+                                'batch_id'   : [(4, bat.id)],
                                 'roll_number': row.gr_no
                             }
                             student_course = self.env['op.student.course'].create(values)
-                            student.write({'course_detail_ids' : student_course.id })
-                            try:
-                                batch.write({'student_lines' : student_course.id })
-                            except Exception as BatchError:
-                                logger.info('batch write id error!!', BatchError)
+                            student.update({'course_detail_ids' : [(4, student_course.id)] })
+                            batch.update({'student_lines' : [(4, student_course.id)] })
                             logger.info('Student with n_id {0} updated'.format(
                                 student.id))
 
@@ -235,13 +232,13 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         students = self.env['op.student'].search([])
         for student in students:
-            for course in student.course_details_ids:
-                batch = self.env['op.batch'].search([('id', '=', course.batch_id)], limit=1)
-                offset = 50
-                subjects = s.get_all_subjects_by_course_student(batch.code, student.gr_no, offset)
+            for course in student.course_detail_ids:
+                subjects = s.get_all_subjects_by_course_student(course.batch_id.code, student.gr_no)
                 for subject in subjects:
                     subject_tb = self.env['op.subject'].search([('code', '=', subject.Id)], limit=1)
-                    course.write({'subject_ids' : subject_tb.id})
+                    for tb in subject_tb:
+                        course.update({'subject_ids' : [(4, tb.id)]})
+                        logger.info("Write subject %s for student ID %s" % (tb.id, student.id))
 
     def Gauth(self):
         logger.info(os.path.dirname(os.path.abspath(__file__)))
