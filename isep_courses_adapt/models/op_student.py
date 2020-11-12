@@ -6,6 +6,9 @@ from .op_moodle import Moodle
 import datetime
 import logging
 import os
+import mysql.connector
+from mysql.connector import errorcode
+from .op_mysql import MYSQL
 
 logger = logging.getLogger(__name__)
 
@@ -65,24 +68,82 @@ class OpStudent(models.Model):
             else:
                 record.last_access = "Nunca"
 
+    def update_access(self, rows):
+        logger.info("**************************************")
+        logger.info("update_access")
+        logger.info("**************************************")
+        for row in rows:
+            if 'idnumber' in row and row['idnumber'] != '':
+                try:
+                    student = self.search(
+                        [('document_number', '=', row['idnumber'])])
+                    if not isinstance(row['lastaccess'], int):
+                        continue
+                    last_access = datetime.datetime.utcfromtimestamp(
+                        row['lastaccess'])
+                    if len(student) == 1:
+                        acces_values = {
+                            'student_id': student.id,
+                            'student_access': last_access
+                        }
+                        _access = self.env['op.student.access'].search(
+                            [('student_id', '=', student.id)], limit=1)
+                        year, month, day = 0, 0, 0
+                        if isinstance(_access.student_access, datetime.datetime):
+                            year = _access.student_access.year
+                            month = _access.student_access.month
+                            day = _access.student_access.day
+                        if not (last_access.year == year and last_access.month == month and last_access.day == day):
+                            self.env['op.student.access'].create(acces_values)
+                            logger.info('Record created')
+                except Exception as e:
+                    logger.info(e)
+                    continue
+
+    def import_recent_student_access(self, days=1):
+        logger.info("**************************************")
+        logger.info("import recent student access")
+        logger.info("**************************************")
+
+        mqsl = MYSQL()
+
+        rows = mqsl.query()
+
+        if len(rows) > 0:
+            self.update_access(rows)
+
+        logger.info("********************************************")
+        logger.info("End of script: import recent student access")
+        logger.info("********************************************")
+
     def import_all_student_access(self):
         logger.info("**************************************")
         logger.info("import all student access")
         logger.info("**************************************")
         moodle = self.env['moodle']
         rows = Moodle.get_last_access_cron(moodle)
-        for dic in rows:
-            if 'idnumber' in dic:
-                student = self.search(
-                    [('document_number', '=', dic['idnumber'])])
-                last_access = datetime.datetime.utcfromtimestamp(
-                    dic['lastaccess'])
-                if len(student) > 0:
-                    acces_values = {
-                        'student_id': student.id,
-                        'student_access': last_access
-                    }
-                    self.env['op.student.access'].create(acces_values)
+        for row in rows:
+            if 'idnumber' in row:
+                try:
+                    student = self.search(
+                        [('document_number', '=', row['idnumber'])])
+                    if not isinstance(row['lastaccess'], int):
+                        continue
+                    last_access = datetime.datetime.utcfromtimestamp(
+                        row['lastaccess'])
+                    if len(student) == 1:
+                        acces_values = {
+                            'student_id': student.id,
+                            'student_access': last_access
+                        }
+                        self.env['op.student.access'].create(acces_values)
+                except Exception as e:
+                    logger.info(e)
+                    continue
+        logger.info("*****************************************")
+        logger.info("End of script: import all students access")
+        logger.info("*****************************************")
+
 
     def import_student_access(self):
         logger.info("**************************************")
@@ -93,16 +154,27 @@ class OpStudent(models.Model):
             rows = Moodle.get_last_access(moodle, 'idnumber',
                                           self.document_number)
             for row in rows:
-                last_access = datetime.datetime.utcfromtimestamp(
-                    row['lastaccess'])
-                acces_values = {
-                    'student_id': self.id,
-                    'student_access': last_access
-                }
-                _access = self.env['op.student.access'].search(
-                    [('student_id', '=', self.id)], limit=1)
-                if _access.student_access != last_access:
-                    self.env['op.student.access'].create(acces_values)
+                try:
+                    if not isinstance(row['lastaccess'], int):
+                        continue
+                    last_access = datetime.datetime.utcfromtimestamp(
+                        row['lastaccess'])
+                    access_values = {
+                        'student_id': self.id,
+                        'student_access': last_access
+                    }
+                    _access = self.env['op.student.access'].search(
+                        [('student_id', '=', self.id)], limit=1)
+                    year, month, day = 0, 0, 0
+                    if isinstance(_access.student_access, datetime.datetime):
+                        year = _access.student_access.year
+                        month = _access.student_access.month
+                        day = _access.student_access.day
+                    if not (last_access.year == year and last_access.month == month and last_access.day == day):
+                        self.env['op.student.access'].create(access_values)
+                except Exception as e:
+                    logger.info(e)
+                    continue
 
     def import_students(self):
         s = SQL()
@@ -172,7 +244,7 @@ class OpStudent(models.Model):
                     logger.info('Student with n_id {0} created'.format(
                         student_values['n_id']))
 
-                    if int_break == 50 and os.name != "posix":
+                    if int_break == 1000 and os.name != "posix":
                         break
                     int_break += 1
 
