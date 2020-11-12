@@ -69,11 +69,16 @@ class OpStudent(models.Model):
                 record.last_access = "Nunca"
 
     def update_access(self, rows):
+        logger.info("**************************************")
+        logger.info("update_access")
+        logger.info("**************************************")
         for row in rows:
-            if 'idnumber' in rows and row['idnumber'] != '':
+            if 'idnumber' in row and row['idnumber'] != '':
                 try:
                     student = self.search(
                         [('document_number', '=', row['idnumber'])])
+                    if not isinstance(row['lastaccess'], int):
+                        continue
                     last_access = datetime.datetime.utcfromtimestamp(
                         row['lastaccess'])
                     if len(student) == 1:
@@ -81,13 +86,21 @@ class OpStudent(models.Model):
                             'student_id': student.id,
                             'student_access': last_access
                         }
+                        logger.info(acces_values)
                         _access = self.env['op.student.access'].search(
                             [('student_id', '=', student.id)], limit=1)
-                        year = _access.student_access.year
-                        month = _access.student_access.month
-                        day = _access.student_access.day
+                        logger.info('student.id')
+                        logger.info(student.id)
+                        logger.info('_access.student_access')
+                        logger.info(_access.student_access)
+                        year, month, day = 0, 0, 0
+                        if isinstance(_access.student_access, datetime.datetime):
+                            year = _access.student_access.year
+                            month = _access.student_access.month
+                            day = _access.student_access.day
                         if not (last_access.year == year and last_access.month == month and last_access.day == day):
                             self.env['op.student.access'].create(acces_values)
+                            logger.info('Record created')
                 except Exception as e:
                     logger.info(e)
                     continue
@@ -160,13 +173,15 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         moodle = self.env['moodle']
         rows = Moodle.get_last_access_cron(moodle)
-        for dic in rows:
-            if 'idnumber' in dic:
+        for row in rows:
+            if 'idnumber' in row:
                 try:
                     student = self.search(
-                        [('document_number', '=', dic['idnumber'])])
+                        [('document_number', '=', row['idnumber'])])
+                    if not isinstance(row['lastaccess'], int):
+                        continue
                     last_access = datetime.datetime.utcfromtimestamp(
-                        dic['lastaccess'])
+                        row['lastaccess'])
                     if len(student) == 1:
                         acces_values = {
                             'student_id': student.id,
@@ -191,20 +206,28 @@ class OpStudent(models.Model):
                                           self.document_number)
             for row in rows:
                 try:
+                    if not isinstance(row['lastaccess'], int):
+                        continue
                     last_access = datetime.datetime.utcfromtimestamp(
                         row['lastaccess'])
-                    acces_values = {
+                    access_values = {
                         'student_id': self.id,
                         'student_access': last_access
                     }
+                    logger.info(access_values)
                     _access = self.env['op.student.access'].search(
                         [('student_id', '=', self.id)], limit=1)
-                    year = _access.student_access.year
-                    month = _access.student_access.month
-                    day = _access.student_access.day
-
+                    logger.info('self.id')
+                    logger.info(self.id)
+                    logger.info('_access.student_access')
+                    logger.info(_access.student_access)
+                    year, month, day = 0, 0, 0
+                    if isinstance(_access.student_access, datetime.datetime):
+                        year = _access.student_access.year
+                        month = _access.student_access.month
+                        day = _access.student_access.day
                     if not (last_access.year == year and last_access.month == month and last_access.day == day):
-                        self.env['op.student.access'].create(acces_values)
+                        self.env['op.student.access'].create(access_values)
                 except Exception as e:
                     logger.info(e)
                     continue
