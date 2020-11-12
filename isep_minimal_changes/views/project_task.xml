@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="imc_view_task_form_inherit" model="ir.ui.view">
+            <field name="name">imc.view.task.form.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="partner_assigned"
+                           class="o_task_user_field"
+                           options='{"no_open": True, "no_create_edit": True}'/>
+                </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="ticket_type"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherit search View to Modify it -->
+        <record id="imc_view_task_search_form_inherit" model="ir.ui.view">
+            <field name="name">imc.view.task.search.form.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_search_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="partner_assigned"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
