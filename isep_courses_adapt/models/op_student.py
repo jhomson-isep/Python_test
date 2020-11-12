@@ -1,11 +1,9 @@
-from addons.openeducat_erp.openeducat_core.models import student
 from odoo import fields, api, models
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 from .op_sql import SQL
 from .op_moodle import Moodle
 import datetime
-from dateutil.relativedelta import relativedelta
 import logging
 import os
 
