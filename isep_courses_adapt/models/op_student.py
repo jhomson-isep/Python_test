@@ -126,18 +126,19 @@ class OpStudent(models.Model):
         for row in rows:
             if 'idnumber' in row:
                 try:
-                    student = self.search(
+                    students = self.search(
                         [('document_number', '=', row['idnumber'])])
                     if not isinstance(row['lastaccess'], int):
                         continue
                     last_access = datetime.datetime.utcfromtimestamp(
                         row['lastaccess'])
-                    if len(student) == 1:
-                        acces_values = {
-                            'student_id': student.id,
-                            'student_access': last_access
-                        }
-                        self.env['op.student.access'].create(acces_values)
+                    if len(students) > 0:
+                        for student in students:
+                            acces_values = {
+                                'student_id': student.id,
+                                'student_access': last_access
+                            }
+                            self.env['op.student.access'].create(acces_values)
                 except Exception as e:
                     logger.info(e)
                     continue
