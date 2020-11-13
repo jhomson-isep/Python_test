@@ -6,9 +6,8 @@ from .op_moodle import Moodle
 import datetime
 import logging
 import os
-import mysql.connector
-from mysql.connector import errorcode
 from .op_mysql import MYSQL
+import ast
 
 logger = logging.getLogger(__name__)
 
@@ -176,6 +175,30 @@ class OpStudent(models.Model):
                 except Exception as e:
                     logger.info(e)
                     continue
+
+    def send_email(self):
+        logger.info("**************************************")
+        logger.info("send email")
+        logger.info("**************************************")
+        for student in self.env['op.student'].search([]):
+            try:
+                last_access=self.env['op.student.access'].\
+                            search([('student_id','=',student.id)])[-1].\
+                            last_access
+                if 'años' in last_access:
+                    continue
+                if 'días' in last_access:
+                    days=last_access.split('días')[0].strip()
+                    days = ast.literal_eval(days)
+                    if days in ( 5, 12 , 20, 40, 70, 80, 100):
+                        #send email
+                        pass
+            except Exception as e:
+                logger.info(e)
+        logger.info("**************************************")
+        logger.info("End of script: send email")
+        logger.info("**************************************")
+
 
     def import_students(self):
         s = SQL()
