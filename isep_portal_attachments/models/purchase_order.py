@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from odoo.tools.float_utils import float_compare
 from odoo import models, fields
 
 
@@ -10,7 +11,9 @@ class PurchaseOrder(models.Model):
                                        readonly=True,
                                        states={'draft': [('readonly', False)],
                                                'sent': [('readonly', False)]},
-                                       help='Request a online signature to the customer in order to confirm orders automatically.')
+                                       help='Request a online signature to '
+                                            'the customer in order to confirm '
+                                            'orders automatically.')
     signature = fields.Binary('Signature',
                               help='Signature received through the portal.',
                               copy=False, attachment=True)
