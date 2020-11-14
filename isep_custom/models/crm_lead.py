@@ -39,7 +39,7 @@ class crm_lead(models.Model):
     x_dateactiontime = fields.Datetime(string="Fecha y hora siguiente actividad")
     x_curso_id = fields.Many2one('product.template', string="Curso")
     x_contactonuevoodup = fields.Char(string="Contacto")
-    x_contactonuevoodup12 = fields.Many2one('res.users',related='partner_id.user_id',string="Contacto 2",store=True)    
+    x_contactonuevoodup12 = fields.Many2one('res.users', related='partner_id.user_id', string="Actual", store=True)
     x_contactoduplicado = fields.Many2one('res.partner', string="Contacto Duplicidado")
     x_codtipodecurso = fields.Char(string="Código Tipo de Curso")
     x_codsede = fields.Char(string="Código Sede")

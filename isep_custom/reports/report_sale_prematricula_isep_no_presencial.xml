@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
+    <data noupdate="1">
         <template id="report_sale_prematricula_isep_no_presencial">
             <t t-name="isep_custom.report_sale_prematricula_isep_no_presencial">
                 <t t-call="web.external_layout">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
+    <data noupdate="1">
         <template id="isep_report_footer" inherit_id="report.external_layout_footer">
 			<xpath expr="//li[@t-if='company.vat']" position="replace">
 				<li t-if="company.vat and not company.vat">TIN: <span t-field="company.vat"/></li>

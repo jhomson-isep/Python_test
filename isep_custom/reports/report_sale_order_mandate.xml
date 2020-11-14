@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-    <data>
+    <data noupdate="1">
     	<template id="report_sale_order_mandate">
             <t t-name="isep_custom.report_sale_order_mandate">
             	<t t-call="report.external_layout">

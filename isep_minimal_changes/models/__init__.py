@@ -11,3 +11,4 @@ from . import helpdesk_tag
 from . import mail_message
 from . import helpdesk_team
 from . import project_task
+from . import crm_lead
