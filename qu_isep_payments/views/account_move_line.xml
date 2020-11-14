@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="isep_account_move_line_tree" model="ir.ui.view">
+		<field name="name">isep.account.move.line.tree</field>
+		<field name="model">account.move.line</field>
+		<field name="inherit_id" ref="account.view_move_line_tree"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='account_id']" position="after">
+	    		<field name="payment_mode_id"/>
+	    	</xpath>
+		</field>
+	</record>
+
+
+	<record id="isep_aaccount_payment_partner_move_line_form" model="ir.ui.view">
+		<field name="name">isep.account_payment_partner.move_line_form</field>
+		<field name="model">account.move.line</field>
+		<field name="inherit_id" ref="account_payment_partner.view_move_line_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='payment_mode_id']" position="attributes">
+	    		<attribute name="readonly">False</attribute>
+	    	</xpath>
+		</field>
+	</record>
+</odoo>
