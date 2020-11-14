@@ -10,6 +10,7 @@
                 <xpath expr="//field[@name='user_id']" position="after">
                     <field name="partner_assigned"
                            class="o_task_user_field"
+                           domain='[["is_programmer","=",True]]'
                            options='{"no_open": True, "no_create_edit": True}'/>
                 </xpath>
                 <xpath expr="//field[@name='tag_ids']" position="after">
