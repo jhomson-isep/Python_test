@@ -7,6 +7,5 @@ class CrmLead(models.Model):
                                   string='Categoria Producto:',
                                   compute='_set_category')
 
-
-def _set_category(self):
-    self.category_id = self.x_curso_id.category_id.id
+    def _set_category(self):
+        self.category_id = self.x_curso_id.categ_id.id

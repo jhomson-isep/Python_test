@@ -14,13 +14,14 @@
     "license": "AGPL-3",
     "depends": [
         "base",
+        "crm",
         "utm",
         "sale",
         "helpdesk",
         "project"
     ],
     "data": [
-        #"views/res_partner.xml",
+        "views/res_partner.xml",
         "views/helpdesk_ticket.xml",
         "views/helpdesk_team.xml",
         "views/project_task.xml",
