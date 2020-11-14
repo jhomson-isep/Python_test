@@ -18,7 +18,8 @@
         "utm",
         "sale",
         "helpdesk",
-        "project"
+        "project",
+        "isep_custom"
     ],
     "data": [
         "views/res_partner.xml",
