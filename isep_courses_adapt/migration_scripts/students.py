@@ -3,24 +3,8 @@ from op_sql import SQL
 from connect_postgresql import PSQL
 from psycopg2 import DatabaseError, DataError, IntegrityError, OperationalError, ProgrammingError
 from pyodbc import Error as ESSQL
-from datetime import date, datetime
-
-def create_name(firts, last):
-    if firts is None:
-        return last
-    elif last is None:
-        return firts
-    else:
-        return firts + last
-
-def cupr_or_dni(curp, dni):
-    if curp is None:
-        return dni
-    elif dni is None:
-        return curp
-    else:
-        return ''
-
+from datetime import datetime
+from validation import create_name, cupr_or_dni, verify_id, verify_char_field, replace_special_caracter
 
 try:
     sql_server = SQL()
@@ -28,10 +12,7 @@ try:
     students = sql_server.get_all_students()
     for student in students:
         try:
-            if student.Nombre and student.Apellidos and student.EMail and student.Telefono and student.Direccion \
-                and student.CodPostal and student.Poblacion and student.CURPMx and student.DNI and student.N_Id \
-                and student.TipoDocumento and student.TipoEstudios and student.Sede \
-                    is None:
+            if student.Nombre is None and student.Apellidos is None:
                 continue
             exist_student = postgres.get_sutdent_by_gr_no(student.N_Id)
             if exist_student is None:
@@ -40,14 +21,14 @@ try:
                 partner_id = postgres.get_partner_by_vat(cupr_or_dni(student.CURPMx, student.DNI))
                 if partner_id is None:
                     values = [
-                        create_name(student.Nombre, student.Apellidos),
-                        student.EMail if student.EMail is None else '',
-                        student.Telefono if student.Telefono is None else '',
-                        student.Telefono if student.Telefono is None else '',
-                        student.Direccion if student.Direccion is None else '',
-                        student.CodPostal if student.CodPostal is None else '',
-                        student.Poblacion if student.Poblacion is None else '',
-                        country_id,
+                        replace_special_caracter(create_name(student.Nombre, student.Apellidos)),
+                        replace_special_caracter(verify_char_field(student.EMail)),
+                        replace_special_caracter(verify_char_field(student.Telefono)),
+                        replace_special_caracter(verify_char_field(student.Telefono)),
+                        replace_special_caracter(verify_char_field(student.Direccion)),
+                        replace_special_caracter(verify_char_field(student.CodPostal)),
+                        replace_special_caracter(verify_char_field(student.Poblacion)),
+                        verify_id(country_id),
                         cupr_or_dni(student.CURPMx, student.DNI),
                         True
                     ]
@@ -69,37 +50,44 @@ try:
                 else:
                     fechaNacimiento = datetime.today().date()
                 student_values = [
-                    student.Nombre if student.Nombre is not None else '',
-                    student.Apellidos if student.Apellidos is not None else '',
-                    partner_id[0],
+                    replace_special_caracter(verify_char_field(student.Nombre)),
+                    replace_special_caracter(verify_char_field(student.Apellidos)),
+                    verify_id(partner_id),
                     fechaNacimiento,
-                    country_id,
+                    gender,
+                    verify_id(country_id),
                     student.N_Id,
                     student.N_Id,
-                    campus_id[0] if campus_id is not None else 'NULL',
-                    student.CURPMx if student.CURPMx is not None else 'NULL',
-                    student.AnyFinalizacionEstudios,
-                    document_type_id[0] if document_type_id is not None else 'NULL',
-                    student.DNI if student.DNI is not None else 'NULL',
-                    study_type_id[0] if study_type_id is not None else 'NULL',
-                    university_id[0] if university_id is not None else 'NULL',
-                    student.IDMoodle,
-                    student.Usuario
+                    verify_id(campus_id),
+                    verify_id(student.CURPMx),
+                    verify_id(student.AnyFinalizacionEstudios),
+                    verify_id(document_type_id),
+                    replace_special_caracter(verify_char_field(student.DNI)),
+                    verify_id(study_type_id),
+                    verify_id(university_id),
+                    verify_id(student.IDMoodle),
+                    replace_special_caracter(verify_char_field(student.Usuario))
                 ]
                 print('Student:', student_values)
                 postgres.create_student(student_values)
+            else:
+                print("Already exist:", student.N_Id)
         except DataError as de:
             print(de)
             postgres.conn.close()
+            break
         except IntegrityError as ie:
             print(ie)
             postgres.conn.close()
+            break
         except OperationalError as oe:
             print(oe)
             postgres.conn.close()
+            break
         except ProgrammingError as pe:
             print(pe)
             postgres.conn.close()
+            break
 except DatabaseError as dbe:
     print(dbe)
 except ESSQL as e:

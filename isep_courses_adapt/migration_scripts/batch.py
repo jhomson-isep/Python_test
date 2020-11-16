@@ -4,28 +4,7 @@ from connect_postgresql import PSQL
 from psycopg2 import DatabaseError, DataError, IntegrityError, OperationalError, ProgrammingError
 from pyodbc import Error as ESSQL
 from datetime import date, datetime
-import base64
-import re
-
-
-def add_years(d, years):
-    """Return a date that's `years` years after the date (or datetime)
-    object `d`. Return the same calendar date (month and day) in the
-    destination year, if it exists, otherwise use the following day
-    (thus changing February 29 to March 1).
-    """
-    try:
-        return d.replace(year=d.year + years)
-    except ValueError:
-        return d + (date(d.year + years, 1, 1) - date(d.year, 1, 1))
-
-
-def replace_special_caracter(args):
-    s = re.split("'", args)
-    args = ''
-    for i in s:
-        args = args + i
-    return args
+from validation import add_years, replace_special_caracter, verify_id
 
 try:
     sql_server = SQL()
@@ -58,18 +37,20 @@ try:
                     course_id[0] if course_id is not None else '1',
                     fechaInicio,
                     end_date,
-                    partner_id[0] if partner_id is not None else 'NULL',
-                    campus_id[0] if campus_id is not None else 'NULL',
+                    verify_id(partner_id),
+                    verify_id(campus_id),
                     fechaDiplomas,
                     batch.AnyAcademico,
                     diaSemana,
                     horario,
                     lugarClase,
                     batch.LimiteMatriculas,
-                    practices_id[0] if practices_id is not None else 'NULL'
+                    verify_id(practices_id)
                 ]
-                print(values)
+                print("Batch:", values)
                 postgres.create_batch(values)
+            else:
+                print("Already exist:", batch.Curso_Id)
         except DataError as de:
             print(de)
             postgres.conn.close()
