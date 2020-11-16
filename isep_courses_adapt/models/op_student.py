@@ -180,21 +180,34 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         logger.info("send email")
         logger.info("**************************************")
-        for student in self.env['op.student'].search([]):
-            try:
-                last_access=self.env['op.student.access'].\
-                            search([('student_id','=',student.id)])[-1].\
-                            last_access
-                if 'años' in last_access:
-                    continue
-                if 'días' in last_access:
-                    days=last_access.split('días')[0].strip()
-                    days = ast.literal_eval(days)
+        template = self.env['mail.template'].search([('name','=','Template Automation')])
+        ###### modificar para que los envie a todos elimine 121 ########
+        if template:
+            for student in self.env['op.student'].search([('id','=',121)]):
+                try:
+                    last_access=self.env['op.student.access'].\
+                                search([('student_id','=',student.id)])[-1].\
+                                last_access
+                    if 'años' in last_access:
+                        continue
+                    if 'días' in last_access:
+                        days = last_access.split('días')[0].strip()
+                        days = ast.literal_eval(days)
+                    template.send_mail(student.id, force_send=True, raise_exception=True)
                     if days in ( 5, 12 , 20, 40, 70, 80, 100):
                         #send email
+                        # email_to = self.env['op.student'].search([('id', '=', student.id)]).email
+                        # values = template.generate_email(student.id, fields=None)
+                        # if not values['email_to'] and not values['email_from']:
+                        #     continue
+                        # mail_mail_obj = self.env['mail.mail']
+                        # mail_mail_obj = self.env['mail.message']
+                        # msg_id = mail_mail_obj.create(values)
+                        # if msg_id:
+                        #     mail_mail_obj.send(msg_id)
                         pass
-            except Exception as e:
-                logger.info(e)
+                except Exception as e:
+                    logger.info(e)
         logger.info("**************************************")
         logger.info("End of script: send email")
         logger.info("**************************************")
