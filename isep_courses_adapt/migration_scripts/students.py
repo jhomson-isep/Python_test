@@ -18,7 +18,7 @@ try:
             if exist_student is None:
                 app_country = sql_server.get_country_by_nid(student.N_Id)
                 country_id = postgres.get_country_by_name(app_country.country) if app_country is not None else 'NULL'
-                partner_id = postgres.get_partner_by_vat(cupr_or_dni(student.CURPMx, student.DNI))
+                partner_id = postgres.get_partner_by_vat(student.N_Id)
                 if partner_id is None:
                     values = [
                         replace_special_caracter(create_name(student.Nombre, student.Apellidos)),
@@ -29,7 +29,7 @@ try:
                         replace_special_caracter(verify_char_field(student.CodPostal)),
                         replace_special_caracter(verify_char_field(student.Poblacion)),
                         verify_id(country_id),
-                        cupr_or_dni(student.CURPMx, student.DNI),
+                        student.N_Id,
                         True
                     ]
                     print('Partner:', values)
