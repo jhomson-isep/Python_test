@@ -48,7 +48,8 @@
         'data/op.university.csv',
         'data/op_modality.xml',
         'data/op.campus.csv',
-        'data/cron.xml'
+        'data/cron.xml',
+        'data/plantillas_mail.xml'
     ],
     'installable': True,
 }
