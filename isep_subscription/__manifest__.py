@@ -2,10 +2,10 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 {
-    "name": "ISEP cambios minimos",
-    "summary": """Cambios minimos en vistas o módulos""",
+    "name": "ISEP Suscripciones",
+    "summary": """Cambios en las suscripciones""",
     "description": """
-        Cambios pequeños en algunas vistas o módulos
+        Ignorar la matricula en la suscripción
     """,
     "version": "12.0.1.0.0",
     "author": "Isep Latam, SC",
