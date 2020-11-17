@@ -132,11 +132,22 @@ class OpStudent(models.Model):
                         row['lastaccess'])
                     if len(students) > 0:
                         for student in students:
-                            acces_values = {
+                            access_values = {
                                 'student_id': student.id,
                                 'student_access': last_access
                             }
-                            self.env['op.student.access'].create(acces_values)
+                            #### Validacion de Duplicidad ########
+                            _access = self.env['op.student.access'].search(
+                                [('student_id', '=', student.id)], limit=1)
+                            year, month, day = 0, 0, 0
+                            if isinstance(_access.student_access, datetime.datetime):
+                                year = _access.student_access.year
+                                month = _access.student_access.month
+                                day = _access.student_access.day
+                            if not (last_access.year == year and \
+                                    last_access.month == month and \
+                                    last_access.day == day):
+                                self.env['op.student.access'].create(access_values)
                 except Exception as e:
                     logger.info(e)
                     continue
