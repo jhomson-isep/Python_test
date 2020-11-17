@@ -176,11 +176,21 @@ class OpStudent(models.Model):
                     logger.info(e)
                     continue
 
+    def greeting(self, gender):
+        resp='Apreciado(a)'
+        try:
+            if gender=='f':
+                resp='Apreciada'
+            if gender=='m':
+                resp='Apreciado'
+        except Exception as e:
+            logg.info(e)
+        return resp
+
     def send_email(self):
         logger.info("**************************************")
         logger.info("send email")
         logger.info("**************************************")
-        #template = self.env['mail.template'].search([('name','=','Template Automation')])
         template = self.env['mail.template'].search([('name', '=', 'Email Student Access')])
         ###### modificar para que los envie a todos elimine 121 ########
         if template:
