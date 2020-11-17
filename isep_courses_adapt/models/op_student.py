@@ -48,24 +48,24 @@ class OpStudent(models.Model):
         'N_ID Number must be unique per student!'
     )]
 
-    def _get_last_access(self):
-        for record in self:
-            last_access = record.env['op.student.access'].search(
-                [('student_id', '=', record.id)], order='id desc', limit=1)
-            if last_access.student_access:
-                access_ago = fields.Datetime.today() - last_access.student_access
-                minutes, seconds = divmod(access_ago.seconds, 60)
-                hours, minutes = divmod(minutes, 60)
-                access_string = "Hace "
-                if access_ago.days > 0:
-                    access_string += "{0} días ".format(access_ago.days)
-                if hours > 0:
-                    access_string += "{0} horas ".format(hours)
-                if minutes > 0:
-                    access_string += "{0} minutos ".format(minutes)
-                record.last_access = access_string
-            else:
-                record.last_access = "Nunca"
+    # def _get_last_access(self):
+    #     for record in self:
+    #         last_access = record.env['op.student.access'].search(
+    #             [('student_id', '=', record.id)], order='id desc', limit=1)
+    #         if last_access.student_access:
+    #             access_ago = fields.Datetime.today() - last_access.student_access
+    #             minutes, seconds = divmod(access_ago.seconds, 60)
+    #             hours, minutes = divmod(minutes, 60)
+    #             access_string = "Hace "
+    #             if access_ago.days > 0:
+    #                 access_string += "{0} días ".format(access_ago.days)
+    #             if hours > 0:
+    #                 access_string += "{0} horas ".format(hours)
+    #             if minutes > 0:
+    #                 access_string += "{0} minutos ".format(minutes)
+    #             record.last_access = access_string
+    #         else:
+    #             record.last_access = "Nunca"
 
     def update_access(self, rows):
         logger.info("**************************************")
@@ -187,38 +187,39 @@ class OpStudent(models.Model):
             logg.info(e)
         return resp
 
+    def get_days_without_access(self,id):
+        return self.env['op.student.access'].\
+               search([('student_id','=', id)])[-1][0].\
+               last_access.split('días')[0].strip()
+
     def send_email(self):
         logger.info("**************************************")
         logger.info("send email")
         logger.info("**************************************")
         template = self.env['mail.template'].search([('name', '=', 'Email Student Access')])
-        ###### modificar para que los envie a todos elimine 121 ########
+        int_break = 0
         if template:
-            for student in self.env['op.student'].search([('id','=',121)]):
+            for student in self.env['op.student'].search([]):
                 try:
                     last_access=self.env['op.student.access'].\
-                                search([('student_id','=',student.id)])[-1].\
-                                last_access
-                    if 'años' in last_access:
-                        continue
-                    if 'días' in last_access:
-                        days = last_access.split('días')[0].strip()
-                        days = ast.literal_eval(days)
-                    template.send_mail(student.id, force_send=True, raise_exception=True)
-                    if days in ( 5, 12 , 20, 40, 70, 80, 100):
-                        #send email
-                        # email_to = self.env['op.student'].search([('id', '=', student.id)]).email
-                        # values = template.generate_email(student.id, fields=None)
-                        # if not values['email_to'] and not values['email_from']:
-                        #     continue
-                        # mail_mail_obj = self.env['mail.mail']
-                        # mail_mail_obj = self.env['mail.message']
-                        # msg_id = mail_mail_obj.create(values)
-                        # if msg_id:
-                        #     mail_mail_obj.send(msg_id)
-                        pass
+                                search([('student_id','=',student.id)])
+                    if len(last_access)>0:
+                        last_access=last_access[-1].last_access
+                        if 'años' in last_access:
+                            continue
+                        if 'días' in last_access:
+                            days = self.get_days_without_access(student.id)
+                            days = ast.literal_eval(days)
+                            logger.info('dias:{}'.format(days))
+                            if days in ( 11, 5, 12 , 20, 40, 70, 80, 100):
+                                template.send_mail(student.id, force_send=True, raise_exception=True)
+                                logger.info('email sended to {}'.format(student.first_name))
                 except Exception as e:
                     logger.info(e)
+
+                if int_break == 100 and os.name != "posix":
+                    break
+                int_break += 1
         logger.info("**************************************")
         logger.info("End of script: send email")
         logger.info("**************************************")
