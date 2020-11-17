@@ -180,7 +180,8 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         logger.info("send email")
         logger.info("**************************************")
-        template = self.env['mail.template'].search([('name','=','Template Automation')])
+        #template = self.env['mail.template'].search([('name','=','Template Automation')])
+        template = self.env['mail.template'].search([('name', '=', 'Email Student Access')])
         ###### modificar para que los envie a todos elimine 121 ########
         if template:
             for student in self.env['op.student'].search([('id','=',121)]):

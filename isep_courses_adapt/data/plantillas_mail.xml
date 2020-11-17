@@ -4,15 +4,15 @@
         <!--Email template -->
         <record id="email_template_aviso_falta_acceso" model="mail.template">
             <field name="name">Email Student Access</field>
-            <field name="email_from">${(object.user_id.email and '%s &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or '')|safe}</field>
-            <field name="subject">Recordatorio de Ingleso</field>
+            <field name="email_from">secretaria@isep.com</field>
+            <field name="subject">Recordatorio de Ingreso</field>
             <field name="email_to">ejimenmail@gmail.com</field>
-            <field name="partner_to"></field>
-            <field name="model_id" ref="account.model_account_invoice"/>
+<!--            <field name="partner_to"></field>-->
+            <field name="model_id" ref="model_op_student"/>
             <field name="auto_delete" eval="False"/>
-            <field name="report_template" ref="account.account_invoices"/>
-            <field name="report_name">Invoice_${(object.number or '').replace('/','_')}_${object.state == 'draft' and 'draft' or ''}</field>
-            <field name="lang">${object.partner_id.lang}</field>
+<!--            <field name="report_template" ref="account.account_invoices"/>-->
+<!--            <field name="report_name">Invoice_${(object.number or '').replace('/','_')}_${object.state == 'draft' and 'draft' or ''}</field>-->
+<!--            <field name="lang">${object.partner_id.lang}</field>-->
             <field name="body_html"><![CDATA[
 <style>
 table, th, td {
@@ -102,15 +102,15 @@ th, td {
 
 
         <!--Email template -->
-        <record id="email_template_creacion_lead_ised_asturias" model="mail.template">
-            <field name="name">Aviso lead asturias creado</field>
-            <field name="email_from">${(object.user_id.email and '%s &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or '')|safe}</field>
-            <field name="subject">${object.company_id.name} Lead (Ref ${object.name or 'n/a'})</field>
-            <field name="email_to">asturias@ised.es,tlopera@grupoisep.com</field>
-            <field name="partner_to"></field>
-            <field name="model_id" ref="crm.model_crm_lead"/>
+        <record id="email_template_aviso_falta_acceso" model="mail.template">
+            <field name="name">Email Student Access</field>
+            <field name="email_from">secretaria@isep.com</field>
+            <field name="subject">Recordatorio de Ingreso</field>
+            <field name="email_to">ejimenmail@gmail.com</field>
+<!--            <field name="partner_to"></field>-->
+            <field name="model_id" ref="model_op_student"/>
             <field name="auto_delete" eval="False"/>
-            <field name="lang">${object.partner_id.lang}</field>
+<!--            <field name="lang">${object.partner_id.lang}</field>-->
             <field name="body_html"><![CDATA[
 <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
 
