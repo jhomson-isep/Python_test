@@ -29,10 +29,10 @@ class SaleOrder(models.Model):
         if default_stage:
             values['stage_id'] = default_stage.id
         # compute the next date
-        today = datetime.date.today()
+        date_start = self.x_Fecha_Primer_Recibo
         periods = {'daily': 'days', 'weekly': 'weeks', 'monthly': 'months', 'yearly': 'years'}
         invoicing_period = relativedelta(**{periods[template.recurring_rule_type]: template.recurring_interval})
-        recurring_next_date = today + invoicing_period
+        recurring_next_date = date_start + invoicing_period
         values['recurring_next_date'] = fields.Date.to_string(recurring_next_date)
         return values
 
