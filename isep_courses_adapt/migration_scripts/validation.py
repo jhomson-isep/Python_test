@@ -23,7 +23,7 @@ def create_name(firts, last):
         if firts is None and last is None:
             return ''
         else:
-            return firts + last
+            return firts + ' ' + last
 
 
 def cupr_or_dni(curp, dni):
