@@ -4,7 +4,9 @@ from connect_postgresql import PSQL
 from psycopg2 import DatabaseError, DataError, IntegrityError, OperationalError, ProgrammingError
 from pyodbc import Error as ESSQL
 from datetime import date, datetime
-from validation import create_name, verify_char_field, verify_id, replace_special_caracter
+from validation import create_name, verify_char_field, verify_id, replace_special_caracter, get_countrys
+
+COUNTRYS = get_countrys()
 
 try:
     sql_server = SQL()
@@ -15,7 +17,14 @@ try:
             exist_faculty = postgres.get_faculty_by_nifp(faculty.NIFP)
             if exist_faculty is None:
                 app_country = sql_server.get_country_by_nifp(faculty.NIFP)
-                country_id = postgres.get_country_by_name(app_country.country) if app_country is not None else 'NULL'
+                if app_country is not None:
+                    country = app_country.country
+                    if country in COUNTRYS:
+                        country_id = postgres.get_country_by_name(COUNTRYS[country])
+                    else:
+                        country_id = 'NULL'
+                else:
+                    country_id = 'NULL'
                 partner_id = postgres.get_partner_by_vat(faculty.NIFP)
                 if partner_id is None:
                     values = [

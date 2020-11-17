@@ -162,9 +162,9 @@ class OpCourse(models.Model):
                         res = super(OpCourse, self).create(course_values)
                         print(res)
 
-                if int_break == 50 and os.name != "posix":
-                    break
-                int_break += 1
+                # if int_break == 50 and os.name != "posix":
+                #     break
+                # int_break += 1
             except Exception as e:
                 logger.info("===== Fallo ======")
                 logger.info(e)

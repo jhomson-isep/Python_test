@@ -4,7 +4,9 @@ from connect_postgresql import PSQL
 from psycopg2 import DatabaseError, DataError, IntegrityError, OperationalError, ProgrammingError
 from pyodbc import Error as ESSQL
 from datetime import datetime
-from validation import create_name, cupr_or_dni, verify_id, verify_char_field, replace_special_caracter
+from validation import create_name, cupr_or_dni, verify_id, verify_char_field, replace_special_caracter, get_countrys
+
+COUNTRYS = get_countrys()
 
 try:
     sql_server = SQL()
@@ -17,8 +19,15 @@ try:
             exist_student = postgres.get_sutdent_by_gr_no(student.N_Id)
             if exist_student is None:
                 app_country = sql_server.get_country_by_nid(student.N_Id)
-                country_id = postgres.get_country_by_name(app_country.country) if app_country is not None else 'NULL'
-                partner_id = postgres.get_partner_by_vat(student.N_Id)
+                if app_country is not None:
+                    country = app_country.country
+                    if country in COUNTRYS:
+                        country_id = postgres.get_country_by_name(COUNTRYS[country])
+                    else:
+                        country_id = 'NULL'
+                else:
+                    country_id = 'NULL'
+                partner_id = postgres.get_partner_by_vat(str(student.N_Id))
                 if partner_id is None:
                     values = [
                         replace_special_caracter(create_name(student.Nombre, student.Apellidos)),
@@ -29,12 +38,12 @@ try:
                         replace_special_caracter(verify_char_field(student.CodPostal)),
                         replace_special_caracter(verify_char_field(student.Poblacion)),
                         verify_id(country_id),
-                        student.N_Id,
+                        str(student.N_Id),
                         True
                     ]
                     print('Partner:', values)
                     postgres.create_partner(values)
-                partner_id = postgres.get_partner_by_vat(cupr_or_dni(student.CURPMx, student.DNI))
+                partner_id = postgres.get_partner_by_vat(student.N_Id)
                 campus_id = postgres.get_campus_by_code(student.Sede)
                 document_type_id = postgres.get_document_type_by_code(student.TipoDocumento)
                 study_type_id = postgres.get_study_type_by_code(student.TipoEstudios)

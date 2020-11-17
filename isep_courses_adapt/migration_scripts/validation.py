@@ -1,6 +1,17 @@
 # -*- coding: utf-8 -*-
 from datetime import date
 import re
+import csv
+
+
+def get_countrys():
+    countrys = {}
+    with open("countrys.csv", newline='') as csvfile:
+        rows = csv.reader(csvfile, delimiter=';')
+        for row in rows:
+            countrys[row[0]] = row[1]
+        csvfile.close()
+    return countrys
 
 
 def create_name(firts, last):
