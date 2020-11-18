@@ -4,6 +4,8 @@ import datetime
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models, _
+import logging
+logger = logging.getLogger(__name__)
 
 
 class SaleOrder(models.Model):
@@ -34,6 +36,12 @@ class SaleOrder(models.Model):
         invoicing_period = relativedelta(**{periods[template.recurring_rule_type]: template.recurring_interval})
         recurring_next_date = date_start + invoicing_period
         values['recurring_next_date'] = fields.Date.to_string(recurring_next_date)
+        logger.info("################Date_Start##############")
+        logger.info(date_start)
+        logger.info("################Recurring_Next_Date##############")
+        logger.info(recurring_next_date)
+        logger.info("###############Vaues##########################")
+        logger.info(values.get('date_start'))
         return values
 
     def _prepare_subscription_line_data(self):
@@ -41,6 +49,7 @@ class SaleOrder(models.Model):
         values = list()
         for line in self:
             if line.product_id.tipodecurso != 'Matrícula':
+                logger.info("Estuve aquí")
                 values.append((0, False, {
                     'product_id': line.product_id.id,
                     'name': line.name,
