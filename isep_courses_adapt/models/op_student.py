@@ -48,24 +48,15 @@ class OpStudent(models.Model):
         'N_ID Number must be unique per student!'
     )]
 
-    # def _get_last_access(self):
-    #     for record in self:
-    #         last_access = record.env['op.student.access'].search(
-    #             [('student_id', '=', record.id)], order='id desc', limit=1)
-    #         if last_access.student_access:
-    #             access_ago = fields.Datetime.today() - last_access.student_access
-    #             minutes, seconds = divmod(access_ago.seconds, 60)
-    #             hours, minutes = divmod(minutes, 60)
-    #             access_string = "Hace "
-    #             if access_ago.days > 0:
-    #                 access_string += "{0} días ".format(access_ago.days)
-    #             if hours > 0:
-    #                 access_string += "{0} horas ".format(hours)
-    #             if minutes > 0:
-    #                 access_string += "{0} minutos ".format(minutes)
-    #             record.last_access = access_string
-    #         else:
-    #             record.last_access = "Nunca"
+
+    def equal_datetimes_YYMMDDHHmm(self,ddtime1,ddtime2):
+        if isinstance(ddtime1, datetime.datetime) and\
+           isinstance(ddtime2, datetime.datetime) and \
+            ddtime1.replace(minute=0, second=0, microsecond=0) == \
+            ddtime2.replace(minute=0, second=0, microsecond=0):
+            return True
+        else:
+            return False
 
     def update_access(self, rows):
         logger.info("**************************************")
@@ -89,13 +80,7 @@ class OpStudent(models.Model):
                             [('student_id', '=', student.id)])
                         if len(_access) > 0:
                             _access = _access[-1]
-                        year, month, day = 0, 0, 0
-                        if isinstance(_access.student_access, datetime.datetime):
-                            year = _access.student_access.year
-                            month = _access.student_access.month
-                            day = _access.student_access.day
-
-                        if not (last_access.year == year and last_access.month == month and last_access.day == day):
+                        if not self.equal_datetimes_YYMMDDHHmm(last_access,_access.student_access):
                             self.env['op.student.access'].create(acces_values)
                             logger.info('Record created')
                 except Exception as e:
@@ -139,25 +124,11 @@ class OpStudent(models.Model):
                                 'student_id': student.id,
                                 'student_access': last_access
                             }
-                            #### Validacion de Duplicidad ########
                             _access = self.env['op.student.access'].search(
                                 [('student_id', '=', student.id)])
                             if len(_access)>0:
                                 _access=_access[-1]
-                            year, month, day = 0, 0, 0
-                            if isinstance(_access.student_access, datetime.datetime):
-                                year = _access.student_access.year
-                                month = _access.student_access.month
-                                day = _access.student_access.day
-                            if not (last_access.year == year and \
-                                    last_access.month == month and \
-                                    last_access.day == day):
-                                if student.id in (114,88,115,98):
-                                    logger.info('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
-                                    logger.info('id:{} name:{} lastaccess:{} last_access:{}'. \
-                                            format(student.id, student.first_name, row['lastaccess'], last_access))
-                                    logger.info('_access:{}'.format(_access.student_access))
-                                    logger.info('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+                            if not self.equal_datetimes_YYMMDDHHmm(last_access,_access.student_access):
                                 self.env['op.student.access'].create(access_values)
                 except Exception as e:
                     logger.info(e)
@@ -189,19 +160,11 @@ class OpStudent(models.Model):
                         [('student_id', '=', self.id)])
                     if len(_access) > 0:
                         _access = _access[-1]
-                    year, month, day = 0, 0, 0
-                    if isinstance(_access.student_access, datetime.datetime):
-                        year = _access.student_access.year
-                        month = _access.student_access.month
-                        day = _access.student_access.day
-                    ### Borrar...
-                    if self.id in (114, 88, 115, 98):
-                        logger.info('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
-                        logger.info('id:{} name:{} lastaccess:{} last_access:{}'. \
-                                    format(self.id, self.first_name, row['lastaccess'], last_access))
-                        logger.info('_access:{}'.format(_access.student_access))
-                        logger.info('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
-                    if not (last_access.year == year and last_access.month == month and last_access.day == day):
+                    if self.document_number in ('AU449596','G08428409','45522791','1030639754'):
+                        logger.info('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+                        logger.info('last_access:{} _access:{}'.format(last_access,_access.student_access))
+                        logger.info('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+                    if not self.equal_datetimes_YYMMDDHHmm(last_access,_access.student_access):
                         self.env['op.student.access'].create(access_values)
                 except Exception as e:
                     logger.info(e)
