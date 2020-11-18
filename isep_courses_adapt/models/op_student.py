@@ -86,12 +86,15 @@ class OpStudent(models.Model):
                             'student_access': last_access
                         }
                         _access = self.env['op.student.access'].search(
-                            [('student_id', '=', student.id)], limit=1)
+                            [('student_id', '=', student.id)])
+                        if len(_access) > 0:
+                            _access = _access[-1]
                         year, month, day = 0, 0, 0
                         if isinstance(_access.student_access, datetime.datetime):
                             year = _access.student_access.year
                             month = _access.student_access.month
                             day = _access.student_access.day
+
                         if not (last_access.year == year and last_access.month == month and last_access.day == day):
                             self.env['op.student.access'].create(acces_values)
                             logger.info('Record created')
@@ -138,7 +141,9 @@ class OpStudent(models.Model):
                             }
                             #### Validacion de Duplicidad ########
                             _access = self.env['op.student.access'].search(
-                                [('student_id', '=', student.id)], limit=1)
+                                [('student_id', '=', student.id)])
+                            if len(_access)>0:
+                                _access=_access[-1]
                             year, month, day = 0, 0, 0
                             if isinstance(_access.student_access, datetime.datetime):
                                 year = _access.student_access.year
@@ -147,6 +152,12 @@ class OpStudent(models.Model):
                             if not (last_access.year == year and \
                                     last_access.month == month and \
                                     last_access.day == day):
+                                if student.id in (114,88,115,98):
+                                    logger.info('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+                                    logger.info('id:{} name:{} lastaccess:{} last_access:{}'. \
+                                            format(student.id, student.first_name, row['lastaccess'], last_access))
+                                    logger.info('_access:{}'.format(_access.student_access))
+                                    logger.info('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
                                 self.env['op.student.access'].create(access_values)
                 except Exception as e:
                     logger.info(e)
@@ -175,12 +186,21 @@ class OpStudent(models.Model):
                         'student_access': last_access
                     }
                     _access = self.env['op.student.access'].search(
-                        [('student_id', '=', self.id)], limit=1)
+                        [('student_id', '=', self.id)])
+                    if len(_access) > 0:
+                        _access = _access[-1]
                     year, month, day = 0, 0, 0
                     if isinstance(_access.student_access, datetime.datetime):
                         year = _access.student_access.year
                         month = _access.student_access.month
                         day = _access.student_access.day
+                    ### Borrar...
+                    if self.id in (114, 88, 115, 98):
+                        logger.info('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+                        logger.info('id:{} name:{} lastaccess:{} last_access:{}'. \
+                                    format(self.id, self.first_name, row['lastaccess'], last_access))
+                        logger.info('_access:{}'.format(_access.student_access))
+                        logger.info('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
                     if not (last_access.year == year and last_access.month == month and last_access.day == day):
                         self.env['op.student.access'].create(access_values)
                 except Exception as e:
