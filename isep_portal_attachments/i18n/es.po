@@ -45,3 +45,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:isep_portal_attachments.view_attachment_form
 msgid "Your feedback..."
 msgstr "Sus comentarios..."
+
+#. module: isep_portal_attachments
+#: model_terms:ir.ui.view,arch_db:isep_portal_attachments.view_purchase_order_filter_inherit
+msgid "Has invoice"
+msgstr "Pedidos con factura"

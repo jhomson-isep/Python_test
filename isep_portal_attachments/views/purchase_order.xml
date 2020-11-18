@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Inherit search View to Modify it -->
+        <record id="view_purchase_order_filter_inherit" model="ir.ui.view">
+            <field name="name">view.purchase.order.filter.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='my_purchases']" position="after">
+                    <filter name="has_invoice_attach" string="Has invoice" domain="[('has_invoice_attached','=', True)]"/>
+                    <separator/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
