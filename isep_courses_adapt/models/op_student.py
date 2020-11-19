@@ -205,7 +205,7 @@ class OpStudent(models.Model):
                             days = self.get_days_without_access(student.id)
                             days = ast.literal_eval(days)
                             logger.info('dias:{}'.format(days))
-                            if days in ( 11, 5, 12 , 20, 40, 70, 80, 100):
+                            if days in ( 5, 12 , 20, 40, 70, 80, 100):
                                 template.send_mail(student.id, force_send=True, raise_exception=True)
                                 logger.info('email sended to {}'.format(student.first_name))
                 except Exception as e:
