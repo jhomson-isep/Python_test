@@ -11,3 +11,4 @@ access_op_university_admin,access.op.university.admin,isep_courses_adapt.model_o
 access_op_workplace_admin,access.op.workplace.admin,isep_courses_adapt.model_op_workplace,base.group_system,1,1,1,1
 access_op_student_documents_admin,access.op.student.documents.admin,isep_courses_adapt.model_op_student_documents,base.group_system,1,1,1,1
 access_op_student_access_admin,access.op.student.access.admin,isep_courses_adapt.model_op_student_access,base.group_system,1,1,1,1
+access_op_area_course_admin,access.op.area.course.admin,isep_courses_adapt.model_op_area_course,base.group_system,1,1,1,1

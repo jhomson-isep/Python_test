@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 from requests import get, post
 from .op_sql import SQL
 import logging
@@ -36,6 +36,10 @@ class OpCourse(models.Model):
     acknowledgments = fields.Text("Acknowledgments", size=700)
     reconeixements = fields.Text("Reconeixements", size=700)
     content = fields.Text("Content", size=700)
+    area_id = fields.Many2one('op.area.course', "Area of Course")
+
+    _sql_constraints = [('unique_course_code',
+                         'check(1=1)', 'Delete constrian unique code per course!')]
 
     @api.model
     def create(self, values):
@@ -119,6 +123,15 @@ class OpCourse(models.Model):
 
         res = super(OpCourse, self).write(values)
         return res
+
+
+    @api.one
+    @api.constrains('area_id', 'code')
+    def _check_code_area(self):
+        res = self.search([('area_id', '=', self.area_id.id), ('code', '=', self.code)], limit=1)
+        if res.id:
+            raise ValidationError(_('One code and area for course!'))
+
 
     def import_courses(self):
         s = SQL()
