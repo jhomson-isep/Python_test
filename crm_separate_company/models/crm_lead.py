@@ -38,7 +38,7 @@ class CrmLead(models.Model):
         zapier = lead.get('zapier')
         if zapier:
             # Buscar el cliente mediante el email utilizando el self.env en el modelo res.partner, si no existe se crea
-            client = self.env['res.partner'].sudo().search([('email', 'ilike', lead.get('email_from'))], limit=1)
+            client = self.env['res.partner'].sudo().search([('email', '=ilike', lead.get('email_from'))], limit=1)
             if len(client) > 0:
                 try:
                     lead.update({'partner_id': client.id})
