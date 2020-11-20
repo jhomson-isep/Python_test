@@ -539,3 +539,8 @@ msgstr "Documentación"
 #: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
 msgid "Access"
 msgstr "Accesos"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_admission_register__batch_id
+msgid "Batch"
+msgstr "Grupo"
