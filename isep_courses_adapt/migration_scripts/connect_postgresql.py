@@ -85,9 +85,9 @@ class PSQL():
 
     def create_partner(self, values):
         self.cr.execute("INSERT INTO res_partner "
-                        "(name, email, phone, mobile, street,"
-                        "zip, city, country_id, vat, is_student, active) VALUES ('%s', '%s', '%s', '%s',"
-                        " '%s', '%s', '%s', %s, '%s', %s, TRUE);" % (values[0], values[1], values[2],
+                        "(display_name, name, email, phone, mobile, street,"
+                        "zip, city, country_id, vat, is_student, active) VALUES ('%s','%s', '%s', '%s', '%s',"
+                        " '%s', '%s', '%s', %s, '%s', %s, TRUE);" % (values[0], values[0], values[1], values[2],
                                                                      values[3], values[4], values[5],
                                                                      values[6], values[7], values[8],
                                                                      values[9])
