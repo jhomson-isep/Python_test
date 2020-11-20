@@ -6,131 +6,61 @@
             <field name="name">Email Student Access</field>
             <field name="email_from">secretaria@isep.com</field>
             <field name="subject">Recordatorio de Ingreso</field>
-            <field name="email_to">ejimenmail@gmail.com</field>
-<!--            <field name="partner_to"></field>-->
+            <field name="email_to">${object.email}</field>
             <field name="model_id" ref="model_op_student"/>
             <field name="auto_delete" eval="False"/>
-<!--            <field name="report_template" ref="account.account_invoices"/>-->
-<!--            <field name="report_name">Invoice_${(object.number or '').replace('/','_')}_${object.state == 'draft' and 'draft' or ''}</field>-->
-<!--            <field name="lang">${object.partner_id.lang}</field>-->
             <field name="body_html"><![CDATA[
-<style>
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-th, td {
-    padding: 5px;
-    text-align: left;
-}
-</style>
 <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
-
-    <p>Hola ${object.name_to_factura_validada},</p>
-    <p>Se ha validado la factura: </p>
-    <ul>
-        <li>Número: ${object.number}</li>
-        <li>Cliente: ${object.partner_id.name}</li>
-        <li>Compañía: ${object.company_id.name}</li>
-    </ul>
-    % if object.sale_order_ids and object.sale_order_ids[0].tarjeta_credito:
-        <p>Datos de la tarjeta de crédito: </p>
-        <ul>
-            <li>Titular: ${object.sale_order_ids[0].tarjeta_credito.name}</li>
-            <li>Número: ${object.sale_order_ids[0].tarjeta_credito.acquirer_ref}</li>
-            <li>CSV: ${object.sale_order_ids[0].tarjeta_credito.csv}</li>
-            <li>Fecha de caducidad: ${object.sale_order_ids[0].tarjeta_credito.caducidad}</li>
-        </ul>
-    % endif
-    <p>
-        Pagos:
-    </p>
-    <table style="border: 1px solid black;border-collapse: collapse;">
-        <tr>
-            <th>Cliente</th>
-            <th>Cuenta</th>
-            <th>Etiqueta</th>
-            <th>Fecha</th>
-            % if object.type == "out_invoice":
-                <th>Importe</th>
-            % endif
-            % if object.type == "out_refund":
-                <th>Debe</th>
-                <th>Haber</th>
-            % endif
-        </tr>
-        % if object.type == "out_invoice":
-            % for line in object.move_id.line_ids:
-                % if line.account_id.code == "430000":
-                    <tr>
-                        <td>
-                            % if line.partner_id:
-                                ${line.partner_id.name}
-                            % endif
-                        </td>
-                        <td>${line.account_id.code}</td>
-                        <td>${line.name}</td>
-                        <td>${line.date_maturity}</td>
-                        <td>${line.debit}</td>
-                    </tr>
-                % endif
-            % endfor
-        % endif
-        % if object.type == "out_refund":
-            % for line in object.move_id.line_ids:
-                <tr>
-                    <td>
-                        % if line.partner_id:
-                            ${line.partner_id.name}
-                        % endif
-                    </td>
-                    <td>${line.account_id.code}</td>
-                    <td>${line.name}</td>
-                    <td>${line.date_maturity}</td>
-                    <td>${line.debit}</td>
-                    <td>${line.credit}</td>
-                </tr>
-            % endfor
-        % endif
-    </table><br/>
-
-    Un saludo,<br/>
-    ${object.company_id.name}
+<p style='color: rgb(0, 0, 0); font-family: "Lucida Grande", Helvetica, Verdana, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial; margin: 0px 0px 1rem;'>
+${object.greeting(object.gender)} ${object.first_name}</p>
+<p style='color: rgb(0, 0, 0); font-family: "Lucida Grande", Helvetica, Verdana, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial; margin: 0px 0px 1rem;'>
+<br>
+</p>
+<p style='color: rgb(0, 0, 0); font-family: "Lucida Grande", Helvetica, Verdana, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial; margin: 0px 0px 1rem;'>
+Observamos que tienes ${object.get_days_without_access(object.id)}<span style="color: rgb(34, 34, 34); font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial; text-align: inherit;">&nbsp;dias sin conectarte a la plataforma, te escribimos este email para recordarte lo importante que es no olvidar tu estudio y proceder adelante.
+En breve recibir&aacute;s una llamada de parte del departamento de atenci&oacute;n al alumnado para ver en que te podemos apoyar.</span></p>
+<p style='color: rgb(0, 0, 0); font-family: "Lucida Grande", Helvetica, Verdana, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial; margin: 0px 0px 1rem;'>
+<br>
+</p>
+<p style='color: rgb(0, 0, 0); font-family: "Lucida Grande", Helvetica, Verdana, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial; margin: 0px 0px 1rem;'>
+Un saludo</p>
+<p style='color: rgb(0, 0, 0); font-family: "Lucida Grande", Helvetica, Verdana, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial; margin: 0px 0px 1rem;'>
+<br>
+</p>
+<p style='color: rgb(0, 0, 0); font-family: "Lucida Grande", Helvetica, Verdana, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial; margin: 0px 0px 1rem;'>
+Secretar&iacute;a Academica</p>
 </div>
             ]]></field>
         </record>
-
 
         <!--Email template -->
-        <record id="email_template_aviso_falta_acceso" model="mail.template">
-            <field name="name">Email Student Access</field>
-            <field name="email_from">secretaria@isep.com</field>
-            <field name="subject">Recordatorio de Ingreso</field>
-            <field name="email_to">ejimenmail@gmail.com</field>
-<!--            <field name="partner_to"></field>-->
-            <field name="model_id" ref="model_op_student"/>
-            <field name="auto_delete" eval="False"/>
-<!--            <field name="lang">${object.partner_id.lang}</field>-->
-            <field name="body_html"><![CDATA[
-<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+<!--        <record id="email_template_aviso_falta_acceso" model="mail.template">-->
+<!--            <field name="name">Email Student Access</field>-->
+<!--            <field name="email_from">secretaria@isep.com</field>-->
+<!--            <field name="subject">Recordatorio de Ingreso</field>-->
+<!--            <field name="email_to">${object.email}</field>-->
+<!--            <field name="model_id" ref="model_op_student"/>-->
+<!--            <field name="auto_delete" eval="False"/>-->
+<!--            <field name="body_html"><![CDATA[-->
+<!--<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">-->
 
-    <p>Hola,</p>
-    <p>Se ha creado la iniciativa: </p>
-    <ul>
-        <li>ID: ${object.id}</li>
-        <li>Iniciativa: ${object.name}</li>
-        <li>Nombre: ${object.contact_name}</li>
-        <li>Teléfono: ${object.phone}</li>
-        <li>Curso: ${object.x_producto_id.name}</li>
-        <li>Area: ${object.x_area_id.name}</li>
-        <li>Observaciones: ${object.description}</li>
-    </ul>
+<!--    <p>Hola,</p>-->
+<!--    <p>Se ha creado la iniciativa: </p>-->
+<!--    <ul>-->
+<!--        <li>ID: ${object.id}</li>-->
+<!--        <li>Iniciativa: ${object.name}</li>-->
+<!--        <li>Nombre: ${object.contact_name}</li>-->
+<!--        <li>Teléfono: ${object.phone}</li>-->
+<!--        <li>Curso: ${object.x_producto_id.name}</li>-->
+<!--        <li>Area: ${object.x_area_id.name}</li>-->
+<!--        <li>Observaciones: ${object.description}</li>-->
+<!--    </ul>-->
 
-    Un saludo,<br/>
-    ${object.company_id.name}
-</div>
-            ]]></field>
-        </record>
+<!--    Un saludo,<br/>-->
+<!--    ${object.company_id.name}-->
+<!--</div>-->
+<!--            ]]></field>-->
+<!--        </record>-->
     </data>
 </openerp>
 
