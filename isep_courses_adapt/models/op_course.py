@@ -36,6 +36,10 @@ class OpCourse(models.Model):
     acknowledgments = fields.Text("Acknowledgments", size=700)
     reconeixements = fields.Text("Reconeixements", size=700)
     content = fields.Text("Content", size=700)
+    area_id = fields.Many2one('op.area.course', "Area of Course")
+
+    _sql_constraints = [('unique_course_code',
+                         'check(1=1)', 'Delete constrian unique code per course!')]
 
     @api.model
     def create(self, values):
@@ -119,6 +123,28 @@ class OpCourse(models.Model):
 
         res = super(OpCourse, self).write(values)
         return res
+
+
+    @api.one
+    @api.constrains('document_type_id', 'student_id', 'faculty_id')
+    def _check_ids(self):
+        if self.student_id.id:
+            res = self.search(
+                [('document_type_id', '=', self.document_type_id.id), ('student_id', '=', self.student_id.id)],
+                limit=1).id
+        elif self.faculty_id.id:
+            res = self.search(
+                [('document_type_id', '=', self.document_type_id.id), ('faculty_id', '=', self.faculty_id.id)],
+                limit=1).id
+        if res != self.id:
+            gauth = self.Gauth()
+            drive = GoogleDrive(gauth)
+            file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
+            for folders in file_list:
+                if folders['id'] == self.search([('id', '=', res)], limit=1).folder_id:
+                    folders.Delete()
+                    break
+            raise ValidationError(_('One documet type per person!!'))
 
     def import_courses(self):
         s = SQL()

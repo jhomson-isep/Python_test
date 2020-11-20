@@ -10,6 +10,7 @@
                 <field name="evaluation_type_id"/>
                 <field name="modality_id"/>
                 <field name="section"/>
+                <field name="area_id" />
             </xpath>
 
             <xpath expr="//form/sheet/group[@name='subject']" position="replace">

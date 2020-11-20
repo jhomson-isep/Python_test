@@ -1,50 +1,40 @@
 # -*- coding: utf-8 -*-
-from sqlalchemy import create_engine, or_
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.schema import Table, MetaData
-from sqlalchemy.ext.declarative import declarative_base
-import os
+from sqlalchemy import and_
+from sqlachemy_conn import get_session_server, GinAreaCurso, get_pg_session, OpAreaCourse, GinCurso, OpCourse
+# SQL SERVER SESSION
+session_server = get_session_server()
+# SQL SERVER AREAS
+areas  = session_server.query(GinAreaCurso).all()
+# POSTGRES SERVER SESSION
+session_pg = get_pg_session()
 
-Base_pg = declarative_base()
-postgres = create_engine('postgresql+psycopg2://openpg:openpgpwd@localhost:5432/ISPE')
-metadata_pg = MetaData(bind=postgres)
-driver = 'SQL+Server'  # for Windows
-if os.name == "posix":
-    driver = 'ODBC+Driver+17+for+SQL+Server'  # for linux
-Base_server = declarative_base()
-server = create_engine('mssql+pyodbc://sa:Gr5p4mr3@85.118.244.220/GrupoISEPxtra?driver=%s' % driver)
-metadata_server = MetaData(bind=server)
-
-
-class OpCourse(Base_pg):
-    __table__ = Table('op_course', metadata_pg, autoload=True)
-
-
-class GinCurso(Base_server):
-    __table__ = Table('gin_Cursos', metadata_server, autoload=True)
-
-
-#SQL SERVER SESSION
-Session_server = sessionmaker()
-Session_server.configure(bind=server)
-session_server = Session_server()
-#SQL SERVER CURSOS
-cursos = session_server.query(GinCurso).all()
-#POSTGRES SERVER SESSION
-Session_pg = sessionmaker()
-Session_pg.configure(bind=postgres)
-session_pg = Session_pg()
-
-for curso in cursos:
-    opcourse = session_pg.query(OpCourse).filter(or_(OpCourse.name == curso.Nombre, OpCourse.code == curso.Codigo)).first()
+for area in areas:
+    opareacurso = session_pg.query(OpAreaCourse).filter(OpAreaCourse.code == area.Codigo).firts()
+    if opareacurso is None:
+        opareacurso = OpAreaCourse()
+        opareacurso.code = area.Codigo
+        opareacurso.name = area.Nombre
+        session_pg.add(opareacurso)
+        session_pg.commit()
+        print("Area:", opareacurso.code)
+    else:
+        print("Area Already exist:", opareacurso.code)
+areacourses = session_server.query(GinCurso.Codigo.label('code_course'), GinCurso.Nombre, GinAreaCurso.Codigo.label('code_area')).filter(
+    GinCurso.AreaID == GinAreaCurso.ID).all()
+for areac in areacourses:
+    opareacourse = session_pg.query(OpAreaCourse).filter(OpAreaCourse.code == areac.code_area)
+    if opareacourse is None:
+        continue
+    opcourse = session_pg.query(OpCourse).filter(
+        and_(OpCourse.code == areac.code_course, OpCourse.area_id == opareacourse.id)).first()
     if opcourse is None:
         opcourse = OpCourse()
-        opcourse.name = curso.Nombre
-        opcourse.code = curso.Codigo
+        opcourse.name = areac.Nombre
+        opcourse.code = areac.code_course
         opcourse.active = True
         opcourse.evaluation_type = 'Normal'
         session_pg.add(opcourse)
         session_pg.commit()
         print("Course:", opcourse.code)
     else:
-        print("Al ready exist:", opcourse.code)
+        print("Course Already exist:", opcourse.code)

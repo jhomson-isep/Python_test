@@ -1,4 +1,3 @@
-from addons.openeducat_erp.openeducat_core.models import student
 from odoo import fields, api, models
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
