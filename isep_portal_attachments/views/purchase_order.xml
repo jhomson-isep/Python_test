@@ -9,6 +9,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//filter[@name='my_purchases']" position="after">
                     <filter name="has_invoice_attach" string="Has invoice" domain="[('has_invoice_attached','=', True)]"/>
+                    <filter name="order_canceled" string="Declined" domain="[('state','=', 'cancel')]"/>
                     <separator/>
                 </xpath>
             </field>
