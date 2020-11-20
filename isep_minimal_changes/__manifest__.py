@@ -14,14 +14,19 @@
     "license": "AGPL-3",
     "depends": [
         "base",
+        "crm",
         "utm",
         "sale",
-        "helpdesk"
+        "helpdesk",
+        "project",
+        "isep_custom"
     ],
     "data": [
         "views/res_partner.xml",
         "views/helpdesk_ticket.xml",
-        "views/helpdesk_team.xml"
+        "views/helpdesk_team.xml",
+        "views/project_task.xml",
+        "views/crm_lead.xml"
     ],
     'installable': True,
 }

@@ -64,8 +64,6 @@ class res_partner(models.Model):
         Overwrite to force 'write' in 'create'
         """
         partner_id = super(res_partner, self).create(values)
-        logger.info("******** Values of partner on crm_duplicates model ********")
-        logger.info(values)
         self.browse(partner_id.id).write({})
         return partner_id
 

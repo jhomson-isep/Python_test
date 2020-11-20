@@ -20,4 +20,5 @@ from . import op_student_documents
 from . import op_student_access
 from . import op_student
 from . import op_faculty
+from . import op_mysql
 from . import op_area_course

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="isep_view_move_form" model="ir.ui.view">
+		<field name="name">isep.account.move.line</field>
+		<field name="model">account.move</field>
+		<field name="inherit_id" ref="account.view_move_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='credit']" position="after">
+	    		<field name="date_maturity" invisible="1"/>
+	    	</xpath>
+	    	<xpath expr="//tree[1]" position="attributes">
+	    		<attribute name="default_order">account_id,date_maturity</attribute>
+	    	</xpath>
+		</field>
+	</record>
+</odoo>
