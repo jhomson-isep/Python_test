@@ -544,3 +544,8 @@ msgstr "Accesos"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_admission_register__batch_id
 msgid "Batch"
 msgstr "Grupo"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_sale_order_line__batch_id
+msgid "Preferred batch"
+msgstr "Grupo de preferencia"

@@ -21,4 +21,7 @@ from . import op_student_access
 from . import op_student
 from . import op_faculty
 from . import op_mysql
+from . import sale_order
+from . import sale_order_line
+from . import op_admission
 from . import op_admission_register

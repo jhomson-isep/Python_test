@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_order_form_inherit" model="ir.ui.view">
+        <field name="name">View order form inherited</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="after">
+                <field name="batch_id" domain="[('course_id.code','=',product_id_default_code)]"/>
+                <field name="code_product_rel" invisible="1"/>
+                <field name="product_id_default_code" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/form[1]/group[1]/group[1]/field[@name='product_id']"
+                   position="after">
+                <field name="batch_id" domain="[('course_id.code','=',product_id_default_code)]"/>
+                <field name="code_product_rel" invisible="1"/>
+                <field name="product_id_default_code" invisible="1"/>
+            </xpath>
+
+<!--            <xpath expr="//field[@name='order_line']/form/group/group/div/field[@name='product_uom_qty']"-->
+<!--                   position="after">-->
+<!--                &lt;!&ndash;                <field name="batch_id" domain="[('course_id.code','=',product_id_default_code)]"/>&ndash;&gt;-->
+<!--                <field name="code_product_rel" invisible="1"/>-->
+<!--                <field name="product_id_default_code" invisible="1"/>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+</odoo>
