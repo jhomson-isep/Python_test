@@ -13,5 +13,17 @@
             <field name="type">ir.actions.server</field>
         </record>
 
+        <record id="student_mail_access" forcecreate='True' model="ir.cron">
+            <field name="name">Estudiante: Mail segun dias de acceso</field>
+            <field eval="True" name="active"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="model_id" ref="model_op_student"/>
+            <field name="state">code</field>
+            <field name="code">model.cron_send_email()</field>
+            <field name="type">ir.actions.server</field>
+        </record>
+
     </data>
 </odoo>
