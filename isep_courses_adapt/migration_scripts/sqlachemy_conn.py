@@ -10,7 +10,8 @@ driver = 'SQL+Server'  # for Windows
 if os.name == "posix":
     driver = 'ODBC+Driver+17+for+SQL+Server'  # for linux
 Base_server = declarative_base()
-server = create_engine('mssql+pyodbc://sa:Gr5p4mr3@85.118.244.220/GrupoISEPxtra?driver=%s' % driver)
+server = create_engine('mssql+pyodbc://sa:Gr5p4mr3@85.118.244.220'
+                       ':1433/GrupoISEPxtra?driver=%s' % driver)
 metadata_server = MetaData(bind=server)
 
 
