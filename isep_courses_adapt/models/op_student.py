@@ -154,7 +154,6 @@ class OpStudent(models.Model):
         logger.info("End of script: import all students access")
         logger.info("*****************************************")
 
-
     def import_student_access(self):
         logger.info("**************************************")
         logger.info("import student access")
@@ -187,23 +186,24 @@ class OpStudent(models.Model):
                     logger.info(e)
                     continue
 
-    def greeting(self, gender):
-        resp='Apreciado(a)'
+    @staticmethod
+    def greeting(gender):
+        resp = 'Apreciado(a)'
         try:
-            if gender=='f':
-                resp='Apreciada'
-            if gender=='m':
-                resp='Apreciado'
+            if gender == 'f':
+                resp = 'Apreciada'
+            if gender == 'm':
+                resp = 'Apreciado'
         except Exception as e:
-            logg.info(e)
+            logger.info(e)
         return resp
 
-    def get_days_without_access(self,id):
-        return self.env['op.student.access'].\
-               search([('student_id','=', id)])[-1][0].\
-               last_access.split('días')[0].strip()
+    def get_days_without_access(self, id):
+        return self.env['op.student.access']. \
+            search([('student_id', '=', id)])[-1][0]. \
+            last_access.split('días')[0].strip()
 
-    def send_email(self):
+    def cron_send_email(self):
         logger.info("**************************************")
         logger.info("send email")
         logger.info("**************************************")
@@ -234,7 +234,6 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         logger.info("End of script: send email")
         logger.info("**************************************")
-
 
     def import_students(self):
         s = SQL()
