@@ -21,4 +21,4 @@ class HelpDeskTeam(models.Model):
         return ', '.join(emails)
 
     def _helpdesk_team_email(self):
-        self.alias_email = self.alias_id.name + self.alias_id.alias_domain.name
+        self.alias_email = self.alias_id.name + '@' + self.alias_id.alias_domain.name
