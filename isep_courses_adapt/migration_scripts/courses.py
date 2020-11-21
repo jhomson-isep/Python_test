@@ -9,7 +9,8 @@ areas  = session_server.query(GinAreaCurso).all()
 session_pg = get_pg_session()
 
 for area in areas:
-    opareacurso = session_pg.query(OpAreaCourse).filter(OpAreaCourse.code == area.Codigo).firts()
+    opareacurso = session_pg.query(OpAreaCourse).filter(OpAreaCourse.code ==
+                                                        area.Codigo).first()
     if opareacurso is None:
         opareacurso = OpAreaCourse()
         opareacurso.code = area.Codigo
@@ -26,7 +27,7 @@ for areac in areacourses:
     if opareacourse is None:
         continue
     opcourse = session_pg.query(OpCourse).filter(
-        and_(OpCourse.code == areac.code_course, OpCourse.area_id == opareacourse.id)).first()
+        and_(OpCourse.code == areac.code_course, OpCourse.area_id == OpAreaCourse.id)).first()
     if opcourse is None:
         opcourse = OpCourse()
         opcourse.name = areac.Nombre
