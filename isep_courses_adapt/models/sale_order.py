@@ -47,7 +47,7 @@ class SaleOrder(models.Model):
         logger.info("sale order: {}".format(so_id))
         return exists
 
-    def send_educat(self, batch_id):
+    def send_student(self, batch_id):
         is_student = False
         register_id = self.get_register_id(batch_id)
         student_id = self.get_student_id()
@@ -58,14 +58,8 @@ class SaleOrder(models.Model):
             is_student = True
             people = 'ALU:' + str(student_id)
 
-        split_name = self.partner_id.name.split()
-        middle = ''
-        if len(split_name) > 2:
-            first, middle, last = filter(lambda x: x not in ('M', 'Shk', 'BS'),
-                                         self.partner_id.name.split())
-        else:
-            first, last = filter(lambda x: x not in ('M', 'Shk', 'BS'),
-                                 self.partner_id.name.split())
+        first_name, middle_name, last_name, last_name2 = self.split_names(
+            self.partner_id.name)
 
         admission_values = {
             'street': self.partner_id.street, 'zip': self.partner_id.zip,
@@ -73,9 +67,9 @@ class SaleOrder(models.Model):
             'name': self.partner_id.name,
             'batch_id': batch_id.id,
             'email': self.partner_id.email,
-            'last_name': last,
-            'first_name': first,
-            'middle_name': middle,
+            'last_name': last_name,
+            'first_name': first_name,
+            'middle_name': middle_name,
             'country_id': self.partner_id.country_id.id,
             'state_id': self.partner_id.state_id.id,
             'application_date': datetime.datetime.today(),
@@ -111,8 +105,84 @@ class SaleOrder(models.Model):
                 logger.info('Course type =======> {}'.format(course_type))
                 if course_type in ['curso', 'pgrado', 'diplo', 'mgrafico',
                                    'master']:
-                    self.send_educat(line.batch_id)
+                    self.send_student(line.batch_id)
                 else:
                     logger.info(course_type)
             self.in_admission = True
         return {}
+
+    @staticmethod
+    def split_names(name):
+        u"""
+        It separates the first and last names and returns a tuple of three
+        elements (string) formatted for names with the first character capitalized.
+        This is assuming that in the chain the names and surnames are ordered in
+        the ideal way:
+
+        1- name or names.
+        2- first surname.
+        3- second surname.
+
+        split_names( '' )
+        >>> ('Name', 'Middle name', 'Last name')
+        """
+
+        # Separate the full name into spaces.
+        tokens = name.split(" ")
+
+        # List with words of the name.
+        names_list = []
+
+        # Words of surnames and compound names.
+        special_tokens = ['da', 'de', 'di', 'do', 'del', 'la', 'las',
+                          'le', 'los', 'mac', 'mc', 'van', 'von', 'y', 'i',
+                          'san',
+                          'santa']
+
+        prev = ""
+        for token in tokens:
+            _token = token.lower()
+
+            if _token in special_tokens:
+                prev += token + " "
+
+            else:
+                names_list.append(prev + token)
+                prev = ""
+
+        len_names = len(names_list)
+        names, middle_name, last_name, last_second_name = "", "", "", ""
+
+        # When there is no name.
+        if len_names == 0:
+            names = ""
+
+        # When the name consists of a single element.
+        elif len_names == 1:
+            names = names_list[0]
+
+        # When the name consists of two elements.
+        elif len_names == 2:
+            names = names_list[0]
+            last_name = names_list[1]
+
+        # When the name consists of three elements.
+        elif len_names == 3:
+            names = names_list[0]
+            last_name = names_list[1]
+            last_second_name = names_list[2]
+
+        # When the name consists of more than three elements.
+        else:
+            names = names_list[0]
+            middle_name = names_list[1]
+            last_name = names_list[2] + " " + names_list[3]
+            last_second_name = names_list[3]
+
+        # We set the strings with the first character in uppercase.
+        names = names.title()
+        last_name = last_name.title()
+        last_second_name = last_second_name.title()
+        middle_name = middle_name.title()
+
+        return names, middle_name, last_name, last_second_name
