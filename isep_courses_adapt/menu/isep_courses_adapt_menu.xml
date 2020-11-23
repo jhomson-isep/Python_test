@@ -7,6 +7,10 @@
                   parent="openeducat_core.menu_op_school_main"
                   sequence="80"/>
 
+        <menuitem id="menu_op_students_sub" name="Estudiantes"
+                  parent="openeducat_core.menu_op_school_main" sequence="10"
+                  action="openeducat_core.act_open_op_student_view" groups="base.group_system"/>
+
         <menuitem id="menu_op_document_type_sub" name="Tipos de Documentos"
                   parent="isep_courses_adapt.menu_op_student_config_general" sequence="10"
                   action="act_open_op_document_type_view" groups="base.group_system"/>
