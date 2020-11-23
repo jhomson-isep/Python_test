@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import psycopg2
 
-dbname = 'ISPE'
-user = 'openpg'
-password = 'openpgpwd'
+dbname = 'ISEP'
+user = 'odoo'
+password = 'odoo'
 host = 'localhost'
 port = '5432'
 

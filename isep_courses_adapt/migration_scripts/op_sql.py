@@ -17,7 +17,7 @@ class SQL():
         driver = 'ODBC Driver 17 for SQL Server'  # for linux
 
     def query(self, sql):
-        # con_string = 'DSN=%s;UID=%s;PWD=%s;DATABASE=%s;' % (self.dsn,
+        # con_string = 'DSN=%s;UID=%s;PWD=%s;DATABASE=%s;PORT=1433' % (self.dsn,
         # self.user, self.password, self.database)
         logger.info(sql)
         con_string = 'DRIVER={' \
