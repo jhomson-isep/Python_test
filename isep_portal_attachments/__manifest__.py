@@ -17,7 +17,8 @@
         "purchase"
     ],
     "data": [
-        "views/purchase_order_portal.xml"
+        "views/purchase_order_portal.xml",
+        "views/purchase_order.xml"
     ],
     'qweb': [
         'static/src/xml/portal_chatter.xml'

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
+    <data noupdate="1">
         <template id="report_sale_presupuesto">
             <t t-name="isep_custom.report_sale_presupuesto">
                 <t t-call="web.html_container">

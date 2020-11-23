@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="isep_view_order_form" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.order"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='partner_invoice_id']" position="replace">
+        		<field string="Titular de factura" name="partner_invoice_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'invoice'}"/>
+        	</xpath>
+        	<xpath expr="//field[@name='partner_shipping_id']" position="attributes">
+		        <attribute name="invisible">True</attribute>
+		    </xpath>
+        	<xpath expr="//group[@name='sale_pay']/field[@name='invoice_status']" position="before">
+        		<field name="diario_id"/>
+        	</xpath>
+        	<xpath expr="//group[@name='sale_pay']/field[@name='invoice_status']" position="after">
+        		<field name="curso"/>
+        		<field name="x_Matricula_Pagada"/>
+        	</xpath>
+        	<xpath expr="//button[1]" position="before">
+				<button name="action_generar_pagos" string="Generar Pagos" type="object"/>
+				<button name="action_send_aplicacion" string="Enviar Aplicación" type="object" attrs="{'invisible':['|','|', ('state', 'in', ('draft', 'sent')), ('x_pago_id', '=', False), ('x_enviado_crm', '=', True)]}"/>
+        	</xpath>
+        	<xpath expr="//field[@name='payment_term_id']" position="after">
+        		<field name="x_pago_id"/>
+        		<field name="x_Fecha_Primer_Recibo"/>
+        	</xpath>
+ 			<xpath expr="//page[last()]" position="after">
+				<page string="Forma de Pago">
+					<group>
+						<group>
+						</group>
+					</group>
+					<group>
+						<group>
+							<field name="x_Tarjeta"/>
+							<field name="x_CVC"/>
+							<field name="x_Mes"/>
+							<field name="x_Anyo"/>
+						</group>
+					  	<group>
+							<field name="x_CCC"/>
+						</group>
+					</group>
+
+					<group>
+						<field name="x_Recibo_Forma_Pago"/>
+					</group>
+					
+				</page>
+			</xpath>
+			<xpath expr="//button[@name='action_cancel']" position="after">
+				<button name="action_cancel" states="done" type="object" string="Cancel" groups="base.group_sale_manager"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="custom_view_order_form_inherit_sale_stock" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='picking_policy']" position="after">
+        		<field name="x_enviado_crm"/>
+        	</xpath>
+        	<xpath expr="//field[@name='order_line']/form/group/group/field[@name='route_id']" position="after">
+        		<field name="grupo_referencia"/>
+        	</xpath>
+        	<xpath expr="//field[@name='order_line']/tree/field[@name='route_id']" position="after">
+        		<field name="grupo_referencia"/>
+        	</xpath>
+        	<xpath expr="//field[@name='order_line']/form/group/group/field[@name='route_id']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+        	<xpath expr="//field[@name='order_line']/tree/field[@name='route_id']" position="attributes">
+				<attribute name="invisible">True</attribute>
+			</xpath>
+        </field>
+    </record>
+
+    <record id="isep_account_payment_sale_view_order_form" model="ir.ui.view">
+    	<field name="model">sale.order</field>
+        <field name="inherit_id" ref="account_payment_sale.view_order_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='payment_mode_id']" position="after">
+        		<field name="payment_mode_id_name" invisible="1"/>
+        		<field name="cuenta_bancaria"  domain="[('partner_id','=',partner_invoice_id)]" options="{'no_create': True}" widget="selection" attrs="{'invisible': [('payment_mode_id_name', '!=', 'Domiciliado')]}"/>
+                <field name="mandate_id"  domain="[('partner_id','=',partner_invoice_id), ('company_id', '=', company_id), ('partner_bank_id', '=', cuenta_bancaria)]" options="{'no_create': True}" widget="selection" attrs="{'invisible': [('payment_mode_id_name', '!=', 'Domiciliado')]}"/>
+        		<field name="tarjeta_credito"  domain="[('partner_id','=',partner_invoice_id)]" options="{'no_create': True}" widget="selection" attrs="{'invisible': [('payment_mode_id_name', '!=', 'Datáfono')]}"/>
+        	</xpath>
+        </field>
+    </record>
+</odoo>
