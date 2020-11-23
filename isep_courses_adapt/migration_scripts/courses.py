@@ -9,7 +9,7 @@ areas  = session_server.query(GinAreaCurso).all()
 session_pg = get_pg_session()
 
 for area in areas:
-    opareacurso = session_pg.query(OpAreaCourse).filter(OpAreaCourse.code == area.Codigo).firts()
+    opareacurso = session_pg.query(OpAreaCourse).filter(OpAreaCourse.code == area.Codigo).first()
     if opareacurso is None:
         opareacurso = OpAreaCourse()
         opareacurso.code = area.Codigo
@@ -22,7 +22,7 @@ for area in areas:
 areacourses = session_server.query(GinCurso.Codigo.label('code_course'), GinCurso.Nombre, GinAreaCurso.Codigo.label('code_area')).filter(
     GinCurso.AreaID == GinAreaCurso.ID).all()
 for areac in areacourses:
-    opareacourse = session_pg.query(OpAreaCourse).filter(OpAreaCourse.code == areac.code_area)
+    opareacourse = session_pg.query(OpAreaCourse).filter(OpAreaCourse.code == areac.code_area).first()
     if opareacourse is None:
         continue
     opcourse = session_pg.query(OpCourse).filter(
@@ -33,6 +33,7 @@ for areac in areacourses:
         opcourse.code = areac.code_course
         opcourse.active = True
         opcourse.evaluation_type = 'Normal'
+        opcourse.area_id = opareacourse.id
         session_pg.add(opcourse)
         session_pg.commit()
         print("Course:", opcourse.code)
