@@ -6,9 +6,8 @@ from .op_moodle import Moodle
 import datetime
 import logging
 import os
-import mysql.connector
-from mysql.connector import errorcode
 from .op_mysql import MYSQL
+import ast
 
 logger = logging.getLogger(__name__)
 
@@ -51,22 +50,30 @@ class OpStudent(models.Model):
 
     def _get_last_access(self):
         for record in self:
-            last_access = record.env['op.student.access'].search(
-                [('student_id', '=', record.id)], order='id desc', limit=1)
-            if last_access.student_access:
-                access_ago = fields.Datetime.today() - last_access.student_access
-                minutes, seconds = divmod(access_ago.seconds, 60)
-                hours, minutes = divmod(minutes, 60)
-                access_string = "Hace "
-                if access_ago.days > 0:
-                    access_string += "{0} días ".format(access_ago.days)
-                if hours > 0:
-                    access_string += "{0} horas ".format(hours)
-                if minutes > 0:
-                    access_string += "{0} minutos ".format(minutes)
-                record.last_access = access_string
-            else:
-                record.last_access = "Nunca"
+            access_ago = fields.Datetime.now() - record.student_access
+            minutes, seconds = divmod(access_ago.seconds, 60)
+            hours, minutes = divmod(minutes, 60)
+            access_string = ""
+            if access_ago.days > 0:
+                if access_ago.days > 365:
+                    years, days = divmod(access_ago.days, 365)
+                    access_string += "{0} años, {1} días, ".format(years, days)
+                else:
+                    access_string += "{0} días, ".format(access_ago.days)
+            if hours > 0:
+                access_string += "{0} horas, ".format(hours)
+            if minutes > 0:
+                access_string += "{0} minutos, ".format(minutes)
+            record.last_access = access_string[:-2]
+
+    def equal_datetimes_YYMMDDHHmm(self,ddtime1,ddtime2):
+        if isinstance(ddtime1, datetime.datetime) and\
+           isinstance(ddtime2, datetime.datetime) and \
+            ddtime1.replace(minute=0, second=0, microsecond=0) == \
+            ddtime2.replace(minute=0, second=0, microsecond=0):
+            return True
+        else:
+            return False
 
     def update_access(self, rows):
         logger.info("**************************************")
@@ -87,13 +94,10 @@ class OpStudent(models.Model):
                             'student_access': last_access
                         }
                         _access = self.env['op.student.access'].search(
-                            [('student_id', '=', student.id)], limit=1)
-                        year, month, day = 0, 0, 0
-                        if isinstance(_access.student_access, datetime.datetime):
-                            year = _access.student_access.year
-                            month = _access.student_access.month
-                            day = _access.student_access.day
-                        if not (last_access.year == year and last_access.month == month and last_access.day == day):
+                            [('student_id', '=', student.id)])
+                        if len(_access) > 0:
+                            _access = _access[-1]
+                        if not self.equal_datetimes_YYMMDDHHmm(last_access,_access.student_access):
                             self.env['op.student.access'].create(acces_values)
                             logger.info('Record created')
                 except Exception as e:
@@ -133,18 +137,22 @@ class OpStudent(models.Model):
                         row['lastaccess'])
                     if len(students) > 0:
                         for student in students:
-                            acces_values = {
+                            access_values = {
                                 'student_id': student.id,
                                 'student_access': last_access
                             }
-                            self.env['op.student.access'].create(acces_values)
+                            _access = self.env['op.student.access'].search(
+                                [('student_id', '=', student.id)])
+                            if len(_access)>0:
+                                _access=_access[-1]
+                            if not self.equal_datetimes_YYMMDDHHmm(last_access,_access.student_access):
+                                self.env['op.student.access'].create(access_values)
                 except Exception as e:
                     logger.info(e)
                     continue
         logger.info("*****************************************")
         logger.info("End of script: import all students access")
         logger.info("*****************************************")
-
 
     def import_student_access(self):
         logger.info("**************************************")
@@ -165,17 +173,67 @@ class OpStudent(models.Model):
                         'student_access': last_access
                     }
                     _access = self.env['op.student.access'].search(
-                        [('student_id', '=', self.id)], limit=1)
-                    year, month, day = 0, 0, 0
-                    if isinstance(_access.student_access, datetime.datetime):
-                        year = _access.student_access.year
-                        month = _access.student_access.month
-                        day = _access.student_access.day
-                    if not (last_access.year == year and last_access.month == month and last_access.day == day):
+                        [('student_id', '=', self.id)])
+                    if len(_access) > 0:
+                        _access = _access[-1]
+                    if self.document_number in ('AU449596','G08428409','45522791','1030639754'):
+                        logger.info('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+                        logger.info('last_access:{} _access:{}'.format(last_access,_access.student_access))
+                        logger.info('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+                    if not self.equal_datetimes_YYMMDDHHmm(last_access,_access.student_access):
                         self.env['op.student.access'].create(access_values)
                 except Exception as e:
                     logger.info(e)
                     continue
+
+    @staticmethod
+    def greeting(gender):
+        resp = 'Apreciado(a)'
+        try:
+            if gender == 'f':
+                resp = 'Apreciada'
+            if gender == 'm':
+                resp = 'Apreciado'
+        except Exception as e:
+            logger.info(e)
+        return resp
+
+    def get_days_without_access(self, id):
+        return self.env['op.student.access']. \
+            search([('student_id', '=', id)])[-1][0]. \
+            last_access.split('días')[0].strip()
+
+    def cron_send_email(self):
+        logger.info("**************************************")
+        logger.info("send email")
+        logger.info("**************************************")
+        template = self.env['mail.template'].search([('name', '=', 'Email Student Access')])
+        int_break = 0
+        if template:
+            for student in self.env['op.student'].search([]):
+                try:
+                    last_access=self.env['op.student.access'].\
+                                search([('student_id','=',student.id)])
+                    if len(last_access)>0:
+                        last_access=last_access[-1].last_access
+                        if 'años' in last_access:
+                            continue
+                        if 'días' in last_access:
+                            days = self.get_days_without_access(student.id)
+                            days = ast.literal_eval(days)
+                            logger.info('dias:{}'.format(days))
+                            if days in ( 5, 12 , 20, 40, 70, 80, 100):
+                                template.send_mail(student.id, force_send=True, raise_exception=True)
+                                logger.info('email sended to {}'.format(student.first_name))
+                except Exception as e:
+                    logger.info(e)
+
+                if int_break == 100 and os.name != "posix":
+                    break
+                int_break += 1
+        logger.info("**************************************")
+        logger.info("End of script: send email")
+        logger.info("**************************************")
 
     def import_students(self):
         s = SQL()

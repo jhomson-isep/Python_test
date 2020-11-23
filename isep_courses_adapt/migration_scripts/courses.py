@@ -26,7 +26,7 @@ for areac in areacourses:
     if opareacourse is None:
         continue
     opcourse = session_pg.query(OpCourse).filter(
-        and_(OpCourse.code == areac.code_course, OpCourse.area_id == opareacourse.id)).first()
+        and_(OpCourse.code == areac.code_course, OpCourse.area_id == OpAreaCourse.id)).first()
     if opcourse is None:
         opcourse = OpCourse()
         opcourse.name = areac.Nombre
