@@ -1,15 +1,20 @@
 # -*- coding: utf-8 -*-
+from dotenv import load_dotenv, find_dotenv
 import psycopg2
+import os
 
-dbname = 'ISEP'
-user = 'odoo'
-password = 'odoo'
-host = 'localhost'
-port = '5432'
+load_dotenv(find_dotenv())
 
 
 class PSQL():
-    conn = psycopg2.connect("dbname=%s user=%s password=%s host=%s port=%s" % (dbname, user, password, host, port))
+    dbname = os.environ['DATABASE']
+    user = os.environ['PSQL_USER']
+    password = os.environ['PSQL_PASSWORD']
+    host = os.environ['HOST_IP']
+    port = os.environ['PORT']
+
+    conn = psycopg2.connect("dbname=%s user=%s password=%s host=%s port=%s"
+                            % (dbname, user, password, host, port))
     cr = conn.cursor()
 
     def get_all_batch(self):
@@ -81,6 +86,11 @@ class PSQL():
     def get_partner_by_vat(self, vat):
         self.cr.execute("SELECT id FROM res_partner "
                         "WHERE vat = '%s';" % vat)
+        return self.cr.fetchone()
+
+    def get_partner_by_email(self, email):
+        self.cr.execute("SELECT id FROM res_partner "
+                        "WHERE vat = '%s';" % email)
         return self.cr.fetchone()
 
     def create_partner(self, values):
