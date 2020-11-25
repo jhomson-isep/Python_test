@@ -219,7 +219,7 @@ class CrmLead(models.Model):
                     team_id = 1
                     lead.update({'x_sede_id': 2})
 
-                elif cod_sede in ('metodo-at-home', 'Metodo-At-Home'):
+                elif cod_sede in ('metodo-at-home', 'Metodo-At-Home') or modalidad == 'ATH':
                     cod_sede = 'ATH'
                     team_id = 1
                     lead.update({'x_sede_id': 2})
