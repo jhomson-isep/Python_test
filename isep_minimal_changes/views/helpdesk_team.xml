@@ -24,5 +24,29 @@
                 </xpath>
             </field>
         </record>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="imc_helpdesk_team_alias_form_inherit" model="ir.ui.view">
+            <field name="name">imc.helpdesk.team.alias.form.inherit</field>
+            <field name="model">helpdesk.team</field>
+            <field name="inherit_id" ref="helpdesk.helpdesk_team_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='productivity']" position="inside">
+                    <div class="col-lg-6 o_setting_box"
+                         title="Alias email:">
+                        <div class="o_setting_right_pane">
+                            <span class="fa fa-3x fa-user pull-right"/>
+                            <label for="alias_email"/>
+                            <div class="text-muted">
+                                Lógica del envió y recepción de emails.
+                            </div>
+                            <div>
+                                <field name="alias_email" class="mt16"/>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>
