@@ -123,10 +123,12 @@ class CustomerPortal(CustomerPortal):
         order_sudo.signature = signature
         order_sudo.signed_by = partner_name
         order_sudo.button_confirm()
+        order_sudo.button_approve()
         try:
             order_sudo.action_create_purchase_invoice()
-        except (AccessError, MissingError):
-            return {'error': _('Invoice not created')}
+        except Exception as e:
+            logger.info(e)
+            # return {'error': _('Invoice not created')}
 
         # pdf = request.env.ref('sale.action_report_saleorder').sudo().render_qweb_pdf(
         #     [order_sudo.id])[0]

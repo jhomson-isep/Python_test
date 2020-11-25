@@ -55,10 +55,17 @@ class PurchaseOrder(models.Model):
             return [('id', 'in', [x.id for x in recs])]
 
     def action_create_purchase_invoice(self):
-        invoice = self.env['account.invoice'].create({
+        self.env.user.company_id = self.company_id
+        self.env['ir.default'].clear_caches()
+        invoice_sudo = self.env['account.invoice'].sudo()
+        logger.info("UID: {}".format(self.env.user.id))
+        logger.info("UID company: {}".format(self.env.user.company_id))
+        invoice = invoice_sudo.create({
             'type': 'in_invoice',
             'purchase_id': self.id,
             'partner_id': self.partner_id.id,
         })
         invoice.purchase_order_change()
+        invoice.compute_taxes()
+        invoice.amount_tax = sum(line.amount for line in invoice.tax_line_ids)
         invoice.action_invoice_open()

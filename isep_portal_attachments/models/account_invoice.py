@@ -1,5 +1,8 @@
 from odoo.tools.float_utils import float_compare
 from odoo import models, fields
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class AccountInvoice(models.Model):
