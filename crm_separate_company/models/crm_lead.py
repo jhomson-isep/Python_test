@@ -210,6 +210,9 @@ class CrmLead(models.Model):
                 if description.find('Agente internacional-') != -1:
                     #Agentes internacionales Yura Vanegas
                     user_id = 45
+                elif description.find('Diplomado-') != -1:
+                    #Diplomado Alicia Pinto
+                    user_id = 255
                 else:
                     # Manel Arroyo
                     user_id = 76
