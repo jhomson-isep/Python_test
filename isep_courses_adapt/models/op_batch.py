@@ -24,6 +24,7 @@ class OpBatch(models.Model):
     days_week = fields.Char(string="Days week", size=50)
     schedule = fields.Char(string="Schedule", size=200)
     preference_group = fields.Char(string="Preference group", size=200)
+    generation = fields.Char(string="Generation", size=100)  #Field of generation add
     class_place = fields.Char(string="Class place", size=200)
     type_practices = fields.Many2one('op.practices.type', string='Type '
                                                                  'practices')

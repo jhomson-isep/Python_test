@@ -33,11 +33,11 @@
                                     <field name="expiration_days"/>
                                     <field name="date_diplomas"/>
                                     <field name="academic_year"/>
+                                    <field name="generation"/>
                                 </group>
                                 <group string="Otra información">
                                     <field name="days_week"/>
                                     <field name="schedule"/>
-                                    <field name="preference_group"/>
                                     <field name="class_place"/>
                                     <field name="type_practices"/>
                                 </group>

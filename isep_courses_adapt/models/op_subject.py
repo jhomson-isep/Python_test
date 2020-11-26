@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 class OpSubject(models.Model):
     _inherit = 'op.subject'
-
+    sepyc_code = fields.Char(string="SEPYC code", size=16) #Field add
     moodle_course_id = fields.Integer(string='Moodle course Id')
     uvic_code = fields.Char(string="UVIC code", size=16)
 
