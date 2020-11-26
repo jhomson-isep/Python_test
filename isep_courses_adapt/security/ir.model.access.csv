@@ -9,6 +9,6 @@ access_op_document_type_admin,access.op.document.type.admin,isep_courses_adapt.m
 access_op_study_type_admin,access.op.study.type.admin,isep_courses_adapt.model_op_study_type,base.group_system,1,1,1,1
 access_op_university_admin,access.op.university.admin,isep_courses_adapt.model_op_university,base.group_system,1,1,1,1
 access_op_workplace_admin,access.op.workplace.admin,isep_courses_adapt.model_op_workplace,base.group_system,1,1,1,1
-access_op_student_documents_admin,access.op.student.documents.admin,isep_courses_adapt.model_op_student_documents,base.group_system,1,1,1,1
+access_op_gdrive_documents_admin,access.op.student.documents.admin,isep_courses_adapt.model_op_gdrive_documents,base.group_system,1,1,1,1
 access_op_student_access_admin,access.op.student.access.admin,isep_courses_adapt.model_op_student_access,base.group_system,1,1,1,1
 access_op_area_course_admin,access.op.area.course.admin,isep_courses_adapt.model_op_area_course,base.group_system,1,1,1,1

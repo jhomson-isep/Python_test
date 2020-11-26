@@ -16,7 +16,7 @@ from . import op_study_type
 from . import op_document_type
 from . import op_contact_type
 from . import op_university
-from . import op_student_documents
+from . import op_gdrive_documents
 from . import op_student_access
 from . import op_student
 from . import op_faculty
