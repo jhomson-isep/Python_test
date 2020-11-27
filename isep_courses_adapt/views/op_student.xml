@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
+        <record id="view_op_student_tree_extended" model="ir.ui.view">
+            <field name="model">op.student</field>
+            <field name="inherit_id"
+                    ref="openeducat_core.view_op_student_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='blood_group']" position="replace">
+                    <field name="blood_group" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
         <record id="view_op_student_form_extended" model="ir.ui.view">
             <field name="model">op.student</field>
             <field name="inherit_id"
@@ -27,6 +38,14 @@
                 <xpath expr="//button[1]" position="after">
                     <button name="import_student_access" string="Get access"
                             type="object"/>
+                </xpath>
+
+                <xpath expr="//field[@name='blood_group']" position="replace">
+                    <field name="blood_group" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='gr_no']" position="replace">
+                    <field name="gr_no" readonly="1"/>
                 </xpath>
 
                 <notebook position="inside">
