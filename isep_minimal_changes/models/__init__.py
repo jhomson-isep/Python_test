@@ -12,3 +12,5 @@ from . import mail_message
 from . import helpdesk_team
 from . import project_task
 from . import crm_lead
+from . import sign_request
+from . import res_config_settings
