@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_op_document_partner_rel_form_inherit" model="ir.ui.view">
+            <field name="name">op.base.partner.rel.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page name="Documentación" string="Documentación">
+                        <field name="document_ids" colspan="2" nolabel="1"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+    </data>
+</odoo>

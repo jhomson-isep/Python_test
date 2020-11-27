@@ -1,56 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <record id="view_op_student_form_extended" model="ir.ui.view">
+            <record id="view_op_student_form_extended" model="ir.ui.view">
+                <field name="model">op.student</field>
+                <field name="inherit_id"
+                       ref="openeducat_core.view_op_student_form"/>
+                <field name="arch" type="xml">
+
+                    <xpath expr="//field[@name='gender']" position="before">
+                        <field name="gr_no"/>
+                    </xpath>
+
+                    <xpath expr="//field[@name='email']"
+                           position="after">
+                        <field name="curp"/>
+                        <field name="university_id"/>
+                        <field name="document_type_id"/>
+                        <field name="year_end_studies"/>
+                        <field name="document_number"/>
+                        <field name="uvic_documentation"/>
+                        <field name="contact_type_id"/>
+                        <field name="rvoe_documentation"/>
+                        <field name="study_type_id"/>
+                    </xpath>
+
+                    <xpath expr="//button[1]" position="after">
+                        <button name="import_student_access" string="Get access"
+                                type="object"/>
+                    </xpath>
+
+                    <notebook position="inside">
+                        <page name="documentation" string="Documentation">
+                            <field name="document_ids" colspan="4" nolabel="1"/>
+                        </page>
+                        <page name="access" string="Access">
+                            <group>
+                                <field name="access_ids" colspan="4" nolabel="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+            </field>
+        </record>
+
+        <record id="view_op_student_form_fees_hide" model="ir.ui.view">
             <field name="model">op.student</field>
             <field name="inherit_id"
-                   ref="openeducat_core.view_op_student_form"/>
+                   ref="openeducat_fees.view_op_student_form_fees_inherit"/>
             <field name="arch" type="xml">
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[not(@name)][1]"
+                       position="replace"/>
+            </field>
+        </record>
 
-                <xpath expr="//field[@name='gender']" position="before">
-                    <field name="gr_no"/>
-                </xpath>
 
-                <xpath expr="//field[@name='email']"
-                       position="after">
-                    <field name="curp"/>
-                    <field name="university_id"/>
-                    <field name="document_type_id"/>
-                    <field name="year_end_studies"/>
-                    <field name="document_number"/>
-                    <field name="uvic_documentation"/>
-                    <field name="contact_type_id"/>
-                    <field name="rvoe_documentation"/>
-                    <field name="study_type_id"/>
-                </xpath>
-
-                <xpath expr="//button[1]" position="after">
-                    <button name="import_student_access" string="Get access"
-                            type="object"/>
-                </xpath>
-
-                <notebook position="inside">
-                    <page name="documentation" string="Documentation">
-                        <field name="document_ids" colspan="4" nolabel="1"/>
-                    </page>
-                    <page name="access" string="Access">
-                        <group>
-                            <field name="access_ids" colspan="4" nolabel="1"/>
-                        </group>
-                    </page>
-            </notebook>
-        </field>
-    </record>
-
-    <record id="view_op_student_form_fees_hide" model="ir.ui.view">
-        <field name="model">op.student</field>
-        <field name="inherit_id"
-               ref="openeducat_fees.view_op_student_form_fees_inherit"/>
-        <field name="arch" type="xml">
-            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[not(@name)][1]"
-                   position="replace"/>
-        </field>
-    </record>
-
-</data>
-        </odoo>
+    </data>
+</odoo>

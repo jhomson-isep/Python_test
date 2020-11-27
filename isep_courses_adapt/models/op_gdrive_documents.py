@@ -25,10 +25,7 @@ class OpGdriveDocuments(models.Model):
     file = fields.Binary()
     filename = fields.Char()
     folder_id = fields.Char(string="Gdrive Folder ID")
-    faculty_id = fields.Many2one(comodel_name="op.faculty", string='faculty')
-    student_id = fields.Many2one(comodel_name="op.student",string='student')
-    partner_id = fields.Many2one('res.partner', 'Partner',
-                                 required=True, ondelete="cascade")
+    partner_id = fields.Many2one(comodel_name='res.partner', string='Partner')
 
 
     @api.multi
@@ -135,7 +132,6 @@ class OpGdriveDocuments(models.Model):
 
     @api.model
     def create(self, values):
-        #res_model, res_id = self.env['ir.model.data'].get_object_reference('module_isep_courses_adapt', values['partner_id'])
         if 'filename' in values:
             values = self.upload_file(values)
         res = super(OpGdriveDocuments, self).create(values)

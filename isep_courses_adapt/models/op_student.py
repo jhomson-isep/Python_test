@@ -34,8 +34,8 @@ class OpStudent(models.Model):
     moodle_user = fields.Char(string='Moodle user', size=128)
     moodle_pass = fields.Char(string='Moodle Password', size=24)
     partner_id = fields.Many2one('res.partner', 'Partner', required=False)
-    document_ids = fields.One2many("op.gdrive.documents", "partner_id",
-                                   string="Documentation")
+    #document_ids = fields.One2many("op.gdrive.documents", "partner_id",
+    #                              string="Documentation")
     access_ids = fields.One2many("op.student.access", "student_id",
                                  string="Access")
     last_access = fields.Char(String='Last access',
@@ -401,13 +401,4 @@ class OpStudent(models.Model):
             for doc in documents:
                 doc.unlink()
         res = super(OpStudent, self).unlink()
-        return res
-
-    def create(self, values):
-        res = super(OpStudent, self).create(values)
-        return res
-
-    def write(self, values):
-        #values['document_ids'][2]['partner_id'] = self.partner_id
-        res = super(OpStudent, self).write(values)
         return res

@@ -23,7 +23,7 @@ class OpFaculty(models.Model):
         ('female', 'Female'),
         ('other', 'Other')
     ], 'Gender', required=True)
-    document_ids = fields.One2many("op.gdrive.documents", "partner_id", String="Documentation")
+    #document_ids = fields.One2many("op.gdrive.documents", "partner_id", String="Documentation")
 
     @staticmethod
     def add_years(d, years):
