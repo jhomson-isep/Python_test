@@ -17,6 +17,7 @@ class OpStudent(models.Model):
     _inherit = ['op.student', 'mail.thread']
 
     campus_id = fields.Many2one('op.campus', string='Campus')
+    place_birth = fields.Char(string='Lugar de nacimiento', size=200)
     uvic_documentation = fields.Boolean(string='UVIC Documentation',
                                         default=False)
     rvoe_documentation = fields.Boolean(string='RVOE Documentation',

@@ -47,6 +47,10 @@
                     <field name="gr_no" readonly="1"/>
                 </xpath>
 
+                <xpath expr="//group[@name='personal_detail']">
+                    <field name="place_birth"/>
+                </xpath>
+
                 <notebook position="inside">
                     <page name="documentation" string="Documentation">
                         <field name="document_ids" colspan="4" nolabel="1"/>
