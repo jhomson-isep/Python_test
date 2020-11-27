@@ -31,7 +31,7 @@
                     <field name="document_number"/>
                     <field name="uvic_documentation"/>
                     <field name="rvoe_documentation"/>
-                    <field name="study_type_id"/>
+                    <field name="study_type_id" options="{'no_create': True}"/>
                 </xpath>
 
                 <xpath expr="//button[1]" position="after">
