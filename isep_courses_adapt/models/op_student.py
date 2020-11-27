@@ -402,3 +402,12 @@ class OpStudent(models.Model):
                 doc.unlink()
         res = super(OpStudent, self).unlink()
         return res
+
+    def create(self, values):
+        res = super(OpStudent, self).create(values)
+        return res
+
+    def write(self, values):
+        #values['document_ids'][2]['partner_id'] = self.partner_id
+        res = super(OpStudent, self).write(values)
+        return res
