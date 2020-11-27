@@ -30,7 +30,6 @@
                     <field name="year_end_studies"/>
                     <field name="document_number"/>
                     <field name="uvic_documentation"/>
-                    <field name="contact_type_id"/>
                     <field name="rvoe_documentation"/>
                     <field name="study_type_id"/>
                 </xpath>
