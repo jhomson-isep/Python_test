@@ -29,5 +29,9 @@
             <field name="name">E-Learning (no residente)</field>
             <field name="code">ENR</field>
         </record>
+        <record id="op_modality_8" model="op.modality">
+            <field name="name">At home</field>
+            <field name="code">ATH</field>
+        </record>
     </data>
 </odoo>
