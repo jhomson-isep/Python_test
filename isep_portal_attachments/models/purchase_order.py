@@ -68,7 +68,8 @@ class PurchaseOrder(models.Model):
         payment_term = self.partner_id.property_supplier_payment_term_id
         if len(payment_term) < 1:
             payment_term = self.env['account.payment.term'].search(
-                [('name', 'ilike', '2 Meses dia 25')])
+                [('company_id', '=', self.company_id.id),
+                 ('name', 'ilike', '2 Meses dia 25')])
         invoice = invoice_sudo.create({
             'type': 'in_invoice',
             'purchase_id': self.id,
