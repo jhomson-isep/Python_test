@@ -257,9 +257,9 @@ msgid "Preference group"
 msgstr "Grupo de preferencia"
 
 #. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__class_place
-msgid "Class place"
-msgstr "Lugar de clase"
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__contact
+msgid "Contact"
+msgstr "Contacto"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__type_practices

@@ -38,7 +38,7 @@
                                 <group string="Otra información">
                                     <field name="days_week"/>
                                     <field name="schedule"/>
-                                    <field name="class_place"/>
+                                    <field name="contact_class"/>
                                     <field name="type_practices"/>
                                 </group>
                             </group>
