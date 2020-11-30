@@ -13,11 +13,6 @@
                     <field name="specialty"/>
                 </xpath>
 
-                <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
-                    <page name="workspaces_page" string="Lugares de trabajo">
-                        <field name="workplace_ids" colspan="4" nolabel="1"/>
-                    </page>
-                </xpath>
                  <notebook position="inside">
                     <page name="Documentación" string="Documentación">
                         <field name="document_ids" colspan="2" nolabel="1"/>
