@@ -27,7 +27,8 @@ class OpCourse(models.Model):
     hours = fields.Float(string="Hours")
     credits = fields.Float(string="Credits")
     name_catalan = fields.Char(string="Catalan name")
-    section = fields.Char(string="Section")
+    section = fields.Many2one('op.section.course',
+                              string='Section')
     moodle_category_id = fields.Integer(string="Moodle category Id")
     moodle_code = fields.Char(string="Moodle code", size=16)
     fees_term_id = fields.Many2one('op.fees.terms', 'Fees Term')

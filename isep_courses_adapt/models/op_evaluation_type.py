@@ -8,3 +8,4 @@ class OpEvaluationType(models.Model):
     _description = "Course evaluation type"
 
     name = fields.Char('Name', size=128, required=True)
+
