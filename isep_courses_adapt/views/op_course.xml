@@ -22,7 +22,6 @@
                                 <field name="hours"/>
                                 <field name="credits"/>
                                 <field name="ects"/>
-                                <field name="level"/>
                             </group>
                             <group string="Reconocimientos">
                                 <field name="acknowledgments"/>
