@@ -17,7 +17,7 @@ class OpStudent(models.Model):
     _inherit = ['op.student', 'mail.thread']
 
     campus_id = fields.Many2one('op.campus', string='Campus')
-    place_birth = fields.Char(string='Lugar de nacimiento', size=200)
+    place_birth = fields.Char(string='Place of birth', size=200)
     uvic_documentation = fields.Boolean(string='UVIC Documentation',
                                         default=False)
     rvoe_documentation = fields.Boolean(string='RVOE Documentation',
@@ -34,6 +34,11 @@ class OpStudent(models.Model):
     moodle_id = fields.Integer(string='Moodle ID')
     moodle_user = fields.Char(string='Moodle user', size=128)
     moodle_pass = fields.Char(string='Moodle Password', size=24)
+    status_documentation = fields.Selection([
+        ('1', 'Completado'),
+        ('2', 'En proceso'),
+        ('3', 'No enviada')
+    ], 'Status documentation')
     partner_id = fields.Many2one('res.partner', 'Partner', required=False)
     document_ids = fields.One2many("op.student.documents", "student_id",
                                    string="Documentation")

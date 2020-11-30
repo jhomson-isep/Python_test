@@ -119,6 +119,18 @@ msgid "UVIC code"
 msgstr "Código UVIC"
 
 #. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_subject__sepyc_code
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_subject_form
+msgid "sepyc_code"
+msgstr "Código SEPYC"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__generation
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_batch_form
+msgid "Generation"
+msgstr "Generación"
+
+#. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__batch_id
 msgid "Batch"
 msgstr "Grupo"
@@ -499,6 +511,18 @@ msgstr "Crear usuario"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_documents__document_name
 msgid "Document name"
 msgstr "Nombre de documento"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__place_birth
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form
+msgid "Place of birth"
+msgstr "Lugar de nacimiento"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__status_documentation
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form
+msgid "Status documentation"
+msgstr "Estado de documentación"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_documents__document_type_id

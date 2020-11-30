@@ -18,7 +18,7 @@
     'depends': [
         'base',
         'openeducat_core',
-        'openeducat_fees'
+        'openeducat_fees',
     ],
     'data': [
         'security/ir.model.access.csv',

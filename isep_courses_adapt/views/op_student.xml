@@ -49,6 +49,7 @@
 
                 <xpath expr="//group[@name='personal_detail']">
                     <field name="place_birth"/>
+                    <field name="status_documentation" attrs="{'invisible':[('uvic_documentation','=', False),('rvoe_documentation','=',False)]}"/>
                 </xpath>
 
                 <notebook position="inside">
@@ -60,19 +61,19 @@
                             <field name="access_ids" colspan="4" nolabel="1"/>
                         </group>
                     </page>
-            </notebook>
-        </field>
-    </record>
+                </notebook>
+            </field>
+        </record>
 
-    <record id="view_op_student_form_fees_hide" model="ir.ui.view">
-        <field name="model">op.student</field>
-        <field name="inherit_id"
-               ref="openeducat_fees.view_op_student_form_fees_inherit"/>
-        <field name="arch" type="xml">
-            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[not(@name)][1]"
-                   position="replace"/>
-        </field>
-    </record>
+        <record id="view_op_student_form_fees_hide" model="ir.ui.view">
+            <field name="model">op.student</field>
+            <field name="inherit_id"
+                ref="openeducat_fees.view_op_student_form_fees_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[not(@name)][1]"
+                    position="replace"/>
+            </field>
+        </record>
 
-</data>
-        </odoo>
+    </data>
+</odoo>
