@@ -58,14 +58,27 @@ class PurchaseOrder(models.Model):
         self.env.user.company_id = self.company_id
         self.env['ir.default'].clear_caches()
         invoice_sudo = self.env['account.invoice'].sudo()
-        logger.info("UID: {}".format(self.env.user.id))
-        logger.info("UID company: {}".format(self.env.user.company_id))
+        partner_bank_ids = self.partner_id.bank_ids
+        payment_mode = self.partner_id.supplier_payment_mode_id
+        if len(payment_mode) < 1:
+            payment_mode = self.env['account.payment.mode'].search(
+                [('payment_type', '=', 'outbound'),
+                 ('company_id', '=', self.company_id.id),
+                 ('name', 'ilike', 'profesor')])
+        payment_term = self.partner_id.property_supplier_payment_term_id
+        if len(payment_term) < 1:
+            payment_term = self.env['account.payment.term'].search(
+                [('name', 'ilike', '2 Meses dia 25')])
         invoice = invoice_sudo.create({
             'type': 'in_invoice',
             'purchase_id': self.id,
             'partner_id': self.partner_id.id,
+            'partner_bank_id': partner_bank_ids[0].id if len(
+                partner_bank_ids) > 0 else None,
         })
         invoice.purchase_order_change()
+        invoice.write({'payment_mode_id': payment_mode.id,
+                       'payment_term_id': payment_term.id})
         invoice.compute_taxes()
         invoice.amount_tax = sum(line.amount for line in invoice.tax_line_ids)
         invoice.action_invoice_open()

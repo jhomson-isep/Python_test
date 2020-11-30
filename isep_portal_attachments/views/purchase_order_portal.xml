@@ -13,6 +13,7 @@
                          t-if="order.has_to_be_signed(True)">
                         <form id="accept" method="POST"
                               t-att-data-order-id="order.id"
+                              t-att-data-reference="partner_reference"
                               t-att-data-token="order.access_token"
                               class="js_accept_json modal-content js_website_submit_form">
                             <input type="hidden" name="csrf_token"
@@ -25,12 +26,12 @@
                             </header>
                             <main class="modal-body" id="sign-dialog">
                                 <p>
-                                    <span>By signing this proposal, I agree to
-                                        the following terms:</span>
+                                    <span>By signing this proposal, I agree to the following terms:</span>
                                     <ul>
-                                        <li><span>Accepted on the behalf
-                                            of:</span> <b
-                                                t-field="order.partner_id.commercial_partner_id"/></li>
+                                        <li>
+                                            <span>Accepted on the behalf of:</span>
+                                            <b t-field="order.partner_id.commercial_partner_id"/>
+                                        </li>
                                         <li><span>For an amount of:</span> <b
                                                 data-id="total_amount"
                                                 t-field="order.amount_total"/></li>
@@ -39,7 +40,14 @@
                                                 t-field="order.payment_term_id.note"/></li>
                                     </ul>
                                 </p>
-                                <t t-call="portal.portal_signature">
+
+<!--                                <div class="form-group">-->
+<!--                                    <label class="col-form-label" for="reference">Invoice reference</label>-->
+<!--                                    <input type="text" name="partner_reference" id="o_portal_reference"-->
+<!--                                           class="form-control" required="1"/>-->
+<!--                                </div>-->
+
+                                <t t-call="isep_portal_attachments.portal_purchase_signature">
                                     <t t-set="object" t-value="order"/>
                                     <t t-set="partner_name"
                                        t-value="order.partner_id.name"/>

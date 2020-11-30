@@ -50,3 +50,22 @@ msgstr "Sus comentarios..."
 #: model_terms:ir.ui.view,arch_db:isep_portal_attachments.view_purchase_order_filter_inherit
 msgid "Has invoice"
 msgstr "Pedidos con factura"
+
+#. module: isep_portal_attachments
+#. openerp-web
+#: code:addons/isep_portal_attachments/static/src/xml/portal_signature.xml:11
+#, python-format
+msgid "Invoice reference"
+msgstr "Referencia de factura"
+
+#. module: isep_portal_attachments
+#: code:addons/isep_portal_attachments/controllers/portal.py:121
+#, python-format
+msgid "Invoice is missing."
+msgstr "Es necesario adjuntar la factura."
+
+#. module: isep_portal_attachments
+#: code:addons/isep_portal_attachments/controllers/portal.py:124
+#, python-format
+msgid "Invoice reference is required."
+msgstr "Referencia de factura requerida."
