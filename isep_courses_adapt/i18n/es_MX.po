@@ -272,6 +272,12 @@ msgid "Campus"
 msgstr "Sede"
 
 #. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__delay
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+msgid "Delay"
+msgstr "Morosidad"
+
+#. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__hours
 msgid "Hours"
 msgstr "Horas"

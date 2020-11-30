@@ -59,6 +59,7 @@
                 </xpath>
 
                 <xpath expr="//group[@name='personal_detail']">
+                    <field name="delay"/>
                     <field name="place_birth"/>
                     <field name="status_documentation" attrs="{'invisible':[('uvic_documentation','=', False),('rvoe_documentation','=',False)]}"/>
                 </xpath>
