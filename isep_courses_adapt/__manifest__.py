@@ -19,6 +19,7 @@
         'base',
         'openeducat_core',
         'openeducat_fees',
+        'openeducat_library',
     ],
     'data': [
         'security/ir.model.access.csv',

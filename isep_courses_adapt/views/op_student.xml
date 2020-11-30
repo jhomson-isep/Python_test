@@ -12,6 +12,17 @@
             </field>
         </record>
 
+        <record id="view_op_student_form_library_extends" model="ir.ui.view">
+            <field name="model">op.student</field>
+            <field name="inherit_id"
+                   ref="openeducat_library.view_op_student_form_library_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='library']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
         <record id="view_op_student_form_extended" model="ir.ui.view">
             <field name="model">op.student</field>
             <field name="inherit_id"
