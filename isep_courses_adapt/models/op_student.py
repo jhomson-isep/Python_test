@@ -35,7 +35,11 @@ class OpStudent(models.Model):
     moodle_user = fields.Char(string='Moodle user', size=128)
     moodle_pass = fields.Char(string='Moodle Password', size=24)
     delay = fields.Boolean(string="Delay")
-    status_documentation = fields.Boolean(string='Status documentation')
+    status_documentation = fields.Selection([
+        ('complete', 'Completado'),
+        ('in process', 'En proceso'),
+        ('Not send', 'No enviada')
+    ], 'Status documentation')
     partner_id = fields.Many2one('res.partner', 'Partner', required=False)
     document_ids = fields.One2many("op.student.documents", "student_id",
                                    string="Documentation")
