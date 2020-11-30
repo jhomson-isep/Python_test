@@ -34,7 +34,7 @@ class OpStudent(models.Model):
     moodle_id = fields.Integer(string='Moodle ID')
     moodle_user = fields.Char(string='Moodle user', size=128)
     moodle_pass = fields.Char(string='Moodle Password', size=24)
-    delay = fields.Char(string="Delay")
+    delay = fields.Boolean(string="Delay")
     status_documentation = fields.Selection([
         ('1', 'Completado'),
         ('2', 'En proceso'),
