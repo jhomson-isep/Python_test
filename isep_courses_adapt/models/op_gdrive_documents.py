@@ -82,7 +82,8 @@ class OpGdriveDocuments(models.Model):
                 folder = folders
                 break
         if not exist_folder:
-            name = self.env['res.partner'].search([('id', '=', values['partner_id'])], limit=1).name
+            partner = self.env['res.partner'].search([('id', '=', values['partner_id'])], limit=1)
+            name = partner.name + '-' + str(partner.id)
             folder = drive.CreateFile(
                 {"title": name, "mimeType": "application/vnd.google-apps.folder"})
             folder.Upload()
