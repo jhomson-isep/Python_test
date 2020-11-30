@@ -4,7 +4,7 @@ from sqlalchemy.schema import Table, MetaData
 from sqlalchemy.ext.declarative import declarative_base
 import os
 Base_pg = declarative_base()
-postgres = create_engine('postgresql+psycopg2://odoo:odoo@localhost:5432/ISEP')
+postgres = create_engine('postgresql+psycopg2://openpg:openpgpwd@localhost:5432/ISEP')
 metadata_pg = MetaData(bind=postgres)
 driver = 'SQL+Server'  # for Windows
 if os.name == "posix":
