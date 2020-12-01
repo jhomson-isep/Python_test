@@ -213,8 +213,15 @@ msgstr ""
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__section
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.inherited_view_op_course_form
 msgid "Section"
 msgstr "Sección"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__period
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.inherited_view_op_course_form
+msgid "Period"
+msgstr "Periodo"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__coordinator
@@ -584,3 +591,13 @@ msgstr "Nombre de sección"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_section_course__code
 msgid "Section Code"
 msgstr "Número de sección"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_period_course__name
+msgid "Period Name"
+msgstr "Nombre del periodo"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_period_course__code
+msgid "Periodo Code"
+msgstr "Número del periodo"

@@ -1,6 +1,7 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
 access_op_modality_admin,access.op.modality.admin,isep_courses_adapt.model_op_modality,base.group_system,1,1,1,1
 access_op_section_course_admin,access.op_section_course.admin,isep_courses_adapt.model_op_section_course,base.group_system,1,1,1,1
+access_op_period_course_admin,access.op_period_course.admin,isep_courses_adapt.model_op_period_course,base.group_system,1,1,1,1
 access_op_evaluation_type_admin,access.op.evaluation_type.admin,isep_courses_adapt.model_op_evaluation_type,base.group_system,1,1,1,1
 access_op_practices_type_admin,access.op.practices.admin,isep_courses_adapt.model_op_practices_type,base.group_system,1,1,1,1
 access_op_campus_admin,access.op.campus.admin,isep_courses_adapt.model_op_campus,base.group_system,1,1,1,1

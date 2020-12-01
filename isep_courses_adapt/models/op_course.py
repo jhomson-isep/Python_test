@@ -23,12 +23,13 @@ class OpCourse(models.Model):
     modality_id = fields.Many2one('op.modality', string='Modality')
     evaluation_type_id = fields.Many2one('op.evaluation.type',
                                          string='Evaluation type')
-    period = fields.Char(string="Period")
     hours = fields.Float(string="Hours")
     credits = fields.Float(string="Credits")
     name_catalan = fields.Char(string="Catalan name")
     section = fields.Many2one('op.section.course',
                               string='Section')
+    period = fields.Many2one('op.period.course',
+                              string='Period')
     moodle_category_id = fields.Integer(string="Moodle category Id")
     moodle_code = fields.Char(string="Moodle code", size=16)
     fees_term_id = fields.Many2one('op.fees.terms', 'Fees Term')

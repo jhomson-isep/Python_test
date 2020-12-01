@@ -23,4 +23,4 @@ from . import op_faculty
 from . import op_mysql
 from . import op_area_course
 from . import op_section_course
-
+from . import op_period_course
