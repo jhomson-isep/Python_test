@@ -31,10 +31,16 @@ class CustomerPortal(CustomerPortal):
             return request.redirect('/my')
 
         if report_type in ('html', 'pdf', 'text'):
-            return self._show_report(
-                model=order_sudo, report_type=report_type,
-                report_ref='purchase.report_purchase_quotation',
-                download=download)
+            if order_sudo.state == 'purchase':
+                return self._show_report(
+                    model=order_sudo, report_type=report_type,
+                    report_ref='purchase.action_report_purchase_order',
+                    download=download)
+            else:
+                return self._show_report(
+                    model=order_sudo, report_type=report_type,
+                    report_ref='purchase.report_purchase_quotation',
+                    download=download)
 
         values = self._purchase_order_get_page_view_values(
             order_sudo, access_token, **kw)
