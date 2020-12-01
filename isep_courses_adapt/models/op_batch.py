@@ -20,6 +20,7 @@ class OpBatch(models.Model):
     end_date = fields.Date('End Date')
     student_lines = fields.One2many('op.student.course', 'id')
     moodle_course_id = fields.Integer(string="Moodle Id")
+    credits = fields.Float(string="Credits", related='course_id.credits')
     academic_year = fields.Char(string="Academic Year", size=16)
     days_week = fields.Char(string="Days week", size=50)
     schedule = fields.Char(string="Schedule", size=200)

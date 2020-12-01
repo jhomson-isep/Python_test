@@ -30,6 +30,7 @@
                                 <group string="Información acádemica">
                                     <field name="ects"/>
                                     <field name="hours"/>
+                                    <field name="credits"/>
                                     <field name="expiration_days"/>
                                     <field name="date_diplomas"/>
                                     <field name="academic_year"/>
