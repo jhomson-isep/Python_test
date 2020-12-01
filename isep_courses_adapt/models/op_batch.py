@@ -33,6 +33,7 @@ class OpBatch(models.Model):
     coordinator = fields.Many2one('res.partner', string="Coordinator")
     uvic_program = fields.Boolean(string='UVIC program', default=False)
     rvoe_program = fields.Boolean(string='RVOE program', default=False)
+    sepyc_program = fields.Boolean(string='SEPYC program', default=False)
     ects = fields.Integer(string="ECTS", default=0, related='course_id.ects')
     hours = fields.Float(string="Hours", related='course_id.hours')
     students_limit = fields.Integer(string="Students limit")

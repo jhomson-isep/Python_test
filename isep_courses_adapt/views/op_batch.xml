@@ -16,6 +16,7 @@
                     <field name="students_limit"/>
                     <field name="uvic_program" attrs="{'invisible': [('user_company_id', '=', 1111)]}"/>
                     <field name="rvoe_program"/>
+                    <field name="sepyc_program"/>
                     <field name="user_company_id" invisible="1"/>
                 </xpath>
 
