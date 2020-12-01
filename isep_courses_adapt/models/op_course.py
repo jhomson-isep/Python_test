@@ -25,8 +25,8 @@ class OpCourse(models.Model):
                                          string='Evaluation type')
     hours = fields.Float(string="Hours")
     credits = fields.Float(string="Credits")
-    uvic_program = fields.Boolean(string='UVIC code program', default=False)
-    sepyc_program = fields.Boolean(string='SEPYC code program', default=False)
+    uvic_program = fields.Boolean(string='UVIC program', default=False)
+    sepyc_program = fields.Boolean(string='SEPYC program', default=False)
     name_catalan = fields.Char(string="Catalan name")
     section = fields.Many2one('op.section.course',
                               string='Section')
