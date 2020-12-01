@@ -18,9 +18,10 @@ class OpStudent(models.Model):
 
     campus_id = fields.Many2one('op.campus', string='Campus')
     place_birth = fields.Char(string='Place of birth', size=200)
-    uvic_documentation = fields.Boolean(string='UVIC Documentation',
+    uvic_program = fields.Boolean(string='UVIC Program',
                                         default=False)
-    rvoe_documentation = fields.Boolean(string='RVOE Documentation',
+    #rvoe_program = fields.Boolean(string='SEPYC Program',default=False)
+    sepyc_program = fields.Boolean(string='SEPYC Program', 
                                         default=False)
     curp = fields.Char(string='CURP', size=20)
     year_end_studies = fields.Integer(string='Year of completion of studies')

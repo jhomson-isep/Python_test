@@ -40,8 +40,8 @@
                     <field name="document_type_id"/>
                     <field name="year_end_studies"/>
                     <field name="document_number"/>
-                    <field name="uvic_documentation"/>
-                    <field name="rvoe_documentation"/>
+                    <field name="uvic_program"/>
+                    <field name="sepyc_program"/>
                     <field name="study_type_id" options="{'no_create': True}"/>
                 </xpath>
 
@@ -61,7 +61,7 @@
                 <xpath expr="//group[@name='personal_detail']">
                     <field name="delay"/>
                     <field name="place_birth"/>
-                    <field name="status_documentation" attrs="{'invisible':[('uvic_documentation','=', False),('rvoe_documentation','=',False)]}"/>
+                    <field name="status_documentation" attrs="{'invisible':[('uvic_program','=', False),('sepyc_program','=',False)]}"/>
                 </xpath>
 
                 <notebook position="inside">
