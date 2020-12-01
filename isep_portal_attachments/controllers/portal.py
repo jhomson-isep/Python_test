@@ -1,4 +1,3 @@
-from datetime import date
 from odoo import fields, http, _
 from odoo.exceptions import AccessError, MissingError
 from odoo.http import request
@@ -20,6 +19,28 @@ class CustomerPortal(CustomerPortal):
             ('state', 'in', ['sent', 'purchase', 'done', 'cancel'])
         ])
         return values
+
+    @http.route(['/my/purchase/<int:order_id>'], type='http',
+                auth="public", website=True)
+    def portal_my_purchase_order(self, order_id=None, access_token=None,
+                                 report_type=None, download=False, **kw):
+        try:
+            order_sudo = self._document_check_access(
+                'purchase.order', order_id, access_token=access_token)
+        except (AccessError, MissingError):
+            return request.redirect('/my')
+
+        if report_type in ('html', 'pdf', 'text'):
+            return self._show_report(
+                model=order_sudo, report_type=report_type,
+                report_ref='purchase.report_purchase_quotation',
+                download=download)
+
+        values = self._purchase_order_get_page_view_values(
+            order_sudo, access_token, **kw)
+        if order_sudo.company_id:
+            values['res_company'] = order_sudo.company_id
+        return request.render("purchase.portal_my_purchase_order", values)
 
     @http.route(['/my/purchase', '/my/purchase/page/<int:page>'], type='http',
                 auth="user", website=True)
@@ -50,7 +71,8 @@ class CustomerPortal(CustomerPortal):
 
         searchbar_filters = {
             'all': {'label': _('All'), 'domain': [
-                ('state', 'in', ['sent', 'purchase', 'done', 'cancel'])]},
+                ('state', 'in', ['sent', 'to approve', 'purchase', 'done',
+                                 'cancel'])]},
             'purchase': {'label': _('Purchase Order'),
                          'domain': [('state', '=', 'purchase')]},
             'cancel': {'label': _('Cancelled'),
@@ -99,8 +121,8 @@ class CustomerPortal(CustomerPortal):
     @http.route(['/my/purchase/<int:order_id>/accept'], type='json',
                 auth="public", website=True)
     def portal_purchase_accept(self, res_id, access_token=None,
-                               partner_name=None,
-                               signature=None, order_id=None):
+                               partner_name=None, signature=None,
+                               order_id=None, invoice_reference=None):
         logger.info("**** on accept ***")
         logger.info("res_id: {0}".format(res_id))
         try:
@@ -116,31 +138,26 @@ class CustomerPortal(CustomerPortal):
                 'Order is not in a state requiring customer signature.')}
         if not signature:
             return {'error': _('Signature is missing.')}
-
         if order_sudo.has_attachments() == 0:
             return {'error': _('Invoice is missing.')}
+        if not invoice_reference:
+            logger.info("Invoice reference is required.")
+            return {'error': _('Invoice reference is required.')}
 
         order_sudo.signature = signature
         order_sudo.signed_by = partner_name
+        order_sudo.partner_ref = invoice_reference
         order_sudo.button_confirm()
+        order_sudo.button_approve()
         try:
             order_sudo.action_create_purchase_invoice()
-        except (AccessError, MissingError):
-            return {'error': _('Invoice not created')}
-
-        # pdf = request.env.ref('sale.action_report_saleorder').sudo().render_qweb_pdf(
-        #     [order_sudo.id])[0]
-        # _message_post_helper(
-        #     res_model='sale.order',
-        #     res_id=order_sudo.id,
-        #     message=_('Order signed by %s') % (partner_name,),
-        #     attachments=[('%s.pdf' % order_sudo.name, pdf)],
-        #     **({'token': access_token} if access_token else {}))
+        except Exception as e:
+            logger.info(e)
+            # return {'error': _('Invoice not created')}
 
         return {
             'force_refresh': True,
-            'redirect_url': order_sudo.get_portal_url(
-                query_string='&message=sign_ok'),
+            'redirect_url': '/my/purchase/{}?message=sign_ok'.format(order_id),
         }
 
     @http.route(['/my/purchase/<int:order_id>/decline'], type='http',
