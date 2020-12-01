@@ -25,6 +25,7 @@ class OpCourse(models.Model):
                                          string='Evaluation type')
     hours = fields.Float(string="Hours")
     credits = fields.Float(string="Credits")
+    rvoe_program = fields.Boolean(string='RVOE code program', default=False)
     name_catalan = fields.Char(string="Catalan name")
     section = fields.Many2one('op.section.course',
                               string='Section')

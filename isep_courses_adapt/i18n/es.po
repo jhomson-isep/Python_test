@@ -297,6 +297,11 @@ msgid "Students limit"
 msgstr "Límite matrículas"
 
 #. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__rvoe_program
+msgid "RVOE code program"
+msgstr "Programa RVOE"
+
+#. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__acknowledgments
 msgid "Acknowledgments"
 msgstr "Reconocimientos"

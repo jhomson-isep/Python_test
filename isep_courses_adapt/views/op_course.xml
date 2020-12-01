@@ -49,6 +49,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='fees_term_id']" position="replace">
                 <field name="period"/>
+                <field name="rvoe_program"/>
             </xpath>
         </field>
     </record>
