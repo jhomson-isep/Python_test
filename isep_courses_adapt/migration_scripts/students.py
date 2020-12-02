@@ -27,7 +27,7 @@ try:
                         country_id = 'NULL'
                 else:
                     country_id = 'NULL'
-                partner_id = postgres.get_partner_by_vat(str(student.N_Id))
+                partner_id = postgres.get_partner_by_email(str(student.EMail))
                 if partner_id is None:
                     values = [
                         replace_special_caracter(create_name(student.Nombre, student.Apellidos)),
@@ -43,7 +43,7 @@ try:
                     ]
                     print('Partner:', values)
                     postgres.create_partner(values)
-                partner_id = postgres.get_partner_by_vat(student.N_Id)
+                partner_id = postgres.get_partner_by_email(str(student.EMail))
                 campus_id = postgres.get_campus_by_code(student.Sede)
                 document_type_id = postgres.get_document_type_by_code(student.TipoDocumento)
                 study_type_id = postgres.get_study_type_by_code(student.TipoEstudios)
