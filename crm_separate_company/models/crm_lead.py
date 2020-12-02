@@ -178,17 +178,17 @@ class CrmLead(models.Model):
                 cod_sede = 'OVI'
             elif cod_sede in ('centro-bilbao', 'bilbao', 'Bilbao', 'ised-bilbao'):
                 cod_sede = 'BIO'
-            elif cod_sede in ('centro-madrid', 'centro-madrid-atocha', 'madrid', 'Madrid', 'MAD', 'MDR', 'ised-madrid'):
+            elif cod_sede in ('centro-madrid', 'centro-madrid-atocha', 'madrid', 'Madrid', 'MAD', 'MDR', 'ised-madrid', 'sesiones-clinicas-madrid'):
                 cod_sede = 'MDR'
-            elif cod_sede == 'ised-barcelona':
+            elif cod_sede in ('ised-barcelona', 'sesiones-clinicas-barcelona'):
                 cod_sede = 'CAT'
             elif cod_sede in ('centro-pamplona', 'Pamplona', 'ised-pamplona'):
                 cod_sede = 'PAM'
             elif cod_sede in ('centro-zaragoza', 'Zaragoza', 'ZAZ', 'ised-zaragoza'):
                 cod_sede = 'ZAR'
-            elif cod_sede in ('Valencia', 'valencia'):
+            elif cod_sede in ('Valencia', 'valencia', 'sesiones-clinicas-valencia'):
                 cod_sede = 'VAL'
-            elif cod_sede in ('Online', 'online'):
+            elif cod_sede in ('Online', 'online', 'sesiones-clinicas-online'):
                 cod_sede = 'ONL'
 
             # REVISAR ESTO
@@ -207,6 +207,15 @@ class CrmLead(models.Model):
             # ISEP SL
             # ---------------------------------
             elif company_id == 1:
+                #Codigo de modalidad con la logica de typeform
+                if modalidad == '001':
+                    modalidad = 'ATH'
+                    cod_sede = 'CAT'
+                elif modalidad == '010':
+                    modalidad = 'PRS'
+                elif modalidad == '100':
+                    modalidad = 'ONL'
+
                 if description.find('Agente internacional-') != -1:
                     #Agentes internacionales Yura Vanegas
                     user_id = 45
@@ -256,17 +265,17 @@ class CrmLead(models.Model):
                         user_id = 100000006
                         team_id = 100000006
 
-                #Codigo de modalidad con la logica de typeform
-                if modalidad == '001':
-                    modalidad = 'ATH'
-                    cod_sede = 'CAT'
-                elif modalidad == '010':
-                    modalidad = 'PRS'
-                elif modalidad == '100':
-                    modalidad = 'ONL'
 
                 if cod_sede and modalidad:
                     if modalidad == 'ONL':
+                        lead.update({
+                            'name': cod_curso +
+                                    '-' +
+                                    modalidad +
+                                    ' - ' +
+                                    email
+                                    })
+                    elif modalidad == 'ATH':
                         lead.update({
                             'name': cod_curso +
                                     '-' +
@@ -326,6 +335,14 @@ class CrmLead(models.Model):
                                     ' - ' +
                                     email
                                     })
+                    elif modalidad == 'ATH':
+                        lead.update({
+                            'name': cod_curso +
+                                    '-' +
+                                    modalidad +
+                                    ' - ' +
+                                    email
+                                    })
                     else:
                         lead.update({
                             'name': cod_curso +
@@ -342,7 +359,7 @@ class CrmLead(models.Model):
 
                 # ONL es online en modalidad
 
-                if modalidad == 'ONL' or cod_sede == 'ONL' or cod_sede == 'CAT':
+                if modalidad == 'ONL' or cod_sede == 'ONL' or cod_sede == 'CAT' or modalidad == 'ATH':
                     # Centro Sup de estudios ISED SL - Online
                     # company_id = 3
                     # Yura Vanegas
