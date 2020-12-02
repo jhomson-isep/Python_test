@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <report id="report_uvic_students"
+                model="op.student"
+                string="Reporte de UVIC"
+                report_type="xlsx"
+                name="isep_openeducat_reports.report_uvic_students"
+                menu="True"/>
+
+    </data>
+</odoo>
