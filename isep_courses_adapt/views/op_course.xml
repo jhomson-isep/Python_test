@@ -25,6 +25,11 @@
                                 <field name="hp_total"/>
                                 <field name="hi_total"/>
                                 <field name="ht_total"/>
+                                <field name="hours_total"/>
+                                <field name="credits_hp"/>
+                                <field name="credits_hi"/>
+                                <field name="credits_ht"/>
+                                <field name="credits_total"/>
                             </group>
                             <group string="Reconocimientos">
                                 <field name="acknowledgments"/>

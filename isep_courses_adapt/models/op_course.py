@@ -25,9 +25,14 @@ class OpCourse(models.Model):
                                          string='Evaluation type')
     hours = fields.Float(string="Hours")
     credits = fields.Float(string="Credits")
-    hp_total = fields.Float(string="Practical Hours Total", compute='_compute_hours_total_course')
-    hi_total = fields.Float(string="Independent Hours Total", compute='_compute_hours_total_course')
-    ht_total = fields.Float(string="Theoretical Hours Total", compute='_compute_hours_total_course')
+    hp_total = fields.Float(string="Practical Hours Total", compute='_compute_hours_course')
+    hi_total = fields.Float(string="Independent Hours Total", compute='_compute_hours_course')
+    ht_total = fields.Float(string="Theoretical Hours Total", compute='_compute_hours_course')
+    hours_total = fields.Float(string="Hours Total", compute='_compute_hours_total_course')
+    credits_hp = fields.Float(string="Practical Hours Credits", compute='_compute_credits_by_hours')
+    credits_hi = fields.Float(string="Independent Hours Credits", compute='_compute_credits_by_hours')
+    credits_ht = fields.Float(string="Theoretical Hours Credits", compute='_compute_credits_by_hours')
+    credits_total = fields.Float(string="Credits Total", compute='_compute_credits_total_course')
     uvic_program = fields.Boolean(string='UVIC program', default=False)
     sepyc_program = fields.Boolean(string='SEPYC program', default=False)
     name_catalan = fields.Char(string="Catalan name")
@@ -49,10 +54,22 @@ class OpCourse(models.Model):
                          'check(1=1)', 'Delete constrian unique code per course!')]
 
     @api.depends('subject_ids')
-    def _compute_hours_total_course(self):
+    def _compute_hours_course(self):
         self.hp_total = sum(subject.hp for subject in self.subject_ids)
         self.hi_total = sum(subject.hi for subject in self.subject_ids)
         self.ht_total = sum(subject.ht for subject in self.subject_ids)
+
+    def _compute_credits_by_hours(self):
+        min_hours_study_by_credit = 16
+        self.credits_hp = self.hp_total / min_hours_study_by_credit
+        self.credits_hi = self.hi_total / min_hours_study_by_credit
+        self.credits_ht = self.ht_total / min_hours_study_by_credit
+
+    def _compute_hours_total_course(self):
+        self.hours_total = self.ht_total + self.hi_total + self.hp_total
+
+    def _compute_credits_total_course(self):
+        self.credits_total = self.credits_ht + self.credits_hi + self.credits_hp
 
     @api.model
     def create(self, values):

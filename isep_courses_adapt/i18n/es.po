@@ -597,6 +597,31 @@ msgid "Theoretical Hours Total"
 msgstr "Total de horas teóricas"
 
 #. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__hours_total
+msgid "Hours Total"
+msgstr "Total de Horas"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__credits_hp
+msgid "Practical Hours Credits"
+msgstr "Créditos Horas Prácticas"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__credits_hi
+msgid "Independent Hours Credits"
+msgstr "Créditos Horas Independientes"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__credits_ht
+msgid "Theoretical Hours Credits"
+msgstr "Créditos Horas Teóricas"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__credits_total
+msgid "Credits Total"
+msgstr "Total de Créditos"
+
+#. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__area_id
 msgid "Area of Course"
 msgstr "Área del curso"
