@@ -53,21 +53,25 @@ class OpCourse(models.Model):
     _sql_constraints = [('unique_course_code',
                          'check(1=1)', 'Delete constrian unique code per course!')]
 
+    @api.one
     @api.depends('subject_ids')
     def _compute_hours_course(self):
         self.hp_total = sum(subject.hp for subject in self.subject_ids)
         self.hi_total = sum(subject.hi for subject in self.subject_ids)
         self.ht_total = sum(subject.ht for subject in self.subject_ids)
 
+    @api.one
     def _compute_credits_by_hours(self):
         min_hours_study_by_credit = 16
         self.credits_hp = self.hp_total / min_hours_study_by_credit
         self.credits_hi = self.hi_total / min_hours_study_by_credit
         self.credits_ht = self.ht_total / min_hours_study_by_credit
 
+    @api.one
     def _compute_hours_total_course(self):
         self.hours_total = self.ht_total + self.hi_total + self.hp_total
 
+    @api.one
     def _compute_credits_total_course(self):
         self.credits_total = self.credits_ht + self.credits_hi + self.credits_hp
 
