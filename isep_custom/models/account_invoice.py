@@ -170,6 +170,7 @@ class account_invoice(models.Model):
             self.move_id.button_cancel()
             if self.move_id.state == "draft":
                 self.move_id.partner_id = self.partner_id.id
+                partner_bank_ids = self.partner_id.bank_ids
                 opciones_cursos = ('curso', 'rec', 'desc', 'inc', 'pgrado', 'diplo', 'mgrafico', 'master')
                 bool_matricula = False
                 bool_gasto_envio = False
@@ -190,6 +191,8 @@ class account_invoice(models.Model):
                             line_matricula = line_obj.with_context(check_move_validity=False).copy()
                             line_matricula.name = pagos_objs[pagos_recorridos].name
                             line_matricula.date_maturity = pagos_objs[pagos_recorridos].fecha.date()#datetime.datetime.strptime(pagos_objs[pagos_recorridos].fecha.split(" ")[0], '%Y-%m-%d')
+                            line_matricula.partner_bank_id = partner_bank_ids[
+                                0].id if len(partner_bank_ids) > 0 else None
 
                             line_matricula.with_context(check_move_validity=False).debit = pagos_objs[pagos_recorridos].importe
                             #_logger.debug("MatrApunt id {} monto{}".format(line_matricula.id, line_matricula.debit))
@@ -210,6 +213,8 @@ class account_invoice(models.Model):
                             bool_gasto_envio = False
                             pagos_recorridos += 1
                         line_obj.name = pagos_objs[pagos_recorridos].name
+                        line_obj.partner_bank_id = partner_bank_ids[
+                            0].id if len(partner_bank_ids) > 0 else None
                         line_obj.date_maturity = pagos_objs[pagos_recorridos].fecha.date()#datetime.datetime.strptime(pagos_objs[pagos_recorridos].fecha.split(" ")[0], '%Y-%m-%d')
                         line_obj.with_context(check_move_validity=False).debit = pagos_objs[pagos_recorridos].importe
                         if not bsamecurrency:
