@@ -18,6 +18,7 @@ class OpSubject(models.Model):
     hp = fields.Float(string='Practical Hours')
     hi = fields.Float(string='Independent Hours')
     ht = fields.Float(string='Theoretical Hours')
+    credits = fields.Float(string='Credits')
 
     @api.model
     def create(self, values):

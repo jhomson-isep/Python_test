@@ -21,6 +21,7 @@
                     <field name="hp"/>
                     <field name="hi"/>
                     <field name="ht"/>
+                    <field name="credits"/>
                 </xpath>
             </field>
         </record>

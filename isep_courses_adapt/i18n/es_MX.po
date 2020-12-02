@@ -40,6 +40,8 @@ msgstr "Creado el"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__credits
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_subject__credits
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__credits
 msgid "Credits"
 msgstr "Créditos"
 
@@ -159,11 +161,6 @@ msgstr "Asignatura"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__hours
 msgid "Hours"
 msgstr "Horas"
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__credits
-msgid "Credits"
-msgstr "Créditos"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__ects
