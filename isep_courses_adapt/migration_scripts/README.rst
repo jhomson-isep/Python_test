@@ -7,9 +7,7 @@ Configuracion .env:
 # Odoo conf
 export HOST_URL
 export DATABASE
-export USER
 export HOST_IP
-export PASSWORD
 export PSQL_PASSWORD
 export PSQL_USER
 export PORT
