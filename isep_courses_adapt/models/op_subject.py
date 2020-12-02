@@ -15,6 +15,9 @@ class OpSubject(models.Model):
     sepyc_code = fields.Char(string="SEPYC code", size=16)
     moodle_course_id = fields.Integer(string='Moodle course Id')
     uvic_code = fields.Char(string="UVIC code", size=16)
+    hp = fields.Float(string='Practical Hours')
+    hi = fields.Float(string='Independent Hours')
+    ht = fields.Float(string='Theoretical Hours')
 
     @api.model
     def create(self, values):

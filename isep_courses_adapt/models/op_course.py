@@ -25,6 +25,9 @@ class OpCourse(models.Model):
                                          string='Evaluation type')
     hours = fields.Float(string="Hours")
     credits = fields.Float(string="Credits")
+    hp_total = fields.Float(string="Practical Hours Total", compute='_compute_hours_total_course')
+    hi_total = fields.Float(string="Independent Hours Total", compute='_compute_hours_total_course')
+    ht_total = fields.Float(string="Theoretical Hours Total", compute='_compute_hours_total_course')
     uvic_program = fields.Boolean(string='UVIC program', default=False)
     sepyc_program = fields.Boolean(string='SEPYC program', default=False)
     name_catalan = fields.Char(string="Catalan name")
@@ -44,6 +47,12 @@ class OpCourse(models.Model):
 
     _sql_constraints = [('unique_course_code',
                          'check(1=1)', 'Delete constrian unique code per course!')]
+
+    @api.depends('subject_ids')
+    def _compute_hours_total_course(self):
+        self.hp_total = sum(subject.hp for subject in self.subject_ids)
+        self.hi_total = sum(subject.hi for subject in self.subject_ids)
+        self.ht_total = sum(subject.ht for subject in self.subject_ids)
 
     @api.model
     def create(self, values):
