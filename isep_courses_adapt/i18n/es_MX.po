@@ -138,7 +138,7 @@ msgstr "Código UVIC"
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_subject__sepyc_code
 #: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_subject_form
-msgid "sepyc_code"
+msgid "SEPYC code"
 msgstr "Código SEPYC"
 
 #. module: isep_courses_adapt
