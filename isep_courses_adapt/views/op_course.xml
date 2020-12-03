@@ -22,13 +22,13 @@
                                 <field name="hours"/>
                                 <field name="credits"/>
                                 <field name="ects"/>
-                                <field name="hp_total"/>
-                                <field name="hi_total"/>
-                                <field name="ht_total"/>
+                                <field name="practical_hours_total"/>
+                                <field name="independent_hours_total"/>
+                                <field name="theoretical_hours_total"/>
                                 <field name="hours_total"/>
-                                <field name="credits_hp"/>
-                                <field name="credits_hi"/>
-                                <field name="credits_ht"/>
+                                <field name="practical_hours_credits"/>
+                                <field name="independent_hours_credits"/>
+                                <field name="theoretical_hours_credits"/>
                                 <field name="credits_total"/>
                             </group>
                             <group string="Reconocimientos">

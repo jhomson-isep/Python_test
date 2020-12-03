@@ -7,4 +7,4 @@ class OpPeriodCourse(models.Model):
     _description = 'Period of courses'
 
     name = fields.Char(string="Period Name", size=180)
-    code = fields.Char(string="Period Node", size=16)
+    code = fields.Char(string="Period Code", size=16)

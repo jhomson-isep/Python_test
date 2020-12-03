@@ -111,17 +111,17 @@ msgid "Moodle code"
 msgstr "Código en Moodle"
 
 #. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_subject__hp
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_subject__practical_hours
 msgid "Practical Hours"
 msgstr "Horas Prácticas (HP)"
 
 #. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_subject__hi
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_subject__independent_hours
 msgid "Independent Hours"
 msgstr "Horas Independientes (HI)"
 
 #. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_subject__ht
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_subject__theoretical_hours
 msgid "Theoretical Hours"
 msgstr "Horas Teóricas (HT)"
 
@@ -225,6 +225,7 @@ msgstr ""
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__section
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.inherited_view_op_course_form
 msgid "Section"
 msgstr "Sección"
 
@@ -237,7 +238,6 @@ msgstr "Coordinador"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__modality_id
 msgid "Modality"
 msgstr "Modalidad"
-
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__academic_year
@@ -268,11 +268,6 @@ msgstr "Contacto"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__type_practices
 msgid "Type practices"
 msgstr "Tipo de prácticas"
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__campus_id
-msgid "Campus"
-msgstr "Sede"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__hours
@@ -413,6 +408,7 @@ msgstr "Enviar a Moodle"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__campus_id
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__campus_id
 msgid "Campus"
 msgstr "Sede"
 
@@ -440,6 +436,18 @@ msgstr "Programa SEPYC"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__year_end_studies
 msgid "Year of completion of studies"
 msgstr "Finalización estudios"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__place_birth
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form
+msgid "Place of birth"
+msgstr "Lugar de nacimiento"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__status_documentation
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form
+msgid "Status documentation"
+msgstr "Estado de documentación"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__document_type_id
@@ -527,18 +535,6 @@ msgid "Document name"
 msgstr "Nombre de documento"
 
 #. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__place_birth
-#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form
-msgid "Place of birth"
-msgstr "Lugar de nacimiento"
-
-#. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__status_documentation
-#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form
-msgid "Status documentation"
-msgstr "Estado de documentación"
-
-#. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_documents__document_type_id
 msgid "Document type"
 msgstr "Tipo de documento"
@@ -579,42 +575,50 @@ msgid "Access"
 msgstr "Accesos"
 
 #. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__hp_total
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__practical_hours_total
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__practical_hours_total
 msgid "Practical Hours Total"
 msgstr "Total de horas prácticas"
 
 #. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__hi_total
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__independent_hours_total
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__independent_hours_total
 msgid "Independent Hours Total"
 msgstr "Total de horas independientes"
 
 #. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__ht_total
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__theoretical_hours_total
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__theoretical_hours_total
 msgid "Theoretical Hours Total"
 msgstr "Total de horas teóricas"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__hours_total
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__hours_total
 msgid "Hours Total"
 msgstr "Total de Horas"
 
 #. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__credits_hp
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__practical_hours_credits
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__practical_hours_credits
 msgid "Practical Hours Credits"
 msgstr "Créditos Horas Prácticas"
 
 #. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__credits_hi
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__independent_hours_credits
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__independent_hours_credits
 msgid "Independent Hours Credits"
 msgstr "Créditos Horas Independientes"
 
 #. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__credits_ht
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__theoretical_hours_credits
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__theoretical_hours_credits
 msgid "Theoretical Hours Credits"
 msgstr "Créditos Horas Teóricas"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__credits_total
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__credits_total
 msgid "Credits Total"
 msgstr "Total de Créditos"
 
@@ -640,5 +644,5 @@ msgstr "Nombre del periodo"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_period_course__code
-msgid "Periodo Code"
+msgid "Period Code"
 msgstr "Número del periodo"
