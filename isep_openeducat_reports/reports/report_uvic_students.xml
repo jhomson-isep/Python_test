@@ -6,6 +6,7 @@
                 string="Reporte de UVIC"
                 report_type="xlsx"
                 name="isep_openeducat_reports.report_uvic_students"
+                file="Uvic_students"
                 menu="True"/>
 
     </data>
