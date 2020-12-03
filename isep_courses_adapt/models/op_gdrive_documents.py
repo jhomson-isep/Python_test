@@ -150,13 +150,6 @@ class OpGdriveDocuments(models.Model):
     def _check_ids(self):
         res = self.search([('document_type_id', '=', self.document_type_id.id), ('partner_id', '=', self.partner_id.id)], limit=1).id
         if res != self.id:
-            gauth = self.Gauth()
-            drive = GoogleDrive(gauth)
-            file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
-            for folders in file_list:
-                if folders['id'] == self.search([('id', '=', res)], limit=1).folder_id:
-                    folders.Delete()
-                    break
             raise ValidationError(_('One documet type per person!!'))
 
     @api.model
