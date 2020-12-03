@@ -245,7 +245,7 @@ class CrmLead(models.Model):
                     team_id = 5
                     lead.update({'x_sede_id': 26})
                     # Mandar a Latam cuando sea un telefono de México y Colombia
-                    if telefono[:3] in ('+52', '+57'):
+                    if telefono[:3] in ('+52', '+57') or telefono[:2] in ('52', '57'):
                         company_id = 1111
                         # Carolina Araujo
                         user_id = 100000006
