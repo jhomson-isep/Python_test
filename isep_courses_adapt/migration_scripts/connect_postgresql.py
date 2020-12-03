@@ -2,8 +2,8 @@
 import psycopg2
 
 dbname = 'ISEP'
-user = 'openpg'
-password = 'openpgpwd'
+user = 'odoo'
+password = 'odoo'
 host = 'localhost'
 port = '5432'
 

@@ -43,6 +43,7 @@
         'views/op_student_view.xml',
         'views/op_area_course.xml',
         'views/res_partner_documentation.xml',
+        'views/op_portal_documentation.xml',
         'menu/isep_courses_adapt_menu.xml',
         'data/op_document_type.xml',
         'data/op_evaluation_type.xml',
