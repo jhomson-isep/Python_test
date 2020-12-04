@@ -15,10 +15,12 @@
     'license': 'AGPL-3',
     'depends': [
         'base',
-        'openeducat_core'
+        'openeducat_core',
+        'report_xlsx'
     ],
     'installable': True,
     'data': [
-        'reports/report_uvic_students.xml'
+        'reports/report_uvic_students.xml',
+        'reports/report_batch_students.xml'
     ]
 }
