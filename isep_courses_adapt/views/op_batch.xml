@@ -27,23 +27,29 @@
                     <notebook>
                         <page string="General">
                             <group cols="4">
-                                <group string="Información acádemica">
-                                    <field name="ects"/>
-                                    <field name="hours"/>
-                                    <field name="credits"/>
-                                    <field name="practical_hours_total"/>
-                                    <field name="independent_hours_total"/>
-                                    <field name="theoretical_hours_total"/>
-                                    <field name="hours_total"/>
-                                    <field name="practical_hours_credits"/>
-                                    <field name="independent_hours_credits"/>
-                                    <field name="theoretical_hours_credits"/>
-                                    <field name="credits_total"/>
-                                    <field name="expiration_days"/>
-                                    <field name="date_diplomas"/>
-                                    <field name="academic_year"/>
-                                    <field name="generation"/>
-                                </group>
+                                <sheet string="groups_info_batch">
+                                    <group string="Información acádemica">
+                                        <field name="expiration_days"/>
+                                        <field name="date_diplomas"/>
+                                        <field name="academic_year"/>
+                                        <field name="generation"/>
+                                    </group>
+                                    <group string="SL">
+                                        <field name="hours"/>
+                                        <field name="credits"/>
+                                        <field name="ects"/>
+                                    </group>
+                                    <group string="LATAM">
+                                        <field name="practical_hours_total"/>
+                                        <field name="independent_hours_total"/>
+                                        <field name="theoretical_hours_total"/>
+                                        <field name="hours_total"/>
+                                        <field name="practical_hours_credits"/>
+                                        <field name="independent_hours_credits"/>
+                                        <field name="theoretical_hours_credits"/>
+                                        <field name="credits_total"/>
+                                    </group>
+                                </sheet>
                                 <group string="Otra información">
                                     <field name="days_week"/>
                                     <field name="schedule"/>
