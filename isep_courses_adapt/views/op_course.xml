@@ -45,7 +45,7 @@
                         </group>
                         <group string="Contenidos">
                                 <field name="content"/>
-                            </group>
+                        </group>
                     </page>
                     <page string="Asignaturas">
                         <field name="subject_ids">
