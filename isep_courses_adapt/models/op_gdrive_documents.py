@@ -27,13 +27,12 @@ class OpGdriveDocuments(models.Model):
     folder_id = fields.Char(string="Gdrive Folder ID")
     partner_id = fields.Many2one(comodel_name='res.partner', string='Partner')
 
-
     @api.multi
     def download_file(self):
         gauth = self.Gauth()
         drive = GoogleDrive(gauth)
 
-        file = drive.CreateFile({'id': self.drive_id, 'parents' : [{'id': self.folder_id}] })
+        file = drive.CreateFile({'id': self.drive_id, 'parents': [{'id': self.folder_id}]})
         logger.info("*******************")
         logger.info(file)
 
@@ -49,7 +48,7 @@ class OpGdriveDocuments(models.Model):
             'res_model': self._name,
             'res_id': self.id,
             'mimetype': file['mimeType']
-        })
+            })
         logger.info("atachment_id: {0}".format(attachment.id))
         return {
             'type': 'ir.actions.act_url',
@@ -57,7 +56,7 @@ class OpGdriveDocuments(models.Model):
                 attachment.id),
             'target': 'new',
             'nodestroy': False,
-        }
+            }
 
     @api.multi
     def upload_file(self, values):
@@ -65,13 +64,11 @@ class OpGdriveDocuments(models.Model):
         gauth = self.Gauth()
         self.valid_file(values)
         drive = GoogleDrive(gauth)
-        model_path = os.path.dirname(os.path.abspath(__file__))
+        os.path.dirname(os.path.abspath(__file__))
         file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
         exist_folder = False
         file = drive.CreateFile()
         folder = ''
-        name = ''
-        field = ''
         res = self.search([('document_type_id', '=', values['document_type_id']),
                            ('partner_id', '=', values['partner_id'])], limit=1).id
         if res != self.id:
@@ -148,7 +145,8 @@ class OpGdriveDocuments(models.Model):
     @api.one
     @api.constrains('document_type_id', 'partner_id')
     def _check_ids(self):
-        res = self.search([('document_type_id', '=', self.document_type_id.id), ('partner_id', '=', self.partner_id.id)], limit=1).id
+        res = self.search(
+            [('document_type_id', '=', self.document_type_id.id), ('partner_id', '=', self.partner_id.id)], limit=1).id
         if res != self.id:
             raise ValidationError(_('One documet type per person!!'))
 
@@ -161,12 +159,6 @@ class OpGdriveDocuments(models.Model):
             [('document_type_id', '=', None), ('partner_id', '=', None)])
         for rec in partner_res_void:
             rec.unlink()
-
-    def get_res_partner_id(self, values):
-        for res in self:
-            model = self.env['ir.model'].search(['model', '=', res.res_model], limit=1)
-            model_name = model[0].name
-            partner_id = self.env[model_name]
 
     def unlink(self):
         res = super(OpGdriveDocuments, self).unlink()
