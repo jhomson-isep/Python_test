@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <report id="report_batch_students"
+        <report id="action_report_report_batch_students"
                 model="op.batch"
-                string="Grupo y Estudiantes"
+                string="Admission Analysis"
                 report_type="qweb-pdf"
-                name="isep_openeducat_reports.batch_students"
-                menu="True"/>
+                name="isep_openeducat_reports.report_batch_students"
+                file="isep_openeducat_reports.report_batch_students"
+                menu="False"/>
 
-
-        <template id="batch_students">
+        <template id="report_batch_students">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <t t-call="web.basic_layout">

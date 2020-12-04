@@ -21,6 +21,6 @@
     'installable': True,
     'data': [
         'reports/report_uvic_students.xml',
-        'reports/report_batch_students.xml'
+        'menu/report_menu.xml'
     ]
 }
