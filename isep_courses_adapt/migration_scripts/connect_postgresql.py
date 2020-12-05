@@ -90,7 +90,7 @@ class PSQL():
 
     def get_partner_by_email(self, email):
         self.cr.execute("SELECT id FROM res_partner "
-                        "WHERE vat = '%s';" % email)
+                        "WHERE email = '%s';" % email)
         return self.cr.fetchone()
 
     def create_partner(self, values):
