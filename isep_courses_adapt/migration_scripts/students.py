@@ -43,8 +43,7 @@ try:
                         True
                     ]
                     print('Partner:', values)
-                    postgres.create_partner(values)
-                partner_id = postgres.get_partner_by_email(str(student.EMail))
+                    partner_id = postgres.create_partner(values)
                 campus_id = postgres.get_campus_by_code(student.Sede)
                 document_type_id = postgres.get_document_type_by_code(student.TipoDocumento)
                 study_type_id = postgres.get_study_type_by_code(student.TipoEstudios)

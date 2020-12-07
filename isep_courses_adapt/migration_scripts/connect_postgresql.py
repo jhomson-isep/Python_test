@@ -97,12 +97,14 @@ class PSQL():
         self.cr.execute("INSERT INTO res_partner "
                         "(display_name, name, email, phone, mobile, street,"
                         "zip, city, country_id, vat, is_student, active) VALUES ('%s','%s', '%s', '%s', '%s',"
-                        " '%s', '%s', '%s', %s, '%s', %s, TRUE);" % (values[0], values[0], values[1], values[2],
-                                                                     values[3], values[4], values[5],
-                                                                     values[6], values[7], values[8],
-                                                                     values[9])
+                        " '%s', '%s', '%s', %s, '%s', %s, TRUE) RETURNING id;" % (
+                            values[0], values[0], values[1], values[2],
+                            values[3], values[4], values[5], values[6],
+                            values[7], values[8], values[9])
                         )
+        partner_id = self.cr.fetchone()[0]
         self.conn.commit()
+        return partner_id
 
     def create_faculty(self, values):
         self.cr.execute("INSERT INTO op_faculty "
