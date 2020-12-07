@@ -56,8 +56,7 @@ class OpSubject(models.Model):
             except Exception:
                 logger.info("Error calling Moodle API\n", Exception)
 
-        res = super(OpSubject, self).create(values)
-        return res
+        return super(OpSubject, self).create(values)
 
     @api.multi
     def write(self, values):
@@ -95,8 +94,7 @@ class OpSubject(models.Model):
             except ValueError:
                 logger.info("Error calling Moodle API\n", ValueError)
 
-        res = super(OpSubject, self).write(values)
-        return res
+        return super(OpSubject, self).write(values)
 
     def import_subjects(self):
         s = SQL()
@@ -127,3 +125,6 @@ class OpSubject(models.Model):
                 except Exception as e:
                     logger.info(e)
                     continue
+        logger.info("**************************************")
+        logger.info("end of import subjects")
+        logger.info("**************************************")

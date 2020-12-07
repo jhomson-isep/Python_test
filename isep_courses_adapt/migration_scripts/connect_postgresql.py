@@ -130,17 +130,17 @@ class PSQL():
         self.conn.commit()
 
     def create_batch(self, values):
-        self.cr.execute("INSERT INTO op_batch "
-                        "(name, code, course_id, start_date,"
-                        " end_date, coordinator, campus_id, date_diplomas,"
-                        " academic_year, days_week, schedule, class_place, "
+        self.cr.execute("INSERT INTO op_batch(name, code, course_id, "
+                        "start_date, end_date, coordinator, campus_id, "
+                        "date_diplomas, academic_year, days_week, schedule, "
                         "students_limit, type_practices, active) "
-                        "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6}, '{7}', '{8}',"
-                        " '{9}', '{10}', '{11}', "
-                        "'{12}', {13}, TRUE);".format(values[0], values[1], values[2], values[3], values[4],
-                                                      values[5], values[6], values[7], values[8], values[9],
-                                                      values[10], values[11], values[12], values[13])
-                        )
+                        "VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6}, "
+                        "'{7}', '{8}', '{9}', '{10}', '{11}', {12}, "
+                        "TRUE);".format(values[0], values[1], values[2],
+                                        values[3], values[4], values[5],
+                                        values[6], values[7], values[8],
+                                        values[9], values[10], values[12],
+                                        values[13]))
         self.conn.commit()
 
     def create_record(self, table, records):

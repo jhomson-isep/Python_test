@@ -20,8 +20,10 @@ class SQL():
         # con_string = 'DSN=%s;UID=%s;PWD=%s;DATABASE=%s;' % (self.dsn,
         # self.user, self.password, self.database)
         logger.info(sql)
-        con_string = 'DRIVER={%s};SERVER=%s;UID=%s;PWD=%s;DATABASE=%s;' % (
-            self.driver, self.server, self.user, self.password, self.database)
+        con_string = 'DRIVER={' \
+                     '%s};SERVER=%s;UID=%s;PWD=%s;DATABASE=%s;PORT=1433;' % (
+                         self.driver, self.server, self.user, self.password,
+                         self.database)
         conn = pyodbc.connect(con_string)
         cursor_sql = conn.cursor()
         cursor_sql.execute(sql)
@@ -32,8 +34,10 @@ class SQL():
         # con_string = 'DSN=%s;UID=%s;PWD=%s;DATABASE=%s;' % (self.dsn,
         # self.user, self.password, self.database)
         # logger.info(sql)
-        con_string = 'DRIVER={%s};SERVER=%s;UID=%s;PWD=%s;DATABASE=%s;' % (
-            self.driver, self.server, self.user, self.password, self.database)
+        con_string = 'DRIVER={' \
+                     '%s};SERVER=%s;UID=%s;PWD=%s;DATABASE=%s;PORT=1433;' % (
+                         self.driver, self.server, self.user, self.password,
+                         self.database)
         conn = pyodbc.connect(con_string)
         cursor_sql = conn.cursor()
         cursor_sql.execute(sql)
@@ -117,7 +121,7 @@ class SQL():
             "(SELECT DISTINCT al.N_Id FROM ISEP.dbo.Alumnos al "
             "LEFT JOIN  GrupoISEPxtra.dbo.gin_PreMatriculas pm ON al.N_Id = pm.AlumnoID "
             "WHERE pm.AnyAcademico IS NOT NULL AND pm.SedeID in (7,8,9,10,11,12,13,27) AND pm.Tramitada = 1 ) "
-            "ORDER BY Alumnos.N_Id DESC OFFSET ({0}) ROWS FETCH NEXT 1000 ROWS ONLY;".format(offset)
+            "ORDER BY Alumnos.N_Id DESC;"
         )
         return rows
 

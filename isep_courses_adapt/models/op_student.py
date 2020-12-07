@@ -73,14 +73,11 @@ class OpStudent(models.Model):
                 access_string += "{0} minutos, ".format(minutes)
             record.last_access = access_string[:-2]
 
-    def equal_datetimes_YYMMDDHHmm(self,ddtime1,ddtime2):
-        if isinstance(ddtime1, datetime.datetime) and\
-           isinstance(ddtime2, datetime.datetime) and \
-            ddtime1.replace(minute=0, second=0, microsecond=0) == \
-            ddtime2.replace(minute=0, second=0, microsecond=0):
-            return True
-        else:
-            return False
+    def equal_datetimes_YYMMDDHHmm(self, ddtime1, ddtime2):
+        return isinstance(ddtime1, datetime.datetime) and \
+                isinstance(ddtime2, datetime.datetime) and \
+                ddtime1.replace(minute=0, second=0, microsecond=0) == \
+                ddtime2.replace(minute=0, second=0, microsecond=0)
 
     def update_access(self, rows):
         logger.info("**************************************")
@@ -96,7 +93,7 @@ class OpStudent(models.Model):
                     last_access = datetime.datetime.utcfromtimestamp(
                         row['lastaccess'])
                     if len(student) == 1:
-                        acces_values = {
+                        access_values = {
                             'student_id': student.id,
                             'student_access': last_access
                         }
@@ -104,8 +101,8 @@ class OpStudent(models.Model):
                             [('student_id', '=', student.id)])
                         if len(_access) > 0:
                             _access = _access[-1]
-                        if not self.equal_datetimes_YYMMDDHHmm(last_access,_access.student_access):
-                            self.env['op.student.access'].create(acces_values)
+                        if not self.equal_datetimes_YYMMDDHHmm(last_access, _access.student_access):
+                            self.env['op.student.access'].create(access_values)
                             logger.info('Record created')
                 except Exception as e:
                     logger.info(e)
@@ -165,8 +162,8 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         logger.info("import student access")
         logger.info("**************************************")
-        moodle = self.env['moodle']
         if self.document_number:
+            moodle = self.env['moodle']
             rows = Moodle.get_last_access(moodle, 'idnumber',
                                           self.document_number)
             for row in rows:
@@ -179,6 +176,8 @@ class OpStudent(models.Model):
                         'student_id': self.id,
                         'student_access': last_access
                     }
+                    logger.info("lastaccess: {}".format(row['lastaccess']))
+                    logger.info("access_values: {}".format(access_values))
                     _access = self.env['op.student.access'].search(
                         [('student_id', '=', self.id)])
                     if len(_access) > 0:
@@ -214,7 +213,8 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         logger.info("send email")
         logger.info("**************************************")
-        template = self.env['mail.template'].search([('name', '=', 'Email Student Access')])
+        template = self.env['mail.template'].search(
+            [('name', '=', 'Email Student Access')])
         int_break = 0
         if template:
             for student in self.env['op.student'].search([]):
