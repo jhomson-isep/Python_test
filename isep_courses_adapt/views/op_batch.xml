@@ -12,7 +12,7 @@
 
                 <xpath expr="//field[@name='course_id']" position="replace">
                     <field name="modality_id"/>
-                    <field name="campus_id"/>
+                    <field name="campus_id" attrs="{'required':[('modality_id', '=' ,1)]}"/>
                     <field name="students_limit"/>
                     <field name="uvic_program" attrs="{'invisible': [('user_company_id', '=', 1111)]}"/>
                     <field name="rvoe_program" attrs="{'invisible': [('user_company_id', '!=', 1111)]}"/>
@@ -33,12 +33,12 @@
                                     <field name="expiration_days"/>
                                     <field name="date_diplomas"/>
                                     <field name="academic_year"/>
+                                    <field name="generation"/>
                                 </group>
                                 <group string="Otra información">
                                     <field name="days_week"/>
                                     <field name="schedule"/>
-                                    <field name="preference_group"/>
-                                    <field name="class_place"/>
+                                    <field name="contact_class"/>
                                     <field name="type_practices"/>
                                 </group>
                             </group>

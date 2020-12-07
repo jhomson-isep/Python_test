@@ -14,14 +14,18 @@
     "license": "AGPL-3",
     "depends": [
         "base",
-        "purchase"
+        "purchase",
+        "account_payment_mode",
+        "account_payment_partner"
     ],
     "data": [
+        "views/assets.xml",
         "views/purchase_order_portal.xml",
         "views/purchase_order.xml"
     ],
     'qweb': [
-        'static/src/xml/portal_chatter.xml'
+        'static/src/xml/portal_chatter.xml',
+        'static/src/xml/portal_signature.xml'
     ],
     'installable': True,
 }

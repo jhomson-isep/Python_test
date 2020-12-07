@@ -119,6 +119,18 @@ msgid "UVIC code"
 msgstr "Código UVIC"
 
 #. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_subject__sepyc_code
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_subject_form
+msgid "sepyc_code"
+msgstr "Código SEPYC"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__generation
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_batch_form
+msgid "Generation"
+msgstr "Generación"
+
+#. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__batch_id
 msgid "Batch"
 msgstr "Grupo"
@@ -245,9 +257,9 @@ msgid "Preference group"
 msgstr "Grupo de preferencia"
 
 #. module: isep_courses_adapt
-#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__class_place
-msgid "Class place"
-msgstr "Lugar de clase"
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__contact_class
+msgid "Contact"
+msgstr "Contacto"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__type_practices
@@ -401,6 +413,12 @@ msgid "Campus"
 msgstr "Sede"
 
 #. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__delay
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+msgid "Delay"
+msgstr "Morosidad"
+
+#. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__uvic_documentation
 msgid "UVIC Documentation"
 msgstr "Documentación UVIC"
@@ -499,6 +517,18 @@ msgstr "Crear usuario"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_documents__document_name
 msgid "Document name"
 msgstr "Nombre de documento"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__place_birth
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form
+msgid "Place of birth"
+msgstr "Lugar de nacimiento"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__status_documentation
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form
+msgid "Status documentation"
+msgstr "Estado de documentación"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_documents__document_type_id
@@ -602,3 +632,13 @@ msgstr "Tipo de Documento"
 #: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_documentation
 msgid "Document Name"
 msgstr "Nombre del documento"
+
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_section_course__name
+msgid "Section name"
+msgstr "Nombre de sección"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_section_course__code
+msgid "Section Code"
+msgstr "Número de sección"
+

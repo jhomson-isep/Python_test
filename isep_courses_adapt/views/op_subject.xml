@@ -17,6 +17,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='grade_weightage']" position="replace">
                     <field name="uvic_code"/>
+                    <field name="sepyc_code"/>
                 </xpath>
             </field>
         </record>

@@ -13,6 +13,7 @@
                          t-if="order.has_to_be_signed(True)">
                         <form id="accept" method="POST"
                               t-att-data-order-id="order.id"
+                              t-att-data-reference="partner_reference"
                               t-att-data-token="order.access_token"
                               class="js_accept_json modal-content js_website_submit_form">
                             <input type="hidden" name="csrf_token"
@@ -25,12 +26,12 @@
                             </header>
                             <main class="modal-body" id="sign-dialog">
                                 <p>
-                                    <span>By signing this proposal, I agree to
-                                        the following terms:</span>
+                                    <span>By signing this proposal, I agree to the following terms:</span>
                                     <ul>
-                                        <li><span>Accepted on the behalf
-                                            of:</span> <b
-                                                t-field="order.partner_id.commercial_partner_id"/></li>
+                                        <li>
+                                            <span>Accepted on the behalf of:</span>
+                                            <b t-field="order.partner_id.commercial_partner_id"/>
+                                        </li>
                                         <li><span>For an amount of:</span> <b
                                                 data-id="total_amount"
                                                 t-field="order.amount_total"/></li>
@@ -39,7 +40,8 @@
                                                 t-field="order.payment_term_id.note"/></li>
                                     </ul>
                                 </p>
-                                <t t-call="portal.portal_signature">
+
+                                <t t-call="isep_portal_attachments.portal_purchase_signature">
                                     <t t-set="object" t-value="order"/>
                                     <t t-set="partner_name"
                                        t-value="order.partner_id.name"/>
@@ -145,9 +147,9 @@
                                 <i class="fa fa-check"/> Accept &amp; Sign</a>
                         </div>
                         <div class="col-sm-auto mt8">
-                            <a role="button" class="btn btn-secondary"
-                               href="#discussion">
-                                <i class="fa fa-comment"/> Feedback</a>
+                            <a role="button" class="btn btn-secondary btn-block o_download_btn"
+                               t-att-href="order.get_portal_url(report_type='pdf', download=True)"
+                               title="Download"><i class="fa fa-download"/> Download</a>
                         </div>
                         <div class="col-sm-auto mt8">
                             <a role="button" class="btn btn-danger"
@@ -160,6 +162,13 @@
                 <section t-if="order.signature" id="signature"
                          name="Signature">
                     <div class="row mt-4" name="signature">
+                        <div class="justify-content-center text-center">
+                            <div class="col-sm-auto mt8">
+                                <a role="button" class="btn btn-secondary btn-block o_download_btn"
+                                   t-att-href="order.get_portal_url(report_type='pdf', download=True)"
+                                   title="Download"><i class="fa fa-download"/> Download</a>
+                            </div>
+                        </div>
                         <div t-attf-class="#{'col-3' if report_type != 'html' else 'col-sm-7 col-md-4'} ml-auto text-center">
                             <h5>Signature</h5>
                             <img t-att-src="image_data_uri(order.signature)"
@@ -177,6 +186,90 @@
                         <t t-set="pid" t-value="pid"/>
                         <t t-set="hash" t-value="hash"/>
                     </t>
+                </div>
+            </xpath>
+
+            <xpath expr="//div[@class='card-body']" position="replace">
+                <div class="card-body">
+                    <div class="mb8">
+                        <strong>Date:</strong> <span t-field="order.date_order"
+                                                     t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <strong>Product</strong>
+                        </div>
+                        <div class="col-lg-2 text-right">
+                            <strong>Description</strong>
+                        </div>
+                        <div class="col-lg-2 text-right">
+                            <strong>Unit Price</strong>
+                        </div>
+                        <div class="col-lg-2 text-right">
+                            <strong>Quantity</strong>
+                        </div>
+                        <div class="col-lg-2 text-right">
+                            <strong>Subtotal</strong>
+                        </div>
+                    </div>
+                    <t t-foreach="order.order_line" t-as="ol">
+                        <div class="row purchases_vertical_align">
+                            <div class="col-lg-1 text-center">
+                                <img t-att-src="image_data_uri(resize_to_48(ol.product_id.image))" alt="Product"/>
+                            </div>
+                            <div id="product_name" class="col-lg-3">
+                                <span t-esc="ol.product_id.name"/>
+                            </div>
+                            <div id="product_description" class="col-lg-2 text-right">
+                                <span t-esc="ol.name"/>
+                            </div>
+                            <div class="col-lg-2 text-right">
+                                <span t-field="ol.price_unit"
+                                      t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: order.currency_id}"/>
+                            </div>
+                            <div class="col-lg-2 text-right">
+                                <span t-esc="ol.product_qty"/>
+                            </div>
+                            <div class="col-lg-2 text-right">
+                                <span t-field="ol.price_subtotal"
+                                      t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: order.currency_id}"/>
+                            </div>
+                        </div>
+                    </t>
+
+                    <hr/>
+
+                    <div class="row">
+                        <div class="col-lg-12 text-right">
+                            <div class="row">
+                                <div class="col-lg-10 text-right">
+                                    Untaxed Amount:
+                                </div>
+                                <div class="col-lg-2 text-right">
+                                    <span t-field="order.amount_untaxed"
+                                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: order.currency_id}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-10 text-right">
+                                    Taxes:
+                                </div>
+                                <div class="col-lg-2 text-right">
+                                    <span t-field="order.amount_tax"
+                                          t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: order.currency_id}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-10 text-right">
+                                    <strong>Total:</strong>
+                                </div>
+                                <div class="col-lg-2 text-right">
+                                    <strong><span t-field="order.amount_total"
+                                                  t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: order.currency_id}"/></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </xpath>
         </field>

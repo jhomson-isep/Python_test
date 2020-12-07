@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
+from dotenv import load_dotenv, find_dotenv
 import logging
 import pyodbc
 import os
 
 logger = logging.getLogger(__name__)
+load_dotenv(find_dotenv())
 
 
 class SQL():
     dsn = 'egServer70source'
-    server = '85.118.244.220'
-    user = 'sa'
-    password = 'Gr5p4mr3'
-    database = 'ISEP'
+    server = os.environ['SERVER']
+    user = os.environ['MSSQL_USER']
+    password = os.environ['MSSQL_PASSWORD']
+    database = os.environ['MSSQL_DATABASE']
+    port = os.environ['MSSQL_PORT']
     driver = 'SQL Server'  # for Windows
     if os.name == "posix":
         driver = 'ODBC Driver 17 for SQL Server'  # for linux
@@ -21,9 +24,9 @@ class SQL():
         # self.user, self.password, self.database)
         logger.info(sql)
         con_string = 'DRIVER={' \
-                     '%s};SERVER=%s;UID=%s;PWD=%s;DATABASE=%s;PORT=1433' % (
+                     '%s};SERVER=%s;UID=%s;PWD=%s;DATABASE=%s;PORT=%s' % (
                          self.driver, self.server, self.user, self.password,
-                         self.database)
+                         self.database, self.port)
         conn = pyodbc.connect(con_string)
         cursor_sql = conn.cursor()
         cursor_sql.execute(sql)
@@ -35,9 +38,9 @@ class SQL():
         # self.user, self.password, self.database)
         # logger.info(sql)
         con_string = 'DRIVER={' \
-                     '%s};SERVER=%s;UID=%s;PWD=%s;DATABASE=%s;PORT=1433' % (
+                     '%s};SERVER=%s;UID=%s;PWD=%s;DATABASE=%s;PORT=%s' % (
                          self.driver, self.server, self.user, self.password,
-                         self.database)
+                         self.database, self.port)
         conn = pyodbc.connect(con_string)
         cursor_sql = conn.cursor()
         cursor_sql.execute(sql)

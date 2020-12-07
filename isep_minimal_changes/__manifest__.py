@@ -19,14 +19,16 @@
         "sale",
         "helpdesk",
         "project",
-        "isep_custom"
+        "isep_custom",
+        "sign"
     ],
     "data": [
         "views/res_partner.xml",
         "views/helpdesk_ticket.xml",
         "views/helpdesk_team.xml",
         "views/project_task.xml",
-        "views/crm_lead.xml"
+        "views/crm_lead.xml",
+        "views/res_config_settings.xml"
     ],
     'installable': True,
 }

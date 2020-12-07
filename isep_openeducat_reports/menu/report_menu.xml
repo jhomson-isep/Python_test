@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Report Menu -->
+        <menuitem id="menu_op_report_batch_students_sub"
+                  name="Grupos y Estudiantes"
+                  parent="openeducat_core.menu_op_report_main"
+                  sequence="80"/>
+
+        <menuitem id="menu_op_students_sub" name="Reporte Estudiantes-Grupo"
+                  parent="openeducat_core.menu_op_report_main" sequence="10"
+                  action="isep_openeducat_reports.action_report_report_batch_students" groups="base.group_system"/>
+    </data>
+</odoo>

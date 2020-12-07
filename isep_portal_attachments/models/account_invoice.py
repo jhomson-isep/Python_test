@@ -1,5 +1,8 @@
 from odoo.tools.float_utils import float_compare
 from odoo import models, fields
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class AccountInvoice(models.Model):
@@ -20,6 +23,7 @@ class AccountInvoice(models.Model):
         invoice_line = self.env['account.invoice.line']
         date = self.date or self.date_invoice
         qty = line.product_qty
+        logger.info("Journal: {}".format(self.journal_id))
         data = {
             'purchase_line_id': line.id,
             'name': line.order_id.name + ': ' + line.name,

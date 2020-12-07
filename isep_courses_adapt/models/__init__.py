@@ -23,3 +23,4 @@ from . import op_faculty
 from . import op_mysql
 from . import op_area_course
 from . import res_partner_documentation
+from . import op_section_course
