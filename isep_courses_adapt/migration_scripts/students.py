@@ -28,7 +28,6 @@ try:
                 else:
                     country_id = 'NULL'
                 partner_id = postgres.get_partner_by_email(str(student.EMail))
-                print(partner_id, student.EMail)
                 if partner_id is None:
                     values = [
                         replace_special_caracter(create_name(student.Nombre, student.Apellidos)),

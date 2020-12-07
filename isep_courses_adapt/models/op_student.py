@@ -1,3 +1,5 @@
+import traceback
+
 from odoo import fields, api, models
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
@@ -332,26 +334,33 @@ class OpStudent(models.Model):
         int_break = 0
         for row in rows:
             try:
-                student = self.env['op.student'].search([('gr_no', '=', row.gr_no)], limit=1)
-                course = self.env['op.course'].search([('code', '=', row.code)], limit=1)
-                batch = self.env['op.batch'].search([('code', '=', row.batch)], limit=1)
-                for stu in student:
-                    logger.info(stu)
-                    for cour in course:
-                        logger.info(cour)
-                        for bat in batch:
-                            logger.info(bat)
-                            values = {
-                                'student_id' : [(4, stu.id)],
-                                'course_id'  : [(4, cour.id)],
-                                'batch_id'   : [(4, bat.id)],
-                                'roll_number': row.gr_no
-                            }
-                            student_course = self.env['op.student.course'].create(values)
-                            student.update({'course_detail_ids' : [(4, student_course.id)] })
-                            batch.update({'student_lines' : [(4, student_course.id)] })
-                            logger.info('Student with n_id {0} updated'.format(
-                                student.id))
+                student = self.env['op.student'].search(
+                    [('gr_no', '=', row.gr_no)], limit=1)
+                course = self.env['op.course'].search(
+                    [('code', '=', row.code)], limit=1)
+                batch = self.env['op.batch'].search(
+                    [('code', '=', row.batch)], limit=1)
+
+                if len(student) > 0 and len(course) > 0 and len(batch) > 0:
+                    exist_rel = self.env['op.student.course'].search(
+                        [('student_id', '=', student.id),
+                         ('course_id', '=', course.id),
+                         ('batch_id', '=', batch.id)], limit=1)
+                    if len(exist_rel) == 0:
+                        values = {
+                            'student_id': student.id,
+                            'course_id': course.id,
+                            'batch_id': batch.id,
+                            'roll_number': row.gr_no
+                        }
+                        student_course = self.env['op.student.course'].create(
+                            values)
+                        student.update(
+                            {'course_detail_ids': [(4, student_course.id)]})
+                        batch.update(
+                            {'student_lines': [(4, student_course.id)]})
+                        logger.info('Student with n_id {0} updated'.format(
+                            student.id))
 
                 if int_break == 50 and os.name != "posix":
                     break
@@ -359,6 +368,7 @@ class OpStudent(models.Model):
 
             except Exception as e:
                 logger.info(e)
+                traceback.print_exc()
                 continue
 
     def import_student_subjects_rel(self):
