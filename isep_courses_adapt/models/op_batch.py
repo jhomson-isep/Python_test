@@ -18,7 +18,7 @@ class OpBatch(models.Model):
 
     start_date = fields.Date('Start Date')
     end_date = fields.Date('End Date')
-    student_lines = fields.One2many('op.student.course', 'id')
+    student_lines = fields.One2many('op.student.course', 'batch_id')
     moodle_course_id = fields.Integer(string="Moodle Id")
     academic_year = fields.Char(string="Academic Year", size=16)
     days_week = fields.Char(string="Days week", size=50)
@@ -107,7 +107,7 @@ class OpBatch(models.Model):
         action = \
             self.env.ref('openeducat_core.act_open_op_student_view').read()[0]
         if len(students) > 1:
-            action['domain'] = [('batch_id', 'in', students.ids)]
+            action['domain'] = [('course_detail_ids', 'in', students.ids)]
         elif len(students) == 1:
             form_view = [(self.env.ref(
                 'openeducat_core.view_op_student_form').id, 'form')]
@@ -117,7 +117,7 @@ class OpBatch(models.Model):
                                                view != 'form']
             else:
                 action['views'] = form_view
-            action['res_id'] = students.ids[0]
+            action['res_id'] = students[0].student_id.id
         else:
             action = {'type': 'ir.actions.act_window_close'}
         return action
