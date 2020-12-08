@@ -7,7 +7,8 @@ from .op_sql import SQL
 import logging
 import os
 import pandas as pd
-import csv
+
+
 
 logger = logging.getLogger(__name__)
 
@@ -137,8 +138,12 @@ class OpSubject(models.Model):
     @api.multi
     def update_subject(self):
         self.ensure_one()
-        with open('/home/rouse/Documentos/ISEP/odoo_local/odoo/custom/isep_courses_adapt/data/subject.csv','r') as csv_file:
-            subject = pd.read_csv(csv_file, names=['code', 'ht', 'hi','hp','c'])
+        path_current = os.path.dirname(os.path.abspath(__file__))
+        path_file = path_current.replace('models','data') + '/subject.csv'
+
+        with open(path_file, 'r') as csv_file:
+            subject = pd.read_csv(csv_file, names=['code', 'ht', 'hi', 'hp', 'c'])
+
         print(subject)
         for _, row in subject.iterrows():
             search_subject = self.search([('code', '=', row.code)])
@@ -147,7 +152,7 @@ class OpSubject(models.Model):
                     'theoretical_hours': row.ht,
                     'independent_hours': row.hi,
                     'practical_hours': row.hp,
-                    'credits':row.c,
+                    'credits': row.c,
                 }
                 search_subject.write(subject_values)
 
