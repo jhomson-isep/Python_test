@@ -8,3 +8,4 @@ pytz~=2020.1
 python-dateutil~=2.8.1
 mysql-connector-python~=8.0.21
 docutils~=0.16
+pandas=1.1.5
