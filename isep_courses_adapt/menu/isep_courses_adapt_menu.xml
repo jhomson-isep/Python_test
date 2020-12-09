@@ -52,6 +52,10 @@
         <menuitem id="menu_op_area_course_sub" name="Area de Cursos"
                   parent="openeducat_core.menu_op_school_config_general" sequence="12"
                   action="act_open_op_area_course_view" groups="base.group_system"/>
+        
+        <menuitem id="menu_op_student_type_sub" name="Tipo de estudios"
+                  parent="openeducat_core.menu_op_school_config_general" sequence="13"
+                  action="act_open_op_study_type_view" groups="base.group_system"/>
 
     </data>
 </odoo>

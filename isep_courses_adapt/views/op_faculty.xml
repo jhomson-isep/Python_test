@@ -13,6 +13,10 @@
                     <field name="specialty"/>
                 </xpath>
 
+                <xpath expr="//notebook/page[@name='library']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
                  <notebook position="inside">
                     <page name="Documentación" string="Documentación">
                         <field name="document_ids" colspan="2" nolabel="1"/>
