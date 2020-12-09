@@ -67,11 +67,13 @@ class SQL():
             "SELECT * FROM Asignaturas ORDER BY id DESC")
         return rows
 
+    def get_all_subject_rel(self):
+        return self.query("SELECT * FROM CursosAsignaturas;")
+
     def get_subject_rel_by_code(self, subject_code):
-        rows = self.query(
+        return self.query(
             "SELECT * FROM CursosAsignaturas WHERE CodAsignatura "
             "= '{0}';".format(subject_code))
-        return rows
 
     def get_all_students(self, offset):
         rows = self.query(
@@ -133,15 +135,19 @@ class SQL():
         return rows
 
     def get_all_subjects_by_course_student(self, course, gr_no):
-        rows = self.query("SELECT TOP(1000) Asignaturas.Id, AL.N_Id, MA.Curso_Id, AL.Nombre FROM Asignaturas "
-               "INNER JOIN CursosAsignaturas CA ON CA.CodAsignatura = Asignaturas.CodAsignatura "
-               "INNER JOIN Matriculaciones MA ON MA.Curso_Id = '%s' AND CA.Curso_Id = '%s' "
-               "INNER JOIN Alumnos AL ON AL.N_Id = '%s' AND MA.N_Id = '%s' AND AL.N_Id NOT IN "
-               "(SELECT DISTINCT al.N_Id FROM ISEP.dbo.Alumnos al "
-               "LEFT JOIN  GrupoISEPxtra.dbo.gin_PreMatriculas pm ON al.N_Id = pm.AlumnoID "
-               "WHERE pm.AnyAcademico IS NOT NULL AND pm.SedeID in (7,8,9,10, 11,12,13,27) AND pm.Tramitada = 1 ) "
-               "ORDER BY Asignaturas.Id DESC;" % (course, course, gr_no, gr_no))
-        return rows
+        return self.query(
+            "SELECT TOP(1000) Asignaturas.Id, Asignaturas.CodAsignatura, "
+            "AL.N_Id, MA.Curso_Id, AL.Nombre FROM Asignaturas INNER JOIN "
+            "CursosAsignaturas CA ON CA.CodAsignatura = "
+            "Asignaturas.CodAsignatura INNER JOIN Matriculaciones MA ON "
+            "MA.Curso_Id = '%s' AND CA.Curso_Id = '%s' INNER JOIN Alumnos AL "
+            "ON AL.N_Id = '%s' AND MA.N_Id = '%s' AND AL.N_Id NOT IN (SELECT "
+            "DISTINCT al.N_Id FROM ISEP.dbo.Alumnos al LEFT JOIN "
+            "GrupoISEPxtra.dbo.gin_PreMatriculas pm ON al.N_Id = pm.AlumnoID "
+            "WHERE pm.AnyAcademico IS NOT NULL AND pm.SedeID in "
+            "(7,8,9,10, 11,12,13,27) AND pm.Tramitada = 1 ) ORDER BY "
+            "Asignaturas.Id DESC;" % (course, course, gr_no, gr_no)
+        )
 
     def get_all_subjects_faculty(self, faculty):
         rows = self.query(

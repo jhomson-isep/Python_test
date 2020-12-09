@@ -17,6 +17,7 @@
     'license': 'AGPL-3',
     'depends': [
         'base',
+        'mail',
         'openeducat_core',
         'openeducat_fees',
         'openeducat_library',

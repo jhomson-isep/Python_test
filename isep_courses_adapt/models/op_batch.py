@@ -65,7 +65,7 @@ class OpBatch(models.Model):
     def _compute_subject_count(self):
         """Compute the number of distinct subjects linked to the batch."""
         for batch in self:
-            sub_count = len(batch.course_id.subject_ids)
+            sub_count = len(batch.op_batch_subject_rel_ids)
             batch.subject_count = sub_count
 
     def action_open_subjects(self):

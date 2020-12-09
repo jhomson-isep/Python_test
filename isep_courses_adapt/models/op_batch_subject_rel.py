@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import models, fields, api
 from .op_sql import SQL
 import logging
-import os
 
 logger = logging.getLogger(__name__)
 
@@ -24,37 +23,42 @@ class OpBatchSubjectRel(models.Model):
     order = fields.Integer(string='Order')
 
     _sql_constrains = [
-        ('unique_batch_id_subject_id_', 'unique( batch_id, subject_id)', 'The Batch Id & Subject Id must be UNIQUE')
+        ('unique_batch_id_subject_id_', 'unique( batch_id, subject_id)',
+         'The Batch Id & Subject Id must be UNIQUE')
     ]
 
-    def import_subjects_rel(self):
+    def import_all_subjects_rel(self):
         s = SQL()
         logger.info("**************************************")
         logger.info("import subjects rel")
         logger.info("**************************************")
-        subjects = self.env['op.subject'].search([])
-        for subject in subjects:
+        subjects_rel = s.get_all_subject_rel()
+        for subject_rel in subjects_rel:
             try:
-                subjects_rel_app = s.get_subject_rel_by_code(subject.code)
-                for subject_rel_app in subjects_rel_app:
-                    batch = self.env['op.batch'].search([('code', 'ilike', subject_rel_app.Curso_id)], limit=1)
-                    existent_subject_rel = self.search([('batch_id', '=', batch.id), ('subject_id', '=', subject.id)])
-                    if len(existent_subject_rel) < 1:
-                        subject_rel_values = {
-                            'batch_id': batch.id,
-                            'subject_id': subject.id,
-                            'hours': subject_rel_app.Horas,
-                            'credits': subject_rel_app.Creditos,
-                            'ects': subject_rel_app.ECTS,
-                            'nif_faculty': subject_rel_app.NIF_Profesor,
-                            'evaluable': subject_rel_app.Evaluable,
-                            'level': subject_rel_app.Nivel,
-                            'optional': subject_rel_app.Optativa,
-                            'order': subject_rel_app.Orden
-                        }
-                        if batch.id:
-                            res = super(OpBatchSubjectRel, self).create(subject_rel_values)
-                            print(res)
+                batch = self.env['op.batch'].search(
+                    [('code', '=', subject_rel.Curso_id)], limit=1)
+                subject = self.env['op.subject'].search(
+                    [('code', '=', subject_rel.CodAsignatura)])
+                existent_subject_rel = self.search(
+                    [('batch_id', '=', batch.id),
+                     ('subject_id', '=', subject.id)])
+                if len(existent_subject_rel) < 1:
+                    subject_rel_values = {
+                        'batch_id': batch.id,
+                        'subject_id': subject.id,
+                        'hours': subject_rel.Horas,
+                        'credits': subject_rel.Creditos,
+                        'ects': subject_rel.ECTS,
+                        'nif_faculty': subject_rel.NIF_Profesor,
+                        'evaluable': subject_rel.Evaluable,
+                        'level': subject_rel.Nivel,
+                        'optional': subject_rel.Optativa,
+                        'order': subject_rel.Orden
+                    }
+                    if batch.id:
+                        res = super(OpBatchSubjectRel, self).create(
+                            subject_rel_values)
+                        print(res)
 
             except Exception as e:
                 logger.info(e)
