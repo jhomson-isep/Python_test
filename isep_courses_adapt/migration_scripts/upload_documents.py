@@ -11,7 +11,7 @@ lsfiles = os.listdir(path='Folder/')
 session_pg = get_pg_session()
 session_isep = get_session_server_isep()
 
-def Gauth(self):
+def Gauth():
     logger.info(os.path.dirname(os.path.abspath(__file__)))
     model_path = os.path.dirname(os.path.abspath(__file__))
     credentials_file = model_path + "../models/drive/credentials.txt"
@@ -33,7 +33,7 @@ def Gauth(self):
     gauth.SaveCredentialsFile(credentials_file)
     return gauth
 
-def upload_file(self, values):
+def upload_file(values):
     gauth = Gauth()
     drive = GoogleDrive(gauth)
     file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
@@ -88,8 +88,39 @@ for file in lsfiles:
         and_(OpGdriveDocuments.document_type_id == OpDocumentType.id,
              OpGdriveDocuments.partner_id == partner.id)
         ).first()
-    if document is None:
-        pass
+    if document is None and partner is not None and
+        student is not None and document_type is not None:
+        values = {
+            'partner_id' : partner.id,
+            'folder_id'  : '',
+            'drive_id'   : '',
+            'filename'   : filename,
+            'file'       : content_file,
+            'document_name' : filename,
+            'document_id' : document_type.id,
+            }
+        values = upload_file(values)
+        document = OpGdriveDocuments()
+        document.document_type_id = values['document_id']
+        document.filename = values['filename']
+        document.document_name = values['document_name']
+        document.partner_id = values['partner_id']
+        document.drive_id = values['drive_id']
+        document.folder_id = values['folder_id']
+        session_pg.add(document)
+        session_pg.commit()
+        document = session_pg.query(OpGdriveDocuments).filter(
+            and_(OpGdriveDocuments.document_type_id == OpDocumentType.id,
+             OpGdriveDocuments.partner_id == partner.id)).first()
+        partner.document_ids = document.id
+        session_pg.add(partner)
+        session_pg.commit()
+    elif partner is None:
+        print("Partner not exist!")
+    elif student is None:
+        print("Student not exist!")
+    elif document_type is None:
+        print("Document type not exist!")
     else:
-        pass
+        print("Document Already exist:", document.id)
 
