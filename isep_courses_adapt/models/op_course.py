@@ -49,6 +49,7 @@ class OpCourse(models.Model):
     reconeixements = fields.Text("Reconeixements", size=700)
     content = fields.Text("Content", size=700)
     area_id = fields.Many2one('op.area.course', "Area of Course")
+    batch_ids = fields.One2many('op.batch', 'course_id', string='Batch(s)')
 
     _sql_constraints = [('unique_course_code',
                          'check(1=1)', 'Delete constrian unique code per course!')]

@@ -10,12 +10,12 @@
                 <field name="evaluation_type_id"/>
                 <field name="modality_id"/>
                 <field name="section"/>
-                <field name="area_id" />
+                <field name="area_id"/>
             </xpath>
 
             <xpath expr="//form/sheet/group[@name='subject']" position="replace">
                 <notebook>
-                    <page string="Información general">
+                    <page id="page_general" string="General information">
                         <group cols="4">
                             <sheet string="groups">
                                 <group string="Curso">
@@ -44,12 +44,11 @@
                             </group>
                         </group>
                         <group string="Contenidos">
-                                <field name="content"/>
+                            <field name="content"/>
                         </group>
                     </page>
-                    <page string="Asignaturas">
-                        <field name="subject_ids">
-                        </field>
+                    <page id="page_batches" string="Batches">
+                        <field name="batch_ids"></field>
                     </page>
                 </notebook>
             </xpath>
