@@ -18,6 +18,10 @@
                 <xpath expr="//field[@name='grade_weightage']" position="replace">
                     <field name="uvic_code"/>
                     <field name="sepyc_code"/>
+                    <field name="practical_hours"/>
+                    <field name="independent_hours"/>
+                    <field name="theoretical_hours"/>
+                    <field name="credits"/>
                 </xpath>
             </field>
         </record>
