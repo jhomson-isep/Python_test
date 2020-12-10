@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <!--Email template -->
+        <record id="email_template_aviso_falta_acceso" model="mail.template">
+            <field name="name">Email Student Access Mensaje Final</field>
+            <field name="email_from">secretaria@isep.com</field>
+            <field name="subject">Recordatorio de Ingreso</field>
+            <field name="email_to">6446632@gmail.com</field>
+            <field name="model_id" ref="model_op_student"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html"><![CDATA[
+<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+<p style='color: rgb(0, 0, 0); font-family: "Lucida Grande", Helvetica, Verdana, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial; margin: 0px 0px 1rem;'>
+
+<img class="alignnone size-full wp-image-869" src="https://res.cloudinary.com/isep-openeducat/image/upload/v1607548753/ISEP_emails/log_isep_syunic.png" alt="" width="208" height="111" />
+<p style="text-align: center;">${object.first_name}, ya diste el paso principal siendo parte de nuestra familia. Llega lejos, no estás solo/a, ¡Tú puedes lograrlo!</p>
+<p style="text-align: center;">Estamos realmente preocupados por tu ausencia, esperamos que todo esté bien y pronto estés contacto con nosotros.
+¡No te desconectes de nuestro campus!</p>
+<p style="text-align: center;">Escríbenos a nuestro WhatsApp 52 1 33 3400 8005.</p>
+<p align="center"><img class="alignnone size-full wp-image-871" src="https://res.cloudinary.com/isep-openeducat/image/upload/v1607551307/ISEP_emails/mensajefinal_wbnsnm.png" alt="" width="62" height="62" /></p>
+&nbsp;
+
+&nbsp;
+
+</div>
+            ]]></field>
+        </record>
+
+    </data>
+</openerp>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

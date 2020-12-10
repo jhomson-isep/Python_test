@@ -207,6 +207,73 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         logger.info("send email")
         logger.info("**************************************")
+
+        int_break = 0
+        for student in self.env['op.student'].search([]):
+            try:
+                last_access=self.env['op.student.access'].\
+                            search([('student_id','=',student.id)])
+                if len(last_access)>0:
+                    last_access=last_access[-1].last_access
+                    if 'años' in last_access:
+                        continue
+                    if 'días' in last_access:
+                        days = self.get_days_without_access(student.id)
+                        days = ast.literal_eval(days)
+                        logger.info('dias:{}'.format(days))
+                        tname = {5: 'Email Student Access 5 days',
+                                 12:'Email Student Access 12 days',
+                                 20:'Email Student Access 20 days',
+                                 40:'Email Student Access 40 days',
+                                 70:'Email Student Access 70 days',
+                                 80:'Email Student Access 80 days',
+                                 100:'Email Student Access 100 days'}
+                        if days in ( 5, 12 , 20, 40, 70, 80, 100):
+                            pass
+                        days = 5
+                        template = self.env['mail.template'].search([('name', '=', tname[days])])
+                        if template:
+                            template.send_mail(student.id, force_send=True, raise_exception=True)
+                        days = 12
+                        template = self.env['mail.template'].search([('name', '=', tname[days])])
+                        if template:
+                            template.send_mail(student.id, force_send=True, raise_exception=True)
+                        days = 20
+                        template = self.env['mail.template'].search([('name', '=', tname[days])])
+                        if template:
+                            template.send_mail(student.id, force_send=True, raise_exception=True)
+                        days = 40
+                        template = self.env['mail.template'].search([('name', '=', tname[days])])
+                        if template:
+                            template.send_mail(student.id, force_send=True, raise_exception=True)
+                        days = 70
+                        template = self.env['mail.template'].search([('name', '=', tname[days])])
+                        if template:
+                            template.send_mail(student.id, force_send=True, raise_exception=True)
+                        days = 80
+                        template = self.env['mail.template'].search([('name', '=', tname[days])])
+                        if template:
+                            template.send_mail(student.id, force_send=True, raise_exception=True)
+                        days = 100
+                        template = self.env['mail.template'].search([('name', '=', tname[days])])
+                        if template:
+                            template.send_mail(student.id, force_send=True, raise_exception=True)
+                        logger.info('email sended to {}'.format(student.first_name))
+                        break
+            except Exception as e:
+                logger.info(e)
+
+            if int_break == 100 and os.name != "posix":
+                break
+            int_break += 1
+        logger.info("**************************************")
+        logger.info("End of script: send email")
+        logger.info("**************************************")
+
+    def send_email_back(self):
+        logger.info("**************************************")
+        logger.info("send email")
+        logger.info("**************************************")
         template = self.env['mail.template'].search([('name', '=', 'Email Student Access')])
         int_break = 0
         if template:
@@ -234,7 +301,6 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         logger.info("End of script: send email")
         logger.info("**************************************")
-
 
     def import_students(self):
         s = SQL()
