@@ -6,13 +6,13 @@
             <field name="model">op.faculty</field>
             <field name="inherit_id" ref="openeducat_core.view_op_faculty_form"/>
             <field name="arch" type="xml">
-
+                <!--
                 <xpath expr="//field[@name='emp_id']" position="after">
                     <field name="nifp"/>
                     <field name="job_title"/>
                     <field name="specialty"/>
                 </xpath>
-
+                -->
                 <xpath expr="//notebook/page[@name='library']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
@@ -22,6 +22,30 @@
                         <field name="document_ids" colspan="2" nolabel="1"/>
                     </page>
                 </notebook>
+                <xpath expr="//sheet/group[1]" position="replace"/>
+                <xpath expr="//notebook/page[@name='personal_information']" position="replace">
+                    <page name="personal_information" string="Personal Information">
+                        <field name='emp_id'/> <!--Atribute required -->
+                        <group cols="4">
+                            <sheet string="group-information-1">
+                                <group string="Datos Sistema">
+
+                                </group>
+                                <group string="Datos Personales">
+
+                                </group>
+                            </sheet>
+                            <sheet string="group-information-2">
+                                <group string="Datos del Contacto">
+
+                                </group>
+                                <group string="Datos Académico">
+
+                                </group>
+                            </sheet>
+                        </group>
+                    </page>
+                </xpath>
 
             </field>
         </record>
