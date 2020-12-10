@@ -44,8 +44,8 @@ class OpStudent(models.Model):
         ('Not send', 'No enviada')
     ], 'Status documentation')
     partner_id = fields.Many2one('res.partner', 'Partner', required=False)
-    document_ids = fields.One2many("op.student.documents", "student_id",
-                                   string="Documentation")
+    #document_ids = fields.One2many("op.gdrive.documents", "partner_id",
+    #                              string="Documentation")
     access_ids = fields.One2many("op.student.access", "student_id",
                                  string="Access")
     last_access = fields.Char(String='Last access',
@@ -418,7 +418,7 @@ class OpStudent(models.Model):
         drive = GoogleDrive(gauth)
         file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
         for rec in self:
-            documents = self.env['op.student.documents'].search([('student_id', '=', rec.id)])
+            documents = self.env['op.gdrive.documents'].search([('partner_id', '=', rec.partner_id.id)])
             delete_folder = False
             for doc in documents:
                 doc.unlink()
