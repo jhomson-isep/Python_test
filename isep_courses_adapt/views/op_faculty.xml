@@ -22,20 +22,22 @@
 
                         <group cols="4">
                             <sheet string="group-information-1">
-                                <group string="Datos Sistema">
+                                <group string="System Data">
                                     <field name='company_id'/>
                                     <field name='emp_id'/>
                                 </group>
-                                <group string="Datos Personales">
+                                <group string="Personal Data">
                                     <field name="nationality"/>
                                     <field name="lang"/>
                                     <field name="place_birth"/>
                                     <field name="birth_date" required="1"/>
                                     <field name="gender"/>
+                                    <field name="document_type_id"/>
+                                    <field name="document_number"/>
                                 </group>
                             </sheet>
                             <sheet string="group-information-2">
-                                <group string="Datos del Contacto">
+                                <group string="Contact Details">
                                     <field name="mobile" required="1"/>
                                     <field name="phone"/>
                                     <field name="email" required="1"/>
@@ -59,7 +61,7 @@
                                     <field name="emergency_contact" context="{'show_address': 1}"
                                            options='{"always_reload": True}'/>
                                 </group>
-                                <group string="Datos Académicos">
+                                <group string="Academic data">
                                     <field name="job_title"/>
                                     <field name="specialty"/>
                                 </group>

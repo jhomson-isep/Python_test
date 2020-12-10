@@ -440,6 +440,7 @@ msgstr "Finalización estudios"
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__place_birth
 #: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_faculty_form
 msgid "Place of birth"
 msgstr "Lugar de nacimiento"
 
@@ -450,12 +451,101 @@ msgid "Status documentation"
 msgstr "Estado de documentación"
 
 #. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.ica_view_op_faculty_form_inherit
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+msgid "System Data"
+msgstr "Datos del Sistema"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.ica_view_op_faculty_form_inherit
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+msgid "Personal Data"
+msgstr "Datos Personales"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.ica_view_op_faculty_form_inherit
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+msgid "Contact Details"
+msgstr "Datos del Contacto"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.ica_view_op_faculty_form_inherit
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+msgid "Academic data"
+msgstr "Datos Académicos"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.ica_view_op_faculty_form_inherit
+msgid "Personal Information"
+msgstr "Información Personal"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.ica_view_op_faculty_form_inherit
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+msgid "Address"
+msgstr "Dirección"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_faculty__street
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__street
+msgid "Street"
+msgstr "Calle"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.ica_view_op_faculty_form_inherit
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+msgid "Street..."
+msgstr "Calle..."
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_faculty__street2
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__street2
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.ica_view_op_faculty_form_inherit
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+msgid "Street2"
+msgstr "Calle2"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_faculty__city
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__city
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.ica_view_op_faculty_form_inherit
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+msgid "City"
+msgstr "Ciudad"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_faculty__state_id
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__state_id
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.ica_view_op_faculty_form_inherit
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+msgid "State"
+msgstr "Estado"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_faculty__zip
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__zip
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.ica_view_op_faculty_form_inherit
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+msgid "ZIP"
+msgstr "C.P."
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_faculty__country_id
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__country_id
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.ica_view_op_faculty_form_inherit
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+msgid "Country"
+msgstr "País"
+
+#. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__document_type_id
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_faculty__document_type_id
 msgid "Document type"
 msgstr "Tipo de documento"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__document_number
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_faculty__document_number
 msgid "Document number"
 msgstr "Número de documento"
 
