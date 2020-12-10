@@ -10,31 +10,44 @@
         <t t-call="portal.portal_layout">
             <t t-set="additional_title">Your Documentation Details</t>
             <h3>Your Documentation</h3>
-            <div class="o_portal_my_details">
-                <table t-attf-class="table table-bordered o_portal_my_details">
-                      <caption>
-                          List of Documents
-                          <a t-if="document_count &lt; 4" t-attf-class="btn btn-primary" href="/my/gdrive/create">Upload a Document</a>
-                      </caption>
-                      <thead>
-                            <tr>
-                              <th scope="col">Document Type</th>
-                              <th scope="col">Document Name</th>
-<!--                              <th scope="col">Download</th>-->
-                            </tr>
-                      </thead>
-                  <tbody>
-                    <t t-if="document_count &gt; 0" >
-                        <t t-foreach="partner.document_ids" t-as="document">
-                             <tr>
-                                    <th scope="row"><a t-attf-class="btn btn-outline-primary" t-attf-href="/my/gdrive/update/{{ document.id }}"><t t-esc="document.document_type_id.name"></t></a></th>
-                                    <td><t t-esc="document.document_name"></t></td>
-<!--                                <td><a href="#" name="download_file"  type="object" >Download</a></td>-->
-                             </tr>
-                        </t>
-                    </t>
-                  </tbody>
-                </table>
+            <div class="row">
+                <div class="o_portal_my_details col-8">
+                    <div class="row">
+                        <div class="col-12">
+                            <table t-attf-class="table table-light o_portal_my_details">
+                          <thead>
+                                <tr>
+                                  <th scope="col">Document Type</th>
+                                  <th scope="col">Document Name</th>
+    <!--                              <th scope="col">Download</th>-->
+                                </tr>
+                          </thead>
+                          <tbody>
+                            <t t-if="document_count &gt; 0" >
+                                <t t-foreach="partner.document_ids" t-as="document">
+                                     <tr>
+                                            <th scope="row"><a t-attf-class="btn btn-outline-primary" t-attf-href="/my/gdrive/update/{{ document.id }}"><t t-esc="document.document_type_id.name"></t></a></th>
+                                            <td><t t-esc="document.document_name"></t></td>
+        <!--                                <td><a href="#" name="download_file"  type="object" >Download</a></td>-->
+                                     </tr>
+                                </t>
+                            </t>
+                          </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 rounded" style="height:100%;background-color:white;padding-top:10px;padding-bottom:10px;">
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-9"><strong style="font-size:18px;">List of Documents</strong></div>
+                    </div>
+                    <hr></hr>
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-9"><a t-if="document_count &lt; 4" t-attf-class="btn btn-primary" href="/my/gdrive/create">Upload a Document</a></div>
+                    </div>
+                </div>
             </div>
         </t>
     </template>
