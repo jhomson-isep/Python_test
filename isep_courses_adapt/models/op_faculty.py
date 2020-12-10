@@ -17,6 +17,7 @@ class OpFaculty(models.Model):
     job_title = fields.Char(string='Job title', size=128)
     specialty = fields.Char(string='Specialty', size=128)
     workplace_ids = fields.Many2many('op.workplace', string='Workplace')
+    place_birth = fields.Char(string='Place of birth', size=200)
     nifp = fields.Char(string='NIFP', size=20)
     gender = fields.Selection([
         ('male', 'Male'),
@@ -24,7 +25,7 @@ class OpFaculty(models.Model):
         ('other', 'Other')
     ], 'Gender', required=True)
     document_ids = fields.One2many("op.student.documents", "faculty_id", String="Documentation")
-
+    company_id = fields.Many2one('res.company', string="Company")
     @staticmethod
     def add_years(d, years):
         """Return a date that's `years` years after the date (or datetime)
