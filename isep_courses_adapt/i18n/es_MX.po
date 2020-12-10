@@ -430,7 +430,7 @@ msgstr "Programa UVIC"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__sepyc_program
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__sepyc_program
 msgid "SEPYC Program"
-msgstr "Programa Sepy/Sep"
+msgstr "Programa Sepyc / Sep"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__year_end_studies
@@ -656,3 +656,38 @@ msgstr "Información general"
 #: model_terms:ir.ui.view,arch_db:isep_courses_adapt.inherited_view_op_course_form
 msgid "Batches"
 msgstr "Grupos"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_batch_form_inherited
+msgid "Subject(s)"
+msgstr "Asignatura(s)"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_batch_form_inherited
+msgid "Student(s)"
+msgstr "Estudiante(s)"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_batch_form_inherited
+msgid "Subjects"
+msgstr "Asignaturas"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_batch_form_inherited
+msgid "Students"
+msgstr "Estudiantes"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_batch_form_inherited
+msgid "Academic information"
+msgstr "Información académica"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_batch_form_inherited
+msgid "General information"
+msgstr "Información general"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_batch_form_inherited
+msgid "Other information"
+msgstr "Otra información"

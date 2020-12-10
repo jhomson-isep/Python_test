@@ -76,7 +76,8 @@ class OpStudent(models.Model):
                 access_string += "{0} minutos, ".format(minutes)
             record.last_access = access_string[:-2]
 
-    def equal_datetimes_YYMMDDHHmm(self, ddtime1, ddtime2):
+    @staticmethod
+    def equal_datetimes_YYMMDDHHmm(ddtime1, ddtime2):
         return isinstance(ddtime1, datetime.datetime) and \
                 isinstance(ddtime2, datetime.datetime) and \
                 ddtime1.replace(minute=0, second=0, microsecond=0) == \

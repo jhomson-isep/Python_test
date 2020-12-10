@@ -113,8 +113,7 @@ class OpCourse(models.Model):
             except Exception:
                 logger.info("Error calling Moodle API\n", Exception)
 
-        res = super(OpCourse, self).create(values)
-        return res
+        return super(OpCourse, self).create(values)
 
     @api.multi
     def write(self, values):
@@ -156,9 +155,7 @@ class OpCourse(models.Model):
             except ValueError:
                 logger.info("Error calling Moodle API\n", ValueError)
 
-        res = super(OpCourse, self).write(values)
-        return res
-
+        return super(OpCourse, self).write(values)
 
     @api.one
     @api.constrains('area_id', 'code')

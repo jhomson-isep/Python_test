@@ -52,8 +52,8 @@ class OpBatch(models.Model):
                                      compute='_get_current_user')
     op_batch_subject_rel_ids = fields.One2many('op.batch.subject.rel',
                                                'batch_id')
-    subject_count = fields.Integer(compute='_compute_subject_count')
-    student_count = fields.Integer(compute='_compute_student_count')
+    subject_count = fields.Integer(compute='_compute_subject_count', default=0)
+    student_count = fields.Integer(compute='_compute_student_count', default=0)
 
     @api.depends()
     def _get_current_user(self):
@@ -81,11 +81,11 @@ class OpBatch(models.Model):
         """Display the linked subjects and adapt the view to the number of
         records to display."""
         self.ensure_one()
-        subjects = self.course_id.subject_ids
+        subjects = self.get_subject_ids_from_rel(self.op_batch_subject_rel_ids)
         action = \
             self.env.ref('openeducat_core.act_open_op_subject_view').read()[0]
         if len(subjects) > 1:
-            action['domain'] = [('id', 'in', subjects.ids)]
+            action['domain'] = [('id', 'in', subjects)]
         elif len(subjects) == 1:
             form_view = [(self.env.ref(
                 'openeducat_core.view_op_subject_form').id, 'form')]
@@ -97,10 +97,14 @@ class OpBatch(models.Model):
             else:
                 logger.info("=== LINE 55 ===")
                 action['views'] = form_view
-            action['res_id'] = subjects.ids[0]
+            action['res_id'] = subjects[0]
         else:
             action = {'type': 'ir.actions.act_window_close'}
         return action
+
+    @staticmethod
+    def get_subject_ids_from_rel(subject_rel_ids):
+        return [subject_rel.subject_id.id for subject_rel in subject_rel_ids]
 
     def _compute_student_count(self):
         """Compute the number of distinct students linked to the batch."""
