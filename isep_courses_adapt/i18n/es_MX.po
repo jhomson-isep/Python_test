@@ -402,6 +402,12 @@ msgid "Categories"
 msgstr "Categorías"
 
 #. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_faculty__category_id
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.ica_view_op_faculty_form_inherit
+msgid "Teacher Categories"
+msgstr "Categoría"
+
+#. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_res_config_settings__send_moodle
 msgid "Send Moodle"
 msgstr "Enviar a Moodle"
@@ -439,8 +445,9 @@ msgstr "Finalización estudios"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__place_birth
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_faculty__place_birth
 #: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form
-#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_faculty_form
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.ica_view_op_faculty_form_inherit
 msgid "Place of birth"
 msgstr "Lugar de nacimiento"
 
