@@ -27,10 +27,9 @@ class OpFaculty(models.Model):
         ('female', 'Female'),
         ('other', 'Other')
     ], 'Gender', required=True)
-    document_ids = fields.One2many("op.student.documents", "faculty_id",
-                                   String="Documentation")
     company_id = fields.Many2one('res.company', string="Company")
     category_id = fields.Many2one('op.category', string="Teacher Categories")
+    #document_ids = fields.One2many("op.gdrive.documents", "partner_id", String="Documentation")
 
     @staticmethod
     def add_years(d, years):
@@ -150,7 +149,7 @@ class OpFaculty(models.Model):
         drive = GoogleDrive(gauth)
         file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
         for rec in self:
-            documents = self.env['op.student.documents'].search([('faculty_id', '=', rec.id)])
+            documents = self.env['op.gdrive.documents'].search([('partner_id', '=', rec.partner_id.id)])
             for doc in documents:
                 doc.unlink()
         res = super(OpFaculty, self).unlink()

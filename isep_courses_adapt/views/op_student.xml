@@ -110,7 +110,6 @@
                 </xpath>
             </field>
         </record>
-
         <record id="view_op_student_form_fees_hide" model="ir.ui.view">
             <field name="model">op.student</field>
             <field name="inherit_id"
@@ -120,6 +119,5 @@
                        position="replace"/>
             </field>
         </record>
-
     </data>
 </odoo>

@@ -725,6 +725,63 @@ msgid "Area of Course"
 msgstr "Área del curso"
 
 #. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_documentation
+msgid "Your Documentation"
+msgstr "Su documentación"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_documentation
+msgid "Your Documentation Details"
+msgstr "Detalles de la documentación"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_update
+msgid "Update Your Documentation"
+msgstr "Actualice su documentación"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
+msgid "Upload Your Documentation"
+msgstr "Cargue su documentación"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_documentation
+msgid "Upload a Document"
+msgstr "Cargar un documento"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_update
+msgid "Select a File"
+msgstr "Seleccione un archivo"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.my_documentation_link
+msgid "My Documentation"
+msgstr "Mi documentación"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_documentation
+msgid "List of Documents"
+msgstr "Lista de documentos"
+
+#. module: isep_courses_adapt
+#: model:ir.model,name:isep_courses_adapt.model_op_gdrive_documents
+msgid "Google Drive Documentation"
+msgstr "Documentación de Google Drive"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_documentation
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_update
+msgid "Document Type"
+msgstr "Tipo de Documento"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_documentation
+msgid "Document Name"
+msgstr "Nombre del documento"
+
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_section_course__name
 msgid "Section name"
 msgstr "Nombre de sección"
