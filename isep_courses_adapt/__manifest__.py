@@ -49,7 +49,14 @@
         'data/op_modality.xml',
         'data/op.campus.csv',
         'data/cron.xml',
-        'data/plantillas_mail.xml'
+        'data/plantillas_mail.xml',
+        'data/plantillas_mail_5days.xml',
+        'data/plantillas_mail_12days.xml',
+        'data/plantillas_mail_20days.xml',
+        'data/plantillas_mail_40days.xml',
+        'data/plantillas_mail_70days.xml',
+        'data/plantillas_mail_80days.xml',
+        'data/plantillas_mail_100days.xml',
     ],
     'installable': True,
 }

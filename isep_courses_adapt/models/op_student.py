@@ -229,6 +229,7 @@ class OpStudent(models.Model):
                                  80:'Email Student Access 80 days',
                                  100:'Email Student Access 100 days'}
                         if days in ( 5, 12 , 20, 40, 70, 80, 100):
+                            #Eliminar pass y acomodar dentro if
                             pass
                         days = 5
                         template = self.env['mail.template'].search([('name', '=', tname[days])])
@@ -256,6 +257,9 @@ class OpStudent(models.Model):
                             template.send_mail(student.id, force_send=True, raise_exception=True)
                         days = 100
                         template = self.env['mail.template'].search([('name', '=', tname[days])])
+                        if template:
+                            template.send_mail(student.id, force_send=True, raise_exception=True)
+                        template = self.env['mail.template'].search([('name', '=', 'Email Student Access Mensaje Final')])
                         if template:
                             template.send_mail(student.id, force_send=True, raise_exception=True)
                         logger.info('email sended to {}'.format(student.first_name))
