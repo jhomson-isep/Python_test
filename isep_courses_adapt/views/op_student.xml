@@ -24,25 +24,25 @@
                 <xpath expr="//notebook/page/group[@name='personal_detail']" position="replace">
                     <group cols="4">
                         <sheet string="group_information_1">
-                            <group string="Datos de Sistema">
+                            <group string="System Data">
                                 <field name="partner_id" placeholder="Partner" required="0"/>
                                 <field name="user_id" string="Usuario" readonly="1"/>
                                 <field name="category_id"/>
                             </group>
-                            <group string="Datos Personales">
+                            <group string="Personal Data">
                                 <field name="nationality"/>
                                 <field name="lang"/>
                                 <field name="place_birth"/>
                                 <field name="birth_date" required="1"/>
                                 <field name="gender"/>
-                                <field name="document_type_id" invisible="1"/> <!--It is believed to appear in the list of curp values-->
+                                <field name="document_type_id"/>
                                 <field name="document_number"/>
                                 <field name="visa_info" string="Documentos de Identificación"/>
                                 <field name="curp" invisible="1"/> <!--It is believed to appear in the list of values-->
                             </group>
                         </sheet>
                         <sheet string="group_information_2">
-                            <group string="Datos del Contacto">
+                            <group string="Contact Details">
                                 <field name="mobile" required="1"/>
                                 <field name="phone"/>
                                 <field name="email" required="1"/>
@@ -50,7 +50,7 @@
                                 <div name="div_type">
                                     <field class="oe_inline" name="type"/>
                                 </div>
-                                <label for="street" string="Dirección"/>
+                                <label for="street" string="Address"/>
                                 <div name="div_address">
                                     <field name="street" placeholder="Street..."/>
                                     <field name="street2" placeholder="Street2"/>
@@ -67,7 +67,7 @@
                                 <field name="emergency_contact" context="{'show_address': 1}"
                                        options='{"always_reload": True}'/>
                             </group>
-                            <group string="Datos Académicos">
+                            <group string="Academic data">
                                 <field name="gr_no" readonly="1"/>
                                 <field name="university_id" string="Universidad de Procedencia"/>
                                 <field name="delay"/>
