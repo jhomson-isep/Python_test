@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 class OpGdriveDocuments(models.Model):
     _name = "op.gdrive.documents"
+    _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin']
     _description = "Google Drive Documentation"
 
     document_type_id = fields.Many2one('op.document.type',

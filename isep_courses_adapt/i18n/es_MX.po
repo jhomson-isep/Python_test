@@ -741,6 +741,7 @@ msgstr "Actualice su documentación"
 
 #. module: isep_courses_adapt
 #: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_create
 msgid "Upload Your Documentation"
 msgstr "Cargue su documentación"
 
@@ -752,8 +753,95 @@ msgstr "Cargar un documento"
 #. module: isep_courses_adapt
 #: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
 #: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_update
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_create
 msgid "Select a File"
 msgstr "Seleccione un archivo"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_update
+msgid "<strong>Upload date:</strong>"
+msgstr "<strong>Fecha de subida:</strong>"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_update
+msgid "<strong>Document name:</strong>"
+msgstr "<strong>Nombre de documento:</strong>"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_update
+msgid "<strong>Document type:</strong>"
+msgstr "<strong>Tipo de documento:</strong>"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_update
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_create
+msgid "Confirm<span class="fa fa-long-arrow-right"/>"
+msgstr "Confirmar <span class="fa fa-long-arrow-right"/>"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_update
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_create
+msgid "Back<span class="fa fa-long-arrow-left"/>"
+msgstr "Regresar <span class="fa fa-long-arrow-left"/>"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_home_documents
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_home_menu_documents
+msgid "Documentation"
+msgstr "Documentación"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_home_menu_documents
+msgid "New file"
+msgstr "Nuevo documento"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_home_menu_documents
+msgid "<span>Uploading file</span>"
+msgstr "<span>Nuevo documento</span>"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_documents
+msgid "Document #"
+msgstr "Documento #"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_documents
+msgid "Document name"
+msgstr "Nombre"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_documents
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_create
+msgid "Document Type"
+msgstr "Tipo de documento"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_documents
+msgid "Actions"
+msgstr "Acciones"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_documents
+msgid "Change"
+msgstr "Cambiar"
+
+#. module: isep_courses_adapt
+#: code:addons/isep_courses_adapt/controllers/portal.py:46
+#, python-format
+msgid "Upload date"
+msgstr "Fecha de subida"
+
+#. module: isep_courses_adapt
+#: code:addons/isep_courses_adapt/controllers/portal.py:50
+#, python-format
+msgid "Document type"
+msgstr "Tipo de documento"
 
 #. module: isep_courses_adapt
 #: model_terms:ir.ui.view,arch_db:isep_courses_adapt.my_documentation_link

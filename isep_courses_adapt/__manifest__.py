@@ -18,6 +18,7 @@
     'depends': [
         'base',
         'mail',
+        'portal',
         'openeducat_core',
         'openeducat_fees',
         'openeducat_library',
