@@ -299,3 +299,10 @@ class GoogleDriveController(CustomerPortal):
             error_message.append(_(message))
 
         return error, error_message
+
+    @http.route(['/my/gdrive/download/<int:doc_id>'],
+                type='http', auth='user', website=True)
+    def my_gdrive_download(self, doc_id, **post):
+        document_ids = request.env['op.gdrive.documents']. \
+            search([('id', '=', doc_id)], limit=1)
+        return document_ids.download_file()
