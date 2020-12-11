@@ -28,9 +28,7 @@ class OpFaculty(models.Model):
         ('female', 'Female'),
         ('other', 'Other')
     ], 'Gender', required=True)
-    document_ids = fields.One2many("op.student.documents",
-                                   "faculty_id",
-                                   String="Documentation")
+    document_ids = fields.One2many("op.student.documents", "faculty_id", String="Documentation")
     company_id = fields.Many2one('res.company', string="Company")
     category_id = fields.Many2one('op.category', string="Teacher Categories")
     street_job = fields.Char()
