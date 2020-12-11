@@ -15,6 +15,9 @@
                     <page name="Documentación" string="Documentación">
                         <field name="document_ids" colspan="2" nolabel="1"/>
                     </page>
+                    <page name="Bank" string="Bank">
+                        <field name="bank_teacher_id" colspan="2" nolabel="1"/>
+                    </page>
                 </notebook>
                 <xpath expr="//sheet/group[1]" position="replace"/>
                 <xpath expr="//notebook/page[@name='personal_information']" position="replace">
@@ -66,6 +69,19 @@
                                 <group string="Academic data">
                                     <field name="job_title"/>
                                     <field name="specialty"/>
+                                    <label for="street" string="Address Place Job"/>
+                                    <div name="div_address">
+                                        <field name="street_job" placeholder="Street..."/>
+                                        <field name="street2_job" placeholder="Street2"/>
+                                        <div class="address_format">
+                                            <field name="city_job" placeholder="City" style="width: 40%%"/>
+                                            <field name="state_job_id" class="oe_no_button"
+                                                   placeholder="State" style="width: 37%%" options='{"no_open": True}'/>
+                                            <field name="zip_job" placeholder="ZIP" style="width: 20%%"/>
+                                        </div>
+                                        <field name="country_job_id" placeholder="Country" class="oe_no_button"
+                                               options='{"no_open": True}'/>
+                                    </div>
                                 </group>
                             </sheet>
                         </group>

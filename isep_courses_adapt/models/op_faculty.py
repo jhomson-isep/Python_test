@@ -15,6 +15,7 @@ class OpFaculty(models.Model):
     _inherit = 'op.faculty'
 
     job_title = fields.Char(string='Job title', size=128)
+    bank_teacher_id = fields.Many2many('res.partner.bank')
     specialty = fields.Char(string='Specialty', size=128)
     workplace_ids = fields.Many2many('op.workplace', string='Workplace')
     place_birth = fields.Char(string='Place of birth', size=200)
@@ -29,6 +30,13 @@ class OpFaculty(models.Model):
     ], 'Gender', required=True)
     company_id = fields.Many2one('res.company', string="Company")
     category_id = fields.Many2one('op.category', string="Teacher Categories")
+    street_job = fields.Char()
+    street2_job = fields.Char()
+    zip_job = fields.Char(change_default=True)
+    city_job = fields.Char()
+    state_job_id = fields.Many2one("res.country.state", string='State', ondelete='restrict',
+                                   domain="[('country_id', '=?', country_job_id)]")
+    country_job_id = fields.Many2one('res.country', string='Country', ondelete='restrict')
     #document_ids = fields.One2many("op.gdrive.documents", "partner_id", String="Documentation")
 
     @staticmethod
