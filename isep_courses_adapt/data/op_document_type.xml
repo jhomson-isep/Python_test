@@ -17,5 +17,13 @@
             <field name="name">CURP</field>
             <field name="code">CURP</field>
         </record>
+        <record id="op_document_type_5" model="op.document.type">
+            <field name="name">Fotocopia del Título Universitario</field>
+            <field name="code">FTU</field>
+        </record>
+        <record id="op_document_type_6" model="op.document.type">
+            <field name="name">Curriculum Vitae</field>
+            <field name="code">CV</field>
+        </record>
     </data>
 </odoo>

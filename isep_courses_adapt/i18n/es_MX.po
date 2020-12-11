@@ -493,6 +493,11 @@ msgid "Address"
 msgstr "Dirección"
 
 #. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.ica_view_op_faculty_form_inherit
+msgid "Address Place Job"
+msgstr "Dirección Lugar de Trabajo"
+
+#. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_faculty__street
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__street
 msgid "Street"
