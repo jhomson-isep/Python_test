@@ -5,7 +5,7 @@ class StudentXlsx(models.AbstractModel):
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_xlsx_report(self, workbook, data, students):
-        #students = self.env['op.student'].sudo().search([('uvic_documentation', '=', True)])
+        student_rows = self.env['op.student'].sudo().search([('uvic_documentation', '=', True)])
 
         sheet = workbook.add_worksheet('UVIC Report')
         bold = workbook.add_format({'bold': True})
@@ -31,8 +31,7 @@ class StudentXlsx(models.AbstractModel):
         sheet.write(0, 17, 'TELEFONO2_HABIT', bold)
         sheet.write(0, 18, 'Codi Assignatures', bold)
 
-        i = 1
-        for obj in students:
+        for i, obj in enumerate(student_rows, start=1):
             sheet.write(i, 0, obj.document_number)
             sheet.write(i, 1, obj.document_type_id.code)
             sheet.write(i, 2, obj.first_name)
@@ -52,4 +51,3 @@ class StudentXlsx(models.AbstractModel):
             sheet.write(i, 16, obj.mobile)
             sheet.write(i, 17, obj.mobile)
             sheet.write(i, 18, '1,2,3,4,5,6,7,8')
-            i = i + 1
