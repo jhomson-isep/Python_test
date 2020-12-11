@@ -25,10 +25,10 @@
 
                 <xpath expr="//form/sheet/group[@name='main']" position="after">
                     <notebook>
-                        <page string="General">
+                        <page id="page_general_information" string="General information">
                             <group cols="4">
                                 <sheet string="groups_info_batch">
-                                    <group string="Información acádemica">
+                                    <group string="Academic information">
                                         <field name="expiration_days"/>
                                         <field name="date_diplomas"/>
                                         <field name="academic_year"/>
@@ -50,7 +50,7 @@
                                         <field name="credits_total"/>
                                     </group>
                                 </sheet>
-                                <group string="Otra información">
+                                <group string="Other information">
                                     <field name="days_week"/>
                                     <field name="schedule"/>
                                     <field name="contact_class"/>
@@ -58,7 +58,7 @@
                                 </group>
                             </group>
                         </page>
-                        <page id="page_student_lines" string="Estudiantes">
+                        <page id="page_student_lines" string="Students">
                             <field name="student_lines" attrs="{'readonly': True}">
                                 <tree string="Student Lines" editable="bottom">
                                     <field name="student_id"/>
@@ -67,12 +67,14 @@
                                 </tree>
                             </field>
                         </page>
-                        <page id="batch_subjects_rel" string="Asignaturas">
-                            <field name="op_batch_subject_rel_ids" attrs="{'readonly': True}">
-                                <tree string="Subject lines" editable="bottom">
+                        <page id="batch_subjects_rel" string="Subjects">
+                            <field name="op_batch_subject_rel_ids">
+                                <tree string="Subject lines">
                                     <field name="subject_id"/>
-                                    <field name="batch_id"/>
                                     <field name="hours"/>
+                                    <field name="credits"/>
+                                    <field name="ects"/>
+                                    <field name="level"/>
                                 </tree>
                             </field>
                         </page>
@@ -80,16 +82,14 @@
                 </xpath>
 
                 <xpath expr="//div[hasclass('oe_button_box')]/button[1]" position="before">
-                    <button class="oe_stat_button" name="action_open_subjects" type="object" icon="fa-book"
-                            attrs="{'invisible': [('subject_count', '=', 0)]}">
-                        <field name="subject_count" widget="statinfo" string="Asignaturas"/>
+                    <button class="oe_stat_button" name="action_open_subjects" type="object" icon="fa-book">
+                        <field name="subject_count" widget="statinfo" string="Subject(s)"/>
                     </button>
                 </xpath>
 
                 <xpath expr="//div[hasclass('oe_button_box')]/button[1]" position="before">
-                    <button class="oe_stat_button" name="action_open_students" type="object" icon="fa-user"
-                            attrs="{'invisible': [('student_count', '=', 0)]}">
-                        <field name="student_count" widget="statinfo" string="Estudiantes"/>
+                    <button class="oe_stat_button" name="action_open_students" type="object" icon="fa-user">
+                        <field name="student_count" widget="statinfo" string="Student(s)"/>
                     </button>
                 </xpath>
             </field>

@@ -49,6 +49,7 @@ class OpCourse(models.Model):
     reconeixements = fields.Text("Reconeixements", size=700)
     content = fields.Text("Content", size=700)
     area_id = fields.Many2one('op.area.course', "Area of Course")
+    batch_ids = fields.One2many('op.batch', 'course_id', string='Batch(s)')
 
     _sql_constraints = [('unique_course_code',
                          'check(1=1)', 'Delete constrian unique code per course!')]
@@ -112,8 +113,7 @@ class OpCourse(models.Model):
             except Exception:
                 logger.info("Error calling Moodle API\n", Exception)
 
-        res = super(OpCourse, self).create(values)
-        return res
+        return super(OpCourse, self).create(values)
 
     @api.multi
     def write(self, values):
@@ -155,9 +155,7 @@ class OpCourse(models.Model):
             except ValueError:
                 logger.info("Error calling Moodle API\n", ValueError)
 
-        res = super(OpCourse, self).write(values)
-        return res
-
+        return super(OpCourse, self).write(values)
 
     @api.one
     @api.constrains('area_id', 'code')

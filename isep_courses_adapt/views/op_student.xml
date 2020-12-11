@@ -4,7 +4,7 @@
         <record id="view_op_student_tree_extended" model="ir.ui.view">
             <field name="model">op.student</field>
             <field name="inherit_id"
-                    ref="openeducat_core.view_op_student_tree"/>
+                   ref="openeducat_core.view_op_student_tree"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='blood_group']" position="replace">
                     <field name="blood_group" invisible="1"/>
@@ -14,8 +14,7 @@
 
         <record id="view_op_student_form_extended" model="ir.ui.view">
             <field name="model">op.student</field>
-            <field name="inherit_id"
-                   ref="openeducat_core.view_op_student_form"/>
+            <field name="inherit_id" ref="openeducat_core.view_op_student_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//notebook/page/group[@name='address']" position="replace"/>
                 <xpath expr="//button[1]" position="after">
@@ -58,15 +57,15 @@
                                     <div class="address_format">
                                         <field name="city" placeholder="City" style="width: 40%%"/>
                                         <field name="state_id" class="oe_no_button" placeholder="State"
-                                                   style="width: 37%%" options='{"no_open": True}'/>
+                                               style="width: 37%%" options='{"no_open": True}'/>
                                         <field name="zip" placeholder="ZIP" style="width: 20%%"/>
                                     </div>
                                     <field name="country_id"
-                                               placeholder="Country" class="oe_no_button"
-                                               options='{"no_open": True}'/>
+                                           placeholder="Country" class="oe_no_button"
+                                           options='{"no_open": True}'/>
                                 </div>
                                 <field name="emergency_contact" context="{'show_address': 1}"
-                                           options='{"always_reload": True}'/>
+                                       options='{"always_reload": True}'/>
                             </group>
                             <group string="Academic data">
                                 <field name="gr_no" readonly="1"/>
@@ -76,7 +75,8 @@
                                 <field name="year_end_studies"/>
                                 <field name="sepyc_program"/>
                                 <field name="uvic_program"/>
-                                <field name="status_documentation" attrs="{'invisible':[('uvic_program','=', False),('sepyc_program','=',False)]}"/>
+                                <field name="status_documentation"
+                                       attrs="{'invisible':[('uvic_program','=', False),('sepyc_program','=',False)]}"/>
                             </group>
                         </sheet>
                     </group>
@@ -93,6 +93,10 @@
                     </page>
                 </notebook>
 
+<!--                <xpath expr="//field[@name='course_detail_ids']/tree/field[@name='subject_ids']" position="replace">-->
+<!--                    <field name="subject_rel_ids" widget="many2many_tags"/>-->
+<!--                </xpath>-->
+
             </field>
         </record>
 
@@ -102,20 +106,18 @@
                    ref="openeducat_library.view_op_student_form_library_inherit"/>
             <field name="arch" type="xml">
                 <xpath expr="//notebook/page[@name='library']" position="attributes">
-                        <attribute name="invisible">1</attribute>
+                    <attribute name="invisible">1</attribute>
                 </xpath>
             </field>
         </record>
-
         <record id="view_op_student_form_fees_hide" model="ir.ui.view">
             <field name="model">op.student</field>
             <field name="inherit_id"
-                ref="openeducat_fees.view_op_student_form_fees_inherit"/>
+                   ref="openeducat_fees.view_op_student_form_fees_inherit"/>
             <field name="arch" type="xml">
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[not(@name)][1]"
-                    position="replace"/>
+                       position="replace"/>
             </field>
         </record>
-
     </data>
 </odoo>

@@ -436,7 +436,7 @@ msgstr "Programa UVIC"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__sepyc_program
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__sepyc_program
 msgid "SEPYC Program"
-msgstr "Programa Sepy/Sep"
+msgstr "Programa Sepyc / Sep"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__year_end_studies
@@ -735,6 +735,151 @@ msgid "Area of Course"
 msgstr "Área del curso"
 
 #. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_documentation
+msgid "Your Documentation"
+msgstr "Su documentación"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_documentation
+msgid "Your Documentation Details"
+msgstr "Detalles de la documentación"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_update
+msgid "Update Your Documentation"
+msgstr "Actualice su documentación"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_create
+msgid "Upload Your Documentation"
+msgstr "Cargue su documentación"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_documentation
+msgid "Upload a Document"
+msgstr "Cargar un documento"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_update
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_create
+msgid "Select a File"
+msgstr "Seleccione un archivo"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_update
+msgid "<strong>Upload date:</strong>"
+msgstr "<strong>Fecha de subida:</strong>"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_update
+msgid "<strong>Document name:</strong>"
+msgstr "<strong>Nombre de documento:</strong>"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_update
+msgid "<strong>Document type:</strong>"
+msgstr "<strong>Tipo de documento:</strong>"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_update
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_create
+msgid "Confirm<span class="fa fa-long-arrow-right"/>"
+msgstr "Confirmar <span class="fa fa-long-arrow-right"/>"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_update
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_create
+msgid "Back<span class="fa fa-long-arrow-left"/>"
+msgstr "Regresar <span class="fa fa-long-arrow-left"/>"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_home_documents
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_home_menu_documents
+msgid "Documentation"
+msgstr "Documentación"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_home_menu_documents
+msgid "New file"
+msgstr "Nuevo documento"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_home_menu_documents
+msgid "<span>Uploading file</span>"
+msgstr "<span>Nuevo documento</span>"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_documents
+msgid "Document #"
+msgstr "Documento #"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_documents
+msgid "Document name"
+msgstr "Nombre"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_documents
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_documents_create
+msgid "Document Type"
+msgstr "Tipo de documento"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_documents
+msgid "Actions"
+msgstr "Acciones"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_documents
+msgid "Change"
+msgstr "Cambiar"
+
+#. module: isep_courses_adapt
+#: code:addons/isep_courses_adapt/controllers/portal.py:46
+#, python-format
+msgid "Upload date"
+msgstr "Fecha de subida"
+
+#. module: isep_courses_adapt
+#: code:addons/isep_courses_adapt/controllers/portal.py:50
+#, python-format
+msgid "Document type"
+msgstr "Tipo de documento"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.my_documentation_link
+msgid "My Documentation"
+msgstr "Mi documentación"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_documentation
+msgid "List of Documents"
+msgstr "Lista de documentos"
+
+#. module: isep_courses_adapt
+#: model:ir.model,name:isep_courses_adapt.model_op_gdrive_documents
+msgid "Google Drive Documentation"
+msgstr "Documentación de Google Drive"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.gdrive_create
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_documentation
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_update
+msgid "Document Type"
+msgstr "Tipo de Documento"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_gdrive_documentation
+msgid "Document Name"
+msgstr "Nombre del documento"
+
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_section_course__name
 msgid "Section name"
 msgstr "Nombre de sección"
@@ -753,3 +898,48 @@ msgstr "Nombre del periodo"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_period_course__code
 msgid "Period Code"
 msgstr "Número del periodo"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.inherited_view_op_course_form
+msgid "General information"
+msgstr "Información general"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.inherited_view_op_course_form
+msgid "Batches"
+msgstr "Grupos"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_batch_form_inherited
+msgid "Subject(s)"
+msgstr "Asignatura(s)"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_batch_form_inherited
+msgid "Student(s)"
+msgstr "Estudiante(s)"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_batch_form_inherited
+msgid "Subjects"
+msgstr "Asignaturas"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_batch_form_inherited
+msgid "Students"
+msgstr "Estudiantes"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_batch_form_inherited
+msgid "Academic information"
+msgstr "Información académica"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_batch_form_inherited
+msgid "General information"
+msgstr "Información general"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_batch_form_inherited
+msgid "Other information"
+msgstr "Otra información"

@@ -2,8 +2,8 @@
 <odoo>
     <data>
         <record id="view_op_student_documents_tree" model="ir.ui.view">
-            <field name="name">op.student.documents.tree</field>
-            <field name="model">op.student.documents</field>
+            <field name="name">op.gdrive.documents.tree</field>
+            <field name="model">op.gdrive.documents</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <tree string="Documentación del alumno">
@@ -17,8 +17,8 @@
             </field>
         </record>
         <record id="view_op_student_documents_form" model="ir.ui.view">
-            <field name="name">op.student.documents.form</field>
-            <field name="model">op.student.documents</field>
+            <field name="name">op.gdrive.documents.form</field>
+            <field name="model">op.gdrive.documents</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <form string="Documento del alumno">
@@ -36,8 +36,8 @@
             </field>
         </record>
         <record id="view_op_student_documents_search" model="ir.ui.view">
-            <field name="name">op.student.documents.search</field>
-            <field name="model">op.student.documents</field>
+            <field name="name">op.gdrive.documents.search</field>
+            <field name="model">op.gdrive.documents</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <search string="Lugares de trabajo">
@@ -53,7 +53,7 @@
                 id="act_open_op_student_documents_view">
             <field name="name">Lugar de trabajo</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">op.student.documents</field>
+            <field name="res_model">op.gdrive.documents</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id"
