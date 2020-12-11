@@ -15,7 +15,7 @@
                     <field name="campus_id" attrs="{'required':[('modality_id', '=' ,1)]}"/>
                     <field name="students_limit"/>
                     <field name="uvic_program" attrs="{'invisible': [('user_company_id', '=', 1111)]}"/>
-                    <field name="rvoe_program" attrs="{'invisible': [('user_company_id', '!=', 1111)]}"/>
+                    <field name="sepyc_program"/>
                     <field name="user_company_id" invisible="1"/>
                 </xpath>
 
@@ -25,17 +25,32 @@
 
                 <xpath expr="//form/sheet/group[@name='main']" position="after">
                     <notebook>
-                        <page string="General">
+                        <page id="page_general_information" string="General information">
                             <group cols="4">
-                                <group string="Información acádemica">
-                                    <field name="ects"/>
-                                    <field name="hours"/>
-                                    <field name="expiration_days"/>
-                                    <field name="date_diplomas"/>
-                                    <field name="academic_year"/>
-                                    <field name="generation"/>
-                                </group>
-                                <group string="Otra información">
+                                <sheet string="groups_info_batch">
+                                    <group string="Academic information">
+                                        <field name="expiration_days"/>
+                                        <field name="date_diplomas"/>
+                                        <field name="academic_year"/>
+                                        <field name="generation"/>
+                                    </group>
+                                    <group string="SL">
+                                        <field name="hours"/>
+                                        <field name="credits"/>
+                                        <field name="ects"/>
+                                    </group>
+                                    <group string="LATAM">
+                                        <field name="practical_hours_total"/>
+                                        <field name="independent_hours_total"/>
+                                        <field name="theoretical_hours_total"/>
+                                        <field name="hours_total"/>
+                                        <field name="practical_hours_credits"/>
+                                        <field name="independent_hours_credits"/>
+                                        <field name="theoretical_hours_credits"/>
+                                        <field name="credits_total"/>
+                                    </group>
+                                </sheet>
+                                <group string="Other information">
                                     <field name="days_week"/>
                                     <field name="schedule"/>
                                     <field name="contact_class"/>
@@ -43,7 +58,7 @@
                                 </group>
                             </group>
                         </page>
-                        <page id="page_student_lines" string="Estudiantes">
+                        <page id="page_student_lines" string="Students">
                             <field name="student_lines" attrs="{'readonly': True}">
                                 <tree string="Student Lines" editable="bottom">
                                     <field name="student_id"/>
@@ -52,12 +67,14 @@
                                 </tree>
                             </field>
                         </page>
-                        <page id="batch_subjects_rel" string="Asignaturas">
-                            <field name="op_batch_subject_rel_ids" attrs="{'readonly': True}">
-                                <tree string="Subject lines" editable="bottom">
+                        <page id="batch_subjects_rel" string="Subjects">
+                            <field name="op_batch_subject_rel_ids">
+                                <tree string="Subject lines">
                                     <field name="subject_id"/>
-                                    <field name="batch_id"/>
                                     <field name="hours"/>
+                                    <field name="credits"/>
+                                    <field name="ects"/>
+                                    <field name="level"/>
                                 </tree>
                             </field>
                         </page>
@@ -65,16 +82,14 @@
                 </xpath>
 
                 <xpath expr="//div[hasclass('oe_button_box')]/button[1]" position="before">
-                    <button class="oe_stat_button" name="action_open_subjects" type="object" icon="fa-book"
-                            attrs="{'invisible': [('subject_count', '=', 0)]}">
-                        <field name="subject_count" widget="statinfo" string="Asignaturas"/>
+                    <button class="oe_stat_button" name="action_open_subjects" type="object" icon="fa-book">
+                        <field name="subject_count" widget="statinfo" string="Subject(s)"/>
                     </button>
                 </xpath>
 
                 <xpath expr="//div[hasclass('oe_button_box')]/button[1]" position="before">
-                    <button class="oe_stat_button" name="action_open_students" type="object" icon="fa-user"
-                            attrs="{'invisible': [('student_count', '=', 0)]}">
-                        <field name="student_count" widget="statinfo" string="Estudiantes"/>
+                    <button class="oe_stat_button" name="action_open_students" type="object" icon="fa-user">
+                        <field name="student_count" widget="statinfo" string="Student(s)"/>
                     </button>
                 </xpath>
             </field>

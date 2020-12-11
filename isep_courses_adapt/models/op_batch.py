@@ -20,18 +20,27 @@ class OpBatch(models.Model):
     end_date = fields.Date('End Date')
     student_lines = fields.One2many('op.student.course', 'batch_id')
     moodle_course_id = fields.Integer(string="Moodle Id")
+    credits = fields.Float(string="Credits", related='course_id.credits')
+    practical_hours_total = fields.Float(string="Practical Hours Total", related='course_id.practical_hours_total')
+    independent_hours_total = fields.Float(string="Independent Hours Total", related='course_id.independent_hours_total')
+    theoretical_hours_total = fields.Float(string="Theoretical Hours Total", related='course_id.theoretical_hours_total')
+    hours_total = fields.Float(string="Hours Total", related='course_id.hours_total')
+    practical_hours_credits = fields.Float(string="Practical Hours Credits", related='course_id.practical_hours_credits')
+    independent_hours_credits = fields.Float(string="Independent Hours Credits", related='course_id.independent_hours_credits')
+    theoretical_hours_credits = fields.Float(string="Theoretical Hours Credits", related='course_id.theoretical_hours_credits')
+    credits_total = fields.Float(string="Credits Total", related='course_id.credits_total')
     academic_year = fields.Char(string="Academic Year", size=16)
     days_week = fields.Char(string="Days week", size=50)
     schedule = fields.Char(string="Schedule", size=200)
     preference_group = fields.Char(string="Preference group", size=200)
-    generation = fields.Char(string="Generation", size=100)  #Field of generation add
+    generation = fields.Char(string="Generation", size=100)
     contact_class = fields.Char(string="Contact", size=200)
     type_practices = fields.Many2one('op.practices.type', string='Type '
                                                                  'practices')
     campus_id = fields.Many2one('op.campus', string='Campus')
     coordinator = fields.Many2one('res.partner', string="Coordinator")
     uvic_program = fields.Boolean(string='UVIC program', default=False)
-    rvoe_program = fields.Boolean(string='RVOE program', default=False)
+    sepyc_program = fields.Boolean(string='SEPYC program', default=False)
     ects = fields.Integer(string="ECTS", default=0, related='course_id.ects')
     hours = fields.Float(string="Hours", related='course_id.hours')
     students_limit = fields.Integer(string="Students limit")
@@ -43,8 +52,8 @@ class OpBatch(models.Model):
                                      compute='_get_current_user')
     op_batch_subject_rel_ids = fields.One2many('op.batch.subject.rel',
                                                'batch_id')
-    subject_count = fields.Integer(compute='_compute_subject_count')
-    student_count = fields.Integer(compute='_compute_student_count')
+    subject_count = fields.Integer(compute='_compute_subject_count', default=0)
+    student_count = fields.Integer(compute='_compute_student_count', default=0)
 
     @api.depends()
     def _get_current_user(self):
@@ -72,11 +81,11 @@ class OpBatch(models.Model):
         """Display the linked subjects and adapt the view to the number of
         records to display."""
         self.ensure_one()
-        subjects = self.course_id.subject_ids
+        subjects = self.get_subject_ids_from_rel(self.op_batch_subject_rel_ids)
         action = \
             self.env.ref('openeducat_core.act_open_op_subject_view').read()[0]
         if len(subjects) > 1:
-            action['domain'] = [('id', 'in', subjects.ids)]
+            action['domain'] = [('id', 'in', subjects)]
         elif len(subjects) == 1:
             form_view = [(self.env.ref(
                 'openeducat_core.view_op_subject_form').id, 'form')]
@@ -88,10 +97,14 @@ class OpBatch(models.Model):
             else:
                 logger.info("=== LINE 55 ===")
                 action['views'] = form_view
-            action['res_id'] = subjects.ids[0]
+            action['res_id'] = subjects[0]
         else:
             action = {'type': 'ir.actions.act_window_close'}
         return action
+
+    @staticmethod
+    def get_subject_ids_from_rel(subject_rel_ids):
+        return [subject_rel.subject_id.id for subject_rel in subject_rel_ids]
 
     def _compute_student_count(self):
         """Compute the number of distinct students linked to the batch."""

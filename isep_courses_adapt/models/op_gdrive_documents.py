@@ -13,27 +13,27 @@ import time
 logger = logging.getLogger(__name__)
 
 
-class OpStudentDocuments(models.Model):
-    _name = "op.student.documents"
+class OpGdriveDocuments(models.Model):
+    _name = "op.gdrive.documents"
+    _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin']
     _description = "Google Drive Documentation"
 
     document_type_id = fields.Many2one('op.document.type',
                                        string='Document type')
-    student_id = fields.Many2one(comodel_name="op.student", string="Student")
     drive_url = fields.Char(string="Gdrive URL")
     drive_id = fields.Char(string="Gdrive ID")
     document_name = fields.Char(string="Document name")
-    faculty_id = fields.Many2one(comodel_name="op.faculty", string="Faculty")
     file = fields.Binary()
     filename = fields.Char()
     folder_id = fields.Char(string="Gdrive Folder ID")
+    partner_id = fields.Many2one(comodel_name='res.partner', string='Partner')
 
     @api.multi
     def download_file(self):
         gauth = self.Gauth()
         drive = GoogleDrive(gauth)
 
-        file = drive.CreateFile({'id': self.drive_id, 'parents' : [{'id': self.folder_id}] })
+        file = drive.CreateFile({'id': self.drive_id, 'parents': [{'id': self.folder_id}]})
         logger.info("*******************")
         logger.info(file)
 
@@ -49,7 +49,7 @@ class OpStudentDocuments(models.Model):
             'res_model': self._name,
             'res_id': self.id,
             'mimetype': file['mimeType']
-        })
+            })
         logger.info("atachment_id: {0}".format(attachment.id))
         return {
             'type': 'ir.actions.act_url',
@@ -57,7 +57,7 @@ class OpStudentDocuments(models.Model):
                 attachment.id),
             'target': 'new',
             'nodestroy': False,
-        }
+            }
 
     @api.multi
     def upload_file(self, values):
@@ -65,32 +65,23 @@ class OpStudentDocuments(models.Model):
         gauth = self.Gauth()
         self.valid_file(values)
         drive = GoogleDrive(gauth)
-        model_path = os.path.dirname(os.path.abspath(__file__))
+        os.path.dirname(os.path.abspath(__file__))
         file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
         exist_folder = False
         file = drive.CreateFile()
         folder = ''
-        name = ''
-        field = ''
-        if 'student_id' in values:
-            field = 'student_id'
-            model = 'op.student'
-        elif 'faculty_id' in values:
-            field = 'faculty_id'
-            model = 'op.faculty'
-        if 'student_id' in values:
-            res = self.search([('document_type_id', '=', values['document_type_id']), ('student_id', '=', values['student_id'])], limit=1).id
-        elif 'faculty_id' in values:
-            res = self.search([('document_type_id', '=', values['document_type_id']), ('faculty_id', '=', values['faculty_id'])], limit=1).id
+        res = self.search([('document_type_id', '=', values['document_type_id']),
+                           ('partner_id', '=', values['partner_id'])], limit=1).id
         if res != self.id:
             return values
         for folders in file_list:
-            if folders['id'] == self.search([(field, '=', values[field])], limit=1).folder_id:
+            if folders['id'] == self.search([('partner_id', '=', values['partner_id'])], limit=1).folder_id:
                 exist_folder = True
                 folder = folders
                 break
         if not exist_folder:
-            name = self.env[model].search([('id', '=', values[field])], limit=1).name
+            partner = self.env['res.partner'].search([('id', '=', values['partner_id'])], limit=1)
+            name = partner.name + '-' + str(partner.id)
             folder = drive.CreateFile(
                 {"title": name, "mimeType": "application/vnd.google-apps.folder"})
             folder.Upload()
@@ -142,43 +133,34 @@ class OpStudentDocuments(models.Model):
     def create(self, values):
         if 'filename' in values:
             values = self.upload_file(values)
-        res = super(OpStudentDocuments, self).create(values)
+        res = super(OpGdriveDocuments, self).create(values)
         return res
 
     @api.multi
     def write(self, values):
         if 'filename' in values:
             values = self.upload_file(values)
-        res = super(OpStudentDocuments, self).create(values)
+        res = super(OpGdriveDocuments, self).write(values)
         return res
 
     @api.one
-    @api.constrains('document_type_id', 'student_id', 'faculty_id')
+    @api.constrains('document_type_id', 'partner_id')
     def _check_ids(self):
-        if self.student_id.id:
-            res = self.search([('document_type_id', '=', self.document_type_id.id), ('student_id', '=', self.student_id.id)], limit=1).id
-        elif self.faculty_id.id:
-            res = self.search([('document_type_id', '=', self.document_type_id.id), ('faculty_id', '=', self.faculty_id.id)], limit=1).id
+        res = self.search(
+            [('document_type_id', '=', self.document_type_id.id), ('partner_id', '=', self.partner_id.id)], limit=1).id
         if res != self.id:
-            gauth = self.Gauth()
-            drive = GoogleDrive(gauth)
-            file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
-            for folders in file_list:
-                if folders['id'] == self.search([('id', '=', res)], limit=1).folder_id:
-                    folders.Delete()
-                    break
             raise ValidationError(_('One documet type per person!!'))
 
     @api.model
     def delete_void_records(self):
-        study_faculty_res = self.env['ir.attachment'].search([('res_model', '=', 'op.student.documents')])
+        study_faculty_res = self.env['ir.attachment'].search([('res_model', '=', 'op.gdrive.documents')])
         for rec in study_faculty_res:
             rec.unlink()
-        study_faculty_res_void = self.env['op.student.documents'].search(
-            [('document_type_id', '=', None), ('student_id', '=', None), ('faculty_id', '=', None)])
-        for rec in study_faculty_res_void:
+        partner_res_void = self.env['op.gdrive.documents'].search(
+            [('document_type_id', '=', None), ('partner_id', '=', None)])
+        for rec in partner_res_void:
             rec.unlink()
 
     def unlink(self):
-        res = super(OpStudentDocuments, self).unlink()
+        res = super(OpGdriveDocuments, self).unlink()
         return res

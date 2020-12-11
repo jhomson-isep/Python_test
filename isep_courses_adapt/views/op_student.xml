@@ -4,64 +4,82 @@
         <record id="view_op_student_tree_extended" model="ir.ui.view">
             <field name="model">op.student</field>
             <field name="inherit_id"
-                    ref="openeducat_core.view_op_student_tree"/>
+                   ref="openeducat_core.view_op_student_tree"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='blood_group']" position="replace">
                     <field name="blood_group" invisible="1"/>
-                </xpath>
-            </field>
-        </record>
-
-        <record id="view_op_student_form_library_extends" model="ir.ui.view">
-            <field name="model">op.student</field>
-            <field name="inherit_id"
-                   ref="openeducat_library.view_op_student_form_library_inherit"/>
-            <field name="arch" type="xml">
-                <xpath expr="//notebook/page[@name='library']" position="attributes">
-                        <attribute name="invisible">1</attribute>
                 </xpath>
             </field>
         </record>
 
         <record id="view_op_student_form_extended" model="ir.ui.view">
             <field name="model">op.student</field>
-            <field name="inherit_id"
-                   ref="openeducat_core.view_op_student_form"/>
+            <field name="inherit_id" ref="openeducat_core.view_op_student_form"/>
             <field name="arch" type="xml">
-
-                <xpath expr="//field[@name='gender']" position="before">
-                    <field name="gr_no"/>
-                </xpath>
-
-                <xpath expr="//field[@name='email']"
-                       position="after">
-                    <field name="curp"/>
-                    <field name="university_id"/>
-                    <field name="document_type_id"/>
-                    <field name="year_end_studies"/>
-                    <field name="document_number"/>
-                    <field name="uvic_documentation"/>
-                    <field name="rvoe_documentation"/>
-                    <field name="study_type_id" options="{'no_create': True}"/>
-                </xpath>
-
+                <xpath expr="//notebook/page/group[@name='address']" position="replace"/>
                 <xpath expr="//button[1]" position="after">
                     <button name="import_student_access" string="Get access"
                             type="object"/>
                 </xpath>
-
-                <xpath expr="//field[@name='blood_group']" position="replace">
-                    <field name="blood_group" invisible="1"/>
-                </xpath>
-
-                <xpath expr="//field[@name='gr_no']" position="replace">
-                    <field name="gr_no" readonly="1"/>
-                </xpath>
-
-                <xpath expr="//group[@name='personal_detail']">
-                    <field name="delay"/>
-                    <field name="place_birth"/>
-                    <field name="status_documentation" attrs="{'invisible':[('uvic_documentation','=', False),('rvoe_documentation','=',False)]}"/>
+                <xpath expr="//notebook/page/group[@name='personal_detail']" position="replace">
+                    <group cols="4">
+                        <sheet string="group_information_1">
+                            <group string="System Data">
+                                <field name="partner_id" placeholder="Partner" required="0"/>
+                                <field name="user_id" string="Usuario" readonly="1"/>
+                                <field name="category_id"/>
+                            </group>
+                            <group string="Personal Data">
+                                <field name="nationality"/>
+                                <field name="lang"/>
+                                <field name="place_birth"/>
+                                <field name="birth_date" required="1"/>
+                                <field name="gender"/>
+                                <field name="document_type_id"/>
+                                <field name="document_number"/>
+                                <field name="visa_info" string="Documentos de Identificación"/>
+                                <field name="curp" invisible="1"/> <!--It is believed to appear in the list of values-->
+                            </group>
+                        </sheet>
+                        <sheet string="group_information_2">
+                            <group string="Contact Details">
+                                <field name="mobile" required="1"/>
+                                <field name="phone"/>
+                                <field name="email" required="1"/>
+                                <label for="type"/>
+                                <div name="div_type">
+                                    <field class="oe_inline" name="type"/>
+                                </div>
+                                <label for="street" string="Address"/>
+                                <div name="div_address">
+                                    <field name="street" placeholder="Street..."/>
+                                    <field name="street2" placeholder="Street2"/>
+                                    <div class="address_format">
+                                        <field name="city" placeholder="City" style="width: 40%%"/>
+                                        <field name="state_id" class="oe_no_button" placeholder="State"
+                                               style="width: 37%%" options='{"no_open": True}'/>
+                                        <field name="zip" placeholder="ZIP" style="width: 20%%"/>
+                                    </div>
+                                    <field name="country_id"
+                                           placeholder="Country" class="oe_no_button"
+                                           options='{"no_open": True}'/>
+                                </div>
+                                <field name="emergency_contact" context="{'show_address': 1}"
+                                       options='{"always_reload": True}'/>
+                            </group>
+                            <group string="Academic data">
+                                <field name="gr_no" readonly="1"/>
+                                <field name="university_id" string="Universidad de Procedencia"/>
+                                <field name="delay"/>
+                                <field name="study_type_id" options="{'no_create': True}"/>
+                                <field name="year_end_studies"/>
+                                <field name="sepyc_program"/>
+                                <field name="uvic_program"/>
+                                <field name="status_documentation"
+                                       attrs="{'invisible':[('uvic_program','=', False),('sepyc_program','=',False)]}"/>
+                            </group>
+                        </sheet>
+                    </group>
                 </xpath>
 
                 <notebook position="inside">
@@ -74,18 +92,32 @@
                         </group>
                     </page>
                 </notebook>
+
+<!--                <xpath expr="//field[@name='course_detail_ids']/tree/field[@name='subject_ids']" position="replace">-->
+<!--                    <field name="subject_rel_ids" widget="many2many_tags"/>-->
+<!--                </xpath>-->
+
             </field>
         </record>
 
+        <record id="view_op_student_form_library_extends" model="ir.ui.view">
+            <field name="model">op.student</field>
+            <field name="inherit_id"
+                   ref="openeducat_library.view_op_student_form_library_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='library']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
         <record id="view_op_student_form_fees_hide" model="ir.ui.view">
             <field name="model">op.student</field>
             <field name="inherit_id"
-                ref="openeducat_fees.view_op_student_form_fees_inherit"/>
+                   ref="openeducat_fees.view_op_student_form_fees_inherit"/>
             <field name="arch" type="xml">
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[not(@name)][1]"
-                    position="replace"/>
+                       position="replace"/>
             </field>
         </record>
-
     </data>
 </odoo>

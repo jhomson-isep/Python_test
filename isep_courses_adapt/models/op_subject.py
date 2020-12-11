@@ -6,15 +6,22 @@ from requests import get, post
 from .op_sql import SQL
 import logging
 import os
+import pandas as pd
+
+
 
 logger = logging.getLogger(__name__)
 
 
 class OpSubject(models.Model):
     _inherit = 'op.subject'
-    sepyc_code = fields.Char(string="SEPYC code", size=16) #Field add
+    sepyc_code = fields.Char(string="SEPYC code", size=16)
     moodle_course_id = fields.Integer(string='Moodle course Id')
     uvic_code = fields.Char(string="UVIC code", size=16)
+    practical_hours = fields.Float(string='Practical Hours')
+    independent_hours = fields.Float(string='Independent Hours')
+    theoretical_hours = fields.Float(string='Theoretical Hours')
+    credits = fields.Float(string='Credits')
 
     @api.model
     def create(self, values):
@@ -128,3 +135,28 @@ class OpSubject(models.Model):
         logger.info("**************************************")
         logger.info("end of import subjects")
         logger.info("**************************************")
+
+    @api.multi
+    def update_subject(self):
+        self.ensure_one()
+        path_current = os.path.dirname(os.path.abspath(__file__))
+        path_file = path_current.replace('models','data') + '/subject.csv'
+
+        with open(path_file, 'r') as csv_file:
+            subject = pd.read_csv(csv_file, names=['code', 'ht', 'hi', 'hp', 'c'])
+
+        print(subject)
+        for _, row in subject.iterrows():
+            search_subject = self.search([('code', '=', row.code)])
+            try:
+                subject_values = {
+                    'theoretical_hours': row.ht,
+                    'independent_hours': row.hi,
+                    'practical_hours': row.hp,
+                    'credits': row.c,
+                }
+                search_subject.write(subject_values)
+
+            except Exception as e:
+                logger.info(e)
+                continue

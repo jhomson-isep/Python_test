@@ -10,32 +10,45 @@
                 <field name="evaluation_type_id"/>
                 <field name="modality_id"/>
                 <field name="section"/>
-                <field name="area_id" />
+                <field name="area_id"/>
             </xpath>
 
             <xpath expr="//form/sheet/group[@name='subject']" position="replace">
                 <notebook>
-                    <page string="Información general">
+                    <page id="page_general" string="General information">
                         <group cols="4">
-                            <group string="Curso">
-                                <field name="product_template_id"/>
-                                <field name="hours"/>
-                                <field name="credits"/>
-                                <field name="ects"/>
-                            </group>
+                            <sheet string="groups">
+                                <group string="Curso">
+                                    <field name="product_template_id"/>
+                                </group>
+                                <group string="SL">
+                                    <field name="hours"/>
+                                    <field name="credits"/>
+                                    <field name="ects"/>
+                                </group>
+                                <group string="LATAM">
+                                    <field name="practical_hours_total"/>
+                                    <field name="independent_hours_total"/>
+                                    <field name="theoretical_hours_total"/>
+                                    <field name="hours_total"/>
+                                    <field name="practical_hours_credits"/>
+                                    <field name="independent_hours_credits"/>
+                                    <field name="theoretical_hours_credits"/>
+                                    <field name="credits_total"/>
+                                </group>
+                            </sheet>
+
                             <group string="Reconocimientos">
                                 <field name="acknowledgments"/>
                                 <field name="reconeixements"/>
                             </group>
                         </group>
                         <group string="Contenidos">
-                                <field name="content"/>
-                            </group>
-
+                            <field name="content"/>
+                        </group>
                     </page>
-                    <page string="Asignaturas">
-                        <field name="subject_ids">
-                        </field>
+                    <page id="page_batches" string="Batches">
+                        <field name="batch_ids"></field>
                     </page>
                 </notebook>
             </xpath>
@@ -49,6 +62,8 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='fees_term_id']" position="replace">
                 <field name="period"/>
+                <field name="uvic_program"/>
+                <field name="sepyc_program"/>
             </xpath>
         </field>
     </record>

@@ -16,6 +16,7 @@ port = os.environ['PORT']
 
 postgres = create_engine('postgresql+psycopg2://{0}:{1}@{2}:{3}/{4}'.format(
     user, password, host, port, dbname))
+
 metadata_pg = MetaData(bind=postgres)
 driver = 'SQL+Server'  # for Windows
 if os.name == "posix":

@@ -15,15 +15,29 @@ class OpFaculty(models.Model):
     _inherit = 'op.faculty'
 
     job_title = fields.Char(string='Job title', size=128)
+    bank_teacher_id = fields.Many2many('res.partner.bank')
     specialty = fields.Char(string='Specialty', size=128)
     workplace_ids = fields.Many2many('op.workplace', string='Workplace')
+    place_birth = fields.Char(string='Place of birth', size=200)
     nifp = fields.Char(string='NIFP', size=20)
+    document_type_id = fields.Many2one('op.document.type',
+                                       string='Document type')
+    document_number = fields.Char(string='Document number', size=32)
     gender = fields.Selection([
         ('male', 'Male'),
         ('female', 'Female'),
         ('other', 'Other')
     ], 'Gender', required=True)
-    document_ids = fields.One2many("op.student.documents", "faculty_id", String="Documentation")
+    company_id = fields.Many2one('res.company', string="Company")
+    category_id = fields.Many2one('op.category', string="Teacher Categories")
+    street_job = fields.Char()
+    street2_job = fields.Char()
+    zip_job = fields.Char(change_default=True)
+    city_job = fields.Char()
+    state_job_id = fields.Many2one("res.country.state", string='State', ondelete='restrict',
+                                   domain="[('country_id', '=?', country_job_id)]")
+    country_job_id = fields.Many2one('res.country', string='Country', ondelete='restrict')
+    #document_ids = fields.One2many("op.gdrive.documents", "partner_id", String="Documentation")
 
     @staticmethod
     def add_years(d, years):
@@ -143,7 +157,7 @@ class OpFaculty(models.Model):
         drive = GoogleDrive(gauth)
         file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
         for rec in self:
-            documents = self.env['op.student.documents'].search([('faculty_id', '=', rec.id)])
+            documents = self.env['op.gdrive.documents'].search([('partner_id', '=', rec.partner_id.id)])
             for doc in documents:
                 doc.unlink()
         res = super(OpFaculty, self).unlink()
