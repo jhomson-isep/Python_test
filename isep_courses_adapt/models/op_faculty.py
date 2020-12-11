@@ -15,6 +15,7 @@ class OpFaculty(models.Model):
     _inherit = 'op.faculty'
 
     job_title = fields.Char(string='Job title', size=128)
+    bank_teacher_id = fields.Many2many('res.partner.bank')
     specialty = fields.Char(string='Specialty', size=128)
     workplace_ids = fields.Many2many('op.workplace', string='Workplace')
     place_birth = fields.Char(string='Place of birth', size=200)

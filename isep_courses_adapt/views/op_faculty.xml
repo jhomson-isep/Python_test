@@ -15,6 +15,9 @@
                     <page name="Documentación" string="Documentación">
                         <field name="document_ids" colspan="2" nolabel="1"/>
                     </page>
+                    <page name="Bank" string="Bank">
+                        <field name="bank_teacher_id" colspan="2" nolabel="1"/>
+                    </page>
                 </notebook>
                 <xpath expr="//sheet/group[1]" position="replace"/>
                 <xpath expr="//notebook/page[@name='personal_information']" position="replace">
