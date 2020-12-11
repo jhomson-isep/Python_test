@@ -20,7 +20,16 @@
     ],
     'installable': True,
     'data': [
+        #'wizards/uvic_student_wizard.xml',
+        #'wizards/batch_students_wizard.xml',
         'reports/report_uvic_students.xml',
+        'reports/report_batch_students.xml',
+        'reports/diploma_isep.xml',
+        'reports/ acceptance_letter.xml',
+        'reports/certified_diploma.xml',
+        #'reports/certified_enrollment.xml',
+        'reports/diploma_ seminar.xml',
+        'reports/diploma_isep.xml',
         'menu/report_menu.xml'
     ]
 }

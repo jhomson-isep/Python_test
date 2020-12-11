@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <report id="report_seminar_diploma_students"
+                model="op.student"
+                string="Diploma del Seminario"
+                report_type="qweb-pdf"
+                name="isep_openeducat_reports.seminar_diploma_students"
+                file="isep_openeducat_reports.seminar_diploma_students"
+                menu="True"/>
+
+        <template id="seminar_diploma_students">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <t t-foreach="o.course_detail_ids" t-as="c">
+                            <div style="text-align:center;">
+                                <p>El Claustro de profesores del Instituto Superior de Estudios Psicológicos ISEP, reunido en sesión extraordinaria,</p>
+                                <p>certifica que </p>
+                                <p><strong style="font-style:italic;font-size:30px;"><span t-field="o.name"></span></strong></p>
+                                <p>
+                                    ha realizado con total aprovechamiento los estudios teórico-prácticos, razón por la que se otorga
+                                    el presente documento acreditativo por haber realizado el #Monográfico# cuya duración ha sido de #0 horas# en
+                                </p>
+                                <p>
+                                    <strong style="font-size:34px;"><span t-field="c.course_id.name"></span></strong>
+                                </p>
+                                <p>Barcelona, a <span t-esc="datetime.datetime.today().day"></span>
+                                    <t t-if="datetime.datetime.today().month == 1"><span>de Enero de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 2"><span>de Febrero de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 3"><span>de Marzo de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 4"><span>de Abril de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 5"><span>de Mayo de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 6"><span>de Junio de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 7"><span>de Julio de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 8"><span>de Agosto de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 9"><span>de Septiembre de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 10"><span>de Octubre de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 11"><span>de Noviembre de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 12"><span>de Diciembre de </span></t>
+                                    <span t-esc="datetime.datetime.today().year"></span>
+                                </p>
+                                <div style="height:20px;"></div>
+                                <div class="row" style="text-align:center;">
+                                    <div class="col-4">La persona interesada</div>
+                                    <div class="col-4">Directora</div>
+                                    <div class="col-4">Coordinador</div>
+                                </div>
+                                <div class="row" style="height:75px">
+                                    <div class="col-4"></div>
+                                    <div class="col-4"></div>
+                                    <div class="col-4"></div>
+                                </div>
+                                <div class="row" style="text-align:center;">
+                                    <div class="col-4"><span t-field="o.name"></span></div>
+                                    <div class="col-4">ERIKA TOBALINA</div>
+                                    <div class="col-4">RIMON GAJA/OSCAR ASOREY</div>
+                                </div>
+                            </div>
+                            <div class="row" style="height:200px;"></div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

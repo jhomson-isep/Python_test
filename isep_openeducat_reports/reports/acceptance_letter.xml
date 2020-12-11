@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <report id="report_acceptance_letter_students"
+                model="op.student"
+                string="Carta de aceptación"
+                report_type="qweb-pdf"
+                name="isep_openeducat_reports.acceptance_letter_students"
+                file="isep_openeducat_reports.acceptance_letter_students"
+                menu="True"/>
+
+        <template id="acceptance_letter_students">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <t t-foreach="o.course_detail_ids" t-as="c">
+                            <div style="text-align:justify;font-size:18px;">
+                                <strong>
+                                    <p style="text-align:right;">
+                                        <span t-field="o.name"></span><br></br>
+                                        <span t-field="o.document_number"></span><br></br>
+                                        <span t-field="o.street"></span><br></br>
+                                        Barcelona<br></br>
+                                        Barcelona<br></br>
+                                        España
+                                    </p>
+                                </strong>
+                                <p style="margin-top:5px;">Apreciada Tatiana :</p>
+                                <p style="margin-top:5px;">
+                                    Le comunicamos que ha sido aceptada y consta matriculada para realizar el <span t-field="c.course_id.name"></span> , en la modalidad <span t-field="c.course_id.modality_id"></span>, de la convocatoria
+                                    correspondiente al curso académico <span t-field="c.course_id.period"></span>.
+                                </p>
+                                <p style="margin-top:5px;">
+                                    El curso se impartirá en nuestras instalaciones de Barcelona. La fecha de inicio del
+                                    periodo formativo es del 1 de enero de 1900 y finaliza el 1 de enero de 1900. Además de
+                                    las clases presenciales, la alumna deberá realizar en horario diurno de Lunes a Viernes ,
+                                    las prácticas formativas, necesarias e implícitas en el programa y en uno de los centros
+                                    concertados por ISEP que se destine a la alumna, dicha práctica tiene carácter evaluativo . Además, alcanzado la mitad del itinerario formativo, la alumna deberá iniciar la elaboración
+                                    del Trabajo Final, tutorizado y dirigido en horario intersemanal y por tanto, no compatible
+                                    con el horario presencial definido en el calendario adjunto.
+                                </p>
+                                <p style="margin-top:5px;">
+                                    El máster consta de 0 ECTS, equivalentes a 0 horas de dedicación al estudio, distribuidas
+                                    entre horas presenciales de clases, horas destinadas a otras actividades académicas
+                                    dirigidas y horas de trabajo personal que el alumno debe realizar para la asimilación de los
+                                    contenidos que permiten acreditar la maestría.
+                                </p>
+
+                                <p style="margin-top:5px;">
+                                    El precio total del Máster es de Euros.
+                                </p>
+                                <p style="margin-top:5px;">
+                                    Aprovechamos la ocasión para enviarle un saludo y felicitarle por la decisión de formarse
+                                    con el ISEP.
+                                </p>
+
+                                <p style="margin-top:5px;">Para que así conste, firma el presente certificado en Barcelona, a <span t-esc="datetime.datetime.today().day"></span>
+                                    <t t-if="datetime.datetime.today().month == 1"><span>de Enero de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 2"><span>de Febrero de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 3"><span>de Marzo de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 4"><span>de Abril de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 5"><span>de Mayo de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 6"><span>de Junio de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 7"><span>de Julio de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 8"><span>de Agosto de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 9"><span>de Septiembre de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 10"><span>de Octubre de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 11"><span>de Noviembre de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 12"><span>de Diciembre de </span></t>
+                                    <span t-esc="datetime.datetime.today().year"></span>
+                                </p>
+                                <p>Erika Tobalina<br></br>Directora de ISEP Barcelona</p>
+                            </div>
+                            <div style="height:275px;"></div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
