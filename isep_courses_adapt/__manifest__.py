@@ -17,11 +17,13 @@
     'license': 'AGPL-3',
     'depends': [
         'base',
+        'sale',
         'mail',
         'portal',
         'openeducat_core',
         'openeducat_fees',
         'openeducat_library',
+        'openeducat_admission',
         'openeducat_attendance',
     ],
     'data': [
@@ -49,6 +51,8 @@
         'views/res_partner_documentation.xml',
         'views/op_portal_documentation.xml',
         'views/op_attendance_line.xml',
+        'views/op_admission_register.xml',
+        'views/sale_order.xml',
         'menu/isep_courses_adapt_menu.xml',
         'data/op_document_type.xml',
         'data/op_evaluation_type.xml',
