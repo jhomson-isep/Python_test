@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
-from sqlachemy_conn import get_pg_session, get_session_server_isep, OpGdriveDocuments, OpStudent, OpDocumentType, ResPartner
+from sqlachemy_conn import get_pg_session, get_session_server_isep, \
+    OpGdriveDocuments, OpStudent, OpDocumentType, ResPartner, TiposDocumento
 from sqlalchemy import and_
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
+import logging
 import os
 import base64
 import io
 
+logger = logging.getLogger(__name__)
 lsfiles = os.listdir(path='Folder/')
 session_pg = get_pg_session()
 session_isep = get_session_server_isep()
@@ -88,17 +91,17 @@ for file in lsfiles:
         and_(OpGdriveDocuments.document_type_id == OpDocumentType.id,
              OpGdriveDocuments.partner_id == partner.id)
         ).first()
-    if document is None and partner is not None and
-        student is not None and document_type is not None:
+    if document is None and partner is not None and student is not None and \
+            document_type is not None:
         values = {
-            'partner_id' : partner.id,
-            'folder_id'  : '',
-            'drive_id'   : '',
-            'filename'   : filename,
-            'file'       : content_file,
-            'document_name' : filename,
-            'document_id' : document_type.id,
-            }
+            'partner_id': partner.id,
+            'folder_id': '',
+            'drive_id': '',
+            'filename': filename,
+            'file': content_file,
+            'document_name': filename,
+            'document_id': document_type.id,
+        }
         values = upload_file(values)
         document = OpGdriveDocuments()
         document.document_type_id = values['document_id']

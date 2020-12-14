@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_op_attendance_line_form_inherit" model="ir.ui.view">
+            <field name="name">op.attendance.line.form.inherit</field>
+            <field name="model">op.attendance.line</field>
+            <field name="inherit_id" ref="openeducat_attendance.view_op_attendance_line_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='present']" position="after">
+                    <field name="justified"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
