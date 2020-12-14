@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import traceback
 
-from odoo import models
+from odoo import models, fields
 import logging
 
 logger = logging.getLogger(__name__)
@@ -9,6 +9,8 @@ logger = logging.getLogger(__name__)
 
 class OpStudentCourse(models.Model):
     _inherit = "op.student.course"
+
+    finish_date = fields.Date(string='Finish Date')
 
     def set_student_course_subject_rel(self):
         logger.info("**************************************")

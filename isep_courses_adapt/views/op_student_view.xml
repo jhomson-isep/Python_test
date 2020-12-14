@@ -11,6 +11,9 @@
                        position="replace">
                    <field name="batch_id"/>
                </xpath>
+                <xpath expr="//field[@name='roll_number']" position="after">
+                    <field name="finish_date" options="{'format': 'DD/MM/YYYY'}"/>
+                </xpath>
             </field>
         </record>
 

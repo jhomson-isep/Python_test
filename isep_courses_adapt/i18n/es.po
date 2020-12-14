@@ -943,3 +943,8 @@ msgstr "Información general"
 #: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_batch_form_inherited
 msgid "Other information"
 msgstr "Otra información"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_course__finish_date
+msgid "Finish Date"
+msgstr "Fecha de Finalización"
