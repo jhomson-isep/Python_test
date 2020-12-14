@@ -25,7 +25,7 @@
         'reports/report_uvic_students.xml',
         'reports/report_batch_students.xml',
         'reports/diploma_isep.xml',
-        'reports/ acceptance_letter.xml',
+        'reports/acceptance_letter.xml',
         'reports/certified_diploma.xml',
         #'reports/certified_enrollment.xml',
         'reports/diploma_ seminar.xml',
