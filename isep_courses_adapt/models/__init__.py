@@ -26,3 +26,4 @@ from . import res_partner_documentation
 from . import op_section_course
 from . import op_period_course
 from . import op_student_course
+from . import op_attendance_line
