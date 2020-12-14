@@ -17,11 +17,59 @@
             <field name="name">CURP</field>
             <field name="code">CURP</field>
         </record>
-        <record id="op_document_type_5" model="op.document.type">
+         <record id="op_document_type_5" model="op.document.type">
+            <field name="name">Dorso DNI</field>
+            <field name="code">DDNI</field>
+        </record>
+        <record id="op_document_type_6" model="op.document.type">
+            <field name="name">Título</field>
+            <field name="code">TTL</field>
+        </record>
+        <record id="op_document_type_7" model="op.document.type">
+            <field name="name">Reclamación</field>
+            <field name="code">RCLN</field>
+        </record>
+        <record id="op_document_type_8" model="op.document.type">
+            <field name="name">Baja</field>
+            <field name="code">BJ</field>
+        </record>
+        <record id="op_document_type_9" model="op.document.type">
+            <field name="name">Justificante</field>
+            <field name="code">JTFCT</field>
+        </record>
+        <record id="op_document_type_10" model="op.document.type">
+            <field name="name">Otro</field>
+            <field name="code">OTR</field>
+        </record>
+        <record id="op_document_type_11" model="op.document.type">
+            <field name="name">NIE</field>
+            <field name="code">NIE</field>
+        </record>
+        <record id="op_document_type_12" model="op.document.type">
+            <field name="name">Modificación matrícula</field>
+            <field name="code">MDMT</field>
+        </record>
+        <record id="op_document_type_13" model="op.document.type">
+            <field name="name">Prórroga</field>
+            <field name="code">PRRG</field>
+        </record>
+        <record id="op_document_type_14" model="op.document.type">
+            <field name="name">Matrícula</field>
+            <field name="code">MTRCL</field>
+        </record>
+        <record id="op_document_type_15" model="op.document.type">
+            <field name="name">Pasaporte</field>
+            <field name="code">PSPRT</field>
+        </record>
+        <record id="op_document_type_16" model="op.document.type">
+            <field name="name">Convenio Practicas</field>
+            <field name="code">CVPRT</field>
+        </record>
+        <record id="op_document_type_17" model="op.document.type">
             <field name="name">Título Universitario</field>
             <field name="code">FTU</field>
         </record>
-        <record id="op_document_type_6" model="op.document.type">
+        <record id="op_document_type_18" model="op.document.type">
             <field name="name">Curriculum Vitae</field>
             <field name="code">CV</field>
         </record>
