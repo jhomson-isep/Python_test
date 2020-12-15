@@ -6,7 +6,7 @@
             <field name="name">Email Student Access 12 days</field>
             <field name="email_from">secretaria@isep.com</field>
             <field name="subject">Recordatorio de Ingreso</field>
-            <field name="email_to">6446632@gmail.com</field>
+            <field name="email_to">${object.email}</field>
             <field name="model_id" ref="model_op_student"/>
             <field name="auto_delete" eval="False"/>
             <field name="body_html"><![CDATA[

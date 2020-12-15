@@ -209,6 +209,13 @@ class OpStudent(models.Model):
         logger.info("**************************************")
 
         int_break = 0
+        tname = {5: 'Email Student Access 5 days',
+                 12: 'Email Student Access 12 days',
+                 20: 'Email Student Access 20 days',
+                 40: 'Email Student Access 40 days',
+                 70: 'Email Student Access 70 days',
+                 80: 'Email Student Access 80 days',
+                 100: 'Email Student Access 100 days'}
         for student in self.env['op.student'].search([]):
             try:
                 last_access=self.env['op.student.access'].\
@@ -220,50 +227,15 @@ class OpStudent(models.Model):
                     if 'días' in last_access:
                         days = self.get_days_without_access(student.id)
                         days = ast.literal_eval(days)
-                        logger.info('dias:{}'.format(days))
-                        tname = {5: 'Email Student Access 5 days',
-                                 12:'Email Student Access 12 days',
-                                 20:'Email Student Access 20 days',
-                                 40:'Email Student Access 40 days',
-                                 70:'Email Student Access 70 days',
-                                 80:'Email Student Access 80 days',
-                                 100:'Email Student Access 100 days'}
                         if days in ( 5, 12 , 20, 40, 70, 80, 100):
-                            #Eliminar pass y acomodar dentro if
-                            pass
-                        days = 5
-                        template = self.env['mail.template'].search([('name', '=', tname[days])])
-                        if template:
-                            template.send_mail(student.id, force_send=True, raise_exception=True)
-                        days = 12
-                        template = self.env['mail.template'].search([('name', '=', tname[days])])
-                        if template:
-                            template.send_mail(student.id, force_send=True, raise_exception=True)
-                        days = 20
-                        template = self.env['mail.template'].search([('name', '=', tname[days])])
-                        if template:
-                            template.send_mail(student.id, force_send=True, raise_exception=True)
-                        days = 40
-                        template = self.env['mail.template'].search([('name', '=', tname[days])])
-                        if template:
-                            template.send_mail(student.id, force_send=True, raise_exception=True)
-                        days = 70
-                        template = self.env['mail.template'].search([('name', '=', tname[days])])
-                        if template:
-                            template.send_mail(student.id, force_send=True, raise_exception=True)
-                        days = 80
-                        template = self.env['mail.template'].search([('name', '=', tname[days])])
-                        if template:
-                            template.send_mail(student.id, force_send=True, raise_exception=True)
-                        days = 100
-                        template = self.env['mail.template'].search([('name', '=', tname[days])])
-                        if template:
-                            template.send_mail(student.id, force_send=True, raise_exception=True)
-                        template = self.env['mail.template'].search([('name', '=', 'Email Student Access Mensaje Final')])
-                        if template:
-                            template.send_mail(student.id, force_send=True, raise_exception=True)
-                        logger.info('email sended to {}'.format(student.first_name))
-                        break
+                            template = self.env['mail.template'].search([('name', '=', tname[days])])
+                            if template:
+                                template.send_mail(student.id, force_send=True, raise_exception=True)
+                            if days == 100:
+                                template = self.env['mail.template'].search([('name', '=', 'Email Student Access Mensaje Final')])
+                                if template:
+                                    template.send_mail(student.id, force_send=True, raise_exception=True)
+                            logger.info('email sended to {}'.format(student.first_name))
             except Exception as e:
                 logger.info(e)
 
