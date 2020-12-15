@@ -953,3 +953,38 @@ msgstr "Fecha de Finalización"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_attendance_line__justified
 msgid "Justified"
 msgstr "Justificada"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_admission__observations
+msgid "Observations"
+msgstr "Observaciones"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_admission__unsubscribed_date
+msgid "Unsubscribed date"
+msgstr "Fecha de baja"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_admission__exam_on_campus
+msgid "Exams in campus"
+msgstr "Exámenes en campus virtual"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_admission__temporary_leave
+msgid "Temporary leave"
+msgstr "Baja temporal"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_admission__academic_record_closing
+msgid "Academic Record Closing Date"
+msgstr "Cierre de expediente académico"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_admission__generation
+msgid "Generation"
+msgstr "Generación"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_admission__mx_documentation
+msgid "MX Documentation"
+msgstr "Documentaciónn MX"

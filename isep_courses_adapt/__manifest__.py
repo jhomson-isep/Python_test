@@ -51,6 +51,7 @@
         'views/res_partner_documentation.xml',
         'views/op_portal_documentation.xml',
         'views/op_attendance_line.xml',
+        'views/op_admission.xml',
         'views/op_admission_register.xml',
         # 'views/sale_order.xml',
         'menu/isep_courses_adapt_menu.xml',
