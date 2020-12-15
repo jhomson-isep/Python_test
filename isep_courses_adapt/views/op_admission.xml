@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <record id="view_op_admission_form_inherit" model="ir.ui.view">
-            <field name="name">Admision form inherited</field>
+            <field name="name">Admission form inherited</field>
             <field name="model">op.admission</field>
             <field name="inherit_id" ref="openeducat_admission.view_op_admission_form"/>
             <field name="arch" type="xml">
@@ -22,8 +22,25 @@
                         <field name="document_ids"></field>
                     </page>
                 </xpath>
+                <xpath expr="//page[@name='admission_detail']/group" position="after">
+                    <group>
+                        <field name="observations" widget="text"/>
+                    </group>
+                </xpath>
             </field>
         </record>
 
+        <record id="view_op_admission_tree_inherit" model="ir.ui.view">
+            <field name="name">View op admission tree inherited</field>
+            <field name="model">op.admission</field>
+            <field name="inherit_id" ref="openeducat_admission.view_op_admission_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='course_id']" position="after">
+                    <field name="batch_id"/>
+                </xpath>
+
+            </field>
+        </record>
     </data>
 </odoo>
