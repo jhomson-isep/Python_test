@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <report id="report_batch_students"
+        <report id="report_batch_students_image"
                 model="op.batch"
-                string="Grupo y Estudiantes"
+                string="Grupo y Estudiantes con Imagenes"
                 report_type="qweb-pdf"
-                name="isep_openeducat_reports.batch_students"
-                file="isep_openeducat_reports.batch_students"
-                menu="False"/>
+                name="isep_openeducat_reports.batch_students_image"
+                file="isep_openeducat_reports.batch_students_image"
+                menu="True"/>
 
-        <template id="batch_students">
+        <template id="batch_students_image">
             <t t-call="web.html_container">
                 <t t-call="web.basic_layout">
                     <t t-foreach="docs" t-as="o">
@@ -43,6 +43,7 @@
                             <div class="col-12">
                                 <table class="table">
                                     <thead>
+                                        <th>Foto</th>
                                         <th>Nombre alumno</th>
                                         <th>Teléfono</th>
                                         <th>Móvil</th>
@@ -54,6 +55,11 @@
                                     <tbody>
                                         <t t-foreach="o.student_lines" t-as="s">
                                             <tr>
+                                                <td>
+                                                    <img class="image"
+                                                     t-att-src="'data:image/png;base64,%s' % to_text(s.student_id.image)"
+                                                     style="max-height:2.5cm; max-width:4cm; margin-left: 10px; margin-right: 10px; margin-bottom: 3px; border: 1px solid #ccc;"/>
+                                                </td>
                                                 <td><span t-field="s.student_id.first_name"></span> <span t-field="s.student_id.last_name"></span></td>
                                                 <td><span t-field="s.student_id.mobile"></span></td>
                                                 <td><span t-field="s.student_id.mobile"></span></td>

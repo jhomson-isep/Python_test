@@ -24,12 +24,15 @@
         #'wizards/batch_students_wizard.xml',
         'reports/report_uvic_students.xml',
         'reports/report_batch_students.xml',
+        'reports/report_batch_students_image.xml',
         'reports/diploma_isep.xml',
         'reports/acceptance_letter.xml',
         'reports/certified_diploma.xml',
         #'reports/certified_enrollment.xml',
         'reports/diploma_ seminar.xml',
         'reports/diploma_isep.xml',
+        'reports/report_attendance.xml',
+        'reports/grades_card.xml',
         'menu/report_menu.xml'
     ]
 }
