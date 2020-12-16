@@ -66,7 +66,6 @@ class GoogleDriveController(CustomerPortal):
 
         # count for pager
         documents_count = OpDriveDocuments.search_count(domain)
-        print(documents_count)
         # make pager
         pager = portal_pager(
             url="/my/documents",
