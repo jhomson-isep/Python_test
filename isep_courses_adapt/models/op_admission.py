@@ -13,12 +13,17 @@ class OpAdmission(models.Model):
                                                  'Date')
     mexico = fields.Boolean(string='Mexico', default=False)
     generation = fields.Integer(string='Generation')
-    mx_documentation = fields.Char(string='MX Documentation')
+    mx_documentation = fields.Boolean(string='MX Documentation', default=False)
     n_id = fields.Integer(string='External N_Id')
     sale_order_id = fields.Many2one('sale.order', string='Sale Order Id')
     document_ids = fields.One2many("op.gdrive.documents", "partner_id",
                                    string="Documentation",
                                    related='partner_id.document_ids')
+    application_number = fields.Char(
+        'Application Number', size=32, copy=False,
+        required=True, readonly=True, store=True,
+        default=lambda self:
+        self.env['ir.sequence'].next_by_code('op.admission'))
     # grade_ids = fields.One2many(comodel_name='op.exam.attendees',
     #                             inverse_name='op_student_course_id',
     #                             domain=[('is_final', '=', 'True')])
