@@ -7,9 +7,7 @@ from sqlachemy_conn import *
 # SQL SERVER SESSION
 session_server = get_session_server_isep()
 # SQL SERVER AREAS
-matriculaciones = session_server.query(Matriculaciones).filter(
-    Matriculaciones.Mexico != None).order_by(
-    desc(Matriculaciones.FechaAlta)).limit(10).all()
+matriculaciones = session_server.query(Matriculaciones).all()
 # POSTGRES SERVER SESSION
 session_pg = get_pg_session()
 
