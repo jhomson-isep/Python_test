@@ -21,7 +21,8 @@ class GoogleDriveController(CustomerPortal):
     FIELDS_CREATE = ['document_id', 'file']
 
     def _prepare_portal_layout_values(self):
-        values = super(GoogleDriveController, self)._prepare_portal_layout_values()
+        values = super(GoogleDriveController,
+                       self)._prepare_portal_layout_values()
         partner = request.env.user.partner_id
 
         OpDriveDocuments = request.env['op.gdrive.documents']
@@ -118,8 +119,8 @@ class GoogleDriveController(CustomerPortal):
 
         return request.render('isep_courses_adapt.gdrive_create', values)
 
-    @http.route(['/my/documents/update/<int:doc_id>'],
-                type='http', auth='user', website=True)
+    @http.route(['/my/documents/update/<int:doc_id>'], type='http',
+                auth='user', website=True)
     def portal_document_update(self, doc_id, **post):
         partner = request.env.user.partner_id
         document = request.env['op.gdrive.documents']. \
@@ -190,6 +191,22 @@ class GoogleDriveController(CustomerPortal):
                 return request.redirect("/my/documents")
         return request.render("isep_courses_adapt.portal_documents_create",
                               values)
+
+    @http.route(['/my/documents/download/<int:doc_id>'],
+                type='http', auth='user', website=True)
+    def portal_document_download(self, doc_id):
+        document_ids = request.env['op.gdrive.documents'].search(
+            [('id', '=', doc_id)], limit=1)
+        gauth = document_ids.Gauth()
+        drive = GoogleDrive(gauth)
+        file = drive.CreateFile({'id': document_ids.drive_id,
+                                 'parents': [{'id': document_ids.folder_id}]})
+        file.FetchContent(file['mimeType'], False)
+        return request.make_response(file.content.getvalue(),
+                                     [('Content-Type', file['mimeType']),
+                                      ('Content-Disposition',
+                                       content_disposition(file['title']))
+                                      ])
 
     @http.route(['/my/gdrive/documents'], type='http', auth='user', website=True)
     def my_gdrive_documents(self):

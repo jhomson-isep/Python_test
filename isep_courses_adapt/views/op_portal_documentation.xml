@@ -65,8 +65,12 @@
                         <td class="text-right"><a t-att-href="document.get_portal_url()"><t
                                 t-esc="document.document_name"/></a></td>
                         <td class="text-right"><span t-field="document.document_type_id"/></td>
-                        <th class="text-right"><a t-attf-class="btn btn-sm btn-outline-secondary"
-                                                  t-attf-href="/my/documents/update/{{ document.id }}">Change</a></th>
+                        <th class="text-right">
+                            <a t-attf-class="btn btn-sm btn-outline-primary"
+                               t-attf-href="/my/documents/update/{{ document.id }}">Change</a>
+                            <a t-attf-class="btn btn-sm btn-outline-danger"
+                               t-attf-href="/my/documents/download/{{ document.id }}">Download</a>
+                        </th>
                     </tr>
                 </t>
             </t>
