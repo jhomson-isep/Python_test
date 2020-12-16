@@ -14,6 +14,7 @@ lsfiles = os.listdir(path='Folder/')
 session_pg = get_pg_session()
 session_isep = get_session_server_isep()
 
+
 def Gauth():
     logger.info(os.path.dirname(os.path.abspath(__file__)))
     model_path = os.path.dirname(os.path.abspath(__file__))
@@ -35,6 +36,7 @@ def Gauth():
     # Save the current credentials to a file
     gauth.SaveCredentialsFile(credentials_file)
     return gauth
+
 
 def upload_file(values):
     gauth = Gauth()
@@ -65,6 +67,7 @@ def upload_file(values):
     values['folder_id'] = folder['id']
     values['drive_id'] = file['id']
     return values
+
 
 for file in lsfiles:
     N_Id, document_id, filename = file.split('_', maxsplit=2)
@@ -126,4 +129,3 @@ for file in lsfiles:
         print("Document type not exist!")
     else:
         print("Document Already exist:", document.id)
-

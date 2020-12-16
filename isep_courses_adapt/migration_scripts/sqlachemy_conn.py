@@ -58,7 +58,19 @@ class OpDocumentType(Base_pg):
     __table__ = Table('op_document_type', metadata_pg, autoload=True)
 
 
-#SQL Server Tables
+class OpBatch(Base_pg):
+    __table__ = Table('op_batch', metadata_pg, autoload=True)
+
+
+class OpAdmissionRegister(Base_pg):
+    __table__ = Table('op_admission_register', metadata_pg, autoload=True)
+
+
+class OpAdmission(Base_pg):
+    __table__ = Table('op_admission', metadata_pg, autoload=True)
+
+
+# SQL Server Tables
 class GinAreaCurso(Base_server):
     __table__ = Table('gin_AreasCurso', metadata_server, autoload=True)
 
@@ -71,22 +83,23 @@ class TiposDocumento(Base_server):
     __table__ = Table('TiposDocumento', metadata_server_isep, autoload=True)
 
 
+class Matriculaciones(Base_server):
+    __table__ = Table('Matriculaciones', metadata_server_isep, autoload=True)
+
+
 def get_session_server():
     Session_server = sessionmaker()
     Session_server.configure(bind=server)
-    session_server = Session_server()
-    return session_server
+    return Session_server()
 
 
 def get_session_server_isep():
     Session_server = sessionmaker()
     Session_server.configure(bind=server_isep)
-    session_server = Session_server()
-    return session_server
+    return Session_server()
 
 
 def get_pg_session():
     Session_pg = sessionmaker()
     Session_pg.configure(bind=postgres)
-    session_pg = Session_pg()
-    return session_pg
+    return Session_pg()
