@@ -86,6 +86,7 @@
                                     <tr>
                                         <th scope="col">Document Type</th>
                                         <th scope="col">Document Name</th>
+                                        <th scope="col">Actions</th>
                                         <!--                              <th scope="col">Download</th>-->
                                     </tr>
                                 </thead>
@@ -97,7 +98,7 @@
                                                                    t-attf-href="/my/gdrive/update/{{ document.id }}"><t
                                                         t-esc="document.document_type_id.name"></t></a></th>
                                                 <td><t t-esc="document.document_name"></t></td>
-                                                <!--                                <td><a href="#" name="download_file"  type="object" >Download</a></td>-->
+                                                <td><a t-attf-class="btn btn-primary" t-attf-href="/my/gdrive/download/?doc_id={{ document.id }}" name="download_file"  type="object" target="_blank" >Download</a></td>
                                             </tr>
                                         </t>
                                     </t>
