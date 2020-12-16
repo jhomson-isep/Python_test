@@ -7,7 +7,11 @@
             <field name="inherit_id" ref="openeducat_admission.view_op_admission_register_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='name']" position="before">
-                    <field name="batch_id"/>
+                    <field name="batch_id" domain="[('course_id', '=', course_id)]"/>
+                </xpath>
+                <xpath expr="//button[@name='confirm_register']" position="before">
+                    <button name="generate_admissions_register" type="object" string="Generate AR"
+                            class="oe_highlight"/>
                 </xpath>
             </field>
         </record>
