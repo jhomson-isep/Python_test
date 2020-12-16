@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from op_sql import SQL
 from connect_postgresql import PSQL
-from psycopg2 import DatabaseError, DataError, IntegrityError, OperationalError, ProgrammingError
+from psycopg2 import DatabaseError, DataError, IntegrityError, \
+    OperationalError, ProgrammingError
 from pyodbc import Error as ESSQL
 from datetime import datetime
-from validation import create_name, cupr_or_dni, verify_id, verify_char_field, replace_special_caracter, get_countrys
+from validation import create_name, cupr_or_dni, verify_id, \
+    verify_char_field, replace_special_caracter, get_countrys
 
 COUNTRYS = get_countrys()
 
@@ -22,7 +24,8 @@ try:
                 if app_country is not None:
                     country = app_country.country
                     if country in COUNTRYS:
-                        country_id = postgres.get_country_by_name(COUNTRYS[country])
+                        country_id = postgres.get_country_by_name(
+                            COUNTRYS[country])
                     else:
                         country_id = 'NULL'
                 else:
@@ -30,13 +33,20 @@ try:
                 partner_id = postgres.get_partner_by_email(str(student.EMail))
                 if partner_id is None:
                     values = [
-                        replace_special_caracter(create_name(student.Nombre, student.Apellidos)),
-                        replace_special_caracter(verify_char_field(student.EMail)),
-                        replace_special_caracter(verify_char_field(student.Telefono)),
-                        replace_special_caracter(verify_char_field(student.Telefono)),
-                        replace_special_caracter(verify_char_field(student.Direccion)),
-                        replace_special_caracter(verify_char_field(student.CodPostal)),
-                        replace_special_caracter(verify_char_field(student.Poblacion)),
+                        replace_special_caracter(
+                            create_name(student.Nombre, student.Apellidos)),
+                        replace_special_caracter(
+                            verify_char_field(student.EMail)),
+                        replace_special_caracter(
+                            verify_char_field(student.Telefono)),
+                        replace_special_caracter(
+                            verify_char_field(student.Telefono)),
+                        replace_special_caracter(
+                            verify_char_field(student.Direccion)),
+                        replace_special_caracter(
+                            verify_char_field(student.CodPostal)),
+                        replace_special_caracter(
+                            verify_char_field(student.Poblacion)),
                         verify_id(country_id),
                         str(student.N_Id),
                         True
@@ -44,9 +54,12 @@ try:
                     print('Partner:', values)
                     partner_id = postgres.create_partner(values)
                 campus_id = postgres.get_campus_by_code(student.Sede)
-                document_type_id = postgres.get_document_type_by_code(student.TipoDocumento)
-                study_type_id = postgres.get_study_type_by_code(student.TipoEstudios)
-                university_id = postgres.get_university_by_code(student.TipoEstudios)
+                document_type_id = postgres.get_document_type_by_code(
+                    student.TipoDocumento)
+                study_type_id = postgres.get_study_type_by_code(
+                    student.TipoEstudios)
+                university_id = postgres.get_university_by_code(
+                    student.TipoEstudios)
                 if student.Sexo == 'H':
                     gender = 'm'
                 elif student.Sexo == 'M':
@@ -58,8 +71,10 @@ try:
                 else:
                     fechaNacimiento = datetime.today().date()
                 student_values = [
-                    replace_special_caracter(verify_char_field(student.Nombre)),
-                    replace_special_caracter(verify_char_field(student.Apellidos)),
+                    replace_special_caracter(
+                        verify_char_field(student.Nombre)),
+                    replace_special_caracter(
+                        verify_char_field(student.Apellidos)),
                     verify_id(partner_id),
                     fechaNacimiento,
                     gender,
@@ -74,7 +89,8 @@ try:
                     verify_id(study_type_id),
                     verify_id(university_id),
                     verify_id(student.IDMoodle),
-                    replace_special_caracter(verify_char_field(student.Usuario))
+                    replace_special_caracter(
+                        verify_char_field(student.Usuario))
                 ]
                 print('Student:', student_values)
                 postgres.create_student(student_values)
