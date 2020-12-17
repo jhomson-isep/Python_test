@@ -70,6 +70,22 @@ class OpAdmission(Base_pg):
     __table__ = Table('op_admission', metadata_pg, autoload=True)
 
 
+class OpExam(Base_pg):
+    __table__ = Table('op_exam', metadata_pg, autoload=True)
+
+
+class OpExamType(Base_pg):
+    __table__ = Table('op_exam_type', metadata_pg, autoload=True)
+
+
+class OpExamSession(Base_pg):
+    __table__ = Table('op_exam_session', metadata_pg, autoload=True)
+
+
+class OpExamAttendees(Base_pg):
+    __table__ = Table('op_exam_attendees', metadata_pg, autoload=True)
+
+
 # SQL Server Tables
 class GinAreaCurso(Base_server):
     __table__ = Table('gin_AreasCurso', metadata_server, autoload=True)

@@ -29,8 +29,8 @@ for matricula in matriculaciones:
                 OpAdmission.application_number == application_number).first()
 
             if admission is None:
-                # If the dates are less than 1901, it indicates that they have not
-                # been established, so we will leave them in None
+                # If the dates are less than 1901, it indicates that they have
+                # not been established, so we will leave them in None
                 academic_record_closing = None
                 unsubscribed_date = None
                 if matricula.FechaCierreExpAcademico > datetime(1901, 1, 1):
@@ -47,7 +47,8 @@ for matricula in matriculaciones:
                 # composition of the student
                 name = ''
                 if not student.middle_name:
-                    name = str(student.first_name) + " " + str(student.last_name)
+                    name = str(student.first_name) + " " + str(
+                        student.last_name)
                 else:
                     name = str(student.first_name) + " " + str(
                         student.middle_name) + " " + str(student.last_name)
@@ -84,14 +85,15 @@ for matricula in matriculaciones:
                 admission.generation = matricula.GeneracionMx
                 admission.mx_documentation = mx_documentation
                 admission.observations = matricula.Observaciones
-                admission.state = 'draft'
+                admission.state = 'done'
                 admission.is_student = True
                 admission.active = True
                 session_pg.add(admission)
                 session_pg.commit()
                 print("Admission created: ", admission.application_number)
             else:
-                print("Admission Already exist: ", admission.application_number)
+                print("Admission Already exist: ",
+                      admission.application_number)
         else:
             print("Admission register or student not found")
     except Exception as e:
