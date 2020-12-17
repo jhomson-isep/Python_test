@@ -10,7 +10,7 @@ attendances_reg = session_pg.query(OpAttendanceRegister).all()
 logger = logging.getLogger(__name__)
 
 for attendance_reg in attendances_reg:
-    attendances = session_pg.query(Asistencias).\
+    attendances = session_server.query(Asistencias).\
         where(Asistencias.Curso_Id == attendance_reg.code)
     for attendance in attendances:
         attendance_sheet = session_pg.query(OpAttendanceSheet).\
@@ -32,5 +32,10 @@ for attendance_reg in attendances_reg:
             logger.warning("Attendance already exist id: %s" % attendance_sheet.id)
             logger.warning("**************************************")
             print("Attendance already exist code: %s" % attendance_sheet.id)
+    else:
+        logger.warning("**************************************")
+        logger.warning("Attendances not found")
+        logger.warning("**************************************")
+        print("Attendances not found")
 
 
