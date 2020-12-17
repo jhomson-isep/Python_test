@@ -12,30 +12,37 @@ logger = logging.getLogger(__name__)
 for attendance_reg in attendances_reg:
     attendances = session_server.query(Asistencias).\
         where(Asistencias.Curso_Id == attendance_reg.code)
+    if attendances is None:
+        logger.warning("**************************************")
+        logger.warning("Attendance Not Exist!")
+        logger.warning("**************************************")
+        continue
     for attendance in attendances:
         attendance_sheet = session_pg.query(OpAttendanceSheet).\
         where(and_(OpAttendanceSheet.register_id == attendance_reg.id,
-                   OpAttendanceSheet.attendance_date == attendance.FechaAlta))
+                   OpAttendanceSheet.attendance_date == attendance.FechaAsistencia))
         if attendance_sheet is None:
             attendance_sheet = OpAttendanceSheet()
             attendance_sheet.register_id = attendance_reg.id
-            attendance_sheet.attendance_date = attendance.FechaAlta.date()
+            attendance_sheet.attendance_date = attendance.FechaAsistencia.date()
             attendance_sheet.active = True
+            attendance_sheet.state = 'draft'
             session_pg.add(attendance_sheet)
             session_pg.commit()
-            logger.info("**************************************")
-            logger.info("Added attendance Register id: %s" % (attendance_sheet.id))
-            logger.info("**************************************")
-            print("Added attendance Register Code: %s" % (attendance_sheet.id))
+            logger.warning("**************************************")
+            logger.warning("Added attendance Register id: %s" % (attendance_sheet.id))
+            logger.warning("**************************************")
         else:
             logger.warning("**************************************")
             logger.warning("Attendance already exist id: %s" % attendance_sheet.id)
             logger.warning("**************************************")
-            print("Attendance already exist code: %s" % attendance_sheet.id)
     else:
         logger.warning("**************************************")
         logger.warning("Attendances not found")
         logger.warning("**************************************")
-        print("Attendances not found")
+else:
+    logger.warning("**************************************")
+    logger.warning("Attendance Register not found")
+    logger.warning("**************************************")
 
 

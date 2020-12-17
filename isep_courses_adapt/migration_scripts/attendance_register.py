@@ -11,26 +11,31 @@ attendances = session_server.query(Asistencias).\
 logger = logging.getLogger(__name__)
 for attendance in attendances:
     attendance_reg = session_pg.query(OpAttendanceRegister).\
-                    filter(OpAttendanceRegister.code == attendance.Curso_Id)
+                    filter(OpAttendanceRegister.code == attendance.Curso_Id).first()
     if attendance_reg is None:
         attendance_reg = OpAttendanceRegister()
         batch_id = session_pg.query(OpBatch). \
             filter(OpBatch.code == attendance.Curso_Id).first()
+        if batch_id is None:
+            logger.warning("**************************************")
+            logger.warning("Batch Not Exist")
+            logger.warning("**************************************")
+            continue
         attendance_reg.name = batch_id.code
         attendance_reg.code = attendance.Curso_Id
         attendance_reg.batch_id = batch_id.id
-        attendance_reg.course_id = batch.course_id
+        attendance_reg.course_id = batch_id.course_id
         attendance_reg.active = True
         session_pg.add(attendance_reg)
         session_pg.commit()
-        logger.info("**************************************")
-        logger.info("Added attendance Register Code: %s" % (attendance_reg.code))
-        logger.info("**************************************")
-        print("Added attendance Register Code: %s" % (attendance_reg.code))
+        logger.warning("**************************************")
+        logger.warning("Added attendance Register Code: %s" % (attendance_reg.code))
+        logger.warning("**************************************")
     else:
         logger.warning("**************************************")
         logger.warning("Attendance already exist code: %s" % attendance_reg.code)
         logger.warning("**************************************")
-        print("Attendance already exist code: %s" % attendance_reg.code)
-
-
+else:
+    logger.warning("**************************************")
+    logger.warning("Attendances not found")
+    logger.warning("**************************************")

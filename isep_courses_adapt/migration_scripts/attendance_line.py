@@ -12,11 +12,26 @@ logger = logging.getLogger(__name__)
 for attendance_sheet in attendances_sheet:
     attendance_reg = session_pg.query(OpAttendanceRegister).\
         filter(OpAttendanceRegister.id == attendance_sheet.register_id)
+    if attendance_reg is None:
+        logger.warning("**************************************")
+        logger.warning("Attendance Register Not Exist!")
+        logger.warning("**************************************")
+        continue
     attendances = session_server.query(Asistencias).\
         filter(and_(Asistencias.FechaAlta == attendance_sheet.attendance_date,
                     Asistencias.Curso_Id == attendance_reg.code))
+    if attendances is None:
+        logger.warning("**************************************")
+        logger.warning("Attendances Not Exist!")
+        logger.warning("**************************************")
+        continue
     for attendance in attendances:
         student = session_pg.query(OpStudent).filter(OpStudent.gn_ro == attendance.N_Id).first()
+        if student is None:
+            logger.warning("**************************************")
+            logger.warning("Student Not Exist!")
+            logger.warning("**************************************")
+            continue
         attendance_line = session_pg.query(OpAttendanceLine).\
             filter(and_(OpAttendanceLine.attendance_id == attendance_sheet.id,
                         OpAttendanceLine.attendance_date == attendance_sheet.attendance_date,
@@ -29,23 +44,26 @@ for attendance_sheet in attendances_sheet:
             attendance_line.attendance_date = attendance_sheet.attendance_date
             attendance_line.active = True
             attendance_line.student_id = student.id
+            if attendance.Marca.upper() == 'A':
+                attendance_line == True
+            elif attendance.Marca.upper() == 'FALTA':
+                attendance_line == False
+            elif attendance.Marca.upper() == 'JUSTIFICADA':
+                pass
             session_pg.add(attendance_line)
             session_pg.commit()
             logger.info("**************************************")
             logger.info("Added attendance line id: %s" % (attendance_line.id))
             logger.info("**************************************")
-            print("Added attendance line id: %s" % (attendance_line.id))
         else:
             logger.warning("**************************************")
             logger.warning("Attendance already exist id: %s" % attendance_line.id)
             logger.warning("**************************************")
-            print("Attendance already exist code: %s" % attendance_line.id)
     else:
         logger.warning("**************************************")
         logger.warning("Attendances not found")
         logger.warning("**************************************")
-        print("Attendances not found")
-
-
-
-
+else:
+    logger.warning("**************************************")
+    logger.warning("Attendance Sheet not found")
+    logger.warning("**************************************")
