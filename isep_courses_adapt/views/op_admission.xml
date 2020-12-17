@@ -40,6 +40,30 @@
                     <field name="batch_id"/>
                 </xpath>
 
+                <xpath expr="//field[@name='title']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_op_admission_search_inherit" model="ir.ui.view">
+            <field name="name">Admision search inherited</field>
+            <field name="model">op.admission</field>
+            <field name="inherit_id" ref="openeducat_admission.view_op_admission_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="replace">
+                    <search string="Admission Register">
+                        <field name="student_id"/>
+                        <field name="name"/>
+                        <field name="course_id"/>
+                        <field name="batch_id"/>
+                        <field name="academic_record_closing"/>
+                        <field name="due_date"/>
+                        <field name="temporary_leave"/>
+                        <field name="unsubscribed_date"/>
+                    </search>
+                </xpath>
             </field>
         </record>
     </data>

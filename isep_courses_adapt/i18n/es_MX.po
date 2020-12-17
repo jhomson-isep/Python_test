@@ -842,6 +842,11 @@ msgid "Change"
 msgstr "Cambiar"
 
 #. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.portal_my_documents
+msgid "Download"
+msgstr "Descargar"
+
+#. module: isep_courses_adapt
 #: code:addons/isep_courses_adapt/controllers/portal.py:46
 #, python-format
 msgid "Upload date"

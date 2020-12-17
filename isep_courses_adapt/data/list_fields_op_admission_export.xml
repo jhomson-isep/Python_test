@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="list_op_admission" model="ir.exports">
+            <field name="name">Lista de Admission</field>
+            <field name="resource">op.admission</field>
+        </record>
+
+        <record id="field_op_admission_student" model="ir.exports.line">
+            <field name="name">student_id/name</field>
+            <field name="export_id" ref="list_op_admission"/>
+        </record>
+
+        <record id="field_op_admission_name" model="ir.exports.line">
+            <field name="name">name</field>
+            <field name="export_id" ref="list_op_admission"/>
+        </record>
+
+        <record id="field_op_admission_batch" model="ir.exports.line">
+            <field name="name">batch_id/name</field>
+            <field name="export_id" ref="list_op_admission"/>
+        </record>
+
+        <record id="field_op_admission_course" model="ir.exports.line">
+            <field name="name">course_id/name</field>
+            <field name="export_id" ref="list_op_admission"/>
+        </record>
+
+        <record id="field_op_admission_academic_record_closing" model="ir.exports.line">
+            <field name="name">academic_record_closing</field>
+            <field name="export_id" ref="list_op_admission"/>
+        </record>
+
+        <record id="field_op_admission_due_date" model="ir.exports.line">
+            <field name="name">due_date</field>
+            <field name="export_id" ref="list_op_admission"/>
+        </record>
+
+        <record id="field_op_admission_temporary_leave" model="ir.exports.line">
+            <field name="name">temporary_leave</field>
+            <field name="export_id" ref="list_op_admission"/>
+        </record>
+
+        <record id="field_op_admission_unsubscribed_date" model="ir.exports.line">
+            <field name="name">unsubscribed_date</field>
+            <field name="export_id" ref="list_op_admission"/>
+        </record>
+
+        <record id="field_op_admission_course_modality" model="ir.exports.line">
+            <field name="name">course_id/modality_id/name</field>
+            <field name="export_id" ref="list_op_admission"/>
+        </record>
+
+        <record id="field_op_admission_batch_campus" model="ir.exports.line">
+            <field name="name">batch_id/campus_id/name</field>
+            <field name="export_id" ref="list_op_admission"/>
+        </record>
+
+    </data>
+</odoo>
