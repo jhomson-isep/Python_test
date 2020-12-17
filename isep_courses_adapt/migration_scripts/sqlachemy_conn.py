@@ -62,6 +62,14 @@ class OpBatch(Base_pg):
     __table__ = Table('op_batch', metadata_pg, autoload=True)
 
 
+class OpSubject(Base_pg):
+    __table__ = Table('op_subject', metadata_pg, autoload=True)
+
+
+class OpBatchSubjectRel(Base_pg):
+    __table__ = Table('op_batch_subject_rel', metadata_pg, autoload=True)
+
+
 class OpAdmissionRegister(Base_pg):
     __table__ = Table('op_admission_register', metadata_pg, autoload=True)
 

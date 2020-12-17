@@ -5,7 +5,7 @@ from odoo import models, fields, api
 class OpExam(models.Model):
     _inherit = "op.exam"
 
-    exam_code = fields.Char('Exam Code', size=16, required=True)
+    exam_code = fields.Char('Exam Code', size=32, required=True)
 
 
 class OpExamSession(models.Model):

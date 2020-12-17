@@ -25,7 +25,7 @@ for batch in batches:
             exam_session.end_date = batch.end_date
             exam_session.evaluation_type = 'grade'
             exam_session.exam_type = exam_type.id
-            exam_session.state = 'Done'
+            exam_session.state = 'done'
             exam_session.active = True
             session_pg.add(exam_session)
             session_pg.commit()
@@ -35,3 +35,4 @@ for batch in batches:
     except Exception as e:
         print(e)
         continue
+print("The migration is over")
