@@ -111,6 +111,10 @@ class Matriculaciones(Base_server):
     __table__ = Table('Matriculaciones', metadata_server_isep, autoload=True)
 
 
+class Calificaciones(Base_server):
+    __table__ = Table('Calificaciones', metadata_server_isep, autoload=True)
+
+
 def get_session_server():
     Session_server = sessionmaker()
     Session_server.configure(bind=server)

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from datetime import datetime
 
 from sqlalchemy import and_, desc
@@ -46,12 +45,12 @@ for matricula in matriculaciones:
                 # the name is required, so we must assign depending on the
                 # composition of the student
                 name = ''
-                if not student.middle_name:
-                    name = str(student.first_name) + " " + str(
-                        student.last_name)
-                else:
+                if student.middle_name:
                     name = str(student.first_name) + " " + str(
                         student.middle_name) + " " + str(student.last_name)
+                else:
+                    name = str(student.first_name) + " " + str(
+                        student.last_name)
                 # admission values
                 admission = OpAdmission()
                 admission.name = name

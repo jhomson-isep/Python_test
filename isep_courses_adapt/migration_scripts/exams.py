@@ -31,8 +31,8 @@ for batch_subject in batch_subjects:
                 exam.name = "-".join([batch.code, subject.code])
                 exam.start_time = batch.start_date
                 exam.end_time = batch.end_date
-                exam.total_marks = 100
-                exam.min_marks = 50
+                exam.total_marks = 10
+                exam.min_marks = 5
                 exam.state = 'done'
                 exam.active = True
                 session_pg.add(exam)
@@ -46,6 +46,5 @@ for batch_subject in batch_subjects:
     except Exception as e:
         print(e)
         traceback.print_tb(e.__traceback__)
-        break
-        # continue
+        continue
 print("Migration terminated")
