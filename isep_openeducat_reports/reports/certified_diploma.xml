@@ -17,8 +17,7 @@
                             <div style="text-align:justify;font-size:18px; margin-left:50px;">
                                 <p>Erika Tobalina, con DNI 45625219G, en calidad de Directora del Instituto Superior de Estudios Psicológicos, ISEP Barcelona,</p>
                                 <p style="margin-top:20px;">CERTIFICA: </p>
-                                <p style="margin-top:20px;">Que <strong><span t-field="o.name"></span></strong> con Documento <span t-field="o.document_number"></span>, consta matriculada en el <strong><span t-field="c.course_id.name"></span></strong> impartido en la modalidad <span t-field="c.course_id.modality_id"></span> durante el periodo académico <span t-field="c.course_id.period"></span>, con una carga lectiva de.</p>
-                                <p>#¿Va algo aquí?#</p>
+                                <p style="margin-top:20px;">Que <strong><span t-field="o.name"></span></strong> con Documento <span t-field="o.document_number"></span>, consta matriculada en el <strong><span t-field="c.course_id.name"></span></strong> impartido en la modalidad <span t-field="c.course_id.modality_id"></span> durante el periodo académico <span t-field="c.course_id.period"></span>, con una carga lectiva de <span t-field="c.course_id.ects"></span>ECTS (<span t-field="c.course_id.hours"></span> Horas).</p>
                                 <p style="margin-top:100px;">Para que así conste, firma el presente certificado en Barcelona, a <span t-esc="datetime.datetime.today().day"></span>
                                     <t t-if="datetime.datetime.today().month == 1"><span>de Enero de </span></t>
                                     <t t-if="datetime.datetime.today().month == 2"><span>de Febrero de </span></t>

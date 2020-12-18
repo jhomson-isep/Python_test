@@ -40,7 +40,7 @@
                                     con el horario presencial definido en el calendario adjunto.
                                 </p>
                                 <p style="margin-top:5px;">
-                                    El máster consta de 0 ECTS, equivalentes a 0 horas de dedicación al estudio, distribuidas
+                                    El máster consta de <span t-field="c.course_id.ects"></span> ECTS, equivalentes a <span t-field="c.course_id.hours"></span> horas de dedicación al estudio, distribuidas
                                     entre horas presenciales de clases, horas destinadas a otras actividades académicas
                                     dirigidas y horas de trabajo personal que el alumno debe realizar para la asimilación de los
                                     contenidos que permiten acreditar la maestría.
