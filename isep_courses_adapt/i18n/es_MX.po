@@ -993,3 +993,28 @@ msgstr "Generación"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_admission__mx_documentation
 msgid "MX Documentation"
 msgstr "Documentaciónn MX"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_exam_attendees__course_type
+msgid "Type of course"
+msgstr "Tipo de curso"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_exam_attendees__order
+msgid "Order"
+msgstr "Orden"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_exam_attendees__modify
+msgid "Modify"
+msgstr "Modifica"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_exam_attendees__admission_id
+msgid "Admission"
+msgstr "Admisión"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_exam_attendees__original_marks
+msgid "Original marks"
+msgstr "Nota original"
