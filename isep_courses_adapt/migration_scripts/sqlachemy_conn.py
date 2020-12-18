@@ -74,11 +74,6 @@ class OpBatch(Base_pg):
     __table__ = Table('op_batch', metadata_pg, autoload=True)
 
 
-#SQL Server Tables
-class OpBatch(Base_pg):
-    __table__ = Table('op_batch', metadata_pg, autoload=True)
-
-
 class OpSubject(Base_pg):
     __table__ = Table('op_subject', metadata_pg, autoload=True)
 

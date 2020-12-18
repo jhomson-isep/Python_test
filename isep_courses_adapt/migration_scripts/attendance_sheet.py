@@ -11,16 +11,16 @@ logger = logging.getLogger(__name__)
 
 for attendance_reg in attendances_reg:
     attendances = session_server.query(Asistencias).\
-        where(Asistencias.Curso_Id == attendance_reg.code)
+        filter(Asistencias.Curso_Id == attendance_reg.code)
     if attendances is None:
         logger.warning("**************************************")
-        logger.warning("Attendance Not Exist!")
+        logger.warning("Attendance Not Exist! Code %s" % attendance_reg.code)
         logger.warning("**************************************")
         continue
     for attendance in attendances:
         attendance_sheet = session_pg.query(OpAttendanceSheet).\
-        where(and_(OpAttendanceSheet.register_id == attendance_reg.id,
-                   OpAttendanceSheet.attendance_date == attendance.FechaAsistencia))
+        filter(and_(OpAttendanceSheet.register_id == attendance_reg.id,
+                   OpAttendanceSheet.attendance_date == attendance.FechaAsistencia.date())).first()
         if attendance_sheet is None:
             attendance_sheet = OpAttendanceSheet()
             attendance_sheet.register_id = attendance_reg.id
@@ -30,11 +30,11 @@ for attendance_reg in attendances_reg:
             session_pg.add(attendance_sheet)
             session_pg.commit()
             logger.warning("**************************************")
-            logger.warning("Added attendance Register id: %s" % (attendance_sheet.id))
+            logger.warning("Added attendance sheet id: %s" % attendance_sheet.id)
             logger.warning("**************************************")
         else:
             logger.warning("**************************************")
-            logger.warning("Attendance already exist id: %s" % attendance_sheet.id)
+            logger.warning("Attendance sheet already exist id: %s" % attendance_sheet.id)
             logger.warning("**************************************")
     else:
         logger.warning("**************************************")

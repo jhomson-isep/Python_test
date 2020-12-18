@@ -18,7 +18,7 @@ for attendance in attendances:
             filter(OpBatch.code == attendance.Curso_Id).first()
         if batch_id is None:
             logger.warning("**************************************")
-            logger.warning("Batch Not Exist")
+            logger.warning("Batch Not Exist Code: %s" % attendance.Curso_Id)
             logger.warning("**************************************")
             continue
         attendance_reg.name = batch_id.code
