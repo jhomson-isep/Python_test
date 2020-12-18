@@ -91,6 +91,11 @@
                             <field name="access_ids" colspan="4" nolabel="1"/>
                         </group>
                     </page>
+                    <page name="attendees" string="Exam attendees">
+                        <group>
+                            <field name="exam_attendees_ids" colspan="4" nolabel="1"/>
+                        </group>
+                    </page>
                 </notebook>
 
 <!--                <xpath expr="//field[@name='course_detail_ids']/tree/field[@name='subject_ids']" position="replace">-->

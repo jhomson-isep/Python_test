@@ -13,6 +13,7 @@
                     <field name="credits"/>
                     <field name="ects"/>
                     <field name="level"/>
+                    <field name="order"/>
                 </tree>
             </field>
         </record>
@@ -30,6 +31,7 @@
                             <field name="credits"/>
                             <field name="ects"/>
                             <field name="level"/>
+                            <field name="order"/>
                         </group>
                     </sheet>
                 </form>
