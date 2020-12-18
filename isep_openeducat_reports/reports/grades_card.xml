@@ -18,7 +18,7 @@
                                 <p>Erika Tobalina, con DNI 45625219G, en calidad de Directora del Instituto Superior de Estudios Psicológicos, ISEP Barcelona,</p>
                                 <p style="margin-top:20px;">CERTIFICA: </p>
                                 <p style="margin-top:20px;">Que <strong><span t-field="o.name"></span></strong> con Documento <span t-field="o.document_number"></span>, en el <strong><span t-field="c.course_id.name"></span></strong> impartido en la modalidad <span t-field="c.course_id.modality_id"></span> durante el periodo académico <span t-field="c.course_id.period"></span>, con una carga lectiva de ##, ha obtenido las calificaciones siguientes:</p>
-                                <table class="table">
+                                <table class="table table-sm">
                                     <thead>
                                         <th>Asignatura</th>
                                         <th>Calificación</th>

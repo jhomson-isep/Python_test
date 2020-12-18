@@ -48,6 +48,8 @@ class OpStudent(models.Model):
     #                              string="Documentation")
     access_ids = fields.One2many("op.student.access", "student_id",
                                  string="Access")
+    admission_ids = fields.One2many("op.admission", "student_id",
+                                    string="Admission")
     exam_attendees_ids = fields.One2many("op.exam.attendees", "student_id",
                                          string="Exam attendees")
     last_access = fields.Char(String='Last access',

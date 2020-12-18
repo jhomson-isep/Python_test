@@ -1011,6 +1011,7 @@ msgstr "Modifica"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_exam_attendees__admission_id
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__admission_ids
 msgid "Admission"
 msgstr "Admisión"
 
@@ -1018,3 +1019,8 @@ msgstr "Admisión"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_exam_attendees__original_marks
 msgid "Original marks"
 msgstr "Nota original"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__exam_attendees_ids
+msgid "Exam attendees"
+msgstr "Calificaciones"
