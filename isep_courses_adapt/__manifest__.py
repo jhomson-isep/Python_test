@@ -56,6 +56,7 @@
         'views/op_admission_register.xml',
         # 'views/sale_order.xml',
         'views/op_exam_session.xml',
+        'views/op_exam_attendances.xml',
         'menu/isep_courses_adapt_menu.xml',
         'data/op_document_type.xml',
         'data/op_evaluation_type.xml',

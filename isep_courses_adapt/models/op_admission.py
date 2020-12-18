@@ -24,6 +24,12 @@ class OpAdmission(models.Model):
         required=True, readonly=True, store=True,
         default=lambda self:
         self.env['ir.sequence'].next_by_code('op.admission'))
+    phone = fields.Char(
+        'Phone', size=32, states={'done': [('readonly', True)],
+                                  'submit': [('required', True)]})
+    mobile = fields.Char(
+        'Mobile', size=32,
+        states={'done': [('readonly', True)], 'submit': [('required', True)]})
     # grade_ids = fields.One2many(comodel_name='op.exam.attendees',
     #                             inverse_name='op_student_course_id',
     #                             domain=[('is_final', '=', 'True')])

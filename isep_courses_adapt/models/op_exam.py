@@ -15,7 +15,7 @@ class OpExamSession(models.Model):
 class OpExamAttendees(models.Model):
     _inherit = "op.exam.attendees"
 
-    observations = fields.Text(string='Observations')
+    original_marks = fields.Char(string='Original marks', size=32)
     course_type = fields.Char(string='Type of course', size=32)
     order = fields.Char(string='Order', size=5)
     modify = fields.Char(string='Modify', size=1)
