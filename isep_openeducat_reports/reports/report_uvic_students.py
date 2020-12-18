@@ -5,7 +5,8 @@ class StudentXlsx(models.AbstractModel):
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_xlsx_report(self, workbook, data, students):
-        student_rows = self.env['op.student'].sudo().search([('uvic_documentation', '=', True)])
+        student_rows = self.env['op.student'].sudo().search(
+            [('uvic_program', '=', True)])
 
         sheet = workbook.add_worksheet('UVIC Report')
         bold = workbook.add_format({'bold': True})
