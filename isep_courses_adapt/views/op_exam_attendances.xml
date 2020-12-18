@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_op_exam_attendees_tree_inherit" model="ir.ui.view">
+            <field name="name">Exam attendees tree inherited</field>
+            <field name="model">op.exam.attendees</field>
+            <field name="inherit_id" ref="openeducat_exam.view_op_exam_attendees_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='exam_id']" position="after">
+                    <field name="course_id"/>
+                    <field name="batch_id"/>
+                </xpath>
+                <xpath expr="//field[@name='room_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_op_exam_attendees_form_inherit" model="ir.ui.view">
+            <field name="name">Exam attendees form inherited</field>
+            <field name="model">op.exam.attendees</field>
+            <field name="inherit_id" ref="openeducat_exam.view_op_exam_attendees_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='room_id']" position="replace">
+                    <field name="course_id"/>
+                    <field name="batch_id"/>
+                    <field name="course_type"/>
+                    <field name="order"/>
+                    <field name="modify"/>
+                    <field name="admission_id"/>
+                    <field name="original_marks"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

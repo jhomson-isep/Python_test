@@ -3,11 +3,14 @@ from datetime import date
 from odoo import http, _, fields
 from odoo.addons.portal.controllers.mail import _message_post_helper
 from odoo.exceptions import AccessError, MissingError
-from odoo.http import request, Controller
+from odoo.http import request, Controller, content_disposition
 from odoo.addons.portal.controllers.portal import CustomerPortal, \
     pager as portal_pager, get_records_pager
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
 import logging
 import base64
+import threading
 
 from odoo.osv import expression
 
@@ -18,7 +21,8 @@ class GoogleDriveController(CustomerPortal):
     FIELDS_CREATE = ['document_id', 'file']
 
     def _prepare_portal_layout_values(self):
-        values = super(GoogleDriveController, self)._prepare_portal_layout_values()
+        values = super(GoogleDriveController,
+                       self)._prepare_portal_layout_values()
         partner = request.env.user.partner_id
 
         OpDriveDocuments = request.env['op.gdrive.documents']
@@ -62,7 +66,6 @@ class GoogleDriveController(CustomerPortal):
 
         # count for pager
         documents_count = OpDriveDocuments.search_count(domain)
-        print(documents_count)
         # make pager
         pager = portal_pager(
             url="/my/documents",
@@ -92,8 +95,8 @@ class GoogleDriveController(CustomerPortal):
     @http.route(['/my/documents/<int:document_id>'], type='http',
                 auth="public", website=True)
     def portal_document_page(self, document_id, report_type=None,
-                          access_token=None, message=False, download=False,
-                          **kw):
+                             access_token=None, message=False, download=False,
+                             **kw):
         try:
             drive_document = self._document_check_access(
                 'op.gdrive.documents', document_id, access_token=access_token)
@@ -115,8 +118,8 @@ class GoogleDriveController(CustomerPortal):
 
         return request.render('isep_courses_adapt.gdrive_create', values)
 
-    @http.route(['/my/documents/update/<int:doc_id>'],
-                type='http', auth='user', website=True)
+    @http.route(['/my/documents/update/<int:doc_id>'], type='http',
+                auth='user', website=True)
     def portal_document_update(self, doc_id, **post):
         partner = request.env.user.partner_id
         document = request.env['op.gdrive.documents']. \
@@ -188,6 +191,22 @@ class GoogleDriveController(CustomerPortal):
         return request.render("isep_courses_adapt.portal_documents_create",
                               values)
 
+    @http.route(['/my/documents/download/<int:doc_id>'],
+                type='http', auth='user', website=True)
+    def portal_document_download(self, doc_id):
+        document_ids = request.env['op.gdrive.documents'].search(
+            [('id', '=', doc_id)], limit=1)
+        gauth = document_ids.Gauth()
+        drive = GoogleDrive(gauth)
+        file = drive.CreateFile({'id': document_ids.drive_id,
+                                 'parents': [{'id': document_ids.folder_id}]})
+        file.FetchContent(file['mimeType'], False)
+        return request.make_response(file.content.getvalue(),
+                                     [('Content-Type', file['mimeType']),
+                                      ('Content-Disposition',
+                                       content_disposition(file['title']))
+                                      ])
+
     @http.route(['/my/gdrive/documents'], type='http', auth='user', website=True)
     def my_gdrive_documents(self):
         partner = request.env.user.partner_id
@@ -197,7 +216,7 @@ class GoogleDriveController(CustomerPortal):
                               {
                                   'document_count': document_count,
                                   'partner': partner
-                                  })
+                              })
 
     @http.route(['/my/gdrive/create'], type='http', auth='user', website=True)
     def my_gdrive_create(self, **post):
@@ -208,7 +227,7 @@ class GoogleDriveController(CustomerPortal):
             'documents_ids': documents_ids,
             'error': {},
             'error_message': [],
-            }
+        }
         if post and request.httprequest.method == 'POST':
             error, error_message = self.gdrive_form_validate(post)
             if not error:
@@ -220,14 +239,14 @@ class GoogleDriveController(CustomerPortal):
                     'partner_id': partner.id,
                     'filename': post.get('file').filename,
                     'file': base64.b64encode(post.get('file').read()),
-                    }
+                }
                 partner.sudo().write({
                     'document_ids': [(0, 0, values)]
-                    })
+                })
                 values.update({
                     'partner': partner,
                     'documents_ids': documents_ids,
-                    })
+                })
         return request.render("isep_courses_adapt.gdrive_create", values)
 
     @http.route(['/my/gdrive/update/<int:doc_id>'],
@@ -241,7 +260,7 @@ class GoogleDriveController(CustomerPortal):
             'document_type_id': document_ids.document_type_id,
             'error': {},
             'error_message': [],
-            }
+        }
         if post and request.httprequest.method == 'POST':
             error, error_message = self.gdrive_form_validate(post)
             values.update({'error': error, 'error_message': error_message})
@@ -251,14 +270,14 @@ class GoogleDriveController(CustomerPortal):
                     'partner_id': partner.id,
                     'filename': post.get('file').filename,
                     'file': base64.b64encode(post.get('file').read()),
-                    }
+                }
                 partner.sudo().write({
                     'document_ids': [(1, doc_id, values)]
-                    })
+                })
                 values.update({
                     'doc_id': doc_id,
                     'document_type_id': document_ids.document_type_id,
-                    })
+                })
         return request.render("isep_courses_adapt.op_gdrive_update", values)
 
     def gdrive_form_validate(self, data):
@@ -299,3 +318,17 @@ class GoogleDriveController(CustomerPortal):
             error_message.append(_(message))
 
         return error, error_message
+
+    @http.route(['/my/gdrive/download'],
+                type='http', auth='user', website=True)
+    def my_gdrive_download(self, doc_id):
+        document_ids = request.env['op.gdrive.documents']. \
+            search([('id', '=', doc_id)], limit=1)
+        gauth = document_ids.Gauth()
+        drive = GoogleDrive(gauth)
+        file = drive.CreateFile({'id': document_ids.drive_id, 'parents': [{'id': document_ids.folder_id}]})
+        file.FetchContent(file['mimeType'], False)
+        return request.make_response(file.content.getvalue() ,
+            [('Content-Type', file['mimeType']),
+             ('Content-Disposition', content_disposition(file['title']))
+        ])

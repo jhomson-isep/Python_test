@@ -22,6 +22,7 @@
         'portal',
         'openeducat_core',
         'openeducat_fees',
+        'openeducat_exam',
         'openeducat_library',
         'openeducat_admission',
         'openeducat_attendance',
@@ -54,15 +55,19 @@
         'views/op_admission.xml',
         'views/op_admission_register.xml',
         # 'views/sale_order.xml',
+        'views/op_exam_session.xml',
+        'views/op_exam_attendances.xml',
         'menu/isep_courses_adapt_menu.xml',
         'data/op_document_type.xml',
         'data/op_evaluation_type.xml',
         'data/op.study.type.csv',
         'data/op.university.csv',
         'data/op_modality.xml',
+        'data/op_exam_type.xml',
         'data/op.campus.csv',
         'data/cron.xml',
-        'data/plantillas_mail.xml'
+        'data/plantillas_mail.xml',
+        'data/list_fields_op_admission_export.xml'
     ],
     'installable': True,
 }
