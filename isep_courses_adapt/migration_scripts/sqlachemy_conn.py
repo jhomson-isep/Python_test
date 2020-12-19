@@ -58,6 +58,18 @@ class OpDocumentType(Base_pg):
     __table__ = Table('op_document_type', metadata_pg, autoload=True)
 
 
+class OpAttendanceRegister(Base_pg):
+    __table__ = Table('op_attendance_register', metadata_pg, autoload=True)
+
+
+class OpAttendanceSheet(Base_pg):
+    __table__ = Table('op_attendance_sheet', metadata_pg, autoload=True)
+
+
+class OpAttendanceLine(Base_pg):
+    __table__ = Table('op_attendance_line', metadata_pg, autoload=True)
+
+
 class OpBatch(Base_pg):
     __table__ = Table('op_batch', metadata_pg, autoload=True)
 
@@ -107,6 +119,8 @@ class TiposDocumento(Base_server):
     __table__ = Table('TiposDocumento', metadata_server_isep, autoload=True)
 
 
+class Asistencias(Base_server):
+    __table__ = Table('Asistencias', metadata_server_isep, autoload=True)
 class Matriculaciones(Base_server):
     __table__ = Table('Matriculaciones', metadata_server_isep, autoload=True)
 

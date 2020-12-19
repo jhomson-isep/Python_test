@@ -32,3 +32,4 @@ from . import op_attendance_line
 from . import op_admission
 from . import op_admission_register
 from . import op_exam
+from . import op_attendance_sheet
