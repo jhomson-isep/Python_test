@@ -1040,3 +1040,9 @@ msgstr "Nota"
 #: model:ir.model.fields,field_description:openeducat_exam.field_op_exam_attendees__note
 msgid "Note"
 msgstr "Observaciones"
+
+#. module: openeducat_core
+#: selection:op.faculty,gender:0
+#: selection:op.student,gender:0
+msgid "Female"
+msgstr "Femenino"
