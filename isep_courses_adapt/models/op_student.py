@@ -232,30 +232,33 @@ class OpStudent(models.Model):
                  100: 'Email Student Access 100 days'}
         for student in self.env['op.student'].search([]):
             try:
-                last_access=self.env['op.student.access'].\
-                            search([('student_id','=',student.id)])
-                if len(last_access)>0:
-                    last_access=last_access[-1].last_access
+                last_access = self.env['op.student.access'].search(
+                    [('student_id', '=', student.id)])
+                if len(last_access) > 0:
+                    last_access = last_access[-1].last_access
                     if 'años' in last_access:
                         continue
                     if 'días' in last_access:
                         days = self.get_days_without_access(student.id)
                         days = ast.literal_eval(days)
-                        if days in ( 5, 12 , 20, 40, 70, 80, 100):
-                            template = self.env['mail.template'].search([('name', '=', tname[days])])
+                        if days in (5, 12, 20, 40, 70, 80, 100):
+                            template = self.env['mail.template'].search(
+                                [('name', '=', tname[days])])
                             if template:
-                                template.send_mail(student.id, force_send=True, raise_exception=True)
+                                template.send_mail(student.id, force_send=True,
+                                                   raise_exception=True)
                             if days == 100:
-                                template = self.env['mail.template'].search([('name', '=', 'Email Student Access Mensaje Final')])
+                                template = self.env['mail.template'].search([
+                                    ('name', '=', 'Email Student Access Final Message')])
                                 if template:
-                                    template.send_mail(student.id, force_send=True, raise_exception=True)
-                            logger.info('email sended to {}'.format(student.first_name))
+                                    template.send_mail(student.id,
+                                                       force_send=True,
+                                                       raise_exception=True)
+                            logger.info('email sent to {}'.format(
+                                student.first_name))
             except Exception as e:
                 logger.info(e)
 
-            if int_break == 100 and os.name != "posix":
-                break
-            int_break += 1
         logger.info("**************************************")
         logger.info("End of script: send email")
         logger.info("**************************************")
