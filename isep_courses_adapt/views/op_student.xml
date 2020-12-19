@@ -28,6 +28,7 @@
                                 <field name="partner_id" placeholder="Partner" required="0"/>
                                 <field name="user_id" string="Usuario" readonly="1"/>
                                 <field name="category_id"/>
+                                <field name="delay"/>
                             </group>
                             <group string="Personal Data">
                                 <field name="nationality"/>
@@ -70,7 +71,6 @@
                             <group string="Academic data">
                                 <field name="gr_no" readonly="1"/>
                                 <field name="university_id" string="Universidad de Procedencia"/>
-                                <field name="delay"/>
                                 <field name="study_type_id" options="{'no_create': True}"/>
                                 <field name="year_end_studies"/>
                                 <field name="sepyc_program"/>

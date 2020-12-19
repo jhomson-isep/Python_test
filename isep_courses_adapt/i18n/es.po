@@ -1046,3 +1046,10 @@ msgstr "Observaciones"
 #: selection:op.student,gender:0
 msgid "Female"
 msgstr "Femenino"
+
+#. module: openeducat_core
+#: model:ir.model.fields,field_description:openeducat_core.field_op_faculty__partner_id
+#: model:ir.model.fields,field_description:openeducat_core.field_op_student__partner_id
+#: model_terms:ir.ui.view,arch_db:openeducat_core.view_op_student_form
+msgid "Partner"
+msgstr "Cliente"
