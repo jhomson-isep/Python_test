@@ -42,6 +42,7 @@ for attendance in attendances:
         attendance_line.attendance_id = attendance_sheet.id
         attendance_line.course_id = attendance_reg.course_id
         attendance_line.batch_id = attendance_reg.batch_id
+        attendance_line.register_id = attendance_sheet.register_id
         attendance_line.attendance_date = attendance_sheet.attendance_date
         attendance_line.active = True
         attendance_line.student_id = student.id

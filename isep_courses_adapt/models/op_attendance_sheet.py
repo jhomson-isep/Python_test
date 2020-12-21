@@ -20,6 +20,9 @@ class OpAttendanceSheet(models.Model):
             attendance_sheet.write({
                 'name' : register + sheet
             })
+            logger.info("**************************************")
+            logger.info("set name %s" % (register + sheet))
+            logger.info("**************************************")
         logger.info("*****************************************")
         logger.info("End of script: set name in all atendances sheets")
         logger.info("*****************************************")
