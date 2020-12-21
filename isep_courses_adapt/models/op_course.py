@@ -25,14 +25,14 @@ class OpCourse(models.Model):
                                          string='Evaluation type')
     hours = fields.Float(string="Hours")
     credits = fields.Float(string="Credits")
-    practical_hours_total = fields.Float(string="Practical Hours Total", compute='_compute_hours_course')
-    independent_hours_total = fields.Float(string="Independent Hours Total", compute='_compute_hours_course')
-    theoretical_hours_total = fields.Float(string="Theoretical Hours Total", compute='_compute_hours_course')
-    hours_total = fields.Float(string="Hours Total", compute='_compute_hours_total_course')
-    practical_hours_credits = fields.Float(string="Practical Hours Credits", compute='_compute_credits_by_hours')
-    independent_hours_credits = fields.Float(string="Independent Hours Credits", compute='_compute_credits_by_hours')
-    theoretical_hours_credits = fields.Float(string="Theoretical Hours Credits", compute='_compute_credits_by_hours')
-    credits_total = fields.Float(string="Credits Total", compute='_compute_credits_total_course')
+    practical_hours_total = fields.Float(string="Practical Hours Total", compute='_compute_hours_course', store=True)
+    independent_hours_total = fields.Float(string="Independent Hours Total", compute='_compute_hours_course', store=True)
+    theoretical_hours_total = fields.Float(string="Theoretical Hours Total", compute='_compute_hours_course', store=True)
+    hours_total = fields.Float(string="Hours Total", compute='_compute_hours_total_course', store=True)
+    practical_hours_credits = fields.Float(string="Practical Hours Credits", compute='_compute_credits_by_hours', store=True)
+    independent_hours_credits = fields.Float(string="Independent Hours Credits", compute='_compute_credits_by_hours', store=True)
+    theoretical_hours_credits = fields.Float(string="Theoretical Hours Credits", compute='_compute_credits_by_hours', store=True)
+    credits_total = fields.Float(string="Credits Total", compute='_compute_credits_total_course', store=True)
     uvic_program = fields.Boolean(string='UVIC program', default=False)
     sepyc_program = fields.Boolean(string='SEPYC program', default=False)
     name_catalan = fields.Char(string="Catalan name")
@@ -55,13 +55,14 @@ class OpCourse(models.Model):
                          'check(1=1)', 'Delete constrian unique code per course!')]
 
     @api.one
-    @api.depends('subject_ids')
+    @api.depends('subject_ids.practical_hours', 'subject_ids.independent_hours', 'subject_ids.theoretical_hours')
     def _compute_hours_course(self):
         self.practical_hours_total = sum(subject.practical_hours for subject in self.subject_ids)
         self.independent_hours_total = sum(subject.independent_hours for subject in self.subject_ids)
         self.theoretical_hours_total = sum(subject.theoretical_hours for subject in self.subject_ids)
 
     @api.one
+    @api.depends('practical_hours_total', 'independent_hours_total', 'theoretical_hours_total')
     def _compute_credits_by_hours(self):
         min_hours_study_by_credit = 16
         self.practical_hours_credits = self.practical_hours_total / min_hours_study_by_credit
@@ -69,10 +70,12 @@ class OpCourse(models.Model):
         self.theoretical_hours_credits = self.theoretical_hours_total / min_hours_study_by_credit
 
     @api.one
+    @api.depends('practical_hours_total', 'independent_hours_total', 'theoretical_hours_total')
     def _compute_hours_total_course(self):
         self.hours_total = self.theoretical_hours_total + self.independent_hours_total + self.practical_hours_total
 
     @api.one
+    @api.depends('theoretical_hours_credits', 'independent_hours_credits', 'practical_hours_credits')
     def _compute_credits_total_course(self):
         self.credits_total = self.theoretical_hours_credits + self.independent_hours_credits + self.practical_hours_credits
 
