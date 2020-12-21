@@ -32,7 +32,7 @@
                                 </p>
                                 <p style="margin-top:5px;">
                                     El curso se impartirá en nuestras instalaciones de Barcelona. La fecha de inicio del
-                                    periodo formativo es del 1 de enero de 1900 y finaliza el 1 de enero de 1900. Además de
+                                    periodo formativo es del <span t-field="c.batch_id.start_date"></span> y finaliza el <span t-field="c.batch_id.end_date"></span>. Además de
                                     las clases presenciales, la alumna deberá realizar en horario diurno de Lunes a Viernes ,
                                     las prácticas formativas, necesarias e implícitas en el programa y en uno de los centros
                                     concertados por ISEP que se destine a la alumna, dicha práctica tiene carácter evaluativo . Además, alcanzado la mitad del itinerario formativo, la alumna deberá iniciar la elaboración
@@ -47,7 +47,7 @@
                                 </p>
 
                                 <p style="margin-top:5px;">
-                                    El precio total del Máster es de Euros.
+                                    El precio total del Máster es de <span></span> Euros.
                                 </p>
                                 <p style="margin-top:5px;">
                                     Aprovechamos la ocasión para enviarle un saludo y felicitarle por la decisión de formarse

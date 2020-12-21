@@ -25,6 +25,13 @@
                                         <th>Créditos</th>
                                     </thead>
                                     <tbody>
+                                        <t t-foreach="o.exam_attendees_ids" t-as="e">
+                                            <tr>
+                                                <td><span t-field="e.exam_id.subject_id.name"></span></td>
+                                                <td><span t-field="e.marks"></span></td>
+                                                <td><span t-field="e.exam_id.subject_id.credits"></span></td>
+                                            </tr>
+                                        </t>
                                     </tbody>
                                 </table>
                                 <p style="margin-top:100px;">Para que así conste, firma el presente certificado en Barcelona, a <span t-esc="datetime.datetime.today().day"></span>
