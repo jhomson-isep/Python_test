@@ -17,7 +17,7 @@
                             <div style="text-align:justify;font-size:18px; margin-left:50px;">
                                 <p>Erika Tobalina, con DNI 45625219G, en calidad de Directora del Instituto Superior de Estudios Psicológicos, ISEP Barcelona,</p>
                                 <p style="margin-top:20px;">CERTIFICA: </p>
-                                <p style="margin-top:20px;">Que <strong><span t-field="o.name"></span></strong> con Documento <span t-field="o.document_number"></span>, en el <strong><span t-field="c.course_id.name"></span></strong> impartido en la modalidad <span t-field="c.course_id.modality_id"></span> durante el periodo académico <span t-field="c.course_id.period"></span>, con una carga lectiva de ##, ha obtenido las calificaciones siguientes:</p>
+                                <p style="margin-top:20px;">Que <strong><span t-field="o.name"></span></strong> con Documento <span t-field="o.document_number"></span>, en el <strong><span t-field="c.course_id.name"></span></strong> impartido en la modalidad <span t-field="c.course_id.modality_id"></span> durante el periodo académico <span t-field="c.course_id.period"></span>, con una carga lectiva de con una carga lectiva de <span t-field="c.course_id.ects"></span> ECTS ( <span t-field="c.course_id.hours"></span> Horas ), ha obtenido las calificaciones siguientes:</p>
                                 <table class="table table-sm">
                                     <thead>
                                         <th>Asignatura</th>
@@ -26,11 +26,13 @@
                                     </thead>
                                     <tbody>
                                         <t t-foreach="o.exam_attendees_ids" t-as="e">
-                                            <tr>
-                                                <td><span t-field="e.exam_id.subject_id.name"></span></td>
-                                                <td><span t-field="e.marks"></span></td>
-                                                <td><span t-field="e.exam_id.subject_id.credits"></span></td>
-                                            </tr>
+                                            <t t-if="e.exam_id.session_id.course_id.name == c.course_id.name">
+                                                <tr>
+                                                    <td><span t-field="e.exam_id.subject_id.name"></span></td>
+                                                    <td><span t-field="e.marks"></span></td>
+                                                    <td><span t-field="e.exam_id.subject_id.credits"></span></td>
+                                                </tr>
+                                            </t>
                                         </t>
                                     </tbody>
                                 </table>
