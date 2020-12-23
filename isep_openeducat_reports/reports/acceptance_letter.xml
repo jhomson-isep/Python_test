@@ -46,9 +46,16 @@
                                     contenidos que permiten acreditar la maestría.
                                 </p>
 
-                                <p style="margin-top:5px;">
-                                    El precio total del Máster es de <span></span> Euros.
-                                </p>
+                                <t t-foreach="o.admission_ids" t-as="ad">
+                                    <t t-if="c.course_id == ad.course_id">
+                                        <t t-foreach="ad.sale_order_id.order_line" t-as="order">
+                                            <!--<t t-if=""></t>-->
+                                                <p style="margin-top:5px;">
+                                                    El precio total del Máster es de <span></span> Euros.
+                                                </p>
+                                        </t>
+                                    </t>
+                                </t>
                                 <p style="margin-top:5px;">
                                     Aprovechamos la ocasión para enviarle un saludo y felicitarle por la decisión de formarse
                                     con el ISEP.

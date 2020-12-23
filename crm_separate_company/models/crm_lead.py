@@ -80,13 +80,16 @@ class CrmLead(models.Model):
             logger.info(lead.get('x_profesion'))
             logger.info(lead.get('x_finalizacionestudios'))
             #---------------Nueva lógica de typeform-----------------------------#
-            if cod_sede is None:
+            if cod_sede is None or cod_sede == '':
                 cod_sede = lead.get('x_profesion')
-            if modalidad is None:
+            else:
+                lead.update({'x_profesion': ''})
+            if modalidad is None or modalidad == '':
                 modalidad = lead.get('x_finalizacionestudios')
+            else:
+                lead.update({'x_finalizacionestudios': ''})
 
-            lead.update({'x_finalizacionestudios': ''})
-            lead.update({'x_profesion': ''})
+
 
             # create
             res = super(CrmLead, self).create(lead)
