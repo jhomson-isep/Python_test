@@ -97,4 +97,5 @@ for matricula in matriculaciones:
             print("Admission register or student not found")
     except Exception as e:
         print(e)
+        session_pg.rollback()
         continue
