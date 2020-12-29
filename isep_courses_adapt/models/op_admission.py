@@ -119,29 +119,24 @@ class OpAdmission(models.Model):
 
     @api.model
     def date_finish(self):
-        op_batch = self.env['op.batch'].search([])
-        op_student = self.env['op.student'].search([])
+        op_batch = self.env['op.batch'].search([('end_date', '>=', date.today())])
         for batch in op_batch:
-            for student in op_student:
-                op_admission = self.search([('student_id', '=', student.id),
-                                            ('active', '=', True)])
-                op_exam_attendees = self.env['op.exam.attendees'].search(
-                    [('student_id', '=', student.id),
-                     ('batch_id', '=', batch.id)])
-                subjects_presented = 0
+            op_student_course = batch.student_lines
+            logger.info(op_student_course)
+            for student_course in op_student_course:
+                op_admission = self.search([('student_id', '=', student_course.student_id.id), ('academic_record_closing', '=', False)])
+                logger.info(op_admission)
+                subjects_presented = self.env['op.exam.attendees'].search_count(
+                    [('student_id', '=', student_course.student_id.id),
+                     ('batch_id', '=', batch.id), ('marks', '>', 0)])
                 total_subject = self.env['op.batch.subject.rel'].search_count(
                     [('batch_id', '=', batch.id)])
-                if len(op_exam_attendees) > 0:
-                    logger.info(op_exam_attendees)
-                    for exam_attendees in op_exam_attendees:
-                        if exam_attendees.marks > 0:
-                            subjects_presented += 1
+                if total_subject > 0 and len(op_admission) > 0:
                     if total_subject == subjects_presented:
-                        if not op_admission.academic_record_closing:
-                            values = {
+                        values = {
                                 'academic_record_closing': date.today()
-                            }
-                            op_admission.write(values)
-                            logger.info('****************************************')
-                            logger.info('*    UPDATE DATE OF ACADEMIC CLOSING   *')
-                            logger.info('****************************************')
+                        }
+                        op_admission.write(values)
+                        logger.info('****************************************')
+                        logger.info('*    UPDATE DATE OF ACADEMIC CLOSING   *')
+                        logger.info('****************************************')
