@@ -106,6 +106,10 @@ class OpExamAttendees(Base_pg):
     __table__ = Table('op_exam_attendees', metadata_pg, autoload=True)
 
 
+class OpModality(Base_pg):
+    __table__ = Table('op_modality', metadata_pg, autoload=True)
+
+
 # SQL Server Tables
 class GinAreaCurso(Base_server):
     __table__ = Table('gin_AreasCurso', metadata_server, autoload=True)
@@ -121,12 +125,18 @@ class TiposDocumento(Base_server):
 
 class Asistencias(Base_server):
     __table__ = Table('Asistencias', metadata_server_isep, autoload=True)
+
+
 class Matriculaciones(Base_server):
     __table__ = Table('Matriculaciones', metadata_server_isep, autoload=True)
 
 
 class Calificaciones(Base_server):
     __table__ = Table('Calificaciones', metadata_server_isep, autoload=True)
+
+
+class IsepCursos(Base_server):
+    __table__ = Table('Cursos', metadata_server_isep, autoload=True)
 
 
 def get_session_server():
