@@ -141,6 +141,9 @@ dmypy.json
 # ipynb extensions
 *.ipynb
 
+# test moodle
+test_moodle/
+
 # gdrive access files
 #isep_courses_adapt/models/drive/client_secrect.json
 #isep_courses_adapt/models/drive/credentials.json
