@@ -2,6 +2,7 @@
 
 from odoo import models, fields, api, _
 from .moodle import MoodleLib
+from datetime import date
 import logging
 import string
 import random
@@ -115,3 +116,32 @@ class OpAdmission(models.Model):
         random_password = random.choices(printable, k=length)
         random_password = ''.join(random_password)
         return random_password
+
+    @api.model
+    def date_finish(self):
+        op_batch = self.env['op.batch'].search([])
+        op_student = self.env['op.student'].search([])
+        for batch in op_batch:
+            for student in op_student:
+                op_admission = self.search([('student_id', '=', student.id),
+                                            ('active', '=', True)])
+                op_exam_attendees = self.env['op.exam.attendees'].search(
+                    [('student_id', '=', student.id),
+                     ('batch_id', '=', batch.id)])
+                subjects_presented = 0
+                total_subject = self.env['op.batch.subject.rel'].search_count(
+                    [('batch_id', '=', batch.id)])
+                if len(op_exam_attendees) > 0:
+                    logger.info(op_exam_attendees)
+                    for exam_attendees in op_exam_attendees:
+                        if exam_attendees.marks > 0:
+                            subjects_presented += 1
+                    if total_subject == subjects_presented:
+                        if not op_admission.academic_record_closing:
+                            values = {
+                                'academic_record_closing': date.today()
+                            }
+                            op_admission.write(values)
+                            logger.info('****************************************')
+                            logger.info('*    UPDATE DATE OF ACADEMIC CLOSING   *')
+                            logger.info('****************************************')
