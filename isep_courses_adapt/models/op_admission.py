@@ -1,5 +1,15 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields
+
+from odoo import models, fields, api, _
+from .moodle import MoodleLib
+import logging
+import string
+import random
+
+logger = logging.getLogger(__name__)
+LETTERS = string.ascii_letters
+NUMBERS = string.digits
+PUNCTUATION = '@@$#'
 
 
 class OpAdmission(models.Model):
@@ -30,6 +40,78 @@ class OpAdmission(models.Model):
     mobile = fields.Char(
         'Mobile', size=32,
         states={'done': [('readonly', True)], 'submit': [('required', True)]})
+
     # grade_ids = fields.One2many(comodel_name='op.exam.attendees',
-    #                             inverse_name='op_student_course_id',
+    #                             inverse_name='admission_id',
     #                             domain=[('is_final', '=', 'True')])
+
+    @api.multi
+    def enroll_student(self):
+        super(OpAdmission, self).enroll_student()
+        for record in self:
+            record.create_moodle_user()
+
+    @api.one
+    def create_moodle_user(self):
+        Moodle = MoodleLib()
+        student = self.env['op.student'].search(
+            [('id', '=', self.student_id.id)], limit=1)
+        student_course = self.env['op.student.course'].search(
+            [('student_id', '=', student.id),
+             ('batch_id', '=', self.batch_id.id)])
+        print("Student id: ", student.id)
+        moodle_course = Moodle.get_course(self.batch_id.moodle_code)
+        print("moodle_course: ", moodle_course)
+        moodle_group = Moodle.get_group(moodle_course.get('id'),
+                                        self.batch_id.code)
+        if moodle_group is None:
+            moodle_group = Moodle.core_group_create_groups(
+                self.batch_id.code, moodle_course.get('id'))
+        print("moodle_group: ", moodle_group)
+        password = self.password_generator(length=10)
+        user = Moodle.get_user_by_field(field="username",
+                                        value=self.partner_id.email)
+        if user is None:
+            user_response = Moodle.create_users(
+                firstname=self.first_name,
+                lastname=self.last_name,
+                dni=self.partner_id.num_reg_trib or self.partner_id.vat,
+                password=password,
+                email=self.partner_id.email)
+            user = user_response[0]
+        print("user: ", user)
+        enrol_result = Moodle.enrol_user(moodle_course.get('id'),
+                                         user.get('id'))
+        logger.info(enrol_result)
+        member_result = Moodle.add_group_members(moodle_group.get('id'),
+                                                 user.get('id'))
+        logger.info(member_result)
+        gr_no = self.env['ir.sequence'].next_by_code('op.gr.number') or '0'
+        student_course.write({'roll_number': gr_no})
+        student.write({
+            'moodle_id': user.get('id'),
+            'moodle_user': self.partner_id.email,
+            'moodle_pass': password,
+            'gr_no': gr_no,
+            'n_id': gr_no
+        })
+
+    @staticmethod
+    def password_generator(length=8):
+        """
+        Generates a random password having the specified length
+        :length -> length of password to be generated. Defaults to 8
+            if nothing is specified.
+        :returns string <class 'str'>
+        """
+        # create alphanumerical from string constants
+        printable = f'{LETTERS}{NUMBERS}{PUNCTUATION}'
+
+        # convert printable from string to list and shuffle
+        printable = list(printable)
+        random.shuffle(printable)
+
+        # generate random password and convert to string
+        random_password = random.choices(printable, k=length)
+        random_password = ''.join(random_password)
+        return random_password

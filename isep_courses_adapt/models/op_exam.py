@@ -27,7 +27,7 @@ class OpExamAttendees(models.Model):
     @api.depends('batch_id', 'student_id', 'course_id')
     def _get_admission(self):
         for sel in self:
-            sel.admission_id = sel.env['op.admission'].search(
+            sel.admission_id = self.env['op.admission'].search(
                 [['student_id', '=', sel.student_id.id],
                  ['batch_id', '=', sel.batch_id.id],
                  ['course_id', '=', sel.course_id.id]]).id

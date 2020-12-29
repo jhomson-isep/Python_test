@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Sequences for op.admission -->
+        <record id="seq_op_gr_number" model="ir.sequence">
+            <field name="name">Gr number</field>
+            <field name="code">op.gr.number</field>
+            <field name="prefix"></field>
+            <field name="padding">422271</field>
+            <field name="company_id" eval="False" />
+        </record>
+    </data>
+</odoo>

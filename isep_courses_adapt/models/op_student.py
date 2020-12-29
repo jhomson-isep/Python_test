@@ -21,10 +21,10 @@ class OpStudent(models.Model):
     campus_id = fields.Many2one('op.campus', string='Campus')
     place_birth = fields.Char(string='Place of birth', size=200)
     uvic_program = fields.Boolean(string='UVIC Program',
-                                        default=False)
-    #rvoe_program = fields.Boolean(string='SEPYC Program',default=False)
-    sepyc_program = fields.Boolean(string='SEPYC Program', 
-                                        default=False)
+                                  default=False)
+    # rvoe_program = fields.Boolean(string='SEPYC Program',default=False)
+    sepyc_program = fields.Boolean(string='SEPYC Program',
+                                   default=False)
     curp = fields.Char(string='CURP', size=20)
     year_end_studies = fields.Integer(string='Year of completion of studies')
     document_type_id = fields.Many2one('op.document.type',
@@ -44,7 +44,7 @@ class OpStudent(models.Model):
         ('Not send', 'No enviada')
     ], 'Status documentation')
     partner_id = fields.Many2one('res.partner', 'Partner', required=False)
-    #document_ids = fields.One2many("op.gdrive.documents", "partner_id",
+    # document_ids = fields.One2many("op.gdrive.documents", "partner_id",
     #                              string="Documentation")
     access_ids = fields.One2many("op.student.access", "student_id",
                                  string="Access")
@@ -83,9 +83,9 @@ class OpStudent(models.Model):
     @staticmethod
     def equal_datetimes_YYMMDDHHmm(ddtime1, ddtime2):
         return isinstance(ddtime1, datetime.datetime) and \
-                isinstance(ddtime2, datetime.datetime) and \
-                ddtime1.replace(minute=0, second=0, microsecond=0) == \
-                ddtime2.replace(minute=0, second=0, microsecond=0)
+               isinstance(ddtime2, datetime.datetime) and \
+               ddtime1.replace(minute=0, second=0, microsecond=0) == \
+               ddtime2.replace(minute=0, second=0, microsecond=0)
 
     def update_access(self, rows):
         logger.info("**************************************")
@@ -109,7 +109,8 @@ class OpStudent(models.Model):
                             [('student_id', '=', student.id)])
                         if len(_access) > 0:
                             _access = _access[-1]
-                        if not self.equal_datetimes_YYMMDDHHmm(last_access, _access.student_access):
+                        if not self.equal_datetimes_YYMMDDHHmm(last_access,
+                                                               _access.student_access):
                             self.env['op.student.access'].create(access_values)
                             logger.info('Record created')
                 except Exception as e:
@@ -155,10 +156,12 @@ class OpStudent(models.Model):
                             }
                             _access = self.env['op.student.access'].search(
                                 [('student_id', '=', student.id)])
-                            if len(_access)>0:
-                                _access=_access[-1]
-                            if not self.equal_datetimes_YYMMDDHHmm(last_access,_access.student_access):
-                                self.env['op.student.access'].create(access_values)
+                            if len(_access) > 0:
+                                _access = _access[-1]
+                            if not self.equal_datetimes_YYMMDDHHmm(last_access,
+                                                                   _access.student_access):
+                                self.env['op.student.access'].create(
+                                    access_values)
                 except Exception as e:
                     logger.info(e)
                     continue
@@ -190,11 +193,17 @@ class OpStudent(models.Model):
                         [('student_id', '=', self.id)])
                     if len(_access) > 0:
                         _access = _access[-1]
-                    if self.document_number in ('AU449596','G08428409','45522791','1030639754'):
-                        logger.info('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
-                        logger.info('last_access:{} _access:{}'.format(last_access,_access.student_access))
-                        logger.info('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
-                    if not self.equal_datetimes_YYMMDDHHmm(last_access,_access.student_access):
+                    if self.document_number in (
+                    'AU449596', 'G08428409', '45522791', '1030639754'):
+                        logger.info(
+                            '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+                        logger.info(
+                            'last_access:{} _access:{}'.format(last_access,
+                                                               _access.student_access))
+                        logger.info(
+                            '$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+                    if not self.equal_datetimes_YYMMDDHHmm(last_access,
+                                                           _access.student_access):
                         self.env['op.student.access'].create(access_values)
                 except Exception as e:
                     logger.info(e)
@@ -249,7 +258,8 @@ class OpStudent(models.Model):
                                                    raise_exception=True)
                             if days == 100:
                                 template = self.env['mail.template'].search([
-                                    ('name', '=', 'Email Student Access Final Message')])
+                                    ('name', '=',
+                                     'Email Student Access Final Message')])
                                 if template:
                                     template.send_mail(student.id,
                                                        force_send=True,
@@ -267,7 +277,8 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         logger.info("send email")
         logger.info("**************************************")
-        template = self.env['mail.template'].search([('name', '=', 'Email Student Access')])
+        template = self.env['mail.template'].search(
+            [('name', '=', 'Email Student Access')])
         int_break = 0
         if template:
             int_break = 0
@@ -311,9 +322,12 @@ class OpStudent(models.Model):
                 existent_student = self.search([('n_id', '=', student.N_Id)])
                 if len(existent_student) < 1:
                     app_country = s.get_country_by_nid(student.N_Id)
-                    country = self.env['res.country'].search([('name', 'ilike', app_country.country or '')], limit=1)
-                    partner = self.env['res.partner'].search([('email', '!=', False),
-                                                              ('email', '=', student.EMail)], limit=1)
+                    country = self.env['res.country'].search(
+                        [('name', 'ilike', app_country.country or '')],
+                        limit=1)
+                    partner = self.env['res.partner'].search(
+                        [('email', '!=', False),
+                         ('email', '=', student.EMail)], limit=1)
                     if not partner.id:
                         partner_values = {
                             'name': student.Nombre + " " + student.Apellidos,
@@ -327,11 +341,16 @@ class OpStudent(models.Model):
                             'vat': student.CURPMx or student.DNI,
                             'is_student': True
                         }
-                        partner = self.env['res.partner'].create(partner_values)
-                    campus = self.env['op.campus'].search([('code', '=', student.Sede)], limit=1)
-                    document_type = self.env['op.document.type'].search([('code', '=', student.TipoDocumento)], limit=1)
-                    study_type = self.env['op.study.type'].search([('code', '=', student.TipoEstudios)], limit=1)
-                    university = self.env['op.university'].search([('code', '=', student.TipoEstudios)], limit=1)
+                        partner = self.env['res.partner'].create(
+                            partner_values)
+                    campus = self.env['op.campus'].search(
+                        [('code', '=', student.Sede)], limit=1)
+                    document_type = self.env['op.document.type'].search(
+                        [('code', '=', student.TipoDocumento)], limit=1)
+                    study_type = self.env['op.study.type'].search(
+                        [('code', '=', student.TipoEstudios)], limit=1)
+                    university = self.env['op.university'].search(
+                        [('code', '=', student.TipoEstudios)], limit=1)
                     if student.Sexo == 'H':
                         gender = 'm'
                     elif student.Sexo == 'M':
@@ -466,9 +485,11 @@ class OpStudent(models.Model):
     def unlink(self):
         gauth = self.Gauth()
         drive = GoogleDrive(gauth)
-        file_list = drive.ListFile({'q': "'root' in parents and trashed=false"}).GetList()
+        file_list = drive.ListFile(
+            {'q': "'root' in parents and trashed=false"}).GetList()
         for rec in self:
-            documents = self.env['op.gdrive.documents'].search([('partner_id', '=', rec.partner_id.id)])
+            documents = self.env['op.gdrive.documents'].search(
+                [('partner_id', '=', rec.partner_id.id)])
             delete_folder = False
             for doc in documents:
                 doc.unlink()

@@ -20,6 +20,7 @@
         'sale',
         'mail',
         'portal',
+        'l10n_mx_einvoice',
         'openeducat_core',
         'openeducat_fees',
         'openeducat_exam',
@@ -67,7 +68,8 @@
         'data/op.campus.csv',
         'data/cron.xml',
         'data/plantillas_mail.xml',
-        'data/list_fields_op_admission_export.xml'
+        'data/list_fields_op_admission_export.xml',
+        'data/sequences.xml'
     ],
     'installable': True,
 }

@@ -6,6 +6,9 @@
             <field name="model">op.admission</field>
             <field name="inherit_id" ref="openeducat_admission.view_op_admission_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//field[@name='register_id']" position="replace">
+                    <field name="register_id" domain="[('state', 'in', ['application','admission'])]"/>
+                </xpath>
                 <xpath expr="//field[@name='fees']" position="replace">
                     <field name="unsubscribed_date"/>
                     <field name="academic_record_closing"/>

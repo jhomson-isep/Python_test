@@ -19,7 +19,7 @@ class OpBatch(models.Model):
     start_date = fields.Date('Start Date')
     end_date = fields.Date('End Date')
     student_lines = fields.One2many('op.student.course', 'batch_id')
-    moodle_course_id = fields.Integer(string="Moodle Id")
+    moodle_course_id = fields.Integer(string="Moodle course id")
     credits = fields.Float(string="Credits", related='course_id.credits')
     practical_hours_total = fields.Float(string="Practical Hours Total", related='course_id.practical_hours_total', store=True)
     independent_hours_total = fields.Float(string="Independent Hours Total", related='course_id.independent_hours_total', store=True)
@@ -54,6 +54,8 @@ class OpBatch(models.Model):
                                                'batch_id')
     subject_count = fields.Integer(compute='_compute_subject_count', default=0)
     student_count = fields.Integer(compute='_compute_student_count', default=0)
+    moodle_code = fields.Char(string="Moodle id code", size=32)
+    moodle_id = fields.Integer(string="Moodle id")
 
     @api.depends()
     def _get_current_user(self):
