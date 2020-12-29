@@ -184,3 +184,8 @@ def get_attendance_line_mdl():
             logger.warning("Attendance Line Exist Id: %s" % attendance_line.id)
             logger.warning("**************************************")
             continue
+
+
+get_attendance_register_mld()
+get_attendance_sheet_mdl()
+get_attendance_line_mdl()
