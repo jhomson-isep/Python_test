@@ -137,6 +137,13 @@ class OpBatch(models.Model):
             action = {'type': 'ir.actions.act_window_close'}
         return action
 
+    @api.model
+    def create(self, values):
+        """Override default Odoo create function and extend."""
+        res = super(OpBatch, self).create(values)
+        self.generate_admission_register(res)
+        return res
+
     def import_batches(self):
         s = SQL()
         logger.info("**************************************")
@@ -184,7 +191,7 @@ class OpBatch(models.Model):
                     logger.info("course: {0}".format(course))
                     if course.id:
                         res = super(OpBatch, self).create(batch_values)
-                        print(res)
+                        logger.info("batch created: {}".format(res.code))
 
                 if int_break == 50 and os.name != "posix":
                     break
@@ -207,3 +214,24 @@ class OpBatch(models.Model):
             return d.replace(year=d.year + years)
         except ValueError:
             return d + (date(d.year + years, 1, 1) - date(d.year, 1, 1))
+
+    @api.multi
+    def generate_admission_register(self, res):
+        for batch in res:
+            ar_count = self.env['op.admission.register'].search_count(
+                [('batch_id', '=', batch.id)])
+            if ar_count == 0:
+                admission_values = {
+                    'batch_id': batch.id,
+                    'name': batch.code,
+                    'course_id': batch.course_id.id,
+                    'start_date': batch.start_date,
+                    'end_date': batch.end_date,
+                    'max_count': batch.students_limit,
+                }
+                logger.info(admission_values)
+                res = self.env['op.admission.register'].create(
+                    admission_values)
+                res.start_admission()
+            else:
+                logger.info("Already exist: {}".format(batch.code))
