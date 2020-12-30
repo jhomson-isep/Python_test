@@ -72,9 +72,9 @@ class OpAttendanceLine(models.Model):
 
     def get_attendance_sheet_mdl(self):
         mysql = MYSQL()
-        attendances = myslq.get_all_attendance()
+        attendances = mysql.get_all_attendance()
         for attendance in attendances:
-            attendance_sessions = myslq.get_attendance_session_by_attendanceid(attendance['id'])
+            attendance_sessions = mysql.get_attendance_session_by_attendanceid(attendance['id'])
             for attendance_session in attendance_sessions:
                 group = mysql.get_group_by_id(attendance_session['groupid'])
                 if not group:
