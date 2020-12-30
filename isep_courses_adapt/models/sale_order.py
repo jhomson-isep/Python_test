@@ -17,8 +17,7 @@ class SaleOrder(models.Model):
     def action_confirm(self):
         for order in self:
             order.action_send_student()
-        res = super(SaleOrder, self).action_confirm()
-        return res
+        return super(SaleOrder, self).action_confirm()
 
     def get_register_id(self, batch_id):
         admission_register_id = self.env['op.admission.register'].search(
@@ -86,11 +85,11 @@ class SaleOrder(models.Model):
             exists = self.get_sale_order_in_admission()
             if exists:
                 raise UserError(_("Student already in admission"))
-            else:
-                if register_id is None or register_id is False:
-                    raise UserError(_("Student without admission"))
-                new_obj = self.env['op.admission'].create(admission_values)
-                logger.info("params:{}".format(admission_values))
+            if register_id is None or register_id is False:
+                raise UserError(_("Student without admission"))
+            admission = self.env['op.admission'].create(admission_values)
+            logger.info("params:{}".format(admission_values))
+            logger.info("Admission created: {}".format(admission))
 
     @api.multi
     def action_send_student(self):
@@ -104,7 +103,7 @@ class SaleOrder(models.Model):
                 logger.info('Line ========> {}'.format(line))
                 logger.info('Course type =======> {}'.format(course_type))
                 if course_type in ['curso', 'pgrado', 'diplo', 'mgrafico',
-                                   'master']:
+                                   'master'] and line.batch_id:
                     self.send_student(line.batch_id)
                 else:
                     logger.info(course_type)

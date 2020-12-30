@@ -131,7 +131,6 @@ class OpAdmission(models.Model):
                     'name': student.name,
                     'login': student.email,
                     'image': self.image or False,
-                    'company_id': self.env.ref('base.main_company').id,
                     'is_student': True,
                     'groups_id': [
                         (6, 0,
