@@ -76,7 +76,7 @@ for matricula in matriculaciones:
                 admission.admission_date = matricula.FechaMatricula.date()
                 admission.course_id = admission_register.course_id
                 admission.batch_id = batch.id
-                admission.unsubscribed_date = unsubscribed_date.date()
+                admission.unsubscribed_date = unsubscribed_date
                 admission.academic_record_closing = academic_record_closing
                 admission.exam_on_campus = exam_on_campus
                 admission.due_date = matricula.FechaVencimiento
