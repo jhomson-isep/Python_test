@@ -6,7 +6,9 @@
             <field name="name">Gr number</field>
             <field name="code">op.gr.number</field>
             <field name="prefix"></field>
-            <field name="padding">422271</field>
+            <field name="padding">7</field>
+            <field name="number_next">422271</field>
+            <field name="number_next_actual">422271</field>
             <field name="company_id" eval="False" />
         </record>
     </data>

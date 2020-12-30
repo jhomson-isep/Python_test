@@ -14,8 +14,8 @@ class ResPartner(models.Model):
         if email:
             email = self.check_email(email)
             values.update({'email': email})
-        else:
-            raise UserError('Introduzca una dirección de correo electrónico')
+        # else:
+        #     raise UserError('Introduzca una dirección de correo electrónico')
 
         res = super(ResPartner, self).create(values)
         return res
