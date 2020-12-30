@@ -61,14 +61,17 @@ class OpAdmission(models.Model):
             [('student_id', '=', student.id),
              ('batch_id', '=', self.batch_id.id)])
         print("Student id: ", student.id)
+        logger.info("Student id: {}".format(student.id))
         moodle_course = Moodle.get_course(self.batch_id.moodle_code)
         print("moodle_course: ", moodle_course)
+        logger.info("moodle_course: {}".format(moodle_course))
         moodle_group = Moodle.get_group(moodle_course.get('id'),
                                         self.batch_id.code)
         if moodle_group is None:
             moodle_group = Moodle.core_group_create_groups(
                 self.batch_id.code, moodle_course.get('id'))
         print("moodle_group: ", moodle_group)
+        logger.info("moodle_group: {}".format(moodle_group))
         password = self.password_generator(length=10)
         user = Moodle.get_user_by_field(field="username",
                                         value=self.partner_id.email)
@@ -81,6 +84,7 @@ class OpAdmission(models.Model):
                 email=self.partner_id.email)
             user = user_response[0]
         print("user: ", user)
+        logger.info("user: {}".format(user))
         enrol_result = Moodle.enrol_user(moodle_course.get('id'),
                                          user.get('id'))
         logger.info(enrol_result)
@@ -88,6 +92,7 @@ class OpAdmission(models.Model):
                                                  user.get('id'))
         logger.info(member_result)
         gr_no = self.env['ir.sequence'].next_by_code('op.gr.number') or '0'
+        logger.info(gr_no)
         student_course.write({'roll_number': gr_no})
         student.write({
             'moodle_id': user.get('id'),
@@ -117,6 +122,7 @@ class OpAdmission(models.Model):
         random_password = ''.join(random_password)
         return random_password
 
+
     @api.model
     def date_finish(self):
         op_batch = self.env['op.batch'].search([('end_date', '>=', date.today())])
@@ -140,3 +146,57 @@ class OpAdmission(models.Model):
                         logger.info('****************************************')
                         logger.info('*    UPDATE DATE OF ACADEMIC CLOSING   *')
                         logger.info('****************************************')
+
+    @api.multi
+    def get_student_vals(self):
+        for student in self:
+            student_user = self.env['res.users'].search(
+                [('login', '=', student.email)], limit=1)
+            if len(student_user) == 0:
+                student_user = self.env['res.users'].create({
+                    'name': student.name,
+                    'login': student.email,
+                    'image': self.image or False,
+                    'company_id': self.env.ref('base.main_company').id,
+                    'is_student': True,
+                    'groups_id': [
+                        (6, 0,
+                         [self.env.ref('base.group_portal').id])]
+                })
+            details = {
+                'phone': student.phone,
+                'mobile': student.mobile,
+                'email': student.email,
+                'street': student.street,
+                'street2': student.street2,
+                'city': student.city,
+                'country_id':
+                    student.country_id and student.country_id.id or False,
+                'state_id': student.state_id and student.state_id.id or False,
+                'image': student.image,
+                'zip': student.zip,
+            }
+            student_user.partner_id.write(details)
+            details.update({
+                'title': student.title and student.title.id or False,
+                'first_name': student.first_name,
+                'middle_name': student.middle_name,
+                'last_name': student.last_name,
+                'birth_date': student.birth_date,
+                'gender': student.gender,
+                'course_id':
+                    student.course_id and student.course_id.id or False,
+                'batch_id':
+                    student.batch_id and student.batch_id.id or False,
+                'image': student.image or False,
+                'course_detail_ids': [[0, False, {
+                    'date': fields.Date.today(),
+                    'course_id':
+                        student.course_id and student.course_id.id or False,
+                    'batch_id':
+                        student.batch_id and student.batch_id.id or False,
+                }]],
+                'user_id': student_user.id,
+                'partner_id': student_user.partner_id.id,
+            })
+            return details

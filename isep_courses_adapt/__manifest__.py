@@ -55,7 +55,7 @@
         'views/op_attendance_line.xml',
         'views/op_admission.xml',
         'views/op_admission_register.xml',
-        # 'views/sale_order.xml',
+        'views/sale_order.xml',
         'views/op_exam_session.xml',
         'views/op_exam_attendances.xml',
         'menu/isep_courses_adapt_menu.xml',
