@@ -21,14 +21,28 @@ class OpBatch(models.Model):
     student_lines = fields.One2many('op.student.course', 'batch_id')
     moodle_course_id = fields.Integer(string="Moodle course id")
     credits = fields.Float(string="Credits", related='course_id.credits')
-    practical_hours_total = fields.Float(string="Practical Hours Total", related='course_id.practical_hours_total', store=True)
-    independent_hours_total = fields.Float(string="Independent Hours Total", related='course_id.independent_hours_total', store=True)
-    theoretical_hours_total = fields.Float(string="Theoretical Hours Total", related='course_id.theoretical_hours_total', store=True)
-    hours_total = fields.Float(string="Hours Total", related='course_id.hours_total', store=True)
-    practical_hours_credits = fields.Float(string="Practical Hours Credits", related='course_id.practical_hours_credits', store=True)
-    independent_hours_credits = fields.Float(string="Independent Hours Credits", related='course_id.independent_hours_credits', store=True)
-    theoretical_hours_credits = fields.Float(string="Theoretical Hours Credits", related='course_id.theoretical_hours_credits', store=True)
-    credits_total = fields.Float(string="Credits Total", related='course_id.credits_total', store=True)
+    practical_hours_total = fields.Float(string="Practical Hours Total",
+                                         related='course_id.practical_hours_total',
+                                         store=True)
+    independent_hours_total = fields.Float(string="Independent Hours Total",
+                                           related='course_id.independent_hours_total',
+                                           store=True)
+    theoretical_hours_total = fields.Float(string="Theoretical Hours Total",
+                                           related='course_id.theoretical_hours_total',
+                                           store=True)
+    hours_total = fields.Float(string="Hours Total",
+                               related='course_id.hours_total', store=True)
+    practical_hours_credits = fields.Float(string="Practical Hours Credits",
+                                           related='course_id.practical_hours_credits',
+                                           store=True)
+    independent_hours_credits = fields.Float(
+        string="Independent Hours Credits",
+        related='course_id.independent_hours_credits', store=True)
+    theoretical_hours_credits = fields.Float(
+        string="Theoretical Hours Credits",
+        related='course_id.theoretical_hours_credits', store=True)
+    credits_total = fields.Float(string="Credits Total",
+                                 related='course_id.credits_total', store=True)
     academic_year = fields.Char(string="Academic Year", size=16)
     days_week = fields.Char(string="Days week", size=50)
     schedule = fields.Char(string="Schedule", size=200)
@@ -142,6 +156,7 @@ class OpBatch(models.Model):
         """Override default Odoo create function and extend."""
         res = super(OpBatch, self).create(values)
         self.generate_admission_register(res)
+        self.generate_exam_session(res)
         return res
 
     def import_batches(self):
@@ -235,3 +250,33 @@ class OpBatch(models.Model):
                 res.start_admission()
             else:
                 logger.info("Already exist: {}".format(batch.code))
+
+    @api.multi
+    def generate_exam_session(self, res):
+        for batch in res:
+            try:
+                session_count = self.env['op.exam.session'].search_count(
+                    [('exam_code', '=', batch.code)])
+                exam_type = self.env['op.exam.type'].search(
+                    [('code', '=', 'SUBJ')], limit=1)
+                if session_count == 0:
+                    exam_session = self.env['op.exam.session'].create({
+                        'name': batch.name,
+                        'course_id': batch.course_id,
+                        'batch_id': batch.id,
+                        'exam_code': batch.code,
+                        'start_date': batch.start_date,
+                        'end_date': batch.end_date,
+                        'evaluation_type': 'grade',
+                        'exam_type': exam_type.id,
+                        'state': 'done',
+                        'active': True
+                    })
+                    logger.info("Exam Session created: {}".format(
+                        exam_session.exam_code))
+                else:
+                    logger.info("Exam Session Already exist: {}".format(
+                        batch.code))
+            except Exception as e:
+                logger.info(e)
+                continue
