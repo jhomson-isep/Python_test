@@ -124,7 +124,7 @@ class OpStudent(models.Model):
 
         mqsl = MYSQL()
 
-        rows = mqsl.query()
+        rows = mqsl.query_recent_access()
 
         if len(rows) > 0:
             self.update_access(rows)

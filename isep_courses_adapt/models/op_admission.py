@@ -42,10 +42,6 @@ class OpAdmission(models.Model):
         'Mobile', size=32,
         states={'done': [('readonly', True)], 'submit': [('required', True)]})
 
-    # grade_ids = fields.One2many(comodel_name='op.exam.attendees',
-    #                             inverse_name='admission_id',
-    #                             domain=[('is_final', '=', 'True')])
-
     @api.multi
     def enroll_student(self):
         super(OpAdmission, self).enroll_student()
@@ -54,7 +50,7 @@ class OpAdmission(models.Model):
 
     @api.one
     def create_moodle_user(self):
-        Moodle = MoodleLib()
+        moodle = MoodleLib()
         student = self.env['op.student'].search(
             [('id', '=', self.student_id.id)], limit=1)
         student_course = self.env['op.student.course'].search(
@@ -62,33 +58,33 @@ class OpAdmission(models.Model):
              ('batch_id', '=', self.batch_id.id)])
         print("Student id: ", student.id)
         logger.info("Student id: {}".format(student.id))
-        moodle_course = Moodle.get_course(self.batch_id.moodle_code)
+        moodle_course = moodle.get_course(self.batch_id.moodle_code)
         print("moodle_course: ", moodle_course)
         logger.info("moodle_course: {}".format(moodle_course))
-        moodle_group = Moodle.get_group(moodle_course.get('id'),
+        moodle_group = moodle.get_group(moodle_course.get('id'),
                                         self.batch_id.code)
         if moodle_group is None:
-            moodle_group = Moodle.core_group_create_groups(
+            moodle_group = moodle.core_group_create_groups(
                 self.batch_id.code, moodle_course.get('id'))
         print("moodle_group: ", moodle_group)
         logger.info("moodle_group: {}".format(moodle_group))
         password = self.password_generator(length=10)
-        user = Moodle.get_user_by_field(field="username",
+        user = moodle.get_user_by_field(field="username",
                                         value=self.partner_id.email)
         if user is None:
-            user_response = Moodle.create_users(
+            user_response = moodle.create_users(
                 firstname=self.first_name,
                 lastname=self.last_name,
-                dni=self.partner_id.num_reg_trib or self.partner_id.vat,
+                dni=self.partner_id.vat,
                 password=password,
                 email=self.partner_id.email)
             user = user_response[0]
         print("user: ", user)
         logger.info("user: {}".format(user))
-        enrol_result = Moodle.enrol_user(moodle_course.get('id'),
+        enrol_result = moodle.enrol_user(moodle_course.get('id'),
                                          user.get('id'))
         logger.info(enrol_result)
-        member_result = Moodle.add_group_members(moodle_group.get('id'),
+        member_result = moodle.add_group_members(moodle_group.get('id'),
                                                  user.get('id'))
         logger.info(member_result)
         gr_no = self.env['ir.sequence'].next_by_code('op.gr.number') or '0'
@@ -121,7 +117,6 @@ class OpAdmission(models.Model):
         random_password = random.choices(printable, k=length)
         random_password = ''.join(random_password)
         return random_password
-
 
     @api.model
     def date_finish(self):

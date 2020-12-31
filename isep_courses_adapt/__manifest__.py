@@ -20,7 +20,6 @@
         'sale',
         'mail',
         'portal',
-        'l10n_mx_einvoice',
         'openeducat_core',
         'openeducat_fees',
         'openeducat_exam',

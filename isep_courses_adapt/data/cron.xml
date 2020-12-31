@@ -26,7 +26,7 @@
         </record>
 
         <record id="add_date_finish_in_admission" forcecreate='True' model="ir.cron">
-            <field name="name">: Admission: Agregar fecha de cierre de expediente académico</field>
+            <field name="name">Admission: Agregar fecha de cierre de expediente académico</field>
             <field eval="True" name="active"/>
             <field name="interval_number">1</field>
             <field name="interval_type">days</field>
@@ -34,6 +34,18 @@
             <field name="model_id" ref="model_op_admission"/>
             <field name="state">code</field>
             <field name="code">model.date_finish()</field>
+            <field name="type">ir.actions.server</field>
+        </record>
+
+        <record id="get_grads_from_moodle" forcecreate='True' model="ir.cron">
+            <field name="name">OP: Obtener calificaciones desde Moodle</field>
+            <field eval="True" name="active"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="model_id" ref="model_op_exam_attendees"/>
+            <field name="state">code</field>
+            <field name="code">model.import_grades_from_moodle()</field>
             <field name="type">ir.actions.server</field>
         </record>
 
