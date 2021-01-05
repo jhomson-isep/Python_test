@@ -50,9 +50,11 @@ class OpCourse(models.Model):
     content = fields.Text("Content", size=700)
     area_id = fields.Many2one('op.area.course', "Area of Course")
     batch_ids = fields.One2many('op.batch', 'course_id', string='Batch(s)')
+    course_type_id = fields.Many2one('op.course.type', string='Course type')
 
     _sql_constraints = [('unique_course_code',
-                         'check(1=1)', 'Delete constrian unique code per course!')]
+                         'check(1=1)',
+                         'Delete constrian unique code per course!')]
 
     @api.one
     @api.depends('subject_ids.practical_hours', 'subject_ids.independent_hours', 'subject_ids.theoretical_hours')

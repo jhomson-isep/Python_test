@@ -35,6 +35,10 @@ class OpCourse(Base_pg):
     __table__ = Table('op_course', metadata_pg, autoload=True)
 
 
+class OpCourseType(Base_pg):
+    __table__ = Table('op_course_type', metadata_pg, autoload=True)
+
+
 class OpAreaCourse(Base_pg):
     __table__ = Table('op_area_course', metadata_pg, autoload=True)
 
@@ -118,6 +122,10 @@ class GinAreaCurso(Base_server):
 
 class GinCurso(Base_server):
     __table__ = Table('gin_Cursos', metadata_server, autoload=True)
+
+
+class GinTipoCurso(Base_server):
+    __table__ = Table('gin_TiposCurso', metadata_server, autoload=True)
 
 
 class GinPrematriculas(Base_server):
