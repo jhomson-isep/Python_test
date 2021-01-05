@@ -17,6 +17,7 @@
     'license': 'AGPL-3',
     'depends': [
         'base',
+        'crm',
         'sale',
         'mail',
         'portal',
@@ -57,6 +58,7 @@
         'views/sale_order.xml',
         'views/op_exam_session.xml',
         'views/op_exam_attendances.xml',
+        'views/crm_team.xml',
         'menu/isep_courses_adapt_menu.xml',
         'data/op_document_type.xml',
         'data/op_evaluation_type.xml',
