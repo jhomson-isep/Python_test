@@ -29,7 +29,8 @@ server_isep = create_engine('mssql+pyodbc://sa:Gr5p4mr3@85.118.244.220'
 metadata_server = MetaData(bind=server)
 metadata_server_isep = MetaData(bind=server_isep)
 
-#PostgresSQL Tables
+
+# PostgresSQL Tables
 class OpCourse(Base_pg):
     __table__ = Table('op_course', metadata_pg, autoload=True)
 
@@ -117,6 +118,10 @@ class GinAreaCurso(Base_server):
 
 class GinCurso(Base_server):
     __table__ = Table('gin_Cursos', metadata_server, autoload=True)
+
+
+class GinPrematriculas(Base_server):
+    __table__ = Table('gin_PreMatriculas', metadata_server, autoload=True)
 
 
 class TiposDocumento(Base_server):
