@@ -7,12 +7,6 @@ from requests import post
 import logging
 
 logger = logging.getLogger(__name__)
-dsn = 'egServer70source'
-# dsn = 'egServer70'server = '85.118.244.220'
-# user = 'sa'
-# password = 'Gr5p4mr3'
-database = 'ISEP'
-
 production = False
 
 

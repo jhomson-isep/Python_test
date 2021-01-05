@@ -140,31 +140,31 @@ class OpStudent(models.Model):
         moodle = self.env['moodle']
         rows = Moodle.get_last_access_cron(moodle)
         for row in rows:
-            if 'idnumber' in row:
-                try:
-                    students = self.search(
-                        [('document_number', '=', row['idnumber'])])
-                    if not isinstance(row['lastaccess'], int):
-                        continue
-                    last_access = datetime.datetime.utcfromtimestamp(
-                        row['lastaccess'])
-                    if len(students) > 0:
-                        for student in students:
-                            access_values = {
-                                'student_id': student.id,
-                                'student_access': last_access
-                            }
-                            _access = self.env['op.student.access'].search(
-                                [('student_id', '=', student.id)])
-                            if len(_access) > 0:
-                                _access = _access[-1]
-                            if not self.equal_datetimes_YYMMDDHHmm(last_access,
-                                                                   _access.student_access):
-                                self.env['op.student.access'].create(
-                                    access_values)
-                except Exception as e:
-                    logger.info(e)
+            try:
+                students = self.search(
+                    ['|', ('document_number', '=', row['idnumber']),
+                     ('moodle_id', '=', row['id'])])
+                if not isinstance(row['lastaccess'], int):
                     continue
+                last_access = datetime.datetime.utcfromtimestamp(
+                    row['lastaccess'])
+                if len(students) > 0:
+                    for student in students:
+                        access_values = {
+                            'student_id': student.id,
+                            'student_access': last_access
+                        }
+                        _access = self.env['op.student.access'].search(
+                            [('student_id', '=', student.id)])
+                        if len(_access) > 0:
+                            _access = _access[-1]
+                        if not self.equal_datetimes_YYMMDDHHmm(last_access,
+                                                               _access.student_access):
+                            self.env['op.student.access'].create(
+                                access_values)
+            except Exception as e:
+                logger.info(e)
+                continue
         logger.info("*****************************************")
         logger.info("End of script: import all students access")
         logger.info("*****************************************")
@@ -175,8 +175,8 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         if self.document_number:
             moodle = self.env['moodle']
-            rows = Moodle.get_last_access(moodle, 'idnumber',
-                                          self.document_number)
+            rows = Moodle.get_last_access(moodle, 'id',
+                                          self.moodle_id)
             for row in rows:
                 try:
                     if not isinstance(row['lastaccess'], int):

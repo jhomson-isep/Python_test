@@ -30,6 +30,7 @@ class OpAdmission(models.Model):
     document_ids = fields.One2many("op.gdrive.documents", "partner_id",
                                    string="Documentation",
                                    related='partner_id.document_ids')
+    due_date = fields.Date(string='Due Date')
     application_number = fields.Char(
         'Application Number', size=32, copy=False,
         required=True, readonly=True, store=True,
@@ -47,6 +48,11 @@ class OpAdmission(models.Model):
         super(OpAdmission, self).enroll_student()
         for record in self:
             record.create_moodle_user()
+
+    @api.multi
+    def submit_form(self):
+        for admission in self:
+            admission.state = 'admission'
 
     @api.one
     def create_moodle_user(self):

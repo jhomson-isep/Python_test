@@ -79,7 +79,9 @@ class SaleOrder(models.Model):
             'application_number': str(
                 batch_id.id) + '-' + people,
             'is_student': is_student, 'student_id': student_id,
-            'partner_id': self.partner_id.id
+            'partner_id': self.partner_id.id,
+            'phone': self.partner_id.phone,
+            'mobile': self.partner_id.mobile or self.partner_id.phone
         }
         if admission_values:
             exists = self.get_sale_order_in_admission()
@@ -105,9 +107,9 @@ class SaleOrder(models.Model):
                 if course_type in ['curso', 'pgrado', 'diplo', 'mgrafico',
                                    'master'] and line.batch_id:
                     self.send_student(line.batch_id)
+                    self.in_admission = True
                 else:
                     logger.info(course_type)
-            self.in_admission = True
         return {}
 
     @staticmethod
@@ -123,7 +125,7 @@ class SaleOrder(models.Model):
         3- second surname.
 
         split_names( '' )
-        >>> ('Name', 'Middle name', 'Last name')
+        ('Name', 'Middle name', 'Last name')
         """
 
         # Separate the full name into spaces.

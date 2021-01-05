@@ -1,9 +1,14 @@
-import logging
-import datetime
-import mysql.connector
+# -*- coding: utf-8 -*-
+from dotenv import load_dotenv, find_dotenv
 from mysql.connector import errorcode
+import mysql.connector
+import datetime
+import logging
+import os
 
 logger = logging.getLogger(__name__)
+load_dotenv(find_dotenv())
+production = False
 
 
 class MYSQL():
@@ -13,6 +18,14 @@ class MYSQL():
         'host': '192.168.0.153',
         'database': 'moodle'
     }
+
+    if production:
+        config = {
+            'user': os.environ['MYSQL_USER'],
+            'password': os.environ['MYSQL_PASSWORD'],
+            'host': os.environ['MYSQL_HOST'],
+            'database': os.environ['MYSQL_DATABASE']
+        }
 
     def query(self, sql):
         logger.info(sql)
@@ -139,7 +152,7 @@ class MYSQL():
             JOIN mdl_course ON mdl_grade_items.courseid = mdl_course.id
             JOIN mdl_user ON mdl_grade_grades.userid = mdl_user.id
             WHERE     
-                DATE(FROM_UNIXTIME(mdl_grade_grades.timemodified, '%y/%m/%d %h:%i:%s')) BETWEEN '2020/11/01' AND NOW()
+                DATE(FROM_UNIXTIME(mdl_grade_grades.timemodified, '%y/%m/%d %h:%i:%s')) BETWEEN '2020/12/20' AND NOW()
                 AND  
                 mdl_grade_grades.finalgrade IS NOT NULL
             ORDER BY mdl_grade_grades.id DESC

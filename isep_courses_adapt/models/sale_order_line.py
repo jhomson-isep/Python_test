@@ -12,7 +12,6 @@ class SaleOrderLine(models.Model):
 
     @api.onchange('product_id')
     def onchange_batch(self):
-        res = {'domain': {
+        return {'domain': {
             'batch_id': [('course_id.code', '=', self.product_id.default_code),
                          ('end_date', '>', datetime.datetime.today())]}}
-        return res
