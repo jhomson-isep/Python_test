@@ -58,4 +58,19 @@
                   action="act_open_op_study_type_view" groups="base.group_system"/>
 
     </data>
+    <data>
+      <menuitem id="openeducat_admission.menu_admission" name="Applications"
+                  groups="openeducat_core.group_op_back_office,openeducat_core.group_op_back_office_admin"
+                  sequence="10"
+                  parent="openeducat_admission.menu_op_admission_submenu"
+                  action="openeducat_admission.act_open_op_admission_view"/>
+
+      <menuitem id="openeducat_admission.menu_admission_register" name="Admission Registers"
+                  sequence="20"
+                  groups="openeducat_core.group_op_back_office,openeducat_core.group_op_back_office_admin"
+                  parent="openeducat_admission.menu_op_admission_submenu"
+                  action="openeducat_admission.act_open_op_admission_register_view"/>
+
+        
+    </data>
 </odoo>
