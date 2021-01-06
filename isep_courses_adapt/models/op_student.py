@@ -49,7 +49,9 @@ class OpStudent(models.Model):
     access_ids = fields.One2many("op.student.access", "student_id",
                                  string="Access")
     admission_ids = fields.One2many("op.admission", "student_id",
-                                    string="Admission")
+                                    string="Admissions")
+    admission_count = fields.Integer(compute='_compute_admission_count',
+                                     default=0)
     exam_attendees_ids = fields.One2many("op.exam.attendees", "student_id",
                                          string="Exam attendees")
     last_access = fields.Char(String='Last access',
@@ -65,6 +67,36 @@ class OpStudent(models.Model):
         'unique(n_id)',
         'N_ID Number must be unique per student!'
     )]
+
+    def _compute_admission_count(self):
+        """Compute the number of distinct admissions linked to the batch."""
+        for student in self:
+            admissions = len(student.admission_ids)
+            student.admission_count = admissions
+
+    def action_open_admissions(self):
+        """Display the linked admissions and adapt the view to the number of
+        records to display."""
+        self.ensure_one()
+        admissions = self.admission_ids
+        action = self.env.ref('openeducat_admission.act_open_op_admission_view').read()[0]
+        if len(admissions) > 1:
+            action['domain'] = [('id', 'in', admissions.ids)]
+        elif len(admissions) == 1:
+            form_view = [(self.env.ref(
+                'openeducat_admission.view_op_admission_form').id, 'form')]
+            if 'views' in action:
+                logger.info("=== LINE 52 ===")
+                action['views'] = form_view + [(state, view) for state, view in
+                                               action['views'] if
+                                               view != 'form']
+            else:
+                logger.info("=== LINE 55 ===")
+                action['views'] = form_view
+            action['res_id'] = admissions.id
+        else:
+            action = {'type': 'ir.actions.act_window_close'}
+        return action
 
     def _compute_student_state(self):
         for student in self:

@@ -100,9 +100,11 @@
                     </page>
                 </notebook>
 
-<!--                <xpath expr="//field[@name='course_detail_ids']/tree/field[@name='subject_ids']" position="replace">-->
-<!--                    <field name="subject_rel_ids" widget="many2many_tags"/>-->
-<!--                </xpath>-->
+                <xpath expr="//button[@name='toggle_active']" position="before">
+                    <button class="btn oe_stat_button" type="object" name="action_open_admissions" style="border-right: 1px solid;" icon="fa-bullseye">
+                            <field string="Admissions" name="admission_count" widget="statinfo"/>
+                        </button>
+                </xpath>
 
             </field>
         </record>
