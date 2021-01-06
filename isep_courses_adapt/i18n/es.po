@@ -1078,3 +1078,8 @@ msgstr "Femenino"
 #: model_terms:ir.ui.view,arch_db:openeducat_core.view_op_student_form
 msgid "Partner"
 msgstr "Cliente"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_admission_search_inherit
+msgid "New admissions"
+msgstr "Nuevas admisiones"

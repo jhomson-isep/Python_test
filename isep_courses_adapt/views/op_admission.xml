@@ -65,9 +65,13 @@
                         <field name="due_date"/>
                         <field name="temporary_leave"/>
                         <field name="unsubscribed_date"/>
+                        <filter name="new_admissions" string="New admissions"
+                                domain="[('state','=', 'draft')]"/>
+                        <separator/>
                     </search>
                 </xpath>
             </field>
         </record>
+
     </data>
 </odoo>
