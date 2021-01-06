@@ -55,12 +55,26 @@ class OpStudent(models.Model):
     last_access = fields.Char(String='Last access',
                               compute='_get_last_access',
                               readonly=True)
+    student_state = fields.Selection(
+        [('draft', 'Draft'), ('progress', 'In progress'),
+         ('done', 'Done'), ('cancel', 'Cancelled')], string='Student state',
+        default='progress', store=True, compute='_compute_student_state')
 
     _sql_constraints = [(
         'unique_n_id',
         'unique(n_id)',
         'N_ID Number must be unique per student!'
     )]
+
+    def _compute_student_state(self):
+        for student in self:
+            state = 'done'
+            for admission in student.admission_ids:
+                if not admission.due_date:
+                    state = 'draft'
+                elif admission.due_date and admission.due_date >= fields.Date.today():
+                    state = 'progress'
+            student.student_state = state
 
     def _get_last_access(self):
         for record in self:

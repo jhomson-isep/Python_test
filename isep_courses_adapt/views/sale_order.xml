@@ -14,6 +14,7 @@
             <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="after">
                 <field name="batch_id"
                        domain="[('course_id.code','=', product_id_default_code), ('end_date', '>', time.strftime('%%Y-%%m-%%d')),('code', 'ilike', campus_id_code)]"/>
+                <field name="order_id" invisible="1"/>
                 <field name="code_product_rel" invisible="1"/>
                 <field name="campus_id_code" invisible="1"/>
                 <field name="product_id_default_code" invisible="1"/>
@@ -23,6 +24,7 @@
                    position="after">
                 <field name="batch_id"
                        domain="[('course_id.code','=', product_id_default_code), ('end_date', '>', time.strftime('%%Y-%%m-%%d')), ('code', 'ilike', campus_id_code)]"/>
+                <field name="order_id" invisible="1"/>
                 <field name="code_product_rel" invisible="1"/>
                 <field name="campus_id_code" invisible="1"/>
                 <field name="product_id_default_code" invisible="1"/>

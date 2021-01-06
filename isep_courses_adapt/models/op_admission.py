@@ -30,7 +30,7 @@ class OpAdmission(models.Model):
     document_ids = fields.One2many("op.gdrive.documents", "partner_id",
                                    string="Documentation",
                                    related='partner_id.document_ids')
-    due_date = fields.Date(string='Due Date')
+    due_date = fields.Date('Due Date', states={'done': [('readonly', False)]})
     application_number = fields.Char(
         'Application Number', size=32, copy=False,
         required=True, readonly=True, store=True,

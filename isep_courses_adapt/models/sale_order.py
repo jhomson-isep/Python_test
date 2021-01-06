@@ -37,36 +37,33 @@ class SaleOrder(models.Model):
             gender = 'm'
         return gender or 'o'
 
-    def get_sale_order_in_admission(self):
-        exists = False
-        so_id = self.env['op.admission'].search(
-            [('sale_order_id', '=', self.id)], limit=1).id
-        if so_id:
-            exists = True
-        logger.info("sale order: {}".format(so_id))
-        return exists
+    def get_sale_order_in_admission(self, application_number):
+        admission_count = self.env['op.admission'].search_count(
+            [('application_number', '=', application_number)])
+        return admission_count > 0
 
     def send_student(self, batch_id):
         is_student = False
         register_id = self.get_register_id(batch_id)
         student_id = self.get_student_id()
-
-        people = 'CON:' + str(self.partner_id.id)
-
-        if student_id:
-            is_student = True
-            people = 'ALU:' + str(student_id)
+        is_student = student_id is not None
+        people = ':'.join(['CON', str(self.partner_id.id)])
 
         first_name, middle_name, last_name, last_name2 = self.split_names(
             self.partner_id.name)
 
+        admission_last_name = last_name
+        if last_name2 not in last_name and last_name2 != '':
+            admission_last_name = ' '.join([last_name, last_name2])
+
+        application_number = str(batch_id.id) + '-' + people
         admission_values = {
             'street': self.partner_id.street, 'zip': self.partner_id.zip,
             'city': self.partner_id.city, 'sale_order_id': self.id,
             'name': self.partner_id.name,
             'batch_id': batch_id.id,
             'email': self.partner_id.email,
-            'last_name': last_name,
+            'last_name': admission_last_name,
             'first_name': first_name,
             'middle_name': middle_name,
             'country_id': self.partner_id.country_id.id,
@@ -76,15 +73,14 @@ class SaleOrder(models.Model):
             'gender': self.get_gender(),
             'register_id': register_id,
             'course_id': batch_id.course_id.id,
-            'application_number': str(
-                batch_id.id) + '-' + people,
+            'application_number': application_number,
             'is_student': is_student, 'student_id': student_id,
             'partner_id': self.partner_id.id,
             'phone': self.partner_id.phone,
             'mobile': self.partner_id.mobile or self.partner_id.phone
         }
         if admission_values:
-            exists = self.get_sale_order_in_admission()
+            exists = self.get_sale_order_in_admission(application_number)
             if exists:
                 raise UserError(_("Student already in admission"))
             if register_id is None or register_id is False:
@@ -99,26 +95,25 @@ class SaleOrder(models.Model):
         if not self.partner_id.x_sexo or not self.partner_id.x_birthdate:
             raise UserError(_('Fields sex and birthday are required'))
 
-        if not self.in_admission:
-            for line in self.order_line:
-                course_type = line.product_id.tipodecurso
-                logger.info('Line ========> {}'.format(line))
-                logger.info('Course type =======> {}'.format(course_type))
-                if course_type in ['curso', 'pgrado', 'diplo', 'mgrafico',
-                                   'master'] and line.batch_id:
-                    self.send_student(line.batch_id)
-                    self.in_admission = True
-                else:
-                    logger.info(course_type)
+        for line in self.order_line:
+            course_type = line.product_id.tipodecurso
+            logger.info('Line ========> {}'.format(line))
+            logger.info('Course type =======> {}'.format(course_type))
+            if course_type in ['curso', 'pgrado', 'diplo', 'mgrafico',
+                               'master'] and line.batch_id:
+                self.send_student(line.batch_id)
+            else:
+                logger.info(course_type)
+
         return {}
 
     @staticmethod
     def split_names(name):
         u"""
         It separates the first and last names and returns a tuple of three
-        elements (string) formatted for names with the first character capitalized.
-        This is assuming that in the chain the names and surnames are ordered in
-        the ideal way:
+        elements (string) formatted for names with the first character
+        capitalized. This is assuming that in the chain the names and
+        surnames are ordered in the ideal way:
 
         1- name or names.
         2- first surname.
@@ -137,8 +132,7 @@ class SaleOrder(models.Model):
         # Words of surnames and compound names.
         special_tokens = ['da', 'de', 'di', 'do', 'del', 'la', 'las',
                           'le', 'los', 'mac', 'mc', 'van', 'von', 'y', 'i',
-                          'san',
-                          'santa']
+                          'san', 'santa']
 
         prev = ""
         for token in tokens:
