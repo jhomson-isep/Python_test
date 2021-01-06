@@ -509,3 +509,11 @@ class OpStudent(models.Model):
                 doc.unlink()
         res = super(OpStudent, self).unlink()
         return res
+
+    def import_log_history(self):
+        student = self.search([('id', '=', 38826)])
+        body = """%s - %s <br/>
+        %s
+        """
+        student.message_post(body=body)
+        print(student)
