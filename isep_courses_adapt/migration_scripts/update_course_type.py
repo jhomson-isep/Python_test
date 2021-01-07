@@ -1,9 +1,7 @@
 from sqlachemy_conn import *
-from moodle import *
 
 session_pg = get_pg_session()
 session_sql = get_session_server()
-Moodle = MoodleLib()
 
 gin_courses = session_sql.query(GinCurso, GinTipoCurso).join(
     GinTipoCurso, GinCurso.TipoCursoID == GinTipoCurso.ID).all()
