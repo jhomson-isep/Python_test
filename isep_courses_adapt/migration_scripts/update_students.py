@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from sqlachemy_conn import *
 import json
 
