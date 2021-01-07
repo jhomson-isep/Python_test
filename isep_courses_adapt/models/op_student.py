@@ -526,6 +526,7 @@ class OpStudent(models.Model):
                                                                 ('res_id', '=', student.id)], limit=1)
                     if len(message) > 0:
                         logger.info("Message already exist id %s" % message.id)
+                        continue
                     else:
                         student.message_post(body=body)
                         message = self.env['mail.message'].search([('body', '=', body),('model','=', 'op.student'),
