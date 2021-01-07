@@ -16,7 +16,7 @@ for history in historys:
         body = """<p>%s - %s</p>
          <p>%s</p>""" % (history.Fecha, history.Usuario, history.Observaciones)
         student = session_pg.query(OpStudent).\
-                    filter(OpStudent.gr_no == history.N_Id).first()
+                    filter(OpStudent.gr_no == str(history.N_Id)).first()
         if student is not None:
             message = session_pg.query(MailMessage).\
                         filter(and_(MailMessage.body == body, MailMessage.model == 'op.student',
