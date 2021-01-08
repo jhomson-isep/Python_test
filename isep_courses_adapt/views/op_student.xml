@@ -77,6 +77,7 @@
                                 <field name="uvic_program"/>
                                 <field name="status_documentation"
                                        attrs="{'invisible':[('uvic_program','=', False),('sepyc_program','=',False)]}"/>
+                                <field name="status_student" readonly="1"/>
                             </group>
                         </sheet>
                     </group>
