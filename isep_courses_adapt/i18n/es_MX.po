@@ -1088,3 +1088,23 @@ msgstr "Nuevas admisiones"
 #: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
 msgid "Admissions"
 msgstr "Admisiones"
+
+#. module: isep_courses_adapt
+#: selection:op.student,status_student:0
+msgid "Graduate"
+msgstr "Graduado"
+
+#. module: isep_courses_adapt
+#: selection:op.student,status_student:0
+msgid "Low"
+msgstr "Baja"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__status_student
+msgid "Student Status"
+msgstr "Estado de estudiante"
+
+#. module: isep_courses_adapt
+#: selection:op.student,status_student:0
+msgid "Valid"
+msgstr "Vigente"

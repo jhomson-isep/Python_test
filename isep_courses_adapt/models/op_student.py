@@ -62,11 +62,35 @@ class OpStudent(models.Model):
          ('done', 'Done'), ('cancel', 'Cancelled')], string='Student state',
         default='progress', store=True, compute='_compute_student_state')
 
+    status_student = fields.Selection(
+        [('valid', 'Valid'), ('graduate', 'Graduate'),
+         ('low', 'Low')], default='valid', string="Student Status",
+         store=True, compute='_compute_determine_status', translate=True
+        )
     _sql_constraints = [(
         'unique_n_id',
         'unique(n_id)',
         'N_ID Number must be unique per student!'
     )]
+
+    def _compute_determine_status(self):
+        for student in self:
+            for admission in student.admission_ids:
+                if admission.due_date:
+                    if fields.Date.today() >= admission.due_date:
+                        student.status_student = 'graduate'
+                    else:
+                        student.status_student = 'valid'
+                else:
+                    student.status_student = 'valid'
+                if admission.unsubscribed_date:
+                    if fields.Date.today() >= admission.unsubscribed_date:
+                        student.status_student = 'low'
+                    else:
+                        student.status_student = 'valid'
+                else:
+                    student.status_student = 'valid'
+
 
     def _compute_admission_count(self):
         """Compute the number of distinct admissions linked to the batch."""
