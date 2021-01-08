@@ -26,7 +26,7 @@ try:
                     fechaInicio = batch.FechaAlta.date()
                 fechaDiplomas = datetime(1900, 1, 1, 0, 0, 0, 0)
                 if batch.FechaDiplomas is not None:
-                    fechaDiplomas = batch.FechaDiplomas.date()
+                    fechaDiplomas = batch.FechaDiplomas
                     fechaDiplomas = datetime(fechaDiplomas.year, fechaDiplomas.month, fechaDiplomas.day, 0, 0, 0, 0)
                 diaSemana = replace_special_caracter(batch.DiaSemana) if batch.DiaSemana is not None else ''
                 horario = replace_special_caracter(batch.Horario) if batch.Horario is not None else ''
