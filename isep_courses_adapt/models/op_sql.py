@@ -156,3 +156,10 @@ class SQL():
             "CursosAsignaturas.NIF_Profesor = '{0}';".format(faculty)
         )
         return rows
+
+    def get_all_history(self):
+        rows = self.query(
+            "SELECT N_Id, Fecha, Observaciones, Usuario "
+            "FROM ISEP.dbo.Historico;"
+            )
+        return rows
