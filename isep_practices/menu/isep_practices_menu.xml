@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_isep_practices_root" name="Practice"
+                  sequence="10"
+                  web_icon="isep_practices,static/description/practice.png"/>
+
+        <menuitem id="menu_isep_practice_submenu" name="Practice"
+                  sequence="20"
+                  parent="menu_isep_practices_root"/>
+
+        <menuitem id="submenu_phase" name="Phase"
+                  sequence="11"
+                  groups="base.group_system"
+                  parent="menu_isep_practice_submenu"
+                  action="act_open_practice_phase_view"/>
+
+        <menuitem id="submenu_temary" name="Temary"
+                  sequence="12"
+                  groups="base.group_system"
+                  parent="menu_isep_practice_submenu"
+                  action="act_open_practice_temary_view"/>
+
+    </data>
+</odoo>
