@@ -130,6 +130,9 @@ class OpModality(Base_pg):
     __table__ = Table('op_modality', metadata_pg, autoload=True)
 
 
+class MailMessage(Base_pg):
+    __table__ = Table('mail_message', metadata_pg, autoload=True)
+
 # SQL Server Tables
 class GinAreaCurso(Base_server):
     __table__ = Table('gin_AreasCurso', metadata_server, autoload=True)
@@ -188,6 +191,10 @@ class MdlAttendanceLog(Base_mysql):
 
 class MdlAttendanceStatuses(Base_mysql):
     __table__ = Table('mdl_attendance_statuses', metadata_mysql, autoload=True)
+
+
+class Historico(Base_server):
+    __table__ = Table('Historico', metadata_server_isep, autoload=True)
 
 
 def get_session_server():

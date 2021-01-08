@@ -541,3 +541,34 @@ class OpStudent(models.Model):
                 doc.unlink()
         res = super(OpStudent, self).unlink()
         return res
+
+    def import_log_history(self):
+        s = SQL()
+        logger.info("**************************************")
+        logger.info("On import students history")
+        logger.info("**************************************")
+        historys = s.get_all_history()
+        for history in historys:
+            if history.Observaciones != '':
+                body = """<p>%s - %s</p>
+                 <p>%s</p>""" % (history.Fecha, history.Usuario, history.Observaciones)
+                student = self.search([('gr_no', '=', history.N_Id)])
+                if len(student) > 0:
+                    message = self.env['mail.message'].search([('body', '=', body),('model','=', 'op.student'),
+                                                                ('res_id', '=', student.id)], limit=1)
+                    if len(message) > 0:
+                        logger.info("Message already exist id %s" % message.id)
+                        continue
+                    else:
+                        student.message_post(body=body)
+                        message = self.env['mail.message'].search([('body', '=', body),('model','=', 'op.student'),
+                                                                ('res_id', '=', student.id)], limit=1)
+                        message.write({
+                            'date' : history.Fecha
+                            })
+                        logger.info("Message register for student gr_no %s" % student.gr_no)
+                else:
+                    logger.info("Student not exist gr_no %s" % history.N_Id)
+        logger.info("**************************************")
+        logger.info("End import students history")
+        logger.info("**************************************")
