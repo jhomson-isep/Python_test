@@ -6,8 +6,8 @@ from sqlachemy_conn import *
 # SQL SERVER SESSION
 session_server = get_session_server_isep()
 # SQL SERVER AREAS
-matriculaciones = session_server.query(Matriculaciones).order_by(
-    Matriculaciones.FechaAlta.desc()).all()
+matriculaciones = session_server.query(Matriculaciones).\
+                                filter(Matriculaciones.FechaMatricula != None)
 # POSTGRES SERVER SESSION
 session_pg = get_pg_session()
 
@@ -72,8 +72,8 @@ for matricula in matriculaciones:
                 admission.state_id = partner.state_id
                 admission.register_id = admission_register.id
                 admission.application_number = application_number
-                admission.application_date = matricula.FechaMatricula
-                admission.admission_date = matricula.FechaMatricula
+                admission.application_date = matricula.FechaMatricula.date()
+                admission.admission_date = matricula.FechaMatricula.date()
                 admission.course_id = admission_register.course_id
                 admission.batch_id = batch.id
                 admission.unsubscribed_date = unsubscribed_date
