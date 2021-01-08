@@ -138,10 +138,9 @@ class OpStudent(models.Model):
         logger.info("update_access")
         logger.info("**************************************")
         for row in rows:
-            if 'idnumber' in row and row['idnumber'] != '':
+            if 'idnumber' in row or 'id' in row:
                 try:
-                    student = self.search(
-                        [('document_number', '=', row['idnumber'])])
+                    student = self.search([('moodle_id', '=', row['id'])])
                     if not isinstance(row['lastaccess'], int):
                         continue
                     last_access = datetime.datetime.utcfromtimestamp(
@@ -158,7 +157,9 @@ class OpStudent(models.Model):
                         if not self.equal_datetimes_YYMMDDHHmm(last_access,
                                                                _access.student_access):
                             self.env['op.student.access'].create(access_values)
-                            logger.info('Record created')
+                            logger.info('Student access created')
+                    elif len(student) > 1:
+                        logger.info(row)
                 except Exception as e:
                     logger.info(e)
                     continue
@@ -188,8 +189,7 @@ class OpStudent(models.Model):
         for row in rows:
             try:
                 students = self.search(
-                    ['|', ('document_number', '=', row['idnumber']),
-                     ('moodle_id', '=', row['id'])])
+                    [('moodle_id', '=', row['id'])])
                 if not isinstance(row['lastaccess'], int):
                     continue
                 last_access = datetime.datetime.utcfromtimestamp(
@@ -219,10 +219,11 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         logger.info("import student access")
         logger.info("**************************************")
-        if self.document_number:
+        if self.document_number or self.moodle_id != 0:
             moodle = self.env['moodle']
             rows = Moodle.get_last_access(moodle, 'id',
                                           self.moodle_id)
+            logger.info(rows)
             for row in rows:
                 try:
                     if not isinstance(row['lastaccess'], int):
@@ -253,6 +254,7 @@ class OpStudent(models.Model):
                         self.env['op.student.access'].create(access_values)
                 except Exception as e:
                     logger.info(e)
+                    traceback.print_exc()
                     continue
 
     @staticmethod

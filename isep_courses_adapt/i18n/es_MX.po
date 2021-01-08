@@ -1088,3 +1088,8 @@ msgstr "Nuevas admisiones"
 #: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
 msgid "Admissions"
 msgstr "Admisiones"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_order_form_inherit
+msgid "Send student"
+msgstr "Enviar estudiante"

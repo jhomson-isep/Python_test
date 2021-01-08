@@ -115,9 +115,8 @@ class MYSQL():
             rows = []
             if cursor != []:
                 for (id, idnumber, username, email, last_access) in cursor:
-                    if 'idnumber' != '':
-                        rows.append({'id': id, 'idnumber': idnumber,
-                                     'lastaccess': last_access})
+                    rows.append({'id': id, 'idnumber': idnumber,
+                                 'lastaccess': last_access})
         except Exception as e:
             rows = []
         return rows
