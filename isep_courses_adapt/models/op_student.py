@@ -65,10 +65,12 @@ class OpStudent(models.Model):
     status_student = fields.Selection(
         [('valid', 'Valid'), ('graduate', 'Graduate'),
          ('low', 'Low')], default='valid', string="Student Status",
-         store=True, compute='_compute_determine_status', translate=True
-        )
-    type_of_course_taken = fields.Many2many('op.course.type', string='Type of course taken', translate=True,
-                                            store=True, compute='_compute_determine_type_of_course')
+        store=True, compute='_compute_determine_status', translate=True)
+    type_of_course_taken = fields.Many2many(
+        comodel_name='op.course.type',
+        string='Type of course taken',
+        translate=True, store=True,
+        compute='_compute_determine_type_of_course')
     _sql_constraints = [(
         'unique_n_id',
         'unique(n_id)',
@@ -80,8 +82,9 @@ class OpStudent(models.Model):
             for course in student.course_detail_ids:
                 if course.course_id.course_type_id not in student.type_of_course_taken:
                     student.update({
-                        'type_of_course_taken' : [(4,course.course_id.course_type_id.id)]
-                        })
+                        'type_of_course_taken': [
+                            (4, course.course_id.course_type_id.id)]
+                    })
 
     def _compute_determine_status(self):
         for student in self:

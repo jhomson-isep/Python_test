@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from datetime import datetime
+
+from dateutil.relativedelta import relativedelta
+from odoo.exceptions import ValidationError
 from odoo import models, fields, api, _
 from .moodle import MoodleLib
 from datetime import date
@@ -45,9 +49,77 @@ class OpAdmission(models.Model):
 
     @api.multi
     def enroll_student(self):
-        super(OpAdmission, self).enroll_student()
         for record in self:
-            record.create_moodle_user()
+            if record.register_id.max_count:
+                total_admission = self.env['op.admission'].search_count(
+                    [('register_id', '=', record.register_id.id),
+                     ('state', '=', 'done')])
+                if not total_admission < record.register_id.max_count:
+                    msg = 'Max Admission In Admission Register :- (%s)' % (
+                        record.register_id.max_count)
+                    raise ValidationError(_(msg))
+
+            student = self.env['op.student'].search(
+                [('email', '=', record.email)], limit=1)
+            if len(student) > 0:
+                record.student_id = student.id
+
+            print(len(student))
+            print(record.student_id)
+
+            if not record.student_id:
+                vals = record.get_student_vals()
+                record.partner_id = vals.get('partner_id')
+                record.student_id = student_id = self.env[
+                    'op.student'].create(vals).id
+            else:
+                student_id = record.student_id.id
+                record.student_id.write({
+                    'course_detail_ids': [[0, False, {
+                        'course_id':
+                            record.course_id and record.course_id.id or False,
+                        'batch_id':
+                            record.batch_id and record.batch_id.id or False,
+                    }]],
+                })
+            if record.fees_term_id:
+                val = []
+                product_id = record.register_id.product_id.id
+                for line in record.fees_term_id.line_ids:
+                    no_days = line.due_days
+                    per_amount = line.value
+                    amount = (per_amount * record.fees) / 100
+                    date = (datetime.today() + relativedelta(
+                        days=no_days)).date()
+                    dict_val = {
+                        'fees_line_id': line.id,
+                        'amount': amount,
+                        'fees_factor': per_amount,
+                        'date': date,
+                        'product_id': product_id,
+                        'state': 'draft',
+                    }
+                    val.append([0, False, dict_val])
+                record.student_id.write({
+                    'fees_detail_ids': val
+                })
+            record.write({
+                'nbr': 1,
+                'state': 'done',
+                'admission_date': fields.Date.today(),
+                'student_id': student_id,
+                'is_student': True,
+            })
+            reg_id = self.env['op.subject.registration'].create({
+                'student_id': student_id,
+                'batch_id': record.batch_id.id,
+                'course_id': record.course_id.id,
+                'min_unit_load': record.course_id.min_unit_load or 0.0,
+                'max_unit_load': record.course_id.max_unit_load or 0.0,
+                'state': 'draft',
+            })
+            reg_id.get_subjects()
+            # record.create_moodle_user()
 
     @api.multi
     def submit_form(self):
