@@ -7,7 +7,8 @@
         <field name="arch" type="xml">
 
             <xpath expr="//button[@name='print_quotation']" position="before">
-                <button name="action_send_student" type="object" string="Send student" class="oe_highlight"></button>
+                <button name="action_send_student" type="object" string="Send student" class="oe_highlight"
+                        attrs="{'invisible': [('state', '!=', 'sale')]}"></button>
 <!--                <button name="action_send_student" type="object" string="Send student"-->
 <!--                        class="oe_highlight" groups="base.group_system"></button>-->
             </xpath>

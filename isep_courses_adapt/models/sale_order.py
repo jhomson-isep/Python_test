@@ -81,10 +81,11 @@ class SaleOrder(models.Model):
         }
         if admission_values:
             exists = self.get_sale_order_in_admission(application_number)
-            if exists:
-                raise UserError(_("Student already in admission"))
-            if register_id is None or register_id is False:
-                raise UserError(_("Student without admission"))
+            if self.state == 'sale':
+                if exists:
+                    raise UserError(_("Student already in admission"))
+                if register_id is None or register_id is False:
+                    raise UserError(_("Student without register admission"))
             admission = self.env['op.admission'].create(admission_values)
             logger.info("params:{}".format(admission_values))
             logger.info("Admission created: {}".format(admission))
