@@ -1123,3 +1123,18 @@ msgstr "Tipo de curso"
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_sale_order-line__modality_id
 msgid "Modality"
 msgstr "Modalidad"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_search_inherit
+msgid "Archived"
+msgstr "Archivados"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_search_inherit
+msgid "In progress"
+msgstr "En progreso"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_search_inherit
+msgid "Low"
+msgstr "Baja"
