@@ -83,6 +83,22 @@
                         </sheet>
                     </group>
                 </xpath>
+                <xpath expr="//form/sheet/notebook/page/group/field[@name='course_detail_ids']" position="before">
+                    <group colspan="4">
+                        <field name="admission_ids"
+                           nolabel="1">
+                            <tree string="Course Details">
+                                <field name="admission_date"/>
+                                <field name="course_id"/>
+                                <field name="batch_id"/>
+                                <field name="due_date"/>
+                                <field name="state"/>
+                            </tree>
+                        </field>
+                    </group>
+                    
+                </xpath>
+
 
                 <notebook position="inside">
                     <page name="documentation" string="Documentation">
