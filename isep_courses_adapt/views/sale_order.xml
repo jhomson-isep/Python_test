@@ -15,9 +15,8 @@
 
             <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="after">
                 <field name="modality_id"/>
-                <field name="batch_id" attrs="{'required': [('company_id_id', 'in', [1])]}"
+                <field name="batch_id" attrs="{'required': [('company_id_id', 'in', [1, 1111])]}"
                        domain="[('course_id.code','=', product_id_default_code), ('end_date', '>', time.strftime('%%Y-%%m-%%d'))]"/>
-                <field name="company_id_id" invisible="1"/>
                 <field name="code_product_rel" invisible="1"/>
                 <field name="campus_id_code" invisible="1"/>
                 <field name="product_id_default_code" invisible="1"/>
@@ -26,9 +25,8 @@
             <xpath expr="//field[@name='order_line']/form[1]/group[1]/group[1]/field[@name='product_id']"
                    position="after">
                 <field name="modality_id"/>
-                <field name="batch_id" attrs="{'required': [('company_id_id', 'in', [1])]}"
+                <field name="batch_id" attrs="{'required': [('company_id_id', 'in', [1, 1111])]}"
                        domain="[('course_id.code','=', product_id_default_code), ('end_date', '>', time.strftime('%%Y-%%m-%%d'))]"/>
-                <field name="company_id_id" invisible="1"/>
                 <field name="code_product_rel" invisible="1"/>
                 <field name="campus_id_code" invisible="1"/>
                 <field name="product_id_default_code" invisible="1"/>
