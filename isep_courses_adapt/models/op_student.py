@@ -65,8 +65,8 @@ class OpStudent(models.Model):
     status_student = fields.Selection(
         [('valid', 'Valid'), ('graduate', 'Graduate'),
          ('low', 'Low')], default='valid', string="Student Status",
-         store=True, compute='_compute_determine_status', translate=True
-        )
+        store=True, compute='_compute_determine_status', translate=True)
+
     _sql_constraints = [(
         'unique_n_id',
         'unique(n_id)',
@@ -90,7 +90,6 @@ class OpStudent(models.Model):
                         student.status_student = 'valid'
                 else:
                     student.status_student = 'valid'
-
 
     def _compute_admission_count(self):
         """Compute the number of distinct admissions linked to the batch."""
@@ -134,21 +133,22 @@ class OpStudent(models.Model):
 
     def _get_last_access(self):
         for record in self:
-            access_ago = fields.Datetime.now() - record.student_access
-            minutes, seconds = divmod(access_ago.seconds, 60)
-            hours, minutes = divmod(minutes, 60)
-            access_string = ""
-            if access_ago.days > 0:
-                if access_ago.days > 365:
-                    years, days = divmod(access_ago.days, 365)
-                    access_string += "{0} años, {1} días, ".format(years, days)
-                else:
-                    access_string += "{0} días, ".format(access_ago.days)
-            if hours > 0:
-                access_string += "{0} horas, ".format(hours)
-            if minutes > 0:
-                access_string += "{0} minutos, ".format(minutes)
-            record.last_access = access_string[:-2]
+            last_access = record.env['op.student.access'].search(
+                [('student_id', '=', record.id)], order='id desc', limit=1)
+            if last_access.student_access:
+                access_ago = fields.Datetime.today() - last_access.student_access
+                minutes, seconds = divmod(access_ago.seconds, 60)
+                hours, minutes = divmod(minutes, 60)
+                access_string = "Hace "
+                if access_ago.days > 0:
+                    access_string += "{0} días ".format(access_ago.days)
+                if hours > 0:
+                    access_string += "{0} horas ".format(hours)
+                if minutes > 0:
+                    access_string += "{0} minutos ".format(minutes)
+                record.last_access = access_string
+            else:
+                record.last_access = "Nunca"
 
     @staticmethod
     def equal_datetimes_YYMMDDHHmm(ddtime1, ddtime2):
