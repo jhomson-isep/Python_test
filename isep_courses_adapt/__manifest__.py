@@ -60,6 +60,7 @@
         'views/op_exam_attendances.xml',
         'views/op_course_type.xml',
         'views/crm_team.xml',
+        'wizard/op_student_merge_view.xml',
         'menu/isep_courses_adapt_menu.xml',
         'data/op_document_type.xml',
         'data/op_evaluation_type.xml',
