@@ -8,7 +8,7 @@
             <xpath expr="//h2[@id='openeducat_core_apps']" position="before">
 
                 <h2 id="op_courses_moodle">Parámetros de moodle</h2>
-                <div class="row mt16 o_settings_container"
+                <div class="row mt16 o_settings_container" id="op_courses_moodle_container"
                      title="Specify different activities which is held in an institute.">
                     <div class="col-12 col-lg-6 o_setting_box">
                         <div class="o_setting_right_pane">
@@ -64,8 +64,8 @@
 
                 </div>
             </xpath>
-            <xpath expr="//h2[@id='op_courses_moodle']" position="before">
 
+            <xpath expr="//h2[@id='op_courses_moodle']" position="before">
                 <h2 id="op_google_drive">Configurar Google Drive</h2>
                 <div class="row mt16 o_settings_container"
                      title="Specify different activities which is held in an institute.">
@@ -79,6 +79,7 @@
                     </div>
                 </div>
             </xpath>
+
         </field>
     </record>
 </odoo>

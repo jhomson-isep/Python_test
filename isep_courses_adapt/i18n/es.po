@@ -1119,3 +1119,7 @@ msgstr "Vigente"
 msgid "Type of course taken"
 msgstr "Tipo de curso"
 
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__modality_id
+msgid "Modality"
+msgstr "Modalidad"

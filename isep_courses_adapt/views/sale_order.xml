@@ -9,14 +9,15 @@
             <xpath expr="//button[@name='print_quotation']" position="before">
                 <button name="action_send_student" type="object" string="Send student" class="oe_highlight"
                         attrs="{'invisible': [('state', '!=', 'sale')]}"></button>
-<!--                <button name="action_send_student" type="object" string="Send student"-->
-<!--                        class="oe_highlight" groups="base.group_system"></button>-->
+                <!--                <button name="action_send_student" type="object" string="Send student"-->
+                <!--                        class="oe_highlight" groups="base.group_system"></button>-->
             </xpath>
 
             <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="after">
-                <field name="batch_id"
-                       domain="[('course_id.code','=', product_id_default_code), ('end_date', '>', time.strftime('%%Y-%%m-%%d')),('code', 'ilike', campus_id_code)]"/>
-                <field name="order_id" invisible="1"/>
+                <field name="modality_id"/>
+                <field name="batch_id" attrs="{'required': [('company_id_id', 'in', [1])]}"
+                       domain="[('course_id.code','=', product_id_default_code), ('end_date', '>', time.strftime('%%Y-%%m-%%d'))]"/>
+                <field name="company_id_id" invisible="1"/>
                 <field name="code_product_rel" invisible="1"/>
                 <field name="campus_id_code" invisible="1"/>
                 <field name="product_id_default_code" invisible="1"/>
@@ -24,9 +25,10 @@
 
             <xpath expr="//field[@name='order_line']/form[1]/group[1]/group[1]/field[@name='product_id']"
                    position="after">
-                <field name="batch_id"
-                       domain="[('course_id.code','=', product_id_default_code), ('end_date', '>', time.strftime('%%Y-%%m-%%d')), ('code', 'ilike', campus_id_code)]"/>
-                <field name="order_id" invisible="1"/>
+                <field name="modality_id"/>
+                <field name="batch_id" attrs="{'required': [('company_id_id', 'in', [1])]}"
+                       domain="[('course_id.code','=', product_id_default_code), ('end_date', '>', time.strftime('%%Y-%%m-%%d'))]"/>
+                <field name="company_id_id" invisible="1"/>
                 <field name="code_product_rel" invisible="1"/>
                 <field name="campus_id_code" invisible="1"/>
                 <field name="product_id_default_code" invisible="1"/>
