@@ -43,7 +43,6 @@ class SaleOrder(models.Model):
         return admission_count > 0
 
     def send_student(self, batch_id):
-        is_student = False
         register_id = self.get_register_id(batch_id)
         student_id = self.get_student_id()
         is_student = student_id is not None
@@ -83,9 +82,11 @@ class SaleOrder(models.Model):
             exists = self.get_sale_order_in_admission(application_number)
             if self.state == 'sale':
                 if exists:
-                    raise UserError(_("Student already in admission"))
+                    raise UserError(_("Estudiante ya enviado a admisión"))
                 if register_id is None or register_id is False:
-                    raise UserError(_("Student without register admission"))
+                    raise UserError(_("Registro de admisión no encontrado, "
+                                      "contacte a su administrador de "
+                                      "sistemas"))
             admission = self.env['op.admission'].create(admission_values)
             logger.info("params:{}".format(admission_values))
             logger.info("Admission created: {}".format(admission))
@@ -94,15 +95,22 @@ class SaleOrder(models.Model):
     def action_send_student(self):
         self.ensure_one()
         if not self.partner_id.x_sexo or not self.partner_id.x_birthdate:
-            raise UserError(_('Fields sex and birthday are required'))
+            raise UserError(_('Los campos Seco y Fecha de nacimiento son '
+                              'requeridos'))
 
         for line in self.order_line:
             course_type = line.product_id.tipodecurso
             logger.info('Line ========> {}'.format(line))
             logger.info('Course type =======> {}'.format(course_type))
             if course_type in ['curso', 'pgrado', 'diplo', 'mgrafico',
-                               'master'] and line.batch_id:
-                self.send_student(line.batch_id)
+                               'master']:
+                if not line.batch_id.id and self.company_id.id in [1, 1111]:
+                    raise UserError(_(
+                        'El grupo es obligatorio para el producto: {}'.format(
+                            line.product_id.name)))
+
+                if line.batch_id.id:
+                    self.send_student(line.batch_id)
             else:
                 logger.info(course_type)
 
