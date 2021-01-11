@@ -30,6 +30,9 @@
                         <field name="observations" widget="text"/>
                     </group>
                 </xpath>
+                <xpath expr="//button[@name='open_student']" position="after">
+                    <button name="create_moodle_user" states="done" string="Send Moodle" type="object" groups="base.group_system"/>
+                </xpath>
             </field>
         </record>
 
