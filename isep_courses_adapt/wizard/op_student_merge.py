@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 class OpStudentMergeWizard(models.TransientModel):
     _name = 'op.student.merge.wizard'
@@ -17,6 +18,8 @@ class OpStudentMergeWizard(models.TransientModel):
     def action_merge(self):
         student_original = 0
         students_to_merge = []
+        if len(self.student_ids) == 1:
+            raise ValidationError(_('Seleccione al menos dos o mas estudiantes para combinar!!'))
         for student in self.student_ids:
             if student_original == 0:
                 student_original = student.id
