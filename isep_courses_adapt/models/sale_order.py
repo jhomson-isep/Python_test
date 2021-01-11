@@ -87,9 +87,10 @@ class SaleOrder(models.Model):
                     raise UserError(_("Registro de admisión no encontrado, "
                                       "contacte a su administrador de "
                                       "sistemas"))
-            admission = self.env['op.admission'].create(admission_values)
-            logger.info("params:{}".format(admission_values))
-            logger.info("Admission created: {}".format(admission))
+            if not exists:
+                admission = self.env['op.admission'].create(admission_values)
+                logger.info("params:{}".format(admission_values))
+                logger.info("Admission created: {}".format(admission))
 
     @api.multi
     def action_send_student(self):

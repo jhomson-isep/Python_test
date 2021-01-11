@@ -119,7 +119,7 @@ class OpAdmission(models.Model):
                 'state': 'draft',
             })
             reg_id.get_subjects()
-            # record.create_moodle_user()
+            record.create_moodle_user()
 
     @api.multi
     def submit_form(self):
@@ -157,6 +157,16 @@ class OpAdmission(models.Model):
                 password=password,
                 email=self.partner_id.email)
             user = user_response[0]
+            gr_no = self.env['ir.sequence'].next_by_code('op.gr.number') or '0'
+            logger.info(gr_no)
+            student_course.write({'roll_number': gr_no})
+            student.write({
+                'moodle_id': user.get('id'),
+                'moodle_user': self.partner_id.email,
+                'moodle_pass': password,
+                'gr_no': gr_no,
+                'n_id': gr_no
+            })
         print("user: ", user)
         logger.info("user: {}".format(user))
         enrol_result = moodle.enrol_user(moodle_course.get('id'),
@@ -165,16 +175,6 @@ class OpAdmission(models.Model):
         member_result = moodle.add_group_members(moodle_group.get('id'),
                                                  user.get('id'))
         logger.info(member_result)
-        gr_no = self.env['ir.sequence'].next_by_code('op.gr.number') or '0'
-        logger.info(gr_no)
-        student_course.write({'roll_number': gr_no})
-        student.write({
-            'moodle_id': user.get('id'),
-            'moodle_user': self.partner_id.email,
-            'moodle_pass': password,
-            'gr_no': gr_no,
-            'n_id': gr_no
-        })
 
     @staticmethod
     def password_generator(length=8):
