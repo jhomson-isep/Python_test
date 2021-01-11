@@ -134,24 +134,25 @@ class OpAdmission(models.Model):
         student_course = self.env['op.student.course'].search(
             [('student_id', '=', student.id),
              ('batch_id', '=', self.batch_id.id)])
-        print("Student id: ", student.id)
         logger.info("Student id: {}".format(student.id))
         moodle_course = moodle.get_course(self.batch_id.moodle_code)
-        print("moodle_course: ", moodle_course)
         logger.info("moodle_course: {}".format(moodle_course))
         moodle_group = moodle.get_group(moodle_course.get('id'),
                                         self.batch_id.code)
         if moodle_group is None:
             moodle_group = moodle.core_group_create_groups(
                 self.batch_id.code, moodle_course.get('id'))
-        print("moodle_group: ", moodle_group)
         logger.info("moodle_group: {}".format(moodle_group))
         password = self.password_generator(length=10)
         user = moodle.get_user_by_field(field="username",
                                         value=self.partner_id.email)
         if user is None:
+            first_name = self.first_name
+            if self.middle_name:
+                first_name = first_name + self.middle_name
+
             user_response = moodle.create_users(
-                firstname=self.first_name,
+                firstname=first_name,
                 lastname=self.last_name,
                 dni=self.partner_id.vat,
                 password=password,
@@ -167,7 +168,6 @@ class OpAdmission(models.Model):
                 'gr_no': gr_no,
                 'n_id': gr_no
             })
-        print("user: ", user)
         logger.info("user: {}".format(user))
         enrol_result = moodle.enrol_user(moodle_course.get('id'),
                                          user.get('id'))
