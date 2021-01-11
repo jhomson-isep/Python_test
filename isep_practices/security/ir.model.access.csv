@@ -1,3 +1,5 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-access_isep_practices,isep_practices,model_practice_phase,base.group_system,1,1,1,1
-access_isep_practices,isep_practices,model_practice_temary,base.group_system,1,1,1,1
+access_isep_practices_phase,isep_practices_phase,model_practice_phase,base.group_system,1,1,1,1
+access_isep_practices_temary,isep_practices_temary,model_practice_temary,base.group_system,1,1,1,1
+access_isep_practices_tutor,isep_practices_tutor,model_practice_tutor,base.group_system,1,1,1,1
+access_isep_practices_tutor_course,isep_practices_tutor_course,model_practice_tutor_course,base.group_system,1,1,1,1

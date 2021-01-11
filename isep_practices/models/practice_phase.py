@@ -2,6 +2,7 @@ from odoo import fields, models
 
 class PracticePhase(models.Model):
     _name = 'practice.phase'
+    _description = "Phase"
 
     code = fields.Char(string='Code', size=8)
     name = fields.Char(string='Name', size=200)

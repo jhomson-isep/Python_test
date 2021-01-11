@@ -23,7 +23,12 @@
         'security/ir.model.access.csv',
         'views/practice_temary.xml',
         'views/practice_phase.xml',
+        'views/practice_tutor.xml',
+        'views/practice_tutor_course.xml',
         'menu/isep_practices_menu.xml'
     ],
+
     'installable': True,
+    'auto_install': False,
+    'application': True,
 }

@@ -17,15 +17,14 @@ msgstr ""
 
 #. module: isep_practices
 #: model:ir.ui.menu,name:isep_practices.menu_isep_practices_root
-#: model:ir.ui.menu,name:isep_practices.menu_isep_practice_submenu
-
+#: model:ir.ui.menu,name:isep_practices.menu_isep_practice_menu
 msgid "Practice"
 msgstr "Prácticas"
 
 #. module: isep_practices
+#: model:ir.ui.menu,name:isep_practices.submenu_phase
 #: model:ir.actions.act_window,name:isep_practices.act_open_practice_phase_view
 #: model:ir.model,name:isep_practices.model_practice_phase
-
 msgid "Phase"
 msgstr "Fase"
 
@@ -38,3 +37,57 @@ msgstr "Código"
 #: model:ir.model.fields,field_description:isep_practices.field_practice_phase__name
 msgid "Name"
 msgstr "Nombre"
+
+#. module: isep_practices
+#: model:ir.ui.menu,name:isep_practices.submenu_temary
+#: model:ir.actions.act_window,name:isep_practices.act_open_practice_temary_view
+#: model:ir.model,name:isep_practices.model_practice_temary
+msgid "Temary"
+msgstr "Temario"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_temary__op_course_id
+#: model:ir.model.fields,field_description:isep_practices.field_practice_tutor_course__op_course_id
+
+msgid "Course"
+msgstr "Curso"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_temary__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_temary__content
+msgid "Content"
+msgstr "Contenido"
+
+#. module: isep_practices
+#: model:ir.ui.menu,name:isep_practices.submenu_tutor
+#: model:ir.actions.act_window,name:isep_practices.act_open_practice_tutor_view
+#: model:ir.model.fields,field_description:isep_practices.field_practice_tutor_course__practice_tutor_id
+#: model:ir.model,name:isep_practices.model_practice_tutor
+msgid "Tutor"
+msgstr "Tutor"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_tutor__first_name
+msgid "First Name"
+msgstr "Nombre"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_tutor__last_name
+msgid "Last Name"
+msgstr "Apellido"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_tutor__dni
+msgid "Dni/Passport"
+msgstr "DNI/Pasaporte"
+
+#. module: isep_practices
+#: model:ir.ui.menu,name:isep_practices.submenu_tutor_course
+#: model:ir.actions.act_window,name:isep_practices.act_open_practice_tutor_course_view
+#: model:ir.model,name:isep_practices.model_practice_tutor_course
+msgid "Association course tutor"
+msgstr "Asociación curso tutor"
