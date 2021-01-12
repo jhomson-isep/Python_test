@@ -1143,3 +1143,18 @@ msgstr "Baja"
 #: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_admission_form_inherit
 msgid "Send Moodle"
 msgstr "Enviar a Moodle"
+
+#: model:ir.model,name:isep_courses_adapt.model_op_student_merge_wizard
+msgid "Merge Student for selected Student(s)"
+msgstr "Combinar estudiantes seleccionados"
+
+#. module: isep_courses_adapt
+#: model:ir.actions.act_window,name:isep_courses_adapt.action_student_merge
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.base_student_merge_automatic_wizard_form
+msgid "Merge Students"
+msgstr "Combinar Estudiantes"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.base_student_merge_automatic_wizard_form
+msgid "Merge the following Student"
+msgstr "Estudiantes a Combinar"
