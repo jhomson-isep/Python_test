@@ -54,6 +54,7 @@ msgstr "Curso"
 
 #. module: isep_practices
 #: model:ir.model.fields,field_description:isep_practices.field_practice_temary__name
+#: model:ir.model.fields,field_description:isep_practices.field_practice_schedule__name
 msgid "Name"
 msgstr "Nombre"
 
@@ -86,8 +87,40 @@ msgid "Dni/Passport"
 msgstr "DNI/Pasaporte"
 
 #. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_tutor__emails
+msgid "Email"
+msgstr "Correo Electrónico"
+
+#. module: isep_practices
 #: model:ir.ui.menu,name:isep_practices.submenu_tutor_course
 #: model:ir.actions.act_window,name:isep_practices.act_open_practice_tutor_course_view
 #: model:ir.model,name:isep_practices.model_practice_tutor_course
 msgid "Association course tutor"
 msgstr "Asociación curso tutor"
+
+#. module: isep_practices
+#: model:ir.ui.menu,name:isep_practices.submenu_schedule
+#: model:ir.actions.act_window,name:isep_practices.act_open_practice_schedule_view
+#: model:ir.model,name:isep_practices.model_practice_schedule
+msgid "Schedule"
+msgstr "Horario"
+
+#. module: isep_practices
+#: model_terms:ir.ui.view,arch_db:isep_practices.view_practice_schedule_form
+msgid "Schedule days"
+msgstr "Calendario"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_schedule_days__day
+msgid "Day"
+msgstr "Día"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_schedule_days__start_time
+msgid "Start Time"
+msgstr "Fecha Inicial"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_schedule_days__end_time
+msgid "End Time"
+msgstr "Fecha Final"
