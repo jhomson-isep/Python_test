@@ -45,7 +45,8 @@ mysql = create_engine('mysql+mysqlconnector://{0}:{1}@{2}:{3}/{4}'.format(
 
 metadata_mysql = MetaData(bind=mysql)
 
-#PostgresSQL Tables
+
+# PostgresSQL Tables
 class OpCourse(Base_pg):
     __table__ = Table('op_course', metadata_pg, autoload=True)
 
@@ -132,6 +133,7 @@ class OpModality(Base_pg):
 
 class MailMessage(Base_pg):
     __table__ = Table('mail_message', metadata_pg, autoload=True)
+
 
 # SQL Server Tables
 class GinAreaCurso(Base_server):
