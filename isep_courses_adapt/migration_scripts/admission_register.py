@@ -8,10 +8,10 @@ session_pg = get_pg_session()
 
 def update_start_date():
     """
-    Función creada con el fin de actualizar la fecha de inicio (start_date)
-    a los registros de admisión (op_admission_register) que inician a una
-    fecha superior o igual a hoy. Esto generaba una incidencia al matricular
-    un alumno debifo a las restricciones de Odoo
+    Function created in order to update the start date (start_date) to
+    admission records (op_admission_register) that start on a date greater
+    than or equal to today. This generated an incident when enrolling a
+    student due to Odoo restrictions
     """
     today = date.today()
     start_date = datetime.strptime('2020-12-30', '%Y-%m-%d')

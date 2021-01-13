@@ -145,7 +145,7 @@ class OpAdmission(models.Model):
         logger.info("moodle_group: {}".format(moodle_group))
         password = self.password_generator(length=10)
         user = moodle.get_user_by_field(field="username",
-                                        value=self.partner_id.email)
+                                        value=self.partner_id.email.lower())
         if user is None:
             first_name = self.first_name
             if self.middle_name:
@@ -156,7 +156,7 @@ class OpAdmission(models.Model):
                 lastname=self.last_name,
                 dni=self.partner_id.vat,
                 password=password,
-                email=self.partner_id.email)
+                email=self.partner_id.email.lower())
             user = user_response[0]
             gr_no = self.env['ir.sequence'].next_by_code('op.gr.number') or '0'
             logger.info(gr_no)
