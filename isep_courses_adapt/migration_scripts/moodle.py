@@ -5,12 +5,6 @@ from requests import post
 import logging
 
 logger = logging.getLogger(__name__)
-dsn = 'egServer70source'
-# dsn = 'egServer70'server = '85.118.244.220'
-# user = 'sa'
-# password = 'Gr5p4mr3'
-database = 'ISEP'
-
 production = False
 
 
@@ -108,17 +102,31 @@ class MoodleLib:
         function = "core_user_create_users"
         return self.connect(function, params)
 
-    def get_users_by_field(self, field: str, dni: str) -> dict:
+    def get_users_by_field(self, field: str, value: str) -> dict:
         """
         core_user_get_users_by_field, field: idnumber for student
 
         :param field: str
-        :param dni: str
+        :param value: str
         :return: dict
         """
         function = "core_user_get_users_by_field"
-        params = {'field': field, 'values[0]': dni}
+        params = {'field': field, 'values[0]': value}
         return self.connect(function, params)
+
+    def get_all_users(self) -> dict:
+        """
+        core_user_get_users, field: idnumber for student
+
+        :return: dict
+        """
+        function = "core_user_get_users"
+        params = {
+            'criteria[0][key]': 'confirmed',
+            'criteria[0][value]': 1
+        }
+        response = self.connect(function, params)
+        return response['users']
 
     def get_user_by_field(self, field: str, value: str) -> dict:
         """

@@ -77,10 +77,28 @@
                                 <field name="uvic_program"/>
                                 <field name="status_documentation"
                                        attrs="{'invisible':[('uvic_program','=', False),('sepyc_program','=',False)]}"/>
+                                <field name="status_student" readonly="1"/>
+                                <field name="type_of_course_taken" readonly="1" widget="many2many_tags"/>
                             </group>
                         </sheet>
                     </group>
                 </xpath>
+                <xpath expr="//form/sheet/notebook/page/group/field[@name='course_detail_ids']" position="before">
+                    <group colspan="4">
+                        <field name="admission_ids"
+                               nolabel="1">
+                            <tree string="Course Details">
+                                <field name="admission_date"/>
+                                <field name="course_id"/>
+                                <field name="batch_id"/>
+                                <field name="due_date"/>
+                                <field name="state"/>
+                            </tree>
+                        </field>
+                    </group>
+
+                </xpath>
+
 
                 <notebook position="inside">
                     <page name="documentation" string="Documentation">
@@ -96,13 +114,16 @@
                         </group>
                     </page>
                     <page name="attendees" string="Exam attendees">
-                            <field name="exam_attendees_ids" colspan="4" nolabel="1"/>
+                        <field name="exam_attendees_ids" colspan="4" nolabel="1"/>
                     </page>
                 </notebook>
 
-<!--                <xpath expr="//field[@name='course_detail_ids']/tree/field[@name='subject_ids']" position="replace">-->
-<!--                    <field name="subject_rel_ids" widget="many2many_tags"/>-->
-<!--                </xpath>-->
+                <xpath expr="//button[@name='toggle_active']" position="before">
+                    <button class="btn oe_stat_button" type="object" name="action_open_admissions"
+                            style="border-right: 1px solid;" icon="fa-bullseye">
+                        <field string="Admissions" name="admission_count" widget="statinfo"/>
+                    </button>
+                </xpath>
 
             </field>
         </record>
@@ -126,5 +147,33 @@
                        position="replace"/>
             </field>
         </record>
+
+        <record id="view_op_student_search_inherit" model="ir.ui.view">
+            <field name="name">Student search inherited</field>
+            <field name="model">op.student</field>
+            <field name="inherit_id" ref="openeducat_core.view_op_student_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="replace">
+                    <search string="Student">
+                        <field name="name"/>
+                        <field name="gr_no"/>
+                        <field name="document_number"/>
+                        <field name="partner_id"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                        <field name="type_of_course_taken"/>
+                        <newline/>
+                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                        <separator/>
+                        <filter string="In progress" name="in_process"
+                                domain="[('status_student', '=', 'valid'), ('type_of_course_taken.code', 'not in', ['PL', 'DI'])]"/>
+                        <filter string="Low" name="in_low"
+                                domain="[('status_student', '=', 'low')]"/>
+                        <separator/>
+                    </search>
+                </xpath>
+            </field>
+        </record>
+
     </data>
 </odoo>

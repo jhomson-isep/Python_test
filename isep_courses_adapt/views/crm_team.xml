@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="sales_team_form_view_in_crm_inherit" model="ir.ui.view">
+            <field name="name">sales team form view inherit</field>
+            <field name="model">crm.team</field>
+            <field name="inherit_id" ref="crm.sales_team_form_view_in_crm"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='team_type']" position="after">
+                    <field name="campus_id" groups="base.group_system"></field>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

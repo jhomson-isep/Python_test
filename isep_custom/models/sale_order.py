@@ -299,10 +299,10 @@ class sale_order(models.Model):
         Apellidos =str(self.partner_id.name.split(' ', 1)[1])
         Nombre = str(self.partner_id.name.split(' ', 1)[0])
         CaducidadTarjetaCredito = str(self.x_Anyo)+str(self.x_Mes)+'01'
-        if self.partner_id.x_nombre:
-            Nombre = str(self.partner_id.x_nombre)
-        if self.partner_id.x_apellidos:
-            Apellidos = str(self.partner_id.x_apellidos)
+        # if self.partner_id.x_nombre:
+        #     Nombre = str(self.partner_id.x_nombre)
+        # if self.partner_id.x_apellidos:
+        #     Apellidos = str(self.partner_id.x_apellidos)
 
         try:
             datetime.strptime(CaducidadTarjetaCredito, '%Y-%m-%d')

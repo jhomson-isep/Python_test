@@ -49,36 +49,119 @@ class OpStudent(models.Model):
     access_ids = fields.One2many("op.student.access", "student_id",
                                  string="Access")
     admission_ids = fields.One2many("op.admission", "student_id",
-                                    string="Admission")
+                                    string="Admissions")
+    admission_count = fields.Integer(compute='_compute_admission_count',
+                                     default=0)
     exam_attendees_ids = fields.One2many("op.exam.attendees", "student_id",
                                          string="Exam attendees")
     last_access = fields.Char(String='Last access',
                               compute='_get_last_access',
                               readonly=True)
+    student_state = fields.Selection(
+        [('draft', 'Draft'), ('progress', 'In progress'),
+         ('done', 'Done'), ('cancel', 'Cancelled')], string='Student state',
+        default='progress', store=True, compute='_compute_student_state')
 
+    status_student = fields.Selection(
+        [('valid', 'Valid'), ('graduate', 'Graduate'),
+         ('low', 'Low')], default='valid', string="Student Status",
+        store=True, compute='_compute_determine_status', translate=True)
+    type_of_course_taken = fields.Many2many(
+        comodel_name='op.course.type',
+        string='Type of course taken',
+        translate=True, store=True,
+        compute='_compute_determine_type_of_course')
     _sql_constraints = [(
         'unique_n_id',
         'unique(n_id)',
         'N_ID Number must be unique per student!'
     )]
 
+    def _compute_determine_type_of_course(self):
+        for student in self:
+            for course in student.course_detail_ids:
+                if course.course_id.course_type_id not in student.type_of_course_taken:
+                    student.update({
+                        'type_of_course_taken': [
+                            (4, course.course_id.course_type_id.id)]
+                    })
+
+    def _compute_determine_status(self):
+        for student in self:
+            for admission in student.admission_ids:
+                if admission.due_date:
+                    if fields.Date.today() >= admission.due_date:
+                        student.status_student = 'graduate'
+                    else:
+                        student.status_student = 'valid'
+                else:
+                    student.status_student = 'valid'
+                if admission.unsubscribed_date:
+                    if fields.Date.today() >= admission.unsubscribed_date:
+                        student.status_student = 'low'
+                    else:
+                        student.status_student = 'valid'
+                else:
+                    student.status_student = 'valid'
+
+    def _compute_admission_count(self):
+        """Compute the number of distinct admissions linked to the batch."""
+        for student in self:
+            admissions = len(student.admission_ids)
+            student.admission_count = admissions
+
+    def action_open_admissions(self):
+        """Display the linked admissions and adapt the view to the number of
+        records to display."""
+        self.ensure_one()
+        admissions = self.admission_ids
+        action = self.env.ref('openeducat_admission.act_open_op_admission_view').read()[0]
+        if len(admissions) > 1:
+            action['domain'] = [('id', 'in', admissions.ids)]
+        elif len(admissions) == 1:
+            form_view = [(self.env.ref(
+                'openeducat_admission.view_op_admission_form').id, 'form')]
+            if 'views' in action:
+                logger.info("=== LINE 52 ===")
+                action['views'] = form_view + [(state, view) for state, view in
+                                               action['views'] if
+                                               view != 'form']
+            else:
+                logger.info("=== LINE 55 ===")
+                action['views'] = form_view
+            action['res_id'] = admissions.id
+        else:
+            action = {'type': 'ir.actions.act_window_close'}
+        return action
+
+    def _compute_student_state(self):
+        for student in self:
+            state = 'done'
+            for admission in student.admission_ids:
+                if not admission.due_date:
+                    state = 'draft'
+                elif admission.due_date and admission.due_date >= fields.Date.today():
+                    state = 'progress'
+            student.student_state = state
+
     def _get_last_access(self):
         for record in self:
-            access_ago = fields.Datetime.now() - record.student_access
-            minutes, seconds = divmod(access_ago.seconds, 60)
-            hours, minutes = divmod(minutes, 60)
-            access_string = ""
-            if access_ago.days > 0:
-                if access_ago.days > 365:
-                    years, days = divmod(access_ago.days, 365)
-                    access_string += "{0} años, {1} días, ".format(years, days)
-                else:
-                    access_string += "{0} días, ".format(access_ago.days)
-            if hours > 0:
-                access_string += "{0} horas, ".format(hours)
-            if minutes > 0:
-                access_string += "{0} minutos, ".format(minutes)
-            record.last_access = access_string[:-2]
+            last_access = record.env['op.student.access'].search(
+                [('student_id', '=', record.id)], order='id desc', limit=1)
+            if last_access.student_access:
+                access_ago = fields.Datetime.today() - last_access.student_access
+                minutes, seconds = divmod(access_ago.seconds, 60)
+                hours, minutes = divmod(minutes, 60)
+                access_string = "Hace "
+                if access_ago.days > 0:
+                    access_string += "{0} días ".format(access_ago.days)
+                if hours > 0:
+                    access_string += "{0} horas ".format(hours)
+                if minutes > 0:
+                    access_string += "{0} minutos ".format(minutes)
+                record.last_access = access_string
+            else:
+                record.last_access = "Nunca"
 
     @staticmethod
     def equal_datetimes_YYMMDDHHmm(ddtime1, ddtime2):
@@ -92,10 +175,9 @@ class OpStudent(models.Model):
         logger.info("update_access")
         logger.info("**************************************")
         for row in rows:
-            if 'idnumber' in row and row['idnumber'] != '':
+            if 'idnumber' in row or 'id' in row:
                 try:
-                    student = self.search(
-                        [('document_number', '=', row['idnumber'])])
+                    student = self.search([('moodle_id', '=', row['id'])])
                     if not isinstance(row['lastaccess'], int):
                         continue
                     last_access = datetime.datetime.utcfromtimestamp(
@@ -112,7 +194,9 @@ class OpStudent(models.Model):
                         if not self.equal_datetimes_YYMMDDHHmm(last_access,
                                                                _access.student_access):
                             self.env['op.student.access'].create(access_values)
-                            logger.info('Record created')
+                            logger.info('Student access created')
+                    elif len(student) > 1:
+                        logger.info(row)
                 except Exception as e:
                     logger.info(e)
                     continue
@@ -140,31 +224,30 @@ class OpStudent(models.Model):
         moodle = self.env['moodle']
         rows = Moodle.get_last_access_cron(moodle)
         for row in rows:
-            if 'idnumber' in row:
-                try:
-                    students = self.search(
-                        [('document_number', '=', row['idnumber'])])
-                    if not isinstance(row['lastaccess'], int):
-                        continue
-                    last_access = datetime.datetime.utcfromtimestamp(
-                        row['lastaccess'])
-                    if len(students) > 0:
-                        for student in students:
-                            access_values = {
-                                'student_id': student.id,
-                                'student_access': last_access
-                            }
-                            _access = self.env['op.student.access'].search(
-                                [('student_id', '=', student.id)])
-                            if len(_access) > 0:
-                                _access = _access[-1]
-                            if not self.equal_datetimes_YYMMDDHHmm(last_access,
-                                                                   _access.student_access):
-                                self.env['op.student.access'].create(
-                                    access_values)
-                except Exception as e:
-                    logger.info(e)
+            try:
+                students = self.search(
+                    [('moodle_id', '=', row['id'])])
+                if not isinstance(row['lastaccess'], int):
                     continue
+                last_access = datetime.datetime.utcfromtimestamp(
+                    row['lastaccess'])
+                if len(students) > 0:
+                    for student in students:
+                        access_values = {
+                            'student_id': student.id,
+                            'student_access': last_access
+                        }
+                        _access = self.env['op.student.access'].search(
+                            [('student_id', '=', student.id)])
+                        if len(_access) > 0:
+                            _access = _access[-1]
+                        if not self.equal_datetimes_YYMMDDHHmm(last_access,
+                                                               _access.student_access):
+                            self.env['op.student.access'].create(
+                                access_values)
+            except Exception as e:
+                logger.info(e)
+                continue
         logger.info("*****************************************")
         logger.info("End of script: import all students access")
         logger.info("*****************************************")
@@ -173,10 +256,11 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         logger.info("import student access")
         logger.info("**************************************")
-        if self.document_number:
+        if self.document_number or self.moodle_id != 0:
             moodle = self.env['moodle']
-            rows = Moodle.get_last_access(moodle, 'idnumber',
-                                          self.document_number)
+            rows = Moodle.get_last_access(moodle, 'id',
+                                          self.moodle_id)
+            logger.info(rows)
             for row in rows:
                 try:
                     if not isinstance(row['lastaccess'], int):
@@ -207,6 +291,7 @@ class OpStudent(models.Model):
                         self.env['op.student.access'].create(access_values)
                 except Exception as e:
                     logger.info(e)
+                    traceback.print_exc()
                     continue
 
     @staticmethod
@@ -433,9 +518,9 @@ class OpStudent(models.Model):
                         logger.info('Student with n_id {0} updated'.format(
                             student.id))
 
-                if int_break == 50 and os.name != "posix":
-                    break
-                int_break += 1
+                #if int_break == 50 and os.name != "posix":
+                 #   break
+                #int_break += 1
 
             except Exception as e:
                 logger.info(e)
@@ -495,3 +580,34 @@ class OpStudent(models.Model):
                 doc.unlink()
         res = super(OpStudent, self).unlink()
         return res
+
+    def import_log_history(self):
+        s = SQL()
+        logger.info("**************************************")
+        logger.info("On import students history")
+        logger.info("**************************************")
+        historys = s.get_all_history()
+        for history in historys:
+            if history.Observaciones != '':
+                body = """<p>%s - %s</p>
+                 <p>%s</p>""" % (history.Fecha, history.Usuario, history.Observaciones)
+                student = self.search([('gr_no', '=', history.N_Id)])
+                if len(student) > 0:
+                    message = self.env['mail.message'].search([('body', '=', body),('model','=', 'op.student'),
+                                                                ('res_id', '=', student.id)], limit=1)
+                    if len(message) > 0:
+                        logger.info("Message already exist id %s" % message.id)
+                        continue
+                    else:
+                        student.message_post(body=body)
+                        message = self.env['mail.message'].search([('body', '=', body),('model','=', 'op.student'),
+                                                                ('res_id', '=', student.id)], limit=1)
+                        message.write({
+                            'date' : history.Fecha
+                            })
+                        logger.info("Message register for student gr_no %s" % student.gr_no)
+                else:
+                    logger.info("Student not exist gr_no %s" % history.N_Id)
+        logger.info("**************************************")
+        logger.info("End import students history")
+        logger.info("**************************************")

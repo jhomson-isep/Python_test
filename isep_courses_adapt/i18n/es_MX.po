@@ -260,6 +260,31 @@ msgid "Preference group"
 msgstr "Grupo de preferencia"
 
 #. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_sale_order_line__batch_id
+msgid "Preferred batch"
+msgstr "Grupo"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_crm_team__campus_id
+msgid "Campus"
+msgstr "Sede"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course_type__name
+msgid "Name"
+msgstr "Tipo de curso"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course_type__code
+msgid "Code"
+msgstr "Código"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_course__course_type_id
+msgid "Course type"
+msgstr "Tipo de curso"
+
+#. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch__contact_class
 msgid "Contact"
 msgstr "Contacto"
@@ -1053,3 +1078,83 @@ msgstr "Femenino"
 #: model_terms:ir.ui.view,arch_db:openeducat_core.view_op_student_form
 msgid "Partner"
 msgstr "Cliente"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_admission_search_inherit
+msgid "New admissions"
+msgstr "Nuevas admisiones"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+msgid "Admissions"
+msgstr "Admisiones"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_order_form_inherit
+msgid "Send student"
+msgstr "Enviar estudiante"
+
+#. module: isep_courses_adapt
+#: selection:op.student,status_student:0
+msgid "Graduate"
+msgstr "Graduado"
+
+#. module: isep_courses_adapt
+#: selection:op.student,status_student:0
+msgid "Low"
+msgstr "Baja"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__status_student
+msgid "Student Status"
+msgstr "Estado de estudiante"
+
+#. module: isep_courses_adapt
+#: selection:op.student,status_student:0
+msgid "Valid"
+msgstr "Vigente"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__type_of_course_taken
+msgid "Type of course taken"
+msgstr "Tipo de curso"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_sale_order_line__modality_id
+msgid "Modality"
+msgstr "Modalidad"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_search_inherit
+msgid "Archived"
+msgstr "Archivados"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_search_inherit
+msgid "In progress"
+msgstr "En progreso"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_search_inherit
+msgid "Low"
+msgstr "Baja"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_admission_form_inherit
+msgid "Send Moodle"
+msgstr "Enviar a Moodle"
+
+#: model:ir.model,name:isep_courses_adapt.model_op_student_merge_wizard
+msgid "Merge Student for selected Student(s)"
+msgstr "Combinar estudiantes seleccionados"
+
+#. module: isep_courses_adapt
+#: model:ir.actions.act_window,name:isep_courses_adapt.action_student_merge
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.base_student_merge_automatic_wizard_form
+msgid "Merge Students"
+msgstr "Combinar Estudiantes"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.base_student_merge_automatic_wizard_form
+msgid "Merge the following Student"
+msgstr "Estudiantes a Combinar"
