@@ -23,7 +23,7 @@ for matricula in matriculaciones:
 
         if admission_register is not None and student is not None:
             partner = session_pg.query(ResPartner).filter(
-                ResPartner.id == matricula.EMail).first()
+                ResPartner.id == student.partner_id).first()
             application_number = "-".join([batch.code, str(matricula.N_Id)])
             admission = session_pg.query(OpAdmission).filter(
                 OpAdmission.application_number == application_number).first()
