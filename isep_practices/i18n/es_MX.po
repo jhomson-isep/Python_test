@@ -54,6 +54,8 @@ msgstr "Curso"
 
 #. module: isep_practices
 #: model:ir.model.fields,field_description:isep_practices.field_practice_temary__name
+#: model:ir.model.fields,field_description:isep_practices.field_practice_schedule__name
+#: model:ir.model.fields,field_description:isep_practices.field_practice_center__name
 msgid "Name"
 msgstr "Nombre"
 
@@ -86,8 +88,137 @@ msgid "Dni/Passport"
 msgstr "DNI/Pasaporte"
 
 #. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_tutor__emails
+msgid "Email"
+msgstr "Correo Electrónico"
+
+#. module: isep_practices
 #: model:ir.ui.menu,name:isep_practices.submenu_tutor_course
 #: model:ir.actions.act_window,name:isep_practices.act_open_practice_tutor_course_view
 #: model:ir.model,name:isep_practices.model_practice_tutor_course
 msgid "Association course tutor"
 msgstr "Asociación curso tutor"
+
+#. module: isep_practices
+#: model:ir.ui.menu,name:isep_practices.submenu_schedule
+#: model:ir.actions.act_window,name:isep_practices.act_open_practice_schedule_view
+#: model:ir.model,name:isep_practices.model_practice_schedule
+msgid "Schedule"
+msgstr "Horario"
+
+#. module: isep_practices
+#: model_terms:ir.ui.view,arch_db:isep_practices.view_practice_schedule_form
+msgid "Schedule days"
+msgstr "Calendario"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_schedule_days__day
+msgid "Day"
+msgstr "Día"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_schedule_days__start_time
+msgid "Start Time"
+msgstr "Fecha Inicial"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_schedule_days__end_time
+msgid "End Time"
+msgstr "Fecha Final"
+
+#. module: isep_practices
+#: model:ir.ui.menu,name:isep_practices.submenu_center
+#: model:ir.actions.act_window,name:isep_practices.act_open_practice_center_view
+#: model:ir.model,name:isep_practices.model_practice_center
+msgid "Center"
+msgstr "Centro"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_center__nif
+msgid "NIF"
+msgstr "NIF"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_center__official_name
+msgid "Official Name"
+msgstr "Nombre Oficial"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_center__coordinator
+msgid "Coordinator"
+msgstr "Coordinador"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_center__schedule
+msgid "Schedule of Aplication"
+msgstr "Horario desde el sistema de aplicación"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_center__email
+msgid "Email"
+msgstr "Correo Electrónico"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_center__web
+msgid "Web"
+msgstr "Dirección Web"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_center__maximum_places
+msgid "Maximum Places"
+msgstr "Maximo de Plazas"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_center__signatory
+msgid "Signatory"
+msgstr "Firmante"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_center__signer_gender
+msgid "Gender Signer"
+msgstr "Genero del Firmante"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_center__signer_gender
+msgid "Gender Signer"
+msgstr "Genero del Firmante"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_center__practice_schedule_id
+msgid "Schedule"
+msgstr "Horario"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_center__city
+#: model_terms:ir.ui.view,arch_db:isep_practices.view_practice_center_form
+msgid "City"
+msgstr "Ciudad"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_center__street
+#: model_terms:ir.ui.view,arch_db:isep_practices.view_practice_center_form
+msgid "Street..."
+msgstr "Calle"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_center__state_id
+#: model_terms:ir.ui.view,arch_db:isep_practices.view_practice_center_form
+msgid "State"
+msgstr "Estado"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_center__code_postal
+#: model_terms:ir.ui.view,arch_db:isep_practices.view_practice_center_form
+msgid "ZIP"
+msgstr "Código Postal"
+
+#. module: isep_practices
+#: model:ir.model.fields,field_description:isep_practices.field_practice_center__country_id
+#: model_terms:ir.ui.view,arch_db:isep_practices.view_practice_center_form
+msgid "Country"
+msgstr "País"
+
+#. module: isep_practices
+#: model_terms:ir.ui.view,arch_db:isep_practices.view_practice_center_form
+msgid "Address"
+msgstr "Dirección"

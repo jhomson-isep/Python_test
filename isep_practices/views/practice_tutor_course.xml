@@ -7,7 +7,7 @@
             <field name="model">practice.tutor.course</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
-                <tree string="Association tutor_course">
+                <tree string="Association tutor course">
                     <field name="op_course_id"/>
                     <field name="practice_tutor_id"/>
                 </tree>
@@ -19,7 +19,7 @@
             <field name="model">practice.tutor.course</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
-                <form string="Association tutor_course">
+                <form string="Association tutor course">
                     <sheet>
                         <group col="4">
                             <field name="op_course_id" />

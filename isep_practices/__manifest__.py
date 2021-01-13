@@ -27,6 +27,7 @@
         'views/practice_tutor_course.xml',
         'views/practice_schedule_days.xml',
         'views/practice_schedule.xml',
+        'views/practice_center.xml',
         'menu/isep_practices_menu.xml'
     ],
 

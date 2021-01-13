@@ -39,5 +39,11 @@
                   parent="menu_isep_practice_menu"
                   action="act_open_practice_schedule_view"/>
 
+        <menuitem id="submenu_center" name="Center"
+                  sequence="17"
+                  groups="base.group_system"
+                  parent="menu_isep_practice_menu"
+                  action="act_open_practice_center_view"/>
+
     </data>
 </odoo>
