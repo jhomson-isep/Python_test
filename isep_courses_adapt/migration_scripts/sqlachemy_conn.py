@@ -34,11 +34,11 @@ metadata_server_isep = MetaData(bind=server_isep)
 
 #MYSQL Connection
 Base_mysql = declarative_base()
-dbname = 'moodle'
-user = 'odoo'
-password = 'Iseplatam2020'
-host = '192.168.0.153'
-port = 3306
+dbname = os.environ['MYSQL_DATABASE']
+user = os.environ['MYSQL_USER']
+password = os.environ['MYSQL_PASSWORD']
+host = os.environ['MYSQL_HOST']
+port = os.environ['MYSQL_PORT']
 
 mysql = create_engine('mysql+mysqlconnector://{0}:{1}@{2}:{3}/{4}'.format(
     user, password, host, port, dbname))

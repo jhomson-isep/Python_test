@@ -78,6 +78,11 @@ class SQL():
 
     def get_all_students(self):
         rows = self.query(
+            "SELECT * FROM Alumnos ORDER BY N_Id DESC;")
+        return rows
+
+    def get_filtered_students(self):
+        rows = self.query(
             "SELECT * FROM Alumnos WHERE N_Id NOT IN (SELECT "
             "DISTINCT al.N_Id FROM Alumnos al LEFT JOIN "
             "GrupoISEPxtra.dbo.gin_PreMatriculas pm ON al.N_Id = pm.AlumnoID "
