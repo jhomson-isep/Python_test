@@ -125,13 +125,11 @@ class OpExamSession(Base_pg):
 class OpExamAttendees(Base_pg):
     __table__ = Table('op_exam_attendees', metadata_pg, autoload=True)
 
+class MailMessage(Base_pg):
+    __table__ = Table('mail_message', metadata_pg, autoload=True)
 
 class OpModality(Base_pg):
     __table__ = Table('op_modality', metadata_pg, autoload=True)
-
-
-class MailMessage(Base_pg):
-    __table__ = Table('mail_message', metadata_pg, autoload=True)
 
 # SQL Server Tables
 class GinAreaCurso(Base_server):
