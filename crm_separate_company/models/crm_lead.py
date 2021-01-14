@@ -177,21 +177,21 @@ class CrmLead(models.Model):
             lead.update({'x_codmodalidad': modalidad})
 
             # Dependiendo la sede se le colocara el nombre nuevo
-            if cod_sede in ('centro-oviedo', 'Oviedo', 'ised-oviedo'):
+            if cod_sede in ('centro-oviedo', 'Oviedo', 'ised-oviedo', 'OviedoOviedo'):
                 cod_sede = 'OVI'
-            elif cod_sede in ('centro-bilbao', 'bilbao', 'Bilbao', 'ised-bilbao'):
+            elif cod_sede in ('centro-bilbao', 'bilbao', 'Bilbao', 'ised-bilbao', 'BilbaoBilbao'):
                 cod_sede = 'BIO'
-            elif cod_sede in ('centro-madrid', 'centro-madrid-atocha', 'madrid', 'Madrid', 'MAD', 'MDR', 'ised-madrid', 'sesiones-clinicas-madrid'):
+            elif cod_sede in ('centro-madrid', 'centro-madrid-atocha', 'madrid', 'Madrid', 'MAD', 'MDR', 'ised-madrid', 'sesiones-clinicas-madrid', 'MadridMadrid'):
                 cod_sede = 'MDR'
-            elif cod_sede in ('ised-barcelona', 'sesiones-clinicas-barcelona'):
+            elif cod_sede in ('ised-barcelona', 'sesiones-clinicas-barcelona', 'BarcelonaBarcelona'):
                 cod_sede = 'CAT'
-            elif cod_sede in ('centro-pamplona', 'Pamplona', 'ised-pamplona'):
+            elif cod_sede in ('centro-pamplona', 'Pamplona', 'ised-pamplona', 'PamplonaPamplona'):
                 cod_sede = 'PAM'
-            elif cod_sede in ('centro-zaragoza', 'Zaragoza', 'ZAZ', 'ised-zaragoza'):
+            elif cod_sede in ('centro-zaragoza', 'Zaragoza', 'ZAZ', 'ised-zaragoza', 'ZaragozaZaragoza'):
                 cod_sede = 'ZAR'
-            elif cod_sede in ('Valencia', 'valencia', 'sesiones-clinicas-valencia'):
+            elif cod_sede in ('Valencia', 'valencia', 'sesiones-clinicas-valencia', 'ValenciaValencia'):
                 cod_sede = 'VAL'
-            elif cod_sede in ('Online', 'online', 'sesiones-clinicas-online'):
+            elif cod_sede in ('Online', 'online', 'sesiones-clinicas-online', 'OnlineOnline'):
                 cod_sede = 'ONL'
 
             # REVISAR ESTO
