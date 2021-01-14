@@ -6,3 +6,4 @@ access_isep_practices_tutor_course,isep_practices_tutor_course,model_practice_tu
 access_isep_practices_schedule_days,isep_practices_schedule_days,model_practice_schedule_days,base.group_system,1,1,1,1
 access_isep_practices_schedule,isep_practices_schedule,model_practice_schedule,base.group_system,1,1,1,1
 access_isep_practices_center,isep_practices_center,model_practice_center,base.group_system,1,1,1,1
+access_isep_practices_practice,isep_practices_practice,model_practice_practice,base.group_system,1,1,1,1

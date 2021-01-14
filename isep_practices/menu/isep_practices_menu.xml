@@ -45,5 +45,11 @@
                   parent="menu_isep_practice_menu"
                   action="act_open_practice_center_view"/>
 
+        <menuitem id="submenu_practice" name="Practice"
+                  sequence="18"
+                  groups="base.group_system"
+                  parent="menu_isep_practice_menu"
+                  action="act_open_practice_practice_view"/>
+
     </data>
 </odoo>
