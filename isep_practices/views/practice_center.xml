@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="view_practice_center_tree" model="ir.ui.view">
+            <field name="name">practice.center.tree</field>
+            <field name="model">practice.center</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Center">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_practice_center_form" model="ir.ui.view">
+            <field name="name">practice.center.form</field>
+            <field name="model">practice.center</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Center">
+                    <sheet>
+                        <group col="4">
+                            <field name="nif" required="1"/>
+                            <field name="name" required="1"/>
+                            <field name="official_name" required="1"/>
+                            <field name="coordinator" required="1"/>
+                            <field name="schedule" readonly="1"/>
+                            <field name="email" required="1"/>
+                            <field name="web"/>
+                            <field name="maximum_places"/>
+                            <field name="signatory" required="1"/>
+                            <field name="signer_gender" required="1"/>
+                            <field name="practice_schedule_id" required="1"/>
+                            <label for="street" string="Address"/>
+                            <div name="div_address">
+                                <field name="street" placeholder="Street..." required="1"/>
+                                <div class="address_format">
+                                    <field name="city" placeholder="City" style="width: 40%%" required="1"/>
+                                    <field name="state_id" class="oe_no_button"
+                                                   placeholder="State" style="width: 37%%" options='{"no_open": True}' required="1"/>
+                                    <field name="code_postal" placeholder="ZIP" style="width: 20%%" required="1"/>
+                                </div>
+                                <field name="country_id" placeholder="Country" class="oe_no_button"
+                                               options='{"no_open": True}' required="1"/>
+                            </div>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+
+            </field>
+        </record>
+
+        <record id="view_practice_center_search" model="ir.ui.view">
+            <field name="name">practice.center.search</field>
+            <field name="model">practice.center</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Center">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_practice_center_view">
+            <field name="name">center</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">practice.center</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree</field>
+            <field name="search_view_id" ref="view_practice_center_search"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_practice_center_form">
+            <field name="act_window_id" ref="act_open_practice_center_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_practice_center_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_practice_center_tree">
+            <field name="act_window_id" ref="act_open_practice_center_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_practice_center_tree"/>
+        </record>
+
+    </data>
+</odoo>
