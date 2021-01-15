@@ -14,7 +14,6 @@
                     <field name="academic_record_closing"/>
                 </xpath>
                 <xpath expr="//field[@name='fees_term_id']" position="replace">
-                    <field name="exam_on_campus"/>
                     <field name="temporary_leave"/>
                     <field name="mexico"/>
                     <field name="generation"/>
