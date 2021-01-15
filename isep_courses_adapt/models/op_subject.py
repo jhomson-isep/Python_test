@@ -22,6 +22,8 @@ class OpSubject(models.Model):
     independent_hours = fields.Float(string='Independent Hours')
     theoretical_hours = fields.Float(string='Theoretical Hours')
     credits = fields.Float(string='Credits')
+    moodle_code = fields.Char(string='Moodle code', size=16)
+    moodle_name = fields.Char(string='Moodle name', size=128)
 
     @api.model
     def create(self, values):

@@ -10,15 +10,18 @@
                 <field name="x_enviado_crm"/>
             </xpath>
             <xpath expr="//field[@name='order_line']/form/group/group/field[@name='qty_to_invoice']" position="after">
-                <field name="grupo_referencia"/>
+                <field name="grupo_referencia" invisible="1"/>
             </xpath>
             <xpath expr="//field[@name='order_line']/tree/field[@name='qty_to_invoice']" position="after">
-                <field name="grupo_referencia"/>
+                <field name="grupo_referencia" invisible="1"/>
             </xpath>
             <xpath expr="//field[@name='order_line']/form/group/group/field[@name='qty_to_invoice']" position="attributes">
                 <attribute name="invisible">True</attribute>
             </xpath>
             <xpath expr="//field[@name='order_line']/tree/field[@name='qty_to_invoice']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='analytic_tag_ids']" position="attributes">
                 <attribute name="invisible">True</attribute>
             </xpath>
         </field>

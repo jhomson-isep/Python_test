@@ -27,9 +27,11 @@ from . import op_section_course
 from . import op_period_course
 from . import op_student_course
 from . import op_attendance_line
-# from . import sale_order
-# from . import sale_order_line
+from . import sale_order
+from . import sale_order_line
 from . import op_admission
 from . import op_admission_register
 from . import op_exam
 from . import op_attendance_sheet
+from . import crm_team
+from . import op_course_type

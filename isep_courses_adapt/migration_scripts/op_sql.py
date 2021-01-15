@@ -78,12 +78,21 @@ class SQL():
 
     def get_all_students(self):
         rows = self.query(
+            "SELECT * FROM Alumnos ORDER BY N_Id DESC;")
+        return rows
+
+    def get_filtered_students(self):
+        rows = self.query(
             "SELECT * FROM Alumnos WHERE N_Id NOT IN (SELECT "
             "DISTINCT al.N_Id FROM Alumnos al LEFT JOIN "
             "GrupoISEPxtra.dbo.gin_PreMatriculas pm ON al.N_Id = pm.AlumnoID "
             "WHERE pm.AnyAcademico IS NOT NULL AND pm.SedeID in (7,8,9,10,"
             "11,12,13,27) AND pm.Tramitada = 1 ) ORDER BY N_Id DESC;")
         return rows
+
+    def get_limit_students(self):
+        return self.query(
+            "SELECT * FROM Alumnos WHERE N_Id = 418192 ORDER BY N_Id DESC;")
 
     def get_province_by_nid(self, nid):
         row = self.query_get_one(

@@ -17,6 +17,7 @@
     'license': 'AGPL-3',
     'depends': [
         'base',
+        'crm',
         'sale',
         'mail',
         'portal',
@@ -29,6 +30,7 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'wizard/op_student_merge_view.xml',
         'views/op_course.xml',
         'views/op_batch.xml',
         'views/op_modality.xml',
@@ -54,9 +56,11 @@
         'views/op_attendance_line.xml',
         'views/op_admission.xml',
         'views/op_admission_register.xml',
-        # 'views/sale_order.xml',
+        'views/sale_order.xml',
         'views/op_exam_session.xml',
         'views/op_exam_attendances.xml',
+        'views/op_course_type.xml',
+        'views/crm_team.xml',
         'menu/isep_courses_adapt_menu.xml',
         'data/op_document_type.xml',
         'data/op_evaluation_type.xml',
@@ -67,7 +71,8 @@
         'data/op.campus.csv',
         'data/cron.xml',
         'data/plantillas_mail.xml',
-        'data/list_fields_op_admission_export.xml'
+        'data/list_fields_op_admission_export.xml',
+        'data/sequences.xml'
     ],
     'installable': True,
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_isep_practices_root" name="Practice"
+                  sequence="10"
+                  web_icon="isep_practices,static/description/practice.png"/>
+
+        <menuitem id="menu_isep_practice_menu" name="Practice"
+                  sequence="20"
+                  parent="menu_isep_practices_root"/>
+
+        <menuitem id="submenu_phase" name="Phase"
+                  sequence="11"
+                  groups="base.group_system"
+                  parent="menu_isep_practice_menu"
+                  action="act_open_practice_phase_view"/>
+
+        <menuitem id="submenu_temary" name="Temary"
+                  sequence="12"
+                  groups="base.group_system"
+                  parent="menu_isep_practice_menu"
+                  action="act_open_practice_temary_view"/>
+
+        <menuitem id="submenu_tutor" name="Tutor"
+                  sequence="13"
+                  groups="base.group_system"
+                  parent="menu_isep_practice_menu"
+                  action="act_open_practice_tutor_view"/>
+
+        <menuitem id="submenu_tutor_course" name="Association course tutor"
+                  sequence="14"
+                  groups="base.group_system"
+                  parent="menu_isep_practice_menu"
+                  action="act_open_practice_tutor_course_view"/>
+
+        <menuitem id="submenu_schedule" name="Schedule"
+                  sequence="16"
+                  groups="base.group_system"
+                  parent="menu_isep_practice_menu"
+                  action="act_open_practice_schedule_view"/>
+
+        <menuitem id="submenu_center" name="Center"
+                  sequence="17"
+                  groups="base.group_system"
+                  parent="menu_isep_practice_menu"
+                  action="act_open_practice_center_view"/>
+
+        <menuitem id="submenu_practice" name="Practice"
+                  sequence="18"
+                  groups="base.group_system"
+                  parent="menu_isep_practice_menu"
+                  action="act_open_practice_practice_view"/>
+
+    </data>
+</odoo>

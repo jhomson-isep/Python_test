@@ -11,6 +11,7 @@
                 <field name="modality_id"/>
                 <field name="section"/>
                 <field name="area_id"/>
+                <field name="course_type_id"/>
             </xpath>
 
             <xpath expr="//form/sheet/group[@name='subject']" position="replace">

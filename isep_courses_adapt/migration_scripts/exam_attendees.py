@@ -7,7 +7,7 @@ import traceback
 session_server = get_session_server_isep()
 # SQL SERVER AREAS
 scores = session_server.query(Calificaciones).order_by(desc(
-    Calificaciones.FechaAlta)).limit(10000).all()
+    Calificaciones.FechaAlta)).all()
 # POSTGRES SERVER SESSION
 session_pg = get_pg_session()
 
@@ -23,12 +23,11 @@ for score in scores:
             attendee = session_pg.query(OpExamAttendees).filter(and_(
                 OpExamAttendees.student_id == student.id,
                 OpExamAttendees.exam_id == exam.id)).first()
-            marks = 0
-            if score.NotaJunio.isnumeric():
-                if float(score.NotaJunio) <= 10:
-                    marks = float(score.NotaJunio) * 10
-                else:
-                    marks = float(score.NotaJunio)
+            try:
+                marks = float(score.NotaJunio)
+            except Exception as ex:
+                print(ex)
+                marks = 0
 
             if attendee is None:
                 attendee = OpExamAttendees()
@@ -46,9 +45,9 @@ for score in scores:
                 attendee.is_final = True
                 session_pg.add(attendee)
                 session_pg.commit()
-                print("Attendee created: ", attendee.id)
+                print("Attendee created: ", [attendee.id, score.N_Id])
             else:
-                print("Attendee already exist: ", attendee.id)
+                print("Attendee already exist: ", [attendee.id, score.N_Id])
         else:
             not_found = "Exam" if exam is None else "Student"
             print("{} not found: {}".format(not_found, session_code))
