@@ -2,18 +2,19 @@ from datetime import datetime
 
 from sqlalchemy import and_, desc
 from sqlachemy_conn import *
+import traceback
 
 # SQL SERVER SESSION
 session_server = get_session_server_isep()
 # SQL SERVER AREAS
-matriculaciones = session_server.query(Matriculaciones).\
-                                filter(Matriculaciones.FechaMatricula != None)
+matriculaciones = session_server.query(Matriculaciones).filter(
+    and_(Matriculaciones.FechaMatricula != None,
+         Matriculaciones.N_Id > 420000)).all()
 # POSTGRES SERVER SESSION
 session_pg = get_pg_session()
 
 for matricula in matriculaciones:
     try:
-        print("Matricula: {}".format(matricula.Curso_Id))
         batch = session_pg.query(OpBatch).filter(
             OpBatch.code == matricula.Curso_Id).first()
         admission_register = session_pg.query(OpAdmissionRegister).filter(
@@ -28,7 +29,7 @@ for matricula in matriculaciones:
             admission = session_pg.query(OpAdmission).filter(
                 OpAdmission.application_number == application_number).first()
 
-            if admission is None:
+            if admission is None and partner.email is not None:
                 # If the dates are less than 1901, it indicates that they have
                 # not been established, so we will leave them in None
                 academic_record_closing = None
@@ -52,6 +53,9 @@ for matricula in matriculaciones:
                 else:
                     name = str(student.first_name) + " " + str(
                         student.last_name)
+                p_zip = partner.zip[0:7] if partner.zip is not None else None
+                p_phone = partner.phone[0:25] if partner.phone is not None else None
+                p_mobile = partner.mobile[0:25] if partner.mobile is not None else None
                 # admission values
                 admission = OpAdmission()
                 admission.name = name
@@ -63,12 +67,12 @@ for matricula in matriculaciones:
                 admission.student_id = student.id
                 admission.partner_id = partner.id
                 admission.email = partner.email
-                admission.phone = partner.phone
-                admission.mobile = partner.mobile
+                admission.phone = p_phone
+                admission.mobile = p_mobile
                 admission.street = partner.street
                 admission.city = partner.city
                 admission.country_id = partner.country_id
-                admission.zip = partner.zip[0:7]
+                admission.zip = p_zip
                 admission.state_id = partner.state_id
                 admission.register_id = admission_register.id
                 admission.application_number = application_number
@@ -92,10 +96,10 @@ for matricula in matriculaciones:
                 session_pg.commit()
                 print("Admission created: ", admission.application_number)
             else:
-                print("Admission Already exist: ",
-                      admission.application_number)
+                print("Admission Already exist: ", application_number)
         else:
             print("Admission register or student not found")
     except Exception as e:
         print(e)
+        traceback.print_exc()
         continue
