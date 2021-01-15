@@ -170,6 +170,10 @@ class Calificaciones(Base_server):
 
 class IsepCursos(Base_server):
     __table__ = Table('Cursos', metadata_server_isep, autoload=True)
+
+class IsepAsignaturas(Base_server):
+     __table__ = Table('Asignaturas', metadata_server_isep, autoload=True)
+
 #MYSQL Tables
 class MdlAttendanceSession(Base_mysql):
     __table__ = Table('mdl_attendance_sessions', metadata_mysql, autoload=True)
