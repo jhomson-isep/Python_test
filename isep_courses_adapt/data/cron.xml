@@ -27,7 +27,7 @@
 
         <record id="add_date_finish_in_admission" forcecreate='True' model="ir.cron">
             <field name="name">Admission: Agregar fecha de cierre de expediente académico</field>
-            <field eval="True" name="active"/>
+            <field eval="False" name="active"/>
             <field name="interval_number">1</field>
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
