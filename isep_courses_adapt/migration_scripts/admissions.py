@@ -54,8 +54,10 @@ for matricula in matriculaciones:
                     name = str(student.first_name) + " " + str(
                         student.last_name)
                 p_zip = partner.zip[0:7] if partner.zip is not None else None
-                p_phone = partner.phone[0:25] if partner.phone is not None else None
-                p_mobile = partner.mobile[0:25] if partner.mobile is not None else None
+                p_phone = partner.phone[
+                          0:25] if partner.phone is not None else None
+                p_mobile = partner.mobile[
+                           0:25] if partner.mobile is not None else None
                 # admission values
                 admission = OpAdmission()
                 admission.name = name
