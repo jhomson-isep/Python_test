@@ -615,3 +615,34 @@ class OpStudent(models.Model):
         logger.info("**************************************")
         logger.info("End import students history")
         logger.info("**************************************")
+
+    def update_university(self):
+        logger.info("**************************************")
+        logger.info("update_university")
+        logger.info("**************************************")
+        s = SQL()
+        offset = 0
+        alumnos = s.get_all_students(offset=offset)
+        int_break = 0
+        for alumno in alumnos:
+            try:
+                student = self.search([('n_id', '=', alumno.N_Id)])
+                logger.info('id:{} name:{}'.format(student.id, student.name))
+                if len(student) == 0:
+                    student = self.search([('gr_no', '=', alumno.N_Id)])
+                if len(student) == 0:
+                    continue
+                university = self.env['op.university'].search(
+                    [('code', '=', alumno.Universidad)])
+                if len(university) != 0:
+                    student.university_id = university.id
+                    logger.info(
+                        'Student [id:{} name:{}] University [code:{} id:{}]'. \
+                            format(student.id, student.name, university.code,
+                                   university.id))
+                if int_break == 1000 and os.name != "posix":
+                    break
+                int_break += 1
+            except Exception as e:
+                logger.info(e)
+                continue
