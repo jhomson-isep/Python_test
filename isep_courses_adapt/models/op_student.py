@@ -578,6 +578,10 @@ class OpStudent(models.Model):
             delete_folder = False
             for doc in documents:
                 doc.unlink()
+        self.env['op.admission'].search([('student_id', '=', self.id)]).write(
+            {'is_student': False})
+        self.env['op.subject.registration'].search([('student_id', '=',
+                                                     self.id)]).unlink()
         res = super(OpStudent, self).unlink()
         return res
 

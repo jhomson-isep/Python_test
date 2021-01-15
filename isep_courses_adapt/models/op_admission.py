@@ -146,6 +146,12 @@ class OpAdmission(models.Model):
         password = self.password_generator(length=10)
         user = moodle.get_user_by_field(field="username",
                                         value=self.partner_id.email.lower())
+        if student.gr_no:
+            gr_no = student.gr_no
+        else:
+            gr_no = self.env['ir.sequence'].next_by_code('op.gr.number') or '0'
+
+        student_values = {}
         if user is None:
             first_name = self.first_name
             if self.middle_name:
@@ -158,16 +164,28 @@ class OpAdmission(models.Model):
                 password=password,
                 email=self.partner_id.email.lower())
             user = user_response[0]
-            gr_no = self.env['ir.sequence'].next_by_code('op.gr.number') or '0'
+            # gr_no = self.env['ir.sequence'].next_by_code('op.gr.number') or '0'
             logger.info(gr_no)
-            student_course.write({'roll_number': gr_no})
-            student.write({
+            student_values = {
                 'moodle_id': user.get('id'),
                 'moodle_user': self.partner_id.email,
                 'moodle_pass': password,
                 'gr_no': gr_no,
-                'n_id': gr_no
+                'n_id': gr_no,
+            }
+
+        if not student.moodle_id:
+            student_values.update({
+                'moodle_id': user.get('id'),
+                'moodle_user': user.get('username')
             })
+        student_values.update({
+            'nationality': self.partner_id.country_id.id or None,
+            'place_birth': self.partner_id.city or None,
+            'document_number': self.partner_id.vat or None
+        })
+        student.write(student_values)
+        student_course.write({'roll_number': gr_no})
         logger.info("user: {}".format(user))
         enrol_result = moodle.enrol_user(moodle_course.get('id'),
                                          user.get('id'))
@@ -225,17 +243,7 @@ class OpAdmission(models.Model):
         for student in self:
             student_user = self.env['res.users'].search(
                 [('login', '=', student.email)], limit=1)
-            if len(student_user) == 0:
-                student_user = self.env['res.users'].create({
-                    'name': student.name,
-                    'login': student.email,
-                    'image': self.image or False,
-                    'is_student': True,
-                    'groups_id': [
-                        (6, 0,
-                         [self.env.ref('base.group_portal').id])]
-                })
-            details = {
+            return {
                 'phone': student.phone,
                 'mobile': student.mobile,
                 'email': student.email,
@@ -245,11 +253,7 @@ class OpAdmission(models.Model):
                 'country_id':
                     student.country_id and student.country_id.id or False,
                 'state_id': student.state_id and student.state_id.id or False,
-                'image': student.image,
                 'zip': student.zip,
-            }
-            student_user.partner_id.write(details)
-            details.update({
                 'title': student.title and student.title.id or False,
                 'first_name': student.first_name,
                 'middle_name': student.middle_name,
@@ -268,7 +272,6 @@ class OpAdmission(models.Model):
                     'batch_id':
                         student.batch_id and student.batch_id.id or False,
                 }]],
-                'user_id': student_user.id,
+                'user_id': student_user.id or None,
                 'partner_id': student_user.partner_id.id,
-            })
-            return details
+            }
