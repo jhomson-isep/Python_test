@@ -69,6 +69,7 @@ class OpExamAttendees(models.Model):
     is_final = fields.Boolean(string='Is Final', default=False)
     admission_id = fields.Many2one('op.admission', compute='_get_admission',
                                    store=True)
+    marks = fields.Float(string='Marks')
 
     @api.multi
     @api.depends('batch_id', 'student_id', 'course_id')
