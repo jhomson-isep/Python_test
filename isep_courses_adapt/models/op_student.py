@@ -265,6 +265,9 @@ class OpStudent(models.Model):
                 try:
                     if not isinstance(row['lastaccess'], int):
                         continue
+                    if row['lastaccess'] == 0:
+                        logger.info(row['lastaccess'])
+                        continue
                     last_access = datetime.datetime.utcfromtimestamp(
                         row['lastaccess'])
                     access_values = {
