@@ -91,7 +91,7 @@
                                 <field name="admission_date"/>
                                 <field name="course_id"/>
                                 <field name="batch_id"/>
-                                <field name="admission_date"/>
+                                <field name="academic_record_closing"/>
                                 <field name="due_date"/>
                                 <field name="unsubscribed_date"/>
                                 <field name="state" invisible="1"/>
