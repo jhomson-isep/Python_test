@@ -150,3 +150,14 @@ class PSQL():
         query = "INSERT INTO %s (%s) VALUES (%s);" % (table, marks, marks)
         self.cr.execute(query, marks.keys() + marks.values())
         self.cr.commit()
+
+    def get_subject_faculty_id_rel(self, faculty_id, subject_id):
+        self.cr.execute("SELECT * FROM op_faculty_op_subject_rel "
+                        "WHERE op_faculty_id = %s AND op_subject_id = %s;" % (faculty_id, subject_id))
+        return self.cr.fetchone()
+
+    def create_subject_faculty_rel(self, values):
+        self.cr.execute("INSERT INTO op_faculty_op_subject_rel "
+                        "(op_faculty_id, op_subject_id) "
+                        "VALUES (%s, %s);" % (values[0], values[1]))
+        self.conn.commit()
