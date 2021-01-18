@@ -1,0 +1,840 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <report id="report_prematricula_isep_espana"
+                model="sale.order"
+                string="Prematricula ISEP España"
+                report_type="qweb-pdf"
+                name="isep_reports_custom.prematricula_isep_espana"
+                menu="True"/>
+
+        <template id="assets_backend" inherit_id="web.assets_backend">
+             <xpath expr="." position="inside">
+                 <link rel="stylesheet" href="/isep_reports_custom/static/src/css/sheet.css"/>
+             </xpath>
+        </template>
+
+        <template id="prematricula_isep_espana">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page" name="first_page">
+                            <!--Header de la factura-->
+                            <div class="header">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <!--<div class="row"><strong style="color:#547494;">Universidad</strong></div>-->
+                                        <div class="row">
+                                            <img class="img-fluid logo" style="height:125px;padding-top:2px;" src="/isep_reports_custom/static/src/img/logo_isep.png"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <!--Iconos en dos renglones cada uno-->
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <img src="/isep_reports_custom/static/src/img/tel.png"/>
+                                                <strong style="color:#fc6c04;">+34 934 87 77 77</strong>
+                                            </div>
+                                            <div class="col-6">
+                                                <img src="/isep_reports_custom/static/src/img/mail.png"/>
+                                                <strong style="color:#fc6c04;">Barcelona@isep.es</strong>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <img src="/isep_reports_custom/static/src/img/web.png"/>
+                                                <strong style="color:#fc6c04;">http://www.isep.es/</strong>
+                                            </div>
+                                            <div class="col-6">
+                                                <img src="/isep_reports_custom/static/src/img/cif.png"/>
+                                                <strong style="color:#fc6c04;">B61254314</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--#############################Primera Seccion #547494 <- Azul del HR##################-->
+                            <hr style="border:3px solid #547494;margin-bottom:1px;"/>
+                            <div class="row">
+                                <div class="col-5 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
+                                    <strong style="color:white; margin-left:5px;">DATOS PERSONALES DEL ALUMNO</strong>
+                                </div>
+                            </div>
+                            <div id="personal_information" class="row personal_information" style="font-size:13px;">
+                                <!--Primera Columna-->
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-6"><strong>Nombre:</strong></div>
+                                        <div class="col-6"><span t-field="o.partner_id.name"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>DNI/Pasaporte:</strong></div>
+                                        <t t-if="o.partner_id.vat"><div class="col-6"><span t-field="o.partner_id.vat"></span></div></t>
+                                        <t t-else=""><div class="col-6"><span t-field="o.partner_id.num_reg_trib"></span></div></t>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>Domicilio:</strong></div>
+                                        <div class="col-6"><span t-field="o.partner_id.street"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>Población:</strong></div>
+                                        <div class="col-6"><span t-field="o.partner_id.city"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>Movil:</strong></div>
+                                        <div class="col-6"><span t-field="o.partner_id.mobile"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>Email:</strong></div>
+                                        <div class="col-6"><span t-field="o.partner_id.email"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>Centro:</strong></div>
+                                        <div class="col-6"><span t-field="o.partner_id.x_universidad"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>Estudios:</strong></div>
+                                        <div class="col-6"><span t-field="o.partner_id.x_titulacion"/></div>
+                                    </div>
+                                </div>
+                                <!--Segunda Columna-->
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-6"><strong>Nacimiento:</strong></div>
+                                        <div class="col-6"><span t-field="o.partner_id.x_annonacimiento"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>País:</strong></div>
+                                        <div class="col-6"><span t-field="o.partner_id.country_id"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>Estado:</strong></div>
+                                        <div class="col-6"><span t-field="o.partner_id.state_id"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>C.P:</strong></div>
+                                        <div class="col-6"><span t-field="o.partner_id.zip"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>Teléfono Fijo:</strong></div>
+                                        <div class="col-6"><span t-field="o.partner_id.phone"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>Asesor</strong></div>
+                                        <div class="col-6"><span t-field="o.partner_id.user_id.name"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>Finalizados</strong></div>
+                                        <div class="col-6"><span t-field="o.partner_id.x_finalizacionestudios"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>Profesión:</strong></div>
+                                        <div class="col-6"><span t-field="o.partner_id.x_profesion"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--############################Segunda seccion#########################################-->
+                            <hr style="border:3px solid #547494;margin-bottom:1px;"/>
+                            <div class="row">
+                                <!--#547494 <- Azul del HR-->
+                                <div class="col-4 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
+                                    <strong style="color:white; margin-left:5px;">DATOS DE FACTURACIÓN</strong>
+                                </div>
+                            </div>
+                            <div id="personal_information" class="row personal_information" style="font-size:13px;">
+                                <!--Primera Columna-->
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-4"><strong>Nombre:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.name"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4"><strong>DNI/Pasaporte:</strong></div>
+                                        <t t-if="o.partner_id.vat"><div class="col-8"><span t-field="o.partner_invoice_id.vat"></span></div></t>
+                                        <t t-else=""><div class="col-8"><span t-field="o.partner_invoice_id.num_reg_trib"></span></div></t>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4"><strong>Móvil:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.mobile"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4"><strong>Teléfono Fijo:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.phone"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4"><strong>Email:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.email"/></div>
+                                    </div>
+                                </div>
+                                <!--Segunda Columna-->
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-4"><strong>Domicilio:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.street"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4"><strong>Población:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.city"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4"><strong>País:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.country_id"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4"><strong>Estado:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.state_id"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4"><strong>C.P:</strong></div>
+                                        <div class="col-8"><span t-field="o.partner_invoice_id.zip"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--##################################Tercera Seccion####################################-->
+                            <hr style="border:2px solid #547494;margin-bottom:1px;"/>
+                            <div class="row">
+                                <p style="font-size:13px;">Recibida previamente la información detallada de las características del curso, contenido y demás cuestiones relacionadas, el alumno/titular acepta las condiciones generales y académicas amparadas en este contrato y SOLICITA LA MATRÍCULA PARA EL CURSO DE:</p>
+                            </div>
+                            <div class="row" style="font-size:13px;">
+                                <ul>
+                                    <t t-foreach="o.order_line" t-as="l">
+                                        <li><span t-field="l.product_id"/></li>
+                                    </t>
+                                </ul>
+                            </div>
+                            <!--###################################Cuarta seccion####################################-->
+                            <hr style="border:3px solid #547494;margin-bottom:1px;"/>
+                            <div class="row">
+                                <div class="col-7 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
+                                    <strong style="color:white; margin-left:5px;">
+                                        CONDICIONES ACEPTADAS PARA EL PAGO DEL CURSO
+                                    </strong>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!--Primera Columna-->
+                                <div class="col-6" style="font-size:13px;">
+                                    <div class="row">
+                                        <div class="col-6"><strong>Plazo de Pago:</strong></div>
+                                        <div class="col-6"><span t-field="o.payment_term_id.display_name"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>Matrícula/Pago Inicial:</strong></div>
+                                        <div class="col-6">
+                                            <span t-field="o.precio_matricula"/>
+                                            <span t-field="o.pricelist_id.currency_id"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>Resto Aplazado:</strong></div>
+                                        <div class="col-6">
+                                            <span t-field="o.len_cuotas"/> Plazo/s de
+                                            <span t-field="o.precio_primer_pago"/>
+                                            <span t-field="o.pricelist_id.name"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>Forma de Pago:</strong></div>
+                                        <div class="col-6"><span t-field="o.payment_mode_id.name"/></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6"><strong>Primer Vencimiento Aplazado:</strong></div>
+                                        <div class="col-6"><span t-field="o.x_Fecha_Primer_Recibo"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--################################Quinta seccion#######################################-->
+                            <hr style="border:2px solid #547494;margin-bottom:1px;"/>
+                            <div class="row">
+                                <div class="col-12">
+                                    <p style="font-size:13px;">
+                                        Suscrito en dos ejemplares en Barcelona, a <span t-field="o.create_date"/>
+                                        <br/>
+                                        Leído y conforme con las condiciones generales y mis derechos y deberes que se adjuntan (recibo copia).
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row sign">
+                                <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL ALUMNO</p></strong></div>
+                                <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL TITULAR<br/>(Si es distinto al alumno)</p></strong></div>
+                                <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA <span t-field="o.company_id.name"/></p></strong></div>
+                            </div>
+                            <div class="row" style="height:90px">
+                                <div class="col-8"/>
+                                <div class="col-4">
+                                    <img class="img-fluid img-sign" style="height:75px;display:block;margin-left:auto;margin-right:auto;" src="/isep_reports_custom/static/src/img/firmaisepsl.jpg"/>
+                                </div>
+                            </div>
+                            <div class="row sign">
+                                <div class="col-4" style="font-size:13px;text-align:center;">
+                                    <strong style="font-size:13px;"><span t-field="o.partner_id.name"/></strong>
+                                    <br/>
+                                    <t t-if="o.partner_id.vat"><span t-field="o.partner_id.vat"></span></t>
+                                    <t t-else=""><span t-field="o.partner_id.num_reg_trib"></span></t>
+                                </div>
+                                <div class="col-4" style="font-size:13px;text-align:center;">
+                                    <strong style="font-size:13px;"><span t-field="o.partner_invoice_id.name"/></strong>
+                                    <br/>
+                                    <t t-if="o.partner_invoice_id.vat"><span t-field="o.partner_invoice_id.vat"></span></t>
+                                    <t t-else=""><span t-field="o.partner_invoice_id.num_reg_trib"></span></t>
+                                </div>
+                                <div class="col-4" style="font-size:13px;text-align:center;">
+                                    <strong style="font-size:13px;">[Ref:<span t-field="o.name"/>]</strong>
+                                </div>
+                            </div>
+                            <div class="row" style="height:140px"/><!--Cuadro para pasar de pagina-->
+                            <div class="footer">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-12" style="text-align:center;">
+                                                <strong style="color:#042c5c;">
+                                                    Nuestro objetivo es tu triunfo profesional.
+                                                </strong>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <img src="/isep_reports_custom/static/src/img/tel.png"/>
+                                                <strong style="color:#fc6c04;">+34 93 847 77 77</strong>
+                                            </div>
+                                            <div class="col-6">
+                                                <img src="/isep_reports_custom/static/src/img/mail.png"/>
+                                                <strong style="color:#fc6c04;">Barcelona@isep.es</strong>
+                                            </div>
+                                        </div>
+                                        <hr style="border:2px solid #547494;margin-bottom:1px;"/>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <img src="/isep_reports_custom/static/src/img/web.png"/>
+                                                <strong style="color:#fc6c04;">http://www.isep.es/</strong>
+                                            </div>
+                                            <div class="col-6">
+                                                <img src="/isep_reports_custom/static/src/img/cif.png"/>
+                                                <strong style="color:#fc6c04;">B61254314</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page" name="second_page">
+                            <div class="row" style="font-size:11px; text-align:justify;margin-left:4px;">
+                                <div class="col-6">
+                                    <br/>
+                                    <strong>INFORMACIÓN PREVIA</strong>
+                                    <br/>
+                                    <p>
+                                        El alumno y el titular del contrato han recibido de ISEP S.L., en el momento
+                                        de la firma del presente, la información necesaria acerca del programa a seguir,
+                                        tanto académica, económica y administrativa.
+                                    </p>
+                                    <strong>FORMALIZACIÓN Y CUMPLIMIENTO DEL CONTRATO</strong>
+                                    <br/>
+                                    <ol>
+                                        <li>
+                                            El contrato queda formalizado con la aceptación de estas condiciones. Las partes
+                                            tienen por no efectuado ningún pacto verbal. Estas cláusulas prevalecen sobre otros
+                                            pactos escritos que las contradigan.
+                                        </li>
+                                        <li>
+                                            Tras la formalización del contrato, el alumno se compromete a aportar la
+                                            documentación requerida (incluyendo la acreditación de la titulación universitaria
+                                            necesaria) en el tiempo y forma solicitados por ISEP S.L.. Cuando se trate de un
+                                            programa de ISEP S.L. vinculado con alguna Universidad u otras instituciones, la
+                                            matriculación a dichas instituciones está supeditada a las normativas propias de cada
+                                            centro.
+                                        </li>
+                                        <li>
+                                            De acuerdo con el Real Decreto Legislativo 1/2007, el alumno/titular tiene derecho, en
+                                            plazo de 14 días naturales tras la formalización del contrato, a desistir sin ningún coste,
+                                            debiendo notificarlo de forma inequívoca al centro de ISEP S.L. donde se haya
+                                            matriculado. En cualquier otro caso, la baja unilateral por parte del alumno no exime del
+                                            pago de los importes pactados ni da derecho a devolución de importes ya abonados. La
+                                            asistencia al aula o el acceso al campus virtual durante ese plazo suponen una solicitud
+                                            expresa de inicio de la prestación del servicio. Como Anexo integrante de este contrato,
+                                            en <a href="isep.es/documento-desistimiento">este enlace (isep.es/documento-desistimiento)</a>
+                                            se adjunta el documento de desistimiento.
+                                        </li>
+                                        <li>
+                                            El titular autoriza a ISEP S.L. a realizar los cobros en la forma y los plazos según las
+                                            condiciones aceptadas para el pago.
+                                        </li>
+                                        <li>
+                                            En caso de incumplimiento de los vencimientos pactados, ISEP S.L. podrá reclamar la
+                                            totalidad del importe al alumno/titular, y los plazos acordados con anterioridad quedarán
+                                            sin efecto.
+                                        </li>
+                                        <li>
+                                            ISEP S.L. se reserva el derecho de dejar de prestar el servicio cuando el alumno no
+                                            cumpla con las obligaciones adquiridas, así como de reportar a ficheros de morosidad,
+                                            solvencia patrimonial o crédito en caso de que el alumno/titular no cumpla
+                                            satisfactoriamente con las obligaciones de pago pactadas
+                                        </li>
+                                        <li>
+                                            Los programas presenciales serán realizados siempre que se alcance el número
+                                            mínimo necesario de alumnos. En caso de anulación, el alumno podrá optar entre
+                                            destinar el importe pagado a otro programa de ISEP S.L. o bien el reintegro de los
+                                            importes abonados. Si no se pueden realizar sesiones presenciales por prevención del
+                                            COVID-19 u otras causas, se mantiene el programa y el alumno tiene derecho a las
+                                            mismas horas de clase en directo. En este caso, ISEP S.L. puede adoptar la
+                                            metodología de la modalidad At Home (clases en vivo por videoconferencia).
+                                        </li>
+                                        <li>
+                                            Los contenidos y la metodología del programa se actualizan para incorporar mejoras y
+                                            novedades. En caso de cambios, el alumno estará informado a medida que se
+                                            implementen.
+                                        </li>
+                                    </ol>
+                                    <strong>TITULACIÓN ACADÉMICA Y CERTIFICADOS</strong>
+                                    <br/>
+                                    <ol start="9">
+                                        <li>
+                                            El alumno podrá solicitar la expedición del título de ISEP S.L. una vez haya superado
+                                            los requisitos académicos de la formación y haya cumplido el resto de requisitos
+                                            (económicos, administrativos, aportación de documentación en tiempo y forma, etc.).
+                                        </li>
+                                        <li>
+                                            Los títulos de ISEP S.L. son titulaciones propias en el marco de la educación continua,
+                                            para el desarrollo y proyección profesional, no conducentes a estudios de doctorado.
+                                            Para cualquier proceso de convalidación de un título de ISEP S.L. fuera de España, el
+                                            interesado debe consultar con la normativa de convalidaciones en su país. Para
+                                            programas con Reconocimiento de Validez Oficial (RVOE) por la SEPyC (México), el
+                                            alumno debe solicitarlo según las instrucciones de
+                                            <a href="https://www.isep.es/proceso-titulacion-oficial-mexico/">este enlace</a>.
+                                        </li>
+                                        <li>
+                                            El precio de expedición de títulos, certificados u otros no están incluidos en el importe
+                                            del programa. Los importes vigentes pueden consultarse en las sedes de ISEP S.L..
+                                        </li>
+                                    </ol>
+                                </div>
+                                <div class="col-6">
+                                    <br/>
+                                    <strong>MEDIDAS TÉCNICAS</strong>
+                                    <br/>
+                                    <ol start="12">
+                                        <li>
+                                            El funcionamiento óptimo del Campus Virtual está planteado para aplicaciones
+                                            destinadas a ser utilizadas en ordenadores personales con navegadores Chrome y
+                                            Firefox. ISEP S.L.no puede garantizar el perfecto funcionamiento del Campus con otros
+                                            dispositivos o navegadores.
+                                        </li>
+                                        <li>
+                                            Se recomienda a los alumnos que cuenten con una conexión de Internet ADSL o Fibra
+                                            óptica. En algunos programas se propondrá el visionado de sesiones en directo que
+                                            pueden requerir un mayor ancho de banda para su correcta visualización.
+                                        </li>
+                                        <li>
+                                            Cuando algún servicio quede temporalmente indisponible por causas de fuerza mayor o
+                                            errores en las redes telemáticas de transferencia de datos, ajenos a la voluntad de ISEP
+                                            S.L., esta queda exonerada de los daños y perjuicios que esta situación ocasione.
+                                        </li>
+                                    </ol>
+                                    <strong>PROPIEDAD INTELECTUAL Y DERECHOS DE IMAGEN</strong>
+                                    <br/>
+                                    <ol start="15">
+                                        <li>
+                                            El alumno, exclusivamente para su uso personal y respetando los derechos de propiedad
+                                            intelectual, podrá descargar los contenidos, copiar o imprimir cualquier página de la web y
+                                            del campus virtual de ISEP S.L. a los que tenga acceso (incluido el material docente). En
+                                            ningún caso podrá transmitir, cambiar, modificar o suprimir los contenidos sin la previa
+                                            autorización escrita de ISEP S.L..
+                                        </li>
+                                        <li>
+                                            Con finalidades docentes, de evaluación, de investigación y de difusión, ISEP S.L. se
+                                            reserva el derecho de tratar, procesar, adaptar, reproducir o comunicar públicamente las
+                                            aportaciones realizadas en ejercicios, foros, casos prácticos y trabajos elaborados por el
+                                            alumno durante la formación. El alumno concede su autorización expresa para ello
+                                            conservando, en todo caso, el derecho al reconocimiento de la autoría de los trabajos
+                                            elaborados durante sus estudios.
+                                        </li>
+                                        <li>
+                                            Cuando el alumno participe en actividades presenciales, autoriza a ISEP S.L. a captar su
+                                            imagen (fotografía, audio y vídeo), así como a su transcripción y a la comunicación
+                                            pública de estas grabaciones o transcripciones a través de la página web, redes sociales
+                                            u otros medios de comunicación.
+                                        </li>
+                                    </ol>
+                                    <strong>DURACIÓN DEL CONTRATO</strong>
+                                    <br/>
+                                    <ol start="19">
+                                        <li>
+                                            De acuerdo con la normativa vigente, ISEP S.L. informa que los datos proporcionados se
+                                            incorporarán al sistema de tratamiento titularidad de ISEP S.L. con finalidades de tramitar
+                                            la matrícula, gestionar la inscripción y participación en la actividad formativa, finalidades
+                                            administrativas y contables, gestión del expediente académico e instancias, finalidades
+                                            comerciales y obligaciones legales. Para cumplimiento legal y gestión administrativacontable, los datos se podrán ceder a Agencia Tributaria, bancos, cajas y organismos y/o
+                                            administración pública. En caso de titulación de UVic-UCC, los datos se comunicarán e
+                                            incorporarán al fichero Formació Continuada de UVic-UCC, con finalidades de formación
+                                            y acreditación de la docencia. Puede ejercer sus derechos (acceso, rectificación,
+                                            limitación, supresión, portabilidad, oposición) o revocar el consentimiento por correo
+                                            postal a ISEP S.L. o bien por email: barcelona@isep.es, o dirigirse a la autoridad
+                                            competente si es oportuno. Más info (finalidades, legitimación, destinatarios, derechos,
+                                            etc): (www.isep.es/privacidad-alumnos).
+                                        </li>
+                                    </ol>
+                                    <strong>LEGISLACIÓN APLICABLE Y JURISDICCIÓN</strong>
+                                    <br/>
+                                    <ol start="20">
+                                        <li>
+                                            Este contrato se considera formalizado en Barcelona. A este contrato y a las relaciones
+                                            jurídicas que puedan derivarse de su aplicación e interpretación, les será de aplicación la
+                                            ley española.
+                                        </li>
+                                        <li>
+                                            Si cualquier cláusula incluida en este contrato fuese declarada nula o ineficaz (total o
+                                            parcialmente), tal nulidad o ineficacia afectará tan solo a dicha disposición o a la parte de
+                                            esta que resulte nula o ineficaz (teniéndose por no puesta), y subsistirán el resto de las
+                                            condiciones pactadas.
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <t t-if="o.payment_mode_id.name == 'Tarjeta' or o.payment_mode_id.name == 'Datáfono'">
+                            <div class="page" name="third_page_tarjeta">
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                <div class="col-3">
+                                    <div class="row"><strong>Nombre :</strong></div>
+                                    <div class="row"><strong>Programa :</strong></div>
+                                </div>
+                                <div class="col-9">
+                                    <div class="row"><span t-field="o.partner_id.name"/></div>
+                                    <div class="row">
+                                        <t t-foreach="o.order_line" t-as="l">
+                                            <span t-field="l.product_id"><br/></span>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                <p>Autorizo a ISEP S.L. a realizar los cargos correspondientes a:</p>
+                            </div>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                <ol>
+                                    <li>
+                                        Gastos de Inscripción: <span t-field="o.precio_matricula"/><span t-field='o.pricelist_id.currency_id.name'></span> <span t-field="o.confirmation_date"/>
+                                    </li>
+                                    <li><span t-field="o.len_cuotas"/> Mensualidades de <span t-field="o.precio_primer_pago"/><span t-field="o.pricelist_id.name"/> con fecha <span t-field="o.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha)[1].fecha"/></li>
+                                </ol>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                <strong>Nombre completo del titular de la cuenta:</strong> <span t-field="o.partner_invoice_id.payment_token_ids[0].display_name"/>
+                            </div>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                <strong>Número de la tarjeta:</strong>
+                                <span t-esc="o.partner_invoice_id.payment_token_ids[0].acquirer_ref[:8]">
+                                </span>
+                                ****
+                                <span t-esc="o.partner_invoice_id.payment_token_ids[0].acquirer_ref[-4:]">
+                                </span>
+                            </div>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                <strong>Si la tarjeta es de débito indicar número de clave bancaria estandarizada "CLABE": </strong>
+                            </div>
+                            <br/>
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                Solicito y autorizo a <span t-field="o.company_id.name"/>, para que en mi nombre realice y gestione cualquier trámite administrativo, pagos académicos y de titulación de la Universidad en
+                                donde he formalizado la inscripción, al no disponer de una tarjeta de crédito habilitada para cobros internacionales y evitarme los costos bancarios de las
+                                transferencias internacionales para dichos pagos.
+                            </div>
+                            <br/>
+                            <br/>
+                            <div class="row" style="text-align:center;font-size:13px">
+                                <div class="col-12">
+                                    Entregar este formato a su gestor comercial
+                                    <br/>
+                                    He leído y autorizo lo manifestado en la presente orden de pago.
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div class="row" style="text-align:center;">
+                                <div class="col-12" style="height:50px;"><strong>FIRMA TITULAR:</strong></div>
+                            </div>
+                            <div class="row" style="text-align:center;">
+                                <div class="col-12"><span t-field="o.partner_invoice_id.name"/></div>
+                            </div>
+                            <div class="row" style="text-align:center;"><div class="col-12"><strong>Fecha:</strong></div></div>
+                            <div class="row" style="text-align:center;"><div class="col-12"><span t-field="o.date_order"/></div></div>
+                        </div>
+                        </t>
+                        <t t-if="o.payment_mode_id.name == 'Domiciliado' and o.cuenta_bancaria and o.mandate_id">
+                            <div class="page" name="third_page_sepa">
+                            <style type="text/css">
+                                h4 {
+                                     margin-top: 2px;
+                                     margin-bottom: 2px;
+                                }
+                                .under-line{
+                                    border-bottom:1px solid;
+                                }
+                                input{
+                                    vertical-align: baseline;
+                                }
+                                .panel-default{
+                                    border:2px solid;
+                                }
+                                .panel.panel-default{
+                                    margin-bottom: 4px;
+                                }
+                                .panel-body{
+                                    padding: 2px 14px;
+                                }
+                                p{
+                                    margin: 0 0 4px;
+                                    font-size: 8px;
+                                }
+                                .native_lang{
+                                    font-style: italic;
+                                }
+                                .native_lang_small{
+                                    font-size: 0.8em;
+                                }
+                            </style>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div class="row mt0">
+                                <div class="col-12 text-center">
+                                    <h4 t-if="o.mandate_id.scheme != 'B2B'">
+                                        <strong>Sepa Direct Debit Mandate</strong>
+                                        <t t-if="is_not_english">
+                                            <br/><span class="native_lang native_lang_small" t-esc="'Sepa Direct Debit Mandate'"/>
+                                        </t>
+                                    </h4>
+                                    <h4 t-if="o.mandate_id.scheme == 'B2B'">
+                                        <strong>Sepa Business-To-Business Direct debit Mandate</strong>
+                                        <t t-if="is_not_english">
+                                            <br/><span class="native_lang native_lang_small" t-esc="'Sepa Business-To-Business Direct debit Mandate'"/>
+                                        </t>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="row mt8">
+                                <div class="col-12">
+                                    <div class="panel panel-default">
+                                        <div class="col-12 text-right" style="font-size:8px;">
+                                            To be completed by the creditor
+                                            <t t-if="is_not_english">
+                                                <span class="native_lang" t-esc="'(To be completed by the creditor)'"/>
+                                            </t>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="col-12">
+                                                <em>Mandate Reference:</em>
+                                                <t t-if="is_not_english">
+                                                    <span class="native_lang native_lang_small" t-esc="'(Mandate Reference)'"/>
+                                                </t>
+                                            </div>
+                                            <div class="col-10 col-offset-2 under-line mt4"><span t-field="o.mandate_id.unique_mandate_reference"/></div>
+                                            <div class="col-12">
+                                                <em>Identifier:</em>
+                                                <t t-if="is_not_english">
+                                                    <span class="native_lang native_lang_small" t-esc="'(Identifier)'"/>
+                                                </t>
+                                            </div>
+                                            <div class="col-10 col-offset-2 under-line mt4"><span t-field="o.mandate_id.company_id.sepa_creditor_identifier"/></div>
+                                            <div class="col-12">
+                                                <em>Creditor's Name:</em>
+                                                <t t-if="is_not_english">
+                                                    <span class="native_lang native_lang_small" t-esc="'(Creditor\'s Name)'"/>
+                                                </t>
+                                            </div>
+                                            <div class="col-10 col-offset-2 under-line mt4"><span t-field="o.mandate_id.company_id.partner_id.name"/></div>
+                                            <div class="col-12">
+                                                <em>Address:</em>
+                                                <t t-if="is_not_english">
+                                                    <span class="native_lang native_lang_small" t-esc="'(Address)'"/>
+                                                </t>
+                                            </div>
+                                            <div class="col-10 col-offset-2 under-line mt4"><span t-field="o.mandate_id.company_id.partner_id.street"/></div>
+                                            <div class="col-12">
+                                                <em>Postal Code - City - Town:</em>
+                                                <t t-if="is_not_english">
+                                                    <span class="native_lang native_lang_small" t-esc="'(Postal Code - City - Town)'"/>
+                                                </t>
+                                            </div>
+                                            <div class="col-10 col-offset-2 under-line  mt8">
+                                                <span t-field="o.mandate_id.company_id.partner_id.zip"/> -
+                                                <span t-field="o.mandate_id.company_id.partner_id.city"/> -
+                                                <span t-field="o.mandate_id.company_id.partner_id.state_id"/>
+                                            </div>
+                                            <div class="col-12">
+                                                <em>Country:</em>
+                                                <t t-if="is_not_english">
+                                                    <span class="native_lang native_lang_small" t-esc="'(Country)'"/>
+                                                </t>
+                                            </div>
+                                            <div class="col-10 col-offset-2 under-line mt4"><span t-field="o.mandate_id.company_id.partner_id.country_id"/></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt0">
+                                <div class="col-12">
+                                    <p>By signing this mandate form, you authorise (A) <strong t-if="o.mandate_id.scheme == 'B2B'"> <span t-field="o.mandate_id.company_id.name"/> </strong>
+                                       to send instructions to your bank to debit your account and (B) your bank to
+                                       debit your account in accordance with the instructions from <strong t-if="o.mandate_id.scheme == 'B2B'"> <span t-field="o.mandate_id.company_id.name"/> </strong>.
+                                       <t t-if="is_not_english">
+                                           <br/>
+                                           <span class="native_lang" t-esc="'(By signing this mandate form, you authorise (A) '"/>
+                                           <t t-if="o.mandate_id.scheme == 'B2B'"> <span class="native_lang" t-field="o.mandate_id.company_id.name"/> </t>
+                                           <span class="native_lang" t-esc="' to send instructions to your bank to debit your account and (B) your bank to debit your account in accordance with the instructions from '"/>
+                                           <t t-if="o.mandate_id.scheme == 'B2B'"> <span class="native_lang" t-field="o.mandate_id.company_id.name"/> </t>.)
+                                       </t>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <p t-if="o.mandate_id.scheme == 'B2B'">
+                                        This mandate is only intended for business-to-business transactions.
+                                        You are not entitled to a refund from your bank after your account has
+                                        been debited, but you are entitled to request your bank
+                                        not to debit your account up until the day on which the payment is due.
+                                        <t t-if="is_not_english">
+                                            <br/><span class="native_lang" t-esc="'(This mandate is only intended for business-to-business transactions. You are not entitled to a refund from your bank after your account has been debited, but you are entitled to request your bank not to debit your account up until the day on which the payment is due.)'"/>
+                                        </t>
+                                    </p>
+                                    <p t-if="o.mandate_id.scheme != 'B2B'">
+                                        As part of your rights, you are entitled to a refund from
+                                        your bank under the terms and conditions of your agreement
+                                        with your bank.
+                                        A refund must be claimed within 8 weeks starting from the date on which your account was debited.
+                                        <t t-if="is_not_english">
+                                            <br/><span class="native_lang" t-esc="'(As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited.)'"/>
+                                        </t>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="panel panel-default">
+                                        <div class="col-12 text-right" style="font-size:8px;">
+                                            To be completed by the debtor
+                                            <t t-if="is_not_english">
+                                                <span class="native_lang" t-esc="'(To be completed by the debtor)'"/>
+                                            </t>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="col-12">
+                                                <em>Debtor's Name:</em>
+                                                <t t-if="is_not_english">
+                                                    <span class="native_lang native_lang_small" t-esc="'(Debtor\'s Name)'"/>
+                                                </t>
+                                            </div>
+                                            <div class="col-10 col-offset-2 under-line mt4"><span t-field="o.mandate_id.partner_id"/></div>
+                                            <div class="col-12">
+                                                <em>Address of the Debtor:</em>
+                                                <t t-if="is_not_english">
+                                                    <span class="native_lang native_lang_small" t-esc="'(Address of the Debtor)'"/>
+                                                </t>
+                                            </div>
+                                            <div class="col-10 col-offset-2 under-line mt4"><span t-field="o.mandate_id.partner_id.street"/></div>
+                                            <div class="col-12">
+                                                <em>Postal Code - City - Town:</em>
+                                                <t t-if="is_not_english">
+                                                    <span class="native_lang native_lang_small" t-esc="'(Postal Code - City - Town)'"/>
+                                                </t>
+                                            </div>
+                                            <div class="col-10 col-offset-2 under-line mt4">
+                                                <span t-field="o.mandate_id.partner_id.zip"/> -
+                                                <span t-field="o.mandate_id.partner_id.city"/> -
+                                                <span t-field="o.mandate_id.partner_id.state_id"/>
+                                            </div>
+                                            <div class="col-12">
+                                                <em>Country of the debtor:</em>
+                                                <t t-if="is_not_english">
+                                                    <span class="native_lang native_lang_small" t-esc="'(Country of the debtor)'"/>
+                                                </t>
+                                            </div>
+                                            <div class="col-10 col-offset-2 under-line mt4"><span t-field="o.mandate_id.partner_id.country_id"/></div>
+                                            <div class="col-12">
+                                                <em>Swift BIC (up to 8 or 11 characteres):</em>
+                                                <t t-if="is_not_english">
+                                                    <span class="native_lang native_lang_small" t-esc="'(Swift BIC, up to 8 or 11 characteres)'"/>
+                                                </t>
+                                            </div>
+                                            <div class="col-10 col-offset-2 under-line mt4"><span t-field="o.mandate_id.partner_bank_id.bank_bic"/></div>
+                                            <div class="col-12">
+                                                <em>Account Number - IBAN:</em>
+                                                <t t-if="is_not_english">
+                                                    <span class="native_lang native_lang_small" t-esc="'(Account Number - IBAN)'"/>
+                                                </t>
+                                            </div>
+                                            <div class="col-10 col-offset-2 under-line mt4"><span t-field="o.mandate_id.partner_bank_id.acc_number"/></div>
+                                            <div class="col-12">
+                                                <em>Type of payment:</em>
+                                                <t t-if="is_not_english">
+                                                    <span class="native_lang native_lang_small" t-esc="'(Type of payment)'"/>
+                                                </t>
+                                            </div>
+                                            <div class="col-10 col-offset-2 mt4">
+                                                <input type="checkbox" t-att-checked="o.mandate_id.type=='recurrent' or None">
+                                                    Recurrent
+                                                    <t t-if="is_not_english">
+                                                        <span class="native_lang native_lang_small" t-esc="'(Recurrent)'"/>
+                                                    </t>
+                                                </input>
+                                                -
+                                                <input type="checkbox" t-att-checked="o.mandate_id.type=='oneoff' or None">
+                                                    One-Off
+                                                    <t t-if="is_not_english">
+                                                        <span class="native_lang native_lang_small" t-esc="'(One-Off)'"/>
+                                                    </t>
+                                                </input>
+                                            </div>
+                                            <div class="col-12">
+                                                <em>Date - Location:</em>
+                                                <t t-if="is_not_english">
+                                                    <span class="native_lang native_lang_small" t-esc="'(Date - Location)'"/>
+                                                </t>
+                                            </div>
+                                            <div class="col-10 col-offset-2 under-line mt16"/>
+                                            <div class="col-12">
+                                                <em>Signature of the debtor:</em>
+                                                <t t-if="is_not_english">
+                                                    <span class="native_lang native_lang_small" t-esc="'(Signature of the debtor)'"/>
+                                                </t>
+                                            </div>
+                                            <div class="col-10 col-offset-2 under-line mt16"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <p t-if="o.mandate_id.scheme != 'B2B'">
+                                        ALL GAPS ARE MANDATORY. ONCE THIS MANDATE HAS BEEN SIGNED MUST BE SENT TO CREDITOR FOR STORAGE.
+                                        <t t-if="is_not_english">
+                                            <br/><span class="native_lang" t-esc="'(ALL GAPS ARE MANDATORY. ONCE THIS MANDATE HAS BEEN SIGNED MUST BE SENT TO CREDITOR FOR STORAGE.)'"/>
+                                        </t>
+                                    </p>
+                                    <p t-if="o.mandate_id.scheme == 'B2B'">
+                                        ALL GAPS ARE MANDATORY. ONCE THIS MANDATE HAS BEEN SIGNED MUST BE SENT TO CREDITOR FOR STORAGE.
+                                        NEVERTHELESS, THE BANK OF DEBTOR REQUIRES DEBTOR’S AUTHORIZATION BEFORE DEBITING B2B DIRECT DEBITS IN THE ACCOUNT.
+                                        THE DEBTOR WILL BE ABLE TO MANAGE THE MENTIONED AUTHORIZATION THROUGH THE MEANS PROVIDED BY HIS BANK.
+                                        <t t-if="is_not_english">
+                                            <br/><span class="native_lang" t-esc="'(ALL GAPS ARE MANDATORY. ONCE THIS MANDATE HAS BEEN SIGNED MUST BE SENT TO CREDITOR FOR STORAGE. NEVERTHELESS, THE BANK OF DEBTOR REQUIRES DEBTOR’S AUTHORIZATION BEFORE DEBITING B2B DIRECT DEBITS IN THE ACCOUNT. THE DEBTOR WILL BE ABLE TO MANAGE THE MENTIONED AUTHORIZATION THROUGH THE MEANS PROVIDED BY HIS BANK.)'"/>
+                                        </t>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
