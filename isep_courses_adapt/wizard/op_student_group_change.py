@@ -6,7 +6,7 @@ class OpStudentGroupChangeWizard(models.TransientModel):
     _name = 'op.student.group.change.wizard'
     _description = "Change Group of Student"
 
-    op_admission_id = fields.Many2one("op.admission", string="Admissions")
+    op_admission_id = fields.Many2one("op.admission", string="Admission")
     op_modality_id = fields.Many2one("op.modality", string="Modality")
     op_course_id = fields.Many2one("op.course", string="Course")
     op_batch_id = fields.Many2one("op.batch", string="Batch")
