@@ -115,15 +115,19 @@
                             <field name="access_ids" colspan="4" nolabel="1"/>
                         </group>
                     </page>
-                    <page name="attendees" string="Exam attendees">
-                        <field name="exam_attendees_ids" colspan="4" nolabel="1"/>
-                    </page>
+<!--                    <page name="attendees" string="Exam attendees">-->
+<!--                        <field name="exam_attendees_ids" colspan="4" nolabel="1"/>-->
+<!--                    </page>-->
                 </notebook>
 
                 <xpath expr="//button[@name='toggle_active']" position="before">
                     <button class="btn oe_stat_button" type="object" name="action_open_admissions"
                             style="border-right: 1px solid;" icon="fa-bullseye">
                         <field string="Admissions" name="admission_count" widget="statinfo"/>
+                    </button>
+                    <button class="btn oe_stat_button" type="object" name="action_open_exam_attendees"
+                            style="border-right: 1px solid;" icon="fa-pencil">
+                        <field string="Marks" name="exam_attendees_count" widget="statinfo"/>
                     </button>
                 </xpath>
 

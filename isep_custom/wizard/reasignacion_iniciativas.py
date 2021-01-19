@@ -2,7 +2,7 @@
 # Copyright (c) 2017 QubiQ (http://www.qubiq.es)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, api, fields
+from openerp import models, api, fields, _
 from openerp.exceptions import ValidationError
 import logging
 _logger = logging.getLogger(__name__)
@@ -55,8 +55,17 @@ class MassReasignacionIniciativas(models.TransientModel):
                             'user_id': sel.user_id.id,
                             'team_id': sel.team_id.id,
                         }
-                        lead_obj.partner_id.write(vals)
-                        lead_obj.write(vals)
+
+                        for user in lead_obj.partner_id.user_ids:
+                            print([user.name, user.company_ids,
+                                   sel.company_id.id])
+                            user.write({
+                                'company_ids': [[4, sel.company_id.id, _]],
+                                'company_id': sel.company_id.id
+                            })
+
+                    lead_obj.partner_id.write(vals)
+                    lead_obj.write(vals)
             else:
                 raise ValidationError(
                     'Se deben de seleccionar todos los campos!')
