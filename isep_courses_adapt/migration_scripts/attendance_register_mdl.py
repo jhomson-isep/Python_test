@@ -1,8 +1,5 @@
-from sqlachemy_conn import (get_pg_session, get_mysql_session, OpAttendanceRegister,
-                            OpBatch, MdlAttendanceSession, MdlAttendance,
-                            MdlGroups, OpAttendanceSheet, MdlAttendanceLog,
-                            MdlUser, MdlAttendanceStatuses, OpAttendanceLine,
-                            OpStudent)
+from sqlachemy_conn import *
+from mysql_sqlalchemy import *
 from sqlalchemy import and_
 import logging
 import datetime
