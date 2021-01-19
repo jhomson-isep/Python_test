@@ -14,6 +14,11 @@
                 <t t-call="web.basic_layout">
                     <t t-foreach="docs" t-as="o">
                         <t t-foreach="o.admission_ids" t-as="c">
+                            <div style="position: absolute; transform: rotate(-90deg); -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);  -ms-transform: rotate(-90deg); -o-transform: rotate(-90deg); margin-left: -460px;  margin-right: -50px; margin-top:500px; margin-bottom: 500px; 
+                                font-size:14px;">
+                                ISEP SL, CIF: B-61254314. Inscrita en el Registro Mercantil de Barcelona con fecha 11/02/1997. Folio 33, Tomo 29572. Inscripción 1<![CDATA[&ordf;]]>. Hoja B-155568
+                            </div>
+                            
                             <div style="text-align:justify;font-size:16px; margin-left:50px;">
                                 <p>El Departamento de Secretaría Académica, del Instituto Superior de Estudios Psicológicos, ISEP Barcelona,</p>
                                 <p style="margin-top:10px;">CERTIFICA: </p>
@@ -39,7 +44,7 @@
                                     <t t-if="datetime.datetime.today().month == 12"><span>de Diciembre de </span></t>
                                     <span t-esc="datetime.datetime.today().year"></span>
                                 </p>
-                                <p style="margin-top:100px;">El Departamento de Secretaría Académica<br></br>ISEP Barcelona</p>
+                                <p style="margin-top:110px;text-align:center;">El Departamento de Secretaría Académica<br></br>ISEP Barcelona</p>
                             </div>
                             <div style="height:550px;"></div>
                         </t>

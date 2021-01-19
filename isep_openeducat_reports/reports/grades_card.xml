@@ -15,9 +15,9 @@
                     <t t-foreach="docs" t-as="o">
                         <t t-foreach="o.course_detail_ids" t-as="c">
                             <div style="text-align:justify;font-size:18px; margin-left:50px;">
-                                <p>Erika Tobalina, con DNI 45625219G, en calidad de Directora del Instituto Superior de Estudios Psicológicos, ISEP Barcelona,</p>
+                                <p>El Departamento de Secretaría Académica, del Instituto Superior de Estudios Psicológicos, ISEP Barcelona,</p>
                                 <p style="margin-top:20px;">CERTIFICA: </p>
-                                <p style="margin-top:20px;">Que <strong><span t-field="o.name"></span></strong> con Documento <span t-field="o.document_number"></span>, en el <strong><span t-field="c.course_id.name"></span></strong> impartido en la modalidad <span t-field="c.course_id.modality_id"></span> durante el periodo académico <span t-field="c.course_id.period"></span>, con una carga lectiva de con una carga lectiva de <span t-field="c.course_id.ects"></span> ECTS ( <span t-field="c.course_id.hours"></span> Horas ), ha obtenido las calificaciones siguientes:</p>
+                                <p style="margin-top:20px;">Que <strong><span t-field="o.name"></span></strong> con <span t-field="o.document_type_id.name"></span> <span t-field="o.document_number"></span>, en el <strong><span t-field="c.course_id.name"></span></strong> impartido en la modalidad <span t-field="c.course_id.modality_id"></span> durante el periodo académico <span t-field="c.batch_id.academic_year"></span>, con una carga lectiva de con una carga lectiva de <span t-field="c.course_id.ects"></span> ECTS ( <span t-field="c.course_id.hours"></span> Horas ), ha obtenido las calificaciones siguientes:</p>
                                 <table class="table table-sm">
                                     <thead>
                                         <th>Asignatura</th>
@@ -51,6 +51,7 @@
                                     <t t-if="datetime.datetime.today().month == 12"><span>de Diciembre de </span></t>
                                     <span t-esc="datetime.datetime.today().year"></span>
                                 </p>
+                                <p style="margin-top:100px;">El Departamento de Secretaría Académica<br></br>ISEP Barcelona</p>
                             </div>
                             <div style="height:690px;"></div>
                         </t>
