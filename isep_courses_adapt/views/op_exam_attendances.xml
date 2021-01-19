@@ -9,6 +9,7 @@
                 <xpath expr="//field[@name='exam_id']" position="after">
                     <field name="course_id"/>
                     <field name="batch_id"/>
+                    <field name="subject_id"/>
                 </xpath>
                 <xpath expr="//field[@name='room_id']" position="attributes">
                     <attribute name="invisible">1</attribute>
@@ -31,6 +32,17 @@
                     <field name="original_marks"/>
                 </xpath>
             </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_exam_attendees_view_grouped">
+            <field name="name">Marks</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">op.exam.attendees</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="search_view_id" ref="openeducat_exam.view_op_exam_attendees_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{'group_by': 'course_id'}</field>
         </record>
     </data>
 </odoo>

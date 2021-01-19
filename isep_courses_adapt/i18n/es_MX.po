@@ -154,6 +154,7 @@ msgstr "Grupo"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__subject_id
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_exam_attendees__subject_id
 msgid "Subject"
 msgstr "Asignatura"
 
@@ -1226,3 +1227,9 @@ msgstr "Debe Seleccionar el Curso."
 #, python-format
 msgid "You must select group."
 msgstr "Debe Seleccionar el Grupo."
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+#: model:ir.actions.act_window,name:isep_courses_adapt.act_exam_attendees_view_grouped
+msgid "Marks"
+msgstr "Calificaciones"

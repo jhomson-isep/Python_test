@@ -70,6 +70,8 @@ class OpExamAttendees(models.Model):
     admission_id = fields.Many2one('op.admission', compute='_get_admission',
                                    store=True)
     marks = fields.Float(string='Marks')
+    subject_id = fields.Many2one('op.subject', string='Subject',
+                                 related='exam_id.subject_id')
 
     @api.multi
     @api.depends('batch_id', 'student_id', 'course_id')
