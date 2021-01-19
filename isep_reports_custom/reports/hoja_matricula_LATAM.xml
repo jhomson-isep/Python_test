@@ -29,7 +29,7 @@
                             <img src="/isep_reports_custom/static/src/img/cif.png"/>
                             <strong style="color:#fc6c04;">B61254314</strong>
                         </div>
-
+                        <hr style="border:2px solid #547494;margin-bottom:1px;"/>
                         <div class="col-5 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
                                     <strong style="color:white; margin-left:5px;">DATOS PERSONALES DEL ALUMNO</strong>
                         </div>
@@ -43,7 +43,7 @@
                                 <strong>DNI/Pasaporte:</strong><br/>
                                 <strong>Domicilio:</strong><br/>
                                 <strong>Población:</strong><br/>
-                                <strong>Movil:</strong><br/>
+                                <strong>Móvil:</strong><br/>
                                 <strong>Email:</strong><br/>
                                 <strong>Centro:</strong><br/>
                                 <strong>Estudios:</strong>
@@ -90,17 +90,96 @@
 
 
                         </div> <!--"personal_information"-->
-
+                        <hr style="border:2px solid #547494;margin-bottom:1px;"/>
                         <div class="col-5 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
                                     <strong style="color:white; margin-left:5px;">DATOS DE FACTURACIÓN</strong>
                         </div>
 
-                        <div class="col-5 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
-                                    <strong style="color:white; margin-left:5px;">DATOS DE FACTURACIÓN</strong>
+                        <div id="facturacion" class="row personal_information" style="font-size:13px;">
+                            <!-- Second row-->
+                            <div class="row">
+                            <!--First columna-->
+                            <div class="col-6">
+                                <strong>Nombre:</strong><br/>
+                                <strong>DNI/Pasaporte:</strong><br/>
+                                <strong>Móvil:</strong><br/>
+                                <strong>Teléfono Fijo:</strong><br/>
+                                <strong>Email:</strong>
+                            </div>
+                            <!--Second column-->
+                            <div class="col-6">
+                                <span t-field="o.partner_invoice_id.name"/><br/>
+                                <t t-if="o.partner_id.vat">
+                                <span t-field="o.partner_invoice_id.vat"></span><br/>
+                                </t>
+                                <t t-else=""><span t-field="o.partner_invoice_id.num_reg_trib"></span><br/>
+                                </t>
+                                <span t-field="o.partner_invoice_id.mobile"/><br/>
+                                <span t-field="o.partner_invoice_id.phone"/><br/>
+                                <span t-field="o.partner_invoice_id.email"/>
+                            </div>
+                            <!--Third column-->
+                            <div class="col-6">
+                                <strong>Domicilio:</strong><br/>
+                                <strong>Población:</strong><br/>
+                                <strong>País:</strong><br/>
+                                <strong>Estado:</strong><br/>
+                                <strong>C.P:</strong>
+                            </div>
+                            <!--Fourth column-->
+                            <div class="col-6">
+                                <span t-field="o.partner_invoice_id.street"/><br/>
+                                <span t-field="o.partner_invoice_id.city"/><br/>
+                                <span t-field="o.partner_invoice_id.country_id"/><br/>
+                                <span t-field="o.partner_invoice_id.state_id"/><br/>
+                                <span t-field="o.partner_invoice_id.zip"/>
+                            </div>
+                            </div><!--First row-->
+
+                        </div> <!--"facturacion"-->
+
+                        <hr style="border:2px solid #547494;margin-bottom:1px;"/>
+                        <div class="row">
+                            <p style="font-size:13px;">Recibida previamente la información detallada de las características del curso, contenido y demás cuestiones relacionadas, el alumno/titular acepta las condiciones generales y académicas amparadas en este contrato y SOLICITA LA MATRÍCULA PARA EL CURSO DE:</p>
+                        </div>
+                        <div class="row" style="font-size:13px;">
+                                <ul>
+                                    <t t-foreach="o.order_line" t-as="l">
+                                        <li><span t-field="l.product_id"/></li>
+                                    </t>
+                                </ul>
                         </div>
 
                         <div class="col-5 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
                                     <strong style="color:white; margin-left:5px;">CONDICIONES ACEPTADAS PARA EL PAGO DEL CURSO</strong>
+                        </div>
+
+                        <!-- Third row-->
+                        <div class="row">
+                        <!--First column-->
+                        <div class="col-3">
+                            <strong>Plazo de Pago:</strong><br/>
+                            <strong>Matrícula/Pago Inicial:</strong><br/>
+                            <strong>Resto Aplazado:</strong><br/>
+                            <strong>Forma de Pago:</strong><br/>
+                            <strong>Primer Vencimiento Aplazado:</strong>
+                        </div>
+                        <!--Second column-->
+                        <div class="col-9">
+                            <span t-field="o.payment_term_id.display_name"/><br/>
+                            <span t-field="o.precio_matricula"/><br/>
+                            <span t-field="o.pricelist_id.currency_id"/>
+                            <span t-field="o.len_cuotas"/> Plazo/s de
+                            <span t-field="o.precio_primer_pago"/>
+                            <span t-field="o.pricelist_id.name"/><br/>
+                            <span t-field="o.payment_mode_id.name"/><br/>
+                            <span t-field="o.x_Fecha_Primer_Recibo"/>
+                        </div>
+
+                        </div><!--First row-->
+
+                        <div class="col-5 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
+                                    <strong style="color:white; margin-left:5px;">OTRO TITULO</strong>
                         </div>
                     </t>
                 </t>
