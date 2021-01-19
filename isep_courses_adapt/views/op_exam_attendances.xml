@@ -39,7 +39,7 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">op.exam.attendees</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree</field>
+            <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="openeducat_exam.view_op_exam_attendees_search"/>
             <field name="domain">[]</field>
             <field name="context">{'group_by': 'course_id'}</field>
