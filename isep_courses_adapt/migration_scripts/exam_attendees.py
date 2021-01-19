@@ -23,11 +23,12 @@ for score in scores:
             attendee = session_pg.query(OpExamAttendees).filter(and_(
                 OpExamAttendees.student_id == student.id,
                 OpExamAttendees.exam_id == exam.id)).first()
+
             try:
                 marks = float(score.NotaJunio)
             except Exception as ex:
                 print(ex)
-                marks = 0
+                marks = 10.0 if score.NotaJunio == 'APTO' else 0
 
             if attendee is None:
                 attendee = OpExamAttendees()
@@ -55,4 +56,5 @@ for score in scores:
         print(e)
         traceback.print_tb(e.__traceback__)
         continue
+
 print("Migration terminated")
