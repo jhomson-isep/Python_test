@@ -64,8 +64,8 @@ class MassReasignacionIniciativas(models.TransientModel):
                                 'company_id': sel.company_id.id
                             })
 
-                    lead_obj.partner_id.write(vals)
-                    lead_obj.write(vals)
+                        lead_obj.partner_id.write(vals)
+                        lead_obj.write(vals)
             else:
                 raise ValidationError(
                     'Se deben de seleccionar todos los campos!')
