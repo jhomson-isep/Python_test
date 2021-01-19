@@ -112,7 +112,13 @@
                             <field name="moodle_pass"/>
                         </group>
                         <group>
-                            <field name="access_ids" colspan="4" nolabel="1"/>
+                            <field name="access_ids" colspan="4" nolabel="1">
+                                <tree string="Last access details" default_order='student_access desc'>
+                                    <field name="student_id"/>
+                                    <field name="student_access"/>
+                                    <field name="last_access"/>
+                                </tree>
+                            </field>
                         </group>
                     </page>
 <!--                    <page name="attendees" string="Exam attendees">-->
