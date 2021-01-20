@@ -217,45 +217,47 @@
                                     <strong style="font-size:13px;">[Ref:<span t-field="o.name"/>]</strong>
                                 </div>
                         </div>
-                        <div class="row" style="font-size:11px; text-align:justify;margin-left:4px;">
-                            <div class="col-6">
-                                <br/>
-                                <strong>INFORMACIÓN PREVIA</strong>
-                                <br/>
-                                <p>
-                                    El alumno y el titular del contrato han recibido de ISEP S.L., en el momento
-                                    de la firma del presente, la información necesaria acerca del programa a seguir,
-                                    tanto académica, económica y administrativa.
-                                </p>
-                            </div>
-                            <div class="col-6">
-                                <br/>
-                                <strong>MEDIDAS TÉCNICAS</strong>
-                                <br/>
-                                <ol start="12">
-                                    <li>
-                                      <p>
-                                        El funcionamiento óptimo del Campus Virtual está planteado para aplicaciones
-                                        destinadas a ser utilizadas en ordenadores personales con navegadores Chrome y
-                                        Firefox. ISEP S.L.no puede garantizar el perfecto funcionamiento del Campus con otros
-                                        dispositivos o navegadores.
-                                    </p>
-                                    </li>
-                                </ol>
 
-                            </div>
-                        </div>
 
-                        <div class="row" style="height:140px"/>
+<!--                        <div class="row" style="height:140px"/>-->
                         <div class="footer">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <strong style="color:#042c5c;">
-                                                    Nuestro objetivo es tu triunfo profesional.
-                                        </strong>
-                                    </div>
+                            <div class="row" style="font-size:11px; text-align:justify;margin-left:4px;">
+                                <div class="col-6">
+                                    <br/>
+                                    <strong>INFORMACIÓN PREVIA</strong>
+                                    <br/>
+                                    <p>
+                                        El alumno y el titular del contrato han recibido de ISEP S.L., en el momento
+                                        de la firma del presente, la información necesaria acerca del programa a seguir,
+                                        tanto académica, económica y administrativa.
+                                    </p>
                                 </div>
-                        </div>
+                                <div class="col-6">
+                                    <br/>
+                                    <strong>MEDIDAS TÉCNICAS</strong>
+                                    <br/>
+                                    <ol start="12">
+                                        <li>
+                                          <p>
+                                            El funcionamiento óptimo del Campus Virtual está planteado para aplicaciones
+                                            destinadas a ser utilizadas en ordenadores personales con navegadores Chrome y
+                                            Firefox. ISEP S.L.no puede garantizar el perfecto funcionamiento del Campus con otros
+                                            dispositivos o navegadores.
+                                        </p>
+                                        </li>
+                                    </ol>
+
+                                </div>
+                            </div>
+                            <div class="row" style="text-align: center">
+                                <div class="col-12">
+                                        <strong style="color:#042c5c;text-align:center;">
+                                                Nuestro objetivo es tu triunfo profesional.
+                                        </strong>
+                                </div>
+                            </div>
+                            <hr style="border:2px solid #547494;margin-bottom:1px;"/>
+                        </div> <!--footer-->
 
 
                     </t>
