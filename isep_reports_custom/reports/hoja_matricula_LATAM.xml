@@ -29,21 +29,21 @@
                                 		<div class="col-6">
 	                                	<div class="row">
 		                                <img src="/isep_reports_custom/static/src/img/tel.png"/>
-		                                <strong style="color:#fc6c04;">+34 934 87 77 77</strong>
+		                                <strong style="color:#fc6c04;">+52 800 077 8899</strong>
 		                                </div>
 		                                <div class="row">
 		                                <img src="/isep_reports_custom/static/src/img/web.png"/>
-		                                <strong style="color:#fc6c04;">http://www.isep.es/</strong>
+		                                <strong style="color:#fc6c04;">http://isep.com/mx</strong>
 		                                </div>
 		                                </div>
 		                                <div class="col-6">
 	 									<div class="row">
 		                                <img src="/isep_reports_custom/static/src/img/mail.png"/>
-		                                <strong style="color:#fc6c04;">Barcelona@isep.es</strong>
+		                                <strong style="color:#fc6c04;">mexico@isep.com</strong>
 		                                </div>
 		                                <div class="row">
 		                                <img src="/isep_reports_custom/static/src/img/cif.png"/>
-		                                <strong style="color:#fc6c04;">B61254314</strong>
+		                                <strong style="color:#fc6c04;">ILA160519AE7</strong>
 		                                </div>
 	                                    </div>
 	                                </div>
@@ -51,8 +51,10 @@
                             </div>
                         </div>
                         <hr style="border:2px solid #547494;margin-bottom:1px;"/>
-                        <div class="col-5 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
-                                    <strong style="color:white; margin-left:5px;">DATOS PERSONALES DEL ALUMNO</strong>
+                        <div class="row">
+                            <div class="col-5" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
+                                        <strong style="color:white; margin-left:5px;">DATOS PERSONALES DEL ALUMNO</strong>
+                            </div>
                         </div>
 
                         <div id="personal_information" class="row personal_information" style="font-size:13px;">
@@ -61,16 +63,10 @@
                             <!--First columna-->
                             <div class="col-3">
                                 <strong>Nombre:</strong><br/>
-                                <strong>DNI/Pasaporte:</strong><br/>
-                                <strong>Domicilio:</strong><br/>
-                                <strong>Población:</strong><br/>
-                                <strong>Móvil:</strong><br/>
-                                <strong>Email:</strong><br/>
-                                <strong>Centro:</strong><br/>
-                                <strong>Estudios:</strong>
+                                <strong>RFC/Pasaporte:</strong><br/>
                             </div>
                             <!--Second column-->
-                            <div class="col-3">
+                            <div class="col-2">
                                 <span t-field="o.partner_id.name"/><br/>
                                 <t t-if="o.partner_id.vat">
                                     <span t-field="o.partner_id.vat"></span><br/>
@@ -78,41 +74,95 @@
                                 <t t-else="">
                                     <span t-field="o.partner_id.num_reg_trib"></span><br/>
                                 </t>
-                                <span t-field="o.partner_id.street"/><br/>
-                                <span t-field="o.partner_id.city"/><br/>
-                                <span t-field="o.partner_id.mobile"/><br/>
-                                <span t-field="o.partner_id.email"/><br/>
-                                <span t-field="o.partner_id.x_universidad"/><br/>
-                                <span t-field="o.partner_id.x_titulacion"/>
                             </div>
                             <!--Third column-->
                             <div class="col-3">
+                                <br/>
                                 <strong>Nacimiento:</strong><br/>
-                                <strong>País:</strong><br/>
-                                <strong>Estado:</strong><br/>
+                            </div>
+                            <!--Fourth column-->
+                            <div class="col-3">
+                                <br/>
+                                <span t-field="o.partner_id.x_annonacimiento"/><br/>
+                            </div>
+                            </div><!--First row-->
+                        </div>
+
+                        <div id="personal_information2" class="row personal_information" style="font-size:13px;">
+                             <div class="row container-fluid">
+                            <!--First columna-->
+                            <div class="col-2">
+                                <strong>Domicilio:</strong><br/>
+                            </div>
+                            <!--Second column-->
+                            <div class="col-7">
+                                <span t-field="o.partner_id.street"/><br/>
+                            </div>
+                            <!--Third column-->
+                            <div class="col-1">
                                 <strong>C.P:</strong><br/>
+                            </div>
+                            <!--Fourth column-->
+                            <div class="col-2">
+                                <span t-field="o.partner_id.zip"/><br/>
+                            </div>
+                            </div><!--First row-->
+                        </div>
+
+                        <div id="personal_information3" class="row personal_information" style="font-size:13px;">
+                            <div class="row container-fluid">
+                            <!--First columna-->
+                            <div class="col-2">
+                                <strong>Población:</strong><br/>
+                                <strong>Móvil:</strong><br/>
+                                <strong>Email:</strong><br/>
+                                <strong>Estudios:</strong><br/>
+                                <strong>Universidad:</strong>
+                            </div>
+                            <!--Second column-->
+                            <div class="col-3">
+                                <span t-field="o.partner_id.city"/><br/>
+                                <span t-field="o.partner_id.mobile"/><br/>
+                                <span t-field="o.partner_id.email"/><br/>
+                                <span t-field="o.partner_id.x_titulacion"/><br/>
+                                <span t-field="o.partner_id.x_universidad"/>
+                            </div>
+                            <!--Third column-->
+                            <div class="col-2">
+                                <strong>Estado:</strong><br/>
                                 <strong>Teléfono Fijo:</strong><br/>
-                                <strong>Asesor</strong><br/>
                                 <strong>Finalizados</strong><br/>
                                 <strong>Profesión:</strong><br/>
                             </div>
                             <!--Fourth column-->
-                            <div class="col-3">
-                                <span t-field="o.partner_id.x_annonacimiento"/><br/>
-                                <span t-field="o.partner_id.country_id"/><br/>
+                            <div class="col-2">
                                 <span t-field="o.partner_id.state_id"/><br/>
-                                <span t-field="o.partner_id.zip"/><br/>
                                 <span t-field="o.partner_id.phone"/><br/>
-                                <span t-field="o.partner_id.user_id.name"/><br/>
                                 <span t-field="o.partner_id.x_finalizacionestudios"/><br/>
                                 <span t-field="o.partner_id.x_profesion"/><br/>
                             </div>
+                            <!--Fourth column-->
+                            <div class="col-1">
+                                <strong>País:</strong><br/>
+                                <br/>
+                                <br/>
+                                <strong>Asesor:</strong><br/>
+                            </div>
+                            <!--Fifth column-->
+                            <div class="col-2">
+                                <span t-field="o.partner_id.country_id"/><br/>
+                                <br/>
+                                <br/>
+                                <span t-field="o.partner_id.user_id.name"/><br/>
+                            </div>
                             </div><!--First row-->
-
                         </div> <!--"personal_information"-->
+
                         <hr style="border:2px solid #547494;margin-bottom:1px;"/>
-                        <div class="col-5 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
+                        <div class="row">
+                            <div class="col-4" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
                                     <strong style="color:white; margin-left:5px;">DATOS DE FACTURACIÓN</strong>
+                            </div>
                         </div>
 
                         <div id="facturacion" class="row personal_information" style="font-size:13px;">
@@ -171,9 +221,12 @@
                         </div>
 
                         <hr style="border:2px solid #547494;margin-bottom:1px;"/>
-                        <div class="col-5 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
+                            <div class="row">
+                        <div class="col-7" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
                                     <strong style="color:white; margin-left:5px;">CONDICIONES ACEPTADAS PARA EL PAGO DEL CURSO</strong>
                         </div>
+                            </div>
+
 
                         <!-- Third row-->
                         <div class="row">
@@ -241,7 +294,7 @@
 
 
 <!--                        <div class="row" style="height:140px"/>-->
-                            <br/><br/>
+                            <br/><br/><br/>
                             <div class="row" style="font-size:11px; text-align:justify;margin-left:4px;">
                                 <div class="col-6">
                                     <br/>
@@ -308,6 +361,7 @@
                         </div><!-- first_page-->
 
                         <div class="page" name="second_page">
+                            <br/>
                             <div class="row container-fluid" style="font-size:11px; text-align:justify;margin-left:4px;">
                                 <div class="col-6">
                                     <strong>FORMALIZACIÓN Y CUMPLIMIENTO DEL CONTRATO</strong>
