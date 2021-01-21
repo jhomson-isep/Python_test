@@ -19,15 +19,15 @@
                 <t t-foreach="docs" t-as="o">
                     <t t-call="web.basic_layout">
                         <div>
-                            <img class="img-fluid logo" style="height:125px;padding-top:2px;" src="/isep_reports_custom/static/src/img/logo_isep.png"/>
-                            <img src="/isep_reports_custom/static/src/img/tel.png"/>
-                            <strong style="color:#fc6c04;">+34 934 87 77 77</strong>
-                            <img src="/isep_reports_custom/static/src/img/mail.png"/>
-                            <strong style="color:#fc6c04;">Barcelona@isep.es</strong>
-                            <img src="/isep_reports_custom/static/src/img/web.png"/>
-                            <strong style="color:#fc6c04;">http://www.isep.es/</strong>
-                            <img src="/isep_reports_custom/static/src/img/cif.png"/>
-                            <strong style="color:#fc6c04;">B61254314</strong>
+<!--                            <img class="img-fluid logo" style="height:125px;padding-top:2px;" src="/isep_reports_custom/static/src/img/logo_isep.png"/>-->
+<!--                            <img src="/isep_reports_custom/static/src/img/tel.png"/>-->
+<!--                            <strong style="color:#fc6c04;">+34 934 87 77 77</strong>-->
+<!--                            <img src="/isep_reports_custom/static/src/img/mail.png"/>-->
+<!--                            <strong style="color:#fc6c04;">Barcelona@isep.es</strong>-->
+<!--                            <img src="/isep_reports_custom/static/src/img/web.png"/>-->
+<!--                            <strong style="color:#fc6c04;">http://www.isep.es/</strong>-->
+<!--                            <img src="/isep_reports_custom/static/src/img/cif.png"/>-->
+<!--                            <strong style="color:#fc6c04;">B61254314</strong>-->
                         </div>
                         <hr style="border:2px solid #547494;margin-bottom:1px;"/>
                         <div class="col-5 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
@@ -36,9 +36,9 @@
 
                         <div id="personal_information" class="row personal_information" style="font-size:13px;">
                             <!-- First row-->
-                            <div class="row">
+                            <div class="row container-fluid">
                             <!--First columna-->
-                            <div class="col-6">
+                            <div class="col-3">
                                 <strong>Nombre:</strong><br/>
                                 <strong>DNI/Pasaporte:</strong><br/>
                                 <strong>Domicilio:</strong><br/>
@@ -49,7 +49,7 @@
                                 <strong>Estudios:</strong>
                             </div>
                             <!--Second column-->
-                            <div class="col-6">
+                            <div class="col-3">
                                 <span t-field="o.partner_id.name"/><br/>
                                 <t t-if="o.partner_id.vat">
                                     <span t-field="o.partner_id.vat"></span><br/>
@@ -65,7 +65,7 @@
                                 <span t-field="o.partner_id.x_titulacion"/>
                             </div>
                             <!--Third column-->
-                            <div class="col-6">
+                            <div class="col-3">
                                 <strong>Nacimiento:</strong><br/>
                                 <strong>País:</strong><br/>
                                 <strong>Estado:</strong><br/>
@@ -76,7 +76,7 @@
                                 <strong>Profesión:</strong><br/>
                             </div>
                             <!--Fourth column-->
-                            <div class="col-6">
+                            <div class="col-3">
                                 <span t-field="o.partner_id.x_annonacimiento"/><br/>
                                 <span t-field="o.partner_id.country_id"/><br/>
                                 <span t-field="o.partner_id.state_id"/><br/>
@@ -96,9 +96,9 @@
 
                         <div id="facturacion" class="row personal_information" style="font-size:13px;">
                             <!-- Second row-->
-                            <div class="row">
+                            <div class="row container-fluid">
                             <!--First columna-->
-                            <div class="col-6">
+                            <div class="col-3">
                                 <strong>Nombre:</strong><br/>
                                 <strong>DNI/Pasaporte:</strong><br/>
                                 <strong>Móvil:</strong><br/>
@@ -106,7 +106,7 @@
                                 <strong>Email:</strong>
                             </div>
                             <!--Second column-->
-                            <div class="col-6">
+                            <div class="col-3">
                                 <span t-field="o.partner_invoice_id.name"/><br/>
                                 <t t-if="o.partner_id.vat">
                                 <span t-field="o.partner_invoice_id.vat"></span><br/>
@@ -118,7 +118,7 @@
                                 <span t-field="o.partner_invoice_id.email"/>
                             </div>
                             <!--Third column-->
-                            <div class="col-6">
+                            <div class="col-3">
                                 <strong>Domicilio:</strong><br/>
                                 <strong>Población:</strong><br/>
                                 <strong>País:</strong><br/>
@@ -126,7 +126,7 @@
                                 <strong>C.P:</strong>
                             </div>
                             <!--Fourth column-->
-                            <div class="col-6">
+                            <div class="col-3">
                                 <span t-field="o.partner_invoice_id.street"/><br/>
                                 <span t-field="o.partner_invoice_id.city"/><br/>
                                 <span t-field="o.partner_invoice_id.country_id"/><br/>
@@ -257,6 +257,30 @@
                                 </div>
                             </div>
                             <hr style="border:2px solid #547494;margin-bottom:1px;"/>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <img src="/isep_reports_custom/static/src/img/tel.png"/>
+                                    <strong style="color:#fc6c04;">+34 93 847 77 77</strong>
+                                </div>
+                                <div class="col-6">
+                                    <img src="/isep_reports_custom/static/src/img/mail.png"/>
+                                    <strong style="color:#fc6c04;">Barcelona@isep.es</strong>
+                                </div>
+                            </div>
+                            <hr style="border:2px solid #547494;margin-bottom:1px;"/>
+                            <div class="row">
+                                <div class="col-6">
+                                    <img src="/isep_reports_custom/static/src/img/web.png"/>
+                                    <strong style="color:#fc6c04;">http://www.isep.es/</strong>
+                                </div>
+                                <div class="col-6">
+                                    <img src="/isep_reports_custom/static/src/img/cif.png"/>
+                                    <strong style="color:#fc6c04;">B61254314</strong>
+                                </div>
+                            </div>
+
+
                         </div> <!--footer-->
 
 
