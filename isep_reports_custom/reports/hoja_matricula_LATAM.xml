@@ -61,13 +61,27 @@
                             <!-- First row-->
                             <div class="row container-fluid">
                             <!--First columna-->
-                            <div class="col-3">
+                            <div class="col-2">
                                 <strong>Nombre:</strong><br/>
-                                <strong>RFC/Pasaporte:</strong><br/>
                             </div>
                             <!--Second column-->
                             <div class="col-2">
                                 <span t-field="o.partner_id.name"/><br/>
+                            </div>
+
+                            </div><!--First row-->
+                        </div>
+
+
+                        <div id="personal_information1" class="row personal_information" style="font-size:13px;">
+                            <!-- First row-->
+                            <div class="row container-fluid">
+                            <!--First columna-->
+                            <div class="col-3">
+                                <strong>RFC/Pasaporte:</strong><br/>
+                            </div>
+                            <!--Second column-->
+                            <div class="col-2">
                                 <t t-if="o.partner_id.vat">
                                     <span t-field="o.partner_id.vat"></span><br/>
                                 </t>
@@ -77,12 +91,10 @@
                             </div>
                             <!--Third column-->
                             <div class="col-3">
-                                <br/>
                                 <strong>Nacimiento:</strong><br/>
                             </div>
                             <!--Fourth column-->
                             <div class="col-3">
-                                <br/>
                                 <span t-field="o.partner_id.x_annonacimiento"/><br/>
                             </div>
                             </div><!--First row-->
@@ -133,6 +145,7 @@
                                 <strong>Teléfono Fijo:</strong><br/>
                                 <strong>Finalizados</strong><br/>
                                 <strong>Profesión:</strong><br/>
+                                <strong>Asesor:</strong><br/>
                             </div>
                             <!--Fourth column-->
                             <div class="col-2">
@@ -140,20 +153,15 @@
                                 <span t-field="o.partner_id.phone"/><br/>
                                 <span t-field="o.partner_id.x_finalizacionestudios"/><br/>
                                 <span t-field="o.partner_id.x_profesion"/><br/>
+                                <span t-field="o.partner_id.user_id.name"/><br/>
                             </div>
                             <!--Fourth column-->
                             <div class="col-1">
                                 <strong>País:</strong><br/>
-                                <br/>
-                                <br/>
-                                <strong>Asesor:</strong><br/>
                             </div>
                             <!--Fifth column-->
                             <div class="col-2">
                                 <span t-field="o.partner_id.country_id"/><br/>
-                                <br/>
-                                <br/>
-                                <span t-field="o.partner_id.user_id.name"/><br/>
                             </div>
                             </div><!--First row-->
                         </div> <!--"personal_information"-->
@@ -169,43 +177,70 @@
                             <!-- Second row-->
                             <div class="row container-fluid">
                             <!--First columna-->
-                            <div class="col-3">
+                            <div class="col-2">
                                 <strong>Nombre:</strong><br/>
-                                <strong>DNI/Pasaporte:</strong><br/>
-                                <strong>Móvil:</strong><br/>
-                                <strong>Teléfono Fijo:</strong><br/>
-                                <strong>Email:</strong>
+                            </div>
+                            <!--Second column-->
+                            <div class="col-2">
+                                <span t-field="o.partner_invoice_id.name"/><br/>
+                            </div>
+                            </div><!--First row-->
+                        </div>
+                        <div id="facturacion1" class="row personal_information" style="font-size:13px;">
+                            <div class="row container-fluid">
+                            <!--First columna-->
+                            <div class="col-2">
+                                <strong>RFC/Pasaporte:</strong><br/>
                             </div>
                             <!--Second column-->
                             <div class="col-3">
-                                <span t-field="o.partner_invoice_id.name"/><br/>
                                 <t t-if="o.partner_id.vat">
                                 <span t-field="o.partner_invoice_id.vat"></span><br/>
                                 </t>
                                 <t t-else=""><span t-field="o.partner_invoice_id.num_reg_trib"></span><br/>
                                 </t>
-                                <span t-field="o.partner_invoice_id.mobile"/><br/>
-                                <span t-field="o.partner_invoice_id.phone"/><br/>
-                                <span t-field="o.partner_invoice_id.email"/>
                             </div>
-                            <!--Third column-->
-                            <div class="col-3">
+                            </div>
+                        </div>
+
+                        <div id="facturacion2" class="row personal_information" style="font-size:13px;">
+                            <div class="row container-fluid">
+                            <div class="col-2">
                                 <strong>Domicilio:</strong><br/>
-                                <strong>Población:</strong><br/>
-                                <strong>País:</strong><br/>
-                                <strong>Estado:</strong><br/>
-                                <strong>C.P:</strong>
                             </div>
-                            <!--Fourth column-->
-                            <div class="col-3">
-                                <span t-field="o.partner_invoice_id.street"/><br/>
-                                <span t-field="o.partner_invoice_id.city"/><br/>
-                                <span t-field="o.partner_invoice_id.country_id"/><br/>
-                                <span t-field="o.partner_invoice_id.state_id"/><br/>
+                            <div class="col-7">
+                                <span t-field="o.partner_invoice_id.street"/>
+                            </div>
+                            <div class="col-1">
+                                <strong>C.P.:</strong><br/>
+                            </div>
+                            <div class="col-2">
                                 <span t-field="o.partner_invoice_id.zip"/>
                             </div>
-                            </div><!--First row-->
+                            </div>
+                        </div> <!--"facturacion"-->
 
+                        <div id="facturacion3" class="row personal_information" style="font-size:13px;">
+                            <div class="row container-fluid">
+                            <div class="col-2">
+                                <strong>Población:</strong><br/>
+                                <strong>Móvil:</strong><br/>
+                                <strong>Email:</strong><br/>
+                            </div>
+                            <div class="col-3">
+                                <span t-field="o.partner_invoice_id.city"/>
+                                <span t-field="o.partner_invoice_id.mobile"/>
+                                <span t-field="o.partner_invoice_id.email"/>
+                            </div>
+                            <div class="col-2">
+                                <strong>Estado:</strong><br/>
+                                <strong>Teléfono fijo:</strong><br/>
+                            </div>
+                            <div class="col-2">
+                                <span t-field="o.partner_invoice_id.state_id"/>
+                                <span t-field="o.partner_invoice_id.phone"/>
+                            </div>
+                            </div>
                         </div> <!--"facturacion"-->
 
                         <hr style="border:2px solid #547494;margin-bottom:1px;"/>
