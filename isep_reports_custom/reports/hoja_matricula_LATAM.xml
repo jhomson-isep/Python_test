@@ -18,16 +18,37 @@
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <t t-call="web.basic_layout">
-                        <div>
-<!--                            <img class="img-fluid logo" style="height:125px;padding-top:2px;" src="/isep_reports_custom/static/src/img/logo_isep.png"/>-->
-<!--                            <img src="/isep_reports_custom/static/src/img/tel.png"/>-->
-<!--                            <strong style="color:#fc6c04;">+34 934 87 77 77</strong>-->
-<!--                            <img src="/isep_reports_custom/static/src/img/mail.png"/>-->
-<!--                            <strong style="color:#fc6c04;">Barcelona@isep.es</strong>-->
-<!--                            <img src="/isep_reports_custom/static/src/img/web.png"/>-->
-<!--                            <strong style="color:#fc6c04;">http://www.isep.es/</strong>-->
-<!--                            <img src="/isep_reports_custom/static/src/img/cif.png"/>-->
-<!--                            <strong style="color:#fc6c04;">B61254314</strong>-->
+                        <div class="page" name="first_page">
+                       <div class="header">
+                            <div class="row">
+                                <div class="col-6">
+                                	<img class="img-fluid logo" style="height:125px;padding-top:2px;" src="/isep_reports_custom/static/src/img/logo_isep.png"/>
+                                 </div>
+                                <div class="col-6">
+                                	<div class="row container-fluid">
+                                		<div class="col-6">
+	                                	<div class="row">
+		                                <img src="/isep_reports_custom/static/src/img/tel.png"/>
+		                                <strong style="color:#fc6c04;">+34 934 87 77 77</strong>
+		                                </div>
+		                                <div class="row">
+		                                <img src="/isep_reports_custom/static/src/img/web.png"/>
+		                                <strong style="color:#fc6c04;">http://www.isep.es/</strong>
+		                                </div>
+		                                </div>
+		                                <div class="col-6">
+	 									<div class="row">
+		                                <img src="/isep_reports_custom/static/src/img/mail.png"/>
+		                                <strong style="color:#fc6c04;">Barcelona@isep.es</strong>
+		                                </div>
+		                                <div class="row">
+		                                <img src="/isep_reports_custom/static/src/img/cif.png"/>
+		                                <strong style="color:#fc6c04;">B61254314</strong>
+		                                </div>
+	                                    </div>
+	                                </div>
+                                </div>
+                            </div>
                         </div>
                         <hr style="border:2px solid #547494;margin-bottom:1px;"/>
                         <div class="col-5 title" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
@@ -258,7 +279,7 @@
                             </div>
                             <hr style="border:2px solid #547494;margin-bottom:1px;"/>
 
-                            <div class="row">
+                            <div class="row container-fluid">
                                 <div class="col-6">
                                     <img src="/isep_reports_custom/static/src/img/tel.png"/>
                                     <strong style="color:#fc6c04;">+34 93 847 77 77</strong>
@@ -268,8 +289,9 @@
                                     <strong style="color:#fc6c04;">Barcelona@isep.es</strong>
                                 </div>
                             </div>
+
                             <hr style="border:2px solid #547494;margin-bottom:1px;"/>
-                            <div class="row">
+                            <div class="row container-fluid">
                                 <div class="col-6">
                                     <img src="/isep_reports_custom/static/src/img/web.png"/>
                                     <strong style="color:#fc6c04;">http://www.isep.es/</strong>
@@ -282,6 +304,7 @@
 
 
                         </div> <!--footer-->
+                        </div><!-- first_page-->
 
 
                     </t>
