@@ -294,7 +294,7 @@
                             <div class="col-12">
                                 <p style="font-size:13px;">
                                     Suscrito en dos ejemplares en Culiacán, a <span t-esc="o.create_date.strftime('%d/%m/%Y')"/>
-                                                                              
+
                                     <br/>
                                     Leído y conforme con las condiciones generales y mis derechos y deberes que se adjuntan (recibo copia).
                                 </p>
@@ -329,39 +329,6 @@
                                     <strong style="font-size:13px;">[Ref:<span t-field="o.name"/>]</strong>
                                 </div>
                         </div>
-
-
-
-<!--                        <div class="row" style="height:140px"/>-->
-<!--                            <br/><br/><br/>-->
-<!--                            <div class="row" style="font-size:11px; text-align:justify;margin-left:4px;">-->
-<!--                                <div class="col-6">-->
-<!--                                    <br/>-->
-<!--                                    <strong>INFORMACIÓN PREVIA</strong>-->
-<!--                                    <br/>-->
-<!--                                    <p>-->
-<!--                                        El alumno y el titular del contrato han recibido de ISEP S.L., en el momento-->
-<!--                                        de la firma del presente, la información necesaria acerca del programa a seguir,-->
-<!--                                        tanto académica, económica y administrativa.-->
-<!--                                    </p>-->
-<!--                                </div>-->
-<!--                                <div class="col-6">-->
-<!--                                    <br/>-->
-<!--                                    <strong>MEDIDAS TÉCNICAS</strong>-->
-<!--                                    <br/>-->
-<!--                                    <ol start="12">-->
-<!--                                        <li>-->
-<!--                                          <p>-->
-<!--                                            El funcionamiento óptimo del Campus Virtual está planteado para aplicaciones-->
-<!--                                            destinadas a ser utilizadas en ordenadores personales con navegadores Chrome y-->
-<!--                                            Firefox. ISEP S.L.no puede garantizar el perfecto funcionamiento del Campus con otros-->
-<!--                                            dispositivos o navegadores.-->
-<!--                                        </p>-->
-<!--                                        </li>-->
-<!--                                    </ol>-->
-
-<!--                                </div>-->
-<!--                            </div>-->
 
 
                         <div class="row container-fluid" style="margin-top:50px">
@@ -560,7 +527,88 @@
                                      </li>
                                  </ol>
 
+                        <br/><br/><br/><br/><br/>
+                        <div class="row sign">
+                                <br/><br/>
+                                <div class="col-6" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL ALUMNO</p></strong></div>
+                                <div class="col-6" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL TITULAR<br/>(Si es distinto al alumno)</p></strong></div>
+                        </div>
+                        <br/><br/><br/>
+
+                        <div class="row sign">
+                                <div class="col-6" style="font-size:13px;text-align:center;">
+                                    <strong style="font-size:13px;"><span t-field="o.partner_id.name"/></strong>
+                                    <br/>
+                                    <t t-if="o.partner_id.vat"><span t-field="o.partner_id.vat"></span></t>
+                                    <t t-else=""><span t-field="o.partner_id.num_reg_trib"></span></t>
+                                </div>
+                                <div class="col-6" style="font-size:13px;text-align:center;">
+                                    <strong style="font-size:13px;"><span t-field="o.partner_invoice_id.name"/></strong>
+                                    <br/>
+                                </div>
+
+                        </div>
+                        <div class="row container-fluid">
+                            <div class="col-12" style="text-align:center">
+                               <strong>Fecha: </strong><t t-esc="time.strftime('%d/%m/%Y')"/>
+                            </div>
+                        </div>
+                         <br/><br/><br/><br/><br/><br/>
                         </div> <!--second_page-->
+
+                        <br/><br/><br/><br/><br/>
+                        <div class="page" name="third_page" style="font-size:11px;text-align:justify;">
+                            <div class="row container-fluid">
+                                <div class="col-2">
+                                    <strong>Nombre:</strong><br/>
+                                    <strong>Programa:</strong>
+                                </div>
+                                <div class="col-4">
+                                    <span t-field="o.partner_id.name"/><br/>
+                                    <div class="row" style="font-size:13px;">
+                                        <ul>
+                                        <t t-foreach="o.order_line" t-as="l">
+
+                                            <li><span t-field="l.product_id"/><br/></li>
+
+                                        </t>
+                                        </ul>
+                                   </div>
+                                </div>
+
+                            </div>
+                            Autorizo a ISEP LATAM, SC, SC. a realizar los cargos correspondientes a:<br/>
+                            a) Gastos de Inscripción $ X,XXX.00 . Día Mes Año<br/>
+                            b) 6 mensualidades de X,XXX.00 [ MXN ] Peso mexicano , a partir del mes de 02 el día 20 del año 2021<br/><br/>
+                            Nombre completo del titular de la cuenta:<span t-field="o.partner_id.name"/><br/>
+                            Número de la tarjeta:<br/>
+                            Si la tarjeta es de débito indicar número de clave bancaria estandarizada “CLABE”<br/>
+                            Clave bancaria estandarizada “CLABE”:<br/>
+                            <br/><br/>
+                            <p>
+                                Solicito y autorizo a ISEP LATAM, SC, para que en mi nombre realice y gestione cualquier
+                                trámite administrativo, pagos académicos y de titulación de la Universidad en donde he
+                                formalizado la inscripción, al no disponer de una tarjeta de crédito habilitada para
+                                cobros internacionales y evitarme los costos bancarios de las transferencias
+                                internacionales para dichos pagos.
+                            </p>
+                            <div class="row container-fluid" style="text-align:center">
+                                <div class="col-12">
+
+                                Entregar este formato a su gestor comercial<br/>
+                                He leído y autorizo lo manifestado en la presente orden de pago.
+                                <br/><br/><br/>
+                                <strong>FIRMA TITULAR:</strong>
+                                <br/><br/><br/><br/>
+<!--                                <t t-field="o.partner_id.name"/><br/>-->
+                                <strong>Fecha:</strong><br/>
+                                <t t-esc="time.strftime('%d/%m/%Y')"/>
+
+                                </div>
+
+                            </div>
+
+                        </div> <!--third_page-->
 
 
                     </t>
