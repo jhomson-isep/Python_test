@@ -211,5 +211,38 @@ Secretar&iacute;a Academica</p>
             ]]></field>
         </record>
 
+            <record id="email_extend_due_date" model="mail.template">
+            <field name="name">Email Extend Due Date Message</field>
+            <field name="email_from">secretaria@isep.com</field>
+            <field name="subject">Prorróga</field>
+            <field name="email_to">${object.admission_ids[0].student_id.partner_id.email}</field>
+            <field name="model_id" ref="model_op_student_extend_due_date_wizard"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html"><![CDATA[
+<div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+<p style='color: rgb(0, 0, 0); font-family: "Lucida Grande", Helvetica, Verdana, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial; margin: 0px 0px 1rem;'>
+
+<img class="alignnone size-full wp-image-869" src="https://res.cloudinary.com/isep-openeducat/image/upload/v1607548753/ISEP_emails/log_isep_syunic.png" alt="" width="208" height="111" />
+<p style="text-align: justify;">${object.admission_ids[0].student_id.first_name}, se ha realizado una prórroga de ${object.months_to_extend} ${if object.months_to_extend == 1} mes ${else} meses ${endif} a los siguientes cursos:</p>
+${for admission in object.admission_ids}
+<ul style="text-align: justify;">
+    <p><strong>Admisión:</strong> ${admission.application_number} </p>
+    <p><strong>Curso:</strong> ${admission.course_id.name} </p> 
+    <p><strong>Grupo:</strong> ${admission.batch_id.code} </p>
+    <p><strong>Fecha de Vencimiento:</strong> ${admission.due_date} </p>
+</ul>
+${endfor}
+<p style="text-align: center;">Escríbenos a nuestro WhatsApp 52 1 33 3400 8005.</p>
+<p align="center"><img class="alignnone size-full wp-image-871" src="https://res.cloudinary.com/isep-openeducat/image/upload/v1607551307/ISEP_emails/mensajefinal_wbnsnm.png" alt="" width="62" height="62" /></p>
+&nbsp;
+
+&nbsp;
+
+</div>
+            ]]></field>
+        </record>
+
+
+
     </data>
 </odoo>

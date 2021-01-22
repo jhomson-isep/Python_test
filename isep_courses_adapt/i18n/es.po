@@ -1086,6 +1086,7 @@ msgid "New admissions"
 msgstr "Nuevas admisiones"
 
 #. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_extend_due_date_wizard__admission_ids
 #: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
 msgid "Admissions"
 msgstr "Admisiones"
@@ -1233,3 +1234,43 @@ msgstr "Debe Seleccionar el Grupo."
 #: model:ir.actions.act_window,name:isep_courses_adapt.act_exam_attendees_view_grouped
 msgid "Marks"
 msgstr "Calificaciones"
+
+#. module: isep_courses_adapt
+#: model:ir.actions.act_window,name:isep_courses_adapt.extend_due_date_act
+msgid "Extend Due Date"
+msgstr "Ampliar la fecha de vencimiento"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_student_extend_due_date_wizard_form
+msgid "Extend Due Date Admission Student"
+msgstr "Ampliar fecha de vencimiento de la adminsion o admisiones del estudiante"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_student_extend_due_date_wizard_form
+msgid "Extend Due Date Admission Wizard"
+msgstr "Asistente para ampliar la fecha de vencimiento de las admisiones del estudiante"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_student_extend_due_date_wizard_form
+msgid "Extend Months"
+msgstr "Ampliar"
+
+#. module: isep_courses_adapt
+#: model:ir.model,name:isep_courses_adapt.model_op_student_extend_due_date_wizard
+msgid "Modify due date in admission of student"
+msgstr "Modificar la fecha de vencimiento en la admisión del estudiante"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_extend_due_date_wizard__months_to_extend
+msgid "Months"
+msgstr "Meses"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,help:isep_courses_adapt.field_op_student_extend_due_date_wizard__months_to_extend
+msgid "Number of months to extend"
+msgstr "Número de meses a extender o ampliar"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,help:isep_courses_adapt.field_op_student_extend_due_date_wizard__admission_ids
+msgid "Select one or more admissions"
+msgstr "Seleccione una o más admisiones"
