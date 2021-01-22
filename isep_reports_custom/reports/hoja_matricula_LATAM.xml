@@ -271,10 +271,9 @@
                             <strong>Matrícula/Pago Inicial:</strong><br/>
                             <strong>Resto Aplazado:</strong><br/>
                             <strong>Forma de Pago:</strong><br/>
-                            <strong>Primer Vencimiento Aplazado:</strong>
                         </div>
                         <!--Second column-->
-                        <div class="col-9">
+                        <div class="col-3">
                             <span t-field="o.payment_term_id.display_name"/><br/>
                             <span t-field="o.precio_matricula"/><br/>
                             <span t-field="o.pricelist_id.currency_id"/>
@@ -282,16 +281,23 @@
                             <span t-field="o.precio_primer_pago"/>
                             <span t-field="o.pricelist_id.name"/><br/>
                             <span t-field="o.payment_mode_id.name"/><br/>
+                        </div>
+                        <div class="col-4">
+                            <br/><br/><br/>
+                            <strong>Primer Vencimiento Aplazado:</strong>
+                        </div>
+                        <div class="col-2">
+                            <br/><br/><br/>
                             <span t-field="o.x_Fecha_Primer_Recibo"/>
                         </div>
-
                         </div><!--Third row-->
 
                         <hr style="border:2px solid #547494;margin-bottom:1px;"/>
                         <div class="row">
                             <div class="col-12">
                                 <p style="font-size:13px;">
-                                    Suscrito en dos ejemplares en Barcelona, a <span t-field="o.create_date"/>
+                                    Suscrito en dos ejemplares en Culiacán, a <span t-esc="o.create_date.strftime('%d/%m/%Y')"/>
+                                                                              
                                     <br/>
                                     Leído y conforme con las condiciones generales y mis derechos y deberes que se adjuntan (recibo copia).
                                 </p>
