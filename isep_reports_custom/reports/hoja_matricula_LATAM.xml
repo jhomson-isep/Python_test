@@ -330,229 +330,235 @@
                                 </div>
                         </div>
 
-                       <div class="row container-fluid">
-                           <img src="/isep_reports_custom/static/src/img/footer_isep2.png"/>
-                       </div>
+
 
 <!--                        <div class="row" style="height:140px"/>-->
-                            <br/><br/><br/>
-                            <div class="row" style="font-size:11px; text-align:justify;margin-left:4px;">
-                                <div class="col-6">
-                                    <br/>
-                                    <strong>INFORMACIÓN PREVIA</strong>
-                                    <br/>
-                                    <p>
-                                        El alumno y el titular del contrato han recibido de ISEP S.L., en el momento
-                                        de la firma del presente, la información necesaria acerca del programa a seguir,
-                                        tanto académica, económica y administrativa.
-                                    </p>
-                                </div>
-                                <div class="col-6">
-                                    <br/>
-                                    <strong>MEDIDAS TÉCNICAS</strong>
-                                    <br/>
-                                    <ol start="12">
-                                        <li>
-                                          <p>
-                                            El funcionamiento óptimo del Campus Virtual está planteado para aplicaciones
-                                            destinadas a ser utilizadas en ordenadores personales con navegadores Chrome y
-                                            Firefox. ISEP S.L.no puede garantizar el perfecto funcionamiento del Campus con otros
-                                            dispositivos o navegadores.
-                                        </p>
-                                        </li>
-                                    </ol>
+<!--                            <br/><br/><br/>-->
+<!--                            <div class="row" style="font-size:11px; text-align:justify;margin-left:4px;">-->
+<!--                                <div class="col-6">-->
+<!--                                    <br/>-->
+<!--                                    <strong>INFORMACIÓN PREVIA</strong>-->
+<!--                                    <br/>-->
+<!--                                    <p>-->
+<!--                                        El alumno y el titular del contrato han recibido de ISEP S.L., en el momento-->
+<!--                                        de la firma del presente, la información necesaria acerca del programa a seguir,-->
+<!--                                        tanto académica, económica y administrativa.-->
+<!--                                    </p>-->
+<!--                                </div>-->
+<!--                                <div class="col-6">-->
+<!--                                    <br/>-->
+<!--                                    <strong>MEDIDAS TÉCNICAS</strong>-->
+<!--                                    <br/>-->
+<!--                                    <ol start="12">-->
+<!--                                        <li>-->
+<!--                                          <p>-->
+<!--                                            El funcionamiento óptimo del Campus Virtual está planteado para aplicaciones-->
+<!--                                            destinadas a ser utilizadas en ordenadores personales con navegadores Chrome y-->
+<!--                                            Firefox. ISEP S.L.no puede garantizar el perfecto funcionamiento del Campus con otros-->
+<!--                                            dispositivos o navegadores.-->
+<!--                                        </p>-->
+<!--                                        </li>-->
+<!--                                    </ol>-->
 
-                                </div>
-                            </div>
+<!--                                </div>-->
+<!--                            </div>-->
+
+
+                        <div class="row container-fluid" style="margin-top:50px">
+                           <img src="/isep_reports_custom/static/src/img/footer_isep2.png"/>
+                        </div>
 
 
                         <div class="footer container-fluid">
-                            <div class="row" style="text-align: center">
-                                <div class="col-12">
-                                        <strong style="color:#042c5c;text-align:center;">
-                                                Nuestro objetivo es tu triunfo profesional.
-                                        </strong>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <img src="/isep_reports_custom/static/src/img/tel.png"/>
-                                    <strong style="color:#fc6c04;">+34 93 847 77 77</strong>
-                                </div>
-                                <div class="col-6">
-                                    <img src="/isep_reports_custom/static/src/img/mail.png"/>
-                                    <strong style="color:#fc6c04;">Barcelona@isep.es</strong>
-                                </div>
-                            </div>
-
-                            <hr style="border:2px solid #547494;margin-bottom:1px;"/>
-                            <div class="row">
-                                <div class="col-6">
-                                    <img src="/isep_reports_custom/static/src/img/web.png"/>
-                                    <strong style="color:#fc6c04;">http://www.isep.es/</strong>
-                                </div>
-                                <div class="col-6">
-                                    <img src="/isep_reports_custom/static/src/img/cif.png"/>
-                                    <strong style="color:#fc6c04;">B61254314</strong>
-                                </div>
-                            </div>
-
-
+                           <div class="row container-fluid">
+                                <img src="/isep_reports_custom/static/src/img/footer_isep3.png"/>
+                           </div>
                         </div> <!--footer-->
+
                         </div><!-- first_page-->
 
-                        <div class="page" name="second_page">
+                        <div class="page" name="second_page" style="font-size:11px;text-align:justify;">
                             <br/>
-                            <div class="row container-fluid" style="font-size:11px; text-align:justify;margin-left:4px;">
-                                <div class="col-6">
-                                    <strong>FORMALIZACIÓN Y CUMPLIMIENTO DEL CONTRATO</strong>
-                                    <ol start="1">
-                                        <li>
-                                            El contrato queda formalizado con la aceptación de estas condiciones.
-                                            Las partes tienen por no efectuado ningún pacto verbal. Estas cláusulas
-                                            prevalecen sobre otros pactos escritos que las contradigan.
-                                        </li>
-                                        <li>
-                                            Tras la formalización del contrato, el alumno se compromete a aportar la documentación
-                                            requerida (incluyendo la acreditación de la titulación universitaria necesaria) en el
-                                            tiempo y forma solicitados por ISEP S.L.. Cuando se trate de un programa de ISEP S.L.
-                                            vinculado con alguna Universidad u otras instituciones, la matriculación a dichas
-                                            instituciones está supeditada a las normativas propias de cada centro.
-                                        </li>
-                                        <li>
-                                            De acuerdo con el Real Decreto Legislativo 1/2007, el alumno/titular tiene derecho, en
-                                            plazo de 14 días naturales tras la formalización del contrato, a desistir sin ningún coste,
-                                            debiendo notificarlo de forma inequívoca al centro de ISEP S.L. donde se haya
-                                            matriculado. En cualquier otro caso, la baja unilateral por parte del alumno no exime del
-                                            pago de los importes pactados ni da derecho a devolución de importes ya abonados.
-                                            La asistencia al aula o el acceso al campus virtual durante ese plazo suponen una
-                                            solicitud expresa de inicio de la prestación del servicio. Como Anexo integrante de este
-                                            contrato, en <span style="color:#03a1fc;">este enlace (isep.es/documento-desistimiento)</span> se adjunta el documento de
-desistimiento.
-                                        </li>
-                                        <li>
-                                            El titular autoriza a ISEP S.L. a realizar los cobros en la forma y los plazos según las
-                                            condiciones aceptadas para el pago.
-                                        </li>
-                                        <li>
-                                            En caso de incumplimiento de los vencimientos pactados, ISEP S.L. podrá reclamar la
-                                            totalidad del importe al alumno/titular, y los plazos acordados con anterioridad quedarán
-sin efecto.
-                                        </li>
-                                        <li>
-                                            ISEP S.L. se reserva el derecho de dejar de prestar el servicio cuando el alumno no
-                                            cumpla con las obligaciones adquiridas, así como de reportar a ficheros de morosidad,
-                                            solvencia patrimonial o crédito en caso de que el alumno/titular no cumpla
-                                            satisfactoriamente con las obligaciones de pago pactadas
-                                        </li>
-                                        <li>
-                                            Los programas presenciales serán realizados siempre que se alcance el número
-                                            mínimo necesario de alumnos. En caso de anulación, el alumno podrá optar entre
-                                            destinar el importe pagado a otro programa de ISEP S.L. o bien el reintegro de los
-                                            importes abonados. Si no se pueden realizar sesiones presenciales por prevención del
-                                            COVID-19 u otras causas, se mantiene el programa y el alumno tiene derecho a las
-                                            mismas horas de clase en directo. En este caso, ISEP S.L. puede adoptar la
-                                            metodología de la modalidad At Home (clases en vivo por videoconferencia).
-                                        </li>
-                                        <li>
-                                            Los contenidos y la metodología del programa se actualizan para incorporar mejoras y
-                                            novedades. En caso de cambios, el alumno estará informado a medida que se
-                                            implementen.
-                                        </li>
-                                        <br/>
-                                        <strong>TITULACIÓN ACADÉMICA Y CERTIFICADOS</strong>
-                                        <li>
-                                            El alumno podrá solicitar la expedición del título de ISEP S.L. una vez haya superado los
-                                            requisitos académicos de la formación y haya cumplido el resto de requisitos
-                                            (económicos, administrativos, aportación de documentación en tiempo y forma, etc.).
-                                        </li>
-                                        <li>
-                                            Los títulos de ISEP S.L. son titulaciones propias en el marco de la educación continua,
-                                            para el desarrollo y proyección profesional, no conducentes a estudios de doctorado.
-                                            Para cualquier proceso de convalidación de un título de ISEP S.L. fuera de España, el
-                                            interesado debe consultar con la normativa de convalidaciones en su país. Para
-                                            programas con Reconocimiento de Validez Oficial (RVOE) por la SEPyC (México), el
-                                            alumno debe solicitarlo según las instrucciones de
-                                            <a href="https://www.isep.es/proceso-titulacion-oficial-mexico/"
-                                               target="_blank"
-                                               style="color:#03a1fc;">
-                                                este enlace
-                                            </a>.
-                                        </li>
-                                        <li>
-                                            El precio de expedición de títulos, certificados u otros no están incluidos en el importe
-                                            del programa. Los importes vigentes pueden consultarse en las sedes de ISEP S.L.
-                                        </li>
-                                    </ol>
-                                </div>
-                                <div class="col-6">
-                                    <ol start="13">
-                                        <li>
-                                            Se recomienda a los alumnos que cuenten con una conexión de Internet ADSL o Fibra
-                                            óptica. En algunos programas se propondrá el visionado de sesiones en directo que
-                                            pueden requerir un mayor ancho de banda para su correcta visualización.
-                                        </li>
-                                        <li>
-                                            Cuando algún servicio quede temporalmente indisponible por causas de fuerza mayor o
-                                            errores en las redes telemáticas de transferencia de datos, ajenos a la voluntad de
-                                            ISEP S.L., esta queda exonerada de los daños y perjuicios que esta situación ocasione.
-                                        </li>
-                                        <br/>
-                                        <strong>PROPIEDAD INTELECTUAL Y DERECHOS DE IMAGEN</strong>
-                                        <li>
-                                            El alumno, exclusivamente para su uso personal y respetando los derechos de
-                                            propiedad intelectual, podrá descargar los contenidos, copiar o imprimir cualquier
-                                            página de la web y del campus virtual de ISEP S.L. a los que tenga acceso (incluido el
-                                            material docente). En ningún caso podrá transmitir, cambiar, modificar o suprimir los
-                                            contenidos sin la previa autorización escrita de ISEP S.L..
-                                        </li>
-                                        <li>
-                                            Con finalidades docentes, de evaluación, de investigación y de difusión, ISEP S.L. se
-                                            reserva el derecho de tratar, procesar, adaptar, reproducir o comunicar públicamente
-                                            las aportaciones realizadas en ejercicios, foros, casos prácticos y trabajos elaborados
-                                            por el alumno durante la formación. El alumno concede su autorización expresa para
-                                            ello conservando, en todo caso, el derecho al reconocimiento de la autoría de los
-                                            trabajos elaborados durante sus estudios.
-                                        </li>
-                                        <li>
-                                            Cuando el alumno participe en actividades presenciales, autoriza a ISEP S.L. a captar
-                                            su imagen (fotografía, audio y vídeo), así como a su transcripción y a la comunicación
-                                            pública de estas grabaciones o transcripciones a través de la página web, redes
-                                            sociales u otros medios de comunicación.
-                                        </li>
-                                        <br/>
-                                        <strong>DURACIÓN DEL CONTRATO</strong>
-                                        <li>
-                                            De acuerdo con la normativa vigente, ISEP S.L. informa que los datos proporcionados
-                                            se incorporarán al sistema de tratamiento titularidad de ISEP S.L. con finalidades de
-                                            tramitar la matrícula, gestionar la inscripción y participación en la actividad formativa,
-                                            finalidades administrativas y contables, gestión del expediente académico e instancias,
-                                            finalidades comerciales y obligaciones legales. Para cumplimiento legal y gestión
-                                            administrativacontable, los datos se podrán ceder a Agencia Tributaria, bancos, cajas y
-                                            organismos y/o administración pública. En caso de titulación de UVic-UCC, los datos se
-                                            comunicarán e incorporarán al fichero Formació Continuada de UVic-UCC, con
-                                            finalidades de formación y acreditación de la docencia. Puede ejercer sus derechos
-                                            (acceso, rectificación, limitación, supresión, portabilidad, oposición) o revocar el
-                                            consentimiento por correo postal a ISEP S.L. o bien por email: barcelona@isep.es, o
-                                            dirigirse a la autoridad competente si es oportuno. Más info (finalidades, legitimación,
-                                            destinatarios, derechos, etc): (www.isep.es/privacidad-alumnos).
-                                        </li>
-                                        <br/>
-                                        <strong>LEGISLACIÓN APLICABLE Y JURISDICCIÓN</strong>
-                                        <li>
-                                            Este contrato se considera formalizado en Barcelona. A este contrato y a las
-                                            relaciones jurídicas que puedan derivarse de su aplicación e interpretación, les será de
-                                            aplicación la ley española.
-                                        </li>
-                                        <li>
-                                            Si cualquier cláusula incluida en este contrato fuese declarada nula o ineficaz (total o
-                                            parcialmente), tal nulidad o ineficacia afectará tan solo a dicha disposición o a la parte
-                                            de esta que resulte nula o ineficaz (teniéndose por no puesta), y subsistirán el resto de
-                                            las condiciones pactadas.
-                                        </li>
-                                    </ol>
-                                </div>
-                            </div>
+                            <strong>INFORMACIÓN PREVIA</strong>
+                            <br/>
+
+                                     El alumno y el titular del contrato han recibido de Isep, en el momento de
+                                     la firma del presente, la información necesaria acerca del programa a seguir,
+                                     tanto académica, económica y administrativa.
+
+                            <br/>>
+                            <strong>FORMALIZACIÓN Y CUMPLIMIENTO DEL CONTRATO</strong>
+                            <br/>
+                                <ol start="1" style="margin-left:10px">
+                                    <li>
+
+                                        El contrato queda formalizado con la aceptación de estas condiciones.
+                                        Las partes tienen por no efectuado ningún pacto verbal. Estas cláusulas
+                                        prevalecen sobre otros pactos escritos que las contradigan.
+
+                                     </li>
+                                    <li>
+                                        Tras la formalización del contrato, el alumno se compromete a aportar la
+                                        documentación requerida (incluyendo la acreditación de la titulación
+                                        universitaria necesaria) en el tiempo y forma solicitados por ISEP LATAM SC.
+                                     </li>
+                                    <li>
+                                        El alumno matriculado, dispondrá de 7 días naturales a partir de la firma
+                                        del presentre contrato para desistir del mismo. En este caso, ISEP LATAM
+                                        SC retendrá las tasas académicas en concepto de gastos de administración y
+                                        reserva de plaza. Pasado dicho plazo, se deberán efectuar todos los pagos.
+                                     </li>
+                                    <li>
+
+                                        El titular autoriza a ISEP LATAM SC a realizar los cobros en la forma y
+                                        los plazos según las condiciones aceptadas para el pago.
+
+                                     </li>
+                                    <li>
+                                        En caso de incumplimiento de los vencimientos pactados, ISEP LATAM SC podrá
+                                        reclamar la totalidad del importe al alumno/titular, y los plazos acordados
+                                        con anterioridad quedarán sin efecto.
+                                     </li>
+                                    <li>
+                                        ISEP LATAM SC se reserva el derecho de dejar de prestar el servicio cuando el
+                                        alumno no cumpla con las obligaciones adquiridas, así como de reportar a ficheros
+                                        de morosidad, solvencia patrimonial o crédito en caso de que el alumno/titular
+                                        no cumpla satisfactoriamente con las obligaciones de pago pactadas.
+                                     </li>
+
+                                    <li>
+
+                                        Los programas presenciales serán realizados siempre que se alcance el número
+                                        mínimo necesario de alumnos. En caso de anulación, el alumno podrá optar entre
+                                        destinar el importe pagado a otro programa de ISEP LATAM SC o bien el reintegro
+                                        de los importes abonados.
+
+                                     </li>
+                                    <li>
+                                        El avance del alumno será a su propio ritmo, sin embargo ante la SEPyC se presentará
+                                        según los calendarios vigentes, por lo cual no es posible titularse antes de los
+                                        cuatro semestres en el caso de Maestrías y dos semestres en caso de Especialidades.
+                                     </li>
+                                </ol>
+
+                                <strong>TITULACIÓN ACADÉMICA Y CERTIFICADOS</strong>
+
+                                <ol start="9" style="margin-left:10px">
+
+                                    <li>
+                                        El alumno/a podrá solicitar la expedición del título de ISEP LATAM,
+                                        SC una vez haya superado los requisitos académicos de la formación y
+                                        haya cumplido el resto de requisitos(económicos,administrativos, aportación
+                                        de documentos en tiempo y forma, etc.).
+                                     </li>
+                                    <li>
+                                        En el momento de realizar la matrícula, se deberá notificar por escrito
+                                        si desea optar por la titulación oficial mexicana, en caso de que el curso
+                                        seleccionado cuente con esa opción, de la cual se deberá abonar las tasas
+                                        correspondientes y que son independientes al coste de la maestría contratada.
+                                     </li>
+                                    <li>
+                                        El/la alumno/a se compromete a entregar la documentación requerida por parte
+                                        de la SEPyC en tiempo y forma para el trámite de inscripción en México,
+                                        en el plazo en el cual se le ha informado por parte de ISEP LATAM, SC .
+                                     </li>
+                                    <li>
+                                        Los documentos a entregar para el trámite de inscripción en México son:
+                                        <ul>
+                                            <li>
+                                                Acta de nacimiento (copia original o copia certificada).
+                                            </li>
+                                            <li>
+                                                Título de licenciatura (copia original certificada ante notario).
+                                            </li>
+                                            <li>
+                                                Comprobante de nivel de inglés (constancia de comprensión lectora).
+                                            </li>
+                                            <li>
+                                                Copia de identificación oficial (INE, Pasaporte, o Documento de identidad equivalente).
+                                            </li>
+                                        </ul>
+                                        Para los alumnos extranjeros, los documentos deberán enviarlos apostillados. .
+                                     </li>
+                                    <li>
+                                        El precio de expedición de títulos, certificados u otros no están incluidos
+                                        en el importe del programa.
+                                     </li>
+                                 </ol>
+
+                            <strong>PROPIEDAD INTELECTUAL Y DERECHOS DE IMAGEN</strong>
+
+                                <ol start="14" style="margin-left:10px">
+
+                                    <li>
+                                        El alumno, exclusivamente para su uso personal y respetando los derechos de
+                                        propiedad intelectual, podrá descargar los contenidos, copiar o imprimir
+                                        cualquier página de la web y del campus virtual de Isep a los que tenga acceso
+                                        (incluido el material docente). En ningún caso podrá transmitir, cambiar,
+                                        modificar o suprimir los contenidos sin la previa autorización escrita de
+                                        ISEP LATAM, SC .
+                                     </li>
+                                    <li>
+                                        Con finalidades docentes, de evaluación, de investigación y de difusión,
+                                        ISEP LATAM, SC se reserva el derecho de tratar, procesar, adaptar, reproducir o
+                                        comunicar públicamente las aportaciones realizadas en ejercicios, foros,
+                                        casos prácticos y trabajos elaborados por el alumno durante la formación.
+                                        El alumno concede su autorización expresa para ello conservando, en todo caso,
+                                        el derecho al reconocimiento de la autoría de los trabajos elaborados durante
+                                        sus estudios.
+                                     </li>
+                                    <li>
+                                        Cuando el alumno participe en actividades presenciales, autoriza a ISEP LATAM,
+                                        SC a captar su imagen (fotografía, audio y vídeo), así como a su transcripción
+                                        y a la comunicación pública de estas grabaciones o transcripciones a través de
+                                        la página web, redes sociales u otros medios de comunicación.
+                                     </li>
+                                 </ol>
+
+                            <strong>DURACIÓN DEL CONTRATO</strong>
+
+                                <ol start="17" style="margin-left:10px">
+
+                                    <li>
+                                        La vigencia de esta matrícula es la misma que el calendario del programa.
+                                        En los programas on-line, la duración es de 24 meses para másteres y de 12
+                                        meses para posgrados. El contrato no se prorroga de forma automática.
+                                        Las prórrogas, condicionadas a la disponibilidad por parte de ISEP LATAM,
+                                        SC , no están incluidas en el precio.
+                                     </li>
+                                 </ol>
+
+                            <strong>DATOS PERSONALES</strong>
+
+                                <ol start="9" style="margin-left:10px">
+
+                                    <li>
+                                        Sus datos se incorporan al sistema responsabilidad de ISEP para gestionar su
+                                        expediente académico. Cuando sea necesario para prestar el servicio, sus datos
+                                        se comunicarán a administraciones públicas, bancos/cajas y a entidades con las
+                                        que sea necesaria la comunicación. Puede ejercer sus derechos de acceso,
+                                        rectificación, limitación, supresión, portabilidad y oposición, o revocar su
+                                        consentimiento dirigiéndose a ISEP LATAM, SC , así como dirigirse a la Autoridad
+                                        de Control si es oportuno (más info.: www.isep.com/mx/privacidad/ ).
+                                     </li>
+                                 </ol>
+
+                            <strong>LEGISLACIÓN APLICABLE Y JURISDICCIÓN</strong>
+
+                                <ol start="9" style="margin-left:10px">
+
+                                    <li>
+                                        Este contrato se considera formalizado en Culiacán, México. A este contrato y a las
+                                        relaciones jurídicas que puedan derivarse de su aplicación e interpretación, les
+                                        será de aplicación la ley mexicana.
+                                     </li>
+                                    <li>
+                                        Si cualquier cláusula incluida en este contrato fuese declarada nula o ineficaz
+                                        (total o parcialmente), tal nulidad o ineficacia afectará tan solo a dicha disposición
+                                        o a la parte de esta que resulte nula o ineficaz (teniéndose por no puesta), y
+                                        subsistirán el resto de las condiciones pactadas.
+                                     </li>
+                                 </ol>
 
                         </div> <!--second_page-->
 
