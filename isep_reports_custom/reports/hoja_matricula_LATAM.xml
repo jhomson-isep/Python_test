@@ -18,7 +18,7 @@
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <t t-call="web.basic_layout">
-                        <div class="page" name="first_page">
+                        <div class="page" name="first_page" style="page-break-after:always;">
                        <div class="header">
                             <div class="row">
                                 <div class="col-6">
@@ -344,7 +344,7 @@
 
                         </div><!-- first_page-->
 
-                        <div class="page" name="second_page" style="font-size:11px;text-align:justify;">
+                        <div class="page" name="second_page" style="font-size:11px;text-align:justify;page-break-after:always;">
                             <br/>
                             <strong>INFORMACIÓN PREVIA</strong>
                             <br/>
@@ -553,11 +553,11 @@
                                <strong>Fecha: </strong><t t-esc="time.strftime('%d/%m/%Y')"/>
                             </div>
                         </div>
-                         <br/><br/><br/><br/><br/><br/>
+
                         </div> <!--second_page-->
 
-                        <br/><br/><br/><br/><br/>
-                        <div class="page" name="third_page" style="font-size:11px;text-align:justify;">
+
+                        <div class="page" name="third_page" style="font-size:11px;text-align:justify;page-break-after:always;">
                             <div class="row container-fluid">
                                 <div class="col-2">
                                     <strong>Nombre:</strong><br/>
@@ -578,8 +578,26 @@
 
                             </div>
                             Autorizo a ISEP LATAM, SC, SC. a realizar los cargos correspondientes a:<br/>
-                            a) Gastos de Inscripción $ X,XXX.00 . Día Mes Año<br/>
-                            b) 6 mensualidades de X,XXX.00 [ MXN ] Peso mexicano , a partir del mes de 02 el día 20 del año 2021<br/><br/>
+                            <p>
+                                    a) Gastos de Inscripción $ <span t-field="o.precio_matricula"/>.
+                                    <span t-esc="o.confirmation_date.strftime('%d')"/> Día <span t-esc="o.confirmation_date.strftime('%m')"/> Mes <span t-esc="o.confirmation_date.strftime('%Y')"/> Año
+
+                            </p>
+                            <br/>
+                            <p>
+                                    b) <t t-if ="o.payment_term_id.name==False"></t><t t-else=""><t t-esc="o.payment_term_id.name.split(' ')[0]"/></t>
+                                    mensualidades de
+
+                                    <span t-esc="o.order_line[1]"/>
+
+                                    <t t-foreach="o.order_line" t-as="l">
+
+                                            <span t-field="l.price_unit"/><br/>
+
+                                    </t>
+                                    [ MXN ] Peso mexicano , a partir del mes de 02 el día 20 del año 2021<br/><br/>
+                            </p>
+
                             Nombre completo del titular de la cuenta:<span t-field="o.partner_id.name"/><br/>
                             Número de la tarjeta:<br/>
                             Si la tarjeta es de débito indicar número de clave bancaria estandarizada “CLABE”<br/>
@@ -600,7 +618,7 @@
                                 <br/><br/><br/>
                                 <strong>FIRMA TITULAR:</strong>
                                 <br/><br/><br/><br/>
-<!--                                <t t-field="o.partner_id.name"/><br/>-->
+                                <span t-field="o.partner_id.name"/><br/><br/>
                                 <strong>Fecha:</strong><br/>
                                 <t t-esc="time.strftime('%d/%m/%Y')"/>
 
@@ -609,6 +627,12 @@
                             </div>
 
                         </div> <!--third_page-->
+
+                        <div class="page" name="fourd_page" style="font-size:11px;text-align:justify;">
+                            <div class="row container-fluid" style="font-size:11px;text-align:justify;">
+                                PAGARÉ PR-004296
+                            </div>
+                        </div><!-- fourd_page-->
 
 
                     </t>
