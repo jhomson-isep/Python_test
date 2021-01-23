@@ -144,7 +144,7 @@ class OpAdmission(models.Model):
                 self.batch_id.code, moodle_course.get('id'))
         logger.info("moodle_group: {}".format(moodle_group))
         password = self.password_generator(length=10)
-        user = moodle.get_user_by_field(field="username",
+        user = moodle.get_user_by_field(field="email",
                                         value=self.partner_id.email.lower())
         if student.gr_no:
             gr_no = student.gr_no
@@ -155,7 +155,7 @@ class OpAdmission(models.Model):
         if user is None:
             first_name = self.first_name
             if self.middle_name:
-                first_name = first_name + self.middle_name
+                first_name = ' '.join([first_name, self.middle_name])
 
             user_response = moodle.create_users(
                 firstname=first_name,
@@ -164,7 +164,6 @@ class OpAdmission(models.Model):
                 password=password,
                 email=self.partner_id.email.lower())
             user = user_response[0]
-            # gr_no = self.env['ir.sequence'].next_by_code('op.gr.number') or '0'
             logger.info(gr_no)
             student_values = {
                 'moodle_id': user.get('id'),
