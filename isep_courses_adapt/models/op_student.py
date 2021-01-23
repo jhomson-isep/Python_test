@@ -73,6 +73,8 @@ class OpStudent(models.Model):
         string='Type of course taken',
         translate=True, store=True,
         compute='_compute_determine_type_of_course')
+    cgi_client_id = fields.Integer(string='Cgi client')
+
     _sql_constraints = [(
         'unique_n_id',
         'unique(n_id)',

@@ -7,7 +7,7 @@ import os
 
 load_dotenv(find_dotenv())
 
-#Postgresql Connection
+# Postgresql Connection
 Base_pg = declarative_base()
 dbname = os.environ['DATABASE']
 user = os.environ['PSQL_USER']
@@ -20,7 +20,7 @@ postgres = create_engine('postgresql+psycopg2://{0}:{1}@{2}:{3}/{4}'.format(
 
 metadata_pg = MetaData(bind=postgres)
 
-#Sql Server Connection
+# Sql Server Connection
 driver = 'SQL+Server'  # for Windows
 if os.name == "posix":
     driver = 'ODBC+Driver+17+for+SQL+Server'  # for linux
@@ -28,10 +28,9 @@ Base_server = declarative_base()
 server = create_engine('mssql+pyodbc://sa:Gr5p4mr3@85.118.244.220'
                        ':1433/GrupoISEPxtra?driver=%s' % driver)
 server_isep = create_engine('mssql+pyodbc://sa:Gr5p4mr3@85.118.244.220'
-                       ':1433/ISEP?driver=%s' % driver)
+                            ':1433/ISEP?driver=%s' % driver)
 metadata_server = MetaData(bind=server)
 metadata_server_isep = MetaData(bind=server_isep)
-
 
 
 # PostgresSQL Tables
@@ -123,6 +122,10 @@ class MailMessage(Base_pg):
     __table__ = Table('mail_message', metadata_pg, autoload=True)
 
 
+class OpUniversity(Base_pg):
+    __table__ = Table('op_university', metadata_pg, autoload=True)
+
+
 # SQL Server Tables
 class GinAreaCurso(Base_server):
     __table__ = Table('gin_AreasCurso', metadata_server, autoload=True)
@@ -159,10 +162,17 @@ class Calificaciones(Base_server):
 class IsepCursos(Base_server):
     __table__ = Table('Cursos', metadata_server_isep, autoload=True)
 
+
 class IsepAsignaturas(Base_server):
-     __table__ = Table('Asignaturas', metadata_server_isep, autoload=True)
+    __table__ = Table('Asignaturas', metadata_server_isep, autoload=True)
 
 
+class Alumnos(Base_server):
+    __table__ = Table('Alumnos', metadata_server_isep, autoload=True)
+
+
+class Tablas(Base_server):
+    __table__ = Table('Tablas', metadata_server_isep, autoload=True)
 
 
 def get_session_server():

@@ -5,7 +5,7 @@ from sqlalchemy.schema import Table, MetaData
 from sqlalchemy.ext.declarative import declarative_base
 import os
 
-#MYSQL Connection
+# MYSQL Connection
 Base_mysql = declarative_base()
 dbname = os.environ['MYSQL_DATABASE']
 user = os.environ['MYSQL_USER']
@@ -18,7 +18,8 @@ mysql = create_engine('mysql+mysqlconnector://{0}:{1}@{2}:{3}/{4}'.format(
 
 metadata_mysql = MetaData(bind=mysql)
 
-#MYSQL Tables
+
+# MYSQL Tables
 class MdlAttendanceSession(Base_mysql):
     __table__ = Table('mdl_attendance_sessions', metadata_mysql, autoload=True)
 
@@ -42,9 +43,6 @@ class MdlAttendanceLog(Base_mysql):
 class MdlAttendanceStatuses(Base_mysql):
     __table__ = Table('mdl_attendance_statuses', metadata_mysql, autoload=True)
 
-
-class Historico(Base_server):
-    __table__ = Table('Historico', metadata_server_isep, autoload=True)
 
 def get_mysql_session():
     Session_mysql = sessionmaker()
