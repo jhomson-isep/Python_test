@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields
+from odoo import models, fields, api
 import logging
 
 logger = logging.getLogger(__name__)
@@ -14,11 +14,12 @@ class HelpDeskTeam(models.Model):
 
     @staticmethod
     def get_partner_emails(partner_ids):
-        emails = []
-        for partner in partner_ids:
-            if partner.email:
-                emails.append(partner.email)
+        emails = [partner.email for partner in partner_ids if partner.email]
         return ', '.join(emails)
 
+    @api.multi
     def _helpdesk_team_email(self):
-        self.alias_email = self.alias_id.alias_name + '@' + self.alias_id.alias_domain.domain_name
+        for team in self:
+            if team.alias_id and team.alias_id.alias_name and team.alias_id.alias_domain.domain_name:
+                team.alias_email = '@'.join([team.alias_id.alias_name,
+                                             team.alias_id.alias_domain.domain_name])
