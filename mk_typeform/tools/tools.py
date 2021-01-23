@@ -38,7 +38,13 @@ def convert_response_to_form(response):
         extract_fields_and_references(fields, fields_list, quest_answers)
         extract_and_join_answers(answers, quest_answers)
         internal_model = {}
-
+        if 'hidden' in form:
+            for name, value in form['hidden'].items():
+                quest_answers[name] = {
+                    'ref': name,
+                    'answers': value,
+                    'title': name
+                }
         for field in quest_answers.values():
             relation_model_search = request.env['mk.typeform.model.relation'].sudo().search([
                 ('reference', '=', field['ref']),
