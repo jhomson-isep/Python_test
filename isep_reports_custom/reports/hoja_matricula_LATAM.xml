@@ -303,7 +303,7 @@
                         <div class="row sign">
                                 <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL ALUMNO</p></strong></div>
                                 <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL TITULAR<br/>(Si es distinto al alumno)</p></strong></div>
-                                <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA <span t-field="o.company_id.name"/></p></strong></div>
+                                <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA ISEP LATAM, S.C: <span t-field="o.company_id.name"/></p></strong></div>
                         </div>
                         <div class="row" style="height:90px">
                                 <div class="col-8"/>
@@ -353,7 +353,7 @@
                                      la firma del presente, la información necesaria acerca del programa a seguir,
                                      tanto académica, económica y administrativa.
 
-                            <br/>>
+                            <br/>
                             <strong>FORMALIZACIÓN Y CUMPLIMIENTO DEL CONTRATO</strong>
                             <br/>
                                 <ol start="1" style="margin-left:10px">
@@ -586,20 +586,40 @@
                             <br/>
                             <p>
                                     b) <t t-if ="o.payment_term_id.name==False"></t><t t-else=""><t t-esc="o.payment_term_id.name.split(' ')[0]"/></t>
-                                    mensualidades de
-
-                                    <span t-esc="o.order_line[1]"/>
-
-                                    <t t-foreach="o.order_line" t-as="l">
-
-                                            <span t-field="l.price_unit"/><br/>
-
+                                    mensualidades de <span t-esc="o.order_line[1].price_unit"/> [ MXN ] Peso mexicano ,
+                                    a partir del mes de
+                                    <t t-if ="o.x_Fecha_Primer_Recibo==False"> el dia del año</t>
+                                    <t t-else="">
+                                        <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%m')"/> el día
+                                        <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%d')"/> del año
+                                        <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%Y')"/>
                                     </t>
-                                    [ MXN ] Peso mexicano , a partir del mes de 02 el día 20 del año 2021<br/><br/>
+                                    <br/><br/>
+
+<!--                                    <t t-foreach="o.order_line" t-as="l">-->
+
+<!--                                            <span t-field="l.price_unit"/><br/>-->
+
+<!--                                    </t>-->
+
                             </p>
 
                             Nombre completo del titular de la cuenta:<span t-field="o.partner_id.name"/><br/>
-                            Número de la tarjeta:<br/>
+
+                            Número de la tarjeta:
+
+                            <div class="row" style="text-align:justify;font-size:13px;">
+                                
+                                <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
+                                    <span t-esc="o.partner_invoice_id.payment_token_ids[0].acquirer_ref[:8]"/>
+                                    ****
+                                    <span t-esc="o.partner_invoice_id.payment_token_ids[0].acquirer_ref[-4:]"/>
+                                </t>
+                                <t t-else="">
+                                </t>
+
+                            </div>
+
                             Si la tarjeta es de débito indicar número de clave bancaria estandarizada “CLABE”<br/>
                             Clave bancaria estandarizada “CLABE”:<br/>
                             <br/><br/>
@@ -630,8 +650,20 @@
 
                         <div class="page" name="fourd_page" style="font-size:11px;text-align:justify;">
                             <div class="row container-fluid" style="font-size:11px;text-align:justify;">
-                                PAGARÉ PR-004296
+                                PAGARÉ:<span t-field="o.name" style="margin-left:5px;"/><br/>
                             </div>
+                            <div class="row container-fluid">
+                                <p style="text-align:right">
+                                <strong>Culiacán, Sinaloa, </strong><t t-esc="time.strftime('%d/%m/%Y')"/>
+                                </p>
+                            </div>
+                            <div class="row container-fluid" style="text-align:justify;">
+                                Debo y pagaré incondicionalmente esta serie de <span t-field="o.payment_term_id.display_name" style="margin:0 5px"/>
+                                pagarés a la orden de ISEP LATAM, S.C. en la ciudad de Culiacán, Sinaloa, México, con domicilio
+                                en calle Lázaro Cárdenas 151 Sur.<br/>
+                                Debiendo realizar los pagos de la siguiente manera:<br/>
+                            </div>
+
                         </div><!-- fourd_page-->
 
 
