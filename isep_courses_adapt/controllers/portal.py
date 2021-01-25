@@ -170,8 +170,8 @@ class GoogleDriveController(CustomerPortal):
         }
         if post and request.httprequest.method == 'POST':
             error, error_message = self.gdrive_form_validate(post)
-            if not error:
-                error, error_message = self.gdrive_validate_document(post)
+            # if not error:
+            #     error, error_message = self.gdrive_validate_document(post)
             values.update({'error': error, 'error_message': error_message})
             if not error:
                 values = {
@@ -230,8 +230,8 @@ class GoogleDriveController(CustomerPortal):
         }
         if post and request.httprequest.method == 'POST':
             error, error_message = self.gdrive_form_validate(post)
-            if not error:
-                error, error_message = self.gdrive_validate_document(post)
+            # if not error:
+            #     error, error_message = self.gdrive_validate_document(post)
             values.update({'error': error, 'error_message': error_message})
             if not error:
                 values = {
@@ -292,32 +292,32 @@ class GoogleDriveController(CustomerPortal):
         # file validation
         if data.get('file').filename == '':
             error["filename"] = 'error'
-            error_message.append(_('Select a file'))
+            error_message.append(_('Seleccion un archivo'))
         documents_ids = [document.id for document in
                          request.env['op.document.type'].search([])]
         # document type validation
         if int(data.get('document_id')) not in documents_ids:
             error["document_id"] = "error"
-            error_message.append(_('Select a document type!'))
+            error_message.append(_('Selecione al menos un tipo de documento!'))
 
         return error, error_message
 
-    def gdrive_validate_document(self, data):
-        error = dict()
-        error_message = []
-        partner_id = request.env.user.partner_id.id
-        document_id = int(data.get('document_id'))
-        document_exits = request.env['op.gdrive.documents']. \
-            search([('partner_id', '=', partner_id),
-                    ('document_type_id', '=', document_id)], limit=1)
-        # Document validation
-        if document_exits.id:
-            error["document_id"] = "error"
-            name = document_exits.document_type_id.name
-            message = 'Document ' + name + ' already exist!'
-            error_message.append(_(message))
+    # def gdrive_validate_document(self, data):
+    #     error = dict()
+    #     error_message = []
+    #     partner_id = request.env.user.partner_id.id
+    #     document_id = int(data.get('document_id'))
+    #     document_exits = request.env['op.gdrive.documents']. \
+    #         search([('partner_id', '=', partner_id),
+    #                 ('document_type_id', '=', document_id)], limit=1)
+    #     # Document validation
+    #     if document_exits.id:
+    #         error["document_id"] = "error"
+    #         name = document_exits.document_type_id.name
+    #         message = 'Document ' + name + ' already exist!'
+    #         error_message.append(_(message))
 
-        return error, error_message
+    #     return error, error_message
 
     @http.route(['/my/gdrive/download'],
                 type='http', auth='user', website=True)
