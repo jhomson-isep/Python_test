@@ -609,7 +609,7 @@
                             Número de la tarjeta:
 
                             <div class="row" style="text-align:justify;font-size:13px;">
-                                
+
                                 <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
                                     <span t-esc="o.partner_invoice_id.payment_token_ids[0].acquirer_ref[:8]"/>
                                     ****
@@ -652,16 +652,34 @@
                             <div class="row container-fluid" style="font-size:11px;text-align:justify;">
                                 PAGARÉ:<span t-field="o.name" style="margin-left:5px;"/><br/>
                             </div>
-                            <div class="row container-fluid">
+                            <div class="row container-fluid" style="text-align:justify;">
                                 <p style="text-align:right">
                                 <strong>Culiacán, Sinaloa, </strong><t t-esc="time.strftime('%d/%m/%Y')"/>
                                 </p>
                             </div>
                             <div class="row container-fluid" style="text-align:justify;">
-                                Debo y pagaré incondicionalmente esta serie de <span t-field="o.payment_term_id.display_name" style="margin:0 5px"/>
-                                pagarés a la orden de ISEP LATAM, S.C. en la ciudad de Culiacán, Sinaloa, México, con domicilio
-                                en calle Lázaro Cárdenas 151 Sur.<br/>
-                                Debiendo realizar los pagos de la siguiente manera:<br/>
+                                Debo y pagaré incondicionalmente esta serie de
+                                <t t-if="o.payment_term_id.name!=False">
+                                    <span t-esc="o.payment_term_id.name.split(' ')[0]" style="margin:0 5px"/>
+                                    pagarés a la orden de ISEP LATAM, S.C. en la ciudad de Culiacán, Sinaloa,
+                                    México, con domicilio en calle Lázaro Cárdenas 151 Sur.<br/>
+                                    Debiendo realizar los pagos de la siguiente manera:<br/>
+                                </t>
+                                <t t-else="">
+                                </t>
+
+                            </div>
+
+                            <div class="row">
+                                <t t-foreach="o.order_line" t-as="l">
+                                    PAGARÉ Pago 1 de 6,
+                                    <li><span t-field="l.product_id"/><br/></li>
+                                    el día 20-02-2021
+                                    la cantidad de $
+                                    1,900.00
+                                    ( 00/100 [ MXN ] Peso mexicano )
+                                </t>
+
                             </div>
 
                         </div><!-- fourd_page-->
