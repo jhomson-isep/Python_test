@@ -308,7 +308,7 @@
                         <div class="row" style="height:90px">
                                 <div class="col-8"/>
                                 <div class="col-4">
-                                    <img class="img-fluid img-sign" style="height:75px;display:block;margin-left:auto;margin-right:auto;" src="/isep_reports_custom/static/src/img/firmaisepsl.jpg"/>
+                                    <img class="img-fluid img-sign" style="height:75px;display:block;margin-left:auto;margin-right:auto;margin-bottom:-10px;" src="/isep_reports_custom/static/src/img/firmaisepsl.jpg"/>
                                 </div>
                         </div>
 
@@ -648,38 +648,119 @@
 
                         </div> <!--third_page-->
 
-                        <div class="page" name="fourd_page" style="font-size:11px;text-align:justify;">
-                            <div class="row container-fluid" style="font-size:11px;text-align:justify;">
-                                PAGARÉ:<span t-field="o.name" style="margin-left:5px;"/><br/>
+                        <div class="page" name="fourd_page" style="font-size:13px;text-align:justify;">
+                            <div class="row container-fluid" style="font-size:13px;text-align:justify;">
+                                PAGARÉ:<span t-field="o.name" style="margin-left:5px;"/>
                             </div>
-                            <div class="row container-fluid" style="text-align:justify;">
-                                <p style="text-align:right">
-                                <strong>Culiacán, Sinaloa, </strong><t t-esc="time.strftime('%d/%m/%Y')"/>
-                                </p>
+                            <br/>
+                            <div class="row container-fluid" style="text-align:right;">
+                                <div class="col" style="text-align:right">
+                                    <strong>Culiacán, Sinaloa, </strong><t t-esc="time.strftime('%d/%m/%Y')"/>
+                                </div>
                             </div>
+                            <br/>
                             <div class="row container-fluid" style="text-align:justify;">
+
+
                                 Debo y pagaré incondicionalmente esta serie de
                                 <t t-if="o.payment_term_id.name!=False">
                                     <span t-esc="o.payment_term_id.name.split(' ')[0]" style="margin:0 5px"/>
                                     pagarés a la orden de ISEP LATAM, S.C. en la ciudad de Culiacán, Sinaloa,
-                                    México, con domicilio en calle Lázaro Cárdenas 151 Sur.<br/>
-                                    Debiendo realizar los pagos de la siguiente manera:<br/>
+                                    México, con domicilio en calle Lázaro Cárdenas 151 Sur.
                                 </t>
                                 <t t-else="">
                                 </t>
 
+                                <br/><br/>
+
+                                Debiendo realizar los pagos de la siguiente manera:
+
+                                <br/><br/>
+
+
                             </div>
 
-                            <div class="row">
-                                <t t-foreach="o.order_line" t-as="l">
-                                    PAGARÉ Pago 1 de 6,
-                                    <li><span t-field="l.product_id"/><br/></li>
-                                    el día 20-02-2021
+                            <div class="row container-fluid" style="text-align:justify;">
+                                <t t-foreach="range(int(o.payment_term_id.name.split(' ')[0]))" t-as="l">
+                                    PAGARÉ Pago
+                                    <span t-esc ="l+1" style="margin:0 2px"/> de
+                                    <span t-esc="o.payment_term_id.name.split(' ')[0]" style="margin:0 2px"/>
+                                    ,el día
+
+                                    <t t-if ="o.x_Fecha_Primer_Recibo==False">
+                                    </t>
+                                    <t t-else="">
+                                      <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%d')"/>-
+                                      <span t-esc="str(int(o.x_Fecha_Primer_Recibo.strftime('%m'))+l).zfill(2)"/>-
+                                      <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%Y')"/>
+                                    </t>
+
                                     la cantidad de $
-                                    1,900.00
+                                    <span t-field="o.precio_primer_pago"/>
                                     ( 00/100 [ MXN ] Peso mexicano )
+                                    <br/><br/>
                                 </t>
 
+
+                            </div>
+
+                            <div class="row container-fluid" style="text-align:justify;">
+
+                               <br/>
+                                    Al no pagarse cualquiera de ellos a su vencimiento, serán exigibles todos los que
+                                    le sigan en número, además de los ya vencidos. En caso de no cumplir con el pago en
+                                    la fecha acordada, cada pagaré generará un interés ordinario de 2% mensual y un interés
+                                    moratorio equivalente al 2% mensual a partir de la fecha en que se constituya en mora y
+                                    hasta su total liquidación.
+
+                                <br/><br/>
+                                    Los deudores renuncian al fuero que por razón de su domicilio presente o futuro pudiera
+                                    corresponderles y se someten a la jurisdicción de los tribunales competentes del Estado
+                                    de Sinaloa, México.
+
+                                <br/><br/>
+                                    Suscriptor (Deudor principal) :
+                                    <span t-field="o.partner_id.name"/>
+
+                                <br/><br/>
+                                    Dirección :
+                                    <span t-field="o.partner_id.street"/>
+
+                                <br/><br/>
+                                    Ciudad :
+                                    <span t-field="o.partner_id.city" style="margin:0 2px"/>
+                                    <span t-field="o.partner_id.state_id" style="margin:0 2px"/>
+                                    <span t-field="o.partner_id.country_id" style="margin:0 2px"/>
+
+                            </div>
+
+                            <br/><br/><br/><br/><br/>
+
+                            <div class="row sign">
+                                    <br/><br/>
+                                    <div class="col-6" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL ALUMNO</p></strong></div>
+                                    <div class="col-6" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL TITULAR<br/>(Si es distinto al alumno)</p></strong></div>
+                            </div>
+
+                            <br/><br/><br/>
+
+                            <div class="row sign">
+                                    <div class="col-6" style="font-size:13px;text-align:center;">
+                                        <strong style="font-size:13px;"><span t-field="o.partner_id.name"/></strong>
+                                        <br/>
+                                        <t t-if="o.partner_id.vat"><span t-field="o.partner_id.vat"></span></t>
+                                        <t t-else=""><span t-field="o.partner_id.num_reg_trib"></span></t>
+                                    </div>
+                                    <div class="col-6" style="font-size:13px;text-align:center;">
+                                        <strong style="font-size:13px;"><span t-field="o.partner_invoice_id.name"/></strong>
+                                        <br/>
+                                    </div>
+
+                            </div>
+                            <div class="row container-fluid">
+                                <div class="col-12" style="text-align:center">
+                                   <strong>Fecha: </strong><t t-esc="time.strftime('%d/%m/%Y')"/>
+                                </div>
                             </div>
 
                         </div><!-- fourd_page-->

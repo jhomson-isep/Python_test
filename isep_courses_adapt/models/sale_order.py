@@ -191,3 +191,23 @@ class SaleOrder(models.Model):
         middle_name = middle_name.title()
 
         return names, middle_name, last_name, last_second_name
+
+    # def update_sale_order(self):
+    #     so=self.env['sale.order'].search([('id','=',7)])
+    #     values7={
+    #         'precio_primer_pago' : 1900,
+    #         'precio_matricula' : 4300
+    #     }
+    #     p23=self.env['res.partner'].search([('id','=',23)])
+    #     values_ptk={
+    #         'partner_id':23,
+    #         'acquirer_id':2,
+    #         'acquirer_ref':1234567899998765
+    #     }
+    #     pt=self.env['payment.token'].create(values_ptk)
+    #     values23={
+    #         'payment_token_ids':[pt]
+    #     }
+    #     p23.write(values23)
+    #     so.write(values7)
+
