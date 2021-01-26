@@ -8,6 +8,8 @@ from odoo.addons.portal.controllers.portal import CustomerPortal, \
     pager as portal_pager, get_records_pager
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
+from pydrive.files import ApiRequestError, FileNotDownloadableError, FileNotUploadedError
+from pydrive.auth import AuthError, AuthenticationError, AuthenticationRejected
 import logging
 import base64
 import threading
@@ -135,23 +137,52 @@ class GoogleDriveController(CustomerPortal):
             'error_message': [],
         }
         if post and request.httprequest.method == 'POST':
-            error, error_message = self.gdrive_form_validate(post)
+            file = post.get('file').read()
+            error, error_message = self.gdrive_form_validate(post, file)
             values.update({'error': error, 'error_message': error_message})
             if not error:
-                document_values = {
-                    'document_type_id': document.document_type_id.id,
-                    'partner_id': partner.id,
-                    'filename': post.get('file').filename,
-                    'file': base64.b64encode(post.get('file').read()),
-                }
-                partner.sudo().write({
-                    'document_ids': [(1, doc_id, document_values)]
-                })
-                values.update({
-                    'doc_id': doc_id,
-                    'document_type_id': document.document_type_id,
-                })
-                return request.redirect("/my/documents")
+                error = dict()
+                error_message = []
+                try:
+                    document_values = {
+                        'document_type_id': document.document_type_id.id,
+                        'partner_id': partner.id,
+                        'filename': post.get('file').filename,
+                        'file': base64.b64encode(file),
+                    }
+                    partner.sudo().write({
+                        'document_ids': [(1, doc_id, document_values)]
+                    })
+                    values.update({
+                        'doc_id': doc_id,
+                        'document_type_id': document.document_type_id,
+                    })
+                    return request.redirect("/my/documents")
+                except AuthError as e:
+                    logger.info(e)
+                    error['AuthError'] = 'error'
+                    error_message.append(_('Error de auotrizacion con google drive: %s' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except AuthenticationError as e:
+                    logger.info(e)
+                    error['AuthenticationError'] = 'error'
+                    error_message.append(_('Error de autentificacion con google drive: %s' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except AuthenticationRejected as e:
+                    logger.info(e)
+                    error['AuthenticationRejected'] = 'error'
+                    error_message.append(_('Autentificacion rechazada por google drive: %s' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except ApiRequestError as e:
+                    logger.info(e)
+                    error['ApiRequestError'] = 'error'
+                    error_message.append(_('Error al acceder a google drive: %s!!' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except FileNotUploadedError as e:
+                    logger.info(e)
+                    error['FileNotUploadedError'] = 'error'
+                    error_message.append(_('Error no se puede cargar un archivo: %s!!' % e))
+                    values.update({'error': error, 'error_message': error_message})
         return request.render("isep_courses_adapt.portal_documents_update",
                               values)
 
@@ -169,25 +200,54 @@ class GoogleDriveController(CustomerPortal):
             'error_message': [],
         }
         if post and request.httprequest.method == 'POST':
-            error, error_message = self.gdrive_form_validate(post)
+            file = post.get('file').read()
+            error, error_message = self.gdrive_form_validate(post, file)
             # if not error:
             #     error, error_message = self.gdrive_validate_document(post)
             values.update({'error': error, 'error_message': error_message})
             if not error:
-                values = {
-                    'document_type_id': int(post.get('document_id')),
-                    'partner_id': partner.id,
-                    'filename': post.get('file').filename,
-                    'file': base64.b64encode(post.get('file').read()),
-                }
-                partner.sudo().write({
-                    'document_ids': [(0, 0, values)]
-                })
-                values.update({
-                    'partner': partner,
-                    'documents_ids': documents_ids,
-                })
-                return request.redirect("/my/documents")
+                error = dict()
+                error_message = []
+                try:
+                    values = {
+                        'document_type_id': int(post.get('document_id')),
+                        'partner_id': partner.id,
+                        'filename': post.get('file').filename,
+                        'file': base64.b64encode(file),
+                    }
+                    partner.sudo().write({
+                        'document_ids': [(0, 0, values)]
+                    })
+                    values.update({
+                        'partner': partner,
+                        'documents_ids': documents_ids,
+                    })
+                    return request.redirect("/my/documents")
+                except AuthError as e:
+                    logger.info(e)
+                    error['AuthError'] = 'error'
+                    error_message.append(_('Error de auotrizacion con google drive: %s' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except AuthenticationError as e:
+                    logger.info(e)
+                    error['AuthenticationError'] = 'error'
+                    error_message.append(_('Error de autentificacion con google drive: %s' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except AuthenticationRejected as e:
+                    logger.info(e)
+                    error['AuthenticationRejected'] = 'error'
+                    error_message.append(_('Autentificacion rechazada por google drive: %s' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except ApiRequestError as e:
+                    logger.info(e)
+                    error['ApiRequestError'] = 'error'
+                    error_message.append(_('Error al acceder a google drive: %s!!' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except FileNotUploadedError as e:
+                    logger.info(e)
+                    error['FileNotUploadedError'] = 'error'
+                    error_message.append(_('Error no se puede cargar un archivo: %s!!' % e))
+                    values.update({'error': error, 'error_message': error_message})
         return request.render("isep_courses_adapt.portal_documents_create",
                               values)
 
@@ -196,16 +256,42 @@ class GoogleDriveController(CustomerPortal):
     def portal_document_download(self, doc_id):
         document_ids = request.env['op.gdrive.documents'].search(
             [('id', '=', doc_id)], limit=1)
-        gauth = document_ids.Gauth()
-        drive = GoogleDrive(gauth)
-        file = drive.CreateFile({'id': document_ids.drive_id,
-                                 'parents': [{'id': document_ids.folder_id}]})
-        file.FetchContent(file['mimeType'], False)
-        return request.make_response(file.content.getvalue(),
-                                     [('Content-Type', file['mimeType']),
-                                      ('Content-Disposition',
-                                       content_disposition(file['title']))
-                                      ])
+        error = dict()
+        error_message = []
+        values = {
+            'error' : {},
+            'error_message' : [],
+        }
+        try:
+            gauth = document_ids.Gauth()
+            drive = GoogleDrive(gauth)
+            file = drive.CreateFile({'id': document_ids.drive_id,
+                                    'parents': [{'id': document_ids.folder_id}]})
+            file.FetchContent(file['mimeType'], False)
+            return request.make_response(file.content.getvalue(),
+                                        [('Content-Type', file['mimeType']),
+                                        ('Content-Disposition',
+                                        content_disposition(file['title']))
+                                        ])
+        except AuthError as e:
+            logger.info(e)
+            error['AuthError'] = 'error'
+            error_message.append(_('Error de auotrizacion con google drive: %s' % e))
+            values.update({'error': error, 'error_message': error_message})
+        except AuthenticationError as e:
+            logger.info(e)
+            error['AuthenticationError'] = 'error'
+            error_message.append(_('Error de autentificacion con google drive: %s' % e))
+            values.update({'error': error, 'error_message': error_message})
+        except AuthenticationRejected as e:
+            logger.info(e)
+            error['AuthenticationRejected'] = 'error'
+            error_message.append(_('Autentificacion rechazada por google drive: %s' % e))
+            values.update({'error': error, 'error_message': error_message})
+        except ApiRequestError as e:
+            logger.info(e)
+            error['ApiRequestError'] = 'error'
+            error_message.append(_('Error al acceder a google drive: %s!!' % e))
 
     @http.route(['/my/gdrive/documents'], type='http', auth='user', website=True)
     def my_gdrive_documents(self):
@@ -229,24 +315,53 @@ class GoogleDriveController(CustomerPortal):
             'error_message': [],
         }
         if post and request.httprequest.method == 'POST':
-            error, error_message = self.gdrive_form_validate(post)
+            file = post.get('file').read()
+            error, error_message = self.gdrive_form_validate(post, file)
             # if not error:
             #     error, error_message = self.gdrive_validate_document(post)
             values.update({'error': error, 'error_message': error_message})
             if not error:
-                values = {
-                    'document_type_id': int(post.get('document_id')),
-                    'partner_id': partner.id,
-                    'filename': post.get('file').filename,
-                    'file': base64.b64encode(post.get('file').read()),
-                }
-                partner.sudo().write({
-                    'document_ids': [(0, 0, values)]
-                })
-                values.update({
-                    'partner': partner,
-                    'documents_ids': documents_ids,
-                })
+                error = dict()
+                error_message = []
+                try:
+                    values = {
+                        'document_type_id': int(post.get('document_id')),
+                        'partner_id': partner.id,
+                        'filename': post.get('file').filename,
+                        'file': base64.b64encode(file),
+                    }
+                    partner.sudo().write({
+                        'document_ids': [(0, 0, values)]
+                    })
+                    values.update({
+                        'partner': partner,
+                        'documents_ids': documents_ids,
+                    })
+                except AuthError as e:
+                    logger.info(e)
+                    error['AuthError'] = 'error'
+                    error_message.append(_('Error de auotrizacion con google drive: %s' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except AuthenticationError as e:
+                    logger.info(e)
+                    error['AuthenticationError'] = 'error'
+                    error_message.append(_('Error de autentificacion con google drive: %s' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except AuthenticationRejected as e:
+                    logger.info(e)
+                    error['AuthenticationRejected'] = 'error'
+                    error_message.append(_('Autentificacion rechazada por google drive: %s' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except ApiRequestError as e:
+                    logger.info(e)
+                    error['ApiRequestError'] = 'error'
+                    error_message.append(_('Error al acceder a google drive: %s!!' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except FileNotUploadedError as e:
+                    logger.info(e)
+                    error['FileNotUploadedError'] = 'error'
+                    error_message.append(_('Error no se puede cargar un archivo: %s!!' % e))
+                    values.update({'error': error, 'error_message': error_message})
         return request.render("isep_courses_adapt.gdrive_create", values)
 
     @http.route(['/my/gdrive/update/<int:doc_id>'],
@@ -262,25 +377,54 @@ class GoogleDriveController(CustomerPortal):
             'error_message': [],
         }
         if post and request.httprequest.method == 'POST':
-            error, error_message = self.gdrive_form_validate(post)
+            file = post.get('file').read()
+            error, error_message = self.gdrive_form_validate(post, file)
             values.update({'error': error, 'error_message': error_message})
             if not error:
-                values = {
-                    'document_type_id': document_ids.document_type_id.id,
-                    'partner_id': partner.id,
-                    'filename': post.get('file').filename,
-                    'file': base64.b64encode(post.get('file').read()),
-                }
-                partner.sudo().write({
-                    'document_ids': [(1, doc_id, values)]
-                })
-                values.update({
-                    'doc_id': doc_id,
-                    'document_type_id': document_ids.document_type_id,
-                })
+                try:
+                    error = dict()
+                    error_message = []
+                    values = {
+                        'document_type_id': document_ids.document_type_id.id,
+                        'partner_id': partner.id,
+                        'filename': post.get('file').filename,
+                        'file': base64.b64encode(file),
+                    }
+                    partner.sudo().write({
+                        'document_ids': [(1, doc_id, values)]
+                    })
+                    values.update({
+                        'doc_id': doc_id,
+                        'document_type_id': document_ids.document_type_id,
+                    })
+                except AuthError as e:
+                    logger.info(e)
+                    error['AuthError'] = 'error'
+                    error_message.append(_('Error de auotrizacion con google drive: %s' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except AuthenticationError as e:
+                    logger.info(e)
+                    error['AuthenticationError'] = 'error'
+                    error_message.append(_('Error de autentificacion con google drive: %s' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except AuthenticationRejected as e:
+                    logger.info(e)
+                    error['AuthenticationRejected'] = 'error'
+                    error_message.append(_('Autentificacion rechazada por google drive: %s' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except ApiRequestError as e:
+                    logger.info(e)
+                    error['ApiRequestError'] = 'error'
+                    error_message.append(_('Error al acceder a google drive: %s!!' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except FileNotUploadedError as e:
+                    logger.info(e)
+                    error['FileNotUploadedError'] = 'error'
+                    error_message.append(_('Error no se puede cargar un archivo: %s!!' % e))
+                    values.update({'error': error, 'error_message': error_message})
         return request.render("isep_courses_adapt.op_gdrive_update", values)
 
-    def gdrive_form_validate(self, data):
+    def gdrive_form_validate(self, data, file):
         error = dict()
         error_message = []
 
@@ -299,6 +443,15 @@ class GoogleDriveController(CustomerPortal):
         if int(data.get('document_id')) not in documents_ids:
             error["document_id"] = "error"
             error_message.append(_('Selecione al menos un tipo de documento!'))
+        
+        if len(file) / 1024 / 1024 > 20:
+            error['file_size'] = "error"
+            error_message.append(_('El archivo a seleccionar debe ser menor a 20 MB!!'))
+    
+        if len(file) == 0:
+            error['file_size'] = "error"
+            error_message.append(_('El archivo seleccionado no tiene contenido!!'))
+
 
         return error, error_message
 
@@ -324,11 +477,37 @@ class GoogleDriveController(CustomerPortal):
     def my_gdrive_download(self, doc_id):
         document_ids = request.env['op.gdrive.documents']. \
             search([('id', '=', doc_id)], limit=1)
-        gauth = document_ids.Gauth()
-        drive = GoogleDrive(gauth)
-        file = drive.CreateFile({'id': document_ids.drive_id, 'parents': [{'id': document_ids.folder_id}]})
-        file.FetchContent(file['mimeType'], False)
-        return request.make_response(file.content.getvalue() ,
-            [('Content-Type', file['mimeType']),
-             ('Content-Disposition', content_disposition(file['title']))
-        ])
+        error = dict()
+        error_message = []
+        values = {
+            'error' : {},
+            'error_message' : [],
+        }
+        try:
+            gauth = document_ids.Gauth()
+            drive = GoogleDrive(gauth)
+            file = drive.CreateFile({'id': document_ids.drive_id, 'parents': [{'id': document_ids.folder_id}]})
+            file.FetchContent(file['mimeType'], False)
+            return request.make_response(file.content.getvalue() ,
+                [('Content-Type', file['mimeType']),
+                ('Content-Disposition', content_disposition(file['title']))
+            ])
+        except AuthError as e:
+            logger.info(e)
+            error['AuthError'] = 'error'
+            error_message.append(_('Error de auotrizacion con google drive: %s' % e))
+            values.update({'error': error, 'error_message': error_message})
+        except AuthenticationError as e:
+            logger.info(e)
+            error['AuthenticationError'] = 'error'
+            error_message.append(_('Error de autentificacion con google drive: %s' % e))
+            values.update({'error': error, 'error_message': error_message})
+        except AuthenticationRejected as e:
+            logger.info(e)
+            error['AuthenticationRejected'] = 'error'
+            error_message.append(_('Autentificacion rechazada por google drive: %s' % e))
+            values.update({'error': error, 'error_message': error_message})
+        except ApiRequestError as e:
+            logger.info(e)
+            error['ApiRequestError'] = 'error'
+            error_message.append(_('Error al acceder a google drive: %s!!' % e))

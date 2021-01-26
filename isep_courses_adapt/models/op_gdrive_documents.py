@@ -182,12 +182,12 @@ class OpGdriveDocuments(models.Model):
 
     @api.multi
     def write(self, values):
-        drive_id = self.drive_id
-        folder_id = self.folder_id
+        #drive_id = self.drive_id
+        #folder_id = self.folder_id
         if 'filename' in values:
             values = self.upload_file(values)
         res = super(OpGdriveDocuments, self).write(values)
-        self.delete_file(drive_id, folder_id)
+        #self.delete_file(drive_id, folder_id)
         return res
 
     # @api.one

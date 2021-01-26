@@ -120,7 +120,7 @@
                     <hr></hr>
                     <div class="row">
                         <div class="col-3"></div>
-                        <div class="col-9"><a t-if="document_count &lt; 4" t-attf-class="btn btn-primary"
+                        <div class="col-9"><a t-attf-class="btn btn-primary"
                                               href="/my/gdrive/create">Upload a Document</a></div>
                     </div>
                 </div>
