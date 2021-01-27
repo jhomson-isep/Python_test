@@ -579,7 +579,7 @@
                                 </div>
 
                             </div>
-                            Autorizo a ISEP LATAM, SC, SC. a realizar los cargos correspondientes a:<br/>
+                            Autorizo a ISEP LATAM, SC, SC. a realizar los cargos correspondientes a:<br/><br/>
                             <p>
                                     a) Gastos de Inscripción $ <span t-field="o.precio_matricula"/>.
                                     <span t-esc="o.confirmation_date.strftime('%d')"/> Día <span t-esc="o.confirmation_date.strftime('%m')"/> Mes <span t-esc="o.confirmation_date.strftime('%Y')"/> Año
@@ -608,17 +608,19 @@
 
                             Nombre completo del titular de la cuenta:<span t-field="o.partner_id.name"/><br/>
 
-                            Número de la tarjeta:
 
-                            <div class="row" style="text-align:justify;font-size:13px;">
 
-                                <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
+                            <div class="row" style="text-align:justify;">
+                                <div class="col-4">
+                                    Número de la tarjeta:
+                                    <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
                                     <span t-esc="o.partner_invoice_id.payment_token_ids[0].acquirer_ref[:8]"/>
                                     ****
                                     <span t-esc="o.partner_invoice_id.payment_token_ids[0].acquirer_ref[-4:]"/>
-                                </t>
-                                <t t-else="">
-                                </t>
+                                    </t>
+                                    <t t-else="">
+                                    </t>
+                                </div>
 
                             </div>
 

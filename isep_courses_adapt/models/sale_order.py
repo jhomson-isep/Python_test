@@ -204,6 +204,7 @@ class SaleOrder(models.Model):
     #         'acquirer_id':2,
     #         'acquirer_ref':1234567899998765
     #     }
+    #
     #     pt=self.env['payment.token'].create(values_ptk)
     #     values23={
     #         'payment_token_ids':[pt]
