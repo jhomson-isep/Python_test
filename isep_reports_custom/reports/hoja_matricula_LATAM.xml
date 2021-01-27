@@ -18,7 +18,7 @@
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <t t-call="web.basic_layout">
-                        <div class="page" name="first_page" style="page-break-after:always;">
+                        <div class="page" name="first_page" style="font-family:Georgia,times, serif;page-break-after:always;">
                        <div class="header">
                             <div class="row">
                                 <div class="col-6">
@@ -50,6 +50,7 @@
                                 </div>
                             </div>
                         </div>
+                        <br/>
                         <hr style="border:2px solid #547494;margin-bottom:1px;margin-top:-3px"/>
                         <div class="row">
                             <div class="col-5" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
@@ -57,7 +58,7 @@
                             </div>
                         </div>
 
-                        <div id="personal_information" class="row personal_information" style="font-size:13px;">
+                        <div id="personal_information" class="row personal_information" style="font-size:10px;">
                             <!-- First row-->
                             <div class="row container-fluid">
                             <!--First columna-->
@@ -73,15 +74,15 @@
                         </div>
 
 
-                        <div id="personal_information1" class="row personal_information" style="font-size:13px;">
+                        <div id="personal_information1" class="row personal_information" style="font-size:10px;">
                             <!-- First row-->
                             <div class="row container-fluid">
                             <!--First columna-->
-                            <div class="col-3">
+                            <div class="col-2">
                                 <strong>RFC/Pasaporte:</strong><br/>
                             </div>
                             <!--Second column-->
-                            <div class="col-2">
+                            <div class="col-3">
                                 <t t-if="o.partner_id.vat">
                                     <span t-field="o.partner_id.vat"></span><br/>
                                 </t>
@@ -90,7 +91,7 @@
                                 </t>
                             </div>
                             <!--Third column-->
-                            <div class="col-3">
+                            <div class="col-4">
                                 <strong>Nacimiento:</strong><br/>
                             </div>
                             <!--Fourth column-->
@@ -100,7 +101,7 @@
                             </div><!--First row-->
                         </div>
 
-                        <div id="personal_information2" class="row personal_information" style="font-size:13px;">
+                        <div id="personal_information2" class="row personal_information" style="font-size:10px;">
                              <div class="row container-fluid">
                             <!--First columna-->
                             <div class="col-2">
@@ -121,7 +122,7 @@
                             </div><!--First row-->
                         </div>
 
-                        <div id="personal_information3" class="row personal_information" style="font-size:13px;">
+                        <div id="personal_information3" class="row personal_information" style="font-size:10px;">
                             <div class="row container-fluid">
                             <!--First columna-->
                             <div class="col-2">
@@ -143,7 +144,7 @@
                             <div class="col-2">
                                 <strong>Estado:</strong><br/>
                                 <strong>Teléfono Fijo:</strong><br/>
-                                <strong>Finalizados</strong><br/>
+                                <strong>Finalizados:</strong><br/>
                                 <strong>Profesión:</strong><br/>
                                 <strong>Asesor:</strong><br/>
                             </div>
@@ -165,7 +166,7 @@
                             </div>
                             </div><!--First row-->
                         </div> <!--"personal_information"-->
-
+                        <br/>
                         <hr style="border:2px solid #547494;margin-bottom:1px;margin-top:-3px"/>
                         <div class="row">
                             <div class="col-4" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
@@ -173,7 +174,7 @@
                             </div>
                         </div>
 
-                        <div id="facturacion" class="row personal_information" style="font-size:13px;">
+                        <div id="facturacion" class="row personal_information" style="font-size:10px;">
                             <!-- Second row-->
                             <div class="row container-fluid">
                             <!--First columna-->
@@ -186,7 +187,7 @@
                             </div>
                             </div><!--First row-->
                         </div>
-                        <div id="facturacion1" class="row personal_information" style="font-size:13px;">
+                        <div id="facturacion1" class="row personal_information" style="font-size:10px;">
                             <div class="row container-fluid">
                             <!--First columna-->
                             <div class="col-2">
@@ -203,7 +204,7 @@
                             </div>
                         </div>
 
-                        <div id="facturacion2" class="row personal_information" style="font-size:13px;">
+                        <div id="facturacion2" class="row personal_information" style="font-size:10px;">
                             <div class="row container-fluid">
                             <div class="col-2">
                                 <strong>Domicilio:</strong><br/>
@@ -220,7 +221,7 @@
                             </div>
                         </div> <!--"facturacion"-->
 
-                        <div id="facturacion3" class="row personal_information" style="font-size:13px;">
+                        <div id="facturacion3" class="row personal_information" style="font-size:10px;">
                             <div class="row container-fluid">
                             <div class="col-2">
                                 <strong>Población:</strong><br/>
@@ -242,12 +243,12 @@
                             </div>
                             </div>
                         </div> <!--"facturacion"-->
-
+                        <br/>
                         <hr style="border:1px solid #547494;margin-bottom:1px;margin-top:-5px"/>
                         <div class="row">
-                            <p style="font-size:13px;">Recibida previamente la información detallada de las características del curso, contenido y demás cuestiones relacionadas, el alumno/titular acepta las condiciones generales y académicas amparadas en este contrato y SOLICITA LA MATRÍCULA PARA EL CURSO DE:</p>
+                            <p style="font-size:10px;">Recibida previamente la información detallada de las características del curso, contenido y demás cuestiones relacionadas, el alumno/titular acepta las condiciones generales y académicas amparadas en este contrato y SOLICITA LA MATRÍCULA PARA EL CURSO DE:</p>
                         </div>
-                        <div class="row" style="font-size:13px;">
+                        <div class="row" style="font-size:10px;">
                                 <ul>
                                     <t t-foreach="o.order_line" t-as="l">
                                         <li><span t-field="l.product_id"/></li>
@@ -256,14 +257,14 @@
                         </div>
 
                         <hr style="border:2px solid #547494;margin-bottom:1px;margin-top:-20px"/>
-                            <div class="row">
-                        <div class="col-7" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
-                                    <strong style="color:white; margin-left:5px;">CONDICIONES ACEPTADAS PARA EL PAGO DEL CURSO</strong>
-                        </div>
-                            </div>
-
 
                         <div class="row">
+                            <div class="col-7" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
+                                <strong style="color:white; margin-left:5px;">CONDICIONES ACEPTADAS PARA EL PAGO DEL CURSO</strong>
+                            </div>
+                        </div>
+
+                        <div class="row" style="font-size:10px;">
                         <div class="col-3">
                             <strong>Plazo de Pago:</strong><br/>
                             <strong>Matrícula/Pago Inicial:</strong><br/>
@@ -288,11 +289,11 @@
                             <span t-field="o.x_Fecha_Primer_Recibo"/>
                         </div>
                         </div><!--Third row-->
-
+                        <br/><br/>
                         <hr style="border:1px solid #547494;margin-bottom:1px;margin-top:-20px"/>
                         <div class="row">
                             <div class="col-12">
-                                <p style="font-size:13px;">
+                                <p style="font-size:10px;">
                                     Suscrito en dos ejemplares en Culiacán, a <span t-esc="o.create_date.strftime('%d/%m/%Y')"/>
 
                                     <br/>
@@ -300,10 +301,11 @@
                                 </p>
                             </div>
                         </div>
+                        <br/><br/><br/>
                         <div class="row sign">
-                                <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL ALUMNO</p></strong></div>
-                                <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL TITULAR<br/>(Si es distinto al alumno)</p></strong></div>
-                                <div class="col-4" style="font-size:13px;text-align:center;"><strong><p>FIRMA ISEP LATAM, S.C: <span t-field="o.company_id.name"/></p></strong></div>
+                                <div class="col-4" style="font-size:10px;text-align:center;"><strong><p>FIRMA DEL ALUMNO</p></strong></div>
+                                <div class="col-4" style="font-size:10px;text-align:center;"><strong><p>FIRMA DEL TITULAR<br/>(Si es distinto al alumno)</p></strong></div>
+                                <div class="col-4" style="font-size:10px;text-align:center;"><strong><p>FIRMA ISEP LATAM, S.C: <span t-field="o.company_id.name"/></p></strong></div>
                         </div>
                         <div class="row" style="height:90px">
                                 <div class="col-8"/>
@@ -313,25 +315,25 @@
                         </div>
 
                         <div class="row sign">
-                                <div class="col-4" style="font-size:13px;text-align:center;">
-                                    <strong style="font-size:13px;"><span t-field="o.partner_id.name"/></strong>
+                                <div class="col-4" style="font-size:10px;text-align:center;">
+                                    <strong><span t-field="o.partner_id.name"/></strong>
                                     <br/>
                                     <t t-if="o.partner_id.vat"><span t-field="o.partner_id.vat"></span></t>
                                     <t t-else=""><span t-field="o.partner_id.num_reg_trib"></span></t>
                                 </div>
-                                <div class="col-4" style="font-size:13px;text-align:center;">
-                                    <strong style="font-size:13px;"><span t-field="o.partner_invoice_id.name"/></strong>
+                                <div class="col-4" style="font-size:10px;text-align:center;">
+                                    <strong><span t-field="o.partner_invoice_id.name"/></strong>
                                     <br/>
                                     <t t-if="o.partner_invoice_id.vat"><span t-field="o.partner_invoice_id.vat"></span></t>
                                     <t t-else=""><span t-field="o.partner_invoice_id.num_reg_trib"></span></t>
                                 </div>
-                                <div class="col-4" style="font-size:13px;text-align:center;">
-                                    <strong style="font-size:13px;">[Ref:<span t-field="o.name"/>]</strong>
+                                <div class="col-4" style="font-size:10px;text-align:center;">
+                                    <strong>[Ref:<span t-field="o.name"/>]</strong>
                                 </div>
                         </div>
 
 
-                        <div class="row container-fluid" style="margin-top:50px">
+                        <div class="row container-fluid" style="margin-top:20px">
                            <img src="/isep_reports_custom/static/src/img/footer_isep2.png"/>
                         </div>
 
@@ -344,11 +346,11 @@
 
                         </div><!-- first_page-->
 
-                        <div class="page" name="second_page" style="font-size:11px;text-align:justify;page-break-after:always;">
-                            <br/>
-                            <strong>INFORMACIÓN PREVIA</strong>
+                        <div class="page" name="second_page" style="font-family:Georgia,times, serif;font-size:11px;text-align:justify;page-break-after:always;">
                             <br/>
 
+                            <strong>INFORMACIÓN PREVIA</strong>
+                            <br/>
                                      El alumno y el titular del contrato han recibido de Isep, en el momento de
                                      la firma del presente, la información necesaria acerca del programa a seguir,
                                      tanto académica, económica y administrativa.
@@ -497,7 +499,7 @@
 
                             <strong>DATOS PERSONALES</strong>
 
-                                <ol start="9" style="margin-left:10px">
+                                <ol start="18" style="margin-left:10px">
 
                                     <li>
                                         Sus datos se incorporan al sistema responsabilidad de ISEP para gestionar su
@@ -512,7 +514,7 @@
 
                             <strong>LEGISLACIÓN APLICABLE Y JURISDICCIÓN</strong>
 
-                                <ol start="9" style="margin-left:10px">
+                                <ol start="19" style="margin-left:10px">
 
                                     <li>
                                         Este contrato se considera formalizado en Culiacán, México. A este contrato y a las
@@ -557,7 +559,7 @@
                         </div> <!--second_page-->
 
 
-                        <div class="page" name="third_page" style="font-size:11px;text-align:justify;page-break-after:always;">
+                        <div class="page" name="third_page" style="font-family:Georgia,times, serif;font-size:11px;text-align:justify;page-break-after:always;">
                             <div class="row container-fluid">
                                 <div class="col-2">
                                     <strong>Nombre:</strong><br/>
@@ -583,7 +585,7 @@
                                     <span t-esc="o.confirmation_date.strftime('%d')"/> Día <span t-esc="o.confirmation_date.strftime('%m')"/> Mes <span t-esc="o.confirmation_date.strftime('%Y')"/> Año
 
                             </p>
-                            <br/>
+
                             <p>
                                     b) <t t-if ="o.payment_term_id.name==False"></t><t t-else=""><t t-esc="o.payment_term_id.name.split(' ')[0]"/></t>
                                     mensualidades de <span t-esc="o.order_line[1].price_unit"/> [ MXN ] Peso mexicano ,
@@ -648,7 +650,7 @@
 
                         </div> <!--third_page-->
 
-                        <div class="page" name="fourd_page" style="font-size:13px;text-align:justify;">
+                        <div class="page" name="fourd_page" style="font-family:Georgia,times, serif;font-size:13px;text-align:justify;">
                             <div class="row container-fluid" style="font-size:13px;text-align:justify;">
                                 PAGARÉ:<span t-field="o.name" style="margin-left:5px;"/>
                             </div>
@@ -698,7 +700,7 @@
                                     la cantidad de $
                                     <span t-field="o.precio_primer_pago"/>
                                     ( 00/100 [ MXN ] Peso mexicano )
-                                    <br/><br/>
+                                    <br/>
                                 </t>
 
 
