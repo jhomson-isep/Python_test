@@ -18,7 +18,7 @@
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="o">
                     <t t-call="web.basic_layout">
-                        <div class="page" name="first_page" style="font-family:Georgia,times, serif;page-break-after:always;">
+                        <div class="page" name="first_page" style="font-family:Arial, serif;page-break-after:always;">
                        <div class="header">
                            <hr style="border:5px solid #002d5f;margin-bottom:1px;margin-top:-3px"/>
                             <div class="row" style="margin-bottom:5px;">
@@ -349,7 +349,7 @@
 
                         </div><!-- first_page-->
 
-                        <div class="page" name="second_page" style="font-family:'Liberation Serif',Georgia,times, serif;font-size:11px;text-align:justify;page-break-after:always;">
+                        <div class="page" name="second_page" style="font-family:Arial, serif;font-size:11px;text-align:justify;page-break-after:always;">
                             <br/>
 
                             <strong>INFORMACIÓN PREVIA</strong>
@@ -562,7 +562,7 @@
                         </div> <!--second_page-->
 
 
-                        <div class="page" name="third_page" style="font-family:Georgia,times, serif;text-align:justify;page-break-after:always;">
+                        <div class="page" name="third_page" style="font-family:Arial, serif;text-align:justify;page-break-after:always;">
                             <div class="row container-fluid">
                                 <div class="col-2">
                                     <strong>Nombre:</strong><br/>
@@ -660,7 +660,7 @@
 
                         </div> <!--third_page-->
 
-                        <div class="page" name="fourd_page" style="font-family:Georgia,times, serif;font-size:13px;text-align:justify;">
+                        <div class="page" name="fourd_page" style="font-family:Arial, serif;font-size:13px;text-align:justify;">
                             <div class="row container-fluid" style="font-size:13px;text-align:justify;">
                                 <div class="col" style="text-align:center">
                                 PAGARÉ:<span t-field="o.name" style="margin-left:5px;"/>
