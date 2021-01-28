@@ -207,6 +207,15 @@ class CrmLead(models.Model):
                 user_id = 100000006
                 team_id = 100000006
 
+                if modalidad:
+                    lead.update({
+                        'name': cod_curso +
+                                '-' +
+                                modalidad +
+                                ' - ' +
+                                email
+                                })
+
             # ISEP SL
             # ---------------------------------
             elif company_id == 1:
