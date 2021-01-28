@@ -54,6 +54,8 @@ class OpStudent(models.Model):
                                      default=0)
     exam_attendees_ids = fields.One2many("op.exam.attendees", "student_id",
                                          string="Exam attendees")
+    exam_attendees_count = fields.Integer(
+        compute='_compute_exam_attendees_count', default=0)
     last_access = fields.Char(String='Last access',
                               compute='_get_last_access',
                               readonly=True)
@@ -71,6 +73,8 @@ class OpStudent(models.Model):
         string='Type of course taken',
         translate=True, store=True,
         compute='_compute_determine_type_of_course')
+    cgi_client_id = fields.Integer(string='Cgi client')
+
     _sql_constraints = [(
         'unique_n_id',
         'unique(n_id)',
@@ -107,8 +111,12 @@ class OpStudent(models.Model):
     def _compute_admission_count(self):
         """Compute the number of distinct admissions linked to the batch."""
         for student in self:
-            admissions = len(student.admission_ids)
-            student.admission_count = admissions
+            student.admission_count = len(student.admission_ids)
+
+    @api.multi
+    def _compute_exam_attendees_count(self):
+        for student in self:
+            student.exam_attendees_count = len(student.exam_attendees_ids)
 
     def action_open_admissions(self):
         """Display the linked admissions and adapt the view to the number of
@@ -130,6 +138,29 @@ class OpStudent(models.Model):
                 logger.info("=== LINE 55 ===")
                 action['views'] = form_view
             action['res_id'] = admissions.id
+        else:
+            action = {'type': 'ir.actions.act_window_close'}
+        return action
+
+    def action_open_exam_attendees(self):
+        """Display the linked exam attendees and adapt the view to the
+        number of records to display."""
+        self.ensure_one()
+        exam_attendees = self.exam_attendees_ids
+        action = self.env.ref(
+            'isep_courses_adapt.act_exam_attendees_view_grouped').read()[0]
+        if len(exam_attendees) > 1:
+            action['domain'] = [('id', 'in', exam_attendees.ids)]
+        elif len(exam_attendees) == 1:
+            form_view = [(self.env.ref(
+                'openeducat_exam.view_op_exam_attendees_form').id, 'form')]
+            if 'views' in action:
+                action['views'] = form_view + [(state, view) for state, view in
+                                               action['views'] if
+                                               view != 'form']
+            else:
+                action['views'] = form_view
+            action['res_id'] = exam_attendees.id
         else:
             action = {'type': 'ir.actions.act_window_close'}
         return action
@@ -264,6 +295,9 @@ class OpStudent(models.Model):
             for row in rows:
                 try:
                     if not isinstance(row['lastaccess'], int):
+                        continue
+                    if row['lastaccess'] == 0:
+                        logger.info(row['lastaccess'])
                         continue
                     last_access = datetime.datetime.utcfromtimestamp(
                         row['lastaccess'])

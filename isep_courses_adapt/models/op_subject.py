@@ -128,9 +128,9 @@ class OpSubject(models.Model):
                     res = super(OpSubject, self).create(subject_values)
                     print(res)
 
-                    if int_break == 50 and os.name != "posix":
-                        break
-                    int_break += 1
+                    #if int_break == 50 and os.name != "posix":
+                     #   break
+                    #int_break += 1
                 except Exception as e:
                     logger.info(e)
                     continue

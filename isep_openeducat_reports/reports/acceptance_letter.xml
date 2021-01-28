@@ -18,7 +18,7 @@
                                 <strong>
                                     <p style="text-align:right;">
                                         <span t-field="o.name"></span><br></br>
-                                        <span t-field="o.document_number"></span><br></br>
+                                        <span t-field="o.document_type_id.name" ></span>: <span t-field="o.document_number"></span><br></br>
                                         <span t-field="o.street"></span><br></br>
                                         Barcelona<br></br>
                                         Barcelona<br></br>
@@ -28,7 +28,7 @@
                                 <p style="margin-top:5px;">Apreciada Tatiana :</p>
                                 <p style="margin-top:5px;">
                                     Le comunicamos que ha sido aceptada y consta matriculada para realizar el <span t-field="c.course_id.name"></span> , en la modalidad <span t-field="c.course_id.modality_id"></span>, de la convocatoria
-                                    correspondiente al curso académico <span t-field="c.course_id.period"></span>.
+                                    correspondiente al curso académico <span t-field="c.batch_id.academic_year"></span>.
                                 </p>
                                 <p style="margin-top:5px;">
                                     El curso se impartirá en nuestras instalaciones de Barcelona. La fecha de inicio del
@@ -76,7 +76,7 @@
                                     <t t-if="datetime.datetime.today().month == 12"><span>de Diciembre de </span></t>
                                     <span t-esc="datetime.datetime.today().year"></span>
                                 </p>
-                                <p>Erika Tobalina<br></br>Directora de ISEP Barcelona</p>
+                                <p>El Departamento de Secretaría Académica<br></br>ISEP Barcelona</p>
                             </div>
                             <div style="height:275px;"></div>
                         </t>

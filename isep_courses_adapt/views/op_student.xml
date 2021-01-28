@@ -91,8 +91,10 @@
                                 <field name="admission_date"/>
                                 <field name="course_id"/>
                                 <field name="batch_id"/>
+                                <field name="academic_record_closing"/>
                                 <field name="due_date"/>
-                                <field name="state"/>
+                                <field name="unsubscribed_date"/>
+                                <field name="state" invisible="1"/>
                             </tree>
                         </field>
                     </group>
@@ -110,18 +112,28 @@
                             <field name="moodle_pass"/>
                         </group>
                         <group>
-                            <field name="access_ids" colspan="4" nolabel="1"/>
+                            <field name="access_ids" colspan="4" nolabel="1">
+                                <tree string="Last access details" default_order='student_access desc'>
+                                    <field name="student_id"/>
+                                    <field name="student_access"/>
+                                    <field name="last_access"/>
+                                </tree>
+                            </field>
                         </group>
                     </page>
-                    <page name="attendees" string="Exam attendees">
-                        <field name="exam_attendees_ids" colspan="4" nolabel="1"/>
-                    </page>
+<!--                    <page name="attendees" string="Exam attendees">-->
+<!--                        <field name="exam_attendees_ids" colspan="4" nolabel="1"/>-->
+<!--                    </page>-->
                 </notebook>
 
                 <xpath expr="//button[@name='toggle_active']" position="before">
                     <button class="btn oe_stat_button" type="object" name="action_open_admissions"
                             style="border-right: 1px solid;" icon="fa-bullseye">
                         <field string="Admissions" name="admission_count" widget="statinfo"/>
+                    </button>
+                    <button class="btn oe_stat_button" type="object" name="action_open_exam_attendees"
+                            style="border-right: 1px solid;" icon="fa-pencil">
+                        <field string="Marks" name="exam_attendees_count" widget="statinfo"/>
                     </button>
                 </xpath>
 

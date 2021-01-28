@@ -154,6 +154,7 @@ msgstr "Grupo"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_batch_subject_rel__subject_id
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_exam_attendees__subject_id
 msgid "Subject"
 msgstr "Asignatura"
 
@@ -1085,6 +1086,7 @@ msgid "New admissions"
 msgstr "Nuevas admisiones"
 
 #. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_extend_due_date_wizard__admission_ids
 #: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
 msgid "Admissions"
 msgstr "Admisiones"
@@ -1158,3 +1160,117 @@ msgstr "Combinar Estudiantes"
 #: model_terms:ir.ui.view,arch_db:isep_courses_adapt.base_student_merge_automatic_wizard_form
 msgid "Merge the following Student"
 msgstr "Estudiantes a Combinar"
+
+#. module: openeducat_fees
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_student_group_change_wizard_form
+#: selection:op.student.fees.details,state:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: openeducat_fees
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_student_group_change_wizard_form
+#: selection:op.student.fees.details,state:0
+msgid "Group Change"
+msgstr "Cambiar de Grupo"
+
+#. module: openeducat_fees
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_student_group_change_wizard_form
+#: selection:op.student.fees.details,state:0
+msgid "Group Change Student"
+msgstr "Cambiar de Grupo a Estudiante"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_group_change_wizard__op_admission_id
+msgid "Admission"
+msgstr "Admisión"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_group_change_wizard__op_course_id
+msgid "Course"
+msgstr "Curso"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_group_change_wizard__op_modality_id
+msgid "Modality"
+msgstr "Modalidad"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_group_change_wizard__op_batch_id
+msgid "Batch"
+msgstr "Grupo"
+
+#. module: isep_courses_adapt
+#: model:ir.actions.act_window,name:isep_courses_adapt.group_change_act
+#: model:ir.model.fields,field_description:isep_courses_adapt.op_student_group_change_wizard_form
+msgid "Group Change"
+msgstr "Cambio de Grupo"
+
+#. module: isep_courses_adapt
+#: code:addons/isep_courses_adapt/wizard/op_student_group_change:0
+#, python-format
+msgid "You must select admission."
+msgstr "Debe Seleccionar la Admisión "
+
+#. module: isep_courses_adapt
+#: code:addons/isep_courses_adapt/wizard/op_student_group_change:0
+#, python-format
+msgid "You must select modality."
+msgstr "Debe Seleccionar la Modalidad."
+
+#. module: isep_courses_adapt
+#: code:addons/isep_courses_adapt/wizard/op_student_group_change:0
+#, python-format
+msgid "You must select course."
+msgstr "Debe Seleccionar el Curso."
+
+#. module: isep_courses_adapt
+#: code:addons/isep_courses_adapt/wizard/op_student_group_change:0
+#, python-format
+msgid "You must select group."
+msgstr "Debe Seleccionar el Grupo."
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.view_op_student_form_extended
+#: model:ir.actions.act_window,name:isep_courses_adapt.act_exam_attendees_view_grouped
+msgid "Marks"
+msgstr "Calificaciones"
+
+#. module: isep_courses_adapt
+#: model:ir.actions.act_window,name:isep_courses_adapt.extend_due_date_act
+msgid "Extend Due Date"
+msgstr "Extender la fecha de vencimiento"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_student_extend_due_date_wizard_form
+msgid "Extend Due Date Admission Student"
+msgstr "Extender la fecha de vencimiento de la adminsion o admisiones del estudiante"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_student_extend_due_date_wizard_form
+msgid "Extend Due Date Admission Wizard"
+msgstr "Asistente para extender la fecha de vencimiento de las admisiones del estudiante"
+
+#. module: isep_courses_adapt
+#: model_terms:ir.ui.view,arch_db:isep_courses_adapt.op_student_extend_due_date_wizard_form
+msgid "Extend Months"
+msgstr "Extender"
+
+#. module: isep_courses_adapt
+#: model:ir.model,name:isep_courses_adapt.model_op_student_extend_due_date_wizard
+msgid "Modify due date in admission of student"
+msgstr "Modificar la fecha de vencimiento en la admisión del estudiante"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student_extend_due_date_wizard__months_to_extend
+msgid "Months"
+msgstr "Meses"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,help:isep_courses_adapt.field_op_student_extend_due_date_wizard__months_to_extend
+msgid "Number of months to extend"
+msgstr "Número de meses a extender o ampliar"
+
+#. module: isep_courses_adapt
+#: model:ir.model.fields,help:isep_courses_adapt.field_op_student_extend_due_date_wizard__admission_ids
+msgid "Select one or more admissions"
+msgstr "Seleccione una o más admisiones"

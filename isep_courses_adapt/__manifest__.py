@@ -31,6 +31,8 @@
     'data': [
         'security/ir.model.access.csv',
         'wizard/op_student_merge_view.xml',
+        'wizard/op_student_group_change.xml',
+        'wizard/op_student_extend_due_date.xml',
         'views/op_course.xml',
         'views/op_batch.xml',
         'views/op_modality.xml',

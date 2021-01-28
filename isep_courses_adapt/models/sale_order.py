@@ -105,7 +105,8 @@ class SaleOrder(models.Model):
             logger.info('Course type =======> {}'.format(course_type))
             if course_type in ['curso', 'pgrado', 'diplo', 'mgrafico',
                                'master']:
-                if not line.batch_id.id and self.company_id.id in [1, 1111]:
+                if not line.batch_id.id and self.company_id.id in\
+                        [1, 1111] and self.env.uid not in [200000001]:
                     raise UserError(_(
                         'El grupo es obligatorio para el producto: {}'.format(
                             line.product_id.name)))
