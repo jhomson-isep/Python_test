@@ -20,12 +20,14 @@
                     <t t-call="web.basic_layout">
                         <div class="page" name="first_page" style="font-family:Georgia,times, serif;page-break-after:always;">
                        <div class="header">
-                            <div class="row">
+                           <hr style="border:5px solid #19456b;margin-bottom:1px;margin-top:-3px"/>
+                            <div class="row" style="margin-bottom:5px;">
                                 <div class="col-6">
                                 	<img class="img-fluid logo" style="height:125px;padding-top:2px;" src="/isep_reports_custom/static/src/img/logo_isep_mx.png"/>
                                  </div>
                                 <div class="col-6">
-                                	<div class="row container-fluid">
+                                    <br/>
+                                	<div class="row container-fluid" style="margin-top:20px">
                                 		<div class="col-6">
 	                                	<div class="row">
 		                                <img src="/isep_reports_custom/static/src/img/tel.png"/>
@@ -51,10 +53,10 @@
                             </div>
                         </div>
                         <br/>
-                        <hr style="border:2px solid #547494;margin-bottom:1px;margin-top:-3px"/>
+                        <hr style="border:2px solid #547494;margin-bottom:1px;margin-top:-20px"/>
                         <div class="row">
                             <div class="col-5" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
-                                        <strong style="color:white; margin-left:5px;">DATOS PERSONALES DEL ALUMNO</strong>
+                                        <strong style="color:white; margin-left:5px;font-size:20px;">DATOS PERSONALES DEL ALUMNO</strong>
                             </div>
                         </div>
 
@@ -170,7 +172,7 @@
                         <hr style="border:2px solid #547494;margin-bottom:1px;margin-top:-3px"/>
                         <div class="row">
                             <div class="col-4" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
-                                    <strong style="color:white; margin-left:5px;">DATOS DE FACTURACIÓN</strong>
+                                    <strong style="color:white; margin-left:5px;font-size:20px;">DATOS DE FACTURACIÓN</strong>
                             </div>
                         </div>
 
@@ -256,16 +258,17 @@
                                 </ul>
                         </div>
 
+                        <br/>
                         <hr style="border:2px solid #547494;margin-bottom:1px;margin-top:-20px"/>
 
                         <div class="row">
                             <div class="col-7" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
-                                <strong style="color:white; margin-left:5px;">CONDICIONES ACEPTADAS PARA EL PAGO DEL CURSO</strong>
+                                <strong style="color:white; margin-left:5px;font-size:20px;">CONDICIONES ACEPTADAS PARA EL PAGO DEL CURSO</strong>
                             </div>
                         </div>
 
                         <div class="row" style="font-size:10px;">
-                        <div class="col-3">
+                        <div class="col-2">
                             <strong>Plazo de Pago:</strong><br/>
                             <strong>Matrícula/Pago Inicial:</strong><br/>
                             <strong>Resto Aplazado:</strong><br/>
@@ -280,14 +283,12 @@
                             <span t-field="o.pricelist_id.name"/><br/>
                             <span t-field="o.payment_mode_id.name"/><br/>
                         </div>
-                        <div class="col-4">
+                        <div class="col-8">
                             <br/><br/><br/>
                             <strong>Primer Vencimiento Aplazado:</strong>
+                            <span t-field="o.x_Fecha_Primer_Recibo" style="margin-left:20px"/>
                         </div>
-                        <div class="col-2">
-                            <br/><br/><br/>
-                            <span t-field="o.x_Fecha_Primer_Recibo"/>
-                        </div>
+
                         </div><!--Third row-->
                         <br/><br/>
                         <hr style="border:1px solid #547494;margin-bottom:1px;margin-top:-20px"/>
@@ -301,7 +302,7 @@
                                 </p>
                             </div>
                         </div>
-                        <br/><br/><br/>
+                        <br/><br/>
                         <div class="row sign">
                                 <div class="col-4" style="font-size:10px;text-align:center;"><strong><p>FIRMA DEL ALUMNO</p></strong></div>
                                 <div class="col-4" style="font-size:10px;text-align:center;"><strong><p>FIRMA DEL TITULAR<br/>(Si es distinto al alumno)</p></strong></div>
@@ -559,13 +560,13 @@
                         </div> <!--second_page-->
 
 
-                        <div class="page" name="third_page" style="font-family:Georgia,times, serif;font-size:11px;text-align:justify;page-break-after:always;">
+                        <div class="page" name="third_page" style="font-family:Georgia,times, serif;text-align:justify;page-break-after:always;">
                             <div class="row container-fluid">
                                 <div class="col-2">
                                     <strong>Nombre:</strong><br/>
                                     <strong>Programa:</strong>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-4" style="margin-left:-20px;">
                                     <span t-field="o.partner_id.name"/><br/>
                                     <div class="row" style="font-size:13px;">
                                         <ul>
@@ -588,8 +589,13 @@
 
                             <p>
                                     b) <t t-if ="o.payment_term_id.name==False"></t><t t-else=""><t t-esc="o.payment_term_id.name.split(' ')[0]"/></t>
-                                    mensualidades de <span t-esc="o.order_line[1].price_unit"/> [ MXN ] Peso mexicano ,
-                                    a partir del mes de
+                                    mensualidades de
+                                    <t t-if="len(o.order_line)>1">
+                                        <span t-esc="o.order_line[1].price_unit"/>
+                                    </t>
+                                    <t t-else="">
+                                    </t>
+                                    [ MXN ] Peso mexicano, a partir del mes de
                                     <t t-if ="o.x_Fecha_Primer_Recibo==False"> el dia del año</t>
                                     <t t-else="">
                                         <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%m')"/> el día
@@ -685,25 +691,36 @@
                             </div>
 
                             <div class="row container-fluid" style="text-align:justify;">
-                                <t t-foreach="range(int(o.payment_term_id.name.split(' ')[0]))" t-as="l">
-                                    PAGARÉ Pago
-                                    <span t-esc ="l+1" style="margin:0 2px"/> de
-                                    <span t-esc="o.payment_term_id.name.split(' ')[0]" style="margin:0 2px"/>
-                                    ,el día
+                                <t t-if="o.payment_term_id.name!=False">
+                                    <t t-foreach="range(int(o.payment_term_id.name.split(' ')[0]))" t-as="l">
+                                        PAGARÉ Pago
+                                        <span t-esc ="l+1" style="margin:0 2px"/> de
+                                        <span t-esc="o.payment_term_id.name.split(' ')[0]" style="margin:0 2px"/>
+                                        ,el día
 
-                                    <t t-if ="o.x_Fecha_Primer_Recibo==False">
-                                    </t>
-                                    <t t-else="">
-                                      <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%d')"/>-
-                                      <span t-esc="str(int(o.x_Fecha_Primer_Recibo.strftime('%m'))+l).zfill(2)"/>-
-                                      <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%Y')"/>
+                                        <t t-if ="o.x_Fecha_Primer_Recibo==False">
+                                        </t>
+                                        <t t-else="">
+                                          <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%d')"/>-
+                                            <t t-if = "int(o.x_Fecha_Primer_Recibo.strftime('%m'))+l>12">
+                                                <span t-esc="str(int(o.x_Fecha_Primer_Recibo.strftime('%m'))+l-12).zfill(2)"/>-
+                                                <span t-esc="str(int(o.x_Fecha_Primer_Recibo.strftime('%Y'))+1).zfill(2)"/>
+                                            </t>
+                                            <t t-else="">
+                                                <span t-esc="str(int(o.x_Fecha_Primer_Recibo.strftime('%m'))+l).zfill(2)"/>-
+                                                <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%Y')"/>
+                                            </t>
+                                        </t>
+                                        la cantidad de $
+                                        <span t-field="o.precio_primer_pago"/>
+                                        ( 00/100 [ MXN ] Peso mexicano )
+                                        <br/>
                                     </t>
 
-                                    la cantidad de $
-                                    <span t-field="o.precio_primer_pago"/>
-                                    ( 00/100 [ MXN ] Peso mexicano )
-                                    <br/>
                                 </t>
+                                <t t-else="">
+                                </t>
+
 
 
                             </div>
@@ -741,7 +758,7 @@
                             <br/><br/><br/><br/><br/>
 
                             <div class="row sign">
-                                    <br/><br/>
+                                    <br/>
                                     <div class="col-6" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL ALUMNO</p></strong></div>
                                     <div class="col-6" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL TITULAR<br/>(Si es distinto al alumno)</p></strong></div>
                             </div>
