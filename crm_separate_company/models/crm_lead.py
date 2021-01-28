@@ -90,6 +90,36 @@ class CrmLead(models.Model):
                 lead.update({'x_finalizacionestudios': ''})
 
 
+            #name
+            try:
+                if modalidad == 'ONL':
+                    lead.update({
+                        'name': cod_curso +
+                                '-' +
+                                modalidad +
+                                ' - ' +
+                                email
+                    })
+                elif modalidad == 'ATH':
+                    lead.update({
+                        'name': cod_curso +
+                                '-' +
+                                modalidad +
+                                ' - ' +
+                                email
+                    })
+                else:
+                    lead.update({
+                        'name': cod_curso +
+                                '-' +
+                                modalidad +
+                                '-' +
+                                cod_sede +
+                                ' - ' +
+                                email
+                    })
+            except Exception as e:
+                logger.info(e)
 
             # create
             res = super(CrmLead, self).create(lead)
@@ -207,14 +237,13 @@ class CrmLead(models.Model):
                 user_id = 100000006
                 team_id = 100000006
 
-                if modalidad:
-                    lead.update({
-                        'name': cod_curso +
-                                '-' +
-                                modalidad +
-                                ' - ' +
-                                email
-                                })
+                lead.update({
+                    'name': cod_curso +
+                            '-' +
+                            modalidad +
+                            ' - ' +
+                            email
+                            })
 
             # ISEP SL
             # ---------------------------------
@@ -267,33 +296,32 @@ class CrmLead(models.Model):
                     team_id = 4
                     lead.update({'x_sede_id': 3})
 
-                if modalidad:
-                    if modalidad == 'ONL':
-                        lead.update({
-                            'name': cod_curso +
-                                    '-' +
-                                    modalidad +
-                                    ' - ' +
-                                    email
-                                    })
-                    elif modalidad == 'ATH':
-                        lead.update({
-                            'name': cod_curso +
-                                    '-' +
-                                    modalidad +
-                                    ' - ' +
-                                    email
-                                    })
-                    else:
-                        lead.update({
-                            'name': cod_curso +
-                                    '-' +
-                                    modalidad +
-                                    '-' +
-                                    cod_sede +
-                                    ' - ' +
-                                    email
-                                    })
+                if modalidad == 'ONL':
+                    lead.update({
+                        'name': cod_curso +
+                                '-' +
+                                modalidad +
+                                ' - ' +
+                                email
+                                })
+                elif modalidad == 'ATH':
+                    lead.update({
+                        'name': cod_curso +
+                                '-' +
+                                modalidad +
+                                ' - ' +
+                                email
+                                })
+                else:
+                    lead.update({
+                        'name': cod_curso +
+                                '-' +
+                                modalidad +
+                                '-' +
+                                cod_sede +
+                                ' - ' +
+                                email
+                                })
 
                 lead.update(({'x_codmodalidad': modalidad}))
                 lead.update(({'x_codsede': cod_sede}))
