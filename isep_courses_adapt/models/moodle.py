@@ -268,3 +268,45 @@ class MoodleLib:
             'members[0][userid]': user_id
         }
         return self.connect(function, params)
+
+    def update_group_members(self, group_member_id: int, group_id: int, user_id: int) -> dict:
+        """
+        core_group_update_group_members
+
+        params = {
+            'members[0][id] : group_member_id #id of model, 
+            'members[0][groupid]': group_id, #new group id to update
+            'members[0][userid]': user_id # user id to update
+        }
+
+        :param group_id: int
+        :param user_id: int
+        :return: dict
+        """
+        function = "core_group_update_group_members"
+        params = {
+            'members[0][id]' : group_member_id,
+            'members[0][groupid]': group_id,
+            'members[0][userid]': user_id
+        }
+        return self.connect(function, params)
+
+    def get_group_members(self, group_id: int, user_id: int) -> dict:
+        """
+        core_group_get_group_members
+
+        params = {
+            'members[0][groupid]': group_id, #group id to find
+            'members[0][userid]': user_id # user id to find
+        }
+
+        :param group_id: int
+        :param user_id: int
+        :return: dict
+        """
+        function = "core_group_get_group_members"
+        params = {
+            'members[0][groupid]': group_id,
+            'members[0][userid]': user_id
+        }
+        return self.connect(function, params)

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
+from odoo.addons.isep_courses_adapt.models.moodle import MoodleLib
 
 class OpStudentGroupChangeWizard(models.TransientModel):
     _name = 'op.student.group.change.wizard'
@@ -27,6 +28,41 @@ class OpStudentGroupChangeWizard(models.TransientModel):
                             ('code', 'ilike', self.op_modality_id.code)]}}
 
     def modifiedDataInModels(self):
+        student = self.env['op.student'].search([('id', '=', self.getIdStudent())])
+        mdl = MoodleLib()
+        mdl_course = mdl.get_course(self.op_admission_id.batch_id.moodle_code)
+        if mdl_course is None:
+            raise ValidationError(
+                _('No se encontro el curso en Moodle'))
+        mdl_group = mdl.get_group(mdl_course.get('id'),
+                                    self.op_admission_id.batch_id.code)
+        if mdl_group is None:
+            raise ValidationError(
+                _('No se encontro el grupo en moodle!!'))
+        mdl_user = mdl.get_user(field='email',
+                                value=student.partner_id.email.lower())
+        if mdl_user is None:
+            raise ValidationError(
+                _('No se encontro el usuario en moodle'))
+        mdl_group_member = mdl.get_group_members(mdl_group.get('id'),
+                                                mdl_user.get('id'))
+        if mdl_group_member is None:
+            raise ValidationError(
+                _('No se ecuentra el grupo asociado!!'))
+        body = '''
+        <h1><strong>Se ha realizado cambio de grupo</strong></h1>
+
+        <h2><strong>Datos del grupo anterior</strong></h2>
+        '''
+        body = body + '''
+        <p><strong>Numero de aplicion:</strong> %s </p>
+        <p><strong>Curso:</strong> %s</p>
+        <p><strong>Grupo:</strong> %s</p>
+        <p><strong>Fecha de admision:</strong> %s</p>
+        '''%(self.op_admission_id[0].application_number,
+            self.op_admission_id[0].course_id.name,
+            self.op_admission_id[0].batch_id.code,
+            self.op_admission_id[0].admission_date)
         op_student_course = self.env['op.student.course'].search(
             [('student_id', '=', self.getIdStudent()),
              ('course_id', '=', self.op_admission_id.course_id.id)])
@@ -59,7 +95,24 @@ class OpStudentGroupChangeWizard(models.TransientModel):
                 'course_id': self.op_course_id.id
             }
             op_admission.write(values)
+        body = body + '''
+        <h2><strong>Datos del nuevo grupo</strong></h2>
 
+        <p><strong>Numero de aplicion:</strong> %s </p>
+        <p><strong>Curso:</strong> %s</p>
+        <p><strong>Grupo:</strong> %s</p>
+        <p><strong>Fecha de admision:</strong> %s</p>
+
+        '''%(op_admission.application_number,
+            op_admission.course_id.name,
+            op_admission.batch_id.code,
+            op_admission.admission_date)
+        student.message_post(body=body)
+        mdl_new_group = mdl.get_course(op_admission.batch_id.moodle_code)
+        mdl.update_group_members(mdl_group_member.get('id'),
+                                mdl_new_group.get('id'),
+                                mdl_user.get('id'))
+    
     def change(self):
         if not self.op_admission_id.id:
             raise ValidationError(
