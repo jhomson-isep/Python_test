@@ -253,7 +253,7 @@ class CrmLead(models.Model):
                     team_id = 200000001
                     lead.update({'x_sede_id': 5})
 
-                elif cod_sede == 'ONL':
+                elif cod_sede == 'ONL' or modalidad == 'ONL':
                     team_id = 5
                     lead.update({'x_sede_id': 26})
                     # Mandar a Latam cuando sea un telefono de México y Colombia
@@ -267,18 +267,7 @@ class CrmLead(models.Model):
                     team_id = 4
                     lead.update({'x_sede_id': 3})
 
-                # ONL es online en modalidad
-                if modalidad == 'ONL':
-                    team_id = 5
-                    # Mandar a Latam cuando sea un telefono de México y Colombia
-                    if telefono[:3] in ('+52', '+57'):
-                        company_id = 1111
-                        # Carolina Araujo
-                        user_id = 100000006
-                        team_id = 100000006
-
-
-                if cod_sede and modalidad:
+                if modalidad:
                     if modalidad == 'ONL':
                         lead.update({
                             'name': cod_curso +
@@ -338,7 +327,7 @@ class CrmLead(models.Model):
                 elif modalidad == '100':
                     modalidad = 'ONL'
 
-                if cod_sede and modalidad:
+                if modalidad:
                     if modalidad == 'ONL':
                         lead.update({
                             'name': cod_curso +
