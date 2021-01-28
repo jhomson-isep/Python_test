@@ -248,7 +248,9 @@
                         <br/>
                         <hr style="border:1px solid #002d5f;margin-bottom:1px;margin-top:-5px"/>
                         <div class="row">
+                            <div class="col-12">
                             <p style="font-size:10px;">Recibida previamente la información detallada de las características del curso, contenido y demás cuestiones relacionadas, el alumno/titular acepta las condiciones generales y académicas amparadas en este contrato y SOLICITA LA MATRÍCULA PARA EL CURSO DE:</p>
+                            </div>
                         </div>
                         <div class="row" style="font-size:10px;">
                                 <ul>
@@ -692,6 +694,7 @@
 
                             <div class="row container-fluid" style="text-align:justify;">
                                 <t t-if="o.payment_term_id.name!=False">
+                                    <t t-set="fpr" t-value="o.x_Fecha_Primer_Recibo-datetime.timedelta(days=30)"/>
                                     <t t-foreach="range(int(o.payment_term_id.name.split(' ')[0]))" t-as="l">
                                         PAGARÉ Pago
                                         <span t-esc ="l+1" style="margin:0 2px"/> de
@@ -701,15 +704,13 @@
                                         <t t-if ="o.x_Fecha_Primer_Recibo==False">
                                         </t>
                                         <t t-else="">
-                                          <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%d')"/>-
-                                            <t t-if = "int(o.x_Fecha_Primer_Recibo.strftime('%m'))+l>12">
-                                                <span t-esc="str(int(o.x_Fecha_Primer_Recibo.strftime('%m'))+l-12).zfill(2)"/>-
-                                                <span t-esc="str(int(o.x_Fecha_Primer_Recibo.strftime('%Y'))+1).zfill(2)"/>
-                                            </t>
-                                            <t t-else="">
-                                                <span t-esc="str(int(o.x_Fecha_Primer_Recibo.strftime('%m'))+l).zfill(2)"/>-
-                                                <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%Y')"/>
-                                            </t>
+
+                                          <t t-set="fpr" t-value="fpr+datetime.timedelta(days=30)"/>
+
+                                          <span t-esc="fpr.strftime('%d').zfill(2)"/>-
+                                          <span t-esc="fpr.strftime('%m').zfill(2)"/>-
+                                          <span t-esc="fpr.strftime('%Y')"/>
+
                                         </t>
                                         la cantidad de $
                                         <span t-field="o.precio_primer_pago"/>
