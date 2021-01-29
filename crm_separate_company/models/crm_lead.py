@@ -128,6 +128,7 @@ class CrmLead(models.Model):
 
             # lead con los nuevos datos hace falta agregar comercial(user_id) y equipo de ventas(crm_team)
             lead = {
+                'name': None,
                 'x_codsede': cod_sede,
                 'x_codcurso': cod_curso,
                 'email_from': email,
@@ -503,6 +504,8 @@ class CrmLead(models.Model):
                 logger.info(e)
                 logger.info("No pudo vincular el area con el codigo de area")
 
+            #================Incluir nombre en el query================
+            name = lead.get('name')
 
             # =======INICIO REVISAR========
             logger.info(lead)
@@ -510,8 +513,8 @@ class CrmLead(models.Model):
             lead_obj.sudo().write(lead)
             # Update a la base de datos para cambiar el company_id directo
             self.env.cr.execute(
-                """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s  WHERE id = %s""" % (
-                    company_id, user_id, team_id or 'NULL', res.id))
+                """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s, name = %s WHERE id = %s""" % (
+                    company_id, user_id, team_id or 'NULL', name, res.id))
             if len(client) > 0:
                 self.env.cr.execute(
                     """ UPDATE res_partner SET company_id = %s WHERE id 
