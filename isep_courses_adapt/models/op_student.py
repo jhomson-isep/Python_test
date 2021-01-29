@@ -74,6 +74,9 @@ class OpStudent(models.Model):
         translate=True, store=True,
         compute='_compute_determine_type_of_course')
     cgi_client_id = fields.Integer(string='Cgi client')
+    unsubscribed_date = fields.Date(string="Unsubscribed date",
+                                    store=True,
+                                    related='admission_ids.unsubscribed_date')
 
     _sql_constraints = [(
         'unique_n_id',
@@ -83,11 +86,11 @@ class OpStudent(models.Model):
 
     def _compute_determine_type_of_course(self):
         for student in self:
-            for course in student.course_detail_ids:
-                if course.course_id.course_type_id not in student.type_of_course_taken:
+            for admission in student.admission_ids:
+                if admission.course_id.course_type_id not in student.type_of_course_taken:
                     student.update({
                         'type_of_course_taken': [
-                            (4, course.course_id.course_type_id.id)]
+                            (4, admission.course_id.course_type_id.id)]
                     })
 
     def _compute_determine_status(self):

@@ -992,6 +992,7 @@ msgstr "Observaciones"
 
 #. module: isep_courses_adapt
 #: model:ir.model.fields,field_description:isep_courses_adapt.field_op_admission__unsubscribed_date
+#: model:ir.model.fields,field_description:isep_courses_adapt.field_op_student__unsubscribed_date
 msgid "Unsubscribed date"
 msgstr "Fecha de baja"
 

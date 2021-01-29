@@ -79,6 +79,7 @@
                                        attrs="{'invisible':[('uvic_program','=', False),('sepyc_program','=',False)]}"/>
                                 <field name="status_student" readonly="1"/>
                                 <field name="type_of_course_taken" readonly="1" widget="many2many_tags"/>
+                                <field name="unsubscribed_date" readonly="1"/>
                             </group>
                         </sheet>
                     </group>
