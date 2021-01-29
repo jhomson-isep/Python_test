@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <report id="report_crm_leads"
+                model="crm.lead"
+                string="Reporte de Oportunidades/Inciativas"
+                report_type="xlsx"
+                name="isep_openeducat_reports.report_crm_leads"
+                file="Crm_leads"
+                menu="True"/>
+
+    </data>
+</odoo>
