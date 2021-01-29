@@ -22,8 +22,8 @@
                        <div class="header">
                            <hr style="border:5px solid #002d5f;margin-bottom:1px;margin-top:-3px"/>
                             <div class="row" style="margin-bottom:5px;">
-                                <div class="col-6">
-                                	<img class="img-fluid logo" style="height:125px;padding-top:2px;" src="/isep_reports_custom/static/src/img/logo_isep_mx.png"/>
+                                <div class="col-6" style="width:150%;height:150%">
+                                	<img class="img-fluid logo" style="height:125px;padding-top:2px;" src="/isep_reports_custom/static/src/img/Logo_1200x700-01.png"/>
                                  </div>
                                 <div class="col-6">
                                     <br/>
