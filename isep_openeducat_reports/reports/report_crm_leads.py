@@ -9,7 +9,6 @@ class CrmLeadXlsx(models.AbstractModel):
         sheet = workbook.add_worksheet('Reporte Iniciativas/Oportunidades')
         bold = workbook.add_format({'bold': True})
         # 'Columns'
-        print(data)
         for item in data['leads']:
             for i, key in enumerate(item.keys()):
                 sheet.write(0, i, key, bold)

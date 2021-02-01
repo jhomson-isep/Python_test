@@ -18,8 +18,8 @@ class CrmLeaReportWizard(models.TransientModel):
             raise ValidationError(
                 _("La fecha inicial no puede ser mayor a la fecha final!!!"))
         data = {
-            'model' : 'crm.lead.report',
-            'form' : self.read()[0],
+            'model': 'crm.lead.report',
+            'form': self.read()[0],
         }
         logger.info(data)
         cmr_leads = self.env['crm.lead'].search(
