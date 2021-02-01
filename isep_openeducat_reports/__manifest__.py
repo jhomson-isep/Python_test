@@ -16,7 +16,8 @@
     'depends': [
         'base',
         'openeducat_core',
-        'report_xlsx'
+        'report_xlsx',
+        'crm',
     ],
     'installable': True,
     'data': [
@@ -36,7 +37,7 @@
         'reports/diploma_isep.xml',
         'reports/report_attendance.xml',
         'reports/grades_card.xml',
-        #'reports/report_crm_leads.xml',
+        'reports/report_crm_leads.xml',
         'menu/report_menu.xml'
     ]
 }
