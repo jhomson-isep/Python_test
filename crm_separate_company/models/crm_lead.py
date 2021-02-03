@@ -128,7 +128,6 @@ class CrmLead(models.Model):
 
             # lead con los nuevos datos hace falta agregar comercial(user_id) y equipo de ventas(crm_team)
             lead = {
-                'name': None,
                 'x_codsede': cod_sede,
                 'x_codcurso': cod_curso,
                 'email_from': email,
@@ -258,12 +257,17 @@ class CrmLead(models.Model):
                 elif modalidad == '100':
                     modalidad = 'ONL'
 
+                no_lead = False
                 if description.find('Agente internacional-') != -1:
                     #Agentes internacionales Yura Vanegas
                     user_id = 45
+                    no_lead = True
                 elif description.find('Diplomado-') != -1:
                     #Diplomado Alicia Pinto
                     user_id = 255
+                    no_lead = True
+                elif description.find('Sesión'):
+                    no_lead = False
                 else:
                     # Manel Arroyo
                     user_id = 76
@@ -297,7 +301,7 @@ class CrmLead(models.Model):
                     team_id = 4
                     lead.update({'x_sede_id': 3})
 
-                if modalidad == 'ONL':
+                if modalidad == 'ONL' and no_lead:
                     lead.update({
                         'name': cod_curso +
                                 '-' +
@@ -305,7 +309,7 @@ class CrmLead(models.Model):
                                 ' - ' +
                                 email
                                 })
-                elif modalidad == 'ATH':
+                elif modalidad == 'ATH' and no_lead:
                     lead.update({
                         'name': cod_curso +
                                 '-' +
@@ -313,7 +317,7 @@ class CrmLead(models.Model):
                                 ' - ' +
                                 email
                                 })
-                else:
+                elif modalidad == 'PRS' and no_lead:
                     lead.update({
                         'name': cod_curso +
                                 '-' +
@@ -504,17 +508,14 @@ class CrmLead(models.Model):
                 logger.info(e)
                 logger.info("No pudo vincular el area con el codigo de area")
 
-            #================Incluir nombre en el query================
-            name = lead.get('name')
-
             # =======INICIO REVISAR========
             logger.info(lead)
             lead_obj = self.sudo().browse(res.id)
             lead_obj.sudo().write(lead)
             # Update a la base de datos para cambiar el company_id directo
             self.env.cr.execute(
-                """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s, name = %s WHERE id = %s""" % (
-                    company_id, user_id, team_id or 'NULL', name, res.id))
+                """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s WHERE id = %s""" % (
+                    company_id, user_id, team_id or 'NULL',  res.id))
             if len(client) > 0:
                 self.env.cr.execute(
                     """ UPDATE res_partner SET company_id = %s WHERE id 
