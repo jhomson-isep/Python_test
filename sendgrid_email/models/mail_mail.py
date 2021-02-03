@@ -47,6 +47,8 @@ class SendGridEmail(models.Model):
     send_grid_check = fields.Boolean()
     temp_check = fields.Boolean()
 
+
+    @api.multi
     def action_send_grid(self):
         """
         function used for Sending emails using
@@ -505,6 +507,7 @@ class SendGridEmail(models.Model):
         else:
             return super(SendGridEmail, self)._action_view_documents_filtered(view_filter)
 
+    @api.multi
     def _compute_statistics(self):
         """
         function is used for computing Send mails Smart button
