@@ -45,3 +45,23 @@ msgstr "Configuración"
 #: model_terms:ir.ui.view,arch_db:isep_minimal_changes.res_config_settings_view_form_inherit
 msgid "Use a specific mail server in priority. Otherwise Odoo relies on the first outgoing mail server available (based on their sequencing) as it does for normal mails"
 msgstr "Utilice un servidor de correo específico en prioridad. De lo contrario, Odoo se basa en el primer servidor de correo saliente disponible (según su secuencia) como lo hace con los correos normales"
+
+#. module: isep_minimal_changes
+#: model:ir.model.fields,field_description:isep_minimal_changes.field_helpdesk_ticket__month
+msgid "Month"
+msgstr "Mes"
+
+#. module: isep_minimal_changes
+#: model:ir.model.fields,field_description:isep_minimal_changes.field_helpdesk_ticket__total_requirements
+msgid "Total requirements"
+msgstr "Total de requerimientos"
+
+#. module: isep_minimal_changes
+#: model:ir.model.fields,field_description:isep_minimal_changes.field_helpdesk_ticket__resolved_requirements
+msgid "Resolved requirements"
+msgstr "Requerimientos atendidos"
+
+#. module: isep_minimal_changes
+#: model:ir.model.fields,field_description:isep_minimal_changes.field_helpdesk_ticket__require_project
+msgid "Requires project?"
+msgstr "¿Requiere proyecto?"
