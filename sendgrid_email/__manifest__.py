@@ -23,7 +23,7 @@
 
 {
     'name': 'Mass Mailing With SendGrid',
-    'version': '13.0.1.0.0',
+    'version': '12.0.0.0.0',
     'summary': 'Mass Mailing using SendGrid API',
     'description': 'Mass Mailing using SendGrid API',
     'category': 'Marketing',
