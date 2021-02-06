@@ -328,11 +328,8 @@
                         <p style="page-break-after:always;"></p>
 
                         <div class="page" name="second_page">
-                            <br/>
                             <div class="row" style="font-size:13px; text-align:justify;margin-left:5px;">
                                 <div class="col-12">
-                                    <br></br>
-                                    <br></br>
                                     <br></br>
                                     <ol>
                                         <li>
@@ -430,93 +427,6 @@
 
                         <p style="page-break-after:always;"></p>
 
-<!--                        <t t-if="o.payment_mode_id.name.find('Tarjeta') != -1 or o.payment_mode_id.name.find('Datáfono') != -1">-->
-<!--                            <div class="page" name="third_page_tarjeta">-->
-<!--                                <div class="row" style="height:310px"/>-->
-<!--                                <br/>-->
-<!--                                <br/>-->
-<!--                                <br/>-->
-<!--                                <div class="row" style="text-align:justify;font-size:13px;">-->
-<!--                                    <div class="col-3">-->
-<!--                                        <div class="row"><strong>Nombre :</strong></div>-->
-<!--                                        <div class="row"><strong>Programa :</strong></div>-->
-<!--                                    </div>-->
-<!--                                    <div class="col-9">-->
-<!--                                        <div class="row"><span t-field="o.partner_invoice_id.name"/></div>-->
-<!--                                        <div class="row">-->
-<!--                                            <t t-foreach="o.order_line" t-as="l">-->
-<!--                                                <span t-field="l.product_id"><br/></span>-->
-<!--                                            </t>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="row" style="text-align:justify;font-size:13px;">-->
-<!--                                    <p>Autorizo a Centro de Estudios Ised SL a realizar los cargos correspondientes-->
-<!--                                        a:</p>-->
-<!--                                </div>-->
-<!--                                <div class="row" style="text-align:justify;font-size:13px;">-->
-<!--                                    <ol>-->
-<!--                                        <li>-->
-<!--                                            Gastos de Inscripción: <span t-field="o.precio_matricula"/><span-->
-<!--                                                t-field='o.pricelist_id.currency_id.name'></span> <span-->
-<!--                                                t-field="o.confirmation_date"/>-->
-<!--                                        </li>-->
-<!--                                        <li><span t-field="o.len_cuotas"/> Mensualidades de <span-->
-<!--                                                t-field="o.precio_primer_pago"/><span-->
-<!--                                                t-field='o.pricelist_id.currency_id.name'></span> con fecha <span-->
-<!--                                                t-field="o.x_pago_id.lines_ids.sorted(key=lambda b: b.fecha)[1].fecha"/></li>-->
-<!--                                    </ol>-->
-<!--                                </div>-->
-<!--                                <br/>-->
-<!--                                <br/>-->
-<!--                                <div class="row" style="text-align:justify;font-size:13px;">-->
-<!--                                    <strong>Nombre completo del titular de la cuenta:</strong> <span-->
-<!--                                        t-field="o.partner_invoice_id.payment_token_ids[0].display_name"/>-->
-<!--                                </div>-->
-<!--                                <div class="row" style="text-align:justify;font-size:13px;">-->
-<!--                                    <strong>Número de la tarjeta:</strong>-->
-<!--                                    <span t-esc="o.partner_invoice_id.payment_token_ids[0].acquirer_ref[:8]">-->
-<!--                                    </span>-->
-<!--                                    ****-->
-<!--                                    <span t-esc="o.partner_invoice_id.payment_token_ids[0].acquirer_ref[-4:]">-->
-<!--                                    </span>-->
-<!--                                </div>-->
-<!--                                <div class="row" style="text-align:justify;font-size:13px;">-->
-<!--                                    <strong>Si la tarjeta es de débito indicar número de clave bancaria estandarizada-->
-<!--                                        "CLABE": </strong>-->
-<!--                                </div>-->
-<!--                                <br/>-->
-<!--                                <div class="row" style="text-align:justify;font-size:13px;">-->
-<!--                                    Solicito y autorizo a <span t-field="o.company_id.name"/>, para que en mi nombre-->
-<!--                                    realice y gestione cualquier trámite administrativo, pagos académicos y de-->
-<!--                                    titulación de la Universidad en-->
-<!--                                    donde he formalizado la inscripción, al no disponer de una tarjeta de crédito-->
-<!--                                    habilitada para cobros internacionales y evitarme los costos bancarios de las-->
-<!--                                    transferencias internacionales para dichos pagos.-->
-<!--                                </div>-->
-<!--                                <br/>-->
-<!--                                <br/>-->
-<!--                                <div class="row" style="text-align:center;font-size:13px">-->
-<!--                                    <div class="col-12">-->
-<!--                                        Entregar este formato a su gestor comercial-->
-<!--                                        <br/>-->
-<!--                                        He leído y autorizo lo manifestado en la presente orden de pago.-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <br/>-->
-<!--                                <br/>-->
-<!--                                <div class="row" style="text-align:center;">-->
-<!--                                    <div class="col-12" style="height:50px;"><strong>FIRMA TITULAR:</strong></div>-->
-<!--                                </div>-->
-<!--                                <div class="row" style="text-align:center;">-->
-<!--                                    <div class="col-12"><span t-field="o.partner_invoice_id.name"/></div>-->
-<!--                                </div>-->
-<!--                                <div class="row" style="text-align:center;"><div class="col-12"><strong>-->
-<!--                                    Fecha:</strong></div></div>-->
-<!--                                <div class="row" style="text-align:center;"><div class="col-12"><span-->
-<!--                                        t-field="o.date_order"/></div></div>-->
-<!--                            </div>-->
-<!--                        </t>-->
                         <t t-if="o.payment_mode_id.name.find('Domiciliado') != -1  and o.cuenta_bancaria and o.mandate_id">
                             <div class="page" name="third_page_sepa">
                                 <div class="row" style="height:40px"/>
