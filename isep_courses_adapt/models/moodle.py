@@ -310,10 +310,11 @@ class MoodleLib:
             'members[0][userid]': user_id
         }
         return self.connect(function, params)
-    
+
     def get_cohort(self, name: str) -> dict:
         """
         core_cohort_search_cohorts: Search for cohorts.
+
         :param name: str to search
         :return: dict of 1 cohort
         """
