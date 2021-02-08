@@ -34,26 +34,18 @@
             </field>
         </record>
 
-        <record id="view_op_exam_attendees_search_inherit" model="ir.ui.view">
-             <field name="name">op.exam.attendees.search.inherit</field>
-            <field name="model">op.exam.attendees</field>
-            <field name="inherit_id" ref="openeducat_exam.view_op_exam_attendees_search"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='marks']" position="attributes">
-                    <field name="avg">Average of marks</field>
-                </xpath>
-            </field>
-        </record>
-
-        <record model="ir.actions.act_window" id="act_exam_attendees_view_grouped">
-            <field name="name">Marks</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">op.exam.attendees</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="search_view_id" ref="openeducat_exam.view_op_exam_attendees_search"/>
-            <field name="domain">[]</field>
-            <field name="context">{'group_by': 'course_id'}</field>
-        </record>
+<!--        <record model="ir.actions.act_window" id="act_exam_attendees_view_grouped">-->
+<!--            <field name="name">Marks</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">op.exam.attendees</field>-->
+<!--            <field name="view_type">form</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="search_view_id" ref="openeducat_exam.view_op_exam_attendees_search"/>-->
+<!--            <field name="domain">[]</field>-->
+<!--            <field name="context">{'group_by': 'course_id'}</field>-->
+<!--            <xpath expr="//field[@name='marks']" position="attributes">-->
+<!--                    <field name="avg">Average of marks</field>-->
+<!--            </xpath>-->
+<!--        </record>-->
     </data>
 </odoo>
