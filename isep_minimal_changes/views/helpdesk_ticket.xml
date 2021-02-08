@@ -10,6 +10,13 @@
                 <xpath expr="//field[@name='tag_ids']" position="after">
                     <field name="ticket_res" widget="many2many_tags"
                            required="1"/>
+                    <field name="total_requirements" groups="base.group_system"></field>
+                    <field name="resolved_requirements" groups="base.group_system"></field>
+                </xpath>
+
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="require_project" groups="base.group_system" widget="boolean_toggle"></field>
+                    <field name="month" groups="base.group_system" widget="selection"></field>
                 </xpath>
 
                 <field name="tag_ids" position="attributes">

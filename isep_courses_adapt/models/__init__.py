@@ -35,3 +35,4 @@ from . import op_exam
 from . import op_attendance_sheet
 from . import crm_team
 from . import op_course_type
+from . import moodle

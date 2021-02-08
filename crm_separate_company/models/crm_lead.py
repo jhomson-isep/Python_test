@@ -90,6 +90,36 @@ class CrmLead(models.Model):
                 lead.update({'x_finalizacionestudios': ''})
 
 
+            #name
+            try:
+                if modalidad == 'ONL':
+                    lead.update({
+                        'name': cod_curso +
+                                '-' +
+                                modalidad +
+                                ' - ' +
+                                email
+                    })
+                elif modalidad == 'ATH':
+                    lead.update({
+                        'name': cod_curso +
+                                '-' +
+                                modalidad +
+                                ' - ' +
+                                email
+                    })
+                else:
+                    lead.update({
+                        'name': cod_curso +
+                                '-' +
+                                modalidad +
+                                '-' +
+                                cod_sede +
+                                ' - ' +
+                                email
+                    })
+            except Exception as e:
+                logger.info(e)
 
             # create
             res = super(CrmLead, self).create(lead)
@@ -207,6 +237,14 @@ class CrmLead(models.Model):
                 user_id = 100000006
                 team_id = 100000006
 
+                lead.update({
+                    'name': cod_curso +
+                            '-' +
+                            modalidad +
+                            ' - ' +
+                            email
+                            })
+
             # ISEP SL
             # ---------------------------------
             elif company_id == 1:
@@ -219,12 +257,17 @@ class CrmLead(models.Model):
                 elif modalidad == '100':
                     modalidad = 'ONL'
 
+                no_lead = False
                 if description.find('Agente internacional-') != -1:
                     #Agentes internacionales Yura Vanegas
                     user_id = 45
+                    no_lead = True
                 elif description.find('Diplomado-') != -1:
                     #Diplomado Alicia Pinto
                     user_id = 255
+                    no_lead = True
+                elif description.find('Sesión'):
+                    no_lead = False
                 else:
                     # Manel Arroyo
                     user_id = 76
@@ -244,7 +287,7 @@ class CrmLead(models.Model):
                     team_id = 200000001
                     lead.update({'x_sede_id': 5})
 
-                elif cod_sede == 'ONL':
+                elif cod_sede == 'ONL' or modalidad == 'ONL':
                     team_id = 5
                     lead.update({'x_sede_id': 26})
                     # Mandar a Latam cuando sea un telefono de México y Colombia
@@ -258,44 +301,32 @@ class CrmLead(models.Model):
                     team_id = 4
                     lead.update({'x_sede_id': 3})
 
-                # ONL es online en modalidad
-                if modalidad == 'ONL':
-                    team_id = 5
-                    # Mandar a Latam cuando sea un telefono de México y Colombia
-                    if telefono[:3] in ('+52', '+57'):
-                        company_id = 1111
-                        # Carolina Araujo
-                        user_id = 100000006
-                        team_id = 100000006
-
-
-                if cod_sede and modalidad:
-                    if modalidad == 'ONL':
-                        lead.update({
-                            'name': cod_curso +
-                                    '-' +
-                                    modalidad +
-                                    ' - ' +
-                                    email
-                                    })
-                    elif modalidad == 'ATH':
-                        lead.update({
-                            'name': cod_curso +
-                                    '-' +
-                                    modalidad +
-                                    ' - ' +
-                                    email
-                                    })
-                    else:
-                        lead.update({
-                            'name': cod_curso +
-                                    '-' +
-                                    modalidad +
-                                    '-' +
-                                    cod_sede +
-                                    ' - ' +
-                                    email
-                                    })
+                if modalidad == 'ONL' and no_lead:
+                    lead.update({
+                        'name': cod_curso +
+                                '-' +
+                                modalidad +
+                                ' - ' +
+                                email
+                                })
+                elif modalidad == 'ATH' and no_lead:
+                    lead.update({
+                        'name': cod_curso +
+                                '-' +
+                                modalidad +
+                                ' - ' +
+                                email
+                                })
+                elif modalidad == 'PRS' and no_lead:
+                    lead.update({
+                        'name': cod_curso +
+                                '-' +
+                                modalidad +
+                                '-' +
+                                cod_sede +
+                                ' - ' +
+                                email
+                                })
 
                 lead.update(({'x_codmodalidad': modalidad}))
                 lead.update(({'x_codsede': cod_sede}))
@@ -329,7 +360,7 @@ class CrmLead(models.Model):
                 elif modalidad == '100':
                     modalidad = 'ONL'
 
-                if cod_sede and modalidad:
+                if modalidad:
                     if modalidad == 'ONL':
                         lead.update({
                             'name': cod_curso +
@@ -477,15 +508,14 @@ class CrmLead(models.Model):
                 logger.info(e)
                 logger.info("No pudo vincular el area con el codigo de area")
 
-
             # =======INICIO REVISAR========
             logger.info(lead)
             lead_obj = self.sudo().browse(res.id)
             lead_obj.sudo().write(lead)
             # Update a la base de datos para cambiar el company_id directo
             self.env.cr.execute(
-                """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s  WHERE id = %s""" % (
-                    company_id, user_id, team_id or 'NULL', res.id))
+                """ UPDATE crm_lead SET company_id = %s, user_id = %s, team_id = %s WHERE id = %s""" % (
+                    company_id, user_id, team_id or 'NULL',  res.id))
             if len(client) > 0:
                 self.env.cr.execute(
                     """ UPDATE res_partner SET company_id = %s WHERE id 

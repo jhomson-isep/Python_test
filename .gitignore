@@ -145,7 +145,6 @@ dmypy.json
 test_moodle/
 
 # gdrive access files
-#isep_courses_adapt/models/drive/client_secrect.json
-#isep_courses_adapt/models/drive/credentials.json
-#isep_courses_adapt/models/drive/credentials.txt
+isep_courses_adapt/models/drive/client_secrets.json
+isep_courses_adapt/models/drive/credentials.txt
 isep_courses_adapt/migration_scripts/Folder/*

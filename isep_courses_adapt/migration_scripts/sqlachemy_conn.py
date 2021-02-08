@@ -175,6 +175,10 @@ class Tablas(Base_server):
     __table__ = Table('Tablas', metadata_server_isep, autoload=True)
 
 
+class Historico(Base_server):
+    __table__ = Table('Historico', metadata_server_isep, autoload=True)
+
+
 def get_session_server():
     Session_server = sessionmaker()
     Session_server.configure(bind=server)
