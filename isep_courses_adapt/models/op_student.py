@@ -361,6 +361,9 @@ class OpStudent(models.Model):
                  70: 'Email Student Access 70 days',
                  80: 'Email Student Access 80 days',
                  100: 'Email Student Access 100 days'}
+
+
+
         for student in self.env['op.student'].search([]):
             try:
                 last_access = self.env['op.student.access'].search(
@@ -373,8 +376,9 @@ class OpStudent(models.Model):
                         days = self.get_days_without_access(student.id)
                         days = ast.literal_eval(days)
                         if days in (5, 12, 20, 40, 70, 80, 100):
+                            #Estamos tomando el ultimo template porque estan duplicados
                             template = self.env['mail.template'].search(
-                                [('name', '=', tname[days])])
+                                [('name', '=', tname[days])])[-1]
                             if template:
                                 template.send_mail(student.id, force_send=True,
                                                    raise_exception=True)
