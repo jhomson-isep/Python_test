@@ -6,12 +6,12 @@ from odoo import _
 from requests import post
 import logging
 
-logger = logging.getLogger(__name__)
-production = False
+logger = logging.getLogger(name)
+production = True
 
 
 class MoodleLib:
-    def __init__(self):
+    def init(self):
         """
         Creates the connection with Moodle
         """
@@ -132,6 +132,7 @@ class MoodleLib:
         if len(users) > 0:
             user = users[0]
         return user
+
 
     def get_course(self, name: str) -> dict:
         """
@@ -272,7 +273,6 @@ class MoodleLib:
     def update_group_members(self, group_member_id: int, group_id: int, user_id: int) -> dict:
         """
         core_group_update_group_members
-
         params = {
             'members[0][id] : group_member_id #id of model, 
             'members[0][groupid]': group_id, #new group id to update
@@ -308,5 +308,32 @@ class MoodleLib:
         params = {
             'members[0][groupid]': group_id,
             'members[0][userid]': user_id
+        }
+        return self.connect(function, params)
+    
+    def get_cohort(self, name: str) -> dict:
+        """
+        core_cohort_search_cohorts: Search for cohorts.
+
+        :param name: str to search
+        :return: dict of 1 cohort
+        """
+        function = "core_cohort_search_cohorts"
+        params = {'query': name,
+                  'context[contextid]': 0,
+                  'context[contextlevel]': 'system',
+                  'context[instanceid]': 0,
+                  'limitnum': 1}
+        cohorts = self.connect(function, params)
+        cohort = None
+        if cohorts is not None and cohorts.get('cohorts'):
+            cohort = cohorts["cohorts"][0]
+        return cohort
+
+    def core_cohort_create_cohorts(self, name):
+        function = "core_cohort_create_cohorts"
+        params = {
+            'members[0][name]': name,
+            'members[0][idnumber]': name,
         }
         return self.connect(function, params)
