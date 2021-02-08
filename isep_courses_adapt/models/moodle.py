@@ -314,7 +314,6 @@ class MoodleLib:
     def get_cohort(self, name: str) -> dict:
         """
         core_cohort_search_cohorts: Search for cohorts.
-
         :param name: str to search
         :return: dict of 1 cohort
         """
@@ -333,7 +332,19 @@ class MoodleLib:
     def core_cohort_create_cohorts(self, name):
         function = "core_cohort_create_cohorts"
         params = {
-            'members[0][name]': name,
-            'members[0][idnumber]': name,
+            'cohorts[0][categorytype][type]': 'system',
+            'cohorts[0][categorytype][value]': '',
+            'cohorts[0][name]': name,
+            'cohorts[0][idnumber]': name,
+        }
+        return self.connect(function, params)
+
+    def core_cohort_add_cohorts_members(self, cohortid, userid):
+        function = "core_cohort_add_cohort_members"
+        params = {
+            'members[0][cohorttype][type]': 'id',
+            'members[0][cohorttype][value]': cohortid,
+            'members[0][usertype][type]': 'id',
+            'members[0][usertype][value]': userid
         }
         return self.connect(function, params)

@@ -136,6 +136,8 @@ class OpAdmission(models.Model):
              ('batch_id', '=', self.batch_id.id)])
         logger.info("Student id: {}".format(student.id))
         moodle_course = moodle.get_course(self.batch_id.moodle_code)
+        modality = list()
+        moodle_cohort = None
         logger.info("moodle_course: {}".format(moodle_course))
         moodle_group = moodle.get_group(moodle_course.get('id'),
                                         self.batch_id.code)
@@ -192,6 +194,15 @@ class OpAdmission(models.Model):
         member_result = moodle.add_group_members(moodle_group.get('id'),
                                                  user.get('id'))
         logger.info(member_result)
+        for course in student_course:
+            modality.append(course.course_id.modality_id.code)
+        if 'ATH' or 'PRS' in modality:
+            moodle_cohort = moodle.get_cohort(self.batch_id.code)
+            if moodle_cohort is None:
+                moodle_cohort = moodle.core_cohort_create_cohorts(self.batch_id.code)
+            cohort_member = moodle.core_cohort_add_cohorts_members(moodle_cohort.get('id'), user.get('id'))
+            logger.info(cohort_member)
+            
 
     @staticmethod
     def password_generator(length=8):
