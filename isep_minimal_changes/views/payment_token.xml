@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="payment_token_form_view_inherit" model="ir.ui.view">
+            <field name="name">Payment token form inherited</field>
+            <field name="model">payment.token</field>
+            <field name="inherit_id" ref="payment.payment_token_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='acquirer_id']" position="after">
+                    <field name="masked_card_number"></field>
+                </xpath>
+
+                <xpath expr="//field[@name='acquirer_ref']" position="attributes">
+                    <attribute name="groups">base.group_system</attribute>
+                </xpath>
+
+                 <xpath expr="//field[@name='csv']" position="attributes">
+                    <attribute name="groups">base.group_system</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="payment_token_tree_view_inherit" model="ir.ui.view">
+            <field name="name">Payment token tree from inherited</field>
+            <field name="model">payment.token</field>
+            <field name="inherit_id" ref="payment.payment_token_tree_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='acquirer_id']" position="after">
+                    <field name="masked_card_number"></field>
+                </xpath>
+
+                <xpath expr="//field[@name='acquirer_ref']" position="attributes">
+                    <attribute name="groups">base.group_system</attribute>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

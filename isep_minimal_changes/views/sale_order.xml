@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_order_form_credit_card_button" model="ir.ui.view">
+            <field name="name">View order form credit card button</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='print_quotation']" position="before">
+                    <button name="action_credit_card_typeform" type="object" string="Enviar email de tarjeta"
+                            class="oe_highlight"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
