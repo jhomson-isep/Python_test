@@ -310,3 +310,42 @@ class MoodleLib:
             'members[0][userid]': user_id
         }
         return self.connect(function, params)
+
+    def get_cohort(self, name: str) -> dict:
+        """
+        core_cohort_search_cohorts: Search for cohorts.
+
+        :param name: str to search
+        :return: dict of 1 cohort
+        """
+        function = "core_cohort_search_cohorts"
+        params = {'query': name,
+                  'context[contextid]': 0,
+                  'context[contextlevel]': 'system',
+                  'context[instanceid]': 0,
+                  'limitnum': 1}
+        cohorts = self.connect(function, params)
+        cohort = None
+        if cohorts is not None and cohorts.get('cohorts'):
+            cohort = cohorts["cohorts"][0]
+        return cohort
+
+    def core_cohort_create_cohorts(self, name):
+        function = "core_cohort_create_cohorts"
+        params = {
+            'cohorts[0][categorytype][type]': 'system',
+            'cohorts[0][categorytype][value]': '',
+            'cohorts[0][name]': name,
+            'cohorts[0][idnumber]': name,
+        }
+        return self.connect(function, params)
+
+    def core_cohort_add_cohorts_members(self, cohortid, userid):
+        function = "core_cohort_add_cohort_members"
+        params = {
+            'members[0][cohorttype][type]': 'id',
+            'members[0][cohorttype][value]': cohortid,
+            'members[0][usertype][type]': 'id',
+            'members[0][usertype][value]': userid
+        }
+        return self.connect(function, params)
