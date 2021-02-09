@@ -7,7 +7,7 @@ from requests import post
 import logging
 
 logger = logging.getLogger(__name__)
-production = False
+production = True
 
 
 class MoodleLib:
