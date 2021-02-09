@@ -10,4 +10,3 @@ class op_moodle_category_rel(models.Model):
     moodle_module = fields.Integer()
     modality_id = fields.Many2many('op.modality')
     course_id = fields.Many2one('op.course')
-    

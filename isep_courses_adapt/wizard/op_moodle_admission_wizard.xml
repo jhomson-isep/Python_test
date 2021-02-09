@@ -14,7 +14,7 @@
                         </group>
                     </sheet>
                     <footer>
-                        <button name='enroll' string='Enroll Student'
+                        <button name='enroll_student' string='Enroll Student'
                             class='oe_highlight'
                             type='object' />
                         <button special="cancel" string="Cancel" type="object" class="btn btn-secondary oe_inline"/>
