@@ -2,6 +2,7 @@
 
 from sqlachemy_conn import get_pg_session, OpCourse, OpModality, \
     OpMoodleCategoryRel
+from sqlalchemy import and_, desc
 import csv
 
 
@@ -25,13 +26,16 @@ def set_moodle_categories():
         modality = session_pg.query(OpModality).filter(
             OpModality.code == category.get('modality')).first()
         if modality is not None:
-            moodle_category_rel = session_pg.query(OpMoodleCategoryRel).filter(
-                OpMoodleCategoryRel.name == category.get('name')).first()
-            if moodle_category_rel is None:
-                for course in courses:
+            for course in courses:
+                moodle_category_rel = session_pg.query(
+                    OpMoodleCategoryRel).filter(and_(
+                    OpMoodleCategoryRel.code == category.get('code'),
+                    OpMoodleCategoryRel.course_id == course.id)).first()
+                if moodle_category_rel is None:
+
                     moodle_category_rel = OpMoodleCategoryRel()
                     moodle_category_rel.name = "-".join(
-                        [category.get('name'), course.id])
+                        [category.get('name'), str(course.id)])
                     moodle_category_rel.code = category.get('code')
                     moodle_category_rel.moodle_category = category.get(
                         'category')
