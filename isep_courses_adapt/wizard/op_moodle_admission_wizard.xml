@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <record id="op_moodle_admission_wizard_form" model="ir.ui.view">
+            <field name='name'>op.moodle.admission.wizard.form</field>
+            <field name='model'>op.moodle.admission.wizard</field>
+            <field name='arch' type='xml'>
+                <form string='Op Moodle Admission Wizard'>
+                    <sheet>
+                        <separator string="Registro de alumnos en Moodle"/>
+                        <group colspan="4">
+                            <field name="category_id"/>
+                            <field name="course_id"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name='enroll' string='Enroll Student'
+                            class='oe_highlight'
+                            type='object' />
+                        <button special="cancel" string="Cancel" type="object" class="btn btn-secondary oe_inline"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="op_moodle_admission_wizard_act" name="MoodLe Admission Wizard"
+                    res_model="op.moodle.admission.wizard" src_model="op.admission"
+                    view_mode="form" target="new" view_type="form"
+                    groups="openeducat_core.group_op_back_office_admin"/>
+</odoo>

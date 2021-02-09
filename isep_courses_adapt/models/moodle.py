@@ -362,3 +362,11 @@ class MoodleLib:
             'members[0][usertype][value]': userid
         }
         return self.connect(function, params)
+    
+    def get_categories(self):
+        function = "core_course_get_categories"
+        params = {
+            'criteria[0][key]' : '',
+            'criteria[0][value]': '',
+        }
+        return self.connect(function, params)
