@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields
 
+<<<<<<< HEAD
 class OpMoodleCategoryRel(models.Model):
     _name = 'op.moodle.category.rel'
     _description = "Moodle Relation Course"
     
+=======
+
+class OpMoodleCategoryRel(models.Model):
+    _name = 'op.moodle.category.rel'
+    _description = "Moodle Relation Course"
+
+>>>>>>> origin/feature/321-cohorts-moodle
     name = fields.Char(string="Name")
     code = fields.Char(string="Code")
     moodle_category = fields.Integer(string="Moodle category", required=True)
