@@ -174,6 +174,14 @@ class OpAdmission(models.Model):
                 'gr_no': gr_no,
                 'n_id': gr_no,
             }
+        else:
+            user_password = moodle.update_user_password(
+                user_id=user.get('id'),
+                password=password)
+            student_values = {
+                'moodle_user': user.get('username'),
+                'moodle_pass': password
+            }
 
         if not student.moodle_id:
             student_values.update({
@@ -194,15 +202,17 @@ class OpAdmission(models.Model):
         member_result = moodle.add_group_members(moodle_group.get('id'),
                                                  user.get('id'))
         logger.info(member_result)
-        for course in student_course:
-            modality.append(course.course_id.modality_id.code)
-        if 'ATH' or 'PRS' in modality:
+        # for course in student_course:
+        #     modality.append(course.course_id.modality_id.code)
+        if 'ATH' or 'PRS' in self.batch_id.code:
+            print("group: ", self.batch_id.code)
             moodle_cohort = moodle.get_cohort(self.batch_id.code)
             if moodle_cohort is None:
-                moodle_cohort = moodle.core_cohort_create_cohorts(self.batch_id.code)
-            cohort_member = moodle.core_cohort_add_cohorts_members(moodle_cohort.get('id'), user.get('id'))
+                moodle_cohort = moodle.core_cohort_create_cohorts(
+                    self.batch_id.code)
+            cohort_member = moodle.core_cohort_add_cohorts_members(
+                moodle_cohort.get('id'), user.get('id'))
             logger.info(cohort_member)
-            
 
     @staticmethod
     def password_generator(length=8):

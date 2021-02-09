@@ -6,12 +6,12 @@ from odoo import _
 from requests import post
 import logging
 
-logger = logging.getLogger(name)
+logger = logging.getLogger(__name__)
 production = True
 
 
 class MoodleLib:
-    def init(self):
+    def __init__(self):
         """
         Creates the connection with Moodle
         """
@@ -133,7 +133,6 @@ class MoodleLib:
             user = users[0]
         return user
 
-
     def get_course(self, name: str) -> dict:
         """
         core_course_search_courses
@@ -217,6 +216,19 @@ class MoodleLib:
         }
         return self.connect(function, params)
 
+    def update_user_password(self, user_id: int, password: str) -> dict:
+        """
+        Function: core_user_update_users
+
+        params = {'users[0][id]': user_id   ,'users[0][password]': password}
+        :param user_id: int
+        :param password: str
+        :return: dict
+        """
+        function = "core_user_update_users"
+        params = {'users[0][id]': user_id, 'users[0][password]': password}
+        return self.connect(function, params)
+
     def delete_users(self, user_id: int) -> dict:
         """
         Function: core_user_delete_users
@@ -280,12 +292,13 @@ class MoodleLib:
         }
 
         :param group_id: int
+        :param group_member_id: int
         :param user_id: int
         :return: dict
         """
         function = "core_group_update_group_members"
         params = {
-            'members[0][id]' : group_member_id,
+            'members[0][id]': group_member_id,
             'members[0][groupid]': group_id,
             'members[0][userid]': user_id
         }
