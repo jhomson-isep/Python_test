@@ -328,7 +328,7 @@ class OpAdmission(models.Model):
             category = self.env['op.moodle.category.rel'].search(
                 [('code', '=', 'ATH'),
                  ('course_id', '=', self.batch_id.course_id.id)], limit=1)
-        elif "ELR" in code_batch:
+        elif "ELR" in code_batch or "ENR" in code_batch:
             category = self.env['op.moodle.category.rel'].search(
                 [('code', '=', 'ELR'),
                  ('course_id', '=', self.batch_id.course_id.id)], limit=1)
@@ -370,7 +370,7 @@ class OpAdmission(models.Model):
         wizard = self.env['op.moodle.admission.wizard'].create(values)
 
         for i, mdl_course in enumerate(moodle_courses):
-            if 'ELR' in self.batch_id.code and i == 0:
+            if ('ELR' in self.batch_id.code or 'ENR' in self.batch_id.code) and i == 0:
                 line = {
                     'moodle_course_id': 2905,
                     'course_name': 'Portal del alumno - ELR',
