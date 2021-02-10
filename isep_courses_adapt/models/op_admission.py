@@ -323,6 +323,7 @@ class OpAdmission(models.Model):
 
     def _get_category(self):
         code_batch = self.batch_id.code
+        logger.info("course id: {}".format(self.batch_id.course_id.id))
         if "ATH" in code_batch:
             category = self.env['op.moodle.category.rel'].search(
                 [('code', '=', 'ATH'),
@@ -340,6 +341,9 @@ class OpAdmission(models.Model):
                 [('code', '=', code_batch),
                  ('course_id', '=', self.batch_id.course_id.id)], limit=1)
         print(category.code, category.id)
+        logger.info(category)
+        logger.info("Category code: {}".format(category.code))
+        logger.info("Category id {}".format(category.id))
         return category
 
     @staticmethod
@@ -350,6 +354,8 @@ class OpAdmission(models.Model):
     def enroll_wizard(self):
         category = self._get_category()
         print(category.id, category.code)
+        logger.info("Category code: {}".format(category.code))
+        logger.info("Category id: {}".format(category.id))
         moodle = MoodleLib()
         response = moodle.get_course_by_field(
             field="category", value=category.moodle_category)
@@ -372,14 +378,13 @@ class OpAdmission(models.Model):
                     'selected': True
                 }
                 self.env['op.moodle.courses.wizard'].create(line)
-            if mdl_course.get('visible') == 1:
-                line = {
-                    'moodle_course_id': mdl_course.get('id'),
-                    'course_name': mdl_course.get('fullname'),
-                    'moodle_admission_wizard': wizard.id,
-                    'selected': i == 0
-                }
-                self.env['op.moodle.courses.wizard'].create(line)
+            line = {
+                'moodle_course_id': mdl_course.get('id'),
+                'course_name': mdl_course.get('fullname'),
+                'moodle_admission_wizard': wizard.id,
+                'selected': i == 0
+            }
+            self.env['op.moodle.courses.wizard'].create(line)
 
         return {
             'name': _('Matricular alumno en Moodle'),
