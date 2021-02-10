@@ -5,7 +5,7 @@
         <field name='name'>op.moodle.admission.wizard.form</field>
         <field name='model'>op.moodle.admission.wizard</field>
         <field name='arch' type='xml'>
-            <form string='Op Moodle Admission Wizard'>
+            <form string='Matricular'>
                 <sheet>
                     <separator string="Registro de alumno: "/>
                     <div class="container mt16 mb16">
