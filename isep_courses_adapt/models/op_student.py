@@ -378,7 +378,7 @@ class OpStudent(models.Model):
                         if days in (5, 12, 20, 40, 70, 80, 100):
                             #Estamos tomando el ultimo template porque estan duplicados
                             template = self.env['mail.template'].search(
-                                [('name', '=', tname[days])])[-1]
+                                [('name', '=', tname[days])])
                             if template:
                                 template.send_mail(student.id, force_send=True,
                                                    raise_exception=True)
