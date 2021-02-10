@@ -33,7 +33,7 @@
                     <button name="create_moodle_user" states="done" string="Send Moodle" type="object" groups="base.group_system"/>
                 </xpath>
                 <xpath expr="//button[@name='enroll_student']" position="replace">
-                    <button name="enroll_wizard" states="admission,done" string="Matricular" type="object"
+                    <button name="enroll_wizard" states="admission" string="Matricular" type="object"
                                 class="oe_highlight"/>
                 </xpath>
             </field>
