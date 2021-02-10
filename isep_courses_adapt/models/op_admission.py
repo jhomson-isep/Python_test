@@ -217,12 +217,13 @@ class OpAdmission(models.Model):
             cohort_member = moodle.core_cohort_add_cohorts_members(
                 moodle_cohort.get('id'), user.get('id'))
             logger.info(cohort_member)
-            mail_welcome_template = self.env.ref(
-                'isep_courses_adapt.student_welcome_template')
-            mail_welcome_template.send_mail(self.id, force_send=True)
-            mail_access_template = self.env.ref(
-                'isep_courses_adapt.student_op_access_mail')
-            mail_access_template.send_mail(student.id, force_send=True)
+
+        mail_welcome_template = self.env.ref(
+            'isep_courses_adapt.student_welcome_template')
+        mail_welcome_template.send_mail(self.id, force_send=True)
+        mail_access_template = self.env.ref(
+            'isep_courses_adapt.student_op_access_mail')
+        mail_access_template.send_mail(student.id, force_send=True)
 
     @staticmethod
     def password_generator(length=8):
