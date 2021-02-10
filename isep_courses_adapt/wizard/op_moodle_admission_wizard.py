@@ -7,21 +7,47 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+class OpMoodleCoursesWizard(models.TransientModel):
+    _name = "op.moodle.courses.wizard"
+    _description = "Moodle Courses Wizard"
+
+    moodle_admission_wizard = fields.Many2one('op.moodle.admission.wizard')
+    moodle_course_id = fields.Integer(string="Course id")
+    course_name = fields.Char(string="Course name")
+    selected = fields.Boolean(string="Select", default=False)
+
+    @api.onchange('selected')
+    def _onchange_selected(self):
+        self.update({'selected': self.selected})
+
+    def get_moodle_course_ids(self, admission_wizard_id):
+        moodle_courses = self.search(
+            [('moodle_admission_wizard', '=', admission_wizard_id),
+             ('selected', '=', True)])
+        return [moodle_course.moodle_course_id for moodle_course in moodle_courses]
+
+
 class OpMoodleAdmissionWizard(models.TransientModel):
     _name = "op.moodle.admission.wizard"
     _description = "Moodle Admission Wizard"
-    
+
+    admission_id = fields.Many2one('op.admission', string="Admission")
+    category_id = fields.Many2one('op.moodle.category.rel',
+                                  string="Select a Category")
+    moodle_course_line_ids = fields.One2many(
+        'op.moodle.courses.wizard', 'moodle_admission_wizard',
+        string='Course lines')
+
     def _get_admission(self):
         admission_id = self.env.context.get('active_ids', []) or []
-        admission = self.env['op.admission'].search([('id', '=', admission_id)])
-        return admission
-    
-    category_id = fields.Many2many('op.moodle.category.rel',
-                                  string="Select a Category")
+        return self.env['op.admission'].search([('id', 'in', admission_id)])
 
     @api.multi
     def enroll_student(self):
-        if self.category_id is None:
-            raise  ValidationError(_('Debe de seleccionar un categoria!!!'))
-        admission = self._get_admission()
-        admission.enroll_student(self.category_id)
+        moodle_course_ids = self.env[
+            'op.moodle.courses.wizard'].get_moodle_course_ids(self.id)
+        if len(moodle_course_ids) == 0:
+            raise ValidationError(_('Debe de seleccionar al menos un '
+                                    'módulo para matricular!!!'))
+        logger.info(moodle_course_ids)
+        self.admission_id.enroll_student(moodle_course_ids)

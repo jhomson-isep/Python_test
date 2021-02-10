@@ -9,29 +9,29 @@ FNATH-344,ATH,FN,Máster en Neuropsicología Forense,ATH,344
 ENATH-346,ATH,EN,Máster de Evaluación Neuropsicológica / Máster en Rehabilitación Cognitiva / Máster en Neuropsicología,ATH,346
 CTATH-347,ATH,CT,Máster en Terapias de Tercera Generación y Aplicación de las Nuevas Tecnologías en el Tratamiento Psicológico,ATH,347
 BEATH-352,ATH,BE,Master Psicología del Bienestar Emocional,ATH,352
-APPRS-45,APPRSCAT,AP,Máster Intervención en Dificultades del Aprendizaje,PRS,45
+APPRS-45,APCATPRS,AP,Máster Intervención en Dificultades del Aprendizaje,PRS,45
 MNPRS-55,APCATPRS,MN,Máster Neuropsicología,PRS,55
-MIPRS-54,MIPRSCAT,MI,Máster Psicología Clínica Infantojuvenil,PRS,54
-PCPRS-57,PCPRSCAT,PC,Máster Psicología Clínica y de la Salud,PRS,57
-MLPRS-58,MLPRSCAT,ML,Máster Psicología Forense,PRS,58
-MSPRS-56,MSPRSCAT,MS,Máster Sexología clínica y terapia de parejas,PRS,56
-MAPRS-47,MAPRSCAT,MA,Máster en Atención Temprana,PRS,47
-ARPRS-110,ARPRSCAT,AR,Máster en Terapias Artísticas y Creativas,PRS,110
-TBPRS-124,TBPRSCAT,TB,Máster en Trastornos Autistas,PRS,124
-LCPRS-125,LCPRSCAT,LC,Máster en Logopedia clínica en Daño Neurológico,PRS,125
-AAPRS-139,AAPRSCAT,AA,Máster en Terapia Asistida con animales,PRS,139
-BEPRS-140,BEPRSCAT,BE,Máster en Psicoterapia del Bienestar emocional,PRS,140
-CCPRS-156,CCPRSCAT,CC,Máster en Psicoterapia Cognitivo Conductual,PRS,156
-NEPRS-170,NEPRSCAT,NE,Máster en Neuroeducación y Optimización de Capacidades,PRS,170
-CTPRS-178,CTPRSCAT,CT,Máster en Terapias de Tercera Generación y Aplicación de las Nuevas Tecnologías,PRS,178
-DEPRS-187,DEPRSCAT,DE,Máster en Envejecimiento y Demencias,PRS,187
-CDPRS-189,CDPRSCAT,CD,Máster en Coaching,PRS,189
-AIPRS-202,AIPRSCAT,AI,Curso de Avances en Psicoterapia Infantojuvenil,PRS,202
-NRPRS-239,NRPRSCAT,NR,Máster en Neurorehabilitación,PRS,239
-ILPRS-241,ILPRSCAT,IL,ISEP Lidera,PRS,241
-TTPRS-242,TTPRSCAT,TT,Máster en Teatroterapia,PRS,242
-AEPRS-243,AEPRSCAT,AE,Máster en Arteterapia,PRS,243
-MMPRS-248,MMPRSCAT,MM,Máster en Musicoterapia,PRS,248
+MIPRS-54,MICATPRS,MI,Máster Psicología Clínica Infantojuvenil,PRS,54
+PCPRS-57,PCCATPRS,PC,Máster Psicología Clínica y de la Salud,PRS,57
+MLPRS-58,MLCATPRS,ML,Máster Psicología Forense,PRS,58
+MSPRS-56,MSCATPRS,MS,Máster Sexología clínica y terapia de parejas,PRS,56
+MAPRS-47,MACATPRS,MA,Máster en Atención Temprana,PRS,47
+ARPRS-110,ARCATPRS,AR,Máster en Terapias Artísticas y Creativas,PRS,110
+TBPRS-124,TBCATPRS,TB,Máster en Trastornos Autistas,PRS,124
+LCPRS-125,LCCATPRS,LC,Máster en Logopedia clínica en Daño Neurológico,PRS,125
+AAPRS-139,AACATPRS,AA,Máster en Terapia Asistida con animales,PRS,139
+BEPRS-140,BECATPRS,BE,Máster en Psicoterapia del Bienestar emocional,PRS,140
+CCPRS-156,CCCATPRS,CC,Máster en Psicoterapia Cognitivo Conductual,PRS,156
+NEPRS-170,NECATPRS,NE,Máster en Neuroeducación y Optimización de Capacidades,PRS,170
+CTPRS-178,CTCATPRS,CT,Máster en Terapias de Tercera Generación y Aplicación de las Nuevas Tecnologías,PRS,178
+DEPRS-187,DECATPRS,DE,Máster en Envejecimiento y Demencias,PRS,187
+CDPRS-189,CDCATPRS,CD,Máster en Coaching,PRS,189
+AIPRS-202,AICATPRS,AI,Curso de Avances en Psicoterapia Infantojuvenil,PRS,202
+NRPRS-239,NRCATPRS,NR,Máster en Neurorehabilitación,PRS,239
+ILPRS-241,ILCATPRS,IL,ISEP Lidera,PRS,241
+TTPRS-242,TTCATPRS,TT,Máster en Teatroterapia,PRS,242
+AEPRS-243,AECATPRS,AE,Máster en Arteterapia,PRS,243
+MMPRS-248,MMCATPRS,MM,Máster en Musicoterapia,PRS,248
 PCPRS-93,PCMDRPRS,PC,Máster en Psicología Clínica y de la Salud,PRS,93
 MIPRS-94,MIMDRPRS,MI,Máster en Psicología Clínica Infantojuvenil,PRS,94
 MLPRS-95,MLMDRPRS,ML,Máster en Psicología Forense,PRS,95

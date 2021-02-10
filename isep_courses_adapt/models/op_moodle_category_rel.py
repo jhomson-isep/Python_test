@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields
 
+
 class OpMoodleCategoryRel(models.Model):
     _name = 'op.moodle.category.rel'
     _description = "Moodle Relation Course"
-
 
     name = fields.Char(string="Name")
     code = fields.Char(string="Code")

@@ -7,7 +7,7 @@ from requests import post
 import logging
 
 logger = logging.getLogger(__name__)
-production = True
+production = False
 
 
 class MoodleLib:
@@ -148,12 +148,12 @@ class MoodleLib:
             course = courses["courses"][0]
         return course
 
-    def get_course_by_field(self, field: str, value: str) -> dict:
+    def get_course_by_field(self, field: str, value) -> dict:
         """
         core_course_get_courses_by_field
 
         :param field: str
-        :param value: str
+        :param value: int,str
         :return: dict
         """
         function = "core_course_get_courses_by_field"

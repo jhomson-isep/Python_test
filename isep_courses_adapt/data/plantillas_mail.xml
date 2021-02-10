@@ -227,7 +227,7 @@ Secretar&iacute;a Academica</p>
 ${for admission in object.admission_ids}
 <ul style="text-align: justify;">
     <p><strong>Admisión:</strong> ${admission.application_number} </p>
-    <p><strong>Curso:</strong> ${admission.course_id.name} </p> 
+    <p><strong>Curso:</strong> ${admission.course_id.name} </p>
     <p><strong>Grupo:</strong> ${admission.batch_id.code} </p>
     <p><strong>Fecha de Vencimiento:</strong> ${admission.due_date} </p>
 </ul>
@@ -242,7 +242,51 @@ ${endfor}
             ]]></field>
         </record>
 
+        <!--Plantilla de bienvenida -->
+        <record id="student_welcome_template" model="mail.template">
+            <field name="name">Student welcome template</field>
+            <field name="email_from">secretaria@isep.com</field>
+            <field name="subject">Mensaje de bienvenida: ${object.first_name}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="model_id" ref="model_op_admission"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html"><![CDATA[
 
+                <div style="background-color: rgb(255, 255, 255);">
+                    <p style="color: rgb(0, 0, 0); font-family: &quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial; margin: 0px 0px 1rem;">Hola ${object.first_name}</p>
+                    <p style="color: rgb(0, 0, 0); font-family: &quot;Lucida Grande&quot;, Helvetica, Verdana, Arial, sans-serif; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial; margin: 0px 0px 1rem;">En nombre de todo el equipo de ISEP, Instituto Superior de Estudios Psicológicos, te damos la bienvenida agradeciéndote la confianza depositada en la institución para capacitarte y desarrollarte profesionalmente.</p><p style="orphans: 2; text-align: start; text-indent: 0px; widows: 2; text-decoration-style: initial; text-decoration-color: initial; margin: 0px 0px 1rem;">Te confirmamos que has sido matriculado(a) en el curso ${object.batch_id.course_id} y que se te ha asignado el siguiente nº de alumno&nbsp;<span style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial; text-align: inherit;">${object.student_id.n_id}</span><span style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;">, vinculado a tu expediente académico.</span><br></p><p style="orphans: 2; text-align: start; text-indent: 0px; widows: 2; text-decoration-style: initial; text-decoration-color: initial; margin: 0px 0px 1rem;">En breve recibirás los datos de acceso al Campus Virtual ISEP.</p><p style="orphans: 2; text-align: start; text-indent: 0px; widows: 2; text-decoration-style: initial; text-decoration-color: initial; margin: 0px 0px 1rem;">Te agradecemos la confianza depositada en ISEP para capacitarte y desarrollarte profesionalmente</p><p style="orphans: 2; text-align: start; text-indent: 0px; widows: 2; text-decoration-style: initial; text-decoration-color: initial; margin: 0px 0px 1rem;">Recibe un cordial saludo.</p>
+                    <style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+</style>
+
+                </div>
+
+                ]]></field>
+        </record>
+
+        <!-- Email de accesos -->
+        <record id="student_op_access_mail" model="mail.template">
+            <field name="name">OP - Mail de accesos Campus</field>
+            <field name="email_from">secretaria@isep.com</field>
+            <field name="subject">Accesos a Campus Isep</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="model_id" ref="model_op_student"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html"><![CDATA[
+                <p>Hola&nbsp;<b>${object.first_name}</b></p><p>A continuación te proporcionamos tus datos de acceso a
+                    nuestro Campus virtual:</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<b>Usuario</b>:&nbsp;${object.moodle_user or
+                    ''}</p><p>&nbsp;&nbsp;&nbsp;&nbsp;<b>Contraseña</b>:&nbsp;${object.moodle_pass or
+                    ''}</p><p><br></p><p>Recuerda que puedes cambiar tu contraseña en el momento que lo desees,&nbsp;no
+                    olvides visitarnos en&nbsp;https://campus.isep.es/</p>
+                ]]></field>
+        </record>
 
     </data>
 </odoo>

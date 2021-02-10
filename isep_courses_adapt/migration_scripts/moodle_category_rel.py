@@ -30,7 +30,9 @@ def set_moodle_categories():
                 moodle_category_rel = session_pg.query(
                     OpMoodleCategoryRel).filter(and_(
                     OpMoodleCategoryRel.code == category.get('code'),
-                    OpMoodleCategoryRel.course_id == course.id)).first()
+                    OpMoodleCategoryRel.course_id == course.id,
+                    OpMoodleCategoryRel.moodle_category == category.get(
+                        'category'))).first()
                 if moodle_category_rel is None:
 
                     moodle_category_rel = OpMoodleCategoryRel()
