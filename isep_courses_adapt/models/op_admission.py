@@ -48,7 +48,7 @@ class OpAdmission(models.Model):
         states={'done': [('readonly', True)], 'submit': [('required', True)]})
 
     @api.multi
-    def enroll_student(self):
+    def enroll_student(self, courses):
         for record in self:
             if record.register_id.max_count:
                 total_admission = self.env['op.admission'].search_count(
@@ -119,7 +119,7 @@ class OpAdmission(models.Model):
                 'state': 'draft',
             })
             reg_id.get_subjects()
-            record.create_moodle_user()
+            record.create_moodle_user(courses)
 
     @api.multi
     def submit_form(self):
@@ -127,7 +127,7 @@ class OpAdmission(models.Model):
             admission.state = 'admission'
 
     @api.one
-    def create_moodle_user(self):
+    def create_moodle_user(self, courses):
         moodle = MoodleLib()
         student = self.env['op.student'].search(
             [('id', '=', self.student_id.id)], limit=1)
@@ -135,16 +135,24 @@ class OpAdmission(models.Model):
             [('student_id', '=', student.id),
              ('batch_id', '=', self.batch_id.id)])
         logger.info("Student id: {}".format(student.id))
-        moodle_course = moodle.get_course(self.batch_id.moodle_code)
+        moodle_courses = []
+        for course in courses:
+            moodle_course = moodle.get_course_by_field(field='category',
+                                                       value=course.moodle_category)['courses']
+            moodle_courses.append(moodle_course)
+            logger.info("moodle_course: {}".format(moodle_course))
         modality = list()
         moodle_cohort = None
-        logger.info("moodle_course: {}".format(moodle_course))
-        moodle_group = moodle.get_group(moodle_course.get('id'),
-                                        self.batch_id.code)
-        if moodle_group is None:
-            moodle_group = moodle.core_group_create_groups(
-                self.batch_id.code, moodle_course.get('id'))
-        logger.info("moodle_group: {}".format(moodle_group))
+        moodle_groups =  []
+        for md_courses in moodle_courses:
+            for moodle_course in md_courses:
+                moodle_group = moodle.get_group(moodle_course.get('id'),
+                                                self.batch_id.code)
+                if moodle_group is None:
+                    moodle_group = moodle.core_group_create_groups(
+                        self.batch_id.code, moodle_course.get('id'))
+                logger.info("moodle_group: {}".format(moodle_group))
+                moodle_groups.append(moodle_group)
         password = self.password_generator(length=10)
         user = moodle.get_user_by_field(field="email",
                                         value=self.partner_id.email.lower())
@@ -196,12 +204,15 @@ class OpAdmission(models.Model):
         student.write(student_values)
         student_course.write({'roll_number': gr_no})
         logger.info("user: {}".format(user))
-        enrol_result = moodle.enrol_user(moodle_course.get('id'),
-                                         user.get('id'))
-        logger.info(enrol_result)
-        member_result = moodle.add_group_members(moodle_group.get('id'),
-                                                 user.get('id'))
-        logger.info(member_result)
+        for md_courses in moodle_courses:
+            for moodle_course in md_courses:
+                enrol_result = moodle.enrol_user(moodle_course.get('id'),
+                                                    user.get('id'))
+                logger.info(enrol_result)
+        for moodle_group in moodle_groups:
+            member_result = moodle.add_group_members(moodle_group.get('id'),
+                                                    user.get('id'))
+            logger.info(member_result)
         # for course in student_course:
         #     modality.append(course.course_id.modality_id.code)
         if 'ATH' or 'PRS' in self.batch_id.code:
