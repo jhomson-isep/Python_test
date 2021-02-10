@@ -67,23 +67,23 @@ MNPRS-81,MNVALPRS,MN,Máster en Neuropsicología Clínica,PRS,81
 NEPRS-199,NEVALPRS,NE,Máster en Neuroeducación y optimización de capacidades,PRS,199
 NRPRS-222,NRVALPRS,NR,Máster en Neurorehabilitación,PRS,222
 NDPRS-240,NDVALPRS,ND,Máster en Trastornos del Neurodesarrollo,PRS,240
-PCONL-113,PCONLELR,PC,Máster en Psicología Clínica y de la Salud,ONL,113
-MIONL-120,MIONLELR,MI,Máster en Psicología Clínica Infantojuvenil,ONL,120
-MLONL-335,MLONLELR,ML,Máster en Psicología Forense,ONL,335
-MLONL-154,MLONLELR,ML,Máster en Psicología Forense.,ONL,154
-CCONL-155,CCONLELR,CC,Máster en Psicoterapia Cognitivo Conductual,ONL,155
-PIONL-203,PIONLELR,PI,Posgrado en Psicología Clínica Infantojuvenil,ONL,203
-PFONL-182,PFONLELR,PF,Máster en Psicoterapia Infantojuvenil,ONL,182
-POONL-235,POONLELR,PO,Especialidad en Psicooncología,ONL,235
-SEONL-237,SEONLELR,SE,Especialidad en Terapia Sexual y de Pareja,ONL,237
-IAONL-254,IAONLELR,IA,Técnico en Intervención Asistida con Animales,ONL,254
-MSONL-230,MSONLELR,MS,Máster en Sexología Clínica y Terapia de Parejas,ONL,230
-CPONL-277,CPONLELR,CP,Máster en Psicooncología y Cuidados Paliativos,ONL,277
-ATONL-42,ATONLELR,AT,Posgrado en Atención Temprana,ONL,42
-AUONL-41,AUONLELR,AU,Posgrado en Trastornos Autistas,ONL,41
-PAONL-177,PAONLELR,PA,Intervención educativa,ONL,177
-LEONL-236,LEONLELR,LE,Especialidad en Trastornos del Lenguaje Escrito,ONL,236
-EDONL-300,EDONLELR,ED,Máster en Educación,ONL,300
-LPONL-2,LPONLELR,LP,Máster en Patologías y lenguaje del habla,ONL,2
-NPONL-234,NPONLELR,NP,Especialidad en Neuropsicología,ONL,234
-THONL-256,THONLELR,TH,Máster en Neuromanagement y Gestión del Talento,ONL,256
+PCONL-113,ELR,PC,Máster en Psicología Clínica y de la Salud,ONL,113
+MIONL-120,ELR,MI,Máster en Psicología Clínica Infantojuvenil,ONL,120
+MLONL-335,ELR,ML,Máster en Psicología Forense,ONL,335
+MLONL-154,ELR,ML,Máster en Psicología Forense.,ONL,154
+CCONL-155,ELR,CC,Máster en Psicoterapia Cognitivo Conductual,ONL,155
+PIONL-203,ELR,PI,Posgrado en Psicología Clínica Infantojuvenil,ONL,203
+PFONL-182,ELR,PF,Máster en Psicoterapia Infantojuvenil,ONL,182
+POONL-235,ELR,PO,Especialidad en Psicooncología,ONL,235
+SEONL-237,ELR,SE,Especialidad en Terapia Sexual y de Pareja,ONL,237
+IAONL-254,ELR,IA,Técnico en Intervención Asistida con Animales,ONL,254
+MSONL-230,ELR,MS,Máster en Sexología Clínica y Terapia de Parejas,ONL,230
+CPONL-277,ELR,CP,Máster en Psicooncología y Cuidados Paliativos,ONL,277
+ATONL-42,ELR,AT,Posgrado en Atención Temprana,ONL,42
+AUONL-41,ELR,AU,Posgrado en Trastornos Autistas,ONL,41
+PAONL-177,ELR,PA,Intervención educativa,ONL,177
+LEONL-236,ELR,LE,Especialidad en Trastornos del Lenguaje Escrito,ONL,236
+EDONL-300,ELR,ED,Máster en Educación,ONL,300
+LPONL-2,ELR,LP,Máster en Patologías y lenguaje del habla,ONL,2
+NPONL-234,ELR,NP,Especialidad en Neuropsicología,ONL,234
+THONL-256,ELR,TH,Máster en Neuromanagement y Gestión del Talento,ONL,256

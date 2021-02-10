@@ -327,11 +327,15 @@ class OpAdmission(models.Model):
             category = self.env['op.moodle.category.rel'].search(
                 [('code', '=', 'ATH'),
                  ('course_id', '=', self.batch_id.course_id.id)], limit=1)
+        elif "ELR" in code_batch:
+            category = self.env['op.moodle.category.rel'].search(
+                [('code', '=', 'ELR'),
+                 ('course_id', '=', self.batch_id.course_id.id)], limit=1)
         else:
-            print(code_batch)
+            logger.info(code_batch)
             code_batch = code_batch[2:10]
-            print(code_batch)
-            print(self.batch_id.course_id.id)
+            logger.info(code_batch)
+            logger.info(self.batch_id.course_id.id)
             category = self.env['op.moodle.category.rel'].search(
                 [('code', '=', code_batch),
                  ('course_id', '=', self.batch_id.course_id.id)], limit=1)
