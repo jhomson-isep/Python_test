@@ -193,7 +193,9 @@ class OpAdmission(models.Model):
         student_values.update({
             'nationality': self.partner_id.country_id.id or None,
             'place_birth': self.partner_id.city or None,
-            'document_number': self.partner_id.vat or None
+            'document_number': self.partner_id.vat or None,
+            'gr_no': gr_no,
+            'n_id': gr_no,
         })
         student.write(student_values)
         student_course.write({'roll_number': gr_no})
@@ -204,7 +206,11 @@ class OpAdmission(models.Model):
             logger.info(enrol_result)
         for moodle_group in moodle_groups:
             logger.info(moodle_group)
-            member_result = moodle.add_group_members(moodle_group.get('id'),
+            if type(moodle_group) == dict:
+                member_result = moodle.add_group_members(moodle_group.get('id'),
+                                                     user.get('id'))
+            else:
+                member_result = moodle.add_group_members(moodle_group[0].get('id'),
                                                      user.get('id'))
             logger.info(member_result)
 
