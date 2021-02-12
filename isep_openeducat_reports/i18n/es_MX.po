@@ -1,0 +1,852 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* isep_openeducat_reports
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-10 13:12+0000\n"
+"PO-Revision-Date: 2021-02-10 13:12+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+msgid ", con una carga lectiva de"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+msgid ", con una carga lectiva de con una carga lectiva de"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+msgid ", consta matriculada en el"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+msgid ", de la convocatoria\n"
+"                                    correspondiente al curso académico"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+msgid ", en el"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+msgid ", en la modalidad"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+msgid ", está realizando y superando el"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+msgid ". Además de\n"
+"                                    las clases presenciales, la alumna deberá realizar en horario diurno de Lunes a Viernes ,\n"
+"                                    las prácticas formativas, necesarias e implícitas en el programa y en uno de los centros\n"
+"                                    concertados por ISEP que se destine a la alumna, dicha práctica tiene carácter evaluativo . Además, alcanzado la mitad del itinerario formativo, la alumna deberá iniciar la elaboración\n"
+"                                    del Trabajo Final, tutorizado y dirigido en horario intersemanal y por tanto, no compatible\n"
+"                                    con el horario presencial definido en el calendario adjunto."
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.student_attendance_report_inherit
+msgid "<b>From Date:</b>"
+msgstr "<B> Desde Fecha: </ b>"
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.student_attendance_report_inherit
+msgid "<b>Student Name:</b>"
+msgstr "<B> Nombre del estudiante: </ b>"
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.student_attendance_report_inherit
+msgid "<b>To Date:</b>"
+msgstr "<B> Para Fecha: </ b>"
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.student_attendance_report_inherit
+msgid "<b>Total Absence</b>"
+msgstr "<B> Ausencia Total </ b>"
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+msgid "<br/>\n"
+"                                        Barcelona<br/>\n"
+"                                        Barcelona<br/>\n"
+"                                        España"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "<span>de Abril de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "<span>de Agost de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "<span>de Agosto de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "<span>de Desembre de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "<span>de Diciembre de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "<span>de Enero de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "<span>de Febrer de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "<span>de Febrero de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "<span>de Gener de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "<span>de Julio de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "<span>de Juliol de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "<span>de Junio de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "<span>de Juny de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "<span>de Maig de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "<span>de Marzo de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "<span>de Març de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "<span>de Mayo de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "<span>de Novembre de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "<span>de Noviembre de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "<span>de Octubre de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "<span>de Septiembre de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "<span>de Setembre de </span>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students_image
+msgid "<strong style=\"color:#fc6c04;\">Información del grupo</strong>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students_image
+msgid "<strong>Código:</strong>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students_image
+msgid "<strong>Fecha de inicio:</strong>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students_image
+msgid "<strong>Fecha finalización:</strong>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students_image
+msgid "<strong>Grupo:</strong>"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.student_attendance_report_inherit
+msgid "<strong>Student Attendance Detail</strong>"
+msgstr "La asistencia <strong> Detalle del estudiante </ strong>"
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+msgid "Apreciada Tatiana :"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+msgid "Aprovechamos la ocasión para enviarle un saludo y felicitarle por la decisión de formarse\n"
+"                                    con el ISEP."
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+msgid "Asignatura"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "Barcelona, a"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+msgid "CERTIFICA:"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+msgid "Calificación"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.crm_lead_report_form
+msgid "Cancelar"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.actions.report,name:isep_openeducat_reports.report_acceptance_letter_students
+msgid "Carta de aceptación"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.actions.report,name:isep_openeducat_reports.report_certified_enrollment
+msgid "Certificado Matricula"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.actions.report,name:isep_openeducat_reports.report_certified_enrollment_nie
+msgid "Certificado Matricula NIE"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.actions.report,name:isep_openeducat_reports.report_grades_card
+msgid "Certificado de Notas"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.actions.report,name:isep_openeducat_reports.report_certified_program
+msgid "Certificado de Programa"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "Coordinador"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_batch_students__create_uid
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_crm_lead_report__create_uid
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_uvic_student__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: isep_openeducat_reports
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_batch_students__create_date
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_crm_lead_report__create_date
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_uvic_student__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+msgid "Créditos"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.student_attendance_report_inherit
+msgid "Date"
+msgstr "Fecha"
+
+#. module: isep_openeducat_reports
+#: model:ir.actions.report,name:isep_openeducat_reports.report_certified_diploma_students
+msgid "Diploma Certificado"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.actions.report,name:isep_openeducat_reports.report_diploma_students
+msgid "Diploma del Estudiante"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.actions.report,name:isep_openeducat_reports.report_seminar_diploma_students
+msgid "Diploma del Seminario"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "Direcció Académica<br/>\n"
+"                                    Dirección Académica"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "Director"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "Directora"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_batch_students__display_name
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_crm_lead_report__display_name
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_report_isep_openeducat_reports_report_crm_leads__display_name
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_report_isep_openeducat_reports_report_uvic_students__display_name
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_uvic_student__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: isep_openeducat_reports
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_uvic_student__uvic_documentation
+msgid "Documentación Uvic"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "ECTS"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+msgid "ECTS ("
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+msgid "ECTS, equivalentes a"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "ERIKA TOBALINA"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "El Claustro de profesores del Instituto Superior de Estudios Psicológicos ISEP, reunido en sesión extraordinaria,"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+msgid "El Departamento de Secretaría Académica, del Instituto Superior de Estudios Psicológicos, ISEP Barcelona,"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+msgid "El Departamento de Secretaría Académica<br/>ISEP Barcelona"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "El Instituto Superior de Estudios Psicológicos expide el diploma de"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+msgid "El curso se impartirá en nuestras instalaciones de Barcelona. La fecha de inicio del\n"
+"                                    periodo formativo es del"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+msgid "El máster consta de"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+msgid "El precio total del Máster es de <span/> Euros."
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students_image
+msgid "Email"
+msgstr "Correo electrónico"
+
+#. module: isep_openeducat_reports
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_crm_lead_report__date_end
+msgid "End Date:"
+msgstr "Fecha Final"
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+msgid "Erika Tobalina<br/>Directora de ISEP Barcelona"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students_image
+msgid "Estudios"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students_image
+msgid "F.Finalización"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students_image
+msgid "F.Matricula"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students_image
+msgid "Foto"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.actions.report,name:isep_openeducat_reports.report_batch_students
+msgid "Grupo y Estudiantes"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.actions.report,name:isep_openeducat_reports.report_batch_students_image
+msgid "Grupo y Estudiantes con Imagenes"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.ui.menu,name:isep_openeducat_reports.menu_op_report_batch_students_sub
+msgid "Grupos y Estudiantes"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+msgid "Horas ), ha obtenido las calificaciones siguientes:"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+msgid "Horas)."
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_batch_students__id
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_crm_lead_report__id
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_report_isep_openeducat_reports_report_crm_leads__id
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_report_isep_openeducat_reports_report_uvic_students__id
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_uvic_student__id
+msgid "ID"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+msgid "ISEP SL, CIF: B-61254314. Inscrita en el Registro Mercantil de Barcelona con fecha 11/02/1997. Folio 33, Tomo 29572. Inscripción 1&amp;ordf;. Hoja B-155568"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.crm_lead_report_form
+msgid "Imprimir reporte"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_crm_lead_report__date_init
+msgid "Initial Date:"
+msgstr "Fecha inicial"
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "Julia Herrero Torres"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "L'Institut Superior d'Estudis Psicològics expedeix el diploma de"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "La persona interesada"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "La persona interessada<br/>\n"
+"                                    La persona interesada"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_batch_students____last_update
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_crm_lead_report____last_update
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_report_isep_openeducat_reports_report_crm_leads____last_update
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_report_isep_openeducat_reports_report_uvic_students____last_update
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_uvic_student____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: isep_openeducat_reports
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_batch_students__write_uid
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_crm_lead_report__write_uid
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_uvic_student__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: isep_openeducat_reports
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_batch_students__write_date
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_crm_lead_report__write_date
+#: model:ir.model.fields,field_description:isep_openeducat_reports.field_uvic_student__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+msgid "Le comunicamos que ha sido aceptada y consta matriculada para realizar el"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students_image
+msgid "Móvil"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students_image
+msgid "Nombre alumno"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+msgid "PROGRAMA DEL CURSO:"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+msgid "Para que así conste, firma el presente certificado en Barcelona, a"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+msgid "Que"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+msgid "Que la fecha de inicio del programa es del #Fecha inicio# al #Fecha Final#"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "RIMON GAJA/OSCAR ASOREY"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "Raimon Gaja Jaumeandreu"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.student_attendance_report_inherit
+msgid "Register"
+msgstr "Registro"
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.student_attendance_report_inherit
+msgid "Remark"
+msgstr "Observación"
+
+#. module: isep_openeducat_reports
+#: model:ir.ui.menu,name:isep_openeducat_reports.menu_op_students_sub
+msgid "Reporte Estudiantes UVIC"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.actions.act_window,name:isep_openeducat_reports.crm_lead_report_wizard
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.crm_lead_report_form
+msgid "Reporte de Iniciativas/Oportunidades"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.actions.report,name:isep_openeducat_reports.report_crm_leads
+msgid "Reporte de Oportunidades/Inciativas"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.ui.menu,name:isep_openeducat_reports.menu_report_crm_leads
+msgid "Reporte de Oportunidades/Iniciativas"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.actions.report,name:isep_openeducat_reports.report_uvic_students
+msgid "Reporte de UVIC"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.batch_students_image
+msgid "Teléfono"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.model,name:isep_openeducat_reports.model_batch_students
+msgid "batch.students"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "certifica que"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+msgid "con"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.model,name:isep_openeducat_reports.model_crm_lead_report
+msgid "crm.lead.report"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+msgid "durante el periodo académico"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "en consideració a l'aprofitament dels estudis seguits en el programa de #Máster o Posgrado# de"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.diploma_students
+msgid "en consideración al aprovechamiento de los estudios seguidos en el programa de #Máster o Posgrado# de"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.seminar_diploma_students
+msgid "ha realizado con total aprovechamiento los estudios teórico-prácticos, razón por la que se otorga\n"
+"                                    el presente documento acreditativo por haber realizado el #Monográfico# cuya duración ha sido de #0 horas# en"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+msgid "horas de dedicación al estudio, distribuidas\n"
+"                                    entre horas presenciales de clases, horas destinadas a otras actividades académicas\n"
+"                                    dirigidas y horas de trabajo personal que el alumno debe realizar para la asimilación de los\n"
+"                                    contenidos que permiten acreditar la maestría."
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_diploma_students
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_enrollment_nie
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.certified_program
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.grades_card
+msgid "impartido en la modalidad"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.model,name:isep_openeducat_reports.model_report_isep_openeducat_reports_report_crm_leads
+msgid "report.isep_openeducat_reports.report_crm_leads"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.model,name:isep_openeducat_reports.model_report_isep_openeducat_reports_report_uvic_students
+msgid "report.isep_openeducat_reports.report_uvic_students"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model:ir.model,name:isep_openeducat_reports.model_uvic_student
+msgid "uvic.student"
+msgstr ""
+
+#. module: isep_openeducat_reports
+#: model_terms:ir.ui.view,arch_db:isep_openeducat_reports.acceptance_letter_students
+msgid "y finaliza el"
+msgstr ""
+

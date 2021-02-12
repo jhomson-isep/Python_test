@@ -48,7 +48,7 @@ class OpAdmission(models.Model):
         states={'done': [('readonly', True)], 'submit': [('required', True)]})
 
     @api.multi
-    def enroll_student(self):
+    def enroll_student(self, courses):
         for record in self:
             if record.register_id.max_count:
                 total_admission = self.env['op.admission'].search_count(
@@ -119,7 +119,7 @@ class OpAdmission(models.Model):
                 'state': 'draft',
             })
             reg_id.get_subjects()
-            record.create_moodle_user()
+            record.create_moodle_user(courses)
 
     @api.multi
     def submit_form(self):
@@ -127,7 +127,7 @@ class OpAdmission(models.Model):
             admission.state = 'admission'
 
     @api.one
-    def create_moodle_user(self):
+    def create_moodle_user(self, moodle_courses):
         moodle = MoodleLib()
         student = self.env['op.student'].search(
             [('id', '=', self.student_id.id)], limit=1)
@@ -135,14 +135,17 @@ class OpAdmission(models.Model):
             [('student_id', '=', student.id),
              ('batch_id', '=', self.batch_id.id)])
         logger.info("Student id: {}".format(student.id))
-        moodle_course = moodle.get_course(self.batch_id.moodle_code)
-        logger.info("moodle_course: {}".format(moodle_course))
-        moodle_group = moodle.get_group(moodle_course.get('id'),
-                                        self.batch_id.code)
-        if moodle_group is None:
-            moodle_group = moodle.core_group_create_groups(
-                self.batch_id.code, moodle_course.get('id'))
-        logger.info("moodle_group: {}".format(moodle_group))
+        moodle_cohort = None
+        moodle_groups = []
+        for moodle_course_id in moodle_courses:
+            moodle_group = moodle.get_group(moodle_course_id,
+                                            self.batch_id.code)
+            if moodle_group is None:
+                moodle_group = moodle.core_group_create_groups(
+                    self.batch_id.code, moodle_course_id)
+            logger.info("moodle_group: {}".format(moodle_group))
+            moodle_groups.append(moodle_group)
+
         password = self.password_generator(length=10)
         user = moodle.get_user_by_field(field="email",
                                         value=self.partner_id.email.lower())
@@ -172,6 +175,15 @@ class OpAdmission(models.Model):
                 'gr_no': gr_no,
                 'n_id': gr_no,
             }
+        else:
+            user_password = moodle.update_user_password(
+                user_id=user.get('id'),
+                password=password)
+            logger.info(user_password)
+            student_values = {
+                'moodle_user': user.get('username'),
+                'moodle_pass': password
+            }
 
         if not student.moodle_id:
             student_values.update({
@@ -181,17 +193,43 @@ class OpAdmission(models.Model):
         student_values.update({
             'nationality': self.partner_id.country_id.id or None,
             'place_birth': self.partner_id.city or None,
-            'document_number': self.partner_id.vat or None
+            'document_number': self.partner_id.vat or None,
+            'gr_no': gr_no,
+            'n_id': gr_no,
         })
         student.write(student_values)
         student_course.write({'roll_number': gr_no})
         logger.info("user: {}".format(user))
-        enrol_result = moodle.enrol_user(moodle_course.get('id'),
-                                         user.get('id'))
-        logger.info(enrol_result)
-        member_result = moodle.add_group_members(moodle_group.get('id'),
-                                                 user.get('id'))
-        logger.info(member_result)
+        for moodle_course_id in moodle_courses:
+            enrol_result = moodle.enrol_user(moodle_course_id,
+                                             user.get('id'))
+            logger.info(enrol_result)
+        for moodle_group in moodle_groups:
+            logger.info(moodle_group)
+            if type(moodle_group) == dict:
+                member_result = moodle.add_group_members(moodle_group.get('id'),
+                                                     user.get('id'))
+            else:
+                member_result = moodle.add_group_members(moodle_group[0].get('id'),
+                                                     user.get('id'))
+            logger.info(member_result)
+
+        if 'ATH' in self.batch_id.code or 'PRS' in self.batch_id.code:
+            logger.info("group: ", self.batch_id.code)
+            moodle_cohort = moodle.get_cohort(self.batch_id.code)
+            if moodle_cohort is None:
+                moodle_cohort = moodle.core_cohort_create_cohorts(
+                    self.batch_id.code)
+            cohort_member = moodle.core_cohort_add_cohorts_members(
+                moodle_cohort.get('id'), user.get('id'))
+            logger.info(cohort_member)
+
+        mail_welcome_template = self.env.ref(
+            'isep_courses_adapt.student_welcome_template')
+        mail_welcome_template.send_mail(self.id, force_send=True)
+        mail_access_template = self.env.ref(
+            'isep_courses_adapt.student_op_access_mail')
+        mail_access_template.send_mail(student.id, force_send=True)
 
     @staticmethod
     def password_generator(length=8):
@@ -289,3 +327,81 @@ class OpAdmission(models.Model):
                 'partner_id': student_user.partner_id.id,
             })
             return details
+
+    def _get_category(self):
+        code_batch = self.batch_id.code
+        logger.info("course id: {}".format(self.batch_id.course_id.id))
+        if "ATH" in code_batch:
+            category = self.env['op.moodle.category.rel'].search(
+                [('code', '=', 'ATH'),
+                 ('course_id', '=', self.batch_id.course_id.id)], limit=1)
+        elif "ELR" in code_batch or "ENR" in code_batch:
+            category = self.env['op.moodle.category.rel'].search(
+                [('code', '=', 'ELR'),
+                 ('course_id', '=', self.batch_id.course_id.id)], limit=1)
+        else:
+            logger.info(code_batch)
+            code_batch = code_batch[2:10]
+            logger.info(code_batch)
+            logger.info(self.batch_id.course_id.id)
+            category = self.env['op.moodle.category.rel'].search(
+                [('code', '=', code_batch),
+                 ('course_id', '=', self.batch_id.course_id.id)], limit=1)
+        print(category.code, category.id)
+        logger.info(category)
+        logger.info("Category code: {}".format(category.code))
+        logger.info("Category id {}".format(category.id))
+        return category
+
+    @staticmethod
+    def get_moodle_course_order(course):
+        return course.get('sortorder')
+
+    @api.multi
+    def enroll_wizard(self):
+        category = self._get_category()
+        print(category.id, category.code)
+        logger.info("Category code: {}".format(category.code))
+        logger.info("Category id: {}".format(category.id))
+        moodle = MoodleLib()
+        response = moodle.get_course_by_field(
+            field="category", value=category.moodle_category)
+        moodle_courses = response['courses']
+        moodle_courses.sort(key=self.get_moodle_course_order)
+        view = self.env.ref(
+            'isep_courses_adapt.op_moodle_admission_wizard_form', False)
+        values = {
+            'admission_id': self.id,
+            'category_id': category.id
+        }
+        wizard = self.env['op.moodle.admission.wizard'].create(values)
+
+        for i, mdl_course in enumerate(moodle_courses):
+            if ('ELR' in self.batch_id.code or 'ENR' in self.batch_id.code) and i == 0:
+                line = {
+                    'moodle_course_id': 2905,
+                    'course_name': 'Portal del alumno - ELR',
+                    'moodle_admission_wizard': wizard.id,
+                    'selected': True
+                }
+                self.env['op.moodle.courses.wizard'].create(line)
+            line = {
+                'moodle_course_id': mdl_course.get('id'),
+                'course_name': mdl_course.get('fullname'),
+                'moodle_admission_wizard': wizard.id,
+                'selected': i == 0
+            }
+            self.env['op.moodle.courses.wizard'].create(line)
+
+        return {
+            'name': _('Matricular alumno en Moodle'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'op.moodle.admission.wizard',
+            'res_id': wizard.id,
+            'views': [(view.id, 'form')],
+            'view_id': view.id,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'context': self.env.context,
+            'target': 'new'
+        }

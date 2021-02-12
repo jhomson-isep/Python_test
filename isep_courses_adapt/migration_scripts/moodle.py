@@ -5,7 +5,7 @@ from requests import post
 import logging
 
 logger = logging.getLogger(__name__)
-production = False
+production = True
 
 
 class MoodleLib:
@@ -45,9 +45,10 @@ class MoodleLib:
         if type(source) == dict and source.get('exception'):
             logger.info("Params: {}".format(json.dumps(params)))
             logger.info("Moodle response: {}".format(json.dumps(source)))
-        elif response.status_code == 404:
             # raise UserError(_("Moodle error: failed connection"))
             print("Moodle error: failed connection")
+        elif response.status_code == 404:
+            raise UserError(_("Moodle error: failed connection"))
         else:
             return source
 
@@ -102,31 +103,17 @@ class MoodleLib:
         function = "core_user_create_users"
         return self.connect(function, params)
 
-    def get_users_by_field(self, field: str, value: str) -> dict:
+    def get_users_by_field(self, field: str, dni: str) -> dict:
         """
         core_user_get_users_by_field, field: idnumber for student
 
         :param field: str
-        :param value: str
+        :param dni: str
         :return: dict
         """
         function = "core_user_get_users_by_field"
-        params = {'field': field, 'values[0]': value}
+        params = {'field': field, 'values[0]': dni}
         return self.connect(function, params)
-
-    def get_all_users(self) -> dict:
-        """
-        core_user_get_users, field: idnumber for student
-
-        :return: dict
-        """
-        function = "core_user_get_users"
-        params = {
-            'criteria[0][key]': 'confirmed',
-            'criteria[0][value]': 1
-        }
-        response = self.connect(function, params)
-        return response['users']
 
     def get_user_by_field(self, field: str, value: str) -> dict:
         """
@@ -227,6 +214,19 @@ class MoodleLib:
         }
         return self.connect(function, params)
 
+    def update_user_password(self, user_id: int, password: str) -> dict:
+        """
+        Function: core_user_update_users
+
+        params = {'users[0][id]': user_id   ,'users[0][password]': password}
+        :param user_id: int
+        :param password: str
+        :return: dict
+        """
+        function = "core_user_update_users"
+        params = {'users[0][id]': user_id, 'users[0][password]': password}
+        return self.connect(function, params)
+
     def delete_users(self, user_id: int) -> dict:
         """
         Function: core_user_delete_users
@@ -277,5 +277,93 @@ class MoodleLib:
         params = {
             'members[0][groupid]': group_id,
             'members[0][userid]': user_id
+        }
+        return self.connect(function, params)
+
+    def update_group_members(self, group_member_id: int, group_id: int, user_id: int) -> dict:
+        """
+        core_group_update_group_members
+        params = {
+            'members[0][id] : group_member_id #id of model, 
+            'members[0][groupid]': group_id, #new group id to update
+            'members[0][userid]': user_id # user id to update
+        }
+
+        :param group_id: int
+        :param group_member_id: int
+        :param user_id: int
+        :return: dict
+        """
+        function = "core_group_update_group_members"
+        params = {
+            'members[0][id]': group_member_id,
+            'members[0][groupid]': group_id,
+            'members[0][userid]': user_id
+        }
+        return self.connect(function, params)
+
+    def get_group_members(self, group_id: int, user_id: int) -> dict:
+        """
+        core_group_get_group_members
+
+        params = {
+            'members[0][groupid]': group_id, #group id to find
+            'members[0][userid]': user_id # user id to find
+        }
+
+        :param group_id: int
+        :param user_id: int
+        :return: dict
+        """
+        function = "core_group_get_group_members"
+        params = {
+            'members[0][groupid]': group_id,
+            'members[0][userid]': user_id
+        }
+        return self.connect(function, params)
+
+    def get_cohort(self, name: str) -> dict:
+        """
+        core_cohort_search_cohorts: Search for cohorts.
+
+        :param name: str to search
+        :return: dict of 1 cohort
+        """
+        function = "core_cohort_search_cohorts"
+        params = {'query': name,
+                  'context[contextid]': 0,
+                  'context[contextlevel]': 'system',
+                  'context[instanceid]': 0,
+                  'limitnum': 1}
+        cohorts = self.connect(function, params)
+        cohort = None
+        if cohorts is not None and cohorts.get('cohorts'):
+            cohort = cohorts["cohorts"][0]
+        return cohort
+
+    def core_cohort_create_cohorts(self, name):
+        function = "core_cohort_create_cohorts"
+        params = {
+            'cohorts[0][categorytype][type]': 'system',
+            'cohorts[0][categorytype][value]': '',
+            'cohorts[0][name]': name,
+            'cohorts[0][idnumber]': name,
+        }
+        return self.connect(function, params)
+
+    def core_cohort_add_cohorts_members(self, cohortid, userid):
+        function = "core_cohort_add_cohort_members"
+        params = {
+            'members[0][cohorttype][type]': 'id',
+            'members[0][cohorttype][value]': cohortid,
+            'members[0][usertype][type]': 'id',
+            'members[0][usertype][value]': userid
+        }
+        return self.connect(function, params)
+    
+    def get_group2(self, id):
+        function = "core_group_get_groups"
+        params = {
+            'groupids[0]': id,
         }
         return self.connect(function, params)
