@@ -192,14 +192,3 @@ class SaleOrder(models.Model):
 
         return names, middle_name, last_name, last_second_name
 
-    def update_sale_order(self):
-
-        so=self.env['sale.order'].search([('id','=',7)])
-
-        values7 = {
-            'precio_primer_pago': 1900,
-            'precio_matricula': 4300
-        }
-
-        so.write(values7)
-
