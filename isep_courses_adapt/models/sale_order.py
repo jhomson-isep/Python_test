@@ -192,3 +192,4 @@ class SaleOrder(models.Model):
         middle_name = middle_name.title()
 
         return names, middle_name, last_name, last_second_name
+

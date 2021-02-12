@@ -20,7 +20,7 @@
     'data': [
         'reports/factura_isep_espana.xml',
         'reports/hoja_matricula_ISEPSL.xml',
-        'reports/hoja_matricula_ISED.xml'
-
+        'reports/hoja_matricula_ISED.xml',
+        'reports/hoja_matricula_LATAM.xml'
     ]
 }
