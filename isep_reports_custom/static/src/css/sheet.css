@@ -43,3 +43,7 @@
 .StandardTable thead th:last-of-type{
     border-top-right-radius: 10px;
 }
+.page{
+   font-family:Georgia,times, serif;
+}
+

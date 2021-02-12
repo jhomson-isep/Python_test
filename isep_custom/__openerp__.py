@@ -71,7 +71,7 @@
          # "reports/report_saleorder_document_pagos.xml",
          # "reports/account_invoice.xml",
          # "reports/report_footer_header.xml",
-         "security/ir.model.access.csv",
+         # "security/ir.model.access.csv",
     ],
     'installable': True,
     "post_init_hook": "post_init_hook",
