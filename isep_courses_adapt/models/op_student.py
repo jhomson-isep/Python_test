@@ -87,7 +87,9 @@ class OpStudent(models.Model):
     def _compute_determine_type_of_course(self):
         for student in self:
             for admission in student.admission_ids:
-                if admission.course_id.course_type_id not in student.type_of_course_taken:
+                if admission.course_id.course_type_id not in \
+                        student.type_of_course_taken and \
+                        admission.course_id.course_type_id.id:
                     student.update({
                         'type_of_course_taken': [
                             (4, admission.course_id.course_type_id.id)]
