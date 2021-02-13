@@ -151,10 +151,11 @@ class OpStudentMergeWizard(models.TransientModel):
             for course_type in student_to_merge.type_of_course_taken:
                 if course_type not in student.type_of_course_taken:
                     student.write({
-                    'type_of_course_taken' : [(4,type_of_course_taken.id)]
+                        'type_of_course_taken': [
+                            (4, student_to_merge.type_of_course_taken.id)]
                     })
             student_to_merge.write({
-            'active' : False
+                'active': False
             })
         values.update({
             'partner_id' :values['partner_id'].id,
