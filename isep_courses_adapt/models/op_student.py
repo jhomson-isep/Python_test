@@ -78,6 +78,10 @@ class OpStudent(models.Model):
     unsubscribed_date = fields.Date(string="Unsubscribed date",
                                     store=True,
                                     related='admission_ids.unsubscribed_date')
+    student_char_groups = fields.Char(string="Student char groups",
+                                      store=True,
+                                      compute='_compute_char_groups',
+                                      translate=True)
 
     _sql_constraints = [(
         'unique_n_id',
@@ -113,6 +117,14 @@ class OpStudent(models.Model):
                         student.status_student = 'valid'
                 else:
                     student.status_student = 'valid'
+
+    @api.multi
+    def _compute_char_groups(self):
+        for student in self:
+            admissions = self.env['op.admission'].search(
+                [('student_id', '=', student.id)])
+            char_groups = [admission.batch_id.code for admission in admissions]
+            student.student_char_groups = ','.join(char_groups)
 
     def _compute_admission_count(self):
         """Compute the number of distinct admissions linked to the batch."""

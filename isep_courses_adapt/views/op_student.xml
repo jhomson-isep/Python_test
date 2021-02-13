@@ -176,12 +176,19 @@
                         <field name="phone"/>
                         <field name="type_of_course_taken"/>
                         <newline/>
-                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
-                        <separator/>
                         <filter string="In progress" name="in_process"
-                                domain="[('status_student', '=', 'valid'), ('type_of_course_taken.code', 'not in', ['PL', 'DI'])]"/>
+                                domain="[('status_student', '=', 'valid')]"/>
                         <filter string="Low" name="in_low"
                                 domain="[('status_student', '=', 'low')]"/>
+                        <separator/>
+                        <filter string="At Home" name="filter_ath"
+                                domain="[('student_char_groups', 'ilike', 'ATH')]"/>
+                        <filter string="Presencial" name="filter_prs"
+                                domain="[('student_char_groups', 'ilike', 'PRS')]"/>
+                        <filter string="E-Learning" name="filter_elr"
+                                domain="['|', ('student_char_groups', 'ilike', 'ELR'), ('student_char_groups', 'ilike', 'ENR')]"/>
+                        <separator/>
+                        <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
                         <separator/>
                     </search>
                 </xpath>
