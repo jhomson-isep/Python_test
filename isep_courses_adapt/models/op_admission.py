@@ -223,6 +223,9 @@ class OpAdmission(models.Model):
             cohort_member = moodle.core_cohort_add_cohorts_members(
                 moodle_cohort.get('id'), user.get('id'))
             logger.info(cohort_member)
+            director_message_template = self.env.ref(
+                'isep_courses_adapt.director_welcome_message')
+            director_message_template.send_mail(student.id, force_send=True)
 
         mail_welcome_template = self.env.ref(
             'isep_courses_adapt.student_welcome_template')

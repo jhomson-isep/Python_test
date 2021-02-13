@@ -331,5 +331,24 @@ th, td {
                 ]]></field>
         </record>
 
+        <!-- Email de accesos -->
+        <record id="director_welcome_message" model="mail.template">
+            <field name="name">OP - Director's welcome message</field>
+            <field name="email_from">Marc Gaja &lt;mgaja@grupoisep.com&gt;</field>
+            <field name="subject">ISEP BIENVENIDA Curso Académico ${object.partner_id.email}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="model_id" ref="model_op_student"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html"><![CDATA[
+
+                <div class="container">
+                    <font color="#444444" face="verdana, sans-serif" size="2"><span style="white-space: pre-wrap;"><p><b>¡Bienvenid@ a ISEP!</b></p><p>En nombre de todo el equipo que integra el Instituto Superior de Estudios Psicológicos, ISEP, y en el mío propio, quiero darte la bienvenida a nuestro centro.</p><p>ISEP Formación inició su actividad académica en el curso 1984-1985. Desde entonces, hemos trabajado para ofrecer una formación postuniversitaria de primera categoría en la que la metodología práctica, los contenidos más actualizados y la calidad de un profesorado experto y en activo tuvieran todo el protagonismo.</p><p>La mayor satisfacción conseguida durante este tiempo es la relevancia que nuestro alumnado ha adquirido en la vida del Instituto y que ha contribuido en la programación de nuevos cursos y en la organización de actividades formativas diversas que han enriquecido muy notablemente nuestra labor.</p><p>El <b>Acto de Apertura del Curso, tuvo lugar el jueves 15 de octubre a las 17h (hora de España)</b>. Fue un evento virtual al cual podrás visualizar a través del siguiente link: <u><a href="https://youtu.be/0ttwrdCn3_Y">https://youtu.be/0ttwrdCn3_Y<br></a></u></p><p>Todo nuestro equipo de profesionales y yo misma/o agradecemos tu confianza al elegirnos como centro especialista para tu formación y te deseamos todo el éxito posible en esta nueva etapa.</p><p>Comprometidos/as con la seguridad de las personas, en ISEP nos hemos adaptado a la nueva situación de España para para hacer frente los efectos del COVID-19 siguiendo el protocolo recomendado por las autoridades para que, en la menor medida posible, afecte a vuestro bienestar y formación.</p><p>Esperamos que a lo largo de estos meses tengais una agradable estancia académica.</p><p>Un fuerte abrazo y bienvenid@s,</p></span></font>
+                    <font color="#444444" face="verdana, sans-serif" size="2" style="color: rgb(8, 82, 148);"><br>
+                        <span style="white-space: pre-wrap;"><b>Marc Gaja</b></span><br></font><font color="#444444" face="verdana, sans-serif" size="2" style="color: rgb(8, 82, 148);"></font><font color="#444444" face="verdana, sans-serif" size="2"><span style="white-space: pre-wrap;" <br="">Director ISEP</span></font>
+                </div>
+
+                ]]></field>
+        </record>
+
     </data>
 </odoo>

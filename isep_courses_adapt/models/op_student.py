@@ -5,6 +5,7 @@ from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 from .op_sql import SQL
 from .op_moodle import Moodle
+from .moodle import MoodleLib
 import datetime
 import logging
 import os
@@ -689,3 +690,9 @@ class OpStudent(models.Model):
             except Exception as e:
                 logger.info(e)
                 continue
+
+    def get_moodle_id(self):
+        moodle = MoodleLib()
+        user_moodle = moodle.get_user_by_field(field="email",
+                                               value=self.partner_id.email)
+        return user_moodle.get('id') if 'id' in user_moodle else False
