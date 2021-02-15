@@ -80,6 +80,14 @@ class CrmLead(models.Model):
             actual = lead.get('x_contactonuevoodup12')
             logger.info(lead.get('x_profesion'))
             logger.info(lead.get('x_finalizacionestudios'))
+
+            #Nombre completo del producto
+            try:
+                if course.find('['):
+                    cod_curso = course[1:2]
+            except Exception as e:
+                print(e)
+            
             #---------------Nueva lógica de typeform-----------------------------#
             if cod_sede is None or cod_sede == '':
                 cod_sede = lead.get('x_profesion')
@@ -448,12 +456,6 @@ class CrmLead(models.Model):
                 except Exception as e:
                     logger.info(e)
 
-            #Nombre completo del producto
-            try:
-                if nombre_curso.find('['):
-                    cod_curso = nombre_curso[1:2]
-            except Exception as e:
-                print(e)
 
             #Producto
             try:
