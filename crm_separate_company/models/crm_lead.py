@@ -36,7 +36,8 @@ class CrmLead(models.Model):
 
         #Añadir campo zapier para saber si proviene de ahí, de no ser así se creará de forma natural
         zapier = lead.get('zapier')
-        if zapier:
+        course = lead.get('x_universidad') or None
+        if zapier and course != 'Ninguna de las anteriores':
             # Buscar el cliente mediante el email utilizando el self.env en el modelo res.partner, si no existe se crea
             client = self.env['res.partner'].sudo().search([('email', '=ilike', lead.get('email_from'))], limit=1)
             if len(client) > 0:
