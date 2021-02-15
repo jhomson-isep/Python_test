@@ -36,7 +36,7 @@ class CrmLead(models.Model):
 
         #Añadir campo zapier para saber si proviene de ahí, de no ser así se creará de forma natural
         zapier = lead.get('zapier')
-        course = lead.get('x_profesion') or None
+        course = lead.get('x_documentodeidentidad') or None
         if zapier and course != 'Ninguna de las anteriores':
             # Buscar el cliente mediante el email utilizando el self.env en el modelo res.partner, si no existe se crea
             client = self.env['res.partner'].sudo().search([('email', '=ilike', lead.get('email_from'))], limit=1)
@@ -83,7 +83,7 @@ class CrmLead(models.Model):
 
             #Nombre completo del producto
             try:
-                if course.find('['):
+                if course.find('[') != -1:
                     cod_curso = course[1:2]
             except Exception as e:
                 print(e)
