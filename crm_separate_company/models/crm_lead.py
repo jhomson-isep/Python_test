@@ -472,15 +472,15 @@ class CrmLead(models.Model):
                     lead.update({'x_curso_id': referencia_interna_template.id})
                     logger.info(lead.get('x_curso_id'))
                     logger.info("Se actualizo")
-
-                referencia_interna_template = self.env['product.template'].sudo().search(
-                    [('sale_ok', '=', True),
-                     ('default_code', '=', cod_curso),
-                     ('company_id', '=', company_id)], limit=1)
-                logger.info(referencia_interna_template)
-                lead.update({'x_curso_id': referencia_interna_template.id})
-                logger.info(lead.get('x_curso_id'))
-                logger.info("Se actualizo")
+                else:
+                    referencia_interna_template = self.env['product.template'].sudo().search(
+                        [('sale_ok', '=', True),
+                         ('default_code', '=', cod_curso),
+                         ('company_id', '=', company_id)], limit=1)
+                    logger.info(referencia_interna_template)
+                    lead.update({'x_curso_id': referencia_interna_template.id})
+                    logger.info(lead.get('x_curso_id'))
+                    logger.info("Se actualizo")
 
                 referencia_interna_product = self.env['product.product'].sudo().search(
                     [('product_tmpl_id', '=', referencia_interna_template.id)], limit=1)
