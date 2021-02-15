@@ -200,7 +200,7 @@ class CrmLead(models.Model):
             elif modalidad in ('Online', 'online'):
                 modalidad = 'ONL'
             # Modalidad At-Home
-            elif modalidad in ('at home', 'At Home', 'At home'):
+            elif modalidad in ('at home', 'At Home', 'At home', 'AT HOME - clases y participación en vivo con los mejores expertos, por videoconferencia'):
                 modalidad = 'ATH'
 
             # Actualizar la modalidad
@@ -446,6 +446,13 @@ class CrmLead(models.Model):
                     lead.update({'x_contactonuevoodup12': user_id})
                 except Exception as e:
                     logger.info(e)
+
+            #Nombre completo del producto
+            try:
+                if nombre_curso.find('['):
+                    cod_curso = nombre_curso[1:2]
+            except Exception as e:
+                print(e)
 
             #Producto
             try:
