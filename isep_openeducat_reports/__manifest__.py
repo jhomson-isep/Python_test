@@ -16,12 +16,14 @@
     'depends': [
         'base',
         'openeducat_core',
-        'report_xlsx'
+        'report_xlsx',
+        'crm',
     ],
     'installable': True,
     'data': [
         #'wizards/uvic_student_wizard.xml',
         #'wizards/batch_students_wizard.xml',
+        'wizards/crm_leads_wizard.xml',
         'reports/report_uvic_students.xml',
         'reports/report_batch_students.xml',
         'reports/report_batch_students_image.xml',
@@ -35,6 +37,7 @@
         'reports/diploma_isep.xml',
         'reports/report_attendance.xml',
         'reports/grades_card.xml',
+        'reports/report_crm_leads.xml',
         'menu/report_menu.xml'
     ]
 }

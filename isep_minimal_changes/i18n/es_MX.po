@@ -65,3 +65,8 @@ msgstr "Requerimientos atendidos"
 #: model:ir.model.fields,field_description:isep_minimal_changes.field_helpdesk_ticket__require_project
 msgid "Requires project?"
 msgstr "¿Requiere proyecto?"
+
+#. module: isep_minimal_changes
+#: model:ir.model.fields,field_description:isep_minimal_changes.field_payment_token__masked_card_number
+msgid "Masked card number"
+msgstr "Número de tarjeta"

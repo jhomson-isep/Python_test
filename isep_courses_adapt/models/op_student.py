@@ -5,6 +5,7 @@ from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 from .op_sql import SQL
 from .op_moodle import Moodle
+from .moodle import MoodleLib
 import datetime
 import logging
 import os
@@ -74,6 +75,13 @@ class OpStudent(models.Model):
         translate=True, store=True,
         compute='_compute_determine_type_of_course')
     cgi_client_id = fields.Integer(string='Cgi client')
+    unsubscribed_date = fields.Date(string="Unsubscribed date",
+                                    store=True,
+                                    related='admission_ids.unsubscribed_date')
+    student_char_groups = fields.Char(string="Student char groups",
+                                      store=True,
+                                      compute='_compute_char_groups',
+                                      translate=True)
 
     _sql_constraints = [(
         'unique_n_id',
@@ -83,11 +91,13 @@ class OpStudent(models.Model):
 
     def _compute_determine_type_of_course(self):
         for student in self:
-            for course in student.course_detail_ids:
-                if course.course_id.course_type_id not in student.type_of_course_taken:
+            for admission in student.admission_ids:
+                if admission.course_id.course_type_id not in \
+                        student.type_of_course_taken and \
+                        admission.course_id.course_type_id.id:
                     student.update({
                         'type_of_course_taken': [
-                            (4, course.course_id.course_type_id.id)]
+                            (4, admission.course_id.course_type_id.id)]
                     })
 
     def _compute_determine_status(self):
@@ -107,6 +117,14 @@ class OpStudent(models.Model):
                         student.status_student = 'valid'
                 else:
                     student.status_student = 'valid'
+
+    @api.multi
+    def _compute_char_groups(self):
+        for student in self:
+            admissions = self.env['op.admission'].search(
+                [('student_id', '=', student.id)])
+            char_groups = [admission.batch_id.code for admission in admissions]
+            student.student_char_groups = ','.join(char_groups)
 
     def _compute_admission_count(self):
         """Compute the number of distinct admissions linked to the batch."""
@@ -358,6 +376,9 @@ class OpStudent(models.Model):
                  70: 'Email Student Access 70 days',
                  80: 'Email Student Access 80 days',
                  100: 'Email Student Access 100 days'}
+
+
+
         for student in self.env['op.student'].search([]):
             try:
                 last_access = self.env['op.student.access'].search(
@@ -370,6 +391,7 @@ class OpStudent(models.Model):
                         days = self.get_days_without_access(student.id)
                         days = ast.literal_eval(days)
                         if days in (5, 12, 20, 40, 70, 80, 100):
+                            #Estamos tomando el ultimo template porque estan duplicados
                             template = self.env['mail.template'].search(
                                 [('name', '=', tname[days])])
                             if template:
@@ -680,3 +702,9 @@ class OpStudent(models.Model):
             except Exception as e:
                 logger.info(e)
                 continue
+
+    def get_moodle_id(self):
+        moodle = MoodleLib()
+        user_moodle = moodle.get_user_by_field(field="email",
+                                               value=self.partner_id.email)
+        return user_moodle.get('id') if 'id' in user_moodle else False

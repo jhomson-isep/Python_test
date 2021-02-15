@@ -148,12 +148,12 @@ class MoodleLib:
             course = courses["courses"][0]
         return course
 
-    def get_course_by_field(self, field: str, value: str) -> dict:
+    def get_course_by_field(self, field: str, value) -> dict:
         """
         core_course_get_courses_by_field
 
         :param field: str
-        :param value: str
+        :param value: int,str
         :return: dict
         """
         function = "core_course_get_courses_by_field"
@@ -216,6 +216,19 @@ class MoodleLib:
         }
         return self.connect(function, params)
 
+    def update_user_password(self, user_id: int, password: str) -> dict:
+        """
+        Function: core_user_update_users
+
+        params = {'users[0][id]': user_id   ,'users[0][password]': password}
+        :param user_id: int
+        :param password: str
+        :return: dict
+        """
+        function = "core_user_update_users"
+        params = {'users[0][id]': user_id, 'users[0][password]': password}
+        return self.connect(function, params)
+
     def delete_users(self, user_id: int) -> dict:
         """
         Function: core_user_delete_users
@@ -272,7 +285,6 @@ class MoodleLib:
     def update_group_members(self, group_member_id: int, group_id: int, user_id: int) -> dict:
         """
         core_group_update_group_members
-
         params = {
             'members[0][id] : group_member_id #id of model, 
             'members[0][groupid]': group_id, #new group id to update
@@ -280,12 +292,13 @@ class MoodleLib:
         }
 
         :param group_id: int
+        :param group_member_id: int
         :param user_id: int
         :return: dict
         """
         function = "core_group_update_group_members"
         params = {
-            'members[0][id]' : group_member_id,
+            'members[0][id]': group_member_id,
             'members[0][groupid]': group_id,
             'members[0][userid]': user_id
         }
@@ -308,5 +321,52 @@ class MoodleLib:
         params = {
             'members[0][groupid]': group_id,
             'members[0][userid]': user_id
+        }
+        return self.connect(function, params)
+
+    def get_cohort(self, name: str) -> dict:
+        """
+        core_cohort_search_cohorts: Search for cohorts.
+
+        :param name: str to search
+        :return: dict of 1 cohort
+        """
+        function = "core_cohort_search_cohorts"
+        params = {'query': name,
+                  'context[contextid]': 0,
+                  'context[contextlevel]': 'system',
+                  'context[instanceid]': 0,
+                  'limitnum': 1}
+        cohorts = self.connect(function, params)
+        cohort = None
+        if cohorts is not None and cohorts.get('cohorts'):
+            cohort = cohorts["cohorts"][0]
+        return cohort
+
+    def core_cohort_create_cohorts(self, name):
+        function = "core_cohort_create_cohorts"
+        params = {
+            'cohorts[0][categorytype][type]': 'system',
+            'cohorts[0][categorytype][value]': '',
+            'cohorts[0][name]': name,
+            'cohorts[0][idnumber]': name,
+        }
+        return self.connect(function, params)
+
+    def core_cohort_add_cohorts_members(self, cohortid, userid):
+        function = "core_cohort_add_cohort_members"
+        params = {
+            'members[0][cohorttype][type]': 'id',
+            'members[0][cohorttype][value]': cohortid,
+            'members[0][usertype][type]': 'id',
+            'members[0][usertype][value]': userid
+        }
+        return self.connect(function, params)
+    
+    def get_categories(self):
+        function = "core_course_get_categories"
+        params = {
+            'criteria[0][key]' : '',
+            'criteria[0][value]': '',
         }
         return self.connect(function, params)

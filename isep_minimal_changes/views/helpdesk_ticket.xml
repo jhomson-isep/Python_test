@@ -15,8 +15,6 @@
                 </xpath>
 
                 <xpath expr="//field[@name='company_id']" position="after">
-                    <field name="ticket_res" widget="many2many_tags"
-                           required="1"/>
                     <field name="require_project" groups="base.group_system" widget="boolean_toggle"></field>
                     <field name="month" groups="base.group_system" widget="selection"></field>
                 </xpath>

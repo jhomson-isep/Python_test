@@ -23,12 +23,15 @@
         "sign"
     ],
     "data": [
+        "data/mail_templates.xml",
         "views/res_partner.xml",
         "views/helpdesk_ticket.xml",
         "views/helpdesk_team.xml",
         "views/project_task.xml",
         "views/crm_lead.xml",
-        "views/res_config_settings.xml"
+        "views/res_config_settings.xml",
+        "views/payment_token.xml",
+        "views/sale_order.xml"
     ],
     'installable': True,
 }

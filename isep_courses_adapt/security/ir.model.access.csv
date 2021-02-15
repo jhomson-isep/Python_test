@@ -17,3 +17,4 @@ access_op_gdrive_documents_portal,access.op.gdrive.documents.portal,isep_courses
 access_op_student_access_admin,access.op.student.access.admin,isep_courses_adapt.model_op_student_access,base.group_system,1,1,1,1
 access_op_area_course_admin,access.op.area.course.admin,isep_courses_adapt.model_op_area_course,base.group_system,1,1,1,1
 access_op_course_type_admin,access.op.course.type.admin,isep_courses_adapt.model_op_course_type,base.group_system,1,1,1,1
+access_op_moodle_category_rel_admin,access.op.moodle.category.rel.admin,isep_courses_adapt.model_op_moodle_category_rel,base.group_system,1,1,1,1

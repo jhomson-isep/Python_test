@@ -1,0 +1,89 @@
+PCATH-287,ATH,PC,Máster en Psicología Clínica y de la Salud,ATH,287
+MIATH-288,ATH,MI,Máster en Psicología Clínica Infantojuvenil,ATH,288
+MSATH-289,ATH,MS,Máster en Sexología Clínica y Terapia de parejas,ATH,289
+APATH-290,ATH,AP,Máster en Intervención en Dificultades del Aprendizaje,ATH,290
+NEATH-295,ATH,NE,Máster en Neuroeducación y Optimización de Capacidades,ATH,295
+THATH-301,ATH,TH,Máster en Neuromanagement y Gestión del Talento,ATH,301
+NDATH-343,ATH,ND,Máster en Trastornos del Neurodesarrollo,ATH,343
+FNATH-344,ATH,FN,Máster en Neuropsicología Forense,ATH,344
+ENATH-346,ATH,EN,Máster de Evaluación Neuropsicológica / Máster en Rehabilitación Cognitiva / Máster en Neuropsicología,ATH,346
+CTATH-347,ATH,CT,Máster en Terapias de Tercera Generación y Aplicación de las Nuevas Tecnologías en el Tratamiento Psicológico,ATH,347
+BEATH-352,ATH,BE,Master Psicología del Bienestar Emocional,ATH,352
+APPRS-45,APCATPRS,AP,Máster Intervención en Dificultades del Aprendizaje,PRS,45
+MNPRS-55,APCATPRS,MN,Máster Neuropsicología,PRS,55
+MIPRS-54,MICATPRS,MI,Máster Psicología Clínica Infantojuvenil,PRS,54
+PCPRS-57,PCCATPRS,PC,Máster Psicología Clínica y de la Salud,PRS,57
+MLPRS-58,MLCATPRS,ML,Máster Psicología Forense,PRS,58
+MSPRS-56,MSCATPRS,MS,Máster Sexología clínica y terapia de parejas,PRS,56
+MAPRS-47,MACATPRS,MA,Máster en Atención Temprana,PRS,47
+ARPRS-110,ARCATPRS,AR,Máster en Terapias Artísticas y Creativas,PRS,110
+TBPRS-124,TBCATPRS,TB,Máster en Trastornos Autistas,PRS,124
+LCPRS-125,LCCATPRS,LC,Máster en Logopedia clínica en Daño Neurológico,PRS,125
+AAPRS-139,AACATPRS,AA,Máster en Terapia Asistida con animales,PRS,139
+BEPRS-140,BECATPRS,BE,Máster en Psicoterapia del Bienestar emocional,PRS,140
+CCPRS-156,CCCATPRS,CC,Máster en Psicoterapia Cognitivo Conductual,PRS,156
+NEPRS-170,NECATPRS,NE,Máster en Neuroeducación y Optimización de Capacidades,PRS,170
+CTPRS-178,CTCATPRS,CT,Máster en Terapias de Tercera Generación y Aplicación de las Nuevas Tecnologías,PRS,178
+DEPRS-187,DECATPRS,DE,Máster en Envejecimiento y Demencias,PRS,187
+CDPRS-189,CDCATPRS,CD,Máster en Coaching,PRS,189
+AIPRS-202,AICATPRS,AI,Curso de Avances en Psicoterapia Infantojuvenil,PRS,202
+NRPRS-239,NRCATPRS,NR,Máster en Neurorehabilitación,PRS,239
+ILPRS-241,ILCATPRS,IL,ISEP Lidera,PRS,241
+TTPRS-242,TTCATPRS,TT,Máster en Teatroterapia,PRS,242
+AEPRS-243,AECATPRS,AE,Máster en Arteterapia,PRS,243
+MMPRS-248,MMCATPRS,MM,Máster en Musicoterapia,PRS,248
+PCPRS-93,PCMDRPRS,PC,Máster en Psicología Clínica y de la Salud,PRS,93
+MIPRS-94,MIMDRPRS,MI,Máster en Psicología Clínica Infantojuvenil,PRS,94
+MLPRS-95,MLMDRPRS,ML,Máster en Psicología Forense,PRS,95
+MSPRS-106,MSMDRPRS,MS,Máster en Sexología y Terapia de Parejas,PRS,106
+CCPRS-141,CCMDRPRS,CC,Máster en Psicoterapia Cognitivo Conductual,PRS,141
+AAPRS-143,AAMDRPRS,AA,Máster en Terapia asistida con animales,PRS,143
+CTPRS-185,CTMDRPRS,CT,Máster Terapias de tercera generación,PRS,185
+APPRS-97,APMDRPRS,AP,Máster en Intervención en Dificultades del Aprendizaje,PRS,97
+MAPRS-98,MAMDRPRS,MA,"Máster en Atención Temprana. Prevención, diagnóstico y tratamiento",PRS,98
+MMPRS-100,MMMDRPRS,MM,Máster en Musicoterapia,PRS,100
+PUPRS-169,PUMDRPRS,PU,Máster en Trastornos del Espectro Autista,PRS,169
+TTPRS-219,TTMDRPRS,TT,Máster en Teatroterapia,PRS,219
+AEPRS-220,AEMDRPRS,AE,Máster en Arteterapia,PRS,220
+ARPRS-274,ARMDRPRS,AR,Máster en Terapias Artísticas y Creativas,PRS,274
+LIPRS-78,LIMDRPRS,LI,Máster en Logopedia Educativa,PRS,78
+LCPRS-129,LCMDRPRS,LC,Máster de Logopedia Clínica en Daño Neurológico,PRS,129
+FMPRS-164,FMMDRPRS,FM,Máster en Terapia Miofuncional,PRS,164
+DEPRS-167,DEMDRPRS,DE,Máster en Envejecimiento y Demencias,PRS,167
+NEPRS-168,NEMDRPRS,NE,Máster en Neuroeducación y Optimización de Capacidades,PRS,168
+MNPRS-96,MNMDRPRS,MN,Máster en Neuropsicología Clínica,PRS,96
+NRPRS-103,NRMDRPRS,NR,Master en Neurorehabilitación,PRS,103
+THPRS-257,THMDRPRS,TH,Máster en Neuromanagement y Gestión del Talento,PRS,257
+PCPRS-82,PCVALPRS,PC,Máster en Psicología Clínica y de la Salud,PRS,82
+MSPRS-172,MSVALPRS,MS,Máster en Sexología Clínica y Terapia de Parejas,PRS,172
+BEPRS-174,BEVALPRS,BE,Máster en Psicoterapia del Bienestar emocional,PRS,174
+CTPRS-226,CTVALPRS,CT,Máster en Terapias de Tercera Gen. y Aplicación Nuevas Tecnologías en el Tratamiento Psicológico,PRS,226
+MIPRS-227,MIVALPRS,MI,Máster en Psicología Clínica Infantojuvenil,PRS,227
+APPRS-173,APVALPRS,AP,Máster en Intervención en Dificultades del Aprendizaje,PRS,173
+MAPRS-224,MAVALPRS,MA,Máster en Atención Temprana,PRS,224
+LCPRS-190,LCVALPRS,LC,Máster en Logopedia Clínica,PRS,190
+FMPRS-228,FMVALPRS,FM,Máster en Terapia Miofuncional,PRS,228
+MNPRS-81,MNVALPRS,MN,Máster en Neuropsicología Clínica,PRS,81
+NEPRS-199,NEVALPRS,NE,Máster en Neuroeducación y optimización de capacidades,PRS,199
+NRPRS-222,NRVALPRS,NR,Máster en Neurorehabilitación,PRS,222
+NDPRS-240,NDVALPRS,ND,Máster en Trastornos del Neurodesarrollo,PRS,240
+PCONL-113,ELR,PC,Máster en Psicología Clínica y de la Salud,ONL,113
+MIONL-120,ELR,MI,Máster en Psicología Clínica Infantojuvenil,ONL,120
+MLONL-335,ELR,ML,Máster en Psicología Forense,ONL,335
+MLONL-154,ELR,ML,Máster en Psicología Forense.,ONL,154
+CCONL-155,ELR,CC,Máster en Psicoterapia Cognitivo Conductual,ONL,155
+PIONL-203,ELR,PI,Posgrado en Psicología Clínica Infantojuvenil,ONL,203
+PFONL-182,ELR,PF,Máster en Psicoterapia Infantojuvenil,ONL,182
+POONL-235,ELR,PO,Especialidad en Psicooncología,ONL,235
+SEONL-237,ELR,SE,Especialidad en Terapia Sexual y de Pareja,ONL,237
+IAONL-254,ELR,IA,Técnico en Intervención Asistida con Animales,ONL,254
+MSONL-230,ELR,MS,Máster en Sexología Clínica y Terapia de Parejas,ONL,230
+CPONL-277,ELR,CP,Máster en Psicooncología y Cuidados Paliativos,ONL,277
+ATONL-42,ELR,AT,Posgrado en Atención Temprana,ONL,42
+AUONL-41,ELR,AU,Posgrado en Trastornos Autistas,ONL,41
+PAONL-177,ELR,PA,Intervención educativa,ONL,177
+LEONL-236,ELR,LE,Especialidad en Trastornos del Lenguaje Escrito,ONL,236
+EDONL-300,ELR,ED,Máster en Educación,ONL,300
+LPONL-2,ELR,LP,Máster en Patologías y lenguaje del habla,ONL,2
+NPONL-234,ELR,NP,Especialidad en Neuropsicología,ONL,234
+THONL-256,ELR,TH,Máster en Neuromanagement y Gestión del Talento,ONL,256

@@ -126,6 +126,10 @@ class OpUniversity(Base_pg):
     __table__ = Table('op_university', metadata_pg, autoload=True)
 
 
+class OpMoodleCategoryRel(Base_pg):
+    __table__ = Table('op_moodle_category_rel', metadata_pg, autoload=True)
+
+
 # SQL Server Tables
 class GinAreaCurso(Base_server):
     __table__ = Table('gin_AreasCurso', metadata_server, autoload=True)
@@ -173,6 +177,10 @@ class Alumnos(Base_server):
 
 class Tablas(Base_server):
     __table__ = Table('Tablas', metadata_server_isep, autoload=True)
+
+
+class Historico(Base_server):
+    __table__ = Table('Historico', metadata_server_isep, autoload=True)
 
 
 def get_session_server():
