@@ -36,7 +36,7 @@ class CrmLead(models.Model):
 
         #Añadir campo zapier para saber si proviene de ahí, de no ser así se creará de forma natural
         zapier = lead.get('zapier')
-        course = lead.get('x_universidad') or None
+        course = lead.get('x_profesion') or None
         if zapier and course != 'Ninguna de las anteriores':
             # Buscar el cliente mediante el email utilizando el self.env en el modelo res.partner, si no existe se crea
             client = self.env['res.partner'].sudo().search([('email', '=ilike', lead.get('email_from'))], limit=1)
@@ -141,7 +141,7 @@ class CrmLead(models.Model):
                 'x_codarea': cod_area,
                 'x_area_id': None,
                 'website': None,
-                'x_universidad': None,
+                'x_profesion': None,
                 'x_curso_id': None,
                 'x_producto_id': None,
                 'x_sede_id': None
@@ -222,7 +222,7 @@ class CrmLead(models.Model):
                 cod_sede = 'ZAR'
             elif cod_sede in ('Valencia', 'valencia', 'sesiones-clinicas-valencia', 'ValenciaValencia'):
                 cod_sede = 'VAL'
-            elif cod_sede in ('Online', 'online', 'sesiones-clinicas-online', 'OnlineOnline'):
+            elif cod_sede in ('Online', 'online', 'sesiones-clinicas-online', 'OnlineOnline', 'Indiferente'):
                 cod_sede = 'ONL'
 
             # REVISAR ESTO
