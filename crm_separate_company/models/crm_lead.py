@@ -87,7 +87,7 @@ class CrmLead(models.Model):
                     cod_curso = course[1:2]
             except Exception as e:
                 print(e)
-            
+
             #---------------Nueva lógica de typeform-----------------------------#
             if cod_sede is None or cod_sede == '':
                 cod_sede = lead.get('x_profesion')
@@ -461,6 +461,17 @@ class CrmLead(models.Model):
             try:
                 if modalidad == 'ONL' and company_id == 4:
                     cod_curso = cod_curso + modalidad
+
+                #error con España
+                if company_id == 1:
+                    referencia_interna_template = self.env['product.template'].sudo().search(
+                        [('sale_ok', '=', True),
+                         ('default_code', '=', cod_curso),
+                         ('company_id', 'in', (1, 1111))], limit=1)
+                    logger.info(referencia_interna_template)
+                    lead.update({'x_curso_id': referencia_interna_template.id})
+                    logger.info(lead.get('x_curso_id'))
+                    logger.info("Se actualizo")
 
                 referencia_interna_template = self.env['product.template'].sudo().search(
                     [('sale_ok', '=', True),
