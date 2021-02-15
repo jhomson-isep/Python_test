@@ -276,7 +276,7 @@ class CrmLead(models.Model):
                     user_id = 255
                     no_lead = True
                 elif description.find('Sesión'):
-                    no_lead = False
+                    no_lead = True
                 else:
                     # Manel Arroyo
                     user_id = 76
