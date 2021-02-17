@@ -708,3 +708,11 @@ class OpStudent(models.Model):
         user_moodle = moodle.get_user_by_field(field="email",
                                                value=self.partner_id.email)
         return user_moodle.get('id') if 'id' in user_moodle else False
+    
+    def generate_gr_no(self):
+        gr_no = self.env['ir.sequence'].next_by_code('op.gr.number') or '0'
+        for student in self:
+            student.write({
+                'gr_no' : gr_no,
+                'n_id'  : gr_no,
+            })

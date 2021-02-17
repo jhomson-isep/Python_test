@@ -21,6 +21,10 @@
                     <button name="import_student_access" string="Get access"
                             type="object"/>
                 </xpath>
+                <xpath expr="//button[1]" position="after">
+                    <button name="generate_gr_no" string="Generar Matricula" attrs="{'invisible': [('gr_no','&gt;', '')]}"
+                            type="object"/>
+                </xpath>
                 <xpath expr="//notebook/page/group[@name='personal_detail']" position="replace">
                     <group cols="4">
                         <sheet string="group_information_1">
