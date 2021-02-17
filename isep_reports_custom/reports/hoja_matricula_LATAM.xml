@@ -708,7 +708,7 @@
                             <div class="row container-fluid" style="text-align:justify;">
                                 <t t-if="o.payment_term_id.name!=False">
                                     <t t-set="fpr" t-value="o.x_Fecha_Primer_Recibo-datetime.timedelta(days=30)"/>
-                                    <t t-foreach="range(int(o.payment_term_id.name.split(' ')[0]))" t-as="l">
+                                    <tr t-foreach="doc.payment_term_id.line_ids.sorted(key=lambda b: b.days)" t-as="l">
                                         PAGARÉ Pago
                                         <span t-esc ="l+1" style="margin:0 2px"/> de
                                         <span t-esc="o.payment_term_id.name.split(' ')[0]" style="margin:0 2px"/>
