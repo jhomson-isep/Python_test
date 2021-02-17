@@ -31,21 +31,21 @@
                                 		<div class="col-6">
 	                                	<div class="row">
 		                                <img src="/isep_reports_custom/static/src/img/tel.png"/>
-		                                <strong style="color:#fc6c04;">+52 800 077 8899</strong>
+		                                <strong style="color:#fc6c04;font-size:80%;">+52 800 077 8899</strong>
 		                                </div>
 		                                <div class="row">
 		                                <img src="/isep_reports_custom/static/src/img/web.png"/>
-		                                <strong style="color:#fc6c04;">http://isep.com/mx</strong>
+		                                <strong style="color:#fc6c04;font-size:80%;">http://isep.com/mx</strong>
 		                                </div>
 		                                </div>
 		                                <div class="col-6">
 	 									<div class="row">
 		                                <img src="/isep_reports_custom/static/src/img/mail.png"/>
-		                                <strong style="color:#fc6c04;">mexico@isep.com</strong>
+		                                <strong style="color:#fc6c04;font-size:80%;">mexico@isep.com</strong>
 		                                </div>
 		                                <div class="row">
 		                                <img src="/isep_reports_custom/static/src/img/cif.png"/>
-		                                <strong style="color:#fc6c04;">ILA160519AE7</strong>
+		                                <strong style="color:#fc6c04;font-size:80%;">ILA160519AE7</strong>
 		                                </div>
 	                                    </div>
 	                                </div>
@@ -53,10 +53,10 @@
                             </div>
                         </div>
                         <br/>
-                        <hr style="border:2px solid #002d5f;margin-bottom:1px;margin-top:-20px"/>
+                        <hr style="border:2px solid #002d5f;margin-top:-2px;margin-bottom:1px;margin-top:-20px"/>
                         <div class="row">
                             <div class="col-5" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
-                                        <strong style="color:white; margin-left:5px;font-size:20px;">DATOS PERSONALES DEL ALUMNO</strong>
+                                <strong style="color:white; margin-left:5px;font-size:18px;">DATOS PERSONALES DEL ALUMNO</strong>
                             </div>
                         </div>
 
@@ -68,7 +68,7 @@
                                 <strong>Nombre:</strong><br/>
                             </div>
                             <!--Second column-->
-                            <div class="col-2">
+                            <div class="col-4">
                                 <span t-field="o.partner_id.name"/><br/>
                             </div>
 
@@ -93,12 +93,14 @@
                                 </t>
                             </div>
                             <!--Third column-->
-                            <div class="col-4">
+                            <div class="col-2">
                                 <strong>Nacimiento:</strong><br/>
                             </div>
                             <!--Fourth column-->
-                            <div class="col-3">
+                            <div class="col-2">
                                 <span t-field="o.partner_id.x_annonacimiento"/><br/>
+                            </div>
+                            <div class="col-3">
                             </div>
                             </div><!--First row-->
                         </div>
@@ -169,10 +171,10 @@
                             </div><!--First row-->
                         </div> <!--"personal_information"-->
                         <br/>
-                        <hr style="border:2px solid #002d5f;margin-bottom:1px;margin-top:-3px"/>
+                        <hr style="border:2px solid #002d5f;margin-top:-2px;margin-bottom:1px;margin-top:-3px"/>
                         <div class="row">
                             <div class="col-4" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
-                                    <strong style="color:white; margin-left:5px;font-size:20px;">DATOS DE FACTURACIÓN</strong>
+                                <strong style="color:white; margin-left:5px;font-size:18px;">DATOS DE FACTURACIÓN</strong>
                             </div>
                         </div>
 
@@ -261,11 +263,11 @@
                         </div>
 
                         <br/>
-                        <hr style="border:2px solid #002d5f;margin-bottom:1px;margin-top:-20px"/>
+                        <hr style="border:2px solid #002d5f;margin-top:-2px;margin-bottom:1px;margin-top:-20px"/>
 
                         <div class="row">
                             <div class="col-7" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
-                                <strong style="color:white; margin-left:5px;font-size:20px;">CONDICIONES ACEPTADAS PARA EL PAGO DEL CURSO</strong>
+                                <strong style="color:white; margin-left:5px;font-size:18px;">CONDICIONES ACEPTADAS PARA EL PAGO DEL CURSO</strong>
                             </div>
                         </div>
 
@@ -293,7 +295,7 @@
 
                         </div><!--Third row-->
                         <br/><br/>
-                        <hr style="border:1px solid #002d5f;margin-bottom:1px;margin-top:-20px"/>
+                        <hr style="border:1px solid #002d5f;margin-top:-2px;margin-bottom:1px;margin-top:-20px"/>
                         <div class="row">
                             <div class="col-12">
                                 <p style="font-size:10px;">
@@ -585,19 +587,26 @@
                             Autorizo a ISEP LATAM, SC, SC. a realizar los cargos correspondientes a:<br/><br/>
                             <p>
                                     a) Gastos de Inscripción $ <span t-field="o.precio_matricula"/>.
-                                    <span t-esc="o.confirmation_date.strftime('%d')"/> Día <span t-esc="o.confirmation_date.strftime('%m')"/> Mes <span t-esc="o.confirmation_date.strftime('%Y')"/> Año
-
+                                    <t t-if ="o.confirmation_date==False"></t>
+                                    <t t-else="">
+                                        <span t-esc="o.confirmation_date.strftime('%d')"/>
+                                        Día
+                                        <span t-esc="o.confirmation_date.strftime('%m')"/>
+                                        Mes
+                                        <span t-esc="o.confirmation_date.strftime('%Y')"/>
+                                        Año
+                                    </t>
                             </p>
 
                             <p>
                                     b) <t t-if ="o.payment_term_id.name==False"></t><t t-else=""><t t-esc="o.payment_term_id.name.split(' ')[0]"/></t>
                                     mensualidades de
                                     <t t-if="len(o.order_line)>1">
-                                        <span t-esc="o.order_line[1].price_unit"/>
+                                        <span t-esc="o.precio_primer_pago"/>
                                     </t>
                                     <t t-else="">
                                     </t>
-                                    [ MXN ] Peso mexicano, a partir del mes de
+                                    [ MXN ] Peso mexicano, a partir del mes
                                     <t t-if ="o.x_Fecha_Primer_Recibo==False"> el dia del año</t>
                                     <t t-else="">
                                         <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%m')"/> el día
@@ -619,7 +628,7 @@
 
 
                             <div class="row" style="text-align:justify;">
-                                <div class="col-4">
+                                <div class="col-6">
                                     Número de la tarjeta:
                                     <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
                                     <span t-esc="o.partner_invoice_id.payment_token_ids[0].acquirer_ref[:8]"/>
@@ -628,6 +637,8 @@
                                     </t>
                                     <t t-else="">
                                     </t>
+                                </div>
+                                <div class="col-6">
                                 </div>
 
                             </div>
