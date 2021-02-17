@@ -706,30 +706,20 @@
                             </div>
 
                             <div class="row container-fluid" style="text-align:justify;">
-                                <t t-if="o.payment_term_id.name!=False">
+                                <tr t-if="o.payment_term_id.name!=False">
                                     <t t-set="fpr" t-value="o.x_Fecha_Primer_Recibo-datetime.timedelta(days=30)"/>
-                                    <tr t-foreach="doc.payment_term_id.line_ids.sorted(key=lambda b: b.days)" t-as="l">
+                                    <tr t-foreach="o.payment_term_id.line_ids.sorted(key=lambda b: b.days)" t-as="l">
                                         PAGARÉ Pago
-                                        <span t-esc ="l+1" style="margin:0 2px"/> de
-                                        <span t-esc="o.payment_term_id.name.split(' ')[0]" style="margin:0 2px"/>
+                                        <span t-esc ="l_index+1" style="margin:0 2px"/> de
+                                        <span t-esc="len(o.payment_term_id.line_ids)" style="margin:0 2px"/>
                                         ,el día
 
-                                        <t t-if ="o.x_Fecha_Primer_Recibo==False">
-                                        </t>
-                                        <t t-else="">
-
-                                          <t t-set="fpr" t-value="fpr+datetime.timedelta(days=30)"/>
-
-                                          <span t-esc="fpr.strftime('%d').zfill(2)"/>-
-                                          <span t-esc="fpr.strftime('%m').zfill(2)"/>-
-                                          <span t-esc="fpr.strftime('%Y')"/>
-
-                                        </t>
-                                        la cantidad de $
-                                        <span t-field="o.precio_primer_pago"/>
-                                        ( 00/100 [ MXN ] Peso mexicano )
+                                        <span t-esc="o.x_Fecha_Primer_Recibo + relativedelta(months=l_index)" t-options="{&quot;format&quot;: &quot;dd-MM-yyyy&quot;, 'widget': 'date'}" />
+                                        la cantidad de <span t-field="o.currency_id.symbol"/>
+                                        <span t-field="o.precio_total_curso"/>
+                                        ( 00/100 <span t-field="o.currency_id.sat_currency_id.display_name"/> )
                                         <br/>
-                                    </t>
+                                    </tr>
 
                                 </t>
                                 <t t-else="">
