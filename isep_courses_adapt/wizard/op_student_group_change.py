@@ -44,11 +44,6 @@ class OpStudentGroupChangeWizard(models.TransientModel):
         if mdl_user is None:
             raise ValidationError(
                 _('No se encontro el usuario en moodle'))
-        mdl_group_member = mdl.get_group_members(mdl_group.get('id'),
-                                                mdl_user.get('id'))
-        if mdl_group_member is None:
-            raise ValidationError(
-                _('No se ecuentra el grupo asociado!!'))
         body = '''
         <h1><strong>Se ha realizado cambio de grupo</strong></h1>
 
@@ -109,9 +104,10 @@ class OpStudentGroupChangeWizard(models.TransientModel):
             op_admission.admission_date)
         student.message_post(body=body)
         mdl_new_group = mdl.get_course(op_admission.batch_id.moodle_code)
-        mdl.update_group_members(mdl_group_member.get('id'),
-                                mdl_new_group.get('id'),
+        mdl.delete_group_member(mdl_group.get('id'),
                                 mdl_user.get('id'))
+        mdl.add_group_members(mdl_new_group.get('id'),
+                              mdl_user.get('id'))
     
     def change(self):
         if not self.op_admission_id.id:

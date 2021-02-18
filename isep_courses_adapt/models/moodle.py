@@ -282,11 +282,10 @@ class MoodleLib:
         }
         return self.connect(function, params)
 
-    def update_group_members(self, group_member_id: int, group_id: int, user_id: int) -> dict:
+    def delete_group_member(self, group_id: int, user_id: int) -> dict:
         """
         core_group_update_group_members
         params = {
-            'members[0][id] : group_member_id #id of model, 
             'members[0][groupid]': group_id, #new group id to update
             'members[0][userid]': user_id # user id to update
         }
@@ -296,9 +295,8 @@ class MoodleLib:
         :param user_id: int
         :return: dict
         """
-        function = "core_group_update_group_members"
+        function = "core_group_delete_group_members"
         params = {
-            'members[0][id]': group_member_id,
             'members[0][groupid]': group_id,
             'members[0][userid]': user_id
         }
