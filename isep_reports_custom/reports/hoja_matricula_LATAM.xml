@@ -586,7 +586,7 @@
                             </div>
                             Autorizo a ISEP LATAM, SC, SC. a realizar los cargos correspondientes a:<br/><br/>
                             <p>
-                                    a) Gastos de Inscripción $ <span t-field="o.precio_matricula"/>.
+                                    a) Gastos de Inscripción <span t-field="o.currency_id.symbol"/> <span t-field="o.precio_matricula"/>.
                                     <t t-if ="o.confirmation_date==False"></t>
                                     <t t-else="">
                                         <span t-esc="o.confirmation_date.strftime('%d')"/>
@@ -604,17 +604,19 @@
                                     <t t-if="len(o.order_line)>1">
                                         <span t-esc="o.precio_primer_pago"/>
                                         ( 00/100 <span t-field="o.currency_id.sat_currency_id.display_name"/> )
+                                        , a partir
+                                        <t t-if ="o.x_Fecha_Primer_Recibo==False"></t>
+                                        <t t-else="">
+                                            del día
+                                            <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%d')"/> del mes
+                                            <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%m')"/> del año
+                                            <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%Y')"/>
+                                        </t>
                                     </t>
                                     <t t-else="">
                                     </t>
                                     <!--<span t-field="o.currency_id.symbol"/>-->
-                                    , a partir del mes
-                                    <t t-if ="o.x_Fecha_Primer_Recibo==False"> el dia del año</t>
-                                    <t t-else="">
-                                        <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%m')"/> el día
-                                        <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%d')"/> del año
-                                        <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%Y')"/>
-                                    </t>
+
                                     <br/><br/>
 
 <!--                                    <t t-foreach="o.order_line" t-as="l">-->
