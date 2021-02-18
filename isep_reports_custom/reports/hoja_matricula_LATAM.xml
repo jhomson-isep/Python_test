@@ -603,10 +603,12 @@
                                     mensualidades de
                                     <t t-if="len(o.order_line)>1">
                                         <span t-esc="o.precio_primer_pago"/>
+                                        ( 00/100 <span t-field="o.currency_id.sat_currency_id.display_name"/> )
                                     </t>
                                     <t t-else="">
                                     </t>
-                                    [ MXN ] Peso mexicano, a partir del mes
+                                    <!--<span t-field="o.currency_id.symbol"/>-->
+                                    , a partir del mes
                                     <t t-if ="o.x_Fecha_Primer_Recibo==False"> el dia del año</t>
                                     <t t-else="">
                                         <span t-esc="o.x_Fecha_Primer_Recibo.strftime('%m')"/> el día
