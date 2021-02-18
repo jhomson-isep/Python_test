@@ -614,6 +614,7 @@
                                         </t>
                                     </t>
                                     <t t-else="">
+                                        (No Aplica)
                                     </t>
                                     <!--<span t-field="o.currency_id.symbol"/>-->
 
