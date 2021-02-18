@@ -338,17 +338,17 @@
                         </div>
 
 
-                        <div class="row container-fluid" style="margin-top:20px">
-                           <img src="/isep_reports_custom/static/src/img/footer_isep2.png"/>
-                        </div>
+                       <!--18-02-2021-->
+                       <div class="row container-fluid">
+                           <img style="z-index:-1;position:relative;margin-top:20px;margin-bottom:0px;" src="/isep_reports_custom/static/src/img/footer_isep2.png"/>
 
+                       </div>
 
                         <div class="footer container-fluid">
-                           <div class="row container-fluid">
+<!--                           <div class="row container-fluid">-->
                                 <img src="/isep_reports_custom/static/src/img/footer_isep3.png"/>
-                           </div>
+<!--                           </div>-->
                         </div> <!--footer-->
-
                         </div><!-- first_page-->
 
                         <div class="page" name="second_page" style="font-family:Arial, serif;font-size:11px;text-align:justify;page-break-after:always;">
