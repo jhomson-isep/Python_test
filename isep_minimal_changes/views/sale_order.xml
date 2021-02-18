@@ -10,7 +10,7 @@
 
                 <xpath expr="//button[@name='print_quotation']" position="before">
                     <button name="action_credit_card_typeform" type="object" string="Enviar email de tarjeta"
-                            attrs="{'invisible': [('company_id', '!=', 1111)]}"
+                            attrs="{'invisible': [('company_id', 'not in', (1111, 1))]}"
                             class="oe_highlight" />
                 </xpath>
 
