@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError 
 from pydrive.auth import GoogleAuth
@@ -54,21 +53,24 @@ class OpGdriveDocuments(models.Model):
                 'mimetype': file['mimeType']
                 })
             logger.info("atachment_id: {0}".format(attachment.id))
-        except AuthError as e:
-            logger.info(e)
-            raise ValidationError(_('Error de auotrizacion con google drive: %s' % e))
         except AuthenticationError as e:
             logger.info(e)
             raise ValidationError(_('Error de autentificacion con google drive: %s' % e))
         except AuthenticationRejected as e:
             logger.info(e)
             raise ValidationError(_('Autentificacion rechazada por google drive: %s' % e))
+        except AuthError as e:
+            logger.info(e)
+            raise ValidationError(_('Error de auotrizacion con google drive: %s' % e))
         except ApiRequestError as e:
             logger.info(e)
             raise ValidationError(_('Error al acceder a google drive: %s!!' % e))
         except FileNotDownloadableError as e:
             logger.info(e)
             raise ValidationError(_('Error no se puede descargar el archivo: %s!!' % e))
+        except Exception as e:
+            logger.info(e)
+            raise ValidationError(_('Error: %s!!' % e))
             
         return {
             'type': 'ir.actions.act_url',
@@ -122,21 +124,24 @@ class OpGdriveDocuments(models.Model):
             values['file'] = b''
             values['folder_id'] = folder['id']
             values['drive_id'] = file['id']
-        except AuthError as e:
-            logger.info(e)
-            raise ValidationError(_('Error de auotrizacion con google drive: %s' % e))
         except AuthenticationError as e:
             logger.info(e)
             raise ValidationError(_('Error de autentificacion con google drive: %s' % e))
         except AuthenticationRejected as e:
             logger.info(e)
             raise ValidationError(_('Autentificacion rechazada por google drive: %s' % e))
+        except AuthError as e:
+            logger.info(e)
+            raise ValidationError(_('Error de auotrizacion con google drive: %s' % e))
         except ApiRequestError as e:
             logger.info(e)
             raise ValidationError(_('Error al acceder a google drive: %s!!' % e))
         except FileNotUploadedError as e:
             logger.info(e)
             raise ValidationError(_('Error no se puede cargar un archivo: %s!!' % e))
+        except Exception as e:
+            logger.info(e)
+            raise ValidationError(_('Error: %s!!' % e))
         end = time.time()
         print(f"Runtime of the program is {end - start}")
         return values
@@ -218,11 +223,13 @@ class OpGdriveDocuments(models.Model):
             drive = GoogleDrive(gauth)
             file = drive.CreateFile({'id': drive_id, 'parents': [{'id': folder_id}]})
             file.Delete()
-        except AuthError as e:
-            logger.info(e)
         except AuthenticationError as e:
             logger.info(e)
         except AuthenticationRejected as e:
             logger.info(e)
+        except AuthError as e:
+            logger.info(e)
         except ApiRequestError as e:
+            logger.info(e)
+        except Exception as e:
             logger.info(e)
