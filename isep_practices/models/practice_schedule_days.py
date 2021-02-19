@@ -1,4 +1,5 @@
-from odoo import fields, models
+# -*- encoding: utf-8 -*-
+from odoo import fields, models, api
 
 class PracticeScheduleDays(models.Model):
     _name = 'practice.schedule.days'
@@ -11,7 +12,12 @@ class PracticeScheduleDays(models.Model):
         ('wednesday', 'Miercoles'),
         ('thursday', 'Jueves'),
         ('friday', 'Viernes'),
+        ('saturday', 'Sabado'),
     ], 'Day')
-    start_time = fields.Datetime(string='Start Time')
-    end_time = fields.Datetime(string='End Time')
     practice_schedule_id = fields.Many2one('practice.schedule', string="Schedule", required=True)
+
+    def getDay(self):
+        return dict(self._fields['day'].selection).get(self.day)
+
+
+

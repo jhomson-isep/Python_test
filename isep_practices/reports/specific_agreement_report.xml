@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <report id="report_specific_agreement"
+                string="Report specific agreement"
+                model="practice.practice"
+                report_type="qweb-pdf"
+                name="isep_practices.report_specific_agreement_template"
+        />
+        <template id="report_specific_agreement_template">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <t t-foreach="docs" t-as="o">
+                    <div class="header">
+
+                    </div>
+                    <div class="page">
+                        <h4>CONVENIO ESPECÍFICO ANEXO</h4>
+                        <P>AL CONVENIO DE COLABORACIÓN PARA LA REALIZACIÓN DE PRÁCTICAS DE FORMACIÓN ENTRE ISEP FORMACIÓN Y <span t-field="o.center_id"/></P>
+                        <span>En [Provincia], a [nro día] de [mes] de [año]</span>
+                        <p>
+                            En el marco del convenio suscrito por ISEP Formación y <span t-field="o.center_id"/> para la realización de prácticas formativas,
+                            se acuerda la realización de prácticas del alumno del <span t-field="o.op_course_id"/>, <span t-field="o.op_student_id"/>,
+                            con documento de identidad <span t-field="o.op_student_id.document_number"/> bajo las siguientes
+                        </p>
+                            <h4>Cláusulas</h4>
+                            <p>
+                                <strong>PRIMERA: </strong>Las prácticas se realizarán desde el día <span t-field="o.start_date" t-options='{"format":"dd-MM-yyyy"}'/>, hasta el día
+                                <span t-field="o.final_date" t-options="{'format':'dd-MM-yyyy'}"/>, con una duración estimada de <span t-field="o.total_hours" /> horas.
+                            </p>
+                            <p>
+                                <strong>SEGUNDA: </strong>La  supervisión de las prácticas del alumno/a será llevada a cabo <span t-field="o.tutor_id"/>,
+                                con documento de identidad [dni].
+                            </p>
+                            <p>
+                                <strong>TERCERA: </strong>EL alumno se compromete a:
+                                <ul>
+                                    <li>
+                                        <p>
+                                            Ser puntual. En los casos en los que se trate con pacientes o usuarios del servicio, deberá llegar, como mínimo,
+                                        con 10 minutos de antelación sobre la hora concertada para la visita.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            Asistir a todas las sesiones de prácticas programadas.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            No establecer ningún vinculo personal con los/las pacientes/usuarias o familiares, fuera del centro.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            Adaptarse a los horarios de visita, terapia o trabajo con pacientes o usuarios, dentro de la franja horaria pactada
+                                        con el centro y a la metodología de trabajo del centro.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            Seguir las pautas establecidas por el responsable del centro de prácticas, en cualquier caso:
+                                            <ol type='a'>
+                                                <li>
+                                                    <p>
+                                                        No intervenir si el terapeuta o tutor responsable no le da permiso para hacerlo.
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p>
+                                                        Mantener el secreto profesional y comentar exclusivamente con el tutor la información
+                                                        confidencial de los usuarios o pacientes.
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p>
+                                                        Abandonar la sesión  si el paciente o terapeuta así lo solicitan.
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p>
+                                                        No utilizar la documentación, material, etc. del centro, sin permiso del tutor.
+                                                    </p>
+                                                </li>
+
+                                            </ol>
+                                        </p>
+
+                                    </li>
+                                    <li>
+                                        <p>
+                                            Realizar las tareas propias del servicio o trabajo con los pacientes o usuarios que le encargue el/la responsable
+                                        del centro  (investigación, elaboración de pautas, de test, etc.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            No hacer uso, reproducir, explotar comercialmente u otras actuaciones de naturaleza análoga, mas allá de la propia
+                                        Memoria o Trabajo de las actividades.
+                                        </p>
+                                        <p>
+                                            Elaboradas en les prácticas, y que gocen de la protección que les concede la Ley de Propiedad Intelectual, aprobada
+                                            por Real Decreto legislativo 1/1996, de 12 de abril, la Ley 20/2003, de 7 de julio, del Diseño industrial, la Ley
+                                            17/2001, de 7 de diciembre, de Marcas, la Ley 11/1986, de 20 de marzo, de Patentes, y otras disposiciones concordantes.
+                                        </p>
+                                    </li>
+
+                                </ul>
+                            </p>
+                            <p>
+                                <strong>CUARTA: </strong> Las tareas que el alumno puede abordar durante el período de prácticas del <span t-field="o.op_course_id"/> son:
+                                <ul>
+                                    <li>Observación de casos.</li>
+                                    <li>Entrevistas diagnósticas y pasación de test.</li>
+                                    <li>Soporte en el diseño de las sesiones de tratamiento y registro de las  sesiones.</li>
+                                    <li>Supervisión y soporte en algunos casos y siempre que ha sido posible, en el ámbito de terapia.</li>
+                                    <li>Revisión de historiales clínicos.</li>
+                                    <li>Búsqueda bibliográfica e investigación relevante al ámbito de la terapia y/o del centro.</li>
+                                </ul>
+                            </p>
+                            <p>
+                                <strong>QUINTA: </strong> Durante el período de prácticas en <span t-field="o.center_id"/>, los seguros pertinentes de
+                                cobertura del alumno (de responsabilidad civil, de accidentes personales y de   asistencia sanitaria) corren a
+                                cargo de ISEP Formación.
+                            </p>
+                            <p>
+                                <strong>SEXTA: </strong>Las partes se reservan la facultad de rescindir unilateralmente este convenio.
+                            </p>
+                            <p>
+                                <strong>SÉPTIMA: </strong>Estas prácticas no son remuneradas
+                            </p>
+                            <p>
+                                Las partes implicadas muestran su conformidad con las cláusulas expuestas y firman por triplicado en el lugar y fecha arriba indicados.
+                            </p>
+
+                    </div>
+                    <div class="footer">
+
+                    </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
