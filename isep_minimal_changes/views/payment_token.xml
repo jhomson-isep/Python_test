@@ -14,12 +14,12 @@
 
                 <xpath expr="//field[@name='acquirer_ref']" position="attributes">
                     <attribute name="groups">base.group_system,account.group_account_manager,sales_team
-                        .group_sale_manager,account.group_account_invoice</attribute>
+                        .group_sale_manager,account.group_account_invoice,base.module_category_usability.Asesor</attribute>
                 </xpath>
 
                  <xpath expr="//field[@name='csv']" position="attributes">
                     <attribute name="groups">base.group_system,account.group_account_manager,sales_team
-                        .group_sale_manager,account.group_account_invoice</attribute>
+                        .group_sale_manager,account.group_account_invoice,base.module_category_usability.Asesor</attribute>
                 </xpath>
 
             </field>
@@ -37,7 +37,7 @@
 
                 <xpath expr="//field[@name='acquirer_ref']" position="attributes">
                     <attribute name="groups">base.group_system,account.group_account_manager,sales_team
-                        .group_sale_manager,account.group_account_invoice</attribute>
+                        .group_sale_manager,account.group_account_invoice,base.module_category_usability.Asesor</attribute>
                 </xpath>
 
             </field>
