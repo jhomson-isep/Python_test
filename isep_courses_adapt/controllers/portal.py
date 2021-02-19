@@ -1,5 +1,4 @@
 from datetime import date
-
 from odoo import http, _, fields
 from odoo.addons.portal.controllers.mail import _message_post_helper
 from odoo.exceptions import AccessError, MissingError
@@ -158,11 +157,6 @@ class GoogleDriveController(CustomerPortal):
                         'document_type_id': document.document_type_id,
                     })
                     return request.redirect("/my/documents")
-                except AuthError as e:
-                    logger.info(e)
-                    error['AuthError'] = 'error'
-                    error_message.append(_('Error de auotrizacion con google drive: %s' % e))
-                    values.update({'error': error, 'error_message': error_message})
                 except AuthenticationError as e:
                     logger.info(e)
                     error['AuthenticationError'] = 'error'
@@ -173,6 +167,11 @@ class GoogleDriveController(CustomerPortal):
                     error['AuthenticationRejected'] = 'error'
                     error_message.append(_('Autentificacion rechazada por google drive: %s' % e))
                     values.update({'error': error, 'error_message': error_message})
+                except AuthError as e:
+                    logger.info(e)
+                    error['AuthError'] = 'error'
+                    error_message.append(_('Error de auotrizacion con google drive: %s' % e))
+                    values.update({'error': error, 'error_message': error_message})
                 except ApiRequestError as e:
                     logger.info(e)
                     error['ApiRequestError'] = 'error'
@@ -182,6 +181,11 @@ class GoogleDriveController(CustomerPortal):
                     logger.info(e)
                     error['FileNotUploadedError'] = 'error'
                     error_message.append(_('Error no se puede cargar un archivo: %s!!' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except Exception as e:
+                    logger.info(e)
+                    error['ExceptionError'] = 'error'
+                    error_message.append(_('Error: %s!!' % e))
                     values.update({'error': error, 'error_message': error_message})
         return request.render("isep_courses_adapt.portal_documents_update",
                               values)
@@ -223,11 +227,6 @@ class GoogleDriveController(CustomerPortal):
                         'documents_ids': documents_ids,
                     })
                     return request.redirect("/my/documents")
-                except AuthError as e:
-                    logger.info(e)
-                    error['AuthError'] = 'error'
-                    error_message.append(_('Error de auotrizacion con google drive: %s' % e))
-                    values.update({'error': error, 'error_message': error_message})
                 except AuthenticationError as e:
                     logger.info(e)
                     error['AuthenticationError'] = 'error'
@@ -238,6 +237,11 @@ class GoogleDriveController(CustomerPortal):
                     error['AuthenticationRejected'] = 'error'
                     error_message.append(_('Autentificacion rechazada por google drive: %s' % e))
                     values.update({'error': error, 'error_message': error_message})
+                except AuthError as e:
+                    logger.info(e)
+                    error['AuthError'] = 'error'
+                    error_message.append(_('Error de auotrizacion con google drive: %s' % e))
+                    values.update({'error': error, 'error_message': error_message})
                 except ApiRequestError as e:
                     logger.info(e)
                     error['ApiRequestError'] = 'error'
@@ -247,6 +251,11 @@ class GoogleDriveController(CustomerPortal):
                     logger.info(e)
                     error['FileNotUploadedError'] = 'error'
                     error_message.append(_('Error no se puede cargar un archivo: %s!!' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except Exception as e:
+                    logger.info(e)
+                    error['ExceptionError'] = 'error'
+                    error_message.append(_('Error: %s!!' % e))
                     values.update({'error': error, 'error_message': error_message})
         return request.render("isep_courses_adapt.portal_documents_create",
                               values)
@@ -273,11 +282,6 @@ class GoogleDriveController(CustomerPortal):
                                         ('Content-Disposition',
                                         content_disposition(file['title']))
                                         ])
-        except AuthError as e:
-            logger.info(e)
-            error['AuthError'] = 'error'
-            error_message.append(_('Error de auotrizacion con google drive: %s' % e))
-            values.update({'error': error, 'error_message': error_message})
         except AuthenticationError as e:
             logger.info(e)
             error['AuthenticationError'] = 'error'
@@ -288,10 +292,20 @@ class GoogleDriveController(CustomerPortal):
             error['AuthenticationRejected'] = 'error'
             error_message.append(_('Autentificacion rechazada por google drive: %s' % e))
             values.update({'error': error, 'error_message': error_message})
+        except AuthError as e:
+            logger.info(e)
+            error['AuthError'] = 'error'
+            error_message.append(_('Error de auotrizacion con google drive: %s' % e))
+            values.update({'error': error, 'error_message': error_message})
         except ApiRequestError as e:
             logger.info(e)
             error['ApiRequestError'] = 'error'
             error_message.append(_('Error al acceder a google drive: %s!!' % e))
+        except Exception as e:
+            logger.info(e)
+            error['ExceptionError'] = 'error'
+            error_message.append(_('Error: %s!!' % e))
+            values.update({'error': error, 'error_message': error_message})
 
     @http.route(['/my/gdrive/documents'], type='http', auth='user', website=True)
     def my_gdrive_documents(self):
@@ -337,11 +351,6 @@ class GoogleDriveController(CustomerPortal):
                         'partner': partner,
                         'documents_ids': documents_ids,
                     })
-                except AuthError as e:
-                    logger.info(e)
-                    error['AuthError'] = 'error'
-                    error_message.append(_('Error de auotrizacion con google drive: %s' % e))
-                    values.update({'error': error, 'error_message': error_message})
                 except AuthenticationError as e:
                     logger.info(e)
                     error['AuthenticationError'] = 'error'
@@ -351,6 +360,11 @@ class GoogleDriveController(CustomerPortal):
                     logger.info(e)
                     error['AuthenticationRejected'] = 'error'
                     error_message.append(_('Autentificacion rechazada por google drive: %s' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except AuthError as e:
+                    logger.info(e)
+                    error['AuthError'] = 'error'
+                    error_message.append(_('Error de auotrizacion con google drive: %s' % e))
                     values.update({'error': error, 'error_message': error_message})
                 except ApiRequestError as e:
                     logger.info(e)
@@ -362,6 +376,12 @@ class GoogleDriveController(CustomerPortal):
                     error['FileNotUploadedError'] = 'error'
                     error_message.append(_('Error no se puede cargar un archivo: %s!!' % e))
                     values.update({'error': error, 'error_message': error_message})
+                except Exception as e:
+                    logger.info(e)
+                    error['ExceptionError'] = 'error'
+                    error_message.append(_('Error: %s!!' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                
         return request.render("isep_courses_adapt.gdrive_create", values)
 
     @http.route(['/my/gdrive/update/<int:doc_id>'],
@@ -397,11 +417,6 @@ class GoogleDriveController(CustomerPortal):
                         'doc_id': doc_id,
                         'document_type_id': document_ids.document_type_id,
                     })
-                except AuthError as e:
-                    logger.info(e)
-                    error['AuthError'] = 'error'
-                    error_message.append(_('Error de auotrizacion con google drive: %s' % e))
-                    values.update({'error': error, 'error_message': error_message})
                 except AuthenticationError as e:
                     logger.info(e)
                     error['AuthenticationError'] = 'error'
@@ -412,6 +427,11 @@ class GoogleDriveController(CustomerPortal):
                     error['AuthenticationRejected'] = 'error'
                     error_message.append(_('Autentificacion rechazada por google drive: %s' % e))
                     values.update({'error': error, 'error_message': error_message})
+                except AuthError as e:
+                    logger.info(e)
+                    error['AuthError'] = 'error'
+                    error_message.append(_('Error de auotrizacion con google drive: %s' % e))
+                    values.update({'error': error, 'error_message': error_message})
                 except ApiRequestError as e:
                     logger.info(e)
                     error['ApiRequestError'] = 'error'
@@ -421,6 +441,11 @@ class GoogleDriveController(CustomerPortal):
                     logger.info(e)
                     error['FileNotUploadedError'] = 'error'
                     error_message.append(_('Error no se puede cargar un archivo: %s!!' % e))
+                    values.update({'error': error, 'error_message': error_message})
+                except Exception as e:
+                    logger.info(e)
+                    error['ExceptionError'] = 'error'
+                    error_message.append(_('Error: %s!!' % e))
                     values.update({'error': error, 'error_message': error_message})
         return request.render("isep_courses_adapt.op_gdrive_update", values)
 
@@ -492,11 +517,6 @@ class GoogleDriveController(CustomerPortal):
                 [('Content-Type', file['mimeType']),
                 ('Content-Disposition', content_disposition(file['title']))
             ])
-        except AuthError as e:
-            logger.info(e)
-            error['AuthError'] = 'error'
-            error_message.append(_('Error de auotrizacion con google drive: %s' % e))
-            values.update({'error': error, 'error_message': error_message})
         except AuthenticationError as e:
             logger.info(e)
             error['AuthenticationError'] = 'error'
@@ -507,7 +527,17 @@ class GoogleDriveController(CustomerPortal):
             error['AuthenticationRejected'] = 'error'
             error_message.append(_('Autentificacion rechazada por google drive: %s' % e))
             values.update({'error': error, 'error_message': error_message})
+        except AuthError as e:
+            logger.info(e)
+            error['AuthError'] = 'error'
+            error_message.append(_('Error de auotrizacion con google drive: %s' % e))
+            values.update({'error': error, 'error_message': error_message})
         except ApiRequestError as e:
             logger.info(e)
             error['ApiRequestError'] = 'error'
             error_message.append(_('Error al acceder a google drive: %s!!' % e))
+        except Exception as e:
+            logger.info(e)
+            error['ExceptionError'] = 'error'
+            error_message.append(_('Error: %s!!' % e))
+            values.update({'error': error, 'error_message': error_message})
