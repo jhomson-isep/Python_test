@@ -1,0 +1,9 @@
+.line{
+    display: flex;
+}
+.space{
+    margin-left: 20px;
+}
+.down{
+    margin-top: 28.5px;
+}

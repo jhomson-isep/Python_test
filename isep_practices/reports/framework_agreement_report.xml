@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <report id="report_framework_agreement"
+                string="Report framework agreement"
+                model="practice.practice"
+                report_type="qweb-pdf"
+                name="isep_practices.report_framework_agreement_template"
+        />
+        <template id="report_framework_agreement_template">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <div class="header">
+                        <h3>CONVENIO ESPECÍFICO ANEXO</h3>
+                        <P>AL CONVENIO DE COLABORACIÓN PARA LA REALIZACIÓN DE PRÁCTICAS DE FORMACIÓN ENTRE ISEP FORMACIÓN Y ISEP CLÍNIC BARCELONA</P>
+                    </div>
+                    <div class="page">
+                        <h1>Convenio Marco</h1>
+                    </div>
+                    <div class="footer">
+
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

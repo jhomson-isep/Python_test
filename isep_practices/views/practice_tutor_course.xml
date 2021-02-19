@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
                 <tree string="Association tutor course">
                     <field name="op_course_id"/>
-                    <field name="practice_tutor_id"/>
+                    <field name="tutor_id"/>
                 </tree>
             </field>
         </record>
@@ -23,7 +23,7 @@
                     <sheet>
                         <group col="4">
                             <field name="op_course_id" />
-                            <field name="practice_tutor_id"/>
+                            <field name="tutor_id"/>
                         </group>
                     </sheet>
                 </form>
@@ -37,7 +37,7 @@
             <field name="arch" type="xml">
                 <search string="Association tutor course">
                     <field name="op_course_id"/>
-                    <field name="practice_tutor_id"/>
+                    <field name="tutor_id"/>
                 </search>
             </field>
         </record>

@@ -18,17 +18,22 @@
         'portal',
         'openeducat_core',
         'openeducat_fees',
+        'openeducat_admission'
     ],
     'data': [
         'security/ir.model.access.csv',
+        'portal/portal_practice.xml',
+        'reports/specific_agreement_report.xml',
+        'reports/framework_agreement_report.xml',
         'views/practice_temary.xml',
-        'views/practice_phase.xml',
-        'views/practice_tutor.xml',
         'views/practice_tutor_course.xml',
         'views/practice_schedule_days.xml',
         'views/practice_schedule.xml',
-        'views/practice_center.xml',
         'views/practice_practice.xml',
+        'views/res_partner_center.xml',
+        'views/res_partner_change.xml',
+        'views/practice_center_course.xml',
+        'views/practice_center_tutor.xml',
         'menu/isep_practices_menu.xml'
     ],
 

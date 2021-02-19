@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="view_res_partner_form_inherit" model="ir.ui.view">
+            <field name="name">practice.tutor_course.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="priority" eval="2"/>
+            <field name="inherit_id" ref="openeducat_core.student_portal_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('portal_user')]/group/field[@name='is_student']" position="replace">
+                    <field name="is_student" attrs="{'readonly': [('center','=', True)]}"/>
+                </xpath>
+                <xpath expr="//div[hasclass('portal_user')]/group/field[@name='is_parent']" position="replace">
+                    <field name="is_parent" attrs="{'readonly': [('center','=', True)]}"/>
+                </xpath>
+                <xpath expr="//div[hasclass('portal_user')]/group/field[@name='is_student']" position="after">
+                    <field name="tutor" attrs="{'readonly': [('center','=', True)]}"/>
+                    <field name="center" attrs="{'readonly': ['|',('tutor','=', True),'|', ('is_student','=', True), ('is_parent','=', True)]}"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

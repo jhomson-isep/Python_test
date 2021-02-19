@@ -2,13 +2,38 @@
 <odoo>
     <data>
 
+        <record id="practice_view_kanban" model="ir.ui.view">
+            <field name="name">practice.kanban</field>
+            <field name="model">practice.practice</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="status_phase" quick_create="false">
+                    <field name="status_phase"/>
+                    <progressbar field="status_phase" colors='{"started": "success", "finished": "danger", "not Finished": "warning"}'/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_content oe_kanban_global_click">
+                                <div>
+                                    <strong class="o_kanban_record_title"><span><field name="op_student_id"/></span></strong>
+                                </div>
+                                <div>
+                                    <span class="o_kanban_record_subtitle"><field name="op_course_id"/></span>
+                                </div>
+                                <div>
+                                    <field name="center_id"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
         <record id="view_practice_practice_tree" model="ir.ui.view">
             <field name="name">practice.practice.tree</field>
             <field name="model">practice.practice</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <tree string="Practice">
-                    <field name="practice_center_id"/>
                     <field name="op_course_id"/>
                 </tree>
             </field>
@@ -20,23 +45,30 @@
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <form string="Practice">
+                    <header>
+                        <field name="status_phase" widget="statusbar" statusbar_visible="finished,started,not finished" statusbar_colors='{"invoice_except":"red","waiting_date":"blue"}'/><!--clickable="True"-->
+                    </header>
                     <sheet>
                         <group col="4">
-                            <field name="op_course_id" required="1"/>
-                            <field name="practice_center_id" required="1"/>
-                            <field name="practice_tutor_id" required="1"/>
-                            <field name="practice_temary_id" required="1"/>
-                            <field name="practice_phase_id" required="1"/>
-                            <field name="weekly_hours" required="1"/>
-                            <field name="total_hours" required="1"/>
-                            <field name="start_date" required="1"/>
-                            <field name="final_date" required="1"/>
-                            <field name="signed_agreement"/>
-                            <field name="assistance_received"/>
-                            <field name="evaluation_received"/>
-                            <field name="invoice_received"/>
-                            <field name="remuneration_center"/>
-                            <field name="expected_end_date"/>
+                            <sheet>
+                                <group string="Datos de la Práctica">
+                                    <field name="center_id" required="1"/>
+                                    <field name="tutor_id" required="1"/>
+                                    <field name="total_hours" required="1"/>
+                                    <field name="weekly_hours" required="1"/>
+                                    <field name="start_date" required="1" widget="date"/>
+                                    <field name="final_date" required="1" widget="date"/>
+                                    <field name="remuneration_center" attrs="{'invisible': [('payment_center','=', False)], 'required': [('payment_center','=', True)]}"/>
+                                    <field name="payment_center"/>
+                                </group>
+                            </sheet>
+                            <sheet>
+                                <group string="Datos Academicos">
+                                    <field name="op_student_id" />
+                                    <field name="op_admission_id" />
+                                    <field name="op_course_id" required="1"/>
+                                </group>
+                            </sheet>
                         </group>
                     </sheet>
                     <div class="oe_chatter">
@@ -54,7 +86,6 @@
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <search string="Practice">
-                    <field name="practice_center_id"/>
                     <field name="op_course_id"/>
                 </search>
             </field>
@@ -65,7 +96,7 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">practice.practice</field>
             <field name="view_type">form</field>
-            <field name="view_mode">form,tree</field>
+            <field name="view_mode">form,tree,kanban</field>
             <field name="search_view_id" ref="view_practice_practice_search"/>
         </record>
 

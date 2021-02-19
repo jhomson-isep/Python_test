@@ -22,23 +22,6 @@ msgid "Practice"
 msgstr "Prácticas"
 
 #. module: isep_practices
-#: model:ir.ui.menu,name:isep_practices.submenu_phase
-#: model:ir.actions.act_window,name:isep_practices.act_open_practice_phase_view
-#: model:ir.model,name:isep_practices.model_practice_phase
-msgid "Phase"
-msgstr "Fase"
-
-#. module: isep_practices
-#: model:ir.model.fields,field_description:isep_practices.field_practice_phase__code
-msgid "Code"
-msgstr "Código"
-
-#. module: isep_practices
-#: model:ir.model.fields,field_description:isep_practices.field_practice_phase__name
-msgid "Name"
-msgstr "Nombre"
-
-#. module: isep_practices
 #: model:ir.ui.menu,name:isep_practices.submenu_temary
 #: model:ir.actions.act_window,name:isep_practices.act_open_practice_temary_view
 #: model:ir.model,name:isep_practices.model_practice_temary
@@ -55,7 +38,6 @@ msgstr "Curso"
 #. module: isep_practices
 #: model:ir.model.fields,field_description:isep_practices.field_practice_temary__name
 #: model:ir.model.fields,field_description:isep_practices.field_practice_schedule__name
-#: model:ir.model.fields,field_description:isep_practices.field_practice_center__name
 msgid "Name"
 msgstr "Nombre"
 
@@ -65,32 +47,9 @@ msgid "Content"
 msgstr "Contenido"
 
 #. module: isep_practices
-#: model:ir.ui.menu,name:isep_practices.submenu_tutor
-#: model:ir.actions.act_window,name:isep_practices.act_open_practice_tutor_view
 #: model:ir.model.fields,field_description:isep_practices.field_practice_tutor_course__practice_tutor_id
-#: model:ir.model,name:isep_practices.model_practice_tutor
 msgid "Tutor"
 msgstr "Tutor"
-
-#. module: isep_practices
-#: model:ir.model.fields,field_description:isep_practices.field_practice_tutor__first_name
-msgid "First Name"
-msgstr "Nombre"
-
-#. module: isep_practices
-#: model:ir.model.fields,field_description:isep_practices.field_practice_tutor__last_name
-msgid "Last Name"
-msgstr "Apellido"
-
-#. module: isep_practices
-#: model:ir.model.fields,field_description:isep_practices.field_practice_tutor__dni
-msgid "Dni/Passport"
-msgstr "DNI/Pasaporte"
-
-#. module: isep_practices
-#: model:ir.model.fields,field_description:isep_practices.field_practice_tutor__emails
-msgid "Email"
-msgstr "Correo Electrónico"
 
 #. module: isep_practices
 #: model:ir.ui.menu,name:isep_practices.submenu_tutor_course
@@ -187,38 +146,3 @@ msgstr "Genero del Firmante"
 #: model:ir.model.fields,field_description:isep_practices.field_practice_center__practice_schedule_id
 msgid "Schedule"
 msgstr "Horario"
-
-#. module: isep_practices
-#: model:ir.model.fields,field_description:isep_practices.field_practice_center__city
-#: model_terms:ir.ui.view,arch_db:isep_practices.view_practice_center_form
-msgid "City"
-msgstr "Ciudad"
-
-#. module: isep_practices
-#: model:ir.model.fields,field_description:isep_practices.field_practice_center__street
-#: model_terms:ir.ui.view,arch_db:isep_practices.view_practice_center_form
-msgid "Street..."
-msgstr "Calle"
-
-#. module: isep_practices
-#: model:ir.model.fields,field_description:isep_practices.field_practice_center__state_id
-#: model_terms:ir.ui.view,arch_db:isep_practices.view_practice_center_form
-msgid "State"
-msgstr "Estado"
-
-#. module: isep_practices
-#: model:ir.model.fields,field_description:isep_practices.field_practice_center__code_postal
-#: model_terms:ir.ui.view,arch_db:isep_practices.view_practice_center_form
-msgid "ZIP"
-msgstr "Código Postal"
-
-#. module: isep_practices
-#: model:ir.model.fields,field_description:isep_practices.field_practice_center__country_id
-#: model_terms:ir.ui.view,arch_db:isep_practices.view_practice_center_form
-msgid "Country"
-msgstr "País"
-
-#. module: isep_practices
-#: model_terms:ir.ui.view,arch_db:isep_practices.view_practice_center_form
-msgid "Address"
-msgstr "Dirección"
