@@ -32,7 +32,8 @@ class PracticesController(http.Controller):
             if len(student_unique):
                 student = student_unique
                 admissions = [admissions for admissions in admission if admissions.student_id.id == student[0].id]
-            print(student)
+            else:
+                student = 'invalid'
         print(center)
         value = {'center': center_id, 'tutor': tutor_id,'student': student, 'admissions': admissions}
         return http.request.render('isep_practices.my_practices_form', value)

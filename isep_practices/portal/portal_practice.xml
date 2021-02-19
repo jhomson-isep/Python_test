@@ -21,7 +21,7 @@
                     <div class="container">
                         <div class="col-lg-8">
                             <div class="row">
-                                <t t-if="student == ''">
+                                <t t-if="student == 'invalid'">
                                     <div class="col-lg-12">
                                         <div class="alert alert-danger" role="alert">
                                             <p>No se encuentra registrado en el sistema</p><br/>
@@ -45,22 +45,12 @@
                 <div class="row o_portal_details">
                     <div class="col-lg-8">
                         <div class="row">
-                            <!--
-                            <div class="col-lg-12">
-                                <div t-if="error_message" class="alert alert-danger" role="alert">
-                                    <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br/></t>
-                                </div>
-                            </div>
-                            -->
-
-                            <t t-if="student != ''">
+                            <t t-if="student != 'invalid' and student != ''">
                                 <div t-attf-class="form-group col-xl-6">
                                 <h4>Datos Academicos</h4><br/>
                                 <label class="col-form-label" for="op_student_id">Estudiante</label>
-                                    <t t-foreach="student" t-as="students">
-                                        <input type="text" t-att-value="students.name" t-attf-class="form-control "/>
-                                        <input type="hidden" name="op_student_id" t-att-value="students.id" t-attf-class="form-control "/>
-                                    </t>
+                                    <input type="text" t-att-value="student[0].name" t-attf-class="form-control "/>
+                                    <input type="hidden" name="op_student_id" t-att-value="student[0].id" t-attf-class="form-control "/>
                                 <label class="col-form-label" for="check_in">Admission-Curso</label>
                                 <select name="op_admission_id" t-attf-class="form-control ">
                                     <t t-foreach="admissions" t-as="admission">
