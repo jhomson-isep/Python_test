@@ -31,7 +31,8 @@
         "views/crm_lead.xml",
         "views/res_config_settings.xml",
         "views/payment_token.xml",
-        "views/sale_order.xml"
+        "views/sale_order.xml",
+        "views/res_groups.xml"
     ],
     'installable': True,
 }
