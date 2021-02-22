@@ -13,11 +13,11 @@
                 </xpath>
 
                 <xpath expr="//field[@name='acquirer_ref']" position="attributes">
-                    <attribute name="groups">base.group_system,account.group_account_manager,sales_team .group_sale_manager,account.group_account_invoice,isep_minimal_changes.group_salesperson</attribute>
+                    <attribute name="groups">base.group_system,account.group_account_manager,sales_team.group_sale_manager,account.group_account_invoice,isep_minimal_changes.group_salesperson</attribute>
                 </xpath>
 
                  <xpath expr="//field[@name='csv']" position="attributes">
-                    <attribute name="groups">base.group_system,account.group_account_manager,sales_team .group_sale_manager,account.group_account_invoice,isep_minimal_changes.group_salesperson</attribute>
+                    <attribute name="groups">base.group_system,account.group_account_manager,sales_team.group_sale_manager,account.group_account_invoice,isep_minimal_changes.group_salesperson</attribute>
                 </xpath>
 
             </field>
