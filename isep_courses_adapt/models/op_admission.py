@@ -155,6 +155,7 @@ class OpAdmission(models.Model):
             gr_no = self.env['ir.sequence'].next_by_code('op.gr.number') or '0'
 
         student_values = {}
+        send_password = False
         if user is None:
             first_name = self.first_name
             if self.middle_name:
@@ -175,15 +176,20 @@ class OpAdmission(models.Model):
                 'gr_no': gr_no,
                 'n_id': gr_no,
             }
-        else:
+            send_password = True
+
+        student_access_days = self.student_id.get_student_access_days()
+        if not self.student_id.moodle_pass or student_access_days > 100:
             user_password = moodle.update_user_password(
                 user_id=user.get('id'),
                 password=password)
             logger.info(user_password)
             student_values = {
+                'moodle_id': user.get('id'),
                 'moodle_user': user.get('username'),
                 'moodle_pass': password
             }
+            send_password = True
 
         if not student.moodle_id:
             student_values.update({
@@ -230,9 +236,10 @@ class OpAdmission(models.Model):
         mail_welcome_template = self.env.ref(
             'isep_courses_adapt.student_welcome_template')
         mail_welcome_template.send_mail(self.id, force_send=True)
-        mail_access_template = self.env.ref(
-            'isep_courses_adapt.student_op_access_mail')
-        mail_access_template.send_mail(student.id, force_send=True)
+        if send_password:
+            mail_access_template = self.env.ref(
+                'isep_courses_adapt.student_op_access_mail')
+            mail_access_template.send_mail(student.id, force_send=True)
 
     @staticmethod
     def password_generator(length=8):

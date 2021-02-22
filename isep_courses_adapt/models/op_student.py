@@ -212,6 +212,16 @@ class OpStudent(models.Model):
             else:
                 record.last_access = "Nunca"
 
+    def get_student_access_days(self):
+        last_access = self.env['op.student.access'].search(
+                [('student_id', '=', self.id)], order='id desc',
+                limit=1)
+        if last_access.student_access:
+            access_ago = fields.Datetime.today() - last_access.student_access
+            return access_ago.days
+        else:
+            return 0
+
     @staticmethod
     def equal_datetimes_YYMMDDHHmm(ddtime1, ddtime2):
         return isinstance(ddtime1, datetime.datetime) and \

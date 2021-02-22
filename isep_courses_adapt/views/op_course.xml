@@ -51,6 +51,15 @@
                     <page id="page_batches" string="Batches">
                         <field name="batch_ids"></field>
                     </page>
+                    <page id="page_moodle" string="Moodle">
+                        <field name="moodle_category_ids" colspan="2" nolabel="1">
+                                <tree string="Moodle course Details" create="false" delete="false">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="moodle_category"/>
+                                </tree>
+                            </field>
+                    </page>
                 </notebook>
             </xpath>
         </field>

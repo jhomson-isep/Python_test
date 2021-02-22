@@ -12,6 +12,7 @@ class OpMoodleCoursesWizard(models.TransientModel):
     _description = "Moodle Courses Wizard"
 
     moodle_admission_wizard = fields.Many2one('op.moodle.admission.wizard')
+    group_change_wizard = fields.Many2one('op.student.group.change.wizard')
     moodle_course_id = fields.Integer(string="Course id")
     course_name = fields.Char(string="Course name")
     selected = fields.Boolean(string="Select", default=False)
@@ -23,6 +24,12 @@ class OpMoodleCoursesWizard(models.TransientModel):
     def get_moodle_course_ids(self, admission_wizard_id):
         moodle_courses = self.search(
             [('moodle_admission_wizard', '=', admission_wizard_id),
+             ('selected', '=', True)])
+        return [moodle_course.moodle_course_id for moodle_course in moodle_courses]
+
+    def get_moodle_course_by_group_change(self, change_wizard_id):
+        moodle_courses = self.search(
+            [('group_change_wizard', '=', change_wizard_id),
              ('selected', '=', True)])
         return [moodle_course.moodle_course_id for moodle_course in moodle_courses]
 

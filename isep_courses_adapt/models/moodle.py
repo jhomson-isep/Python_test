@@ -262,6 +262,44 @@ class MoodleLib:
         }
         return self.connect(function, params)
 
+    def unenrol_user(self, course_id: str, user_id: int) -> dict:
+        """
+        enrol_manual_unenrol_users
+
+        params = {
+            'enrolments[0][courseid]': course_id,
+            'enrolments[0][userid]': user_id,
+            'enrolments[0][roleid]': 5
+        }
+        :param course_id: str
+        :param user_id: int
+        :return: dict
+        """
+        function = "enrol_manual_unenrol_users"
+        params = {
+            'enrolments[0][courseid]': course_id,
+            'enrolments[0][userid]': user_id,
+            'enrolments[0][roleid]': 5
+        }
+        return self.connect(function, params)
+
+    def get_users_courses(self, user_id: int) -> dict:
+        """
+        core_enrol_get_users_courses
+
+        params = {
+            'userid': user_id
+        }
+
+        :param user_id: int
+        :return: dict
+        """
+        function = "core_enrol_get_users_courses"
+        params = {
+            'userid': user_id
+        }
+        return self.connect(function, params)
+
     def add_group_members(self, group_id: int, user_id: int) -> dict:
         """
         core_group_add_group_members
@@ -358,6 +396,14 @@ class MoodleLib:
             'members[0][cohorttype][value]': cohortid,
             'members[0][usertype][type]': 'id',
             'members[0][usertype][value]': userid
+        }
+        return self.connect(function, params)
+
+    def cohort_delete_cohort_members(self, cohort_id, user_id):
+        function = "core_cohort_delete_cohort_members"
+        params = {
+            'members[0][cohortid]': cohort_id,
+            'members[0][userid]': user_id
         }
         return self.connect(function, params)
     

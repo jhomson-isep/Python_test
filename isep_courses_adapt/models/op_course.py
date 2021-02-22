@@ -51,6 +51,9 @@ class OpCourse(models.Model):
     area_id = fields.Many2one('op.area.course', "Area of Course")
     batch_ids = fields.One2many('op.batch', 'course_id', string='Batch(s)')
     course_type_id = fields.Many2one('op.course.type', string='Course type')
+    moodle_category_ids = fields.One2many('op.moodle.category.rel',
+                                          'course_id',
+                                          string='Moodle courses')
 
     _sql_constraints = [('unique_course_code',
                          'check(1=1)',
