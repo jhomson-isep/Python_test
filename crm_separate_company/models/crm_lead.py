@@ -84,7 +84,7 @@ class CrmLead(models.Model):
             #Nombre completo del producto
             try:
                 if course.find('[') != -1:
-                    cod_curso = course[1:2]
+                    cod_curso = course[1:3]
             except Exception as e:
                 print(e)
 
