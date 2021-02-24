@@ -6,7 +6,8 @@ import traceback
 # SQL SERVER SESSION
 session_server = get_session_server_isep()
 # SQL SERVER AREAS
-scores = session_server.query(Calificaciones).order_by(desc(
+scores = session_server.query(Calificaciones).filter(
+    Calificaciones.FechaAlta > '2020-12-01').order_by(desc(
     Calificaciones.FechaAlta)).all()
 # POSTGRES SERVER SESSION
 session_pg = get_pg_session()

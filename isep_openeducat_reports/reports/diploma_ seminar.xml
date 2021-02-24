@@ -20,7 +20,7 @@
                                 <p><strong style="font-style:italic;font-size:30px;"><span t-field="o.name"></span></strong></p>
                                 <p>
                                     ha realizado con total aprovechamiento los estudios teórico-prácticos, razón por la que se otorga
-                                    el presente documento acreditativo por haber realizado el #Monográfico# cuya duración ha sido de #0 horas# en
+                                    el presente documento acreditativo por haber realizado el <span t-field="c.course_id.name"></span> cuya duración ha sido de <span t-field="c.course_id.hours"></span> horas# en
                                 </p>
                                 <p>
                                     <strong style="font-size:34px;"><span t-field="c.course_id.name"></span></strong>
