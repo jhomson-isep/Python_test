@@ -272,7 +272,7 @@
                         </div>
 
                         <div class="row" style="font-size:10px;">
-                        <div class="col-2">
+                        <div class="col-3">
                             <strong>Plazo de Pago:</strong><br/>
                             <strong>Matrícula/Pago Inicial:</strong><br/>
                             <strong>Resto Aplazado:</strong><br/>
@@ -287,7 +287,7 @@
                             <span t-field="o.pricelist_id.name"/><br/>
                             <span t-field="o.payment_mode_id.name"/><br/>
                         </div>
-                        <div class="col-8">
+                        <div class="col-6">
                             <br/><br/><br/>
                             <strong>Primer Vencimiento Aplazado:</strong>
                             <span t-field="o.x_Fecha_Primer_Recibo" style="margin-left:20px"/>
