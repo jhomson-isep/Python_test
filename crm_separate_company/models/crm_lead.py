@@ -241,6 +241,13 @@ class CrmLead(models.Model):
             # ISEP LATAM
             # ---------------------------------
             if company_id == 1111:
+                if modalidad == '001':
+                    modalidad = 'ATH'
+                    cod_sede = 'CAT'
+                elif modalidad == '010':
+                    modalidad = 'PRS'
+                elif modalidad == '100':
+                    modalidad = 'ONL'
                 # Solo se usa online en latam
                 # Carolina Araujo
                 user_id = 100000006
