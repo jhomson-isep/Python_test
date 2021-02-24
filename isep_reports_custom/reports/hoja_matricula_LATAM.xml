@@ -272,7 +272,7 @@
                         </div>
 
                         <div class="row" style="font-size:10px;">
-                        <div class="col-3">
+                        <div class="col-2">
                             <strong>Plazo de Pago:</strong><br/>
                             <strong>Matrícula/Pago Inicial:</strong><br/>
                             <strong>Resto Aplazado:</strong><br/>
@@ -280,7 +280,7 @@
                         </div>
                         <div class="col-3">
                             <span t-field="o.payment_term_id.display_name"/><br/>
-                            <span t-field="o.precio_matricula"/><br/>
+                            <span t-field="o.precio_matricula"/><br/><br/>
                             <span t-field="o.pricelist_id.currency_id"/>
                             <span t-field="o.len_cuotas"/> Plazo/s de
                             <span t-field="o.precio_primer_pago"/>
