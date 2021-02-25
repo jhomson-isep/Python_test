@@ -154,8 +154,7 @@ class MYSQL():
             INNER JOIN mdl_groups on mdl_groups.courseid = mdl_course.id
             INNER JOIN mdl_groups_members ON mdl_groups_members.groupid = mdl_groups.id and mdl_groups_members.userid = mdl_user.id
             WHERE     
-                DATE(FROM_UNIXTIME(mdl_grade_grades.timemodified, '%y/%m/%d 
-                %h:%i:%s')) BETWEEN '{0}' AND NOW()
+                DATE(FROM_UNIXTIME(mdl_grade_grades.timemodified, '%y/%m/%d %h:%i:%s')) BETWEEN {0} AND NOW()
                 AND  
                 mdl_grade_grades.finalgrade IS NOT NULL
             ORDER BY mdl_grade_grades.id DESC;
