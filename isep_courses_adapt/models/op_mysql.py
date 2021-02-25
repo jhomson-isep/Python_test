@@ -57,11 +57,11 @@ class MYSQL():
                      enumerate(value)} for value in cursor.fetchall()]
         except mysql.connector.Error as err:
             if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-                print("Something is wrong with your user name or password")
+                logger.info("Something is wrong with your user name or password")
             elif err.errno == errorcode.ER_BAD_DB_ERROR:
-                print("Database does not exist")
+                logger.info("Database does not exist")
             else:
-                print(err)
+                logger.info(err)
             rows = []
         else:
             cnx.close()
@@ -121,7 +121,12 @@ class MYSQL():
             rows = []
         return rows
 
-    def get_moodle_grades(self):
+    def get_moodle_grades(self, days=1):
+        today = datetime.datetime.now()
+        yesterday = today - datetime.timedelta(days=days)
+        yesterday = yesterday.strftime('%Y-%m-%d')
+        s = "\'"
+        yesterday = s + yesterday + s
         return self.query_with_headers(
             """
             SELECT 
@@ -137,11 +142,7 @@ class MYSQL():
             mdl_course.fullname,
             mdl_course.idnumber course_idnumber,
             mdl_course.shortname,
-            (SELECT mdl_groups.name
-             FROM
-             mdl_groups
-             WHERE mdl_groups.courseid = mdl_course.id
-             LIMIT 1) as mdl_groups_name,
+            mdl_groups.name as mdl_groups_name,
             mdl_grade_grades.finalgrade,
             mdl_grade_grades.timemodified,
             mdl_grade_grades.timecreated,
@@ -150,12 +151,15 @@ class MYSQL():
             JOIN mdl_grade_grades ON mdl_grade_items.id = mdl_grade_grades.itemid
             JOIN mdl_course ON mdl_grade_items.courseid = mdl_course.id
             JOIN mdl_user ON mdl_grade_grades.userid = mdl_user.id
+            INNER JOIN mdl_groups on mdl_groups.courseid = mdl_course.id
+            INNER JOIN mdl_groups_members ON mdl_groups_members.groupid = mdl_groups.id and mdl_groups_members.userid = mdl_user.id
             WHERE     
-                DATE(FROM_UNIXTIME(mdl_grade_grades.timemodified, '%y/%m/%d %h:%i:%s')) BETWEEN '2020/12/20' AND NOW()
+                DATE(FROM_UNIXTIME(mdl_grade_grades.timemodified, '%y/%m/%d 
+                %h:%i:%s')) BETWEEN '{0}' AND NOW()
                 AND  
                 mdl_grade_grades.finalgrade IS NOT NULL
-            ORDER BY mdl_grade_grades.id DESC
-            """
+            ORDER BY mdl_grade_grades.id DESC;
+            """.format(yesterday)
         )
 
     def get_all_attendance(self):

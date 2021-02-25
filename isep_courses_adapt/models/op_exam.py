@@ -88,36 +88,29 @@ class OpExamAttendees(models.Model):
         logger.info('***************************************')
         mysql = MYSQL()
         grades = mysql.get_moodle_grades()
-        # grade_data = {
-        #     'id': 8031, 'userid': 17508, 'idnumber': 'False',
-        #     'firstname': 'Jhon', 'lastname': 'Doe', 'department': '',
-        #     'courseid': 2050, 'categoryid': None,
-        #     'item_idnumber': 'PGSE01',
-        #     'fullname': 'Aspectos médicos de la sexualidad',
-        #     'course_idnumber': '', 'shortname': 'PGSEELR01',
-        #     'mdl_groups_name': 'PGSECATELR181A',
-        #     'finalgrade': Decimal('10.00000'),
-        #     'timemodified': 1609364302, 'timecreated': None,
-        #     'dt_created': datetime.date(2020, 12, 30)}
         for grade in grades:
             try:
+                if grade.get('mdl_groups_name') is None or grade.get(
+                        'item_idnumber') is None:
+                    continue
                 session_code = grade.get('mdl_groups_name') + grade.get(
                     'item_idnumber')
-                exam_count = self.env['op.exam'].search_count(
-                    [('exam_code', '=', session_code)])
-                if exam_count == 0:
+                logger.info("Session code:  {}".format(session_code))
+                exam = self.env['op.exam'].search(
+                    [('exam_code', '=', session_code)], limit=1)
+                if len(exam) == 0:
                     self.env['op.exam'].generate_exams_from_batch_code(
                         grade.get('mdl_groups_name'))
                 exam = self.env['op.exam'].search(
                     [('exam_code', '=', session_code)], limit=1)
+                logger.info("User id: {}".format(grade.get('userid')))
                 student = self.env['op.student'].search(
                     [('moodle_id', '=', grade.get('userid'))], limit=1)
                 if len(student) > 0 and len(exam) > 0:
-                    attendee_count = self.search_count(
+                    attendee = self.search(
                         [('student_id', '=', student.id),
-                         ('exam_id', '=', exam.id),
-                         ('marks', '>', 0)])
-                    if attendee_count == 0:
+                         ('exam_id', '=', exam.id)], limit=1)
+                    if len(attendee) == 0:
                         attendee = self.create({
                             'exam_id': exam.id,
                             'student_id': student.id,
@@ -131,7 +124,10 @@ class OpExamAttendees(models.Model):
                         logger.info("Exam attendee created: {}".format(
                             attendee.id))
                     else:
-                        logger.info("Attendee already exist: {}".format(grade))
+                        if attendee.marks != grade.get('finalgrade'):
+                            attendee.update({'marks': grade.get('finalgrade')})
+                        logger.info("Attendee already exist: {}, "
+                                    "Updating".format(grade))
                 else:
                     not_found = "Exam" if exam == 0 else "Student"
                     logger.info(
@@ -140,6 +136,7 @@ class OpExamAttendees(models.Model):
             except Exception as e:
                 logger.info(e)
                 traceback.print_tb(e.__traceback__)
+                logger.error(e, exc_info=True)
                 continue
         logger.info('***************************************')
         logger.info('*   [END] IMPORT GRADES FROM MOODLE   *')
