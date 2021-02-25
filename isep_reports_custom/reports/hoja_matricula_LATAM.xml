@@ -56,7 +56,7 @@
                         <hr style="border:2px solid #002d5f;margin-top:-2px;margin-bottom:1px;margin-top:-30px"/>
                         <div class="row">
                             <div class="col-5" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
-                                <strong style="color:white; margin-left:5px;font-size:18px;">DATOS PERSONALES DEL ALUMNO</strong>
+                                <strong style="color:white; margin-left:5px;font-size:15px;">DATOS PERSONALES DEL ALUMNO</strong>
                             </div>
                         </div>
 
@@ -174,7 +174,7 @@
                         <hr style="border:2px solid #002d5f;margin-top:-2px;margin-bottom:1px;margin-top:-10px"/>
                         <div class="row">
                             <div class="col-4" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
-                                <strong style="color:white; margin-left:5px;font-size:18px;">DATOS DE FACTURACIÓN</strong>
+                                <strong style="color:white; margin-left:5px;font-size:15px;">DATOS DE FACTURACIÓN</strong>
                             </div>
                         </div>
 
@@ -267,7 +267,7 @@
 
                         <div class="row">
                             <div class="col-7" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
-                                <strong style="color:white; margin-left:5px;font-size:18px;">CONDICIONES ACEPTADAS PARA EL PAGO DEL CURSO</strong>
+                                <strong style="color:white; margin-left:5px;font-size:15px;">CONDICIONES ACEPTADAS PARA EL PAGO DEL CURSO</strong>
                             </div>
                         </div>
 
