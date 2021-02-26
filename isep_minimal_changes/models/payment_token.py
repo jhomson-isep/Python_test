@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from datetime import datetime, timedelta
 
 
 class PaymentToken(models.Model):
@@ -15,3 +16,14 @@ class PaymentToken(models.Model):
             if card.acquirer_ref:
                 card.masked_card_number = ' '.join(['**** **** ****',
                                                     card.acquirer_ref[-4:]])
+
+    @api.model
+    def create(self, token):
+
+        date = token.get('caducidad')
+        #years on days 'cause the timedelta function do not have years attribute
+        years = 730485
+        if date.year < 2000:
+            date = date + timedelta(days=years)
+        res = super(PaymentToken, self).create(token)
+        return res
