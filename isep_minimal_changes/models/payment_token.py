@@ -25,5 +25,6 @@ class PaymentToken(models.Model):
         years = 730485
         if date.year < 2000:
             date = date + timedelta(days=years)
+            token.update({'caducidad': date})
         res = super(PaymentToken, self).create(token)
         return res
