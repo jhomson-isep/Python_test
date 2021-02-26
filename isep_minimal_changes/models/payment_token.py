@@ -21,6 +21,7 @@ class PaymentToken(models.Model):
     def create(self, token):
 
         date = token.get('caducidad')
+        date = datetime.strptime(date, '%Y-%m-%d')
         #years on days 'cause the timedelta function do not have years attribute
         years = 730485
         if date.year < 2000:
