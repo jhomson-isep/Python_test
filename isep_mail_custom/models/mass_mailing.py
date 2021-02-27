@@ -124,9 +124,7 @@ class MassMailing(models.Model):
                             "To": recipients,
                             "Subject": mailing.name,
                             "TextPart": tools.html2plaintext(mailing.body_html),
-                            "HTMLPart": mailing.body_html,
-                            "CustomCampaign": mailing.name,
-                            "DeduplicateCampaign": True
+                            "HTMLPart": mailing.body_html
                         }
                     ]
                 }
