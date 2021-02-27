@@ -135,9 +135,10 @@ class MassMailing(models.Model):
                     _logger.info(result)
                     _logger.info(result.json())
                 else:
-                    raise UserError(_("Error on mailjet connection: " % str(result.json())))
                     _logger.info(result)
                     _logger.info(result.json())
+                    raise UserError(_(
+                        "Error on mailjet connection: " % str(result.json())))
                 res_ids = mailing.get_remaining_recipients()
         return True
 
