@@ -91,6 +91,20 @@ class MassMailing(models.Model):
                     msg_id = mail.create(mail_values)
                     statistics_values.update(
                         {'mail_mail_id': msg_id.id, 'mail_mail_id_int': msg_id.id, 'message_id': msg_id.message_id})
+
+                    base_url = self.env[
+                        'ir.config_parameter'].sudo().get_param(
+                        'web.base.url').rstrip('/')
+                    link_to_replace = base_url + '/unsubscribe_from_list'
+                    unsubscribe_url = msg_id._get_unsubscribe_url(email_to)
+
+                    if link_to_replace in mailing.body_html:
+                        msg_id.update({'body_html': mailing.body_html.replace(
+                            link_to_replace,
+                            unsubscribe_url if unsubscribe_url else '#')})
+                        mailing.update({'body_html': mailing.body_html.replace(
+                            link_to_replace,
+                            unsubscribe_url if unsubscribe_url else '#')})
                     # ============= Create mail.mail ============
 
                     _logger.info("========== is_blacklisted ===========")
