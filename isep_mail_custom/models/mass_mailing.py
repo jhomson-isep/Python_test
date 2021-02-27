@@ -35,7 +35,7 @@ class MassMailing(models.Model):
                 recipients = []
                 _logger.info(mailing.mailing_model_real)
                 extra_context = self._get_mass_mailing_context()
-                recipients_list = self.env[mailing.mailing_model_real].search([('id', 'in', res_ids)], limit=50)
+                recipients_list = self.env[mailing.mailing_model_real].search([('id', 'in', res_ids)], limit=1)
                 recipients_list = recipients_list.with_context(active_ids=res_ids, **extra_context)
                 _logger.info(type(res_ids))
 
