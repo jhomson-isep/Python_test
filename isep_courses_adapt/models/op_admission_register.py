@@ -16,6 +16,8 @@ class OpAdmissionRegister(models.Model):
         'product.product', 'Course Fees', required=False,
         domain=[('type', '=', 'service')], readonly=True,
         states={'draft': [('readonly', False)]}, track_visibility='onchange')
+    max_count = fields.Integer('Maximum No. of Admission', readonly=True, 
+                               related='batch_id.students_limit', store=True)
 
     # @api.one
     # @api.onchange('batch_id')
