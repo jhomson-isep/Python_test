@@ -60,8 +60,7 @@ class OpBatch(models.Model):
     students_limit = fields.Integer(string="Students limit")
     expiration_days = fields.Integer(string="Expiration days", default=0)
     date_diplomas = fields.Datetime(string="Date diplomas")
-    modality_id = fields.Many2one('op.modality', string='Modality',
-                                  related='course_id.modality_id')
+    modality_id = fields.Many2one('op.modality', string='Modality')
     user_company_id = fields.Integer(string="Company id",
                                      compute='_get_current_user')
     op_batch_subject_rel_ids = fields.One2many('op.batch.subject.rel',
