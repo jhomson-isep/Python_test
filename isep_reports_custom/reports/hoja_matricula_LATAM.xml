@@ -340,7 +340,7 @@
                                     <br/>
 <!--                                    <t t-if="o.partner_id.vat"><span t-field="o.partner_id.vat"></span></t>-->
 <!--                                    <t t-else=""><span t-field="o.partner_id.num_reg_trib"></span></t>-->
-                                    <t t-if="o.res_partner.country_id.code=='MX'">
+                                    <t t-if="o.partner_id.country_id.code=='MX'">
                                         <span t-field="o.partner_id.vat"></span>
                                     </t>
                                     <t t-else="">
@@ -566,8 +566,14 @@
                                 <div class="col-6" style="font-size:10px;text-align:center;">
                                     <strong style="font-size:10px;"><span t-field="o.partner_id.name"/></strong>
                                     <br/>
-                                    <t t-if="o.partner_id.vat"><span t-field="o.partner_id.vat"></span></t>
-                                    <t t-else=""><span t-field="o.partner_id.num_reg_trib"></span></t>
+
+                                    <t t-if="o.partner_id.country_id.code=='MX'">
+                                        <span t-field="o.partner_id.vat"></span>
+                                    </t>
+                                    <t t-else="">
+                                        <span t-field="o.partner_id.num_reg_trib"></span>
+                                    </t>
+
                                 </div>
                                 <div class="col-6" style="font-size:10px;text-align:center;">
                                     <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.name"/></strong>
@@ -798,8 +804,14 @@
                                     <div class="col-6" style="font-size:13px;text-align:center;">
                                         <strong style="font-size:13px;"><span t-field="o.partner_id.name"/></strong>
                                         <br/>
-                                        <t t-if="o.partner_id.vat"><span t-field="o.partner_id.vat"></span></t>
-                                        <t t-else=""><span t-field="o.partner_id.num_reg_trib"></span></t>
+
+                                        <t t-if="o.partner_id.country_id.code=='MX'">
+                                        <span t-field="o.partner_id.vat"></span>
+                                        </t>
+                                        <t t-else="">
+                                            <span t-field="o.partner_id.num_reg_trib"></span>
+                                        </t>
+
                                     </div>
                                     <div class="col-6" style="font-size:13px;text-align:center;">
                                         <strong style="font-size:13px;"><span t-field="o.partner_invoice_id.name"/></strong>
