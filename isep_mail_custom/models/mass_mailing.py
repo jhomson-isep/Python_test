@@ -33,11 +33,11 @@ class MassMailing(models.Model):
 
             while len(res_ids) > 0:
                 recipients = []
-                _logger.info(mailing.mailing_model_real)
+                # _logger.info(mailing.mailing_model_real)
                 extra_context = self._get_mass_mailing_context()
                 recipients_list = self.env[mailing.mailing_model_real].search([('id', 'in', res_ids)], limit=1)
                 recipients_list = recipients_list.with_context(active_ids=res_ids, **extra_context)
-                _logger.info(type(res_ids))
+                # _logger.info(type(res_ids))
 
                 for rl in recipients_list:
                     is_blacklisted = False
@@ -107,9 +107,9 @@ class MassMailing(models.Model):
                             unsubscribe_url if unsubscribe_url else '#')})
                     # ============= Create mail.mail ============
 
-                    _logger.info("========== is_blacklisted ===========")
-                    _logger.info(is_blacklisted)
-                    _logger.info("========== is_blacklisted ===========")
+                    # _logger.info("========== is_blacklisted ===========")
+                    # _logger.info(is_blacklisted)
+                    # _logger.info("========== is_blacklisted ===========")
                     statistics = self.env['mail.mail.statistics'].with_context(active_ids=res_ids,
                                                                                **extra_context).create(
                         statistics_values)
@@ -129,13 +129,13 @@ class MassMailing(models.Model):
                     ]
                 }
 
-                _logger.info(data)
+                # _logger.info(data)
                 result = mailjet.send.create(data=data)
                 if result.status_code == 200:
-                    _logger.info(result)
+                    # _logger.info(result)
                     _logger.info(result.json())
                 else:
-                    _logger.info(result)
+                    # _logger.info(result)
                     _logger.info(result.json())
                     raise UserError(_(
                         "Error on mailjet connection: " % str(result.json())))
@@ -150,7 +150,7 @@ class MassMailing(models.Model):
         for mass_mailing in mass_mailings:
             user = mass_mailing.write_uid or self.env.user
             mass_mailing = mass_mailing.with_context(**user.sudo(user=user).context_get())
-            _logger.info(mass_mailing.use_api)
+            # _logger.info(mass_mailing.use_api)
             if not mass_mailing.use_api:
                 if len(mass_mailing.get_remaining_recipients()) > 0:
                     mass_mailing.state = 'sending'
@@ -158,9 +158,9 @@ class MassMailing(models.Model):
                 else:
                     mass_mailing.write({'state': 'done', 'sent_date': fields.Datetime.now()})
             else:
-                _logger.info("========== Use api ===========")
-                _logger.info(mass_mailing)
-                _logger.info("========== Use api ===========")
+                # _logger.info("========== Use api ===========")
+                # _logger.info(mass_mailing)
+                # _logger.info("========== Use api ===========")
                 if len(mass_mailing.get_remaining_recipients()) > 0:
                     mass_mailing.state = 'sending'
                     mass_mailing.write({'state': 'sending'})
