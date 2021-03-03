@@ -46,6 +46,11 @@ class OpAdmission(models.Model):
     mobile = fields.Char(
         'Mobile', size=32,
         states={'done': [('readonly', True)], 'submit': [('required', True)]})
+    
+    @api.multi
+    @api.constrains('register_id', 'application_date')
+    def _check_admission_register(self):
+        pass
 
     @api.multi
     def enroll_student(self, courses):
