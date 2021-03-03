@@ -696,7 +696,20 @@
                                     <span t-esc="o.partner_invoice_id.payment_token_ids[0].acquirer_ref[-4:]"/>
                                     </t>
                                     <t t-else="">
+
+                                        <t t-if="len(o.partner_id.payment_token_ids)!=0">
+                                        <span t-esc="o.partner_id.payment_token_ids[0].acquirer_ref[:8]"/>
+                                        ****
+                                        <span t-esc="o.partner_id.payment_token_ids[0].acquirer_ref[-4:]"/>
+                                        </t>
+                                        <t t-else="">
+
+                                        </t>
+
                                     </t>
+
+
+
                                 </div>
                                 <div class="col-6">
                                 </div>
