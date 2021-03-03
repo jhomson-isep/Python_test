@@ -248,6 +248,37 @@ class CrmLead(models.Model):
                     modalidad = 'PRS'
                 elif modalidad == '100':
                     modalidad = 'ONL'
+
+                # name
+                try:
+                    if modalidad == 'ONL':
+                        lead.update({
+                            'name': cod_curso +
+                                    '-' +
+                                    modalidad +
+                                    ' - ' +
+                                    email
+                        })
+                    elif modalidad == 'ATH':
+                        lead.update({
+                            'name': cod_curso +
+                                    '-' +
+                                    modalidad +
+                                    ' - ' +
+                                    email
+                        })
+                    else:
+                        lead.update({
+                            'name': cod_curso +
+                                    '-' +
+                                    modalidad +
+                                    '-' +
+                                    cod_sede +
+                                    ' - ' +
+                                    email
+                        })
+                except Exception as e:
+                    logger.info(e)
                 # Solo se usa online en latam
                 # Carolina Araujo
                 user_id = 100000006
