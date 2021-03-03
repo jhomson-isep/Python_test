@@ -35,7 +35,7 @@ class MassMailing(models.Model):
                 recipients = []
                 # _logger.info(mailing.mailing_model_real)
                 extra_context = self._get_mass_mailing_context()
-                recipients_list = self.env[mailing.mailing_model_real].search([('id', 'in', res_ids)], limit=1)
+                recipients_list = self.env[mailing.mailing_model_real].search([('id', 'in', res_ids)], limit=49)
                 recipients_list = recipients_list.with_context(active_ids=res_ids, **extra_context)
                 # _logger.info(type(res_ids))
 
@@ -121,7 +121,13 @@ class MassMailing(models.Model):
                                 "Email": mailing.email_from,
                                 "Name": mailing.email_from,
                             },
-                            "To": recipients,
+                            "To": [
+                                {
+                                    'name': 'Correo ISEP',
+                                    'email': 'certificados1@isep.com'
+                                }
+                            ],
+                            "Bcc": recipients,
                             "Subject": mailing.name,
                             "TextPart": tools.html2plaintext(mailing.body_html),
                             "HTMLPart": mailing.body_html
