@@ -427,7 +427,7 @@
 
                         <p style="page-break-after:always;"></p>
 
-                        <t t-if="o.payment_mode_id.name.find('Domiciliado') != -1  and o.cuenta_bancaria and o.mandate_id">
+                        <t t-if="(o.payment_mode_id.name.find('Domiciliado') != -1  and o.cuenta_bancaria and o.mandate_id) or (o.pay_method_id.name.find('Tarjetas de crédito') and o.payment_mode_id.name.find('On-line - Datáfono'))">
                             <div class="page" name="third_page_sepa">
                                 <div class="row" style="height:40px"/>
                                 <style type="text/css">
