@@ -170,7 +170,8 @@ class OpCourse(models.Model):
     def _check_code_area(self):
         res = self.search([('area_id', '=', self.area_id.id), ('code', '=', self.code)], limit=1)
         if res.id:
-            raise ValidationError(_('One code and area for course!'))
+            #raise ValidationError(_('One code and area for course!'))
+            pass
 
 
     def import_courses(self):
