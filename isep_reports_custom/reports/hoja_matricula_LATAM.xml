@@ -247,8 +247,8 @@
                                 <strong>Email:</strong><br/>
                             </div>
                             <div class="col-3">
-                                <span t-field="o.partner_invoice_id.city"/>
-                                <span t-field="o.partner_invoice_id.mobile"/>
+                                <span t-field="o.partner_invoice_id.city"/><br/>
+                                <span t-field="o.partner_invoice_id.mobile"/><br/>
                                 <span t-field="o.partner_invoice_id.email"/>
                             </div>
                             <div class="col-2">
@@ -256,7 +256,7 @@
                                 <strong>Teléfono fijo:</strong><br/>
                             </div>
                             <div class="col-2">
-                                <span t-field="o.partner_invoice_id.state_id"/>
+                                <span t-field="o.partner_invoice_id.state_id"/><br/>
                                 <span t-field="o.partner_invoice_id.phone"/>
                             </div>
                             </div>
@@ -269,11 +269,13 @@
                             </div>
                         </div>
                         <div class="row" style="font-size:10px;">
+                             <div class="col-12">
                                 <ul>
                                     <t t-foreach="o.order_line" t-as="l">
                                         <li><span t-field="l.product_id"/></li>
                                     </t>
                                 </ul>
+                             </div>
                         </div>
 
                         <br/>
@@ -341,7 +343,7 @@
                                 <div class="col-4" style="font-size:10px;text-align:center;"><strong><p>FIRMA DEL TITULAR<br/>(Si es distinto al alumno)</p></strong></div>
                                 <div class="col-4" style="font-size:10px;text-align:center;"><strong><p>FIRMA ISEP LATAM, S.C: <span t-field="o.company_id.name"/></p></strong></div>
                         </div>
-                        <div class="row" style="height:90px; margin-top:-30px">
+                        <div class="row" style="height:90px; margin-top:-10px">
                                 <div class="col-8"/>
                                 <div class="col-4">
                                     <img class="img-fluid img-sign" style="height:75px;display:block;margin-left:auto;margin-right:auto;margin-bottom:-10px;" src="/isep_reports_custom/static/src/img/firmaisepsl.jpg"/>
@@ -381,7 +383,7 @@
 
                        <!--18-02-2021-->
                        <div class="row container-fluid">
-                           <img style="z-index:-1;position:relative;margin-top:20px;margin-bottom:0px;" src="/isep_reports_custom/static/src/img/footer_isep2.png"/>
+                           <img style="z-index:-1;position:relative;margin-top:5px;margin-bottom:0px;" src="/isep_reports_custom/static/src/img/footer_isep2.png"/>
 
                        </div>
 
