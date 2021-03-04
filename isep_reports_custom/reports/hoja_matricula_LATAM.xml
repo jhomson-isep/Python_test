@@ -177,7 +177,7 @@
                             </div><!--First row-->
                         </div> <!--"personal_information"-->
                         <br/>
-                        <hr style="border:2px solid #002d5f;margin-top:-2px;margin-bottom:1px;margin-top:-10px"/>
+                        <hr style="border:2px solid #002d5f;margin-top:-2px;margin-bottom:1px;margin-top:-15px"/>
                         <div class="row">
                             <div class="col-4" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
                                 <strong style="color:white; margin-left:5px;font-size:15px;">DATOS DE FACTURACIÓN</strong>
@@ -192,7 +192,7 @@
                                 <strong>Nombre:</strong><br/>
                             </div>
                             <!--Second column-->
-                            <div class="col-2">
+                            <div class="col-3">
                                 <span t-field="o.partner_invoice_id.name"/><br/>
                             </div>
                             </div><!--First row-->
@@ -218,7 +218,7 @@
                                 </t>
                                 <br/>
                             </div>
-                                <br/>
+<!--                                <br/>-->
                             </div>
                         </div>
 
@@ -262,7 +262,7 @@
                             </div>
                         </div> <!--"facturacion"-->
                         <br/>
-                        <hr style="border:1px solid #002d5f;margin-bottom:1px;margin-top:-15px"/>
+                        <hr style="border:1px solid #002d5f;margin-bottom:1px;margin-top:-20px"/>
                         <div class="row">
                             <div class="col-12">
                             <p style="font-size:10px;">Recibida previamente la información detallada de las características del curso, contenido y demás cuestiones relacionadas, el alumno/titular acepta las condiciones generales y académicas amparadas en este contrato y SOLICITA LA MATRÍCULA PARA EL CURSO DE:</p>
@@ -286,7 +286,7 @@
                         </div>
 
                         <div class="row" style="font-size:10px;">
-                        <div class="col-2">
+                        <div class="col-3">
                             <strong>Plazo de Pago:</strong><br/>
                             <strong>Matrícula/Pago Inicial:</strong><br/>
                             <strong>Resto Aplazado:</strong><br/>
@@ -314,7 +314,7 @@
                             <span t-esc="var_cursos"/>
                             <span t-field="o.pricelist_id.currency_id"/>
                             <span t-field="o.pricelist_id.name"/><br/>
-                            <span t-field="o.payment_mode_id.name"/><br/>
+                            <span t-field="o.payment_mode_id.name"/>
                         </div>
                         <div class="col-6">
                             <br/><br/><br/>
