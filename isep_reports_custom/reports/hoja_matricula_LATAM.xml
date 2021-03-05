@@ -364,17 +364,18 @@
                                     </t>
                                 </div>
                                 <div class="col-4" style="font-size:10px;text-align:center;">
-                                    <strong><span t-field="o.partner_invoice_id.name"/></strong>
-                                    <br/>
-<!--                                    <t t-if="o.partner_invoice_id.vat"><span t-field="o.partner_invoice_id.vat"></span></t>-->
-<!--                                    <t t-else=""><span t-field="o.partner_invoice_id.num_reg_trib"></span></t>-->
-                                    <t t-if="o.partner_id.country_id.code=='MX'">
-                                        <span t-field="o.partner_id.vat"></span>
+
+                                    <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
+                                      <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
+                                      </strong><br/>
                                     </t>
                                     <t t-else="">
-                                        <span t-field="o.partner_id.num_reg_trib"></span>
+                                      <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.name"/>
+                                      </strong><br/>
                                     </t>
+
                                 </div>
+
                                 <div class="col-4" style="font-size:10px;text-align:center;">
                                     <strong>[Ref:<span t-field="o.name"/>]</strong>
                                 </div>
@@ -598,14 +599,14 @@
 
                                 </div>
                                 <div class="col-6" style="font-size:10px;text-align:center;">
-                                    <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.name"/></strong>
-                                    <br/>
-
-                                    <t t-if="o.partner_id.country_id.code=='MX'">
-                                        <span t-field="o.partner_id.vat"></span>
+<!--                                    <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.name"/></strong>-->
+                                    <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
+                                      <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
+                                      </strong><br/>
                                     </t>
                                     <t t-else="">
-                                        <span t-field="o.partner_id.num_reg_trib"></span>
+                                      <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.name"/>
+                                      </strong><br/>
                                     </t>
 
                                 </div>
@@ -685,7 +686,18 @@
 
                             </p>
 
-                            Nombre completo del titular de la cuenta:<span t-field="o.partner_id.name"/><br/>
+                            Nombre completo del titular de la cuenta:
+
+                            <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
+                              <span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
+                              <br/>
+                            </t>
+                            <t t-else="">
+                              <span t-field="o.partner_invoice_id.name"/>
+                              <br/>
+                            </t>
+
+                            <br/>
 
 
 
@@ -736,7 +748,17 @@
                                 <br/><br/><br/>
                                 <strong>FIRMA TITULAR:</strong>
                                 <br/><br/><br/><br/>
-                                <span t-field="o.partner_id.name"/><br/><br/>
+
+                                <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
+                                  <strong><span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
+                                  </strong><br/>
+                                </t>
+                                <t t-else="">
+                                  <strong><span t-field="o.partner_invoice_id.name"/>
+                                  </strong><br/>
+                                </t>
+
+                                <br/><br/>
                                 <strong>Fecha:</strong><br/>
                                 <t t-esc="time.strftime('%d/%m/%Y')"/>
 
@@ -857,14 +879,14 @@
 
                                     </div>
                                     <div class="col-6" style="font-size:13px;text-align:center;">
-                                        <strong style="font-size:13px;"><span t-field="o.partner_invoice_id.name"/></strong>
-                                        <br/>
 
-                                        <t t-if="o.partner_id.country_id.code=='MX'">
-                                            <span t-field="o.partner_id.vat"></span>
+                                        <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
+                                          <strong style="font-size:13px;"><span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
+                                          </strong><br/>
                                         </t>
                                         <t t-else="">
-                                            <span t-field="o.partner_id.num_reg_trib"></span>
+                                          <strong style="font-size:13px;"><span t-field="o.partner_invoice_id.name"/>
+                                          </strong><br/>
                                         </t>
 
                                     </div>
