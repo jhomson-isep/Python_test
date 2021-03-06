@@ -211,10 +211,10 @@
 <!--                                <t t-else=""><span t-field="o.partner_invoice_id.num_reg_trib"></span><br/>-->
 <!--                                </t>-->
                                 <t t-if="o.partner_id.country_id.code=='MX'">
-                                    <span t-field="o.partner_id.vat"></span>
+                                    <span t-field="o.partner_invoice_id.vat"></span>
                                 </t>
                                 <t t-else="">
-                                    <span t-field="o.partner_id.num_reg_trib"></span>
+                                    <span t-field="o.partner_invoice_id.num_reg_trib"></span>
                                 </t>
                                 <br/>
                             </div>
@@ -365,14 +365,20 @@
                                 </div>
                                 <div class="col-4" style="font-size:10px;text-align:center;">
 
-                                    <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
-                                      <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
-                                      </strong><br/>
-                                    </t>
+                                    <t t-if="o.payment_mode_id.name.find('Tarjeta') != -1"></t>
+                                        <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
+                                          <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
+                                          </strong><br/>
+                                        </t>
+                                        <t t-else="">
+                                          <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.name"/>
+                                          </strong><br/>
+                                        </t>
                                     <t t-else="">
-                                      <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.name"/>
-                                      </strong><br/>
+                                        <strong style="font-size:10px;"><span t-field="o.partner_id.name"/>
+                                        </strong><br/>
                                     </t>
+
 
                                 </div>
 
@@ -600,15 +606,19 @@
                                 </div>
                                 <div class="col-6" style="font-size:10px;text-align:center;">
 <!--                                    <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.name"/></strong>-->
-                                    <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
-                                      <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
-                                      </strong><br/>
-                                    </t>
+                                    <t t-if="o.payment_mode_id.name.find('Tarjeta') != -1"></t>
+                                        <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
+                                          <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
+                                          </strong><br/>
+                                        </t>
+                                        <t t-else="">
+                                          <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.name"/>
+                                          </strong><br/>
+                                        </t>
                                     <t t-else="">
-                                      <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.name"/>
-                                      </strong><br/>
+                                        <strong style="font-size:10px;"><span t-field="o.partner_id.name"/>
+                                        </strong><br/>
                                     </t>
-
                                 </div>
 
                         </div>
@@ -688,13 +698,18 @@
 
                             Nombre completo del titular de la cuenta:
 
-                            <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
-                              <span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
-                              <br/>
-                            </t>
+                            <t t-if="o.payment_mode_id.name.find('Tarjeta') != -1"></t>
+                                <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
+                                  <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
+                                  </strong><br/>
+                                </t>
+                                <t t-else="">
+                                  <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.name"/>
+                                  </strong><br/>
+                                </t>
                             <t t-else="">
-                              <span t-field="o.partner_invoice_id.name"/>
-                              <br/>
+                                <strong style="font-size:10px;"><span t-field="o.partner_id.name"/>
+                                </strong><br/>
                             </t>
 
                             <br/>
@@ -749,13 +764,18 @@
                                 <strong>FIRMA TITULAR:</strong>
                                 <br/><br/><br/><br/>
 
-                                <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
-                                  <strong><span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
-                                  </strong><br/>
-                                </t>
+                                <t t-if="o.payment_mode_id.name.find('Tarjeta') != -1"></t>
+                                    <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
+                                      <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
+                                      </strong><br/>
+                                    </t>
+                                    <t t-else="">
+                                      <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.name"/>
+                                      </strong><br/>
+                                    </t>
                                 <t t-else="">
-                                  <strong><span t-field="o.partner_invoice_id.name"/>
-                                  </strong><br/>
+                                    <strong style="font-size:10px;"><span t-field="o.partner_id.name"/>
+                                    </strong><br/>
                                 </t>
 
                                 <br/><br/>
@@ -849,7 +869,7 @@
 
                                 <br/><br/>
                                     Ciudad :
-                                    <span t-field="o.partner_id.city" s tyle="margin:02px"/>
+                                    <span t-field="o.partner_id.city" style="margin:02px"/>
                                     <span t-field="o.partner_id.state_id" style="margin:0 2px"/>
                                     <span t-field="o.partner_id.country_id" style="margin:0 2px"/>
 
@@ -880,14 +900,19 @@
                                     </div>
                                     <div class="col-6" style="font-size:13px;text-align:center;">
 
+                                    <t t-if="o.payment_mode_id.name.find('Tarjeta') != -1"></t>
                                         <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
-                                          <strong style="font-size:13px;"><span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
+                                          <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
                                           </strong><br/>
                                         </t>
                                         <t t-else="">
-                                          <strong style="font-size:13px;"><span t-field="o.partner_invoice_id.name"/>
+                                          <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.name"/>
                                           </strong><br/>
                                         </t>
+                                    <t t-else="">
+                                        <strong style="font-size:10px;"><span t-field="o.partner_id.name"/>
+                                        </strong><br/>
+                                    </t>
 
                                     </div>
 
