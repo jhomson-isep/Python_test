@@ -85,11 +85,17 @@
                             </div>
                             <!--Second column-->
                             <div class="col-3">
-                                <t t-if="o.partner_id.vat">
-                                    <span t-field="o.partner_id.vat"></span><br/>
+<!--                                <t t-if="o.partner_id.vat">-->
+<!--                                    <span t-field="o.partner_id.vat"></span><br/>-->
+<!--                                </t>-->
+<!--                                <t t-else="">-->
+<!--                                    <span t-field="o.partner_id.num_reg_trib"></span><br/>-->
+<!--                                </t>-->
+                                <t t-if="o.partner_id.country_id.code=='MX'">
+                                        <span t-field="o.partner_id.vat"></span>
                                 </t>
                                 <t t-else="">
-                                    <span t-field="o.partner_id.num_reg_trib"></span><br/>
+                                    <span t-field="o.partner_id.num_reg_trib"></span>
                                 </t>
                             </div>
                             <!--Third column-->
@@ -171,7 +177,7 @@
                             </div><!--First row-->
                         </div> <!--"personal_information"-->
                         <br/>
-                        <hr style="border:2px solid #002d5f;margin-top:-2px;margin-bottom:1px;margin-top:-10px"/>
+                        <hr style="border:2px solid #002d5f;margin-top:-2px;margin-bottom:1px;margin-top:-15px"/>
                         <div class="row">
                             <div class="col-4" style="background-color: #fc6c04;border-bottom-right-radius:5px;">
                                 <strong style="color:white; margin-left:5px;font-size:15px;">DATOS DE FACTURACIÓN</strong>
@@ -186,7 +192,7 @@
                                 <strong>Nombre:</strong><br/>
                             </div>
                             <!--Second column-->
-                            <div class="col-2">
+                            <div class="col-3">
                                 <span t-field="o.partner_invoice_id.name"/><br/>
                             </div>
                             </div><!--First row-->
@@ -199,12 +205,20 @@
                             </div>
                             <!--Second column-->
                             <div class="col-3">
-                                <t t-if="o.partner_id.vat">
-                                <span t-field="o.partner_invoice_id.vat"></span><br/>
+<!--                                <t t-if="o.partner_id.vat">-->
+<!--                                <span t-field="o.partner_invoice_id.vat"></span><br/>-->
+<!--                                </t>-->
+<!--                                <t t-else=""><span t-field="o.partner_invoice_id.num_reg_trib"></span><br/>-->
+<!--                                </t>-->
+                                <t t-if="o.partner_id.country_id.code=='MX'">
+                                    <span t-field="o.partner_id.vat"></span>
                                 </t>
-                                <t t-else=""><span t-field="o.partner_invoice_id.num_reg_trib"></span><br/>
+                                <t t-else="">
+                                    <span t-field="o.partner_id.num_reg_trib"></span>
                                 </t>
+                                <br/>
                             </div>
+<!--                                <br/>-->
                             </div>
                         </div>
 
@@ -233,8 +247,8 @@
                                 <strong>Email:</strong><br/>
                             </div>
                             <div class="col-3">
-                                <span t-field="o.partner_invoice_id.city"/>
-                                <span t-field="o.partner_invoice_id.mobile"/>
+                                <span t-field="o.partner_invoice_id.city"/><br/>
+                                <span t-field="o.partner_invoice_id.mobile"/><br/>
                                 <span t-field="o.partner_invoice_id.email"/>
                             </div>
                             <div class="col-2">
@@ -242,24 +256,26 @@
                                 <strong>Teléfono fijo:</strong><br/>
                             </div>
                             <div class="col-2">
-                                <span t-field="o.partner_invoice_id.state_id"/>
+                                <span t-field="o.partner_invoice_id.state_id"/><br/>
                                 <span t-field="o.partner_invoice_id.phone"/>
                             </div>
                             </div>
                         </div> <!--"facturacion"-->
                         <br/>
-                        <hr style="border:1px solid #002d5f;margin-bottom:1px;margin-top:-15px"/>
+                        <hr style="border:1px solid #002d5f;margin-bottom:1px;margin-top:-20px"/>
                         <div class="row">
                             <div class="col-12">
                             <p style="font-size:10px;">Recibida previamente la información detallada de las características del curso, contenido y demás cuestiones relacionadas, el alumno/titular acepta las condiciones generales y académicas amparadas en este contrato y SOLICITA LA MATRÍCULA PARA EL CURSO DE:</p>
                             </div>
                         </div>
                         <div class="row" style="font-size:10px;">
+                             <div class="col-12">
                                 <ul>
                                     <t t-foreach="o.order_line" t-as="l">
                                         <li><span t-field="l.product_id"/></li>
                                     </t>
                                 </ul>
+                             </div>
                         </div>
 
                         <br/>
@@ -272,7 +288,7 @@
                         </div>
 
                         <div class="row" style="font-size:10px;">
-                        <div class="col-2">
+                        <div class="col-3">
                             <strong>Plazo de Pago:</strong><br/>
                             <strong>Matrícula/Pago Inicial:</strong><br/>
                             <strong>Resto Aplazado:</strong><br/>
@@ -300,7 +316,7 @@
                             <span t-esc="var_cursos"/>
                             <span t-field="o.pricelist_id.currency_id"/>
                             <span t-field="o.pricelist_id.name"/><br/>
-                            <span t-field="o.payment_mode_id.name"/><br/>
+                            <span t-field="o.payment_mode_id.name"/>
                         </div>
                         <div class="col-6">
                             <br/><br/><br/>
@@ -338,15 +354,28 @@
                                 <div class="col-4" style="font-size:10px;text-align:center;">
                                     <strong><span t-field="o.partner_id.name"/></strong>
                                     <br/>
-                                    <t t-if="o.partner_id.vat"><span t-field="o.partner_id.vat"></span></t>
-                                    <t t-else=""><span t-field="o.partner_id.num_reg_trib"></span></t>
+<!--                                    <t t-if="o.partner_id.vat"><span t-field="o.partner_id.vat"></span></t>-->
+<!--                                    <t t-else=""><span t-field="o.partner_id.num_reg_trib"></span></t>-->
+                                    <t t-if="o.partner_id.country_id.code=='MX'">
+                                        <span t-field="o.partner_id.vat"></span>
+                                    </t>
+                                    <t t-else="">
+                                        <span t-field="o.partner_id.num_reg_trib"></span>
+                                    </t>
                                 </div>
                                 <div class="col-4" style="font-size:10px;text-align:center;">
-                                    <strong><span t-field="o.partner_invoice_id.name"/></strong>
-                                    <br/>
-                                    <t t-if="o.partner_invoice_id.vat"><span t-field="o.partner_invoice_id.vat"></span></t>
-                                    <t t-else=""><span t-field="o.partner_invoice_id.num_reg_trib"></span></t>
+
+                                    <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
+                                      <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
+                                      </strong><br/>
+                                    </t>
+                                    <t t-else="">
+                                      <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.name"/>
+                                      </strong><br/>
+                                    </t>
+
                                 </div>
+
                                 <div class="col-4" style="font-size:10px;text-align:center;">
                                     <strong>[Ref:<span t-field="o.name"/>]</strong>
                                 </div>
@@ -355,7 +384,7 @@
 
                        <!--18-02-2021-->
                        <div class="row container-fluid">
-                           <img style="z-index:-1;position:relative;margin-top:20px;margin-bottom:0px;" src="/isep_reports_custom/static/src/img/footer_isep2.png"/>
+                           <img style="z-index:-1;position:relative;margin-top:5px;margin-bottom:0px;" src="/isep_reports_custom/static/src/img/footer_isep2.png"/>
 
                        </div>
 
@@ -430,7 +459,7 @@
                                      </li>
                                 </ol>
 
-                                <strong style="margin-top:-30px">TITULACIÓN ACADÉMICA Y CERTIFICADOS</strong>
+                                <strong style="margin-top:-40px">TITULACIÓN ACADÉMICA Y CERTIFICADOS</strong>
 
                                 <ol start="9" style="margin-left:10px">
 
@@ -475,7 +504,7 @@
                                      </li>
                                  </ol>
 
-                            <strong style="margin-top:-30px">PROPIEDAD INTELECTUAL Y DERECHOS DE IMAGEN</strong>
+                            <strong style="margin-top:-40px">PROPIEDAD INTELECTUAL Y DERECHOS DE IMAGEN</strong>
 
                                 <ol start="14" style="margin-left:10px">
 
@@ -504,7 +533,7 @@
                                      </li>
                                  </ol>
 
-                            <strong style="margin-top:-30px">DURACIÓN DEL CONTRATO</strong>
+                            <strong style="margin-top:-40px">DURACIÓN DEL CONTRATO</strong>
 
                                 <ol start="17" style="margin-left:10px">
 
@@ -517,7 +546,7 @@
                                      </li>
                                  </ol>
 
-                            <strong style="margin-top:-30px">DATOS PERSONALES</strong>
+                            <strong style="margin-top:-40px">DATOS PERSONALES</strong>
 
                                 <ol start="18" style="margin-left:10px">
 
@@ -532,7 +561,7 @@
                                      </li>
                                  </ol>
 
-                            <strong style="margin-top:-30px">LEGISLACIÓN APLICABLE Y JURISDICCIÓN</strong>
+                            <strong style="margin-top:-40px">LEGISLACIÓN APLICABLE Y JURISDICCIÓN</strong>
 
                                 <ol start="19" style="margin-left:10px">
 
@@ -550,7 +579,7 @@
                                  </ol>
 
                         <br/>
-                        <div class="row sign" style="margin-top:-25px">
+                        <div class="row sign" style="margin-top:-10px">
                                 <div class="col-6" style="font-size:10px;text-align:center;"><strong><p>FIRMA DEL ALUMNO</p></strong></div>
                                 <div class="col-6" style="font-size:10px;text-align:center;"><strong><p>FIRMA DEL TITULAR<br/>(Si es distinto al alumno)</p></strong></div>
                         </div>
@@ -560,12 +589,26 @@
                                 <div class="col-6" style="font-size:10px;text-align:center;">
                                     <strong style="font-size:10px;"><span t-field="o.partner_id.name"/></strong>
                                     <br/>
-                                    <t t-if="o.partner_id.vat"><span t-field="o.partner_id.vat"></span></t>
-                                    <t t-else=""><span t-field="o.partner_id.num_reg_trib"></span></t>
+
+                                    <t t-if="o.partner_id.country_id.code=='MX'">
+                                        <span t-field="o.partner_id.vat"></span>
+                                    </t>
+                                    <t t-else="">
+                                        <span t-field="o.partner_id.num_reg_trib"></span>
+                                    </t>
+
                                 </div>
                                 <div class="col-6" style="font-size:10px;text-align:center;">
-                                    <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.name"/></strong>
-                                    <br/>
+<!--                                    <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.name"/></strong>-->
+                                    <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
+                                      <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
+                                      </strong><br/>
+                                    </t>
+                                    <t t-else="">
+                                      <strong style="font-size:10px;"><span t-field="o.partner_invoice_id.name"/>
+                                      </strong><br/>
+                                    </t>
+
                                 </div>
 
                         </div>
@@ -643,7 +686,18 @@
 
                             </p>
 
-                            Nombre completo del titular de la cuenta:<span t-field="o.partner_id.name"/><br/>
+                            Nombre completo del titular de la cuenta:
+
+                            <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
+                              <span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
+                              <br/>
+                            </t>
+                            <t t-else="">
+                              <span t-field="o.partner_invoice_id.name"/>
+                              <br/>
+                            </t>
+
+                            <br/>
 
 
 
@@ -656,7 +710,20 @@
                                     <span t-esc="o.partner_invoice_id.payment_token_ids[0].acquirer_ref[-4:]"/>
                                     </t>
                                     <t t-else="">
+
+                                        <t t-if="len(o.partner_id.payment_token_ids)!=0">
+                                        <span t-esc="o.partner_id.payment_token_ids[0].acquirer_ref[:8]"/>
+                                        ****
+                                        <span t-esc="o.partner_id.payment_token_ids[0].acquirer_ref[-4:]"/>
+                                        </t>
+                                        <t t-else="">
+
+                                        </t>
+
                                     </t>
+
+
+
                                 </div>
                                 <div class="col-6">
                                 </div>
@@ -681,7 +748,17 @@
                                 <br/><br/><br/>
                                 <strong>FIRMA TITULAR:</strong>
                                 <br/><br/><br/><br/>
-                                <span t-field="o.partner_id.name"/><br/><br/>
+
+                                <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
+                                  <strong><span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
+                                  </strong><br/>
+                                </t>
+                                <t t-else="">
+                                  <strong><span t-field="o.partner_invoice_id.name"/>
+                                  </strong><br/>
+                                </t>
+
+                                <br/><br/>
                                 <strong>Fecha:</strong><br/>
                                 <t t-esc="time.strftime('%d/%m/%Y')"/>
 
@@ -691,8 +768,8 @@
 
                         </div> <!--third_page-->
 
-                        <div class="page" name="fourd_page" style="font-family:Arial, serif;font-size:13px;text-align:justify;">
-                            <div class="row container-fluid" style="font-size:13px;text-align:justify;">
+                        <div class="page" name="fourd_page" style="font-family:Arial, serif;font-size:11px;text-align:justify;">
+                            <div class="row container-fluid" style="font-size:12px;text-align:justify;">
                                 <div class="col" style="text-align:center">
                                 PAGARÉ:<span t-field="o.name" style="margin-left:5px;"/>
                                 </div>
@@ -725,7 +802,7 @@
 
                             </div>
 
-                            <div class="row container-fluid" style="text-align:justify;">
+                            <div class="row container-fluid" style="text-align:justify;font-size:9px">
                                 <t t-if="o.payment_term_id.name!=False">
 
                                     <tr t-foreach="o.payment_term_id.line_ids.sorted(key=lambda b: b.days)" t-as="l">
@@ -772,7 +849,7 @@
 
                                 <br/><br/>
                                     Ciudad :
-                                    <span t-field="o.partner_id.city" style="margin:0 2px"/>
+                                    <span t-field="o.partner_id.city" s tyle="margin:02px"/>
                                     <span t-field="o.partner_id.state_id" style="margin:0 2px"/>
                                     <span t-field="o.partner_id.country_id" style="margin:0 2px"/>
 
@@ -780,7 +857,7 @@
 
                             <br/><br/>
 
-                            <div class="row sign">
+                            <div class="row sign" style="margin-top:-40px">
                                     <br/>
                                     <div class="col-6" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL ALUMNO</p></strong></div>
                                     <div class="col-6" style="font-size:13px;text-align:center;"><strong><p>FIRMA DEL TITULAR<br/>(Si es distinto al alumno)</p></strong></div>
@@ -792,12 +869,26 @@
                                     <div class="col-6" style="font-size:13px;text-align:center;">
                                         <strong style="font-size:13px;"><span t-field="o.partner_id.name"/></strong>
                                         <br/>
-                                        <t t-if="o.partner_id.vat"><span t-field="o.partner_id.vat"></span></t>
-                                        <t t-else=""><span t-field="o.partner_id.num_reg_trib"></span></t>
+
+                                        <t t-if="o.partner_id.country_id.code=='MX'">
+                                        <span t-field="o.partner_id.vat"></span>
+                                        </t>
+                                        <t t-else="">
+                                            <span t-field="o.partner_id.num_reg_trib"></span>
+                                        </t>
+
                                     </div>
                                     <div class="col-6" style="font-size:13px;text-align:center;">
-                                        <strong style="font-size:13px;"><span t-field="o.partner_invoice_id.name"/></strong>
-                                        <br/>
+
+                                        <t t-if="len(o.partner_invoice_id.payment_token_ids)!=0">
+                                          <strong style="font-size:13px;"><span t-field="o.partner_invoice_id.payment_token_ids[0].name"/>
+                                          </strong><br/>
+                                        </t>
+                                        <t t-else="">
+                                          <strong style="font-size:13px;"><span t-field="o.partner_invoice_id.name"/>
+                                          </strong><br/>
+                                        </t>
+
                                     </div>
 
                             </div>
