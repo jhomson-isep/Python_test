@@ -7,6 +7,7 @@ import re
 from odoo import api, fields, models, tools, _
 from binascii import Error as binascii_error
 from odoo.exceptions import UserError
+from odoo.tools import email_re
 from mailjet_rest import Client
 
 _image_dataurl = re.compile(r'(data:image/[a-z]+?);base64,([a-z0-9+/\n]{3,}=*)\n*([\'"])(?: data-filename="([^"]*)")?', re.I)
@@ -35,9 +36,7 @@ class MassMailing(models.Model):
                 raise UserError(_('There is no recipients selected.'))
 
             while len(res_ids) > 0:
-                recipients = []
                 messages = []
-                recipient = []
                 # _logger.info(mailing.mailing_model_real)
                 extra_context = self._get_mass_mailing_context()
                 recipients_list = self.env[mailing.mailing_model_real].search(
@@ -46,9 +45,12 @@ class MassMailing(models.Model):
                     active_ids=res_ids, **extra_context)
                 # _logger.info(type(res_ids))
 
-                for index, rl in enumerate(recipients_list):
+                for rl in recipients_list:
                     recipient = []
-                    is_blacklisted = False
+                    extra_context = self._get_mass_mailing_context()
+                    opt_out_list = extra_context.get(
+                        'mass_mailing_opt_out_list')
+                    seen_list = extra_context.get('mass_mailing_seen_list')
                     statistics_values = {
                         'model': mailing.mailing_model_real,
                         'res_id': rl.id,
@@ -56,41 +58,56 @@ class MassMailing(models.Model):
                         'sent': fields.Datetime.now(),
                         'state': 'sent'
                     }
+
                     email_to = ''
                     name = ''
                     if mailing.mailing_model_real == "crm.lead":
                         email_to = rl.partner_id.email
                         name = rl.partner_id.name
-                        if not rl.is_blacklisted and not rl.partner_is_blacklisted and re.match(
-                                EMAIL_PATTERN, email_to):
-                            recipients.append(
-                                {'Email': email_to, 'Name': name})
-                            recipient.append({'Email': email_to, 'Name': name})
+                        try:
+                            if (opt_out_list and email_to in opt_out_list) or (
+                                    seen_list and email_to in seen_list) or (
+                                    not email_to or not email_re.findall(
+                                    email_to)):
+                                statistics_values.update(
+                                    {'email': email_to,
+                                     'ignored': fields.Datetime.now(),
+                                     'state': 'ignored',
+                                     'sent': None})
+                            else:
+                                recipient.append(
+                                    {'Email': email_to, 'Name': name})
+                                statistics_values.update(
+                                    {'email': email_to})
+                        except Exception as e:
+                            _logger.info(e)
                             statistics_values.update(
                                 {'email': email_to,
-                                 'partner_id': rl.partner_id})
-                        else:
-                            statistics_values.update(
-                                {'email': email_to,
-                                 'partner_id': rl.partner_id,
                                  'ignored': fields.Datetime.now(),
                                  'state': 'ignored',
                                  'sent': None})
-                            is_blacklisted = True
                     else:
                         email_to = rl.email
                         name = rl.name
-                        if not rl.is_blacklisted and rl.is_email_valid:
-                            recipients.append(
-                                {'Email': email_to, 'Name': name})
-                            statistics_values.update({'email': email_to})
-                            recipient.append({'Email': email_to, 'Name': name})
-                        else:
+                        try:
+                            if (opt_out_list and email_to in opt_out_list) or (
+                                    seen_list and email_to in seen_list) or (
+                                    not email_to or not email_re.findall(
+                                    email_to)):
+                                statistics_values.update(
+                                    {'email': email_to,
+                                     'ignored': fields.Datetime.now(),
+                                     'state': 'ignored', 'sent': None})
+                            else:
+                                statistics_values.update({'email': email_to})
+                                recipient.append(
+                                    {'Email': email_to, 'Name': name})
+                        except Exception as e:
+                            _logger.info(e)
                             statistics_values.update(
                                 {'email': email_to,
                                  'ignored': fields.Datetime.now(),
                                  'state': 'ignored', 'sent': None})
-                            is_blacklisted = True
 
                     # # =========== Create mail.mail ===========
                     mail = self.env['mail.mail']
@@ -109,7 +126,7 @@ class MassMailing(models.Model):
                         # 'auto_delete': True,
                         'scheduled_date': fields.Datetime.now()
                     }
-                    mail_values = self.prepare_images(mail_values)
+
                     msg_id = mail.create(mail_values)
                     statistics_values.update(
                         {'mail_mail_id': msg_id.id,
@@ -138,33 +155,36 @@ class MassMailing(models.Model):
                     statistics = self.env['mail.mail.statistics'].with_context(
                         active_ids=res_ids, **extra_context).create(
                         statistics_values)
+                    self.env.cr.commit()
 
-                    message = {
-                            "From": {
-                                "Email": mailing.email_from,
-                                "Name": mailing.email_from,
-                            },
-                            "To": recipient,
-                            "Subject": mailing.name,
-                            "TextPart": tools.html2plaintext(body),
-                            "HTMLPart": body
-                        }
-                    messages.append(message)
+                    if len(recipient) > 0:
+                        message = {
+                                "From": {
+                                    "Email": mailing.email_from,
+                                    "Name": mailing.email_from,
+                                },
+                                "To": recipient,
+                                "Subject": mailing.name,
+                                "TextPart": tools.html2plaintext(body),
+                                "HTMLPart": body
+                            }
+                        messages.append(message)
 
-                data = {
-                    'Messages': messages
-                }
-
-                # _logger.info(data)
-                result = mailjet.send.create(data=data)
-                if result.status_code == 200:
-                    # _logger.info(result)
-                    _logger.info(result.json())
-                else:
-                    # _logger.info(result)
-                    _logger.info(result.json())
-                    raise UserError(_(
-                        "Error on mailjet connection: " % str(result.json())))
+                if len(messages) > 1:
+                    data = {
+                        'Messages': messages
+                    }
+                    # _logger.info(data)
+                    result = mailjet.send.create(data=data)
+                    if result.status_code == 200:
+                        # _logger.info(result)
+                        _logger.info(result.json())
+                    else:
+                        # _logger.info(result)
+                        _logger.info(data)
+                        _logger.info(result.json())
+                        raise UserError(_(
+                            "Error on mailjet connection: " % str(result.json())))
                 res_ids = mailing.get_remaining_recipients()
                 messages = []
         return True
@@ -193,7 +213,6 @@ class MassMailing(models.Model):
                 # _logger.info("========== Use api ===========")
                 if len(mass_mailing.get_remaining_recipients()) > 0:
                     mass_mailing.state = 'sending'
-                    mass_mailing.write({'state': 'sending'})
                     mass_mailing.send_api_mail()
                 else:
                     mass_mailing.write(
@@ -202,8 +221,6 @@ class MassMailing(models.Model):
     def prepare_images(self, values):
         Attachments = self.env['ir.attachment']
         data_to_url = {}
-        _logger.info('-----------------')
-        _logger.info(values.get('model'))
 
         def base64_to_boundary(match):
             key = match.group(2)
