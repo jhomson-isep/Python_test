@@ -27,7 +27,6 @@ class MassMailing(models.Model):
     mailjet_campaign_id = fields.Integer(string='ID de campaña (Mailjet)')
 
     def send_api_mail(self, res_ids=None):
-        author_id = self.env.user.partner_id.id
 
         for mailing in self:
             if not res_ids:
@@ -37,13 +36,11 @@ class MassMailing(models.Model):
 
             while len(res_ids) > 0:
                 messages = []
-                # _logger.info(mailing.mailing_model_real)
                 extra_context = self._get_mass_mailing_context()
                 recipients_list = self.env[mailing.mailing_model_real].search(
-                    [('id', 'in', res_ids)], limit=49)
+                    [('id', 'in', res_ids)], limit=50)
                 recipients_list = recipients_list.with_context(
                     active_ids=res_ids, **extra_context)
-                # _logger.info(type(res_ids))
 
                 for rl in recipients_list:
                     recipient = []
@@ -59,8 +56,6 @@ class MassMailing(models.Model):
                         'state': 'sent'
                     }
 
-                    email_to = ''
-                    name = ''
                     if mailing.mailing_model_real == "crm.lead":
                         email_to = rl.partner_id.email
                         name = rl.partner_id.name
@@ -137,7 +132,6 @@ class MassMailing(models.Model):
                         'ir.config_parameter'].sudo().get_param(
                         'web.base.url').rstrip('/')
                     link_to_replace = base_url + '/unsubscribe_from_list'
-                    _logger.info("Link to replace: {}".format(link_to_replace))
                     unsubscribe_url = msg_id._get_unsubscribe_url(email_to)
 
                     if link_to_replace in body:
@@ -149,9 +143,6 @@ class MassMailing(models.Model):
                             unsubscribe_url if unsubscribe_url else '#')})
                     # ============= Create mail.mail ============
 
-                    # _logger.info("========== is_blacklisted ===========")
-                    # _logger.info(is_blacklisted)
-                    # _logger.info("========== is_blacklisted ===========")
                     statistics = self.env['mail.mail.statistics'].with_context(
                         active_ids=res_ids, **extra_context).create(
                         statistics_values)
@@ -174,13 +165,10 @@ class MassMailing(models.Model):
                     data = {
                         'Messages': messages
                     }
-                    # _logger.info(data)
                     result = mailjet.send.create(data=data)
                     if result.status_code == 200:
-                        # _logger.info(result)
                         _logger.info(result.json())
                     else:
-                        # _logger.info(result)
                         _logger.info(data)
                         _logger.info(result.json())
                         raise UserError(_(
@@ -199,24 +187,15 @@ class MassMailing(models.Model):
             user = mass_mailing.write_uid or self.env.user
             mass_mailing = mass_mailing.with_context(
                 **user.sudo(user=user).context_get())
-            # _logger.info(mass_mailing.use_api)
-            if not mass_mailing.use_api:
-                if len(mass_mailing.get_remaining_recipients()) > 0:
-                    mass_mailing.state = 'sending'
-                    mass_mailing.send_mail()
-                else:
-                    mass_mailing.write(
-                        {'state': 'done', 'sent_date': fields.Datetime.now()})
-            else:
-                # _logger.info("========== Use api ===========")
-                # _logger.info(mass_mailing)
-                # _logger.info("========== Use api ===========")
-                if len(mass_mailing.get_remaining_recipients()) > 0:
-                    mass_mailing.state = 'sending'
+            if len(mass_mailing.get_remaining_recipients()) > 0:
+                mass_mailing.state = 'sending'
+                if mass_mailing.use_api:
                     mass_mailing.send_api_mail()
                 else:
-                    mass_mailing.write(
-                        {'state': 'done', 'sent_date': fields.Datetime.now()})
+                    mass_mailing.send_mail()
+            else:
+                mass_mailing.write(
+                    {'state': 'done', 'sent_date': fields.Datetime.now()})
 
     def prepare_images(self, values):
         Attachments = self.env['ir.attachment']
