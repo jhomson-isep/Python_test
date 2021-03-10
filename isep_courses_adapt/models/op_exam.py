@@ -80,7 +80,7 @@ class OpExamAttendees(models.Model):
             sel.admission_id = self.env['op.admission'].search(
                 [['student_id', '=', sel.student_id.id],
                  ['batch_id', '=', sel.batch_id.id],
-                 ['course_id', '=', sel.course_id.id]]).id
+                 ['course_id', '=', sel.course_id.id]], limit=1).id
 
     def import_grades_from_moodle(self):
         logger.info('***************************************')
