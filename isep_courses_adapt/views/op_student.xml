@@ -20,6 +20,8 @@
                 <xpath expr="//button[1]" position="after">
                     <button name="import_student_access" string="Get access"
                             type="object"/>
+                    <button name="generate_exam_attendees_button" string="Get marks"
+                            type="object" groups="base.group_system"/>
                 </xpath>
                 <xpath expr="//button[1]" position="after">
                     <button name="generate_gr_no" string="Generar Matricula" attrs="{'invisible': [('gr_no','&gt;', '')]}"

@@ -161,6 +161,40 @@ class MYSQL():
             """.format(yesterday)
         )
 
+    def get_moodle_grades_by_user(self, user_id):
+        return self.query_with_headers(
+            """
+            SELECT 
+            mdl_grade_items.id,
+            mdl_grade_grades.userid,
+            mdl_user.idnumber,
+            mdl_user.firstname,
+            mdl_user.lastname,
+            mdl_user.department,
+            mdl_grade_items.courseid,
+            mdl_grade_items.categoryid,
+            mdl_grade_items.idnumber item_idnumber,
+            mdl_course.fullname,
+            mdl_course.idnumber course_idnumber,
+            mdl_course.shortname,
+            mdl_groups.name as mdl_groups_name,
+            mdl_grade_grades.finalgrade,
+            mdl_grade_grades.timemodified,
+            mdl_grade_grades.timecreated,
+            DATE(FROM_UNIXTIME(mdl_grade_grades.timemodified, '%y/%m/%d %h:%i:%s')) AS dt_created
+            FROM mdl_grade_items 
+            JOIN mdl_grade_grades ON mdl_grade_items.id = mdl_grade_grades.itemid
+            JOIN mdl_course ON mdl_grade_items.courseid = mdl_course.id
+            JOIN mdl_user ON mdl_grade_grades.userid = mdl_user.id
+            INNER JOIN mdl_groups on mdl_groups.courseid = mdl_course.id
+            INNER JOIN mdl_groups_members ON mdl_groups_members.groupid = mdl_groups.id and mdl_groups_members.userid = mdl_user.id
+            WHERE     
+                mdl_grade_grades.finalgrade IS NOT NULL
+                and mdl_user.id = {0}
+            ORDER BY mdl_grade_grades.id DESC;
+            """.format(user_id)
+        )
+
     def get_all_attendance(self):
         try:
             cnx = mysql.connector.connect(**self.config)

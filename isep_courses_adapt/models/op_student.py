@@ -593,6 +593,138 @@ class OpStudent(models.Model):
                 traceback.print_exc()
                 continue
 
+    def generate_student_course_rel(self):
+        students = self.env['op.student'].search(
+            [('course_detail_ids', '=', False)])
+        for student in students:
+            admissions = self.env['op.admission'].search(
+                [('student_id', '=', student.id), ('state', '=', 'done')])
+            for admission in admissions:
+                exist_rel = self.env['op.student.course'].search(
+                    [('student_id', '=', student.id),
+                     ('course_id', '=', admission.batch_id.course_id.id),
+                     ('batch_id', '=', admission.batch_id.id)], limit=1)
+                if len(exist_rel) == 0:
+                    values = {
+                        'student_id': student.id,
+                        'course_id': admission.batch_id.course_id.id,
+                        'batch_id': admission.batch_id.id,
+                        'roll_number': student.gr_no
+                    }
+                    student_course = self.env['op.student.course'].create(
+                        values)
+                    logger.info(
+                        'Student with n_id {0} updated in student_course_id: '
+                        '{1}'.format(student.gr_no, student_course.id))
+
+    def generate_student_exam_attendees(self):
+        students = self.env['op.student'].search(
+            [('exam_attendees_ids', '=', False)])
+        for student in students:
+            for admission in student.admission_ids:
+                batch = admission.batch_id
+                exam_session = self.env['op.exam.session'].search(
+                    [('exam_code', '=', batch.code)], limit=1)
+                exam_type = self.env['op.exam.type'].search(
+                    [('code', '=', 'SUBJ')], limit=1)
+                if not exam_session.id:
+                    exam_session = self.env['op.exam.session'].create({
+                        'name': batch.code,
+                        'course_id': batch.course_id.id,
+                        'batch_id': batch.id,
+                        'exam_code': batch.code,
+                        'start_date': batch.start_date,
+                        'end_date': batch.end_date,
+                        'evaluation_type': 'grade',
+                        'exam_type': exam_type.id
+                    })
+                    logger.info("Exam Session created: {}".format(batch.code))
+                for batch_subject in batch.op_batch_subject_rel_ids:
+                    exam_code = batch.code + batch_subject.subject_id.code
+                    exam = self.env['op.exam'].search([
+                        ('exam_code', '=', exam_code)], limit=1)
+                    if not exam.id:
+                        exam = self.env['op.exam'].create({
+                            'session_id': exam_session.id,
+                            'name': exam_code,
+                            'course_id': batch.course_id.id,
+                            'batch_id': batch.id,
+                            'exam_code': exam_code,
+                            'subject_id': batch_subject.subject_id.id,
+                            'start_time': batch.start_date,
+                            'end_time': batch.end_date,
+                            'total_marks': 10,
+                            'min_marks': 7
+                        })
+                        logger.info("Exam created: {}".format(exam_code))
+                    attendee = self.env['op.exam.attendees'].search([
+                        ('student_id', '=', student.id),
+                        ('exam_id', '=', exam.id)], limit=1)
+                    if not attendee.id:
+                        attendee = self.env['op.exam.attendees'].create({
+                            'exam_id': exam.id,
+                            'student_id': student.id,
+                            'batch_id': batch.id,
+                            'course_id': batch.course_id.id,
+                            'marks': 0,
+                            'status': 'present'
+                        })
+                        logger.info("Attendee created: {0}, {1}".format(
+                            attendee.id, attendee.marks))
+
+    @api.one
+    def generate_exam_attendees_button(self):
+        for admission in self.admission_ids:
+            batch = admission.batch_id
+            exam_session = self.env['op.exam.session'].search(
+                [('exam_code', '=', batch.code)], limit=1)
+            exam_type = self.env['op.exam.type'].search(
+                [('code', '=', 'SUBJ')], limit=1)
+            if not exam_session.id:
+                exam_session = self.env['op.exam.session'].create({
+                    'name': batch.code,
+                    'course_id': batch.course_id.id,
+                    'batch_id': batch.id,
+                    'exam_code': batch.code,
+                    'start_date': batch.start_date,
+                    'end_date': batch.end_date,
+                    'evaluation_type': 'grade',
+                    'exam_type': exam_type.id
+                })
+                logger.info("Exam Session created: {}".format(batch.code))
+            for batch_subject in batch.op_batch_subject_rel_ids:
+                exam_code = batch.code + batch_subject.subject_id.code
+                exam = self.env['op.exam'].search([
+                    ('exam_code', '=', exam_code)], limit=1)
+                if not exam.id:
+                    exam = self.env['op.exam'].create({
+                        'session_id': exam_session.id,
+                        'name': exam_code,
+                        'course_id': batch.course_id.id,
+                        'batch_id': batch.id,
+                        'exam_code': exam_code,
+                        'subject_id': batch_subject.subject_id.id,
+                        'start_time': batch.start_date,
+                        'end_time': batch.end_date,
+                        'total_marks': 10,
+                        'min_marks': 7
+                    })
+                    logger.info("Exam created: {}".format(exam_code))
+                attendee = self.env['op.exam.attendees'].search([
+                    ('student_id', '=', self.id),
+                    ('exam_id', '=', exam.id)], limit=1)
+                if not attendee.id:
+                    attendee = self.env['op.exam.attendees'].create({
+                        'exam_id': exam.id,
+                        'student_id': self.id,
+                        'batch_id': batch.id,
+                        'course_id': batch.course_id.id,
+                        'marks': 0,
+                        'status': 'present'
+                    })
+                    logger.info("Attendee created: {0}, {1}".format(
+                        attendee.id, attendee.marks))
+
     def import_student_subjects_rel(self):
         s = SQL()
         logger.info("**************************************")
