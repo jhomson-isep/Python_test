@@ -15,3 +15,5 @@ from . import crm_lead
 from . import sign_request
 from . import res_config_settings
 from . import payment_token
+from . import res_users
+from . import wizard

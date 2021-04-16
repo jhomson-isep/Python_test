@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3).
 
-#from . import account_move
+from . import account_move
 #from . import gmri
 from . import res_partner
 from . import res_groups
@@ -24,15 +24,15 @@ from . import sale_order_line
 from . import account_invoice_line
 from . import account_payment
 from . import res_partner_bank
-# from . import geonames_import
-# from . import payment_method
+#from . import geonames_import
+#from . import payment_method
 from . import payment_token
-#from . import crm_temp
-#from . import crm_temp_call
-#from . import llamadas_isep
+from . import crm_temp
+from . import crm_temp_call
+from . import llamadas_isep
 from . import temp_tax
 from . import account_move_line
-#from . import hr_employee
-# from . import account_receipt_custom
+from . import hr_employee
+#from . import account_receipt_custom
 from . import account_payment_line
 #from . import account_payment_order

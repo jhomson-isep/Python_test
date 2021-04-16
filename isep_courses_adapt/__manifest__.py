@@ -34,6 +34,8 @@
         'wizard/op_student_group_change.xml',
         'wizard/op_student_extend_due_date.xml',
         'wizard/op_moodle_admission_wizard.xml',
+        #'wizard/op_moodle_commission_wizard.xml',
+        #'wizard/op_admisiones_pedidos_de_venta_wizard.xml',
         'views/op_course.xml',
         'views/op_batch.xml',
         'views/op_modality.xml',

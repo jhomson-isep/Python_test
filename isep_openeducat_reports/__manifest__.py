@@ -16,6 +16,7 @@
     'depends': [
         'base',
         'openeducat_core',
+        'openeducat_admission',
         'report_xlsx',
         'crm',
     ],
@@ -24,6 +25,7 @@
         #'wizards/uvic_student_wizard.xml',
         #'wizards/batch_students_wizard.xml',
         'wizards/crm_leads_wizard.xml',
+        'wizards/op_apv_wizard.xml',
         'reports/report_uvic_students.xml',
         'reports/report_batch_students.xml',
         'reports/report_batch_students_image.xml',

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <!--Se define un record con el modelo ir.ui.view para crear una vista para el Wizard-->
+    <record id="op_admisiones_pedidos_de_venta_form" model="ir.ui.view">
+        <!--Se define el nombre de la vista en el sistema-->
+        <field name='name'>op.admisiones.pedidos.de.venta.form</field>
+        <!--Se define el modelo a usar para la vista en el Wizard-->
+        <field name='model'>op.admisiones.pedidos.de.venta.wizard</field>
+        <field name='arch' type='xml'>
+            <!--Se define un elemento form, el mismo permite el uso de 
+            1- Componentes de estructura (groups, notebooks)
+            2- Elementos interactivos (buttons, fields)-->
+            <form string='Admision y Pedidos de Venta'>
+                <sheet>
+                    <!--Definimos una linea que funcione como titulo con la etiqueta separator-->
+                    <separator string="Listado de Admisiones"/>
+                    <!--Definimos un contenedor para añadir una descripcion debajo del titulo-->
+                    <div class="container mt16 mb16">
+                        <!--Se puede hacer uso de elementos HTML para colocar la data en la vista-->
+                        <h5>Filtros para busqueda exacta</h5>
+                    </div>
+
+                    <notebook>
+                        <page name="lista_admisiones_ventas" string="Listado">
+                            <tree string="Vista de Arbol de Admisiones">
+                                <field name="campoa"/>
+                                <field name="campob"/>
+                                <field name="campoc"/>
+                            </tree>
+                        </page>
+                    </notebook>
+                    
+                    <button name='Exportar_res' string='Exportar' class='oe_highlight' type='object'/>
+                </sheet>
+                <footer>
+                    <!--<button name='Exportar_res' string='Exportar' class='oe_highlight' type='object'/>-->
+                    <button special="cancel" string="Cancel" type="object" class="btn btn-secondary oe_inline"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <act_window id="Lista_de_admisiones_pedidos_de_venta_window" name="Admisiones y Pedidos de Venta"
+                res_model="op.admisiones.pedidos.de.venta.wizard" src_model="op.admission"
+                view_mode="form" target="new" view_type="form"
+                groups="openeducat_core.group_op_back_office_admin"/>
+    
+    <!--
+    <menuitem name="Admisiones y Pedidos de Venta" id="apd" parent="base.admission" sequence="0"
+    action="enquiry_case_leads_all"/>
+    -->
+
+</odoo>

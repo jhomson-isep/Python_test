@@ -32,7 +32,8 @@
         "views/res_config_settings.xml",
         "views/payment_token.xml",
         "views/sale_order.xml",
-        "data/res_groups.xml"
+        "data/res_groups.xml",
+        "views/res_users.xml"
     ],
     'installable': True,
 }

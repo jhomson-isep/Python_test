@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <record id="op_moodle_commission_wizard_form" model="ir.ui.view">
+        <field name='name'>op.moodle.commission.wizard.form</field>
+        <field name='model'>op.moodle.list.commission.wizard</field>
+        <field name='arch' type='xml'>
+            <form string='Comisiones'>
+                <sheet>
+                    <h2 style="color: #666666">Asistente de Comisiones</h2>
+                    <div class="container mt16 mb16">
+                        <h5 style="color: #666666">Este asistente le guiara en el proceso de solicitud de comisiones.</h5>
+                    </div>
+                    <notebook>
+                        <page name="listado de comisiones" string="Listado de Comisiones">
+                            <field name="moodle_course_line_ids" colspan="5" nolabel="1">
+                                <tree string="Moodle course Details" create="false" delete="false">
+                                <!--    <field name="selected" widget="boolean_toggle"/>    -->
+                                <!--    <field name="course_name"/>    -->
+                                <!--    <field name="moodle_course_id"/> -->
+                                    <field name="comission_id"/>
+                                    <field name="comission"/>
+                                    <field name="checked" widget="boolean_toggle"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name='enroll_student' string='Consultar Comisiones'
+                            class='oe_highlight'
+                            type='object'/>
+                    <button special="cancel" string="Cancel" type="object" class="btn btn-secondary oe_inline"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="op_moodle_commission_wizard_act" name="Comisiones"
+                res_model="op.moodle.list.commission.wizard" src_model="op.admission"
+                view_mode="form" target="new" view_type="form"
+                groups="openeducat_core.group_op_back_office_admin"/>
+
+</odoo>

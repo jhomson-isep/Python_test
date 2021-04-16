@@ -7,24 +7,29 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class OpMoodleCoursesWizard(models.TransientModel):
-    _name = "op.moodle.courses.wizard"
-    _description = "Moodle Courses Wizard"
+class OpMoodleListCommissionWizard(models.TransientModel):
+    _name = "op.moodle.list.commission.wizard"
+    _description = "Comission List Moodle Wizard"
 
-    moodle_admission_wizard = fields.Many2one('op.moodle.admission.wizard')
+    moodle_commission_wizard = fields.Many2one('op.moodle.commission.wizard')
     group_change_wizard = fields.Many2one('op.student.group.change.wizard')
     moodle_course_id = fields.Integer(string="Course id")
     course_name = fields.Char(string="Course name")
     selected = fields.Boolean(string="Select", default=False)
     comission = fields.Char(string="Nombre Comision", required=True)
+    comission_id = fields.Integer(string="Comission id")
+    checked = fields.Boolean(string="Checked", default=False)
+    moodle_course_line_ids = fields.One2many(
+        'op.moodle.list.commission.wizard', 'moodle_commission_wizard',
+        string='Course lines')
 
     @api.onchange('selected')
     def _onchange_selected(self):
         self.update({'selected': self.selected})
 
-    def get_moodle_course_ids(self, admission_wizard_id):
+    def get_moodle_course_ids(self, commission_wizard_id):
         moodle_courses = self.search(
-            [('moodle_admission_wizard', '=', admission_wizard_id),
+            [('moodle_commission_wizard', '=', commission_wizard_id),
              ('selected', '=', True)])
         return [moodle_course.moodle_course_id for moodle_course in moodle_courses]
 
@@ -35,15 +40,15 @@ class OpMoodleCoursesWizard(models.TransientModel):
         return [moodle_course.moodle_course_id for moodle_course in moodle_courses]
 
 
-class OpMoodleAdmissionWizard(models.TransientModel):
-    _name = "op.moodle.admission.wizard"
-    _description = "Moodle Admission Wizard"
+class OpMoodleCommissionWizard(models.TransientModel):
+    _name = "op.moodle.commission.wizard"
+    _description = "Moodle Commission Wizard"
 
     admission_id = fields.Many2one('op.admission', string="Admission")
     category_id = fields.Many2one('op.moodle.category.rel',
                                   string="Select a Category")
-    moodle_course_line_ids = fields.One2many(
-        'op.moodle.courses.wizard', 'moodle_admission_wizard',
+    moodle_course_line_ids_B = fields.One2many(
+        'op.moodle.list.commission.wizard', 'moodle_commission_wizard',
         string='Course lines')
 
     def _get_admission(self):

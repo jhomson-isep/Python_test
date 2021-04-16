@@ -10,7 +10,7 @@
                     <separator string="Registro de alumno: "/>
                     <div class="container mt16 mb16">
                         <h5 style="color: #666666">Esta ventana se encarga de matricular al alumno en los modulos de Campus Isep que sean
-                        seleccionados en la parte de abajo. Puedes seleccionar mas de uno.</h5>
+                        seleccionadós en la parte de abajo. Puedes seleccionar mas de uno.</h5>
                     </div>
                     <notebook>
                         <page name="moodle_courses" string="Moodle courses">

@@ -102,6 +102,7 @@ class crm_temp(models.Model):
     }
 
     def _dict_company(self):
+
         res = {}
         for company in self.env['res.company'].sudo().search([]):
             res[company.name.lower()] = company.id
@@ -114,6 +115,7 @@ class crm_temp(models.Model):
             ('check', '=', False), ('check_error', '=', False)], limit=80)
         for lead in temp_lead_obj:
             logger.info('INICIATIVA ENTRANTE:')
+
             logger.info(lead)
             self.ajustar_lead(lead)
             # self._check_lead(lead)
@@ -397,11 +399,11 @@ class crm_temp(models.Model):
             # tienen que codificar a utf8                           #
 
             default_code = str(lead.cod_curso+lead.cod_sede)
-            nombre_curso = lead.curso.encode('utf-8')
+            nombre_curso = lead.curso
             check_tipo = False
             prod_id = False
 
-            tipocurso = lead.tipo_curso.encode('utf-8')
+            tipocurso = lead.tipo_curso
             if tipocurso == 'Máster':
                 tipocurso = 'Master'
 
@@ -563,7 +565,7 @@ class crm_temp(models.Model):
 
             if lead.cod_area != '-':
                 area = self.env['product.category'].search([
-                    ('x_codigocategoria', '=', lead.cod_area.upper()),
+                    ('x_codigocategoria', '=', lead.cod_area),
                     ('x_compania', 'ilike', company_id.name)
                 ], limit=1)
 
@@ -1275,12 +1277,12 @@ class crm_temp(models.Model):
             except:
                 default_code = 'CUSED'
 
-            nombre_curso = lead.curso.encode('utf-8')
+            nombre_curso = lead.curso
             check_tipo = False
             prod_id = False
             logger.info("Terminamos con mobiles")
 
-            tipocurso = lead.tipo_curso.encode('utf-8')
+            tipocurso = lead.tipo_curso
             if tipocurso == 'Máster':
                 tipocurso = 'Master'
 
@@ -1447,7 +1449,7 @@ class crm_temp(models.Model):
 
             if lead.cod_area != '-':
                 area = self.env['product.category'].search([
-                    ('x_codigocategoria', '=', lead.cod_area.upper()),
+                    ('x_codigocategoria', '=', lead.cod_area),
                     ('x_compania', 'ilike', company_id.name)
                 ], limit=1)
 

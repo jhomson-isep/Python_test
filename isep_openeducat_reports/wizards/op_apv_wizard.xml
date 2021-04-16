@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <!--Se define un record con el modelo ir.ui.view para crear una vista para el Wizard-->
+    <record id="op_apv_form" model="ir.ui.view">
+        <!--Se define el nombre de la vista en el sistema-->
+        <field name='name'>op.apv.form</field>
+        <!--Se define el modelo a usar para la vista en el Wizard-->
+        <field name='model'>op.apv.wizard</field>
+        <field name='arch' type='xml'>
+            <!--Se define un elemento form, el mismo permite el uso de 
+            1- Componentes de estructura (groups, notebooks)
+            2- Elementos interactivos (buttons, fields)-->
+            <form string='Admision y Pedidos de Venta'>
+                <sheet>
+                    <div class="container">
+                        <group colspan="4">
+                            <field name="date_init"/>
+                            <field name="date_end" attrs="{'invisible':[('date_init','=',False)]}"/>
+                            <field name="course_id" attrs="{'invisible':[('date_end','=',False)]}"/>
+                        </group>
+                    </div>
+                </sheet>
+                <footer>
+                    <!--Se hace llamado a la funcion "test wizard" con un boton, esta funcion esta definida
+                        en el modelo relacionado con esta vista.-->
+                    <button name="test_wizard" string="test" type="object" class="btn-primary"/>
+                    <button name="generate_xlsx_apv_report" string="Reporte" type="object" class="oe_link oe_right"/>
+                    <!--<button name='Exportar_res' string='Exportar' class='oe_highlight' type='object'/>-->
+                    <button special="cancel" string="Cancel" type="object" class="btn btn-secondary oe_inline"/>
+
+                    <!--
+                    <report
+                        id="op_apv_xlsx"
+                        model="op.admission"
+                        string="Print to XLSX"
+                        report_type="xlsx"
+                        name="isep_openeducat_reports.op_apv_report"
+                        file="isep_openeducat_reports.op_apv_report"
+                        attachment_use="False"
+                    />
+                    -->
+
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <act_window id="Lista_apv_window" name="Admisiones y Pedidos de Venta"
+                res_model="op.apv.wizard" src_model="op.admission"
+                view_mode="form" target="new" view_type="form"/>
+
+    <!--
+    <menuitem name="Admisiones y Pedidos de Venta" id="apd" parent="base.admission" sequence="0"
+    action="enquiry_case_leads_all"/>
+    -->
+
+</odoo>
