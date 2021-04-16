@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="uvic_student_form" model="ir.ui.view">
+            <field name="name">uvic.student.wizard</field>
+            <field name="model">uvic.student</field>
+            <field name="arch" type="xml">
+                <form string="Reporte de Estudiantes">
+                    <group>
+                        <field name="uvic_documentation"/>
+                    </group>
+                    <footer>
+                        <button name="print_uvic_report" string="Imprimir reporte" type="object" class="btn-primary"/>
+                        <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="uvic_student_wizard" model="ir.actions.act_window">
+            <field name="name">Reporte de Estudiantes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">uvic.student</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="uvic_student_form"/>
+            <field name="target">new</field>
+        </record>
+        
+    </data>
+</odoo>

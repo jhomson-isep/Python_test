@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <report id="report_certified_program"
+                model="op.student"
+                string="Certificado de Programa"
+                report_type="qweb-pdf"
+                name="isep_openeducat_reports.certified_program"
+                file="isep_openeducat_reports.certified_program"
+                menu="True"/>
+
+        <template id="certified_program">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <t t-foreach="o.admission_ids" t-as="c">
+                            <div style="position: absolute; transform: rotate(-90deg); -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);  -ms-transform: rotate(-90deg); -o-transform: rotate(-90deg); margin-left: -460px;  margin-right: -50px; margin-top:500px; margin-bottom: 500px; 
+                                font-size:14px;">
+                                ISEP SL, CIF: B-61254314. Inscrita en el Registro Mercantil de Barcelona con fecha 11/02/1997. Folio 33, Tomo 29572. Inscripción 1<![CDATA[&ordf;]]>. Hoja B-155568
+                            </div>
+                            
+                            <div style="text-align:justify;font-size:16px; margin-left:50px;">
+                                <p>El Departamento de Secretaría Académica, del Instituto Superior de Estudios Psicológicos, ISEP Barcelona,</p>
+                                <p style="margin-top:10px;">CERTIFICA: </p>
+                                <p style="margin-top:10px;">Que <strong><span t-field="o.name"></span></strong> con <span t-field="o.document_type_id.name"></span> <span t-field="o.document_number"></span>, consta matriculada en el <strong><span t-field="c.course_id.name"></span></strong> impartido en la modalidad <span t-field="c.course_id.modality_id"></span> durante el periodo académico <span t-field="c.batch_id.academic_year"></span>, con una carga lectiva de <span t-field="c.course_id.ects"></span>ECTS (<span t-field="c.course_id.hours"></span> Horas).</p>
+                                <p style="margin-top:10px;">PROGRAMA DEL CURSO:</p>
+                                <ul>
+                                    <t t-foreach="c.batch_id.op_batch_subject_rel_ids" t-as="subject">
+                                        <li style="margin-top:5px;"><span t-field="subject.subject_id.name" /></li>
+                                    </t>
+                                </ul>                                    
+                                <p style="margin-top:10px;">Para que así conste, firma el presente certificado en Barcelona, a <span t-esc="datetime.datetime.today().day"></span>
+                                    <t t-if="datetime.datetime.today().month == 1"><span>de Enero de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 2"><span>de Febrero de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 3"><span>de Marzo de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 4"><span>de Abril de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 5"><span>de Mayo de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 6"><span>de Junio de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 7"><span>de Julio de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 8"><span>de Agosto de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 9"><span>de Septiembre de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 10"><span>de Octubre de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 11"><span>de Noviembre de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 12"><span>de Diciembre de </span></t>
+                                    <span t-esc="datetime.datetime.today().year"></span>
+                                </p>
+                                <p style="margin-top:110px;text-align:center;">El Departamento de Secretaría Académica<br></br>ISEP Barcelona</p>
+                            </div>
+                            <div style="height:550px;"></div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

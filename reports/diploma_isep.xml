@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <report id="report_diploma_students"
+                model="op.student"
+                string="Diploma del Estudiante"
+                report_type="qweb-pdf"
+                name="isep_openeducat_reports.diploma_students"
+                file="isep_openeducat_reports.diploma_students"
+                menu="True"/>
+
+        <template id="diploma_students">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <t t-foreach="o.admission_ids" t-as="c">
+                            <div class="row">
+                                <div class="col-6">L'Institut Superior d'Estudis Psicològics expedeix el diploma de</div>
+                                <div class="col-6">El Instituto Superior de Estudios Psicológicos expide el diploma de</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6" style="font-size:25px;text-align:center;"><strong><span t-field="c.course_id.name_catalan"></span></strong></div>
+                                <div class="col-6" style="font-size:25px;text-align:center;"><strong><span t-field="c.course_id.name"></span></strong></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-8" style="font-size:25px;text-align:center;"><strong>A</strong></div>
+                                <div class="col-2"></div>
+                            </div>
+                            <div class="row" style="height:50px;"></div>
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-8" style="font-size:50px;text-align:center;font-style:italic;"><strong><span t-field="o.name"></span></strong></div>
+                                <div class="col-2"></div>
+                            </div>
+                            <div class="row" style="height:50px;"></div>
+                            <div class="row">
+                                <div class="col-6">en consideració a l'aprofitament dels estudis seguits en el programa de <span t-field="c.batch_id.course_id.name"></span> de <span t-field="c.course_id.ects"></span> ECTS</div>
+                                <div class="col-6">en consideración al aprovechamiento de los estudios seguidos en el programa de <span t-field="c.batch_id.course_id.name"></span> de <span t-field="c.course_id.ects"></span> ECTS</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    Barcelona, a <span t-esc="datetime.datetime.today().day"></span>
+                                    <t t-if="datetime.datetime.today().month == 1"><span>de Gener de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 2"><span>de Febrer de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 3"><span>de Març de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 4"><span>de Abril de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 5"><span>de Maig de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 6"><span>de Juny de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 7"><span>de Juliol de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 8"><span>de Agost de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 9"><span>de Setembre de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 10"><span>de Octubre de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 11"><span>de Novembre de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 12"><span>de Desembre de </span></t>
+
+                                    <span t-esc="datetime.datetime.today().year"></span>
+                                </div>
+                                <div class="col-6">
+                                    Barcelona, a <span t-esc="datetime.datetime.today().day"></span>
+                                    <t t-if="datetime.datetime.today().month == 1"><span>de Enero de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 2"><span>de Febrero de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 3"><span>de Marzo de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 4"><span>de Abril de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 5"><span>de Mayo de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 6"><span>de Junio de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 7"><span>de Julio de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 8"><span>de Agosto de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 9"><span>de Septiembre de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 10"><span>de Octubre de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 11"><span>de Noviembre de </span></t>
+                                    <t t-if="datetime.datetime.today().month == 12"><span>de Diciembre de </span></t>
+                                    <span t-esc="datetime.datetime.today().year"></span>
+                                </div>
+                            </div>
+                            <div class="row" style="height:100px;"></div>
+                            <div class="row" style="text-align:center;">
+                                <div class="col-4">
+                                    La persona interessada<br></br>
+                                    La persona interesada
+                                </div>
+                                <div class="col-4">Director</div>
+                                <div class="col-4">
+                                    Direcció Académica<br></br>
+                                    Dirección Académica
+                                </div>
+                            </div>
+                            <div class="row" style="height:75px">
+                                <div class="col-4"></div>
+                                <div class="col-4"></div>
+                                <div class="col-4"></div>
+                            </div>
+                            <div class="row" style="text-align:center;">
+                                <div class="col-4"><span t-field="o.name"></span></div>
+                                <div class="col-4">Raimon Gaja Jaumeandreu</div>
+                                <div class="col-4">Julia Herrero Torres</div>
+                            </div>
+                            <div class="row" style="height:120px;"></div>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

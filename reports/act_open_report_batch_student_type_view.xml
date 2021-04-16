@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <report id="action_report_report_batch_students"
+                model="op.batch"
+                string="Grupo y Estudiantes"
+                report_type="qweb-pdf"
+                name="isep_openeducat_reports.report_batch_students"
+                file="isep_openeducat_reports.report_batch_students"
+                menu="False"/>
+
+        <template id="report_batch_students">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+                            <div class="header">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <img class="img-fluid logo" style="height:125px;padding-top:2px;" src="/isep_openeducat_reports/static/src/img/logo_isep.png"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <strong style="color:#fc6c04;">Información del grupo</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3"><strong>Grupo:</strong></div>
+                                <div class="col-3"><strong>Código:</strong></div>
+                                <div class="col-3"><strong>Fecha de inicio:</strong></div>
+                                <div class="col-3"><strong>Fecha finalización:</strong></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3"><span t-field="o.name"></span></div>
+                                <div class="col-3"><span t-field="o.code"></span></div>
+                                <div class="col-3"><span t-field="o.start_date"></span></div>
+                                <div class="col-3"><span t-field="o.end_date"></span></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table">
+                                        <thead>
+                                            <th>Nombre alumno</th>
+                                            <th>Teléfono</th>
+                                            <th>Móvil</th>
+                                            <th>Email</th>
+                                            <th>Estudios</th>
+                                            <th>F.Matricula</th>
+                                            <th>F.Finalización</th>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="o.student_lines" t-as="s">
+                                                <tr>
+                                                    <td><span t-field="s.student_id.first_name"></span> <span t-field="s.student_id.last_name"></span></td>
+                                                    <td><span t-field="s.student_id.mobile"></span></td>
+                                                    <td><span t-field="s.student_id.mobile"></span></td>
+                                                    <td><span t-field="s.student_id.email"></span></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

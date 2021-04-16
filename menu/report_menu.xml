@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Report Menu -->
+        <menuitem id="menu_op_report_batch_students_sub"
+                  name="Grupos y Estudiantes"
+                  parent="openeducat_core.menu_op_report_main"
+                  sequence="80"/>
+
+        <menuitem id="menu_op_students_sub" name="Reporte Estudiantes UVIC"
+                  parent="openeducat_core.menu_op_report_main" sequence="10"
+                  action="isep_openeducat_reports.report_uvic_students" groups="base.group_system"/>
+
+        <!--
+        <menuitem id="menu_op_students_batch_sub" name="Reporte Estudiantes-Grupo"
+                  parent="openeducat_core.menu_op_report_main" sequence="10"
+                  action="isep_openeducat_reports.batch_students_wizard" groups="base.group_system"/>
+        -->
+        <menuitem id="menu_report_crm_leads" name="Reporte de Oportunidades/Iniciativas"
+                  parent="crm.crm_menu_report" sequence="30"
+                  action="isep_openeducat_reports.crm_lead_report_wizard" groups="base.group_system"/>
+    </data>
+</odoo>
